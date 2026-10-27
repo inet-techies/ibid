@@ -1,0 +1,219 @@
+/**
+ * OEM Module Stylesheet
+ * Integrates OEM with the existing Bid Management design language
+ * Eliminates artificial card stretching and balances whitespace
+ */
+
+/* Natural card height - eliminate artificial vertical whitespace */
+.oem-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.oem-card-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #f1f3f5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.oem-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #283c50;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+}
+
+.oem-card-body {
+    padding: 1.25rem;
+}
+
+/* Compact table styling matching Bid */
+.oem-table {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.oem-table thead th {
+    background-color: #f8fafc;
+    color: #4b5563;
+    font-weight: 600;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+}
+
+.oem-table tbody td {
+    padding: 0.85rem 1rem;
+    vertical-align: middle;
+    font-size: 0.875rem;
+    color: #374151;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.oem-table tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+/* Bid action buttons (avatar-text) */
+.oem-action-btn {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background-color: #f3f4f6;
+    color: #4b5563;
+    transition: all 0.2s ease;
+    border: none;
+    text-decoration: none;
+}
+
+.oem-action-btn:hover {
+    background-color: #3454d1;
+    color: #ffffff;
+}
+
+.oem-action-btn.btn-danger-soft:hover {
+    background-color: #ea4d4d;
+    color: #ffffff;
+}
+
+.oem-action-btn.btn-success-soft:hover {
+    background-color: #10b981;
+    color: #ffffff;
+}
+
+/* Stat & Summary Badges */
+.oem-badge-l1 {
+    background-color: #d1fae5;
+    color: #065f46;
+    font-weight: 600;
+    padding: 0.35rem 0.65rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+}
+
+/* Form input groupings matching Bid */
+.oem-input-group-icon {
+    background-color: #f9fafb;
+    border-color: #e5e7eb;
+    color: #6b7280;
+    min-width: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Price highlighting */
+.oem-price-tag {
+    font-weight: 700;
+    color: #1e3a8a;
+    font-family: inherit;
+}
+
+.oem-price-lowest {
+    color: #059669;
+    font-weight: 700;
+}
+
+/* Modal Stacking Context & Backdrop Fix */
+body.modal-open .nxl-container,
+body.modal-open .main-content,
+body.modal-open .nxl-content {
+    filter: none !important;
+}
+
+.modal {
+    z-index: 1060 !important;
+}
+
+.modal-dialog {
+    z-index: 1065 !important;
+    position: relative;
+}
+
+.modal-backdrop {
+    z-index: 1050 !important;
+}
+
+.modal-content {
+    background: #ffffff !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Right-Side Sliding Drawer Modal (Matching BidDetails) */
+.right-form {
+    z-index: 1065 !important;
+    max-width: 95vw;
+}
+
+.right-form.right-form-lg {
+    width: 620px;
+    right: -620px;
+}
+
+.right-form.right-form-lg.open {
+    right: 0;
+}
+
+#rightFormOverlay {
+    z-index: 1060 !important;
+}
+
+/* Fix table cell overlaps and ensure quotation form controls breathe */
+#quotesInputTable {
+    min-width: 1100px;
+}
+
+#quotesInputTable th {
+    white-space: nowrap !important;
+    vertical-align: middle;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    padding: 0.75rem 0.65rem;
+    color: #4b5563;
+    background-color: #f8fafc;
+}
+
+#quotesInputTable td {
+    vertical-align: middle;
+    padding: 0.5rem 0.65rem;
+}
+
+#quotesInputTable .form-select,
+#quotesInputTable .form-control {
+    font-size: 0.8125rem;
+}
+
+#quotesInputTable .input-group-text {
+    padding: 0.375rem 0.6rem;
+    font-size: 0.8125rem;
+}
+
+#existingQuotesTable,
+#comparisonTable,
+#projectMaterialsTable {
+    min-width: 950px;
+}
+
+#existingQuotesTable th,
+#comparisonTable th,
+#projectMaterialsTable th {
+    white-space: nowrap !important;
+}
+
+

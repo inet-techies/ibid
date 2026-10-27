@@ -40,11 +40,13 @@ $isActive   = !empty($currentUrlArray['child'])
     <link rel="stylesheet" type="text/css" href="<?=$theme_path?>/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="<?=$theme_path?>/assets/vendors/css/datepicker.min.css">
     <link rel="stylesheet" type="text/css" href="<?=$theme_path?>/assets/vendors/css/daterangepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="<?=$theme_path?>/assets/vendors/css/dataTables.bs5.min.css" />
 
     <!--! END: Vendors CSS-->
     <!--! BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="<?=$theme_path?>/assets/css/theme.min.css" />
-      <link rel="stylesheet" href="<?=$theme_path?>/css/canvas-modal.css">
+    <link rel="stylesheet" href="<?=$theme_path?>/css/canvas-modal.css">
+    <link rel="stylesheet" href="<?=$theme_path?>/assets/css/oem.css">
 
     <!--! END: Custom CSS-->
     <!--! HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries !-->
@@ -690,6 +692,9 @@ $isActive   = !empty($currentUrlArray['child'])
     <!--! ================================================================ !-->
    <!--! BEGIN: Vendors JS !-->
     <script src="<?=$theme_path?>/assets/vendors/js/vendors.min.js"></script>
+    <script src="<?=$theme_path?>/assets/vendors/js/bootstrap.min.js"></script>
+    <script src="<?=$theme_path?>/assets/vendors/js/dataTables.min.js"></script>
+    <script src="<?=$theme_path?>/assets/vendors/js/dataTables.bs5.min.js"></script>
    <!--  <script src="<?=$theme_path?>/assets/vendors/js/tagify.min.js"></script>
     <script src="<?=$theme_path?>/assets/vendors/js/tagify-data.min.js"></script> -->
     <script src="<?=$theme_path?>/assets/vendors/js/select2.min.js"></script>

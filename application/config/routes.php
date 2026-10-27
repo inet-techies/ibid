@@ -53,3 +53,13 @@ $route['default_controller'] = 'bid/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['sitemap\.xml'] = "bid/site_map";
+
+/* OEM Module Routes */
+$route['bid/oem/(:any)/(:any)/(:any)'] = 'oem/$1/$2/$3';
+$route['bid/oem/(:any)/(:any)']        = 'oem/$1/$2';
+$route['bid/oem/(:any)']               = 'oem/$1';
+$route['bid/oem']                      = 'oem/index';
+$route['oem/(:any)/(:any)/(:any)']     = 'oem/$1/$2/$3';
+$route['oem/(:any)/(:any)']            = 'oem/$1/$2';
+$route['oem/(:any)']                   = 'oem/$1';
+$route['oem']                          = 'oem/index';
