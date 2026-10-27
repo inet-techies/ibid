@@ -1,0 +1,83 @@
+html,
+body {
+height: 100%;
+/* The html and body elements cannot have any padding or margin. */
+}
+
+.container {
+
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+min-height: 100%;
+height: auto !important;
+height: 100%;
+/* Negative indent footer by it's height */
+margin: 0 auto -60px;
+}
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+height: 60px;
+}
+#footer {
+background-color: #f5f5f5;
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+#footer {
+  margin-left: -20px;
+  margin-right: -20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+}
+
+
+
+code {
+font-size: 80%;
+}
+
+#header-container {
+background:#102348;
+border-radius:0px 0px 4px 4px;
+}
+.logo {
+padding-left:5px;
+}
+
+.navbar-inner {
+background-color:#27395A !important;
+background: url('') #27395A !important;
+border:none !important;
+}
+
+.navbar .nav > li > a {
+
+color:#FFFFFF !important;
+text-shadow:none !important;
+font-weight:600;
+}
+.navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+background-color:#007FBF !important;
+border-radius:4px;
+}
+
+.right_header {
+padding-right:5px;
+}
+
+.page-header {
+	margin-top:0px !important;
+}
+
+.row-fluid {
+	width:98.5% !important;
+}
+.tooltip-inner {
+    background-color: #006DCC !important;
+}

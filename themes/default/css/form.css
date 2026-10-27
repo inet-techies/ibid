@@ -1,0 +1,39 @@
+/* ==================== Form style sheet ==================== */
+
+form { margin: 25px 0 0 29px; width: 445px; padding-bottom: 30px }
+form * { vertical-align: middle; }
+
+fieldset { margin: 0 0 22px 0; border: 0; }
+legend { font-size: 1.2em; color: #2E6600; font-weight: bold; }
+
+label { float: left; display: block; width: 100px; margin-top: 4px; clear: left; }
+label.choose { width: 162px; }
+label.spam-protection { display: inline; width: auto; }
+
+input.text, textarea, input.choose, input.answer { border: 1px solid #909090; padding: 3px; }
+input.text { width: 300px; margin: 0 0 8px 0; }
+textarea { width: 400px; margin: 0 0 12px 0; display: block; }
+
+select { width: 250px; border: 1px solid #909090; padding: 2px;  margin: 0 0 8px 0; }
+
+input.choose { margin: 0; }
+input.answer { width: 40px; margin: 0 0 0 10px; }
+input.submit-text { font: 1.4em Georgia, "Times New Roman", Times, serif; letter-spacing: 1px; display: block; margin: 23px 0 0 0; }
+
+hr.formik { height: 1px; color: gray; background-color: gray; border: 0 solid gray; margin: 3px 0 20px 0; }
+form br { display: none; }
+
+/* ==================== Form style sheet END ==================== */
+
+
+
+<!--[if lte IE 7]>
+
+/* ==================== Form style sheet for IE 7 and lower ==================== */
+
+legend { position: relative; top: 6px; left: -7px; }
+
+/* ==================== Form style sheet for IE end ==================== */
+
+
+<!--<![endif]-->
