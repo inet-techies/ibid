@@ -1,0 +1,2369 @@
+GOVERNMENT OF TELANGANA
+GREATER HYDERABAD MUNICIPAL CORPORATION
+Sanitation & Solid Waste Management Wing
+REQUEST FOR PROPOSAL CUM TENDER DOCUMENT
+for the
+GARBAGE VULNERABLE POINTS ELIMINATION UNDER SWACHH BHARATH MISSION URBAN (2.0) – INFORMATION, EDUCATION, COMMUNICATION (I.E.C) COMPONENT USING CCTV SURVEILLANCE CAMERAS AND IoT-BASED PUBLIC ADDRESS SYSTEM
+AT 2,500 GARBAGE VULNERABLE POINTS (GVPS) / SWEEPING POINTS / HOTSPOTS WITHIN GHMC LIMITS
+
+Particulars
+| Details
+|
+RFP Notice No.
+| 04/IT/GHMC/2026-27
+|
+Date of Notice
+| 07.09.2026
+|
+Tendering Authority
+| Addl. Commissioner (IT) , Greater Hyderabad Municipal Corporation
+|
+Method of Selection
+| Quality and Cost Based Selection (QCBS) — 70 : 30
+|
+Contracted Quantity
+| 2,500 locations, which may increase or decrease – refer (Clause 3.4)
+|
+e-Procurement Portal
+| https://tender.telangana.gov.in
+|
+Bid Document Price
+| Rs. 10,000 (non-refundable), payable online through the e-Procurement portal
+|
+
+Issued by
+Greater Hyderabad Municipal Corporation
+GHMC Head Office, CC Complex, Tank Bund Road, Hyderabad – 500 063, Telangana, India
+
+Disclaimer
+The information contained in this Request for Proposal (RFP) document, or subsequently provided to the Bidder(s) whether verbally, in documentary form, electronically or by any other means, by or on behalf of the Greater Hyderabad Municipal Corporation (hereinafter "GHMC", "the Corporation" or "the Authority") or any of its employees, officers, consultants or advisors, is provided to the Bidder(s) on the terms and conditions set out in this RFP and such other terms and conditions subject to which such information is provided.
+This RFP is issued for the selection of an Agency for the procurement, design, supply, installation, testing, commissioning, integration and comprehensive Operation and Maintenance of CCTV surveillance cameras and IoT-based Public Address and citizen-command systems at 2,500 identified Garbage Vulnerable Points, Sweeping Points and Hotspots within GHMC limits, on a turnkey, single-point-responsibility basis.
+The information contained in this RFP has been prepared in good faith for the purpose of assisting interested parties in making their own evaluation of the Project. The Authority has made reasonable efforts to ensure the accuracy of the information contained herein. However, this RFP does not purport to contain all the information that each Bidder may require. Each Bidder should conduct its own investigations, analyses and due diligence, undertake a site visit at its own cost, and verify the accuracy, adequacy, correctness, reliability and completeness of the information, assumptions, assessments, statements and projections contained in this RFP.
+Information provided in this RFP is intended to assist Bidders in preparing and submitting their proposals. It should not be construed as legal, technical, financial, commercial or professional advice. The Authority accepts no responsibility for the accuracy or completeness of any interpretation or opinion on law, regulations, taxation or any other matter expressed herein.
+Neither the Authority nor its employees, officers, consultants, advisors or representatives make any representation or warranty, express or implied, as to the accuracy, adequacy, correctness, completeness or reliability of the information contained in this RFP. Neither the Authority nor its representatives shall have any liability to any person under any law, statute, rule, regulation, contract, tort, principles of restitution or otherwise for any loss, damages, costs, expenses or liabilities arising from or incurred by reason of anything contained in this RFP, including any omission, deficiency or inaccuracy therein, or arising in any manner from participation in the bidding process.
+The Authority reserves the right to amend, modify, supplement, cancel or withdraw this RFP, either in part or in full, at any stage of the bidding process without assigning any reason whatsoever and without incurring any liability. The issuance of this RFP does not imply that the Authority is bound to select any Bidder, award any contract or proceed with the Project. The Authority reserves the right to reject any or all proposals without assigning any reason whatsoever.
+This Project is proposed to be funded under the IEC Component of Swachh Bharat Mission (Urban) 2.0, subject to sanction of the Competent Authority and release of funds by the Government of Telangana and the Government of India in accordance with the prescribed cost-sharing pattern. Award of contract and release of payment shall be subject to such sanction and release of funds, and no claim shall lie against the Authority on account of any delay or default in such sanction or release.
+The Bidder shall bear all costs and expenses associated with the preparation and submission of its proposal, including costs related to documentation, site visits, technical demonstrations, presentations, meetings, consultations, travel and communication. The Authority shall not be liable in any manner whatsoever for any such costs or expenses incurred by any Bidder, regardless of the conduct or outcome of the bidding process.
+By submitting a proposal, the Bidder shall be deemed to have acknowledged and accepted the terms and conditions contained in this Disclaimer and the RFP document in its entirety.
+
+Table of Contents
+Disclaimer……………………………………………………………………………………………………………………………………………………..2
+1. RFP Notice………………………………………………………………………………………………………………………………………………….5
+1.1 Availability of the RFP Document………………………………………………………………………………………………………..5
+1.2 Submission………………………………………………………………………………………………………………………………………….5
+2. Schedule of Bidding Process (Fact Sheet)… ……………………………………………………………………………………………6
+3. Introduction to the Project………………………………………………………………………………………………………………………8
+3.1 Background………………………………………………………………………………………………………………………………………..8
+3.2 Objectives…………………………………………………………………………………………………………………………………………..8
+3.3 Jurisdictional Coverage and Volumetrics…………………………………………………………………………………………….8
+3.4 Contracted Quantity and Substitution of Locations…………………………………………………………..………9
+4. Scope of Work…….……………………………………………………………………………………………………………………………………11
+4.1 Overview………..…………………………………………………………………………………………………………………………………11
+4.2 Site Survey and Validation………………………………………………………………………………………………………………..11
+4.3 CCTV Camera System…………….…………………………………………………………………………………………………………11
+4.4 IoT-based Public Address and Citizen Command System…………………………………………………………………13
+4.5 Garbage Accumulation and Volume Escalation……………………………………………………………………….………13
+4.6 Networking, Central Monitoring and Integration……………………………………………………………………………14
+4.7 Civil, Electrical and Allied Works……………………………………………………………………………………………………15
+4.8 Power and Connectivity…………………………………………………………………………………………………………………15
+4.9 Operation and Maintenance………………………………………………………………………………………………………16
+4.10 Manpower for Shift-wise Monitoring………………………………………………………………………………………16
+4.11 Training and Capacity Building………………………………………………………………………………………………………16
+4.12 Scope Exclusions……………………………………………………………………………………………………………………………17
+5. Hosting, Availability and Disaster Recovery18
+5.1 Hosting Model and Responsibility18
+5.2 Availability and Redundancy18
+5.3 Backup and Disaster Recovery18
+5.4 Monitoring18
+6. Security, Compliance and Data Protection20
+6.1 Security Controls20
+6.2 Compliance and Certification20
+6.3 Data Protection and Surveillance Safeguards20
+7. Governance and Stakeholder Responsibilities22
+7.1 Governance Structure22
+7.2 Responsibilities of the Authority22
+7.3 Responsibilities of the Bidder22
+8. Definitions, Project Timelines and Deliverables24
+8.1 Definitions24
+8.2 Implementation Schedule25
+8.3 Deliverables26
+8.4 Support during the Project Period26
+8.5 Change Control Procedure27
+8.6 Confidentiality and Intellectual Property Rights27
+9. Qualification and Evaluation of the Bidder29
+9.1 Pre-Qualification Criteria29
+9.2 Evaluation Procedure31
+9.3 Technical Evaluation Framework32
+9.4 Selection Methodology and Award34
+10. Instructions to Bidders35
+10.1 Introduction35
+10.2 Eligible Bidders35
+10.3 Completeness of Response35
+10.4 Cost of Bidding35
+10.5 Transferability36
+10.6 Pre-Bid Queries36
+10.7 Amendment and Supplemental Information36
+10.8 Submission of Bids36
+10.9 Bid Validity37
+10.10 Earnest Money Deposit37
+10.11 Bid Submission Documents37
+10.12 Clarification, Modification and Rejection38
+10.13 Signing of Contract38
+11. Contract Period, Payment and Service Levels39
+11.1 Contract Period39
+11.2 Payment Terms39
+11.3 Service Levels40
+11.4 Penalties, Theft and Default41
+11.5 Exit Management and Reverse Transition42
+12. General Conditions of Contract43
+12.1 Performance Bank Guarantee43
+12.2 Suspension of Work43
+12.3 Force Majeure43
+12.4 Right of Monitoring, Inspection and Audit43
+12.5 Assignment, Subletting and Sub-contracting44
+12.6 Risk, Insurance and Indemnity44
+12.7 Safety and Public Convenience44
+12.8 Termination44
+12.9 Liquidated Damages45
+12.10 Taxes45
+12.11 Dispute Resolution and Arbitration45
+12.12 Limitation of Liability46
+12.13 Notices and Miscellaneous46
+13. Annexures47
+Appendix I — Pre-Qualification Proposal Forms48
+PQ Form #1 — General Information of the Bidder48
+PQ Form #2 — Financial Turnover and Net Worth50
+PQ Form #3 — Project Experience51
+PQ Form #4 — Technical Manpower53
+PQ Form #5 — Declaration of Non-Blacklisting54
+PQ Form #6 — Declaration of No Conflict of Interest55
+Appendix II — Technical Proposal Forms56
+TQ Form #1 — Approach, Methodology and Rollout Plan56
+TQ Form #2 — Technical Compliance Statement57
+Appendix III — Commercial Proposal Forms59
+C Form #1 — Commercial Proposal Submission Form59
+C Form #2 — Price Schedule60
+Appendix IV — Other Formats63
+Format 1 — Bid Letter63
+Format 2 — Performance Bank Guarantee64
+Format 3 — Compliance and Enclosure Checklist65
+Format 4 — No Deviation Certificate67
+Format 5 — Manufacturer Authorisation Form65
+Format 6 — Format of Site Feasibility Report69
+Format 7 — Master List of Identified Locations71
+
+1. RFP Notice
+The Greater Hyderabad Municipal Corporation, Hyderabad, invites proposals from eligible, experienced and qualified agencies with the requisite technical and financial capability for the "Procurement, Installation, Testing, Commissioning and Operation & Maintenance of CCTV Surveillance Cameras and IoT-based Public Address (PA) Systems at 2,500 Garbage Vulnerable Points / Sweeping Points / Hotspots within GHMC Limits", as detailed in the Scope of Work at Section 4.
+1.1 Availability of the RFP Document
+The RFP may be downloaded from the Government of Telangana e-Procurement Portal at https://tender.telangana.gov.in under the login for suppliers. Prospective bidders who are not already registered on the portal must complete registration before participating. Details of the registration process and of obtaining Digital Signature Certificates are available on the portal.
+1.2 Submission
+Bidders shall read the complete document carefully. Scanned copies of all required documents shall be uploaded on the portal in PDF format.
+On successful submission, the system will generate an acknowledgement bearing a unique offer submission number.
+The Bidder must fulfil all pre-qualification criteria set out at Clause 9.1. All bids must be uploaded on or before the date and time specified at Section 2, together with online payment of the Bid Document Price and the Earnest Money Deposit.
+Bids received through any mode other than the e-Procurement portal, including by post, email, telex or facsimile, shall be rejected.
+
+2. Schedule of Bidding Process (Fact Sheet)
+The particulars in this Fact Sheet govern the bidding process. Where a date or figure in this Fact Sheet differs from the body of the RFP, the Fact Sheet shall prevail, save for the eligibility and evaluation criteria at Section 9, which shall prevail in all cases.
+#
+| Key Information
+| Details
+|
+1
+| RFP Notice No. and Date
+| 04/IT/GHMC/2026-27, Dt: 07.09.2026
+|
+2
+| Name of Work
+| Procurement, Installation, Testing, Commissioning and Operation & Maintenance of CCTV Surveillance Cameras and IoT-based Public Address Systems at 2,500 GVPs / Sweeping Points / Hotspots within GHMC limits
+|
+3
+| Tendering Authority
+| Addl. Commissioner, GHMC. All correspondence to the Additional Commissioner (IT), GHMC.
+|
+4
+| Method of Selection
+| Quality and Cost Based Selection (QCBS), 70 : 30, as detailed at Clause 9.4
+|
+5
+| Contracted Quantity
+| 2,500 locations which may increase or decrease for the contract period. The Authority may substitute locations without altering that total, in accordance with Clause 3.4.
+|
+6
+| Bid Document Price
+| Rs. 10,000 (non-refundable), payable online through the e-Procurement portal only
+|
+7
+| Earnest Money Deposit (EMD)
+| Rs. ______, payable online through the e-Procurement portal only, valid for 180 days from the last date of bid submission. MSME exemptions, if any, as per Government of Telangana orders in force.
+|
+8
+| Contract Period
+| Implementation period up to Go-Live, followed by one (1) year of Comprehensive Operation and Maintenance, extendable by up to two (2) further years at the discretion of the Authority (Clause 11.1)
+|
+9
+| Bid Validity
+| 180 days from the last date of bid submission, extendable on request by the Authority
+|
+10
+| Performance Bank Guarantee
+| 10% of the total evaluated bid price (Clause 12.1). No separate security deposit is payable.
+|
+11
+| Bid Submission Start Date
+| 07/09/ 2026 at 01:00 PM
+|
+12
+| Last Date for Pre-Bid Queries
+| 10/ 09/ 2026 at 04:00 PM
+|
+13
+| Bid Submission End Date
+| 16/09 / 2026 at 04:00 PM
+|
+14
+| Opening of Pre-Qualification and Technical Bids
+| 16/09 / 2026 at 04 :05 PM
+|
+15
+| Address for Correspondence
+| Office of the Additional Commissioner (IT), GHMC Head Office, CC Complex, Tank Bund Road, Hyderabad – 500 063
+|
+16
+| Contact Details
+| Telephone: 6309999454/6309999458 | Email: deeit-ghmc@ghmc.gov.in
+|
+
+Note: the Bid Document Price and the Earnest Money Deposit are payable online through the e-Procurement portal only. No physical instrument shall be accepted.
+
+3. Introduction to the Project
+3.1 Background
+The Government of India's Swachh Bharat Mission (Urban) 2.0 envisages all cities becoming "Garbage Free", with sustained Open Defecation Free (ODF++) status and comprehensive source segregation, scientific processing and remediation of legacy dumpsites. In terms of the Operational Guidelines issued by the Ministry of Housing and Urban Affairs, Government of India, the Information, Education and Communication (IEC) Component of the Mission specifically provides for citizen behaviour-change interventions, including technology-enabled surveillance and real-time public messaging at chronically vulnerable locations, in furtherance of the Mission's Garbage Free City (GFC) star-rating protocol.
+The Greater Hyderabad Municipal Corporation, constituted under the Greater Hyderabad Municipal Corporation Act, 1955, has, after due field verification by its Sanitation and Solid Waste Management Wing, identified Garbage Vulnerable Points (GVPs), Sweeping Points and Hotspots across its jurisdiction for technology-driven surveillance, real-time citizen deterrence and eventual elimination. This initiative is taken forward in continuation of the Corporation's ongoing Swachh Hyderabad drive, comprising barricading, wall art and GVP-to-park conversion undertaken at field level by Circle Sanitation staff.
+This RFP is issued for the selection of a competent System Integrator or Implementation Agency for the procurement, design, supply, installation, testing, commissioning, integration and comprehensive Operation and Maintenance of CCTV cameras and IoT-based Public Address and citizen-command systems at 2,500 locations within GHMC limits, strictly on a turnkey basis.
+3.2 Objectives
+Continuous visual monitoring and video-based evidence capture at all contracted locations, to deter unauthorised dumping of garbage.
+Real-time, sensor-based detection of dumping events at each location using IoT devices, independent of manual control-room intervention.
+Instant on-site audio and visual command at the moment garbage is dumped, discouraging the act and directing citizens to designated collection points and door-to-door collection timings.
+Automated alerts, snapshots and video clips to the Integrated Command and Control Centre for monitoring, evidence-based enforcement and issue of penalty or challan under the applicable bye-laws.
+Escalation of garbage accumulation beyond a configurable threshold to the concerned Sanitation Inspector, field staff and Deputy Executive Engineer (SWM), so that clearance can be initiated promptly and field responsiveness can be measured.
+A centralised dashboard providing real-time and historical analytics of all contracted locations, hotspot-closure tracking and trend reporting to support data-driven policy decisions.
+Measurable, sustained elimination of GVPs, Sweeping Points and Hotspots, supporting the Corporation's progress toward higher Garbage Free City star ratings and its Swachh Survekshan indicators.
+3.3 Jurisdictional Coverage and Volumetrics
+The contracted quantity for this Project is 2,500 locations. Of these, the locations set out in the master list at Format 7 of Appendix IV have been identified and field-verified by the Sanitation and Solid Waste Management Wing as on the date of this RFP. The balance shall be notified by the Authority during the contract period in accordance with Clause 3.4. The distribution of the identified locations is as follows.
+
+Zone
+| Circles
+| GVPs
+| Sweeping Points
+| Total identified
+| Category A
+| Category B / C
+|
+Charminar
+| 5
+| 236
+| 54
+| 290
+| 61
+| 36 / 193
+|
+Golconda
+| 5
+| 225
+| 55
+| 280
+| 90
+| 48 / 142
+|
+Khairatabad
+| 5
+| 180
+| 132
+| 312
+| 93
+| 64 / 155
+|
+Rajendra Nagar
+| 6
+| 235
+| 116
+| 351
+| 83
+| 70 / 198
+|
+Secunderabad
+| 5
+| 197
+| 74
+| 271
+| 106
+| 62 / 103
+|
+Shamshabad
+| 4
+| 454
+| 46
+| 500
+| —
+| —
+|
+Total identified as on date
+| 30
+| 1,527
+| 477
+| 2004
+| 433
+| 280 / 791
+|
+Balance to be notified under Clause 3.4
+| —
+| —
+| —
+| 496
+| —
+| —
+|
+Contracted quantity
+| —
+| —
+| —
+| 2,500
+| —
+| —
+|
+
+The master list at Format 7 identifies each location by its Collection Point Code, name, type, category, Circle and Zone. Each Collection Point Code is unique and shall be the primary key by which the location is identified in the system, in the site survey report, in the asset register and in every invoice.
+The categorisation of locations as A, B or C reflects the Corporation's assessment of the severity and frequency of dumping at the location. The Authority may revise the categorisation of any location during the contract period. Categorisation shall not by itself alter the equipment configuration or the unit rates payable, unless a change is directed under Clause 8.5.
+The number of Zones and Circles stated above reflects the jurisdiction of the Corporation as on the date of this RFP. Bidders shall satisfy themselves as to the current jurisdictional boundaries before bidding.
+The volumetrics in this clause are the basis on which the Bidder shall size and price its solution, and on which the Total Evaluated
+Bid Price shall be computed under Clause 9.4.
+3.4 Contracted Quantity and Substitution of Locations
+This clause is central to the commercial structure of this Project and Bidders shall read it with particular care. It fixes the contracted quantity while conferring on the Authority an unqualified right to change the locations at which that quantity is deployed.
+The contracted quantity for this Project is, and shall throughout the contract period remain, two thousand five hundred (2,500) locations, which may increase or decrease by reason of any substitution, relocation, addition or deletion of individual locations made under this clause.
+The Authority may at any time during the contract period, at its sole discretion and without assigning any reason, substitute any location or locations with other locations within GHMC limits. The Authority may equally add a location to, or delete a location from, the deployment list, provided that the total number of locations at which the system is deployed shall at all times be brought back to, and shall not exceed, two thousand five hundred.
+The right at sub-clause (2) may be exercised on any ground, including successful elimination or closure of a GVP consequent to behavioural change, conversion of a GVP into a park or other public amenity, road widening or other civil works, change in dumping patterns, identification of a new vulnerable point, adverse site conditions, or repeated theft or vandalism at a location.
+Elimination of a GVP is an objective of this Project, and the Bidder shall not be entitled to treat the closure of a location as a reduction in the contracted quantity. Where a location is closed, the Authority shall notify a substitute location and the Bidder shall relocate the installation to it. The Bidder shall not derive any benefit from the continuance of a GVP, nor suffer any loss from its elimination.
+A substitution shall be effected by written notice from the Additional Commissioner (Sanitation), identifying the location to be vacated by its Collection Point Code and the substitute location by its Collection Point Code or, where the substitute is not on the master list, by its name, Circle, Zone and geo-coordinates. The Bidder shall complete the relocation within thirty (30) days of such notice.
+Relocation comprises safe de-installation of all equipment at the vacated location, restoration of the vacated site to its original condition to the satisfaction of the DEE (SWM) of concerned circle, transportation, and re-installation, testing and commissioning at the substitute location, together with reconfiguration in the dashboard, the asset register and the Integrated Command and Control Centre so that the substitute location is monitored without interruption.
+Relocation shall be paid for at the firm relocation rate per location quoted at Item 15 of the Price Schedule. That rate shall be firm for the contract period and shall be the only sum payable on account of a substitution. No mobilisation charge, demobilisation charge, one-time charge, idle charge, escalation or other sum whatsoever shall be payable on account of any substitution.
+The Bidder shall carry out, at the relocation rate and without demur, up to two hundred and fifty (250) relocations in each year of the contract period, being ten (10) per cent of the contracted quantity. Where the Authority requires relocations in excess of that number in any year, the excess shall be carried out at the same firm rate, and the Bidder shall not decline or delay such relocation, but the Bidder may seek an extension of the completion period at sub-clause (5) in respect of the excess.
+Where equipment is lost, damaged or rendered unserviceable in the course of a relocation, the replacement shall be at the cost of the Bidder. Where equipment is stolen or vandalised at a location, Clause 11.4 shall apply.
+No claim shall lie against the Authority for loss of profit, loss of opportunity, or any consequential loss whatsoever by reason of the exercise of the rights conferred by this clause. Bidders shall price their bids on the footing that the identity of the 2,500 locations will change during the contract period, and that the number will not.
+The equipment configuration at an individual location may vary with site geometry, the number of approach roads and field conditions established during the joint site survey. Such variation shall be dealt with under Clause 4.2 and shall be paid for at the unit rates in the Price Schedule. It shall not alter the contracted quantity of locations.
+Illustration. If, in the second year of the contract period, forty locations are eliminated following sustained behavioural change and the Authority notifies forty substitute locations, the Bidder shall relocate the installations within thirty days of notice and shall be paid forty times the relocation rate at Item 15. The contracted quantity remains 2,500, the per-site Operation and Maintenance charge at Item 14 continues to be payable on 2,500 locations without interruption, and no other sum is payable on account of the substitution.
+
+4. Scope of Work
+4.1 Overview
+The Scope of Work shall be executed by the Bidder on a turnkey, single-point-responsibility basis, and comprises:
+Joint site survey, validation of locations and site-readiness assessment.
+Supply, installation, testing and commissioning of CCTV surveillance cameras at each contracted location.
+Supply, installation, testing and commissioning of IoT-based garbage-dump-detection sensors and Public Address and citizen-command units at each contracted location.
+Supply and erection of mounting infrastructure, including Smart Poles where required, together with power, solar and connectivity infrastructure at each contracted location.
+Supply, installation and commissioning of the central recording, storage, networking and display infrastructure at the notified Command Centres.
+Development, hosting and commissioning of the centralised Video Management Systems, dashboard and analytics platform, and its integration with the systems of the Corporation.
+Relocation of installations between locations as directed under Clause 3.4.
+Comprehensive Operation and Maintenance, including manned shift-wise monitoring at the Integrated Command and Control Centre, for the contract period.
+Training and capacity building of Corporation personnel and control-room operators.
+Provision of mobile based display for officers for monitoring.
+4.2 Site Survey and Validation
+The Bidder shall conduct a joint physical survey of each contracted location together with the Deputy Executive Engineer (SWM) of the respective Circle, to finalise the site-wise hardware requirement, being the number and type of cameras, the IoT and Public Address units, the mounting structure, the power source and the networking equipment.
+The survey shall assess line of sight for the camera, sensor placement feasibility, availability of a power source and of an existing pole or civil structure, network connectivity by fibre or 4G or 5G, ambient lighting, exposure to tampering, and any civil work required.
+The Bidder shall submit a Site Feasibility Report and a Bill of Materials for each location, identifying the location by its Collection Point Code and recording its geo-coordinates, duly countersigned by the concerned Deputy Executive Engineer (SWM), for approval of the Competent Authority before execution at that location.
+Each location shall be covered by not fewer than one fixed IP camera. Where site geometry, the number of approach roads or the extent of the dumping area so requires, the Competent Authority may approve an additional fixed camera or a PTZ camera at that location, and the additional unit shall be paid for at the unit rates in the Price Schedule.
+The survey of the locations identified at Clause 3.3 shall be completed within the period stated at Clause 8.2. The survey of a location notified subsequently under Clause 3.4 shall be completed within fifteen (15) days of the notice.
+4.3 CCTV Camera System
+4.3.1 Deployment
+Cameras shall be mounted on the Smart Pole, on an existing pole approved by the Authority, on a wall, or on a purpose-built structure, at a height sufficient to avoid tampering/Pilferage while retaining clear coverage of the GVP.
+The mounting position shall be such that the camera field of view covers the whole of the identified GVP area and, so far as practicable, the approach to it.
+Cameras shall be positioned so as not to survey the interior of any private premises, and the Bidder shall apply privacy masking to any part of the field of view that unavoidably includes private premises.
+4.3.2 Functional and technical requirements
+Fixed IP bullet or box camera of not less than 4 MP resolution (Provision to identification of facial features and vehicle number clearly) , with an integrated 4G/5G module and an amplified audio output capable of driving the Public Address speaker specified at Clause 4.4.
+Continuous recording on a twenty-four hour, seven day basis, with local edge storage at the location and retrieval from the central Network Video Recorder and Video Management System.
+Day and night recording capability, being colour-in-low-light or infrared, suitable for outdoor, unlit and poorly lit locations.
+Weatherproof and vandal-resistant housing, rated not less than IP66 and IK10 or equivalent, suited to outdoor deployment in Hyderabad conditions.
+Embedded or server-side video analytics capable of object and garbage-drop detection, loitering and dumping-activity detection, and generation of an event trigger capable of being linked to the IoT announcement unit and to the control-room alert.
+Tamper detection, comprising camera blocking, defocus, view obstruction and physical movement, with automatic alert generation.
+Remote configuration, health monitoring and firmware update capability from the Integrated Command and Control Centre.
+Certification as BIS, CE or FCC compliant as applicable, and compliance with the technical guidelines of the Ministry of Electronics and Information Technology for surveillance and IoT device security.
+4.3.3 Retention of recorded data
+Recorded video shall be retained as follows. The retention periods in this clause are the operative periods for the Project and govern the sizing of both the edge storage and the central storage.
+
+Data
+| Retention period
+| Location and purpose
+|
+Continuous recorded video
+| Not less than 15 days
+| Local edge storage at the location, retrievable remotely
+|
+Continuous recorded video
+| Not less than 30 days
+| Central Network Video Recorder at the Integrated Command and Control Centre
+|
+Event footage, being the clip and snapshot associated with a detection or escalation event
+| Not less than 3 months
+| Central storage, in a manner readily retrievable for enforcement and evidentiary purposes
+|
+Event footage relied upon in enforcement proceedings
+| Until conclusion of the proceedings, or 1 year, whichever is later
+| Central storage, preserved on marking by the Authority
+|
+Event metadata, alerts, escalations and clearance logs
+| Contract period and 2 years thereafter
+| Database, for audit and analytics
+|
+The central Network Video Recorder capacity quoted at Item 9 of the Price Schedule shall be sized to meet the thirty-day central retention above across the full contracted quantity, and the Bidder shall state its sizing calculation in the Technical Proposal.
+4.4 IoT-based Public Address and Citizen Command System
+4.4.1 Purpose
+Each contracted location shall be equipped with an IoT-based detection and Public Address unit that identifies the act of garbage being dumped in real time and immediately issues an audible and visual command or deterrent message to the citizen at the location, functioning as an instant, automated, on-site nudge and enforcement mechanism independent of manual control-room intervention.
+4.4.2 Detection mechanism
+Passive infrared motion sensors, ultrasonic or infrared proximity sensors, or weight and vibration sensors, as appropriate to site conditions, to detect the physical act of an object being deposited within the monitored zone.
+The detection logic shall, wherever feasible, be corroborated with the video analytics event trigger, so as to minimise false positives and to distinguish a pedestrian passing the location from an actual act of dumping.
+Configurable sensitivity and configurable detection-zone boundaries, to suit the geometry of each location.
+The false-positive rate shall not exceed the threshold at Clause 11.3.4, and the Bidder shall tune the detection logic at any location where that threshold is exceeded.
+4.4.3 Public Address and citizen response unit
+On confirmed detection, the unit shall trigger an instant pre-recorded audio announcement through a weatherproof outdoor speaker, in Telugu and Urdu, with Hindi and English as secondary languages, in line with the multilingual citizenry of the Corporation.
+The announcement shall convey a directive not to dump garbage at the location, together with information on 4 way segregation, Swachh Auto Tipper collection timings and any other solid waste management and sanitation related messages applicable to that location.
+An accompanying visual deterrent, being a flashing LED, warning light or digital signage board displaying a text message, shall be triggered simultaneously where specified by the Authority.
+The message content and library shall be configurable and updatable remotely by the Authority. Multiple message variants shall be supported so as to avoid habituation, and the system shall cycle between them.
+Announcement volume shall be configurable per location and per time of day, and shall be capable of being restricted during night hours so as to comply with the Noise Pollution (Regulation and Control) Rules, 2000. The Bidder shall configure a reduced night-time volume, or suppress the announcement, at any location falling within a silence zone as defined under those Rules, as directed by the Authority.
+Each detection event shall automatically generate a timestamped alert with a snapshot and short video clip, sent in real time to the dashboard at the Integrated Command and Control Centre and, where integrated, to the enforcement application of the Corporation for follow-up action.
+4.5 Garbage Accumulation and Volume Escalation
+In addition to the citizen-facing announcement, the system shall function as an escalation tool for the sanitation field machinery of the Corporation.
+Where the sensors or the video analytics detect that garbage has accumulated at a location beyond a configurable threshold, whether by reason of repeated dumping events without intervening clearance or by visual estimation of pile size exceeding the set limit, the system shall automatically generate a distinct escalation alert, over and above the citizen announcement.
+Such escalation alert shall be sent in real time, with the Collection Point Code, location name, timestamp and snapshot or clip, to the concerned Sanitation Inspector, field staff and Deputy Executive Engineer (SWM) of the Circle, through SMS, the dashboard, and the citizen mobile application of the Corporation or a dedicated mobile notification, as integrated.
+The threshold for triggering escalation, and the list of officers to be notified, shall be configurable by the Authority at Circle and Zone level and updatable from the dashboard without recourse to the Bidder.
+The system shall record the time of the escalation alert and the time at which clearance is marked complete, shall compute the time taken for clearance, and shall report clearance performance by location, Circle and Zone, so as to enable the Corporation to monitor field responsiveness.
+Escalation alerts and clearance times shall be retained in accordance with Clause 4.3.3 and shall be available for audit.
+4.6 Networking, Central Monitoring and Integration
+4.6.1 Central infrastructure
+The Bidder shall supply, install and commission at the Integrated Command and Control Centre the servers for live view, the Network Video Recorders, the display monitors for pop-up event view, the racks, the Layer 3 switching, and all allied infrastructure specified in the Price Schedule.
+The Network Video Recorder capacity shall be sized to the retention requirement at Clause 4.3.3 across the full contracted quantity, with not less than fifteen per cent spare channel capacity.
+The Bidder shall provide and maintain the central bandwidth specified at the Price Schedule for the contract period, and shall be responsible for its adequacy to carry the aggregate feed of all contracted locations at the configured stream settings.
+4.6.2 Dashboard
+The dashboard shall provide:
+Live view and playback of all cameras, with role-based access.
+A GIS-based map view of all contracted locations, Zone-wise and Circle-wise, with real-time status shown as active, inactive or in alert.
+An event log of all detected dumping incidents with time, Collection Point Code, location, snapshot and clip.
+Analytics and management information reports, including Ward-wise, Circle-wise and Zone-wise trends, time-of-day analysis, repeat-offender hotspot analysis, clearance performance under Clause 4.5, and hotspot-closure tracking.
+A relocation register recording every substitution effected under Clause 3.4, with the date of notice, the vacated and substitute Collection Point Codes, and the date of recommissioning.
+Role-based user access control for officials of the Sanitation and Solid Waste Management Wing, at Ward, Circle, Zone and head-office level.
+Export of any report to PDF and spreadsheet formats, and the ability for an authorised officer to define a new report format by configuration.
+4.6.3 Integration
+The system shall support integration through documented, versioned and secured open APIs with the existing Integrated Command and Control Centre platform of the Corporation, with the citizen mobile application for grievance linkage and closure, and with the enforcement and challan-management system of the Corporation for issue of spot fines under the applicable Municipal Solid Waste bye-laws. The Bidder shall publish API documentation and provide a sandbox environment for integration testing. The Bidder is responsible for the platform side of each integration and for consuming the interface published by the counterpart system; it is not responsible for building or altering the counterpart system.
+4.7 Civil, Electrical and Allied Works
+4.7.1 Smart Pole and mounting infrastructure
+All cameras, IoT and Public Address units, signage and networking equipment shall, so far as practicable, be mounted on a single integrated Smart Pole in preference to separate poles, so as to minimise clutter on public roads and footpaths and to present a uniform appearance across the city. The Smart Pole shall comprise:
+A galvanised mild-steel or glass-reinforced-plastic pole of appropriate height, with weatherproof junction and termination box, cable routing conduit and tamper-proof access panel.
+An integrated solar panel with charge controller and lithium battery bank, sized to power the camera, the IoT and Public Address unit and the signage independently at locations without reliable grid connectivity, with automatic changeover between grid and solar where grid power is available.
+Provision for mounting the camera, the speaker unit, the warning LED or signage and the networking equipment on a single structure.
+Earthing, lightning and surge protection, and reflective high-visibility base marking for road safety.
+Where an existing pole or structure of the Corporation is available at a location and is assessed as suitable in the joint site survey, the Competent Authority may direct that it be used in place of a new Smart Pole. In that event the Smart Pole item shall not be payable for that location, and the mounting accessories and junction box shall be payable at the unit rates in the Price Schedule.
+4.7.2 General civil and electrical works
+Supply and erection of Smart Poles and mounting structures, junction boxes, cabling, conduiting and earthing as required at each location.
+Coordination of power connection and metering with the local electricity distribution utility, or supply and installation of the solar power unit where grid power is unavailable or not feasible.
+Weatherproofing, lightning and surge protection, and safety compliance for all outdoor installations.
+Obtaining, with the facilitation of the Authority, such statutory approvals and right-of-way permissions as are required for erection of poles, and execution of the works consequent to such approvals.
+Restoration of any public infrastructure or surface disturbed during installation to its original condition, to the satisfaction of the DEE (SWM) of concerned circle.
+Any other civil, electrical or allied work required for the successful installation, commissioning and functioning of the system at a location, as may be directed by the DEE (SWM) of concerned circle.
+4.8 Power and Connectivity
+Each installation shall be powered from mains supply with battery backup of not less than eight (8) hours, or by a solar power pack with battery bank at locations lacking reliable grid connectivity, as determined during the joint site survey.
+Connectivity shall be by 4G/5G or LTE using an IoT SIM, or by Wi-Fi or fibre backhaul where available, with store-and-forward capability sufficient to retain not less than twenty-four hours of event data and to synchronise automatically on restoration of connectivity, without loss of data and without duplicate records.
+The Bidder shall supply the IoT SIM and the SIM module, and shall bear the recurring data charges for the contract period. The cost thereof shall be included in the rates quoted.
+Recurring electricity charges for grid-connected locations shall be borne by the Authority. The Bidder shall coordinate metering and shall be responsible for the correctness of the connected load declared.
+4.9 Operation and Maintenance
+The Bidder shall provide Comprehensive Operation and Maintenance covering preventive and breakdown maintenance of all cameras, sensors, Public Address units, Smart Poles, solar and power equipment, networking equipment, central infrastructure and the software and dashboard, together with the manpower deployed under Clause 4.10, for the contract period.
+Comprehensive Operation and Maintenance includes the supply and replacement of any part, component or whole unit that fails, at no additional cost to the Authority, save as provided at Clause 11.4 in respect of theft and vandalism.
+The Bidder shall carry out periodic preventive maintenance visits, comprising lens cleaning, sensor calibration, connector and cable checks, solar panel cleaning, battery health check and firmware update, at intervals of not more than thirty days (30) at each location, and shall record each visit in a site-wise maintenance register maintained in the dashboard.
+The Bidder shall operate a dedicated toll-free number and helpdesk, manned during the Operation and Maintenance period, for logging of complaints by field staff of the Corporation and by the general public.
+The Bidder shall maintain an asset register in the dashboard recording, for every installation, the Collection Point Code, the equipment serial numbers, the date of commissioning, the maintenance history and the relocation history.
+4.10 Manpower for Shift-wise Monitoring
+The Bidder shall, as part of the Operation and Maintenance scope, depute adequately trained manpower for round-the-clock live monitoring of the dashboard at the Integrated Command and Control Centre, on a shift basis, for the entire Operation and Maintenance period.
+Deployment shall be in three (3) shifts of eight (8) hours each covering operations on a twenty-four hour, seven day basis, with not fewer than four (4) trained operators per shift, together with a Shift Supervisor or Team Lead in each shift for day-to-day coordination with the Sanitation and Solid Waste Management Wing.
+Deployed manpower shall be responsible for real-time observation of alerts, prompt escalation of unresolved or critical incidents to the concerned Sanitation Inspector, Deputy Executive Engineer (SWM) or Superintending Engineer(SWM), maintenance of shift-wise incident registers and logs, and coordination with the field maintenance team of the Bidder in respect of equipment faults.
+The Bidder shall maintain attendance and duty rosters of deployed manpower and make them available for inspection by officers of the Corporation as and when required.
+The Bidder shall be the employer of all such manpower and shall comply with all applicable labour legislation, including payment of not less than the minimum wages notified by the Government of Telangana, provident fund and employees state insurance contributions, and shall indemnify the Authority against any claim in that behalf. No employer-employee relationship shall arise between the Authority and any person deployed by the Bidder.
+Manpower shall be paid for at the rate quoted at Item 13 of the Price Schedule, per operator per month.
+4.11 Training and Capacity Building
+The Bidder shall conduct hands-on training for operators at the Integrated Command and Control Centre, enforcement staff and technical maintenance personnel of the Corporation, on system operation, dashboard usage, incident handling, evidence retrieval and basic troubleshooting.
+Training shall be delivered at Zone level and at the head office, and shall be repeated annually and on the release of any major functional change.
+Comprehensive user manuals, standard operating procedures and as-built documentation for each location shall be handed over to the Authority, in English and Telugu.
+4.12 Scope Exclusions
+The following are expressly outside the Scope of Work, and no cost in respect of them shall be included in the quoted rates. Any requirement falling within this clause shall, if subsequently required by the Authority, be dealt with under the change control procedure at Clause 8.5.
+Recurring electricity charges for grid-connected locations, which shall be borne by the Authority in accordance with Clause 4.8.
+Physical lifting, transportation and disposal of garbage from any location, and any sanitation or street-sweeping operation whatsoever.
+Statutory or legal action arising from evidence generated by the system, including issue of challans otherwise than by generation from the system, adjudication and recovery proceedings, all of which remain with the Authority.
+Development or modification of any system of the Corporation other than the platform supplied under this contract, including the Integrated Command and Control Centre platform, the citizen mobile application and the enforcement and challan-management system. The Bidder is responsible for consuming the interfaces published by those systems and not for building or altering them.
+Civil construction unrelated to the installation, including construction of enclosures, rooms or compound walls, and any beautification, barricading or GVP-to-park conversion work.
+Acquisition of land or of any right in immovable property, and payment of any compensation in respect of the site of an installation.
+Creation of base GIS map data or procurement of satellite or aerial imagery. The Authority shall provide the base map and the Ward, Circle and Zone boundary layers.
+
+5. Hosting, Availability and Disaster Recovery
+5.1 Hosting Model and Responsibility
+Hosting of all software, applications and data, whether on premise at the Integrated Command and Control Centre of the Corporation or in a data centre or cloud environment, shall be the sole responsibility of the Bidder, at its own cost, for the entire duration of the contract including the Operation and Maintenance period. No separate hosting charge shall be payable save as quoted at Item 12 of the Price Schedule.
+Where the Bidder proposes a cloud environment, it shall be a Cloud Service Provider empanelled by the Ministry of Electronics and Information Technology, Government of India.
+All data at rest, including recorded video, event footage, metadata and personal data, shall be located within the territory of India, in compliance with the data-localisation and security norms of the Government of India and the Government of Telangana.
+The subscription or licence shall be taken in the name of the Corporation where the provider permits, failing which in the name of the Bidder with a written undertaking to transfer or assign it to the Corporation on demand or on expiry or termination of the contract.
+The Authority reserves the right to require migration of the environment to the Telangana State Data Centre, or to a Government Community Cloud, on ninety (90) days' written notice. In that event the Bidder shall migrate the environment at a cost agreed under Clause 8.5, and no early termination charge, exit fee or minimum commitment charge shall be payable to the Bidder or to any service provider.
+5.2 Availability and Redundancy
+The central platform shall be deployed with redundancy at the application and database tiers, with no single point of failure, automatic failover, and rolling deployment such that a release does not require the service to be taken down. The availability commitment, its method of measurement and the consequences of failure to meet it are set out at Clause 11.3.
+5.3 Backup and Disaster Recovery
+A disaster recovery environment shall be maintained in a location within India separate from the primary environment, with automated replication of configuration, metadata and event footage.
+Recovery Point Objective not exceeding thirty (30) minutes and Recovery Time Objective not exceeding eight (8) hours in respect of the platform, dashboard and event data.
+A full backup daily and incremental backup every six hours, with retention in accordance with Clause 4.3.3, checksum-based integrity validation of every backup, and a documented restoration test once each quarter, the result of which shall be reported to the Authority.
+Encryption of all backups at rest.
+A disaster recovery drill conducted once every six months in the presence of the Authority, with a report submitted within fifteen days of each drill.
+Continuous recorded video held on edge storage at a location is not required to be replicated to the disaster recovery environment. Event footage, being the material of evidentiary value, shall be so replicated.
+5.4 Monitoring
+The Bidder shall provide, and shall give the Authority read access to, monitoring covering device health at every location, camera and sensor uptime, network and bandwidth utilisation, storage capacity and growth, power and battery status at solar locations, intrusion and tamper alerts, and automated measurement of the service levels at Clause 11.3, from which the monthly service report shall be generated. Service level measurement shall be from the monitoring system, and the underlying measurement data shall be available to the Authority. Service levels shall not be computed from figures self-reported by the Bidder without an auditable source.
+
+6. Security, Compliance and Data Protection
+6.1 Security Controls
+Encryption of data at rest using AES-256 or equivalent, and in transit using TLS 1.2 or later, including the video stream from each location.
+Secure device onboarding, with each camera and IoT unit uniquely identified and authenticated, and default credentials changed on commissioning.
+Strict role-based access control on the principle of least privilege, and multi-factor authentication for all administrative and privileged accounts.
+Immutable audit logging of every action performed, capturing user identity, timestamp, action, and the value before and after change, retained for the contract period and two years thereafter.
+Detection and alerting on unauthorised access attempts and anomalous usage patterns, API rate limiting, input validation and web application firewall protection.
+Secure software development practices, including static and dynamic application security testing before each major release.
+Quarterly vulnerability assessment, and closure of critical and high vulnerabilities within seven and fifteen days respectively.
+The Bidder shall be liable for any data breach attributable to inadequate hosting or device security.
+6.2 Compliance and Certification
+The platform shall be subjected to a security audit by an auditor empanelled with CERT-In, at the cost of the Bidder, before Go-Live and thereafter once every twelve months and upon every major release. A clear audit certificate is a condition precedent to Go-Live under Clause 8.1.
+All cameras and IoT devices shall be BIS, CE or FCC certified as applicable, and shall comply with the technical guidelines of the Ministry of Electronics and Information Technology and of the Smart Cities Mission for surveillance and IoT device security.
+Preference shall be given to equipment complying with the applicable public procurement orders of the Government of India relating to Make in India, in accordance with the orders in force on the last date of bid submission.
+The solution shall comply with the Information Technology Act, 2000 as amended, the Greater Hyderabad Municipal Corporation Act, 1955, the Telangana Municipal Solid Waste Management Bye-laws, and the Solid Waste Management Rules, 2016.
+The Bidder shall procure and maintain a valid SSL or TLS certificate for all published endpoints throughout the contract period, at its own cost.
+The project shall be implemented in accordance with the Swachh Bharat Mission (Urban) 2.0 Operational Guidelines issued by the Ministry of Housing and Urban Affairs, and all deliverables, milestones and documentation shall additionally be structured so as to satisfy the reporting, audit and utilisation-certificate requirements of the Mission.
+6.3 Data Protection and Surveillance Safeguards
+The system will capture video of public places and of identifiable persons, and will generate material used in enforcement proceedings. The following obligations apply and are additional to, and not in substitution for, the confidentiality obligations at Clause 8.6.
+For the purposes of the Digital Personal Data Protection Act, 2023, the Authority is the Data Fiduciary and the Bidder is a Data Processor acting solely on the instructions of the Authority.
+The Bidder shall process personal data, including video footage and images of identifiable persons, only to the extent necessary to perform its obligations under the contract, and for no other purpose. The Bidder shall not use such data for product development, model training, benchmarking, analytics for its own account, demonstration to any third party, or any commercial purpose whatsoever.
+The Bidder shall not publish, share, transmit or make available any footage to any person other than an officer of the Authority duly authorised in that behalf. Any request for footage from any other person, including from any law enforcement agency, shall be referred to the Authority and shall not be acted upon by the Bidder.
+Cameras shall not be positioned so as to survey the interior of private premises, and privacy masking shall be applied in accordance with Clause 4.3.1.
+No facial recognition, biometric identification or matching of any person against any database shall be undertaken by the Bidder, and no such capability shall be deployed, unless expressly directed in writing by the Authority under Clause 8.5 and subject to such conditions as the Authority may impose.
+The Bidder shall implement and maintain reasonable security safeguards to prevent personal data breach, and shall maintain a record of processing activities which shall be made available to the Authority on request.
+The Bidder shall not engage a sub-processor, and shall not permit any third party to access personal data, without the prior written consent of the Authority. Where consent is given, the Bidder shall remain liable for the acts and omissions of the sub-processor.
+The Bidder shall notify the Authority of any personal data breach, or of any reasonable suspicion of a breach, within twenty-four (24) hours of becoming aware of it, and shall provide all assistance required by the Authority in intimating the Data Protection Board of India and affected Data Principals.
+No personal data and no footage shall be transferred outside India.
+Evidence captured shall be stored and produced in a manner admissible for enforcement action under the applicable bye-laws, with an unbroken chain of custody, and the system shall record and preserve the integrity metadata of any footage marked for evidentiary use.
+On expiry or termination of the contract, the Bidder shall return all data to the Authority in an open, machine-readable format and shall thereafter erase it from all systems within its control, including backups, and shall certify such erasure in writing. Erasure shall be deferred only to the extent, and for so long as, retention is required by law or by pending proceedings.
+
+7. Governance and Stakeholder Responsibilities
+7.1 Governance Structure
+A Project Steering Committee chaired by the Additional Commissioner (Sanitation), shall meet monthly during implementation and quarterly thereafter, and shall be the forum for approval of change requests, review of service levels, review of the relocation register maintained under Clause 3.4, and resolution of escalations. A Project Manager nominated by the Bidder shall report to the Additional Commissioner (Sanitation), nominated by the Authority. The expressions System Integrator, Implementation Agency, Agency, Vendor, Bidder and successful Bidder are used interchangeably in this RFP and refer to the successful bidder who shall implement the Project.
+7.2 Responsibilities of the Authority
+Enter into a contract agreement with the successful Bidder.
+Provide the master list of identified locations, the base GIS map and the ward, Circle and Zone boundary layers.
+Nominate and depute the Deputy Executive Engineer (SWM) of each Circle for the joint site survey, validation and countersignature of the Site Feasibility Report.
+Notify substitute locations under Clause 3.4 and approve the relocation register.
+Facilitate statutory approvals and right-of-way permissions required for erection of poles and mounting structures.
+Bear recurring electricity charges for grid-connected locations in accordance with Clause 4.8.
+Provide access to the Integrated Command and Control Centre premises, and space, power and network drop for the central infrastructure.
+Provide access to the existing systems of the Corporation through defined APIs, together with technical documentation and a test environment, for the integration contemplated at Clause 4.6.3.
+Take enforcement action on the basis of evidence generated by the system.
+Obtain sanction of the Competent Authority and pursue release of funds under the IEC Component of Swachh Bharat Mission (Urban) 2.0.
+Monitor service levels at the intervals specified at Clause 11.3 and make payment in accordance with Clause 11.2.
+7.3 Responsibilities of the Bidder
+The Bidder shall be wholly responsible for the rollout of the Project and for the complete services stated in the Scope of Work, on a turnkey, single-point-responsibility basis, and shall in particular:
+Conduct the joint site survey and submit the Site Feasibility Report and Bill of Materials for each location.
+Procure, supply, install, test and commission all equipment, mounting infrastructure, power and connectivity at each contracted location.
+Supply, install and commission the central infrastructure at the Integrated Command and Control Centre, and develop, host and commission the platform and dashboard.
+Integrate with such systems of the Corporation as are specified at Clause 4.6.3.
+Relocate installations as directed under Clause 3.4, within the period there specified.
+Provide Comprehensive Operation and Maintenance and shift-wise manned monitoring in accordance with Clauses 4.9 and 4.10.
+Maintain the asset register, the maintenance register and the relocation register in the dashboard, and reconcile them against every invoice.
+Provide, at its own cost, the CERT-In security audit certificate, the SSL certificate and any other audit or certification required under Clause 6.2.
+Provide training, documentation and manuals in accordance with Clause 4.11.
+Comply with all applicable labour legislation in respect of manpower deployed, and maintain all statutory registers.
+Take out and maintain, for the contract period, insurance covering the equipment installed at all locations against fire, theft, vandalism, natural calamity and third-party liability, and produce the policy to the Authority. The Authority shall be named as loss payee to the extent of its interest.
+Comply with all instructions, standards and guidelines prescribed by the Government of India and the Government of Telangana from time to time in respect of surveillance, IoT device security and data protection.
+Provide technical documentation and manpower support to enable the Authority, its representatives and its consultants to carry out evaluation and audit.
+
+8. Definitions, Project Timelines and Deliverables
+8.1 Definitions
+In this RFP and in the resulting contract, the following expressions bear the meanings assigned below.
+
+Expression
+| Meaning
+|
+Location
+| A Garbage Vulnerable Point, Sweeping Point or Hotspot at which the system is deployed under this contract, identified by its Collection Point Code. The contracted quantity of Locations is 2,500 which may increase or decrease in accordance with Clause 3.4.
+|
+Collection Point Code
+| The unique numeric code assigned by the Corporation to a Location, being the primary key by which the Location is identified in the master list, the site survey report, the asset register, the dashboard and every invoice.
+|
+Site Acceptance
+| Written confirmation and certification from the Deputy Executive Engineer (SWM) of the Circle, that the installation at a Location has been tested and found to conform to the requirements of this RFP. Site Acceptance shall be given or refused with reasons within fifteen (15) working days of the Bidder reporting completion at that Location, failing which the installation shall be deemed accepted.
+|
+Go-Live
+| The date on which all of the following have occurred and been certified in writing by the Engineer-in-Charge: (a) installations at not less than ninety-five (95) per cent of the contracted quantity have achieved Site Acceptance; (b) the central infrastructure is installed and commissioned at the Integrated Command and Control Centre; (c) the platform and dashboard are in production use and integrated in accordance with Clause 4.6.3; (d) user acceptance testing has been completed and signed off; (e) a clear security audit certificate from a CERT-In empanelled auditor has been furnished; and (f) first-level training has been completed. Go-Live is the trigger for the Operation and Maintenance period at Clause 11.1.
+|
+Site Uptime
+| In respect of a Location in a calendar month, the percentage of total minutes in that month during which the camera, the IoT and Public Address unit and the connectivity at that Location are each functioning and reporting to the platform, computed as (total minutes in the month less Site Downtime) divided by (total minutes in the month), multiplied by 100, measured from the monitoring system referred to at Clause 5.4.
+|
+Site Downtime
+| Any period during which the camera, the IoT and Public Address unit or the connectivity at a Location is not functioning or not reporting, other than an Excluded Period.
+|
+Platform Availability
+| The percentage of total minutes in a calendar month during which the central platform, the dashboard and the recording infrastructure are each accessible and functioning, computed on the same basis as Site Uptime.
+|
+Excluded Period
+| A planned maintenance window approved in advance in writing by the Engineer-in-Charge, not exceeding four (4) hours in any calendar month in aggregate and falling wholly outside the hours 08:00 to 20:00 Indian Standard Time; a period during which a Location is inaccessible by reason of an act of the Authority or of another agency; a period during which grid electricity supply is unavailable at a Location for reasons not attributable to the Bidder and the battery backup period at Clause 4.8 has been exhausted; and a period during which a Location is under relocation under Clause 3.4, being not more than thirty days from the date of notice. Any downtime for maintenance that is not so approved, or that exceeds the approved window, shall constitute Downtime.
+|
+Business Hours
+| 10:30 to 17:30 Indian Standard Time on any day other than a Sunday or a holiday notified by the Government of Telangana.
+|
+Relocation
+| The de-installation, transportation, re-installation, testing, commissioning and reconfiguration of an installation from one Location to another, as directed under Clause 3.4.
+|
+Background IP
+| Intellectual property owned by or licensed to the Bidder, and in existence prior to the date of the contract or developed independently of it, which the Bidder proposes to use in providing the solution.
+|
+Total Evaluated Bid Price
+| The figure computed in accordance with Clause 9.4 from the Price Schedule, on which financial evaluation and the award of contract are based.
+|
+8.2 Implementation Schedule
+T0 is the date of issue of the Letter of Intent. The following milestones apply.
+
+#
+| Milestone
+| Completion
+| Deliverable
+|
+1
+| Issue of Letter of Intent
+| T0
+| —
+|
+2
+| Contract signature, Performance Bank Guarantee furnished, project inception and mobilisation
+| T0 + 1 week
+| PBG; inception report; project plan
+|
+3
+| Joint site survey of the identified Locations completed; Site Feasibility Reports and Bills of Materials submitted and approved
+| T0 + 3 weeks
+| Site Feasibility Reports; BoM per Location
+|
+4
+| Detailed design and system architecture accepted; type approval of camera, IoT unit, Smart Pole and solar kit on a sample installation
+| T0 + 3 weeks
+| Design document; approved sample installation
+|
+5
+| Central infrastructure supplied, installed and commissioned at the Integrated Command and Control Centre
+| T0 + 4 weeks
+| Commissioning report
+|
+6
+| Platform, dashboard and analytics developed; integration with the systems of the Corporation completed and tested
+| T0 + 4 weeks
+| Test reports; API documentation
+|
+7
+| Field installation, testing and commissioning, phase-wise by Zone, to 50% of contracted quantity
+| T0 + 5 weeks
+| Site Acceptance certificates
+|
+8
+| Field installation, testing and commissioning to 95% of contracted quantity
+| T0 + 8 weeks
+| Site Acceptance certificates
+|
+9
+| User acceptance testing completed and signed off; security audit cleared; training of trainers completed
+| T0 + 10 weeks
+| UAT sign-off; audit certificate; training material
+|
+10
+| Go-Live, as defined at Clause 8.1
+| T0 + 12 weeks
+| Go-Live certificate
+|
+11
+| Balance installations completed to the full contracted quantity
+| T0 + 24 weeks
+| Site Acceptance certificates
+|
+12
+| Comprehensive Operation and Maintenance period
+| 1 year from Go-Live, extendable by up to 2 further years
+| Monthly service reports
+|
+13
+| Exit management and reverse transition
+| Final 3 months of the contract
+| Transition plan; handover certificate
+|
+The Bidder shall strictly adhere to the implementation schedule. Delay attributable to the Bidder in achieving any milestone shall attract liquidated damages under Clause 12.9. Where a Location cannot be commissioned by reason of an act or default of the Authority or of another agency, or by reason of a statutory approval not being granted, that Location shall be excluded from the computation of the milestone percentage for so long as the impediment continues.
+8.3 Deliverables
+Site Feasibility Report and Bill of Materials for each Location, countersigned by the Deputy Executive Engineer (SWM).
+Detailed design and system architecture document, and an approved sample installation.
+All equipment, mounting infrastructure, power, solar and connectivity installed, tested and commissioned at each contracted Location.
+Central infrastructure installed and commissioned at the Integrated Command and Control Centre.
+The platform, dashboard, analytics and integrations, hosted in accordance with Section 5.
+Test plans and test cases, comprising site acceptance test plan, system integration test plan, user acceptance test plan, security test plan and load test plan, and testing documentation recording defects and their resolution.
+Asset register, maintenance register and relocation register, maintained in the dashboard.
+Clear security audit certificate from a CERT-In empanelled auditor, and every subsequent periodic audit certificate.
+Source code for all software specifically developed or customised for this Project, delivered at Go-Live and on every subsequent release, together with build and deployment instructions, and placed in escrow in accordance with Clause 8.6.
+User manuals, standard operating procedures, system administration manuals and as-built documentation for each Location, in English and Telugu.
+Training of officials and control-room operators, with training plan, session schedule and training manuals.
+Monthly service level reports, and periodic status and review reports as required by the Authority.
+Documentation structured so as to satisfy the reporting, audit and utilisation-certificate requirements of Swachh Bharat Mission (Urban) 2.0.
+The exit management and reverse transition deliverables at Clause 11.5.
+8.4 Support during the Project Period
+The Bidder shall provide support in accordance with the service levels at Clause 11.3.
+A facility shall be provided in the login of each designated officer to raise a ticket in respect of any fault or issue, with the option to upload an image and to select the issue type and the Collection Point Code. On resolution, the Bidder shall upload evidence of resolution.
+The Bidder shall maintain a log of each issue, recording the time and date of receipt, the Collection Point Code, the cause and nature of the problem, and the date and time of resolution.
+The Bidder shall cooperate with third-party external auditors in conducting certification and audit, and shall assist in strengthening processes by attending to audit observations.
+8.5 Change Control Procedure
+The following shall not constitute a change request and shall be delivered at no additional cost: any deliverable within the Scope of Work and the signed contract, whether or not expressly enumerated; defect rectification; changes required for compliance with the service levels; changes arising from statutory or regulatory requirement; configuration of alert thresholds, escalation lists, message libraries, announcement volume, report formats and user roles; and substitution of Locations under Clause 3.4, which is governed by the relocation rate and not by this clause.
+Any other change shall be initiated by a Change Request Note raised by either party and recorded in a register maintained by the Additional Commissioner (Sanitation), GHMC.
+The Bidder shall submit an impact assessment within seven (7) working days of receipt, stating the effort, the schedule impact, the risk and the cost computed at the unit rates in the Price Schedule and the person-day rates quoted at Table B of the Commercial Form. Those rates shall be firm for the contract period and shall be the only basis on which change is priced.
+No change shall be implemented until the Change Request Note has been approved in writing by the Project Steering Committee. Work undertaken without such approval shall not be payable.
+Cumulative change orders shall not exceed twenty-five (25) per cent of the one-time capital cost of the Project without the prior approval of the competent financial authority of the Corporation.
+8.6 Confidentiality and Intellectual Property Rights
+8.6.1 Confidentiality
+The Bidder shall maintain absolute confidentiality in respect of all documents, maps, footage, images and data collected in any form, and any other data or information provided to it for the execution of the work.
+The Bidder shall not use project data for any purpose other than the Scope of Work specified in this document, and shall not disclose to any person any information marked confidential or communicated or made accessible to it during execution of the work.
+All project-related documents issued by the Authority, other than the contract itself, shall remain the property of the Authority and shall be returned in all copies on completion of the Bidder's performance.
+If at any stage it is found that the Bidder is using data provided by the Authority, or footage generated under this contract, for any purpose other than the contract, whether during the contract or after its completion, legal action shall be initiated in accordance with law and the contract shall be liable to termination.
+Erasure and return of data shall additionally be governed by Clause 6.3.
+8.6.2 Intellectual property and ownership of assets
+All equipment, cameras, sensors, Public Address units, poles, solar kits, batteries, networking equipment and central infrastructure supplied under this contract shall, on payment, vest absolutely in the Corporation, free of encumbrance, notwithstanding that the Bidder remains responsible for their maintenance, replacement and relocation for the contract period.
+All footage, images, event data, metadata and analytics output generated under this contract shall vest absolutely in the Corporation.
+All intellectual property rights in software specifically developed, customised, configured or modified for this Project, and in all documentation prepared for it, shall vest absolutely in the Corporation. The Bidder shall execute such assignments as may be necessary to give effect to this clause.
+The Bidder shall retain ownership of its Background IP, and shall grant to the Corporation a perpetual, irrevocable, non-exclusive, royalty-free, worldwide licence, transferable to a successor agency, to use, operate, host, maintain, modify and have modified such Background IP to the extent embedded in or necessary for the operation of the system, such licence to survive expiry or termination of the contract for any reason.
+The Bidder shall disclose in its Technical Proposal all Background IP, all third-party proprietary components and all open-source components proposed to be used, together with the applicable licence terms. Any component whose licence terms are inconsistent with sub-clauses (3) and (4) shall not be used without the prior written approval of the Authority.
+Source code for all bespoke software shall be delivered in accordance with Clause 8.3 and shall additionally be placed in escrow with an escrow agent approved by the Authority, on terms permitting release to the Authority on insolvency of the Bidder, on termination, or on failure by the Bidder to remedy a material breach. The cost of escrow shall be borne by the Bidder.
+All third-party software licences supplied by the Bidder shall be genuine, perpetual and full-use, shall carry patches, fixes and security updates directly from the original equipment manufacturer at no additional cost to the Authority for the contract period, and shall be in the name of the Corporation from the date of procurement. Where the licence model of the manufacturer does not permit a perpetual licence, the Bidder shall disclose this in the Technical Proposal and shall quote the subscription cost for the full contract period.
+The Bidder shall indemnify the Authority against all third-party claims of infringement of copyright, patent, trademark, design or other intellectual property right arising from the use of the solution or any part of it in India, and shall act expeditiously to extinguish any such claim.
+
+9. Qualification and Evaluation of the Bidder
+9.1 Pre-Qualification Criteria
+The competence and capability of the Bidder shall be established by the parameters set out in this clause. The Bidder may be a company registered under the Indian Companies Act, a registered partnership firm, or a Limited Liability Partnership. The Bidder shall meet every criterion in this clause. Each criterion is mandatory, and a bid that does not meet any one of them shall be treated as non-responsive and shall not be considered for further evaluation.
+Bidding is on a sole-bidder basis. Consortium and joint-venture bids are not permitted. A Bidder shall submit one bid only and shall not participate in any other bid under this RFP in any capacity.
+
+#
+| Pre-Qualification Criteria
+| Attachments
+|
+1
+| The Bidder shall be a company registered under the Indian Companies Act, 1956 or 2013, or a partnership firm registered under the Indian Partnership Act, 1932, or a Limited Liability Partnership registered under the Limited Liability Partnership Act, 2008.
+The Bidder shall have been in operation for at least five (5) years in the field of supply, installation and maintenance of CCTV surveillance, IoT or electronic security systems, as on the last date of bid submission.
+| Copy of the Certificate of Incorporation signed by the authorised signatory of the Bidder, or a copy of the partnership deed or LLP agreement, or any other relevant document issued by a competent Authority/Govt.
+|
+2
+| The Bidder shall hold ISO 9001:2015 certification, ISO/IEC 27001:2022 certification and CMMI Level 3 appraisal or above, each valid as on the last date of bid submission.
+| Valid copy of each certificate and of the CMMI appraisal, with the certifying or appraising body, the certificate or appraisal number, the appraisal level and the validity period legible.
+|
+3
+| The Bidder shall have executed, during the last five (5) financial years, CCTV surveillance or IoT-based field-device projects for any Central or State Government organisation, Public Sector Undertaking, Urban Local Body or Private Company in India, being either:
+(a) one (1) project of not less than 1,250 field locations or cameras, or
+(b) two (2) projects of not less than 750 field locations or cameras each.
+| For each project, the work order together with a completion certificate, performance certificate or satisfactory-work certificate from the client, stating the number of locations or cameras. PQ Form #3.
+|
+4
+| The Bidder shall have executed, during the last five (5) financial years, at least one (1) project involving integration of field cameras or IoT devices with a centralised command and control centre, video management system or dashboard, including central recording and storage.
+| Work order and client completion or experience certificate. PQ Form #3.
+|
+5
+| The Bidder shall have a minimum average annual turnover of Rs. 40 Crores in the last three (3) audited financial years, namely FY 2023-24, FY 2024-25 and FY 2025-26, from the business area of supply, installation, commissioning and maintenance of CCTV surveillance, IoT, electronic security or allied systems.
+| Audited and certified balance sheet and profit and loss account for the last three (3) financial years. Certificate from a practising Chartered Accountant stating the turnover for each of the three years and the average annual turnover for that period. PQ Form #2.
+|
+6
+| The Bidder shall have a positive net worth in the last audited financial year, ending on 31 March 2026.
+ITR should be filed for the last three financial years (preceding the current FY)
+| Audited and certified balance sheet and profit and loss account, and a Chartered Accountant certificate stating the net worth as on 31 March 2026.
+ITR acknowledgement copies for the last three financial years (preceding the current FY)
+|
+7
+| The Bidder shall have at least thirty (30) regular technical personnel on its rolls as on the last date of bid submission, engaged in installation, commissioning and maintenance of surveillance, IoT or networking systems, of whom not less than ten (10) shall hold a degree or diploma in engineering or technology.
+| Certificate from the Human Resources head of the Bidder, listing the personnel, their qualifications and their roles, supported by the most recent Provident Fund or ESI return. PQ Form #4.
+|
+8
+| The Bidder shall be an authorised partner, dealer or system integrator of the original equipment manufacturer of the camera and of the Video Management System proposed, or shall be the manufacturer thereof.
+| Manufacturer Authorisation Form in the format at Format 5, from each such manufacturer.
+|
+9
+| The Bidder shall not be blacklisted or debarred by any Central or State Government department, or by any Central or State Public Sector Undertaking in India, as on the bid submission date.
+| Undertaking by the Bidder. PQ Form #5.
+|
+10
+| The Bidder shall have a valid GST registration and a Permanent Account Number in India.
+| GST registration certificate and PAN.
+GST Returns of last 3 months.
+|
+11
+| The Bidder shall have a local office at Hyderabad, or shall furnish an undertaking to establish one within thirty (30) days of the issue of the Letter of Intent and to maintain it throughout the contract period, so as to ensure satisfactory fulfilment of the service levels at Clause 11.3.
+| Details of the office address at Hyderabad, or undertaking on the letterhead of the Bidder.
+|
+
+Relevant supporting documents, ink signed, shall be furnished without fail, failing which the bid is liable to be treated as non-responsive.
+
+Notes.
+The Bidder shall upload all required documents with clear visibility and shall avoid missing documents and bidding mistakes. Where documents are missing or are not clear, the Authority reserves the right to seek clarification, and may disqualify the Bidder for bidding mistakes, missing documents or documents that are not clear.
+Private Company, wherever used in this clause and in Clause 9.3, means a company incorporated under the Indian Companies Act, 1956 or 2013, or a Limited Liability Partnership registered under the Limited Liability Partnership Act, 2008, whether listed or unlisted. Experience with a Private Company client shall be supported in the manner set out in the notes to PQ Form #3, and the Authority reserves the right to verify any such certificate directly with the client.
+The Bidder shall not have any conflict of interest that may affect the bidding process. Any applicant found to have a conflict of interest shall be disqualified.
+Turnover, net worth, experience and certifications shall be reckoned in respect of the bidding entity itself. The turnover, experience or certification of a parent, subsidiary, associate or group company shall not be considered, save that where the bidding entity has been formed by conversion of a partnership into a company or a Limited Liability Partnership, or by amalgamation, the record of the predecessor entity shall be considered on production of the instrument of conversion or the scheme of amalgamation.
+Where the audited accounts for FY 2025-26 have not been finalised as on the last date of bid submission, provisional accounts certified by a practising Chartered Accountant may be submitted, together with an undertaking to furnish the audited accounts within thirty (30) days of finalisation.
+9.2 Evaluation Procedure
+The method of selection is Quality and Cost Based Selection on a 70 : 30 basis, seventy per cent weightage being given to the Technical Proposal and thirty per cent to the Financial Proposal, in accordance with the marking criteria at Clause 9.3 and the methodology at Clause 9.4.
+The Authority shall constitute a Committee to evaluate the responses. The Committee shall evaluate the responses and all supporting documents and documentary evidence. Inability on the part of a Bidder to submit the requisite supporting documents or documentary evidence may lead to rejection of its bid.
+The decision of the Authority in the evaluation of bids shall be final and binding on all Bidders. No correspondence will be entertained outside the process of evaluation. The Authority may call for meetings or presentations with Bidders to seek clarification or confirmation on their bids.
+The Authority reserves the right to reject any or all bids.
+9.2.1 Stage 1(A) — Pre-Qualification
+The Authority shall validate the Bid Document Price and the Earnest Money Deposit.
+If those are in accordance with the requirements, the Authority shall open the Pre-Qualification Bid. Each criterion at Clause 9.1 is mandatory. Where a bid does not meet any one of those conditions, it shall be treated as non-responsive and shall not be considered further.
+Only bids meeting all pre-qualification criteria shall be considered for Stage 1(B).
+9.2.2 Stage 1(B) — Technical Evaluation
+Technical bids shall be evaluated only for Bidders who have succeeded at Stage 1(A).
+The Committee shall first determine whether each technical bid is substantially responsive. Bids that are not substantially responsive are liable to be disqualified.
+Each technical bid shall be assigned a technical score out of a maximum of one hundred (100) marks in accordance with the framework at Clause 9.3.
+Bidders shall make a technical presentation and shall demonstrate a proof of concept, in accordance with items 2.1, 2.2 and 2.3 of Clause 9.3. The presentation and demonstration form part of the Technical Proposal.
+Only bids obtaining an overall technical score of seventy (70) marks or more shall be considered technically qualified. Bids scoring less than seventy marks shall be technically disqualified and their commercial bids shall not be opened.
+9.2.3 Stage 2 — Commercial Evaluation
+All technically qualified Bidders shall be notified to participate in the commercial bid opening process.
+The commercial bids of only those Bidders who have qualified at Stage 1(A) and Stage 1(B) shall be opened, and shall be reviewed to determine whether they are substantially responsive. Commercial bids that are not substantially responsive, or that are incomplete or conditional in any manner, shall be summarily rejected.
+The Total Evaluated Bid Price shall be computed for each responsive commercial bid in accordance with Clause 9.4. Arithmetical errors shall be corrected on the basis that, where there is a discrepancy between a unit rate and the corresponding total, the unit rate shall prevail, and where an amount is stated both in words and in figures, the amount in words shall prevail.
+Substantially responsive bid. A substantially responsive bid is one which conforms to all the requirements, terms, conditions and specifications of this Request for Proposal without material deviation. Any attempt by a Bidder to influence the bid evaluation process may result in the rejection of that Bidder's bid.
+9.3 Technical Evaluation Framework
+The Evaluation Committee shall evaluate the Technical Proposal against the parameters set out below. All projects offered for evaluation shall have been successfully completed, or shall be ongoing with the completed portion certified, and shall be supported by a client certificate.
+
+Part E1 — Bidder Credentials and Experience (55 marks)
+#
+| Evaluation Parameter and Scoring
+| Max. Marks
+| Eligible Documentary Evidence
+|
+1.1
+| Scale of deployment. Largest single CCTV or IoT field-device project executed in the last five (5) financial years, measured by number of field locations or cameras.
+1,250 and above but below 2,000 — 5 marks.
+2,000 and above but below 3,000 — 10 marks.
+3,000 and above — 15 marks.
+| 15
+| Work order and client completion or performance certificate stating the number of locations or cameras. PQ Form #3.
+|
+1.2
+| Municipal and urban governance experience. Number of CCTV or IoT field-device projects executed in the last five (5) financial years for an Urban Local Body, Municipal Corporation, Smart City Special Purpose Vehicle or State Police organisation in India.
+One (1) project — 5 marks.
+Two (2) projects — 10 marks.
+Three (3) or more projects — 15 marks.
+| 15
+| Work orders and client certification. PQ Form #3 for each project.
+|
+1.3
+| Command and control centre integration experience. Number of projects in the last five (5) financial years involving integration of field devices with a centralised command and control centre, video management system or dashboard, including central recording and storage.
+One (1) project — 3 marks.
+Two (2) projects — 7 marks.
+Three (3) or more projects — 10 marks.
+| 10
+| Work orders and client certification.
+|
+1.4
+| Financial capacity. Average annual turnover of the Bidder from the business area specified at criterion 5 of Clause 9.1, for the last three (3) audited financial years.
+Meeting the threshold at criterion 5 but below 1.5 times that threshold — 2 marks.
+1.5 times and above but below 2 times that threshold — 3 marks.
+2 times that threshold and above — 5 marks.
+| 5
+| Audited balance sheet and profit and loss account for the last three financial years and Chartered Accountant certificate. PQ Form #2.
+|
+1.5
+| Quality, security and process certifications held by the Bidder, valid as on the last date of bid submission. Certifications required at criterion 2 of Clause 9.1 are mandatory and carry the base marks below; further certifications carry the additional marks.
+ISO certifications — ISO 9001:2015 and ISO/IEC 27001:2022, both held — 2 marks. Each further certification relevant to this Project, being ISO/IEC 20000-1 (service management), ISO 14001 (environmental management) or ISO 45001 (occupational health and safety) — 1 mark each, subject to a maximum of 3 further marks. Maximum 5 marks.
+| 5
+| Valid copy of each certificate, with the certifying body, certificate number and validity period legible.
+|
+1.6
+| Process maturity. Valid CMMI appraisal as on the last date of bid submission. CMMI Level 3 is mandatory under criterion 2 of Clause 9.1 and carries the base marks below.
+CMMI Level 3 — 3 marks; CMMI Level 4 — 4 marks; CMMI Level 5 — 5 marks. Maximum 5 marks.
+| 5
+| Valid appraisal certificate with the appraising body, the appraisal date, the level and the validity legible.
+|
+
+| Sub-total, Part E1
+| 55
+|
+|
+
+Part E2 — Solution, Approach and Demonstration (45 marks)
+#
+| Evaluation Parameter and Scoring
+| Max. Marks
+| Eligible Documentary Evidence
+|
+2.1
+| Technical and professional capability and the proposed solution, assessed on the technical presentation.
+Understanding of the requirement and quality of the proposed solution and system architecture — 5 marks. Rollout plan for 2,500 Locations, phasing by Zone, resourcing and risk management — 5 marks. Approach to relocation under Clause 3.4, including the relocation workflow and its effect on continuity of monitoring — 4 marks. Operation and Maintenance plan, field service organisation and spares holding — 4 marks. Team structure and qualifications of key personnel, and training plan — 2 marks.
+| 20
+| Technical presentation before the Committee; TQ Form #1; curricula vitae of key personnel; PQ Form #4.
+|
+2.2
+| Proof of concept demonstration at a live or simulated site, of the specifications in this RFP.
+Detection of a dumping event by sensor, corroborated by video analytics, with the false-positive controls at Clause 4.4.2 — 5 marks. Instant multilingual Public Address announcement and visual deterrent on detection — 4 marks. Generation of a timestamped alert with snapshot and clip to the dashboard — 3 marks. Operation on solar power with automatic changeover, and store-and-forward on loss of connectivity — 3 marks.
+| 15
+| Live demonstration before the Technical Committee. Details to be provided in the Technical Proposal.
+|
+2.3
+| Dashboard and analytics demonstration.
+GIS map view of Locations with real-time status, and drill-down to Zone, Circle and Collection Point Code — 3 marks. Escalation workflow under Clause 4.5, including clearance-time measurement and field responsiveness reporting — 4 marks. Relocation register and asset register, and the reflection of a substitution in the dashboard — 3 marks — 10 marks in aggregate.
+| 10
+| Live demonstration before the Technical Committee.
+|
+
+| Sub-total, Part E2
+| 45
+|
+|
+
+| Total, Part E1 and Part E2
+| 100
+|
+|
+
+A minimum technical score of seventy (70) marks out of one hundred is required to qualify for opening of the financial bid.
+9.4 Selection Methodology and Award
+The overall evaluation shall be on the QCBS basis in the ratio of 70 : 30, seventy per cent weightage being given to the technical evaluation in accordance with Clause 9.3 and thirty per cent to the financial evaluation.
+The Total Evaluated Bid Price for each responsive financial bid shall be the "Total Evaluated Bid Price" computed at the foot of the Price Schedule at C Form #2, being the sum of the extended amounts of every item of that Schedule, computed by applying the unit rate quoted against each item to the evaluation quantity stated against that item.
+The financial score of each Bidder shall be computed as: F = 100 × (lowest Total Evaluated Bid Price among all responsive bids ÷ Total Evaluated Bid Price of the Bidder). The Bidder quoting the lowest Total Evaluated Bid Price shall accordingly obtain a financial score of 100.
+The overall score of each Bidder shall be computed as: S = (0.70 × Technical Score) + (0.30 × Financial Score), each score being out of 100.
+The proposals shall be ranked in terms of the overall scores obtained, from highest to lowest. The Bidder obtaining the highest overall score shall be considered for award of the contract and shall be issued the Letter of Intent.
+Where two or more Bidders obtain the same overall score, the Bidder with the higher technical score shall be preferred. Where the technical scores are also equal, the Bidder with the lower Total Evaluated Bid Price shall be preferred.
+The Authority reserves the right to negotiate with the Bidder whose proposal has been ranked first, on the basis of best value to the Project. Negotiation shall not result in an increase in any quoted unit rate or in any dilution of the Scope of Work.
+The evaluation quantities in the Price Schedule are used solely to arrive at a comparable Total Evaluated Bid Price. Payment shall be made on the quantities actually supplied, installed, relocated and maintained, at the unit rates quoted, in accordance with Clause 11.2.
+
+Illustration. A Bidder obtaining a technical score of 78 marks, whose Total Evaluated Bid Price is Rs. 62.50 Crores against a lowest responsive price of Rs. 55.00 Crores, obtains a financial score of 100 × (55.00 ÷ 62.50) = 88.00, and an overall score of (0.70 × 78) + (0.30 × 88.00) = 54.60 + 26.40 = 81.00.
+
+10. Instructions to Bidders
+10.1 Introduction
+While every effort has been made to provide comprehensive and accurate background information and requirements, Bidders must form their own conclusions about the solution needed to meet the requirements of the Authority. Bidders are encouraged to attend the pre-bid meeting and to undertake a site visit, at their own cost, before submission of their bid.
+All information supplied by a Bidder as part of its bid may be treated as contractually binding on the Bidder on award of the assignment.
+No commitment of any kind, contractual or otherwise, shall exist unless and until a formal written contract has been executed by or on behalf of the Authority. Notification of preferred bidder status shall not give rise to any enforceable right. The Authority may cancel this procurement at any time prior to execution of a formal written contract.
+Bids shall be received through the e-Procurement portal before the date and time specified at Section 2. The Authority may extend that deadline by issuing a corrigendum on the portal.
+Bids received through any other mode of communication, including email, printed copy, telex, cable or facsimile, shall be rejected.
+10.2 Eligible Bidders
+The Bidder shall satisfy every pre-qualification criterion at Clause 9.1, including the requirements as to legal status and vintage at criterion 1 of that clause.
+The Bidder shall have the capability to deliver the entire Scope of Work through its own resources, save to the extent of sub-contracting permitted under Clause 12.5.
+Bidding is on a sole-bidder basis. A Bidder shall submit one bid only, and shall not participate in any other bid under this RFP in any capacity.
+A Bidder may be an Indian entity or a foreign entity. A foreign entity shall register as a company under the Companies Act, 2013 in India within six (6) months of the issue of the Letter of Intent, and shall in any event hold Indian GST registration before the first invoice is raised.
+10.3 Completeness of Response
+Bidders are advised to study all instructions, forms, terms, requirements and other information in the RFP carefully. Submission of a bid shall be deemed to have been made after careful study and examination of the RFP with full understanding of its implications.
+The response shall be full and complete in all respects. Failure to furnish all information required, or submission of a proposal not substantially responsive in every respect, shall be at the Bidder's risk and may result in rejection of the proposal and forfeiture of the Earnest Money Deposit.
+Bidders shall include all documentation specified in this RFP, shall follow the format of this RFP and shall respond to each element in the order set out.
+10.4 Cost of Bidding
+The Bidder shall bear all costs associated with the preparation and submission of its bid, including costs of due diligence, site visits, participation in meetings, discussions and presentations, preparation of the proposal, provision of additional information and negotiation of a definitive contract. The Authority shall in no case be responsible or liable for such costs, regardless of the conduct or outcome of the bidding process. The tender document is downloadable from the e-Procurement portal. The Bid Document Price and the Earnest Money Deposit are payable online through the portal.
+10.5 Transferability
+This RFP document is non-transferable.
+10.6 Pre-Bid Queries
+All queries relating to this RFP shall be submitted in writing by email to the Additional Commissioner (IT), GHMC, at the address at Section 2, on or before the date specified at Section 2. Queries by telephone or facsimile will not be accepted.
+A pre-bid meeting shall be held on the date and at the venue specified at Section 2.
+The Authority will endeavour to provide a complete and timely response to all queries but makes no representation as to the completeness or accuracy of any response, nor does it undertake to answer every query. Responses shall be published on the e-Procurement portal and shall be circulated to all Bidders.
+Queries shall be submitted in the following format. Queries not conforming to the format may not be responded to.
+
+Sl. No.
+| Clause No. / Page No.
+| Component or sub-component
+| Reference or subject requiring clarification
+| Clarification sought
+|
+
+|
+|
+|
+|
+|
+10.7 Amendment and Supplemental Information
+At any time prior to the last date for receipt of bids, the Authority may, whether at its own initiative or in response to a clarification requested by a prospective Bidder, modify this RFP by amendment. Amendments shall be published on the e-Procurement portal and shall be binding on all Bidders. Bidders are requested to visit the portal frequently. In order to afford Bidders reasonable time to take an amendment into account, the Authority may extend the last date for receipt of bids, and Bidders shall be permitted to resubmit their bids following such amendment.
+10.8 Submission of Bids
+Bids shall be submitted online only, on the e-Procurement portal, in the formats prescribed in this RFP and on the portal. No physical copy shall be submitted.
+The financial bid shall be submitted in the separate financial bid envelope on the portal. Where the financial bid is submitted along with the technical bid, the bid shall be rejected.
+Bidders shall register on the portal and obtain a Digital Signature Certificate at their own initiative and in time.
+All pages of the bid shall be sequentially numbered and the bid shall contain a list of contents with page numbers. Any deficiency in documentation may result in rejection.
+All pages of the bid shall be digitally signed by the person authorised to sign the bid, and the authorisation letter or power of attorney shall be enclosed.
+The Bidder shall include the solution architecture, a compliance statement, and a separate statement of assumptions and deviations, each as a distinct section of the technical bid.
+Prices shall be quoted in Indian Rupees only.
+The names of Bidders, and the presence or absence of the requisite bid security, will be announced at the time of opening.
+10.9 Bid Validity
+Bids shall remain valid for one hundred and eighty (180) days from the last date of bid submission. On completion of the validity period, unless the Bidder withdraws its bid in writing, the bid shall be deemed valid until the Bidder formally withdraws it in writing. The Authority may request an extension of validity, which a Bidder may accept or decline without forfeiture of its Earnest Money Deposit.
+10.10 Earnest Money Deposit
+Bidders shall pay the Earnest Money Deposit specified at Section 2 online through the e-Procurement portal, valid for one hundred and eighty (180) days from the last date of bid submission. Offers made without the Earnest Money Deposit shall be rejected.
+The Earnest Money Deposit shall not bear interest, and shall be refunded to unsuccessful Bidders on conclusion of the evaluation process.
+The Earnest Money Deposit of the successful Bidder shall be released on execution of the contract and furnishing of the Performance Bank Guarantee under Clause 12.1.
+The Earnest Money Deposit shall be liable to forfeiture where the Bidder withdraws its bid during the period of bid validity, or where the successful Bidder fails to execute the contract in accordance with its terms or to furnish the Performance Bank Guarantee.
+10.11 Bid Submission Documents
+10.11.1 Pre-Qualification
+General information of the Bidder — PQ Form #1
+Financial turnover and net worth — PQ Form #2
+Past experience details, one form per project offered — PQ Form #3
+Technical manpower — PQ Form #4
+Declaration of non-blacklisting — PQ Form #5
+Declaration of no conflict of interest — PQ Form #6
+Manufacturer Authorisation Form — Format 5
+Evidence of payment of Bid Document Price and Earnest Money Deposit
+Power of attorney or authorisation letter of the signatory
+10.11.2 Technical Proposal
+Approach, methodology, rollout plan and work plan — TQ Form #1
+Technical specification compliance statement — TQ Form #2
+Make, model and datasheet of every item of equipment proposed
+Solution architecture, and statement of assumptions and deviations
+Disclosure of Background IP, third-party and open-source components under Clause 8.6.2
+Curricula vitae of key personnel
+10.11.3 Commercial Proposal
+Commercial proposal submission form — C Form #1
+Price Schedule and person-day rates — C Form #2
+10.12 Clarification, Modification and Rejection
+To assist in scrutiny, evaluation and comparison of offers, the Authority may at its discretion seek clarification from any or all Bidders. Requests for clarification and the responses shall be in writing. No change in the substance of the bid, and no change in price, shall be sought, offered or permitted.
+Modification or withdrawal of an offer is not permissible after submission. Where an offer is withdrawn before expiry of the validity period, the Earnest Money Deposit shall be forfeited.
+Bidders shall abide by the terms and conditions of this RFP. Conditional offers shall be liable to outright rejection.
+Notwithstanding anything stated in this RFP, the Authority reserves the right to accept the whole or part of a bid, or to reject any bid, and to cancel or annul the bidding process and reject all bids at any time before award of the contract, without assigning any reason and without incurring any liability to any Bidder.
+All materials submitted by a Bidder shall become the property of the Authority and may be returned at its sole discretion.
+10.13 Signing of Contract
+On notifying the successful Bidder that its bid has been accepted, the Authority shall enter into a contract with the successful Bidder incorporating the agreed terms. The contract shall be executed within twenty-one (21) days of the issue of the Letter of Intent, and the Performance Bank Guarantee shall be furnished at or before execution.
+
+11. Contract Period, Payment and Service Levels
+11.1 Contract Period
+The contract period shall comprise the implementation period up to Go-Live in accordance with Clause 8.2, followed by one (1) year of Comprehensive Operation and Maintenance from the date of Go-Live. The Authority may extend the Comprehensive Operation and Maintenance period by up to two (2) further years, in one or more spells, at the discretion of the Competent Authority, on the same terms, conditions and rates, subject to satisfactory performance of the Bidder during the preceding period as assessed against the service levels at Clause 11.3. The decision of the Competent Authority regarding satisfactory performance and grant of extension shall be final.
+11.2 Payment Terms
+All payments are subject to sanction of the Competent Authority and to availability and release of funds under the IEC Component of Swachh Bharat Mission (Urban) 2.0, and to production of such utilisation and completion certificates as the Mission requires.
+11.2.1 Capital items — supply, installation and commissioning
+Ten (10) per cent of the value of the capital items at Items 1 to 11 of the Price Schedule, on approval of the detailed design and of the Site Feasibility Reports for the Locations covered by the joint site survey.
+Fifty (50) per cent, computed Location by Location at the unit rates quoted, on Site Acceptance of the installation at that Location under Clause 8.1, certified by the Deputy Executive Engineer (SWM) of the Circle. Payment under this sub-clause shall be released against monthly running bills covering the Locations accepted in that month.
+Twenty-five (25) per cent on Go-Live, as defined at Clause 8.1, and on completion of integration with the systems of the Corporation.
+Fifteen (15) per cent on completion of ninety (90) days of satisfactory operation from Go-Live, subject to delivery of the source code and escrow deposit under Clause 8.6.2 and to closure of all critical and high-severity faults then outstanding.
+11.2.2 Comprehensive Operation and Maintenance (Item 14)
+Payable quarterly in arrears at the rate quoted per Location per year, pro-rated for part periods and computed on the number of Locations in service during the quarter, subject to deduction of penalties assessed under Clause 11.4. A Location under relocation under Clause 3.4 shall be treated as in service for this purpose, for a period not exceeding thirty days from the date of the substitution notice.
+11.2.3 Manpower for shift-wise monitoring (Item 13)
+Payable monthly in arrears at the rate quoted per operator per month, on the number of operators actually deployed as evidenced by the attendance and duty rosters maintained under Clause 4.10, subject to deduction for any shift not manned in accordance with that clause.
+11.2.4 Hosting and central bandwidth (Item 12)
+Payable quarterly in arrears against actual provision, subject to the quoted annual ceiling and pro-rated for part periods.
+11.2.5 Relocation (Item 15)
+Payable monthly in arrears on the number of relocations completed and recommissioned during the month, at the firm relocation rate quoted, certified by the Deputy Executive Engineer (SWM) of the Circle of the substitute Location and supported by the relocation register maintained under Clause 4.6.2. No other sum shall be payable on account of a substitution, in accordance with Clause 3.4(7).
+11.2.6 General
+Every invoice shall be accompanied by a statement identifying each Location by its Collection Point Code, and shall reconcile to the asset register and the relocation register maintained in the dashboard. An invoice that cannot be so reconciled shall not be payable until reconciled.
+The rates quoted shall be inclusive of all activities within the Scope of Work and of all taxes, duties, freight, insurance, installation and commissioning charges, and shall be firm for the contract period, subject only to change orders approved under Clause 8.5.
+Undisputed invoices shall be paid within thirty (30) days of receipt of a correct invoice together with the supporting statements required under this clause, subject to Audit clearances by the Authority. Where any part of an invoice is disputed, the undisputed part shall be paid within that period and the dispute shall be dealt with under Clause 12.11.
+No interest shall be payable on the Earnest Money Deposit or on the amount secured by the Performance Bank Guarantee, or on account of any delay in payment attributable to non-release of funds under the Mission.
+11.3 Service Levels
+The Bidder shall comply with the following service levels throughout the Operation and Maintenance period, and shall submit a monthly service review report to the Engineer-in-Charge with each invoice. Measurement shall be from the monitoring system under Clause 5.4.
+11.3.1 Site uptime
+The site uptime target is 95 per cent per Location per calendar month, computed in accordance with the definitions at Clause 8.1.
+
+Average site uptime across all Locations in the month
+| Measurement
+| Deduction from the monthly amount payable
+|
+99% and above
+| Monthly, from the monitoring system
+| Nil
+|
+95% and above but below 99%
+| Monthly
+| 2% of the monthly amount payable
+|
+90% and above but below 95%
+| Monthly
+| 5% of the monthly amount payable
+|
+85% and above but below 90%
+| Monthly
+| 8% of the monthly amount payable
+|
+Below 85%
+| Monthly
+| 10% of the monthly amount payable
+|
+In addition, where the uptime at any individual Location falls below 85 per cent in any calendar month, a deduction of the per-Location Operation and Maintenance charge for that month shall be made in respect of that Location, and where it does so in three consecutive months the Authority may direct replacement of the installation at that Location at the cost of the Bidder.
+11.3.2 Platform availability
+Platform availability, comprising the central platform, the dashboard and the recording infrastructure, shall be not less than 99.5 per cent of total minutes in each calendar month. A deduction of 2 per cent of the monthly amount payable shall be made for every full 0.5 percentage point, or part thereof, by which availability falls below that target, subject to Clause 11.4.
+11.3.3 Fault rectification
+The Bidder shall rectify faults or replace faulty, damaged or stolen equipment within the following timelines. Time runs from the logging of the complaint at the helpdesk or the raising of an automatic alert by the monitoring system, whichever is earlier.
+
+Component
+| Maximum response time
+| Maximum resolution or replacement time
+| Deduction for breach
+|
+CCTV camera — fault, damage or theft
+| 4 hours
+| 48 hours
+| Rs. 1000 per Location per day or part thereof
+|
+IoT and Public Address unit — fault, damage or theft
+| 4 hours
+| 48 hours
+| Rs. 500 per Location per day or part thereof
+|
+Networking equipment — router, switch or 4G/5G modem
+| 4 hours
+| 24 hours
+| Rs. 1000 per Location per day or part thereof
+|
+Solar kit, battery or power equipment
+| 8 hours
+| 48 hours
+| Rs. 1000 per Location per day or part thereof
+|
+Electricity supply fault — mains connection, wiring or metering
+| 8 hours
+| 72 hours, or as permitted by the distribution utility
+| Nil where the delay is attributable to the utility
+|
+Civil work — pole damage, foundation or junction box
+| 24 hours
+| 7 days
+| Rs. 1000 per Location per day or part thereof
+|
+Central infrastructure, software, dashboard or integration fault
+| 2 hours
+| 24 hours
+| 1% of the monthly amount payable for every additional 4 hours or part thereof
+|
+"Response time" means the time taken by the Bidder to acknowledge the complaint and depute a technician or field team to the Location. "Resolution or replacement time" means the time taken to fully restore the equipment or infrastructure to working condition.
+11.3.4 Detection accuracy
+The false-positive rate, being the proportion of announcements triggered where no act of dumping occurred, shall not exceed ten (10) per cent of announcements at any Location, measured monthly against a sample verified from the recorded footage from the dashboard data base which shall maintain logs of day wise triggers. Where the rate exceeds that threshold at any Location, the Bidder shall retune the detection logic at that Location within fifteen (15) days at its own cost. Persistent breach at more than five (5) per cent of Locations in any month shall attract a deduction of 2 per cent of the monthly amount payable.
+11.4 Penalties, Theft and Default
+Penalties assessed under Clause 11.3 shall be deducted from the next payment falling due to the Bidder.
+The aggregate of penalties levied in any calendar month shall not exceed ten (10) per cent of the amount payable to the Bidder for that month.
+Where the aggregate deduction exceeds ten per cent of the amount payable in each of three consecutive months, that shall constitute an event of default entitling the Authority to terminate the contract under Clause 12.8.
+Equipment installed at a Location shall be insured by the Bidder in accordance with Clause 7.3(11). Where equipment is stolen or vandalised, the Bidder shall replace and recommission it within the timelines at Clause 11.3.3 and shall recover its loss under that insurance. The first two (2) per cent of installations lost to theft or vandalism in any year of the contract period shall be replaced at the cost of the Bidder. Beyond that threshold, the Authority shall reimburse the depreciated cost of replacement at the unit rates quoted, less any insurance recovery, subject to the Bidder having lodged a police complaint and having taken all reasonable preventive measures.
+Downtime falling within an Excluded Period as defined at Clause 8.1 shall not be counted in computing site uptime or platform availability.
+The Bidder shall ensure complete recovery of event data in the event of a system failure at any point during the contract period, subject to the Recovery Point Objective at Clause 5.3.
+11.5 Exit Management and Reverse Transition
+The Bidder shall submit a draft exit management plan within six (6) months of Go-Live, and shall update it annually.
+Reverse transition shall commence three (3) months before expiry of the contract, or immediately on notice of termination, and shall be completed by the date of expiry or within three (3) months of the notice, as the case may be.
+The Bidder shall hand over: all installed equipment at all Locations in good working order, with the asset register reconciled; all data, footage and event records in an open, documented, machine-readable format together with the data dictionary; all source code, build scripts and deployment documentation for bespoke software; all configuration artefacts; all operational documentation and runbooks; all licences and subscriptions in the name of the Corporation; and all credentials and administrative access.
+The Bidder shall conduct knowledge transfer to the Authority or to a successor agency, and shall conduct a parallel run of not less than one (1) month with the successor agency.
+The Bidder shall continue to provide services at the contracted rates during the reverse transition period, and the Authority may extend the contract for up to six (6) months at the same rates solely for the purpose of completing transition.
+Ten (10) per cent of the amount payable under Item 14 of the Price Schedule for the final year shall be retained and released on issue of the handover certificate by the Superintending Engineer(SWM).
+The obligations at Clauses 6.3, 8.6 and 8.6.2 shall survive expiry or termination of the contract.
+
+12. General Conditions of Contract
+12.1 Performance Bank Guarantee
+The successful Bidder shall, at its own expense, furnish an unconditional and irrevocable Performance Bank Guarantee from a nationalised or scheduled bank, payable on demand at any bank branch at Hyderabad, for an amount equivalent to ten (10) per cent of the Total Evaluated Bid Price, at or before execution of the contract. No separate security deposit shall be payable.
+The Performance Bank Guarantee shall remain valid for the contract period and for six (6) months thereafter, and shall be extended by the Bidder as required, including on any extension of the Operation and Maintenance period under Clause 11.1.
+The Authority may invoke the Performance Bank Guarantee where the Bidder fails to meet the penalty conditions in this RFP, fails to perform its responsibilities and obligations to the satisfaction of the Authority, or misrepresents any fact or information submitted to the Authority.
+The Performance Bank Guarantee shall be discharged on the Authority being satisfied that the obligations of the Bidder have been duly performed and on issue of the handover certificate under Clause 11.5. No interest shall be payable on it.
+12.2 Suspension of Work
+The Bidder shall, if directed in writing by the Authority, temporarily suspend the work or any part of it for such period as may be directed. The Bidder shall not be entitled to claim compensation for loss or damage sustained by reason of such temporary suspension. An extension of time for completion corresponding to the delay caused shall be granted on request, provided the suspension was not consequent on any default of the Bidder. Where a suspension not consequent on the default of the Bidder continues for more than three (3) months, the Bidder may request the Authority to terminate the contract by mutual consent.
+12.3 Force Majeure
+The Bidder shall not be liable to forfeiture of its Performance Bank Guarantee, to liquidated damages or to termination for default to the extent that its delay in performance or other failure to perform is the result of an event of force majeure.
+Force majeure means an event beyond the control of the Bidder, not involving its fault or negligence and not reasonably foreseeable, and may include acts of the Government in its sovereign capacity, war, civil disturbance, fire, flood, epidemic, quarantine restriction and freight embargo.
+Where an event of force majeure arises, the Bidder shall promptly notify the Authority in writing of the event and its cause, and shall continue to perform its obligations so far as is reasonably practicable.
+Where an event of force majeure continues for more than ninety (90) days, either party may terminate the contract on notice, and the Authority shall pay for work satisfactorily executed up to the date of termination.
+12.4 Right of Monitoring, Inspection and Audit
+The Authority reserves the right to inspect and assess the progress, performance and maintenance of the Project at any time during the currency of the contract, including by physical inspection of any Location.
+The Authority shall have the right to conduct, itself or through a third party, an audit to monitor the performance by the Bidder of its obligations against the standards required, and the Bidder undertakes to cooperate and to provide all documents and details required for that purpose. Deviations identified as a result of such audit shall be rectified by the Bidder, failing which the Authority may issue a notice of default.
+The Authority may verify the asset register and the relocation register against physical installations at any time, and any discrepancy shall be rectified and the corresponding payment adjusted.
+12.5 Assignment, Subletting and Sub-contracting
+The whole of the work included in this tender shall be executed by the successful Bidder, and the Bidder shall not directly or indirectly transfer, assign or sublet the contract or any part of it, or any interest in it, without the written consent of the Authority. Breach of this clause shall entitle the Authority to terminate the contract and to invoke the Performance Bank Guarantee. Where consent is given, the Bidder shall remain solely responsible to the Authority for the performance of the sub-contracted work, and Clause 6.3 shall apply to any sub-processing of personal data. Deployment of field installation or maintenance manpower through an approved sub-contractor shall not relieve the Bidder of single-point responsibility.
+12.6 Risk, Insurance and Indemnity
+The Bidder shall bear all risk relating to its personnel deployed on this Project, and to its equipment, components and other property, during the entire period of their engagement, and the Authority shall have no liability on that account. The Bidder shall maintain the insurance required by Clause 7.3(11) for the contract period. The Bidder shall indemnify the Authority against all third-party claims arising from any act or omission of the Bidder or its personnel, including any claim arising from erection of a pole or structure on a public road or footpath, and against claims of intellectual property infringement in accordance with Clause 8.6.2.
+12.7 Safety and Public Convenience
+The Bidder shall execute all works with due regard to the safety and convenience of the public. Barricading, signage, reflective marking and traffic diversion, where required, shall be provided at the cost of the Bidder in accordance with the directions of the Additional Commissioner (Sanitation), and of the traffic police. The Bidder shall comply with all applicable safety legislation in respect of work at height, electrical work and excavation.
+12.8 Termination
+12.8.1 Termination for default
+The Authority may terminate the contract, in whole or in part, by written notice of thirty (30) days, without compensation to the Bidder, in any of the following events:
+Default on the part of the Bidder, including failure to observe any of its commitments under its bid, the tender or the contract
+The event of default at Clause 11.4(3)
+Failure to complete relocations directed under Clause 3.4 within the period there specified, persisting after written notice
+Actual conflict of interest on the part of the Bidder with the interests of the Authority
+Threat to or loss of the ability of the Bidder to survive as an independent entity, including the filing of bankruptcy proceedings or institution of winding-up proceedings
+Conviction of the Bidder for any unlawful activity
+Breach of Clause 6.3, Clause 8.6 or Clause 12.5
+On the happening of any such event the Authority may retain from sums due and payable to the Bidder such amounts as may be required to offset losses caused to the Authority, may invoke the Performance Bank Guarantee, and may pursue such other rights and remedies as are available to it in law. Nothing in this clause shall affect the continuing obligation of the Bidder to perform pending transition, and Clause 11.5 shall apply.
+12.8.2 Termination for insolvency
+The Authority may at any time terminate the contract by thirty (30) days' written notice where the Bidder becomes bankrupt or otherwise insolvent, without compensation to the Bidder, provided that such termination shall not prejudice any right of action or remedy accrued to the Authority.
+12.8.3 Termination for convenience
+The Authority may at any time, by thirty (30) days' written notice, terminate the contract in whole or in part for its convenience, including where funds under the Mission are not sanctioned or released. The notice shall specify the extent to which performance is terminated and the effective date.
+On termination for convenience the Authority shall pay for work satisfactorily executed up to the effective date, together with the cost of equipment supplied, installed and accepted and not yet paid for. No further compensation shall be payable.
+All equipment, software, licences and data procured and used for the Project shall be taken over by the Authority from the date of termination, and Clause 11.5 shall apply.
+12.9 Liquidated Damages
+Where the Bidder fails to achieve a milestone at Clause 8.2 within the period specified, the Authority shall, without prejudice to its other remedies, recover liquidated damages at the rate of one half of one per cent (0.5%) of the value of the work comprised in that milestone for each completed week of delay or part thereof.
+Liquidated damages under this clause shall not in aggregate exceed ten (10) per cent of the one-time capital cost of the Project. On the maximum being reached, the Authority may consider termination under Clause 12.8.1.
+Where a delay is attributable to the Authority, to a statutory approval not being granted, or to an event of force majeure, the affected milestone dates shall be extended correspondingly and no liquidated damages shall accrue for that period.
+Where a delivered or installed component cannot be put to use without an undelivered component, liquidated damages shall be computed on the value of the components that cannot be put to use.
+12.10 Taxes
+The rates quoted shall be inclusive of all taxes, duties and levies, unless the Commercial Form requires GST to be shown separately. Statutory variation in the rate of GST during the contract period shall be to the account of the Authority, on production of documentary proof, subject to the Bidder having discharged its own compliance obligations. Deduction of tax at source shall be made as required by law.
+12.11 Dispute Resolution and Arbitration
+The parties shall use their best efforts to settle amicably, by direct informal negotiation, any disagreement or dispute arising under or in connection with the contract.
+Where the parties have been unable to settle a dispute amicably within thirty (30) days of the commencement of such negotiation, either party may refer the dispute to arbitration.
+The dispute shall be referred to a sole arbitrator appointed by agreement between the parties. Where the parties fail to agree on the appointment within thirty (30) days of the request for arbitration, the arbitrator shall be appointed in accordance with Section 11 of the Arbitration and Conciliation Act, 1996.
+The arbitration shall be governed by the Arbitration and Conciliation Act, 1996, as amended. The seat and venue of arbitration shall be Hyderabad, Telangana, and the language shall be English. The award shall be final and binding.
+The contract shall be governed by and construed in accordance with the laws of India, and the courts at Hyderabad shall have exclusive jurisdiction subject to sub-clauses (1) to (4).
+The Bidder shall continue to perform its obligations during the pendency of any dispute or arbitration, and the Authority shall continue to pay undisputed amounts falling due.
+12.12 Limitation of Liability
+Save in respect of liability arising from wilful misconduct, fraud, breach of confidentiality or of Clause 6.3, or infringement of intellectual property, the aggregate liability of either party under the contract shall not exceed the Total Evaluated Bid Price. Neither party shall be liable for indirect or consequential loss. The liability caps in this clause shall not limit the right of the Authority to recover liquidated damages under Clause 12.9, penalties under Clause 11.4, or the proceeds of the Performance Bank Guarantee.
+12.13 Notices and Miscellaneous
+Any notice under the contract shall be in writing and shall be delivered by hand against acknowledgement, by registered post or courier, or by email to the address notified by the party for that purpose. A notice under Clause 3.4 may be given by email and shall be deemed received on the next working day following transmission.
+No waiver of any breach shall constitute a waiver of any subsequent breach, and no forbearance shall operate as a waiver of any right.
+Where any provision of the contract is held invalid or unenforceable, the remaining provisions shall continue in full force and effect.
+The contract, together with this RFP, the corrigenda and clarifications issued, the minutes of the pre-bid meeting, the bid of the successful Bidder and the Letter of Intent, shall constitute the entire agreement between the parties. In the event of inconsistency, the order of precedence shall be: the contract agreement; the Letter of Intent; corrigenda and clarifications issued by the Authority in reverse chronological order; the minutes of the pre-bid meeting; this RFP; and the bid of the successful Bidder.
+Nothing in the contract shall constitute a partnership, agency or employment relationship between the parties.
+
+13. Annexures
+The forms in this Section are to be submitted as part of the bid. All forms shall be on the letterhead of the Bidder unless otherwise stated, and shall be digitally signed by the authorised signatory.
+
+Appendix I — Pre-Qualification Proposal Forms
+PQ Form #1 — General Information of the Bidder
+
+#
+| Description
+| Particulars / Supporting document with page number
+|
+1
+| Name of the company or firm
+|
+|
+2
+| Legal status — company, partnership firm or LLP
+|
+|
+3
+| Registration number, date of incorporation and registering authority
+|
+|
+4
+| PAN
+|
+|
+5
+| GST registration number
+|
+|
+6
+| Nature of business in India
+|
+|
+7
+| Address of the registered office in India
+|
+|
+8
+| Address of the local office at Hyderabad, as required by criterion 11 of Clause 9.1
+|
+|
+9
+| Date of commencement of business, and completed years of operation in the field at criterion 1 of Clause 9.1
+|
+|
+10
+| Name, designation, email, telephone and mobile number of the contact person
+|
+|
+11
+| Website
+|
+|
+12
+| Bid Document Price — transaction reference and date
+|
+|
+13
+| Earnest Money Deposit — amount, transaction reference and date
+|
+|
+14
+| ISO 9001:2015 certificate — number, certifying body and validity
+|
+|
+15
+| ISO/IEC 27001:2022 certificate — number, certifying body and validity
+|
+|
+16
+| CMMI appraisal — level, appraising body, appraisal date and validity (Level 3 or above is mandatory under criterion 2 of Clause 9.1)
+|
+|
+17
+| Number of regular technical personnel on rolls as on the last date of bid submission
+|
+|
+Place:Signature of the Bidder
+Date:Name, designation and seal
+Name of the Bidder: ____________________________________
+PQ Form #2 — Financial Turnover and Net Worth
+All figures in Rupees Crores, to two decimal places.
+
+#
+| Financial Year
+| Total turnover of the entity
+| Turnover from supply, installation, commissioning and maintenance of CCTV surveillance, IoT, electronic security or allied systems
+| Profit after tax
+| Net worth at year end
+|
+1
+| FY 2023-24
+|
+|
+|
+|
+|
+2
+| FY 2024-25
+|
+|
+|
+|
+|
+3
+| FY 2025-26
+|
+|
+|
+|
+|
+
+| Average annual, for the three (3) years
+|
+|
+|
+| —
+|
+
+Notes.
+The turnover relied on for criterion 5 of Clause 9.1, and scored at item 1.4 of Clause 9.3, is the figure in column 4. The threshold is the minimum average annual turnover stated at that criterion.
+The net worth relied on for criterion 6 of Clause 9.1 is the figure in column 6 for FY 2025-26, which shall be positive.
+Audited balance sheets, profit and loss accounts and income tax returns for each of the three financial years shall be attached in support.
+The Bidder shall attach a certificate from a practising Chartered Accountant, bearing the membership number and Unique Document Identification Number, certifying the figures in columns 3 to 6 and the average annual turnover.
+
+Place:Signature of the Bidder
+Date:Name, designation and seal
+
+Name of the Bidder: ____________________________________
+
+PQ Form #3 — Project Experience
+(One form to be completed for each project offered under criteria 3 and 4 of Clause 9.1 and under items 1.1, 1.2 and 1.3 of Clause 9.3)
+
+Description of item
+| Particulars
+| Supporting document with page number
+|
+Name of the project
+|
+|
+|
+Name of the client
+|
+|
+|
+Category of client — Central or State Government department, Urban Local Body or Municipal Corporation, Smart City SPV, State Police organisation, Public Sector Undertaking, or Private Company
+|
+|
+|
+Contact name, designation, telephone number and email of the client reference
+|
+|
+|
+Complete address of the client
+|
+|
+|
+Contract value of the project (Rs.)
+|
+|
+|
+Number of field locations covered
+|
+|
+|
+Number of cameras or IoT devices installed
+|
+|
+|
+Whether the project involved integration with a command and control centre, VMS or dashboard, including central recording and storage
+|
+|
+|
+Whether the project involved outdoor deployment with solar power or independent power
+|
+|
+|
+Current status — completed or ongoing
+|
+|
+|
+Value of work certified as completed as on the last date of bid submission (Rs.)
+|
+|
+|
+Date of commencement and date of completion
+|
+|
+|
+Criterion or evaluation item against which this project is offered
+|
+|
+|
+
+Notes.
+The Bidder shall submit, for each project, the work order or purchase order together with a completion certificate, performance certificate or satisfactory-work certificate from the client, stating the number of locations or cameras.
+Where the client is a Government department, Urban Local Body, PSU or Smart City SPV, the certificate shall be signed by an officer not below the rank of Executive Engineer, Deputy Secretary, Deputy General Manager or equivalent.
+Where the client is a Private Company, the certificate shall be signed by a person not below the rank of Vice President, Chief Information Officer, Chief Technology Officer or equivalent, and shall be accompanied by the work order and by evidence of consideration received.
+The Authority reserves the right to verify any certificate directly with the client, and refusal or failure of the client to confirm it shall entitle the Authority to disregard the project.
+The same project may be offered against more than one criterion or evaluation item, and shall be counted separately for each, but shall not be counted more than once within the same item.
+
+Place: Signature of the Bidder
+Date: Name, designation and seal
+
+Name of the Bidder: ____________________________________
+
+PQ Form #4 — Technical Manpower
+Part A — Regular technical personnel on rolls, for criterion 7 of Clause 9.1
+
+#
+| Name
+| Designation and role
+| Qualification
+| Total experience (years)
+| On rolls since
+|
+1
+|
+|
+|
+|
+|
+|
+2
+|
+|
+|
+|
+|
+|
+3
+|
+|
+|
+|
+|
+|
+The Bidder shall list not fewer than thirty (30) regular technical personnel, and shall attach the certificate of the Human Resources head together with the most recent Provident Fund or ESI return in support.
+
+Part B — Personnel proposed for deployment on this Project, for item 2.1 of Clause 9.3
+
+#
+| Resource level
+| Responsibility and area of expertise
+| Qualification and certifications
+| Number to be deployed
+| Relevant experience with the Bidder
+|
+1
+| Project Manager
+|
+|
+|
+|
+|
+2
+| Technical Architect
+|
+|
+|
+|
+|
+3
+| Field Installation Supervisors
+|
+|
+|
+|
+|
+4
+| Field Maintenance Engineers
+|
+|
+|
+|
+|
+5
+| ICCC Shift Supervisors
+|
+|
+|
+|
+|
+6
+| ICCC Operators
+|
+|
+|
+|
+|
+Curricula vitae of key personnel, being the Project Manager, the Technical Architect and the O&M Manager, shall be attached. Key personnel shall not be substituted after award without the prior written approval of the Authority, and any substitute shall be of equal or better qualification and experience.
+
+Place:Signature of the Bidder
+Date:Name, designation and seal
+
+Name of the Bidder: ____________________________________
+
+PQ Form #5 — Declaration of Non-Blacklisting
+
+To
+The Commissioner, Greater Hyderabad Municipal Corporation, Tank Bund Road, Hyderabad – 500 063
+
+Subject: Self-declaration of non-blacklisting, in response to the Request for Proposal for the Procurement, Installation, Testing, Commissioning and Operation & Maintenance of CCTV Surveillance Cameras and IoT-based Public Address Systems at 2,500 GVPs / Sweeping Points / Hotspots within GHMC limits.
+Reference: RFP Notice No. RFP-____/SWM/GHMC/2026-27, dated __ / __ / 2026.
+
+Sir,
+We confirm that our company or firm, ____________________________________, is not, as on the last date of bid submission, blacklisted or debarred in any manner whatsoever by any State Government, Union Territory Administration, Public Sector Undertaking, Urban Local Body or the Central Government in India, on any ground, including on the ground of corrupt practice, fraudulent practice, coercive practice, collusive practice, undesirable practice or restrictive practice.
+We further confirm that no proceedings for blacklisting or debarment are pending against us as on that date, and that we shall inform the Authority forthwith should our status change at any time before the award of the contract.
+
+Place:Signature of the Bidder
+Date:Name, designation and seal
+
+Name of the Bidder: ____________________________________
+
+PQ Form #6 — Declaration of No Conflict of Interest
+
+We confirm that we have no conflict of interest capable of affecting the bidding process for this Request for Proposal or the performance of the resulting contract. In particular we confirm that:
+We have not assisted, and are not associated with any person or entity that has assisted, the Authority in the preparation of this RFP, the specifications contained in it, or the evaluation criteria.
+We are not submitting more than one bid under this RFP, whether directly or through any associated entity, and we are not participating in any other bid under this RFP in any capacity.
+We have no relationship, whether of ownership, control, common directorship or otherwise, with any other Bidder under this RFP.
+No member of the evaluation committee, and no officer of the Authority engaged in this procurement, holds any interest in our entity.
+We undertake to disclose to the Authority forthwith any circumstance arising after the date of this declaration and before the award of the contract which would or might constitute a conflict of interest.
+
+Place: Signature of the Bidder
+Date: Name, designation and seal
+
+Name of the Bidder: ____________________________________
+
+Appendix II — Technical Proposal Forms
+TQ Form #1 — Approach, Methodology and Rollout Plan
+The Bidder shall submit a technical proposal addressing at a minimum the following:
+Understanding of the requirement, of the jurisdictional coverage and volumetrics at Clause 3.3, and of the contracted quantity and substitution regime at Clause 3.4.
+Proposed system architecture, covering the field layer, the connectivity layer, the central layer and the application layer, with a schematic of a typical installation.
+Make, model and technical datasheet of every item of equipment proposed, and mapping of each specification in Section 4 to the equipment proposed.
+Rollout plan for the contracted quantity, phased by Zone and Circle, with activities, dependencies, resource loading and milestones aligned to Clause 8.2.
+Approach to the joint site survey and to site-wise Bill of Materials preparation.
+Relocation methodology under Clause 3.4, including the workflow from notice to recommissioning, the effect on continuity of monitoring, and the treatment of the vacated site.
+Detection methodology, sensor selection, sensor fusion with video analytics, and the approach to controlling false positives under Clause 11.3.4.
+Power design, including solar sizing calculation and battery autonomy, and the approach at locations without grid supply.
+Connectivity design, bandwidth calculation per location and in aggregate, and store-and-forward behaviour.
+Central infrastructure sizing, including the storage calculation demonstrating compliance with the retention requirements at Clause 4.3.3.
+Hosting architecture, disaster recovery design, and the basis on which the objectives at Clause 5.3 will be met.
+Security architecture, the plan for the CERT-In security audit, and the approach to compliance with Clause 6.3.
+Integration approach in respect of each system identified at Clause 4.6.3.
+Operation and Maintenance plan, field service organisation, spares holding, preventive maintenance schedule and helpdesk design.
+Manpower deployment plan for shift-wise monitoring under Clause 4.10.
+Training and capacity building plan.
+Risk register, with mitigation for each identified risk.
+Exit management approach under Clause 11.5.
+Statement of assumptions and deviations.
+
+Place:Signature of the Bidder
+Date:Name, designation and seal
+
+Name of the Bidder: ____________________________________
+
+TQ Form #2 — Technical Compliance Statement
+(The Bidder shall state compliance against every requirement. "Complied" means the requirement will be met in full without deviation. Any qualification shall be recorded as a deviation and set out in the statement of deviations.)
+
+#
+| Clause
+| Requirement
+| Complied — Yes / No
+| Remarks or deviation reference
+|
+1
+| Clause 3.4
+| Contracted quantity of 2,500 Locations, and unconditional right of the Authority to substitute Locations, with relocation at the firm rate quoted and no other charge
+|
+|
+|
+2
+| Clause 4.2
+| Joint site survey with the DEE-SWM, Site Feasibility Report and Bill of Materials per Location
+|
+|
+|
+3
+| Clause 4.3.2
+| Fixed IP camera of not less than 4 MP with integrated 4G module and amplified audio output; IP66 / IK10; day-night; tamper detection; remote configuration and firmware update
+|
+|
+|
+4
+| Clause 4.3.3
+| Retention — 15 days edge, 30 days central, 3 months event footage, 1 year for footage in enforcement proceedings
+|
+|
+|
+5
+| Clause 4.4.2
+| Sensor-based detection with video-analytics corroboration; configurable sensitivity and detection zones
+|
+|
+|
+6
+| Clause 4.4.3
+| Instant multilingual announcement in Telugu and Urdu with Hindi and English; visual deterrent; remotely configurable message library; night-time volume control and silence-zone compliance
+|
+|
+|
+7
+| Clause 4.5
+| Accumulation escalation to Sanitation Inspector, field staff and DEE-SWM, with configurable thresholds and clearance-time measurement
+|
+|
+|
+8
+| Clause 4.6.1
+| Central NVR, servers, display, racks and switching sized to the retention requirement with 15% spare channel capacity
+|
+|
+|
+9
+| Clause 4.6.2
+| Dashboard with live view, GIS map, event log, analytics, relocation register and role-based access
+|
+|
+|
+10
+| Clause 4.6.3
+| Open API integration with the ICCC platform, the citizen mobile application and the enforcement and challan system
+|
+|
+|
+11
+| Clause 4.7
+| Smart Pole with solar panel, charge controller and lithium battery bank; earthing, surge protection and reflective base marking
+|
+|
+|
+12
+| Clause 4.8
+| Mains with not less than 8 hours battery backup, or solar; 4G IoT SIM with data borne by the Bidder; store-and-forward of not less than 24 hours
+|
+|
+|
+13
+| Clause 4.9
+| Comprehensive O&M including replacement of failed parts, preventive maintenance at not more than 90-day intervals, toll-free helpdesk and asset register
+|
+|
+|
+14
+| Clause 4.10
+| Three shifts of eight hours with not fewer than four operators per shift plus a Shift Supervisor, and compliance with labour legislation
+|
+|
+|
+15
+| Clause 5.1
+| Hosting at the cost of the Bidder, MeitY-empanelled where cloud, all data within India
+|
+|
+|
+16
+| Clause 5.3
+| Disaster recovery, RPO 30 minutes, RTO 8 hours, backup regime and quarterly restoration test
+|
+|
+|
+17
+| Clause 6.1
+| Security controls including encryption in transit and at rest, secure device onboarding and immutable audit logging
+|
+|
+|
+18
+| Clause 6.2
+| CERT-In audit before Go-Live and annually; BIS / CE / FCC certified devices; MeitY and Smart Cities device security guidelines
+|
+|
+|
+19
+| Clause 6.3
+| Data protection under the DPDP Act 2023; no facial recognition without written direction; privacy masking; no transfer of footage outside India; chain of custody for evidence
+|
+|
+|
+20
+| Clause 8.2
+| Implementation schedule and milestone dates
+|
+|
+|
+21
+| Clause 8.6.2
+| Vesting of equipment, footage and bespoke software in the Corporation; licence of Background IP; source code escrow
+|
+|
+|
+22
+| Clause 11.3
+| Service levels for site uptime, platform availability, fault rectification and detection accuracy
+|
+|
+|
+23
+| Clause 11.4
+| Insurance of installed equipment and the theft and vandalism regime
+|
+|
+|
+24
+| Clause 11.5
+| Exit management and reverse transition
+|
+|
+|
+
+Place:Signature of the Bidder
+Date:Name, designation and seal
+
+Name of the Bidder: ____________________________________
+
+Appendix III — Commercial Proposal Forms
+C Form #1 — Commercial Proposal Submission Form
+
+To: The Commissioner, Greater Hyderabad Municipal Corporation, Hyderabad
+
+Sir,
+We, the undersigned, offer to procure, supply, install, test, commission, integrate, operate and maintain CCTV surveillance cameras and IoT-based Public Address systems at 2,500 Garbage Vulnerable Points, Sweeping Points and Hotspots within GHMC limits, in accordance with your Request for Proposal No. RFP-____/SWM/GHMC/2026-27 dated __ / __ / 2026 and our Technical Proposal.
+Our attached Price Schedule yields a Total Evaluated Bid Price, computed in accordance with Clause 9.4, of Rs. ____________________ (Rupees ____________________________________ only).
+We confirm that we have read and accepted Clause 3.4, that we have priced our bid on the footing that the contracted quantity is at 2,500 Locations which may increase or decrease and that the identity of those Locations will change during the contract period, and that no sum other than the relocation rate quoted at Item 15 shall be claimed on account of any substitution.
+We confirm that our unit rates are firm for the contract period and are inclusive of all taxes, duties, freight, insurance, installation and commissioning charges, and that our Financial Proposal is unconditional. We acknowledge that any condition attached to it shall result in rejection.
+We understand that you are not bound to accept any proposal you receive, and that award and payment are subject to sanction and release of funds under Swachh Bharat Mission (Urban) 2.0.
+
+Place: Signature of the Bidder
+Date: Name, designation and seal
+
+Name of the Bidder: ____________________________________
+
+C Form #2 — Price Schedule
+Table A — Price Schedule and Total Evaluated Bid Price. Bidders shall quote a firm, all-inclusive unit rate in Indian Rupees against every item. The extended amount is the unit rate multiplied by the evaluation quantity. The evaluation quantities are used solely to arrive at a comparable Total Evaluated Bid Price under Clause 9.4; payment shall be made on quantities actually executed, at the unit rates quoted, in accordance with Clause 11.2. A nil, zero or nominal quote against any item shall render the financial bid liable to rejection as non-responsive.
+
+#
+| Item description
+| Unit
+| Evaluation quantity
+| Unit rate (Rs.)
+| Amount (Rs.)
+|
+1
+| IP CCTV camera, fixed bullet or box, not less than 4 MP, with integrated 4G /5G module, amplified audio output, embedded AI video analytics, IP66 / IK10 housing and edge storage per Clause 4.3.3, with mounting accessories
+| No.
+| 2,500
+|
+|
+|
+2
+| Additional fixed camera or PTZ camera at multi-approach Locations, as approved on site survey
+| No.
+| 250
+|
+|
+|
+3
+| IoT-based detection and Public Address citizen command unit, comprising sensor set, weatherproof outdoor horn speaker and warning LED or signage, per Clauses 4.4.2 and 4.4.3
+| No.
+| 2,500
+|
+|
+|
+4
+| Smart Pole with mounting provisions, earthing, surge protection and reflective base marking, per Clause 4.7.1
+| No.
+| 2,000
+|
+|
+|
+5
+| Solar kit — solar panel, charge controller and lithium battery bank, sized per Clause 4.8
+| No.
+| 2,500
+|
+|
+|
+6
+| Outdoor junction and termination box, weatherproof, with cable routing conduit and tamper-proof access panel
+| No.
+| 2,500
+|
+|
+|
+7
+| Networking equipment at Location — 4G/5G router or modem with IoT SIM module (Set)
+| No.
+| 2,500
+|
+|
+|
+8
+| IoT SIM with data, for the full contract period, per Clause 4.8
+| No.
+| 2,500
+|
+|
+|
+9
+| Field installation, testing and commissioning at a Location, including civil, electrical and allied works and site restoration (Per Location)
+| No.
+| 2,500
+|
+|
+|
+10
+| Central Network Video Recorder, 64 channel, with storage sized to the retention requirement at Clause 4.3.3
+| No.
+| 45
+|
+|
+|
+11
+| Central infrastructure at the ICCC — server for live view (2 Nos.), 65 inch LED monitor for pop-up event view (2 Nos.), 42U fully loaded rack (6 Nos.), 24 port Layer 3 10 Gbps switch fully loaded (6 Nos.), with installation and commissioning (Lot)
+| No.
+| 1
+|
+|
+|
+12
+| Hosting of platform, dashboard and data, and central bandwidth of 1 Gbps, per Clause 5.1 (Per annum)
+| No.
+| 3
+|
+|
+|
+13
+| Manpower for shift-wise ICCC monitoring, per Clause 4.10 (Per operator per month)
+| No.
+| 180
+|
+|
+|
+14
+| Comprehensive Operation and Maintenance, per Clause 4.9 (Per Location per year)
+| No.
+| 7,500
+|
+|
+|
+15
+| Relocation of an installation from one Location to another, per Clause 3.4, being de-installation, restoration of the vacated site, transportation, re-installation, testing, commissioning and reconfiguration (Per Location)
+| No.
+| 750
+|
+|
+|
+
+| Total Evaluated Bid Price (in figures)
+|
+|
+|
+|
+|
+
+| Total Evaluated Bid Price (in words)
+|
+|
+|
+|
+|
+
+Notes to Table A.
+Evaluation quantities at Items 12, 13, 14 and 15 are stated for the full contract period of three (3) years, being the Operation and Maintenance year together with the two extension years contemplated at Clause 11.1, so that bids are compared on the same footing. Payment shall be made only for the periods and quantities actually executed, and no sum shall be payable in respect of an extension year that is not granted.
+The evaluation quantity at Item 2 reflects an assumption that ten (10) per cent of Locations will require a second camera. The evaluation quantity at Item 4 reflects an assumption that eighty (80) per cent of Locations will require a new Smart Pole, the balance being served by an existing structure under Clause 4.7.1. The evaluation quantity at Item 15 reflects the ten (10) per cent annual relocation volume at Clause 3.4(8) over three years. These assumptions are for evaluation only and do not constitute a guarantee of quantity.
+The evaluation quantity at Item 13 reflects fifteen (15) operators and supervisors deployed for twelve (12) months, over the Operation and Maintenance year only.
+Rates and prices shall be quoted in Indian Rupees, in figures and in words, and shall be inclusive of all taxes, duties, freight, insurance, installation and commissioning charges, unless GST is required to be shown separately.
+The rate quoted at Item 15 shall be firm for the contract period and shall be the sole sum payable on account of a substitution of Location under Clause 3.4.
+
+Table B — Firm person-day rates for change orders under Clause 8.5
+#
+| Resource category
+| Minimum experience
+| Rate (Rs. per person-day)
+|
+1
+| Project Manager
+| 10 years
+|
+|
+2
+| Technical Architect
+| 10 years
+|
+|
+3
+| Software Developer
+| 3 years
+|
+|
+4
+| Network Engineer
+| 5 years
+|
+|
+5
+| Field Installation Technician
+| 3 years
+|
+|
+6
+| Field Maintenance Engineer
+| 3 years
+|
+|
+7
+| GIS Specialist
+| 5 years
+|
+|
+
+Place: Signature of the Bidder
+Date: Name, designation and seal
+
+Name of the Bidder: ____________________________________
+
+Appendix IV — Other Formats
+Format 1 — Bid Letter
+
+From: (registered name and address of the Bidder)
+
+To: The Commissioner, Greater Hyderabad Municipal Corporation, CC Complex, Tank Bund Road, Hyderabad – 500 063
+
+Sir,
+Having examined the bidding documents and the amendments and clarifications issued in respect of them, we, the undersigned, offer to execute the works and provide the services in conformity with the terms and conditions of the bidding document, in response to your tender call No. RFP-____/SWM/GHMC/2026-27 dated __ / __ / 2026, for the Procurement, Installation, Testing, Commissioning and Operation & Maintenance of CCTV Surveillance Cameras and IoT-based Public Address Systems at 2,500 GVPs / Sweeping Points / Hotspots within GHMC limits.
+We undertake to execute the Project in conformity with the said bidding documents, at the unit rates quoted in our Price Schedule, yielding a Total Evaluated Bid Price of Rs. ____________________ (Rupees ____________________________________ only), the sums actually payable being determined by the quantities actually executed in accordance with Clause 11.2.
+If our bid is accepted, we undertake to execute the Project according to the time schedule specified, to furnish a Performance Bank Guarantee in accordance with Clause 12.1, and to abide by the bid conditions, including the minutes of the pre-bid meeting, which shall remain binding upon us during the entire bid validity period.
+We understand that you are not bound to accept the lowest or any bid you may receive, that you are not bound to give any reason for the rejection of any bid, and that you will not defray any expenses incurred by us in bidding.
+
+Place: Signature of the Bidder
+Date: Name, designation and seal
+
+Name of the Bidder: ____________________________________
+
+Format 2 — Performance Bank Guarantee
+
+Bank Guarantee No. ____________ Date ____________
+
+To: The Commissioner, Greater Hyderabad Municipal Corporation, Hyderabad – 500 063
+
+Whereas ____________________ (hereinafter called "the Bidder") has undertaken, in pursuance of Contract No. ____________ dated ____________, to procure, install, commission, operate and maintain CCTV surveillance cameras and IoT-based Public Address systems at 2,500 Garbage Vulnerable Points, Sweeping Points and Hotspots to the Greater Hyderabad Municipal Corporation (hereinafter called "the Authority");
+And whereas it has been stipulated in the said contract that the Bidder shall furnish to the Authority a bank guarantee from a recognized bank for the sum specified therein, as security for compliance with its obligations in accordance with the contract;
+Now therefore we hereby affirm that we are guarantors and responsible to you, on behalf of the Bidder, up to a total of Rupees ____________ (Rupees ____________________ only), and we undertake to pay you, on your first written demand declaring the Bidder to be in default under the contract and without cavil or argument, any sum or sums within those limits, without your needing to prove or to show grounds or reasons for your demand or the sum specified in it.
+We hereby waive the necessity of your demanding the said debt from the Bidder before presenting us with the demand. We further agree that no change, addition or other modification of the terms of the contract which may be made between you and the Bidder shall in any way release us from any liability under this guarantee, and we hereby waive notice of any such change, addition or modification.
+Notwithstanding anything contained herein: (i) our liability under this bank guarantee shall not exceed Rupees ____________ (Rupees ____________________ only); (ii) this bank guarantee shall be valid up to ____________, being the contract period and six months thereafter in accordance with Clause 12.1; and (iii) it is a condition of our liability for payment of the guaranteed amount or any part of it arising under this bank guarantee that we receive a valid written claim or demand for payment on or before ____________, failing which our liability under the guarantee shall automatically cease.
+
+Date
+|
+| Signature
+|
+|
+Place
+|
+| Printed name
+|
+|
+Witness
+|
+| Designation and seal
+|
+|
+
+Format 3 — Compliance and Enclosure Checklist
+
+#
+| Bid document reference
+| Enclosed — Yes / No
+| Page number in bid
+| Remarks — agreed, no deviation, or deviation reference
+|
+1
+| Scope of Work (Section 4)
+|
+|
+|
+|
+2
+| Contracted quantity and substitution of Locations (Clause 3.4)
+|
+|
+|
+|
+3
+| Hosting, availability and disaster recovery (Section 5)
+|
+|
+|
+|
+4
+| Security, compliance and data protection (Section 6)
+|
+|
+|
+|
+5
+| Implementation schedule and deliverables (Section 8)
+|
+|
+|
+|
+6
+| Intellectual property, ownership of assets and escrow (Clause 8.6.2)
+|
+|
+|
+|
+7
+| PQ Form #1 — General information
+|
+|
+|
+|
+8
+| PQ Form #2 — Turnover and net worth
+|
+|
+|
+|
+9
+| PQ Form #3 — Project experience (one per project)
+|
+|
+|
+|
+10
+| PQ Form #4 — Technical manpower, Parts A and B
+|
+|
+|
+|
+11
+| PQ Form #5 — Non-blacklisting declaration
+|
+|
+|
+|
+12
+| PQ Form #6 — Conflict of interest declaration
+|
+|
+|
+|
+13
+| Format 5 — Manufacturer Authorization Form
+|
+|
+|
+|
+14
+| Power of attorney or authorization letter of the signatory
+|
+|
+|
+|
+15
+| Evidence of Bid Document Price and Earnest Money Deposit
+|
+|
+|
+|
+16
+| TQ Form #1 — Approach, methodology and rollout plan
+|
+|
+|
+|
+17
+| TQ Form #2 — Technical compliance statement
+|
+|
+|
+|
+18
+| Datasheets of all equipment proposed
+|
+|
+|
+|
+19
+| Statement of assumptions and deviations
+|
+|
+|
+|
+20
+| C Form #1 — Commercial proposal submission form
+|
+|
+|
+|
+21
+| C Form #2 — Price Schedule, Tables A and B
+|
+|
+|
+|
+22
+| Payment terms and service levels (Section 11)
+|
+|
+|
+|
+23
+| General conditions of contract (Section 12)
+|
+|
+|
+|
+
+Place: Signature of the Bidder
+Date: Name, designation and seal
+
+Name of the Bidder: ____________________________________
+
+Format 4 — No Deviation Certificate
+
+This is to certify that our offer is exactly in line with your Request for Proposal No. ____________________ dated ____________, including all amendments, corrigenda and clarifications issued in respect of it, and the minutes of the pre-bid meeting.
+We expressly certify that our offer contains no deviation in respect of the requirements of the Authority, the Scope of Work, the technical specifications, the service levels, or the general conditions of contract, save as expressly recorded in the statement of deviations enclosed at page ______ of our bid.
+We further certify that we accept Clause 3.4 without qualification.
+
+Name: ____________________ In the capacity of: ____________________
+
+Signed: ____________________ Seal:
+
+Format 5 — Manufacturer Authorization Form
+(On the letterhead of the original equipment manufacturer, for criterion 8 of Clause 9.1)
+
+To: The Commissioner, Greater Hyderabad Municipal Corporation, Hyderabad – 500 063
+
+We, ____________________, being established manufacturers of ____________________ having factories at ____________________, do hereby authorise ____________________ (name of the Bidder) to submit a bid and to negotiate and conclude a contract with you against RFP Notice No. RFP-____/SWM/GHMC/2026-27 for the above equipment manufactured by us.
+We hereby confirm that the model or models offered, being ____________________, are current production models and are not scheduled for end of sale or end of support within the contract period. We undertake to make available spares and technical support for the equipment offered for a period of not less than five (5) years from the date of supply.
+We hereby extend our full warranty and technical support for the equipment offered by the above firm against this RFP, and confirm that we shall support the Authority directly in the event that the above firm is unable or unwilling to perform its obligations.
+
+Signature of the authorised signatory of the manufacturer, with name, designation and seal
+
+Format 6 — Format of Site Feasibility Report
+(To be submitted per Location under Clause 4.2, countersigned by the Deputy Executive Engineer (SWM) of the Circle)
+
+Particular
+| Entry
+|
+Collection Point Code
+|
+|
+Name of the Location
+|
+|
+Type — GVP, Sweeping Point or Hotspot; Category A, B or C
+|
+|
+Circle and Zone
+|
+|
+Geo-coordinates — latitude and longitude
+|
+|
+Date of joint survey; names of the Bidder's surveyor and of the DEE-SWM present
+|
+|
+Extent of the dumping area, and number of approach roads or access points
+|
+|
+Number and type of cameras proposed, with justification where more than one
+|
+|
+Sensor type proposed and detection zone boundary
+|
+|
+Mounting proposal — new Smart Pole, existing pole or structure, or wall mount
+|
+|
+Power source — grid available or solar required; connected load
+|
+|
+Connectivity — fibre, 4G or 5G availability and measured signal strength
+|
+|
+Line of sight assessment and any obstruction
+|
+|
+Proximity to private premises requiring privacy masking under Clause 4.3.1
+|
+|
+Whether the Location falls in a silence zone requiring volume control under Clause 4.4.3
+|
+|
+Civil work required, and any statutory approval or right of way required
+|
+|
+Site-wise Bill of Materials
+|
+|
+Photographs of the Location from not fewer than three angles
+|
+|
+Remarks of the DEE-SWM
+|
+|
+
+Signature of the Bidder's representative Counter signature of the DEE-SWM, ____________ Circle
+
+Format 7 — Master List of Identified Locations
+The master list of the Locations identified and field-verified as on the date of this RFP is annexed to this document and is also published on the e-Procurement portal as a separate downloadable file, in spreadsheet format, together with this RFP.
+The list sets out, for each Location, the Collection Point Code, the name of the collection point, the type being GVP or Sweeping Point, the category being A, B or C, the Circle and the Zone. The summary of the list is as follows.
+
+Zone
+| GVPs
+| Sweeping Points
+| Total
+|
+Charminar
+| 236
+| 54
+| 290
+|
+Golconda
+| 225
+| 55
+| 280
+|
+Khairatabad
+| 180
+| 132
+| 312
+|
+Rajendra Nagar
+| 235
+| 116
+| 351
+|
+Secunderabad
+| 197
+| 74
+| 271
+|
+Shamshabad
+| 454
+| 46
+| 500
+|
+Total identified as on date
+| 1,527
+| 477
+| 2004
+|
+Balance to be notified by the Authority under Clause 3.4
+| —
+| —
+| 496
+|
+Contracted quantity
+| —
+| —
+| 2,500
+|
+
+The master list is the list of Locations identified as on the date of this RFP. It is not a guarantee that the system will be deployed at each of those Locations, nor that deployment will be confined to them.
+The balance of the contracted quantity shall be notified by the Authority, in one or more tranches, in accordance with Clause 3.4. The Bidder shall survey and commission each Location so notified within the periods at Clauses 4.2(5) and 3.4(5).
+The Authority may substitute any Location on the master list in accordance with Clause 3.4. The contracted quantity shall at all times remain 2,500.
+Bidders shall satisfy themselves as to the site conditions prevailing at the Locations by undertaking a site visit at their own cost before submission of their bid.
+
+Format 8 — Unit Rate - Bill of Quantities (Price schedule)
+
+Supply, Installation, Testing, Commissioning and Operation & Maintenance of CCTV Surveillance Cameras and IoT-based Public Address Systems at 2,500 GVPs / Sweeping Points / Hotspots within GHMC limits
+‘e’ NIT No.: 04/IT/GHMC/2026-27, Dt:07.09.2026.
+
+Name of Contractor: ………………………………………………………………
+
+Address: ………………………………………………………………………
+
+#
+| Item description
+| Unit
+| Unit rate (Rs.)
+|
+1
+| IP CCTV camera, fixed bullet or box, not less than 4 MP, with integrated 4G /5G module, amplified audio output, embedded AI video analytics, IP66 / IK10 housing and edge storage per Clause 4.3.3, with mounting accessories
+| No.
+|
+|
+2
+| Additional fixed camera or PTZ camera at multi-approach Locations, as approved on site survey
+| No.
+|
+|
+3
+| IoT-based detection and Public Address citizen command unit, comprising sensor set, weatherproof outdoor horn speaker and warning LED or signage, per Clauses 4.4.2 and 4.4.3
+| No.
+|
+|
+4
+| Smart Pole with mounting provisions, earthing, surge protection and reflective base marking, per Clause 4.7.1
+| No.
+|
+|
+5
+| Solar kit — solar panel, charge controller and lithium battery bank, sized per Clause 4.8
+| No.
+|
+|
+6
+| Outdoor junction and termination box, weatherproof, with cable routing conduit and tamper-proof access panel
+| No.
+|
+|
+7
+| Networking equipment at Location — 4G/5G router or modem with IoT SIM module
+| No.
+|
+|
+8
+| IoT SIM with data, for the full contract period, per Clause 4.8
+| No.
+|
+|
+9
+| Field installation, testing and commissioning at a Location, including civil, electrical and allied works and site restoration
+| No.
+|
+|
+10
+| Central Network Video Recorder, 64 channel, with storage sized to the retention requirement at Clause 4.3.3
+| No.
+|
+|
+11
+| Central infrastructure at the ICCC — server for live view (2 Nos.), 65 inch LED monitor for pop-up event view (2 Nos.), 42U fully loaded rack (6 Nos.), 24 port Layer 3 10 Gbps switch fully loaded (6 Nos.), with installation and commissioning
+| No.
+|
+|
+12
+| Hosting of platform, dashboard and data, and central bandwidth of 1 Gbps, per Clause 5.1
+| No.
+|
+|
+13
+| Manpower for shift-wise ICCC monitoring, per Clause 4.10
+| No.
+|
+|
+14
+| Comprehensive Operation and Maintenance, per Clause 4.9
+| No.
+|
+|
+15
+| Relocation of an installation from one Location to another, per Clause 3.4, being de-installation, restoration of the vacated site, transportation, re-installation, testing, commissioning and reconfiguration
+| No.
+|
+|
+
+| Total Evaluated Bid Price (in figures)
+|
+|
+|
+
+| Total Evaluated Bid Price (in words)
+|
+|
+|
+
+— End of Document —
+
+GHMC | CCTV at GVPs — RFP | 2026-27
+
+Page PAGE69 of NUMPAGES73

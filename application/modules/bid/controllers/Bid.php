@@ -720,19 +720,31 @@ public function AddBidData(){
 		   		}
 		   		else{
 		   			
+		   			 $nasPath = !empty($inputs['bidNASIDInput']) ? $inputs['bidNASIDInput'] : (!empty($inputs['attachedDocumentPath']) ? $inputs['attachedDocumentPath'] : '');
+		   			 if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
+		   			 	$uploadDir = FCPATH . 'uploads/tender/';
+		   			 	if (!is_dir($uploadDir)) {
+		   			 		@mkdir($uploadDir, 0777, true);
+		   			 	}
+		   			 	$safeName = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $_FILES['file']['name']);
+		   			 	if (@move_uploaded_file($_FILES['file']['tmp_name'], $uploadDir . $safeName)) {
+		   			 		$nasPath = 'uploads/tender/' . $safeName;
+		   			 	}
+		   			 }
+
 		   			 $Biddata = [
 			            'BidType'        => $inputs['bidTypeInput'],
 			            'BidTitle'       => $inputs['bidTitleInput'],
 			            'BidDepartment'  => $inputs['bidDepartmentInput'],
 			            'EstimatedValue' => $inputs['bidEstimatedInput'],
 			            'EmdValue'       => $inputs['bidEmdInput'],
-			            'PublishedDate'  => date('Y-m-d', strtotime($inputs['PublishedDate'])),
-			            'SubmissionDate' => date('Y-m-d', strtotime($inputs['SubmissionDate'])),
-			            'OpeningDate'    => date('Y-m-d', strtotime($inputs['OpeningDate'])),
+			            'PublishedDate'  => (!empty($inputs['PublishedDate']) && strtotime($inputs['PublishedDate'])) ? date('Y-m-d', strtotime($inputs['PublishedDate'])) : null,
+			            'SubmissionDate' => (!empty($inputs['SubmissionDate']) && strtotime($inputs['SubmissionDate'])) ? date('Y-m-d', strtotime($inputs['SubmissionDate'])) : null,
+			            'OpeningDate'    => (!empty($inputs['OpeningDate']) && strtotime($inputs['OpeningDate'])) ? date('Y-m-d', strtotime($inputs['OpeningDate'])) : null,
 			            'SummaryKeywords'=> $inputs['bidSummaryInput'],
 			            'TenderPortalUrl'=> $inputs['bidTenderPortalInput'],
 			            'TenderId'       => $inputs['bidTenderIDInput'],
-			            'NASPath'        => $inputs['bidNASIDInput'],
+			            'NASPath'        => $nasPath,
 			            'Remarks'        => $inputs['bidRemarksInput'],
 			            'BidStatus'      => 1
 			        ];
@@ -754,6 +766,17 @@ public function AddBidData(){
 
 					        $this->db->insert('BidStatusTracking', $tracking);
 
+					        $factSheetId = !empty($inputs['factSheetId']) ? (int)$inputs['factSheetId'] : 0;
+					        $attachedDoc = !empty($inputs['attachedDocumentPath']) ? $inputs['attachedDocumentPath'] : $nasPath;
+					        $this->load->model('document_parser/Factsheet_model');
+					        if ($factSheetId > 0) {
+					            $this->Factsheet_model->linkFactSheetToBid($factSheetId, $id);
+					        } elseif (!empty($attachedDoc)) {
+					            $fs = $this->Factsheet_model->getFactSheetByDocPath($attachedDoc);
+					            if ($fs) {
+					                $this->Factsheet_model->linkFactSheetToBid($fs['Tfsid'], $id);
+					            }
+					        }
 
 					   		 $this->session->set_flashdata('true', 'Successfully Added Bid Details');
 					   		 redirect($this->config->item('base_url').'bid/CreateBids');
@@ -1101,6 +1124,133 @@ public  function logout()
 			} else {
 				redirect($this->config->item('base_url').'bid/index');
 			}
-	} 
+	}
+
+    /**
+     * Render the 12-Section Tender Fact Sheet
+     * Route: GET/POST /bid/factsheet?id=X or ?bcid=Y or ?doc=Z
+     */
+    public function factsheet()
+    {
+        $this->load->model('document_parser/Factsheet_model');
+
+        $fsid = $this->input->get_post('id') ? (int)$this->input->get_post('id') : (int)$this->input->get_post('fsid');
+        $bcid = (int)$this->input->get_post('bcid');
+        $doc  = $this->input->get_post('doc');
+
+        $factsheet = null;
+        if ($fsid > 0) {
+            $factsheet = $this->Factsheet_model->getFactSheetById($fsid);
+        } elseif ($bcid > 0) {
+            $factsheet = $this->Factsheet_model->getFactSheetByBcid($bcid);
+        } elseif (!empty($doc)) {
+            $factsheet = $this->Factsheet_model->getFactSheetByDocPath($doc);
+        }
+
+        // If no specific record requested, get the latest Fact Sheet as preview
+        if (!$factsheet) {
+            $latest = $this->db->order_by('Tfsid', 'DESC')->get('TenderFactSheet', 1)->row_array();
+            if ($latest) {
+                $factsheet = $latest;
+            }
+        }
+
+        // Allow live overlay/sync from current CreateBids form fields passed via POST
+        $formSync = $this->input->post();
+        if (!empty($formSync) && is_array($formSync)) {
+            $updatedFields = [];
+            if (!empty($formSync['bidTitle'])) {
+                $factsheet['TenderTitle'] = trim($formSync['bidTitle']);
+                $updatedFields['TenderTitle'] = $factsheet['TenderTitle'];
+            }
+            if (!empty($formSync['bidDepartment'])) {
+                $factsheet['Department'] = trim($formSync['bidDepartment']);
+                $updatedFields['Department'] = $factsheet['Department'];
+            }
+            if (!empty($formSync['bidType']) && $formSync['bidType'] !== '0') {
+                $factsheet['TenderType'] = trim($formSync['bidType']);
+                $updatedFields['TenderType'] = $factsheet['TenderType'];
+            }
+            if (!empty($formSync['bidEstimated'])) {
+                $factsheet['ProjectValue'] = trim($formSync['bidEstimated']);
+                $factsheet['EstimatedValue'] = trim($formSync['bidEstimated']);
+                $updatedFields['ProjectValue'] = $factsheet['ProjectValue'];
+                $updatedFields['EstimatedValue'] = $factsheet['EstimatedValue'];
+            }
+            if (!empty($formSync['bidEmd'])) {
+                $factsheet['EmdAmount'] = trim($formSync['bidEmd']);
+                $updatedFields['EmdAmount'] = $factsheet['EmdAmount'];
+            }
+            if (!empty($formSync['bidTenderID'])) {
+                $factsheet['TenderRefNo'] = trim($formSync['bidTenderID']);
+                $updatedFields['TenderRefNo'] = $factsheet['TenderRefNo'];
+            }
+            if (!empty($formSync['startDate'])) {
+                $factsheet['TenderPublishedDate'] = trim($formSync['startDate']);
+                $factsheet['TenderDate'] = trim($formSync['startDate']);
+                $updatedFields['TenderPublishedDate'] = $factsheet['TenderPublishedDate'];
+                $updatedFields['TenderDate'] = $factsheet['TenderDate'];
+            }
+            if (!empty($formSync['dueDate'])) {
+                $factsheet['BidSubmissionDeadline'] = trim($formSync['dueDate']);
+                $updatedFields['BidSubmissionDeadline'] = $factsheet['BidSubmissionDeadline'];
+            }
+            if (!empty($formSync['dateofBirth'])) {
+                $factsheet['TechnicalBidOpening'] = trim($formSync['dateofBirth']);
+                $updatedFields['TechnicalBidOpening'] = $factsheet['TechnicalBidOpening'];
+            }
+            if (!empty($formSync['bidSummary'])) {
+                $factsheet['ScopeOfWork'] = trim($formSync['bidSummary']);
+                $updatedFields['ScopeOfWork'] = $factsheet['ScopeOfWork'];
+            }
+
+            // Keep the 12 section columns in perfect sync with the updated form fields
+            $factsheet = $this->Factsheet_model->buildSectionPayload($factsheet);
+            foreach ([
+                'TenderOverview', 'ImportantDates', 'TenderValue', 'ScopeOfWork',
+                'AreasCovered', 'ContractPeriod', 'AwardCriteria', 'PerformanceGuarantee',
+                'BidValidity', 'Warranty', 'RiskPoints', 'OpportunityAssessment'
+            ] as $secCol) {
+                if (isset($factsheet[$secCol])) {
+                    $updatedFields[$secCol] = $factsheet[$secCol];
+                }
+            }
+
+            if (!empty($updatedFields) && !empty($factsheet['Tfsid'])) {
+                $this->db->where('Tfsid', (int)$factsheet['Tfsid'])->update('TenderFactSheet', $updatedFields);
+            }
+        }
+
+        if (!$factsheet) {
+            $this->session->set_flashdata('err', 'No Fact Sheet found. Please upload a tender document first.');
+            redirect($this->config->item('base_url') . 'bid/CreateBids');
+            return;
+        }
+
+        $data = [
+            'page_title' => 'Tender Fact Sheet - ' . (!empty($factsheet['TenderRefNo']) ? $factsheet['TenderRefNo'] : (!empty($factsheet['DocumentName']) ? $factsheet['DocumentName'] : 'Document')),
+            'factsheet'  => $factsheet
+        ];
+
+        if ($this->input->get('ajax') || $this->input->is_ajax_request()) {
+            $data['is_ajax'] = true;
+            $this->load->view('document_parser/FactSheet', $data);
+            return;
+        }
+
+        if ($this->input->get('print') || $this->input->get('standalone')) {
+            $this->load->view('document_parser/FactSheet', $data);
+        } else {
+            $Bid_Session = $this->session->userdata('logged_in');
+            if (isset($Bid_Session) && !empty($Bid_Session)) {
+                $currentUrl = strtolower(uri_string());
+                $data['currentUrlArray'] = $this->bid_model->getBreadcrumb($currentUrl);
+                $this->template->write_view('content', 'document_parser/FactSheet', $data);
+                $this->template->render();
+            } else {
+                $this->load->view('document_parser/FactSheet', $data);
+            }
+        }
+    }
 
 } //MAIN

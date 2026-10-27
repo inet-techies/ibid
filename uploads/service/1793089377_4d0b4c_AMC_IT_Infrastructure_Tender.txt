@@ -1,0 +1,6 @@
+NOTICE INVITING TENDER FOR ANNUAL MAINTENANCE CONTRACT (AMC)
+Name of Work: Comprehensive Annual Maintenance Contract (CAMC) of IT Infrastructure and Computer Hardware.
+Tender Ref: AMC/IT/2026/04
+Scope of Services: The contractor shall provide comprehensive maintenance, quarterly preventive servicing, routine servicing, breakdown maintenance, and helpdesk support.
+Service Level Agreement (SLA): Bidder shall ensure 99.5% uptime. Penalty for downtime exceeding 4 hours will be deducted from quarterly service charges.
+Last date for bid submission: 15/11/2026.

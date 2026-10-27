@@ -81,13 +81,22 @@
                                                             <div class="hstack gap-2 justify-content-end">
                                                                 <a href="javascript:void(0)"
                                                                     class="avatar-text avatar-md openAddForm view-bid"
-                                                                    data-bid='<?= json_encode($val); ?>'>
+                                                                    data-bid='<?= json_encode($val); ?>'
+                                                                    title="View Bid Details">
                                                                     <i class="feather feather-eye"></i>
+                                                                </a>
+                                                                <a href="javascript:void(0)"
+                                                                    class="avatar-text avatar-md view-factsheet"
+                                                                    data-bcid="<?= $val['Bcid']; ?>"
+                                                                    title="View Tender Fact Sheet"
+                                                                    style="color:#0284c7;background:#e0f2fe;border:1px solid #bae6fd;">
+                                                                    <i class="feather feather-file-text"></i>
                                                                 </a>
                                                                 <a href="javascript:void(0)"
                                                                     class="avatar-text avatar-md update-bid"
                                                                     data-id="<?= $val['Bcid']; ?>"
-                                                                    data-current="<?= $val['BidStatus']; ?>">
+                                                                    data-current="<?= $val['BidStatus']; ?>"
+                                                                    title="Update Bid Status">
                                                                     <i class="feather feather-edit-2"></i>
                                                                 </a>
                                                             </div>
@@ -129,6 +138,51 @@
 </div>
 
 <div id="rightFormOverlay"></div>
+
+<!-- Right-Side Fact Sheet Slide-out Modal Panel -->
+<div id="factSheetPanel" class="right-form factsheet-panel">
+    <div class="right-form-header d-flex justify-content-between align-items-center py-2 px-3 border-bottom bg-white" style="position:sticky;top:0;z-index:10;">
+        <div class="d-flex align-items-center gap-2">
+            <i class="feather-file-text text-primary" style="font-size:19px;"></i>
+            <h5 class="mb-0 fw-bold fs-15 text-dark">Tender Fact Sheet</h5>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            <button type="button" class="btn btn-sm btn-outline-success d-inline-flex align-items-center py-1 px-2" id="btnDownloadFactSheetInModal" title="Download Fact Sheet">
+                <i class="feather-download me-1 mr-1"></i> Download
+            </button>
+            <a href="javascript:void(0);" target="_blank" class="btn btn-sm btn-outline-primary d-inline-flex align-items-center py-1 px-2" id="btnOpenFactSheetTab" title="Open in New Tab">
+                <i class="feather-external-link me-1 mr-1"></i> Full Page
+            </a>
+            <button type="button" class="close-btn ms-2 ml-2" id="closeFactSheetPanel" title="Close Panel" style="font-size:24px;line-height:1;border:none;background:none;cursor:pointer;">&times;</button>
+        </div>
+    </div>
+    <div class="right-form-body p-0" id="factSheetPanelBody" style="background:#f1f5f9;overflow-y:auto;flex:1;">
+        <div class="text-center py-5 text-muted" style="min-height:350px;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <div class="spinner-border spinner-border-sm text-primary mb-2" role="status"></div>
+            <div>Loading Fact Sheet...</div>
+        </div>
+    </div>
+</div>
+
+<style>
+.factsheet-panel {
+    position: fixed;
+    top: 0;
+    right: -920px;
+    width: 880px !important;
+    max-width: 95vw !important;
+    height: 100vh;
+    background: #ffffff;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.2);
+    transition: right 0.32s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 1060;
+    display: flex;
+    flex-direction: column;
+}
+.factsheet-panel.open {
+    right: 0 !important;
+}
+</style>
 
 <!-- Right Side Update Panel -->
 <div class="right-form" id="bidCanvas">
@@ -328,6 +382,15 @@ $(document).on('click', '.view-bid', function () {
                         <td>${bid.Remarks ?? '-'}</td>
                     </tr>
 
+                    <tr>
+                        <th>Fact Sheet</th>
+                        <td>
+                            <button type="button" class="btn btn-sm text-white fw-bold d-inline-flex align-items-center py-1 px-3 view-factsheet" data-bcid="${bid.Bcid}" style="background:linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);border:none;border-radius:6px;box-shadow:0 2px 6px rgba(14,165,233,0.3);">
+                                <i class="feather-file-text me-1 mr-1"></i> View Fact Sheet
+                            </button>
+                        </td>
+                    </tr>
+
                 </tbody>
             </table>
 
@@ -520,5 +583,98 @@ $(document).on('click', '#UpdateBid', function (e) {
             }
         }
     });
+});
+
+// ── Fact Sheet Slide-out Modal Handlers ──
+$(document).on('click', '.view-factsheet', function (e) {
+    e.preventDefault();
+    var bcid = $(this).data('bcid') || $(this).attr('data-bcid');
+
+    // Close other panels if open
+    $('#rightForm').removeClass('open');
+    $('#bidCanvas').removeClass('open');
+
+    // Update full page link
+    var tabUrl = "<?= base_url('bid/factsheet'); ?>?bcid=" + encodeURIComponent(bcid) + "&standalone=1";
+    $('#btnOpenFactSheetTab').attr('href', tabUrl);
+
+    // Show loading spinner
+    $('#factSheetPanelBody').html(`
+        <div class="text-center py-5 text-muted" style="min-height:350px;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <div class="spinner-border text-primary mb-3" role="status" style="width:2.2rem;height:2.2rem;"></div>
+            <div class="fw-bold" style="font-size:14px;color:#1e293b;">Loading Tender Fact Sheet...</div>
+            <div class="small text-muted mt-1">Retrieving sections from TenderFactSheet</div>
+        </div>
+    `);
+
+    // Slide open right modal
+    $('#factSheetPanel').addClass('open');
+    $('#rightFormOverlay').addClass('show');
+
+    // Fetch Fact Sheet via AJAX
+    $.ajax({
+        url: "<?= base_url('bid/factsheet'); ?>",
+        type: "GET",
+        data: { bcid: bcid, ajax: 1 },
+        success: function (response) {
+            $('#factSheetPanelBody').html(response);
+        },
+        error: function () {
+            $('#factSheetPanelBody').html(`
+                <div class="alert alert-danger m-4 border-0 shadow-sm" style="border-radius:8px;">
+                    <div class="fw-bold"><i class="feather-alert-triangle me-1"></i> Unable to Load Fact Sheet</div>
+                    <div class="small mt-1">No Fact Sheet was found for this bid.</div>
+                </div>
+            `);
+        }
+    });
+});
+
+$(document).on('click', '#closeFactSheetPanel', function (e) {
+    e.preventDefault();
+    $('#factSheetPanel').removeClass('open');
+    $('#rightFormOverlay').removeClass('show');
+});
+
+// Download Fact Sheet as PDF handler
+function downloadFactSheetAsPdf() {
+    var printArea = document.getElementById('pdfPrintableArea') || document.querySelector('.pdf-factsheet-sheet');
+    if (!printArea) {
+        alert('Fact Sheet content is not available to download.');
+        return;
+    }
+    var filename = 'Tender_FactSheet.pdf';
+
+    function executeDownload() {
+        if (window.html2pdf) {
+            var opt = {
+                margin:       [8, 8, 8, 8],
+                filename:     filename,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, logging: false },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(printArea).save();
+        } else {
+            window.print();
+        }
+    }
+
+    if (window.html2pdf) {
+        executeDownload();
+    } else {
+        var script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+        script.onload = executeDownload;
+        script.onerror = function() {
+            window.print();
+        };
+        document.head.appendChild(script);
+    }
+}
+
+$(document).on('click', '#btnDownloadFactSheetInModal', function (e) {
+    e.preventDefault();
+    downloadFactSheetAsPdf();
 });
 </script>

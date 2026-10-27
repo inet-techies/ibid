@@ -1,0 +1,439 @@
+AI Generated Tender Summary / Eligibility Criteria
+
+   Tender Id        103059665
+
+ Bid End Date
+                    24/08/2026 up to 16:00 Hrs
+     Time
+
+ Bid Opening
+                    27/08/2026 16:30 Hrs
+  Date Time
+
+  Department
+                    Vadodara Municipal Corporation
+    Name
+
+                    Category: Others
+Item Category
+                    Nature of Requirement: Turnkey Project
+
+ Site location      Vadodara city
+
+Emd Instrument
+                    No
+     Type
+
+  Completion
+                    4 months from the work order
+    Period
+
+   Category         Surveillance Cameras
+
+Delivery district   Vadodara city
+
+   Location         Vadodara city
+
+                    CCTV Cameras (Bullet, Dome & PTZ), Video Management System (VMS), Servers, Storage,
+                    Backup Software, SAN Switches, Core/Distribution/Access Switches (including PoE Switches),
+   Products
+                    Active LED Video Wall, Video Wall Controller, EMS/NMS, UPS, and other active IT and
+                    surveillance equipment.
+
+     State          Gujarat
+
+                    50 Crore - Tender for Selection of Agency for the Supply, Installation, Testing, Commissioning
+Estimated Cost
+                    (SITC) and Operation & maintenance of Surveillance Cameras in Vadodara city
+
+                   30,000 /- (Rupees Thirty thousand only) in form of DD only - Bid Processing Fee
+  EMD Value
+                   1,00,00,000 /-(Rupees One Crore only) - Bid Security EMD
+
+Emd Mode Type      DD / BG
+
+Pre Bid Meeting    12/08/2026 upto 15:00 Hrs
+
+Joint Venture OR
+ Consortium OR     no
+       JV
+
+Work to be Done
+    Site or        Site
+  Workshop
+
+ Performance
+                   10% of the Project Value
+Bank Guarantee
+
+                   The successful bidder shall complete the supply, installation, integration, testing, commissioning,
+                   and Go-Live of the complete City Surveillance System, including all field infrastructure, network
+                   connectivity, central infrastructure, software applications, licenses, integrations, training,
+                   documentation, and acceptance testing. The project shall be considered successfully completed
+                   only after successful Go-Live of the entire system and issuance of Final Acceptance Certificate
+                   by VMC. The bidder shall submit a detailed Project Implementation Schedule within fifteen (15)
+                   days from the date of Work Order for approval by VMC. However, the overall project completion
+                   and Go-Live timeline shall remain ____ Months from the date of Work Order, irrespective of any
+                   internal activity schedules submitted by the bidder. Any delay beyond the stipulated Go-Live date
+                   shall attract penalties and liquidated damages as specified in this tender. Go-Live Date: Within
+                   90 Days (3 Months) from the date of issuance of Work Order. Note: one single Go-Live date and
+Payment terms
+                   do not want phase-wise. a) No advance payment will be made. b) All payments shall be made in
+                   Indian rupees. c) Mode of Billing and Payments i. The Bidder shall submit invoices in duplicate
+                   on the firm's printed bill forms along with all supporting documents, inspection reports, installation
+                   certificates, commissioning reports, and acceptance certificates as required by VMC. ii. Payment
+                   shall be released only after successful supply, installation, integration, testing, commissioning,
+                   and acceptance of the respective items/services by VMC and submission of all required
+                   documents. iii. The successful bidder shall submit a Performance Bank Guarantee (PBG) as
+                   specified in the tender conditions, which shall remain valid for the prescribed contract period. iv.
+                   Operation & Maintenance (O&M)/CAMC payments shall be released on a quarterly basis in
+                   arrears after satisfactory performance of services during the respective quarter and after
+                   adjustment of applicable SLA penalties, if any.
+
+  Hard Copy
+                   The technical proposal should be submitted in hard copy with soft version stored in pen drive.
+  Submission
+
+ Courier Speed     The Technical Bid must be sent to VMC, strictly by Postal Speed Post or Registered Post only.
+Post Submission    Documents received in any other manner or mode (like email) will not be considered.
+
+                   Yes, the following are required:
+   Affidavit
+   notarized              1. The Bidder must attach valid documents in support to their Pre-Qualification as mentioned
+  documents                  above.
+                          2. The Bidder should submit authorization certificate of Original Equipment Manufacturer
+                             (OEM) (or multiple OEMs) specific to the bid.
+
+                       3. Work Order and Work Completion Certificate must be in English language only. In case,
+                          Work Order or Work Completion Certificate is in any other language, bidder has to submit
+                          notarized Work Order in English language only.
+                       4. Bidder must submit a self declaration/undertaking, duly signed and stamped by the
+                          Authorized Signatory, in the format prescribed in this RFP.
+                       5. The authorized signatories of the bidder should execute a Power of Attorney / Notarized
+                          board resolution copy to nominate one person as an authorized signatory regarding all
+                          communications and execution of this project. The authorized signatory should sign all
+                          communications including the bid.
+                       6. Bidder should have to submit affidavit physically on Stamp paper as per format mentioned
+                          in TQ_6.
+                       7. Original Power of Attorney / Notarized board resolution copy should be submitted in order
+                          to support their authorization to sign the document.
+                       8. The power of attorney should be submitted on a stamping of INR 300/- (Rupees Three
+                          Hundred Only).
+
+                   150 Unit for Pole with Foundation, Electrification, Earthing and Civil Work
+                   150 Unit for PTZ CCTV Camera with Mounting Accessories
+                   450 Unit for Fixed CCTV Camera with Mounting Accessories
+                   600 Licenses for Video Management Software (VMS) Licenses – Videonetics
+                   150 Unit for Field Junction Box (Outdoor)
+                   150 Unit for Industrial Managed PoE Switch with SFP Ports
+                   150 Unit for UPS with Battery Backup
+                   150 Unit for CCTV Signage Board
+                   150 Unit for Wiring, Cabling, Conduit, Earthing and Accessories
+                   75 KM for Optical Fiber Cable- 48 core (OFC) including Two (2) HDPE Duct + OFC Laying,
+                   Blowing, Splicing, Termination and Testing + LIU, Patch Panels, Patch Cords, SFPs and OFC
+                   Accessories
+                   40 Unit for Dome CCTV with mounting accessories
+                   1 Unit for Server Chassis
+                   12 Unit for Blade / Rack Servers (900 CCTVs & 20% open space after installation of all
+                   applications & Operating System) **
+Quantity Details   Lums um TB for Storage System with Capacity to Cater 900 CCTV Cameras with minimum 20%
+                   empty space after installation
+                   1 Lot for Virtualization Software Licenses
+                   2 Unit for SAN Switch
+                   2 Unit for ToR Switch
+                   1 Lot for 42U Network Rack with Accessories
+                   1 Lot for Backup Software Included Automate Tap Library
+                   1 Lot for Tape Drive / Backup Media
+                   1 Lot for EMS / NMS Licenses
+                   1 Licenses for Antivirus / Endpoint Security Licenses for Server
+                   1 Lot for Integration with Existing Applications / IoT Platform / CCC Applications
+                   1 Set + Lot for Active LED Video Wall + Video Wall Controller + Civil, Electrical, Furniture and
+                   Installation Work for Video Wall with Existing Video Wall Buy back
+                   5 Year for CAMC for all the above items for a total period of 5 years after Go Live (including 1
+                   year comprehensive warranty/support after Go Live), along with all required manpower, 24x7
+                   support services, and resources necessary.
+                   1 Lot for Any Other Item Required for Complete Functionality of Solution
+
+   Delivery        Vadodara city
+   Location        Gujarat
+
+                   Supply of Goods
+    Scope
+                   Installation / Execution
+ Classification
+                   Turnkey Work
+
+                   The eligibility criteria for bidders are as follows:**1. Authorized System Integrator (SI) /
+   Eligibility     Authorized Channel Partner:*** The bidder must be an Authorized System Integrator (SI) or an
+    Criteria       Authorized Channel Partner of the respective OEM(s) for the proposed CCTV Cameras (Bullet,
+                   Dome & PTZ), Video Management System (VMS), Servers, Storage, Backup Software, SAN
+
+Switches, Core/Distribution/Access Switches (including PoE Switches), Active LED Video Wall,
+Video Wall Controller, EMS/NMS, UPS, and all other active IT and surveillance equipment.* The
+bidder must submit a valid Manufacturer's Authorization Form (MAF) and a back-to-back OEM
+warranty and support for the entire five (5) year Contract Period after Go-Live, as per the
+prescribed format, from the respective OEM(s).* The MAF must be enclosed with the Technical
+Bid.**2. Indian Firm Registration:*** The bidder should be an Indian firm.* The bidder should be
+registered under the Companies Act 1956 in India or a Limited Liability Partnership Firm under
+the Limited Liability Partnership Firm Act 2008 at the time of bidding.* The bidder must have a
+registered number of, GST, and Income Tax / Pan number.* The bidder should have been in
+operation in India for a period of at least 3 years as on the publication date of this tender.*
+**Supporting Documents:** * Copy of certificate of incorporation issued by the competent
+authority/ Registration Certificate/ Shop & Establishment certificate. * Copy of PAN card. * Copy
+of GST registration.**3. Financial Requirements:*** **Average Annual Turnover:** The bidder
+should have an average annual turnover of at least Rs. 17 Cr. for the last three audited financial
+years ending 31 March 2026 (i.e., FY 2023-24, FY 2024-25, FY 2025-26).* **Net Worth and
+Profitability:** The bidder must have a positive net worth and should have been profit-making in
+each of the last three financial years as on 31st March 2026.* **Supporting Documents:** * Copy
+of Audited Balance Sheet, audited Profit & Loss statements for each of the last 3 financial years
+as on 31st March 2025. * Certificate from the statutory auditor / Chartered Accountant (CA)
+clearly specifying the annual turnover for each of the last 3 financial years as on 31st March
+2026. Original or Notarized Copy should be submitted for evaluation.**4. CCTV Camera OEM
+Compliance:*** The proposed CCTV Camera OEMs must possess valid STQC / BSI-Er
+compliance certification as on the bid submission date.* IP CCTV System OEMs should own the
+MAC Address of the proposed components &/or network devices.* **Supporting Document:**
+Copy of the valid certification should be submitted.**5. Work Experience:*** The bidder should
+have successfully executed the following in Central / State Government / Municipal Corporations
+/ Urban Local Bodies / PWD / Public Sector Undertaking / Private Organization companies within
+the last 07 years ending on the tender floating date: * One similar completed work costing not
+less than 80% of the estimated cost (i.e., Rs. 40 Crore). * **OR** * Two similar completed works
+each costing not less than 50% of the estimated cost (i.e., Rs. 25 Crore). * **OR** * Three similar
+completed works each costing not less than the amount 40% of estimated cost (i.e., Rs. 20
+Crore).* The bidder should submit a certificate from the client on the completion status of on-
+going projects and the performance of the bidder.* **Definition of Similar Work/Project:** "Supply,
+Installation, Testing, Commissioning and/or Maintenance of OFC enabled CCTV Surveillance
+Project involving DC Infrastructure, EMS/NMS etc."* **Exemption for Civil and Electrical Works:**
+In cases where the proposed project includes civil and electrical works, the bidder shall consider
+only the cost of Cameras, along with Server with Storage, and associated IT/ITES components
+(excluding civil and basic electrical works) for the purpose of meeting the eligibility criteria. The
+bidder must submit a Chartered Accountant (CA) certificate, duly bearing a valid UDIN,
+confirming that the project cost considered for qualification strictly comprises only the
+aforementioned equipment and components.* **Ongoing Projects:** In case of ongoing projects,
+the proposed project must be commissioned as on the online bid submission date.* **Supporting
+Documents:** For each project, the bidder must submit a Copy of Work Order / Agreement and
+Work completion certificate issued by the client, OR Work completion (Certified by CA / CS /
+independent auditor of the bidding entity) with Project Citation.**6. Demonstrable Work
+Experience:*** The bidder shall have demonstrable similar work experience of minimum Outdoor
+650+ CCTV cameras with Servers, Storage, City-wide UG fiber network of minimum 80 Km in
+the last seven (7) years in India on the bid submission date.* **Supporting Documents:** For
+each project, the bidder has to submit a Copy of Work Order / Agreement and Work completion
+certificate issued by the client OR Work completion (Certified by CA / CS / independent auditor of
+the bidding entity) with Project Citation.* **Exemption for Civil and Electrical Works:** In cases
+where the proposed project includes civil and electrical works, the bidder shall consider only the
+cost of Cameras, along with Server with Storage, and associated IT/ITES components (excluding
+civil and basic electrical works) for the purpose of meeting the eligibility criteria. The bidder must
+submit a Chartered Accountant (CA) certificate, duly bearing a valid UDIN, confirming that the
+project cost considered for qualification strictly comprises only the aforementioned equipment
+and components.* **Ongoing Projects:** In case of ongoing projects, the proposed project must
+be commissioned as on the online bid submission date.**7. Proof of Office Location:*** The
+bidder must provide proof of office location.* **Supporting Document:** Provide Professional Tax
+paid receipt (for local vendor). For non-local vendors, any of the following proof is required:
+Company Registration Proof, Profession Tax Proof, Shop & Establishment Proof, Property Tax,
+Electricity Bills, or Valid Lease Agreement. This should be submitted with the bid for proof at their
+office location.**8. Technical Manpower:*** The bidder shall have a minimum of twenty (20)
+
+technically qualified employees on its payroll as on the date of bid submission, engaged in
+activities such as CCTV surveillance system implementation, networking, optical fibre (OFC),
+system integration, installation, testing, commissioning, operation & maintenance (O&M), and
+technical support.* **Supporting Document:** Certificate from HR head confirming
+compliance.**9. Non-Blacklisting:*** The bidder should not have been blacklisted by the Central
+Government / Any State Government / PSU in India as on the date of bid submission.* The
+bidder should not be insolvent, in receivership, bankrupt or being wound up, not have its affairs
+administered by a court or a judicial officer, not have its business activities suspended, and must
+not be the subject of legal proceedings for any of the foregoing reasons.* The bidder shall have
+an office in Gujarat. If the bidder does not have an office in Gujarat at the time of bid submission,
+an undertaking must be submitted to establish an office in Gujarat within 45 days from the date of
+Work Order issued by VMC.* The bidder's directors and officers should not have been convicted
+of any criminal offence related to their professional conduct or the making of false statements or
+misrepresentations as to their qualifications to enter into a procurement contract within a period
+of three years preceding the commencement of the procurement process, or not have been
+otherwise disqualified.* The bidder should not be a subsidiary/affiliate/attached office of any
+border companies that may be banned by the Government of India for doing business in India,
+as per the revision of GFR rules.* The bidder must submit a self-declaration/undertaking, duly
+signed and stamped by the Authorized Signatory, in the format prescribed in the RFP.**10.
+Authorized Signatories:*** The authorized signatories of the bidder should execute a Power of
+Attorney / Notarized board resolution copy to nominate one person as an authorized signatory for
+all communications and execution of the project. This authorized signatory must sign all
+communications, including the bid.* **Supporting Documents:** Original Power of Attorney /
+Notarized board resolution copy should be submitted. The power of attorney should be submitted
+on a stamping of INR 300/-.**11. Affidavit:*** The bidder must submit an affidavit physically on
+Stamp paper as per the format mentioned in TQ_6.* **Supporting Document:** ORIGINAL on
+Non-Judicial Stamping of Rs. 300/- duly attested by Magistrate / Notary.**12. Certifications:***
+**Mandatory:** CMMi Level 3 or above.* **Any 2 of the following:** * ISO/IEC 27001:2013 or
+above for Information Security Management System. * ISO 20000-1:2011 or above for IT Service
+Management. * ISO 14001:2015 or above for Environmental Management System. * ISO
+45001:2018 or above for Occupational Health and Safety (OH&S) Management Systems. * ISO
+9001:2015 for Quality Management Systems.* **Supporting Documents:** Copies of the valid
+certificate in the name of the bidder.**13. Supporting Documents for Pre-Qualification:*** The
+bidder must attach valid documents in support of their Pre-Qualification as mentioned. Without
+proper supporting documents, bids are liable to be rejected.* Technical proposal should be
+submitted in hard copy with a soft version stored in a pen drive.* For all cited projects under
+experience criteria, bidders must submit work order with full BoQ, contract agreement go-
+live/amount of work completion certificate, and copy of invoice submitted to the client. Sub-
+contracted projects will not be considered.* The bidder must use only the makes/brands specified
+in the Approved Makes List of this Tender. Final make, model, OEM datasheets, and test
+certificates must be submitted for approval.* For items where make/brand is not specified, bidder
+must submit details, technical specifications, OEM credentials, certifications, and product
+datasheets for approval.* VMC may permit equivalent makes/brands approved by the Vendor
+Committee, provided they comply with technical specifications and quality requirements.*
+Manufacturers for hardware must have accreditation from a recognized national/state
+government agency. Accreditation, safety, and quality certificates must be submitted.*
+Manufacturer calibration lab accreditation certificate should be submitted with the technical
+proposal along with QAP.* Purchaser (VMC) or its representative has the right to inspect and test
+the Goods.* Inspections and tests may be conducted at the supplier's premises or at the point of
+delivery. Purchaser may reject non-conforming Goods, and the supplier shall replace them free
+of cost.* Total delivered quantity from each line item of the price bid will be reviewed and
+inspected.* Equipment likely to be declared end-of-life/sale within seven years must not be
+bid/supplied. Such equipment must be replaced with latest or equivalent configuration during the
+project duration.* All expenses related to inspection, lodging, boarding, transportation, and third-
+party inspection fees will be borne by the IA.* Supplier shall facilitate in-process and/or pre-
+delivery inspection by VMC representatives.* Successful Bidder must assess existing server,
+storage, and IT infrastructure and carry out necessary upgrades, configurations, and integration
+without additional cost to VMC.* Instruments must be tested and verified against approved
+datasheets.* Integration of instruments will be tested for data transmission and performance.*
+Materials must be delivered after receiving a release note from the third-party inspection
+authority, without damage during transportation and handling.* Material dispatch for Vadodara
+must be to the store or site within the Municipal limit as per the Engineer-in-Charge's instruction.*
+Bidders must supply additional quantities required by VMC during the contract validity (2 years)
+
+at the same unit rate and terms & conditions.* Work must be carried out as per approved
+drawings and instructions from the engineer-in-charge.* Bidder needs to provide an installation
+plan in advance weekly.* Bidder needs to submit weekly progress reports.* Bidder is responsible
+for any damage to walls or grounds, which must be repaired at their own cost.* Luminaries will
+operate based on astronomical guidelines and poles will receive electric supply as per schedule.*
+Controller repair and replacement is the bidder's scope for the entire project duration.* All
+equipment deployed will be under warranty for the entire project duration, including O&M.*
+Successful Bidder must integrate the proposed solution with existing VMC systems.* Bidder shall
+ensure seamless interoperability, data exchange, alarm/event sharing, health monitoring, user
+authentication, and centralized management without affecting the existing operational
+environment. All hardware, software, APIs, connectors, licenses, professional services,
+customization, configuration, testing, and commissioning for integration must be included in the
+bid price.* **Supporting Documents:** Valid documents supporting Pre-Qualification criteria and
+any other required documents.**14. Bid Submission:*** **Technical Bid:** Must be submitted
+strictly by Postal Speed Post or Registered Post only to VMC. Documents received via any other
+manner (like email) will not be considered. * Envelope 1: Tender fee (original DD) & Bid
+Security/Earnest Money Deposit (EMD) (original DD/BG). * Envelope 2: Eligibility documents for
+Pre-Qualification criterion with all annexures described in RFP. * Envelope 3: Support documents
+for Technical Qualification evaluation with all annexures described in RFP. * Envelope 4: Soft
+copy of Technical Bid in a Pen Drive.* All four envelopes should be packaged together in a larger
+envelope with the tender number.* Each page of the technical bid must bear the initials of the
+applicant along with the seal of the Applicant.* **Price Bid:** Must be submitted online on
+https://tender.nprocure.com. Physical submission of the price bid will lead to rejection.**15.
+Single Bid Submission:*** A Bidder shall submit only one bid for the Project. Submission of
+multiple bids by the same Bidder, either directly or indirectly, shall lead to disqualification.**16.
+EMD / Bid Security:*** **Amount:** Rs. 1,00,00,000/- (Rupees One Crore)* **Submission
+Mode:** * Demand Draft in favor of “Municipal Commissioner, Vadodara” from any Nationalized
+or Scheduled Banks (except Co-operative Banks approved by Gujarat State Govt. and VMC),
+payable at Vadodara, for the period of 6 years. * **OR** * Bank Guarantee issued by a
+Nationalized Bank (including IDBI Bank/Private Banks – Axis Bank, HDFC Bank and ICICI Bank)
+along with banks mentioned in the GR of Finance Department of Government of Gujarat
+(FD/MSM/e-file/4/2024/2859/DMO dated 01/05/2025) in favor of “Commissioner, Vadodara
+Municipal Corporation” for the period of 6 years.* No interest will be payable by VMC on the
+Earnest Money Deposit (EMD).* If a bid is submitted without EMD or Bid fees as mentioned
+above, VMC reserves the right to reject the bid without providing an opportunity for further
+correspondence.* EMD of unsuccessful Bidders will be returned promptly after acceptance of the
+Selected Bidder's proposal or cancellation of the Bidding Process.* Selected Bidder’s EMD will
+be returned upon signing the Agreement and furnishing the Security Deposit / Performance
+Guarantee.* VMC's decision regarding EMD forfeiture and bid rejection shall be final.* **EMD
+Forfeiture Conditions:** * Bidder withdraws bid or increases quoted prices during bid validity. *
+Successful bidder fails to sign the Contract or furnish Performance Bank Guarantee within the
+specified time. * Bidder indulges in deliberate acts that jeopardize or unnecessarily delay the bid
+process. * Submission of wrong, manipulated, or hidden information in the bid.**17. Bid Fee:***
+Non-refundable Bid Fee: Rs. 20,000 /- (Rupees Twenty Thousands only) in favor of “Municipal
+Commissioner, Vadodara” payable at Vadodara, from Nationalized or Scheduled Banks (except
+Co-operative Banks approved by Gujarat State Govt. and VMC).**18. Labor Regulations
+Compliance:*** The Bidder shall pay fair and reasonable wages to the workmen and comply with
+the Minimum Wages Act and the Contract Labor Act 1970.**19. Conflict of Interest:*** Bidders
+shall not have a conflict of interest that may affect the Selection Process or the scope of the
+project. VMC requires that bidders provide professional, objective, and impartial advice.* The
+Bidder must disclose to VMC in writing any actual and potential Conflicts of Interest as soon as
+they become aware of such a conflict.**20. Land Border Country Clause:*** Any bidder from a
+country sharing a land border with India will be eligible only if they are registered with the
+Competent Authority (Registration committee constituted by the Department for Promotion of
+Industry and Internal Trade (DPIIT)).**21. Other Requirements:*** **Conditional Bids:** Bids
+found to be incorrect, misleading, or fraudulent, or those attempting to influence the bid process,
+will be rejected.* **Bidder's Signatory:** Bids must be signed by an authorized person.*
+**Bidder's Organization:** Must be a single legal entity meeting all eligibility, technical, and
+financial requirements. Consortiums, joint ventures, or partnerships are not permitted.* **All
+Documents:** Must be duly sealed & signed as required. Technical bid documents should be
+sealed and signed.* **Deviation:** Any conditional mention regarding technical details or prices
+in any document or forwarding letter will lead to the price bid not being opened.* **OEM
+
+            Authorization:** Authorization letters from OEMs for all hardware & software components and
+            compliance to technical specifications on OEM’s letterhead are mandatory.
+
+Checklist         Bid Processing Fee (DD) as per RFP
+                  Bid Security EMD (DD/BG) as per RFP
+                  Technical Proposal Packaged in Envelope with Pen Drive as per RFP
+                  Power of attorney / board resolution to the authorized Signatory of the RFP
+                  Copy of Certificate of Incorporation/Registration certificate/ Shop & Establishment
+                  Certificate – Bidder
+                  Copy of Audited Balance Sheet and Profit and Loss statement for last three financial years
+                  Bidder
+                  Supporting Documents like Rent Agreement/ Electricity Bill / Self-Declaration on
+                  Company’s Letter head to be submitted for Office Location. OR Undertaking from
+                  authorized signatory to open the local office within 60 days from issuance of LOI to be
+                  submitted – Bidder
+                  Copy of GST registration – Bidder
+                  Copy of PAN registration – Bidder
+                  Bid Covering Letter
+                  Particulars of the Bidders
+                  Details of Annual Turnover for last three financial years
+                  Certificate from the Statutory auditor / CA clearly specifying the annual turnover for the
+                  specified years
+                  Declaration letter that the firm is not blacklisted by Central Government or any State
+                  Government organization / PSU in India at the time of submission of the Bid, in the format
+                  given in the RFP
+                  Affidavit on Non-judicial Rs 300 stamp paper
+                  Details of the similar projects executed
+                  Solution Design
+                  Format for Authorization Letters from OEMs
+                  Format for Bid EMD
+                  Make & Model of all Hardware & Software components
+                  Compliance to Technical Specifications as mentioned in the RFP on OEM’s Letterhead.
+                  Bill of Material without prices
+                  Datasheets highlighting the Functional and Technical Specification parameters in each
+                  datasheet for compliances
+                  Self-declaration by the Bidder duly signed and stamped by the authorized signatory - Not
+                  be insolvent, in receivership, bankrupt or being wound up, not have its affairs administered
+                  by a court or a judicial officer, not have its business activities suspended and must not be
+                  the subject of legal proceedings for any of the foregoing reasons.
+                  Self-declaration by the Bidder duly signed and stamped by the authorized signatory - Not
+                  have their directors and officers convicted of any criminal offence related to their
+                  professional conduct or the making of false statements or misrepresentations as to their
+                  qualifications to enter into a procurement contract within a period of three years preceding
+                  the commencement of the procurement process, or not have been otherwise disqualified.
+                  Copy of Manufacturer's Authorization Form (MAF)
+                  Back-to-back OEM warranty and support
+                  Manufacturer’s Authorization Form (MAF) & back-to-back OEM warranty and support for
+                  the entire five (5) year Contract Period
+                  Copy of certification of incorporation issued by competent authority/ Registration
+                  Certificate/ Shop & Establishment certificate
+                  Copy of PAN card
+                  Copy of GST registration
+                  Copy of audited Balance Sheet, audited Profit & Loss statements for each of the last 3
+                  financial years as on 31st March 2025.
+                  Certificate from the statutory auditor / Chartered Accountant (CA) clearly specifying the
+                  annual turnover for each of the last 3 financial years as on 31st March 2026. Original or
+                  Notarized Copy should be submitted for evaluation.
+                  Copy of the valid certification should be submitted.
+                  Copy of Work Order / Agreement
+                  Work completion certificate issued by client OR Work completion (Certified by CA / CS /
+                  independent auditor of the bidding entity) with Project Citation.
+                  Original Power of Attorney / Notarized board resolution copy
+                  Affidavit physically on Stamp paper
+
+Copies of the valid certificate in the name of the Bidder
+CMMi Level 3 or above
+ISO/IEC 27001:2013 or above for Information Security Management System
+ISO 20000-1:2011 or above for IT Service Management
+ISO 14001:2015 or above for Environmental Management System
+ISO 45001:2018 or above for Occupational Health and Safety (OH&S) Management
+Systems
+ISO 9001: 2015 for Quality Management Systems
+Valid proof of Manufacturer’s Authorization Form (MAF)
+Work order with full BoQ, contract agreement go-live/amount of work completion certificate
+and copy of invoice submitted to the client.
+Notarized Work Order in English language only
+Valid Digital Certificate
+Valid STQC/BIS-ER certification
