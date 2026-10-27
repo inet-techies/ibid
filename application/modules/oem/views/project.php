@@ -313,14 +313,8 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
-                                    <?php else: ?>
-                                        <tr>
-                                            <td colspan="7" class="text-center text-muted py-4">
-                                                <i class="feather-alert-circle me-1"></i> No projects registered yet. Click "Add Project & BOM" above to register one.
-                                            </td>
-                                        </tr>
-                                    <?php endif; ?>
-                                </tbody>
+                            <?php endif; ?>
+                        </tbody>
                             </table>
                         </div>
                     </div>
@@ -506,7 +500,11 @@ document.addEventListener("DOMContentLoaded", function() {
         $('#projectDirectoryTable').DataTable({
             pageLength: 10,
             responsive: true,
-            order: [[0, 'asc']]
+            order: [[0, 'asc']],
+            language: {
+                emptyTable: 'No records found',
+                zeroRecords: 'No matching records found'
+            }
         });
     }
 
