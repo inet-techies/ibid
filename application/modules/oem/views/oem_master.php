@@ -138,12 +138,6 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
-                            <?php else: ?>
-                                <tr>
-                                    <td colspan="6" class="text-center text-muted py-4">
-                                        <i class="feather-alert-circle me-1"></i> No OEM vendors found matching criteria. Click "+ Register OEM" to add one.
-                                    </td>
-                                </tr>
                             <?php endif; ?>
                         </tbody>
                     </table>
@@ -390,7 +384,11 @@ document.addEventListener("DOMContentLoaded", function() {
         $('#oemTable').DataTable({
             pageLength: 10,
             responsive: true,
-            order: [[0, 'asc']]
+            order: [[0, 'asc']],
+            language: {
+                emptyTable: 'No records found',
+                zeroRecords: 'No matching records found'
+            }
         });
     }
 

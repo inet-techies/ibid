@@ -92,12 +92,6 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
-                            <?php else: ?>
-                                <tr>
-                                    <td colspan="5" class="text-center text-muted py-4">
-                                        <i class="feather-alert-circle me-1"></i> No categories registered yet. Click "+ Add Category" to create one.
-                                    </td>
-                                </tr>
                             <?php endif; ?>
                         </tbody>
                     </table>
@@ -286,7 +280,11 @@ document.addEventListener("DOMContentLoaded", function() {
         $('#categoryTable').DataTable({
             pageLength: 10,
             responsive: true,
-            order: [[0, 'asc']]
+            order: [[0, 'asc']],
+            language: {
+                emptyTable: 'No records found',
+                zeroRecords: 'No matching records found'
+            }
         });
     }
 
