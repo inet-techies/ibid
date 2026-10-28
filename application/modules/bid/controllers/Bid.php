@@ -146,51 +146,8 @@ public function dashboard(){
 			// Theme path for asset references
 			$data['theme_path'] = $this->config->item('theme_locations') . $this->config->item('active_template');
 
-<<<<<<< HEAD
 			$this->template->write_view('content', 'bid/masterdashboard', $data);
 			$this->template->render();
-=======
-					    $statusMap = [];
-					    foreach($statuses as $status){
-					        $statusMap[$status['StatusName']] = [
-					            'DisplayName' => $status['DisplayName'],
-					            'BadgeClass' => $status['BadgeClass'],
-					            'Sid' => $status['Sid'],
-					            'Count' => isset($countArray[$status['Sid']]) ? $countArray[$status['Sid']] : 0,
-					            'IconClass'   => $status['IconClass']
-					        ];
-					    }
-
-					    // $data['statusName'] = $statuses['DisplayName'];
-					    $data['statusCounts'] = $statusMap;
-					    $data['totalBids'] = array_sum($countArray);
-
-					     // Bootstrap color mapping
-						    $data['colorMap'] = [
-						        'bg-primary'   => '#0d6efd',
-						        'bg-success'   => '#198754',
-						        'bg-danger'    => '#dc3545',
-						        'bg-warning'   => '#ffc107',
-						        'bg-info'      => '#0dcaf0',
-						        'bg-dark'      => '#212529',
-						        'bg-secondary' => '#6c757d'
-						    ];
-
-				// Get Last 10 Bids (latest first)
-				$lastBids = $this->db
-				    ->select('b.Bcid, b.BidTitle, b.BidType, b.BidDepartment, b.PublishedDate,b.OpeningDate,b.SubmissionDate,b.CreationTs,b.Remarks,s.DisplayName as StatusName, s.BadgeClass')
-				    ->from('BidCreationDetails b')
-				    ->join('BidStatusMaster s', 's.Sid = b.BidStatus', 'left')
-				    ->order_by('b.CreationTs', 'DESC')
-				    ->limit(10)
-				    ->get()
-				    ->result_array();
-
-				$data['lastBids'] = $lastBids;
-		    
-				$this->template->write_view('content', 'bid/masterdashboard', $data);
-				$this->template->render();
->>>>>>> 8866ea9440fa5a61793462eed5fb862bd347169f
 
 		} else
 		{
