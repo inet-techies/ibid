@@ -929,12 +929,36 @@
       }
     };
 
-    // Global validate() function called by form onsubmit="return validate();"
+    // Helper to dismiss error on a specific field when user edits it
+    function clearFieldError(el) {
+      if (!el) return;
+      el.classList.remove('is-invalid');
+      var group = el.closest('.input-group');
+      if (group) group.classList.remove('has-validation-error');
+      if (el.id === 'bidTypeInput') {
+        var s2 = el.nextElementSibling;
+        if (s2 && s2.classList.contains('select2-container')) {
+          s2.style.border = '';
+        }
+      }
+      var col = el.closest('.col-lg-8');
+      if (col) {
+        var feed = col.querySelector('.field-error-feedback');
+        if (feed) feed.style.display = 'none';
+      }
+      var remaining = document.querySelectorAll('.is-invalid');
+      if (remaining.length === 0) {
+        var alertBox = document.getElementById('bidFormValidationSummary');
+        if (alertBox) alertBox.style.display = 'none';
+      }
+    }
+
+    // Global validate() function called ONLY when user clicks "Create Bid" (form onsubmit)
     window.validate = function() {
       return window.validateBidForm(true, true);
     };
 
-    // Attach real-time input and change listeners to clear error states as user types
+    // When user fixes an error by typing/changing that field, clear only that field's error
     [
       'bidTypeInput', 'bidTitleInput', 'bidDepartmentInput', 'bidEstimatedInput',
       'bidEmdInput', 'startDate', 'dueDate', 'dateofBirth', 'bidSummaryInput',
@@ -942,19 +966,16 @@
     ].forEach(function(id) {
       var el = document.getElementById(id);
       if (!el) return;
-      var liveClear = function() {
-        window.validateBidForm(true, false);
-      };
-      el.addEventListener('input', liveClear);
-      el.addEventListener('change', liveClear);
+      el.addEventListener('input', function() {
+        clearFieldError(this);
+      });
+      el.addEventListener('change', function() {
+        clearFieldError(this);
+      });
     });
 
     // ── Open Right-Side Fact Sheet Modal ──
     function openFactSheetPanel() {
-      var isFormValid = window.validateBidForm(true, true);
-      if (!isFormValid) {
-        return;
-      }
 
       var fsId = document.getElementById('factSheetId') ? document.getElementById('factSheetId').value : '';
       var attachedPath = document.getElementById('attachedDocumentPath') ? document.getElementById('attachedDocumentPath').value : '';
@@ -1132,6 +1153,23 @@
         }
         var attachBadge = document.getElementById('attachedDocumentBadge');
         if (attachBadge) attachBadge.style.display = 'none';
+
+        // Clear all validation errors and summary alert
+        document.querySelectorAll('.is-invalid').forEach(function(el) {
+          el.classList.remove('is-invalid');
+        });
+        document.querySelectorAll('.has-validation-error').forEach(function(el) {
+          el.classList.remove('has-validation-error');
+        });
+        document.querySelectorAll('.field-error-feedback').forEach(function(el) {
+          el.style.display = 'none';
+        });
+        var valAlert = document.getElementById('bidFormValidationSummary');
+        if (valAlert) valAlert.style.display = 'none';
+        var typeEl = document.getElementById('bidTypeInput');
+        if (typeEl && typeEl.nextElementSibling && typeEl.nextElementSibling.classList.contains('select2-container')) {
+          typeEl.nextElementSibling.style.border = '';
+        }
       });
     }
   });
