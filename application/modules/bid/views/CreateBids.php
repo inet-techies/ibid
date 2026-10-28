@@ -888,43 +888,15 @@
         }
       }
 
-      var alertBox = document.getElementById('bidFormValidationSummary');
       if (errors.length > 0) {
-        if (showSummary) {
-          if (!alertBox) {
-            alertBox = document.createElement('div');
-            alertBox.id = 'bidFormValidationSummary';
-            alertBox.className = 'alert alert-danger mx-4 shadow-sm';
-            alertBox.style.cssText = 'border-radius:8px;border-left:4px solid #ef4444 !important;';
-            var formEl = document.querySelector('form[action*="AddBidData"]');
-            if (formEl) formEl.insertBefore(alertBox, formEl.firstChild);
-          }
-          alertBox.innerHTML = `
-            <div class="d-flex align-items-start gap-2">
-              <i class="feather-alert-circle text-danger mt-1 me-2 mr-2" style="font-size:18px;flex-shrink:0;"></i>
-              <div style="flex:1;">
-                <strong class="text-danger">Please correct the following ${errors.length} required field(s) before submitting:</strong>
-                <ul class="mb-0 mt-1 ps-3" style="font-size:12.5px;line-height:1.6;">
-                  ${errors.map(function(e) { return '<li>' + e.msg + '</li>'; }).join('')}
-                </ul>
-              </div>
-              <button type="button" class="btn btn-sm btn-link text-danger p-0 ms-2 ml-2" onclick="document.getElementById('bidFormValidationSummary').style.display='none';">
-                <i class="feather-x" style="font-size:16px;"></i>
-              </button>
-            </div>
-          `;
-          alertBox.style.display = 'block';
-
-          if (firstEl) {
-            firstEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            setTimeout(function() {
-              try { firstEl.focus(); } catch(err){}
-            }, 300);
-          }
+        if (firstEl) {
+          firstEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          setTimeout(function() {
+            try { firstEl.focus(); } catch(err){}
+          }, 300);
         }
         return false;
       } else {
-        if (alertBox) alertBox.style.display = 'none';
         return true;
       }
     };
@@ -945,11 +917,6 @@
       if (col) {
         var feed = col.querySelector('.field-error-feedback');
         if (feed) feed.style.display = 'none';
-      }
-      var remaining = document.querySelectorAll('.is-invalid');
-      if (remaining.length === 0) {
-        var alertBox = document.getElementById('bidFormValidationSummary');
-        if (alertBox) alertBox.style.display = 'none';
       }
     }
 
@@ -1164,8 +1131,6 @@
         document.querySelectorAll('.field-error-feedback').forEach(function(el) {
           el.style.display = 'none';
         });
-        var valAlert = document.getElementById('bidFormValidationSummary');
-        if (valAlert) valAlert.style.display = 'none';
         var typeEl = document.getElementById('bidTypeInput');
         if (typeEl && typeEl.nextElementSibling && typeEl.nextElementSibling.classList.contains('select2-container')) {
           typeEl.nextElementSibling.style.border = '';
