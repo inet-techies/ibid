@@ -187,25 +187,6 @@
     </div>
 </div>
 
-<style>
-.factsheet-panel {
-    position: fixed;
-    top: 0;
-    right: -920px;
-    width: 880px !important;
-    max-width: 95vw !important;
-    height: 100vh;
-    background: #ffffff;
-    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.2);
-    transition: right 0.32s cubic-bezier(0.25, 0.8, 0.25, 1);
-    z-index: 1060;
-    display: flex;
-    flex-direction: column;
-}
-.factsheet-panel.open {
-    right: 0 !important;
-}
-</style>
 
 <!-- Right Side Update Panel -->
 <div class="right-form" id="bidCanvas">
