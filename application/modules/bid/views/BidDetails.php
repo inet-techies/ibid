@@ -205,6 +205,22 @@
 .factsheet-panel.open {
     right: 0 !important;
 }
+
+/* Update Bid Modal Validation Styles */
+#updateBidForm .is-invalid,
+#updateBidForm .is-invalid + .select2-container .select2-selection {
+    border-color: #ef4444 !important;
+    background-color: #fef2f2 !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
+}
+#updateBidForm .field-error-feedback {
+    color: #dc2626;
+    font-size: 11.5px;
+    font-weight: 500;
+    margin-top: 4px;
+    display: block;
+    line-height: 1.3;
+}
 </style>
 
 <!-- Right Side Update Panel -->
@@ -220,7 +236,7 @@
                     <div id="responseMessage"></div>
                    
                     <div class="mb-4">
-                        <label class="form-label">Status</label>
+                        <label class="form-label">Status <span class="text-danger">*</span></label>
                         <select class="form-control" id="bid_status" name="bid_status" >
                          
                         </select>
@@ -612,6 +628,10 @@ var isTechEvaluatedMenu = <?= $isTechEvaluatedMenu ? 'true' : 'false'; ?>;
 
 $(document).on("click", ".update-bid", function () {
 
+    if (typeof clearModalValidation === 'function') {
+        clearModalValidation();
+    }
+
     let bidId = $(this).data("id");
     let currentStatus = $(this).data("current");
     let currentTech = $(this).data("tech");
@@ -706,6 +726,10 @@ $(document).on("click", ".update-bid", function () {
 });
 
 $(document).on('change', '#bid_status', function(){
+
+    if (typeof clearModalValidation === 'function') {
+        clearModalValidation();
+    }
 
     let statusName = $("#bid_status option:selected").data("name");
     let statusText = $.trim($("#bid_status option:selected").text());
@@ -862,8 +886,172 @@ $(document).on('change', '#ApprovedByManagement', function () {
         $('#ApprovedByWhom').closest('.mb-4').hide();
     }
 });
+// ── Modal Field Validation Helpers ──
+function clearModalValidation() {
+    $('#updateBidForm .is-invalid').removeClass('is-invalid');
+    $('#updateBidForm .field-error-feedback').remove();
+}
+
+function showModalFieldError($elem, message) {
+    $elem.addClass('is-invalid');
+    var $group = $elem.closest('.mb-4');
+    $group.find('.field-error-feedback').remove();
+    $group.append('<span class="field-error-feedback"><i class="feather-alert-circle me-1"></i> ' + message + '</span>');
+}
+
+function validateUpdateBidModal() {
+    clearModalValidation();
+    var errors = [];
+
+    // 1. Status
+    var $status = $('#bid_status');
+    var statusVal = $status.val();
+    if (!statusVal || statusVal === '' || statusVal === '0' || statusVal === 'Loading...') {
+        errors.push({ elem: $status, msg: 'Please select a status.' });
+    }
+
+    // 2. Date
+    var $date = $('#ActualDate');
+    var dateVal = $.trim($date.val());
+    if (!dateVal) {
+        errors.push({ elem: $date, msg: 'Please select a date.' });
+    }
+
+    // 3. Technical Selected (if visible)
+    if ($('#techSelectedGroup').is(':visible')) {
+        var $tech = $('#TechnicalSelected');
+        var techVal = $tech.val();
+        if (techVal === '' || techVal === null || techVal === undefined) {
+            errors.push({ elem: $tech, msg: 'Please select whether Technical Selected (Yes / No).' });
+        }
+    }
+
+    // 4. Price Details (if visible)
+    if ($('#priceDetailsGroup').is(':visible')) {
+        var $price = $('#PriceDetails');
+        var priceVal = $.trim($price.val());
+        if (!priceVal) {
+            errors.push({ elem: $price, msg: 'Please enter price details.' });
+        }
+    }
+
+    // 5. LOA Received (if visible)
+    if ($('#loaReceivedGroup').is(':visible')) {
+        var $loa = $('#LoaReceived');
+        var loaVal = $loa.val();
+        if (loaVal === '' || loaVal === null || loaVal === undefined) {
+            errors.push({ elem: $loa, msg: 'Please select whether LOA was received (Yes / No).' });
+        } else if (loaVal === '1' && $('#loaDocumentGroup').is(':visible')) {
+            var $loaDoc = $('#LoaDocument');
+            var loaFileInput = $loaDoc[0];
+            var hasNewLoaFile = loaFileInput && loaFileInput.files && loaFileInput.files.length > 0;
+            var hasExistingLoaDoc = $('#loaExistingDoc').is(':visible') && $('#loaExistingDoc').text().trim() !== '';
+            if (!hasNewLoaFile && !hasExistingLoaDoc) {
+                errors.push({ elem: $loaDoc, msg: 'Please upload the LOA document.' });
+            }
+        }
+    }
+
+    // 6. BG Submitted (if visible)
+    if ($('#bgSubmittedGroup').is(':visible')) {
+        var $bg = $('#BgSubmitted');
+        var bgVal = $bg.val();
+        if (bgVal === '' || bgVal === null || bgVal === undefined) {
+            errors.push({ elem: $bg, msg: 'Please select whether BG was submitted (Yes / No).' });
+        } else if (bgVal === '1' && $('#bgDocumentGroup').is(':visible')) {
+            var $bgDoc = $('#BgDocument');
+            var bgFileInput = $bgDoc[0];
+            var hasNewBgFile = bgFileInput && bgFileInput.files && bgFileInput.files.length > 0;
+            var hasExistingBgDoc = $('#bgExistingDoc').is(':visible') && $('#bgExistingDoc').text().trim() !== '';
+            if (!hasNewBgFile && !hasExistingBgDoc) {
+                errors.push({ elem: $bgDoc, msg: 'Please upload the BG document.' });
+            }
+        }
+    }
+
+    // 7. WO Received (if visible)
+    if ($('#woReceivedGroup').is(':visible')) {
+        var $wo = $('#WoReceived');
+        var woVal = $wo.val();
+        if (woVal === '' || woVal === null || woVal === undefined) {
+            errors.push({ elem: $wo, msg: 'Please select whether WO was received (Yes / No).' });
+        } else if (woVal === '1' && $('#woDocumentGroup').is(':visible')) {
+            var $woDoc = $('#WoDocument');
+            var woFileInput = $woDoc[0];
+            var hasNewWoFile = woFileInput && woFileInput.files && woFileInput.files.length > 0;
+            var hasExistingWoDoc = $('#woExistingDoc').is(':visible') && $('#woExistingDoc').text().trim() !== '';
+            if (!hasNewWoFile && !hasExistingWoDoc) {
+                errors.push({ elem: $woDoc, msg: 'Please upload the WO document.' });
+            }
+        }
+    }
+
+    // 8. Completion Certificate Received (if visible)
+    if ($('#ccReceivedGroup').is(':visible')) {
+        var $cc = $('#CompletionCertificateReceived');
+        var ccVal = $cc.val();
+        if (ccVal === '' || ccVal === null || ccVal === undefined) {
+            errors.push({ elem: $cc, msg: 'Please select whether Completion Certificate was received (Yes / No).' });
+        } else if (ccVal === '1' && $('#ccDocumentGroup').is(':visible')) {
+            var $ccDoc = $('#CompletionCertificateDocument');
+            var ccFileInput = $ccDoc[0];
+            var hasNewCcFile = ccFileInput && ccFileInput.files && ccFileInput.files.length > 0;
+            var hasExistingCcDoc = $('#ccExistingDoc').is(':visible') && $('#ccExistingDoc').text().trim() !== '';
+            if (!hasNewCcFile && !hasExistingCcDoc) {
+                errors.push({ elem: $ccDoc, msg: 'Please upload the Completion Certificate document.' });
+            }
+        }
+    }
+
+    // 9. Approved By Management (if visible)
+    if ($('#ApprovedByManagement').closest('.mb-4').is(':visible')) {
+        var $mgmt = $('#ApprovedByManagement');
+        var mgmtVal = $mgmt.val();
+        if (!mgmtVal || mgmtVal === '0' || mgmtVal === '') {
+            errors.push({ elem: $mgmt, msg: 'Please select whether Approved By Management (Yes / No).' });
+        } else if (mgmtVal === '1' && $('#ApprovedByWhom').closest('.mb-4').is(':visible')) {
+            var $whom = $('#ApprovedByWhom');
+            var whomVal = $whom.val();
+            if (!whomVal || whomVal === '0' || whomVal === '') {
+                errors.push({ elem: $whom, msg: 'Please select who approved this bid.' });
+            }
+        }
+    }
+
+    // 10. Remarks
+    var $remarks = $('#addressInput');
+    var remarksVal = $.trim($remarks.val());
+    if (!remarksVal) {
+        errors.push({ elem: $remarks, msg: 'Please enter remarks.' });
+    }
+
+    if (errors.length > 0) {
+        // Apply inline error styles and messages
+        for (var i = 0; i < errors.length; i++) {
+            showModalFieldError(errors[i].elem, errors[i].msg);
+        }
+
+        // Focus & scroll first invalid element smoothly into view
+        var $first = errors[0].elem;
+        $first.focus();
+        if ($first.length && $first[0].scrollIntoView) {
+            $first[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        return false;
+    }
+
+    return true;
+}
+
+// Clear field error in real-time when user types or changes input
+$(document).on('input change', '#updateBidForm input, #updateBidForm select, #updateBidForm textarea', function () {
+    $(this).removeClass('is-invalid');
+    $(this).closest('.mb-4').find('.field-error-feedback').remove();
+});
+
 $(document).on('click', '#clear', function (e) {
     e.preventDefault();
+    clearModalValidation();
     $('#ActualDate').val('');
     $('#TechnicalSelected').val('');
     $('#PriceDetails').val('');
@@ -893,92 +1081,9 @@ $(document).on('click', '#UpdateBid', function (e) {
 
     e.preventDefault();
 
-    if ($('#techSelectedGroup').is(':visible') && $('#TechnicalSelected').val() === '') {
-        alert('Please select whether the bid is Technical Selected (Yes / No).');
-        $('#TechnicalSelected').focus();
-        return;
-    }
-
-    if ($('#priceDetailsGroup').is(':visible') && $.trim($('#PriceDetails').val()) === '') {
-        alert('Please enter Price Details.');
-        $('#PriceDetails').focus();
-        return;
-    }
-
-    if ($('#loaReceivedGroup').is(':visible')) {
-        let loaVal = $('#LoaReceived').val();
-        if (loaVal === '') {
-            alert('Please select whether LOA was received (Yes / No).');
-            $('#LoaReceived').focus();
-            return;
-        }
-        if (loaVal === '1') {
-            let fileInput = document.getElementById('LoaDocument');
-            let hasNewFile = fileInput && fileInput.files && fileInput.files.length > 0;
-            let hasExistingDoc = $('#loaExistingDoc').is(':visible') && $('#loaExistingDoc').text().trim() !== '';
-            if (!hasNewFile && !hasExistingDoc) {
-                alert('Please upload the LOA Document.');
-                $('#LoaDocument').focus();
-                return;
-            }
-        }
-    }
-
-    if ($('#bgSubmittedGroup').is(':visible')) {
-        let bgVal = $('#BgSubmitted').val();
-        if (bgVal === '') {
-            alert('Please select whether BG was submitted (Yes / No).');
-            $('#BgSubmitted').focus();
-            return;
-        }
-        if (bgVal === '1') {
-            let fileInput = document.getElementById('BgDocument');
-            let hasNewFile = fileInput && fileInput.files && fileInput.files.length > 0;
-            let hasExistingDoc = $('#bgExistingDoc').is(':visible') && $('#bgExistingDoc').text().trim() !== '';
-            if (!hasNewFile && !hasExistingDoc) {
-                alert('Please upload the BG Document.');
-                $('#BgDocument').focus();
-                return;
-            }
-        }
-    }
-
-    if ($('#woReceivedGroup').is(':visible')) {
-        let woVal = $('#WoReceived').val();
-        if (woVal === '') {
-            alert('Please select whether WO was received (Yes / No).');
-            $('#WoReceived').focus();
-            return;
-        }
-        if (woVal === '1') {
-            let fileInput = document.getElementById('WoDocument');
-            let hasNewFile = fileInput && fileInput.files && fileInput.files.length > 0;
-            let hasExistingDoc = $('#woExistingDoc').is(':visible') && $('#woExistingDoc').text().trim() !== '';
-            if (!hasNewFile && !hasExistingDoc) {
-                alert('Please upload the WO Document.');
-                $('#WoDocument').focus();
-                return;
-            }
-        }
-    }
-
-    if ($('#ccReceivedGroup').is(':visible')) {
-        let ccVal = $('#CompletionCertificateReceived').val();
-        if (ccVal === '') {
-            alert('Please select whether Completion Certificate was received (Yes / No).');
-            $('#CompletionCertificateReceived').focus();
-            return;
-        }
-        if (ccVal === '1') {
-            let fileInput = document.getElementById('CompletionCertificateDocument');
-            let hasNewFile = fileInput && fileInput.files && fileInput.files.length > 0;
-            let hasExistingDoc = $('#ccExistingDoc').is(':visible') && $('#ccExistingDoc').text().trim() !== '';
-            if (!hasNewFile && !hasExistingDoc) {
-                alert('Please upload the Completion Certificate Document.');
-                $('#CompletionCertificateDocument').focus();
-                return;
-            }
-        }
+    // Trigger validation strictly on Update button click
+    if (!validateUpdateBidModal()) {
+        return false;
     }
 
     // Use FormData to allow file upload

@@ -1050,7 +1050,65 @@ public function updateBidStatus()
 		        $user = $this->session->userdata('logged_in');
 
 		        if(empty($bcid) || empty($newStatus)){
-		            echo json_encode(['status'=>false,'message'=>'Required fields missing']);
+		            echo json_encode(['status'=>false,'message'=>'Please select a status.']);
+		            return;
+		        }
+
+		        if(empty($actualDate)){
+		            echo json_encode(['status'=>false,'message'=>'Please select a date.']);
+		            return;
+		        }
+
+		        if($remarks === null || trim($remarks) === ''){
+		            echo json_encode(['status'=>false,'message'=>'Please enter remarks.']);
+		            return;
+		        }
+
+		        // Fetch target status details for contextual validation
+		        $targetStatusRow = $this->db->select('StatusName, DisplayName')
+		                                    ->where('Sid', $newStatus)
+		                                    ->get('BidStatusMaster')
+		                                    ->row();
+		        $targetStatusName = $targetStatusRow ? $targetStatusRow->StatusName : '';
+
+		        if ($targetStatusName === 'TechnicalEvaluated' && $techSelectedVal === null) {
+		            echo json_encode(['status'=>false,'message'=>'Please select whether Technical Selected (Yes / No).']);
+		            return;
+		        }
+
+		        if ($targetStatusName === 'LBids' && ($priceDetails === null || trim($priceDetails) === '')) {
+		            echo json_encode(['status'=>false,'message'=>'Please enter price details.']);
+		            return;
+		        }
+
+		        if ($targetStatusName === 'PQEvaluation') {
+		            if (empty($approvedMgmt) || $approvedMgmt == 0) {
+		                echo json_encode(['status'=>false,'message'=>'Please select whether Approved By Management (Yes / No).']);
+		                return;
+		            }
+		            if ($approvedMgmt == 1 && empty($approvedWhom)) {
+		                echo json_encode(['status'=>false,'message'=>'Please select who approved this bid.']);
+		                return;
+		            }
+		        }
+
+		        if ($targetStatusName === 'LoaReceived' && $loaReceivedVal === null) {
+		            echo json_encode(['status'=>false,'message'=>'Please select whether LOA was received (Yes / No).']);
+		            return;
+		        }
+
+		        if ($targetStatusName === 'BgSubmitted' && $bgSubmittedVal === null) {
+		            echo json_encode(['status'=>false,'message'=>'Please select whether BG was submitted (Yes / No).']);
+		            return;
+		        }
+
+		        if ($targetStatusName === 'WoReceived' && $woReceivedVal === null) {
+		            echo json_encode(['status'=>false,'message'=>'Please select whether WO was received (Yes / No).']);
+		            return;
+		        }
+
+		        if ($targetStatusName === 'CompletionCertificate' && $ccReceivedVal === null) {
+		            echo json_encode(['status'=>false,'message'=>'Please select whether Completion Certificate was received (Yes / No).']);
 		            return;
 		        }
 
