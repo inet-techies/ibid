@@ -24,94 +24,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Factsheet_model extends CI_Model
 {
-    protected $table = 'TenderFactSheet';
+    protected $table = 'tenderfactsheet';
 
     public function __construct()
     {
         parent::__construct();
-        $this->ensureTable();
-    }
-
-    /**
-     * Ensures the single TenderFactSheet table exists in bid_core_db with all 12 section columns
-     * and performs safe migration of existing rows to JSON.
-     */
-    public function ensureTable()
-    {
-        $sql = "CREATE TABLE IF NOT EXISTS `TenderFactSheet` (
-          `Tfsid` int(11) NOT NULL AUTO_INCREMENT,
-          `Bcid` int(11) DEFAULT NULL,
-          `DocumentPath` varchar(255) NOT NULL,
-          `DocumentName` varchar(255) NOT NULL,
-          `DocumentHash` varchar(64) DEFAULT NULL,
-          `TxtFilePath` varchar(255) DEFAULT NULL,
-          `Classification` varchar(50) DEFAULT 'unknown',
-          `ClassificationStatus` varchar(50) DEFAULT 'unclassified',
-          
-          -- 12 Main Heading Section Columns (One Column Per Section, safely encoded JSON)
-          `TenderOverview` text DEFAULT NULL,
-          `ImportantDates` text DEFAULT NULL,
-          `TenderValue` text DEFAULT NULL,
-          `ScopeOfWork` text DEFAULT NULL,
-          `AreasCovered` text DEFAULT NULL,
-          `ContractPeriod` text DEFAULT NULL,
-          `AwardCriteria` text DEFAULT NULL,
-          `PerformanceGuarantee` text DEFAULT NULL,
-          `BidValidity` text DEFAULT NULL,
-          `Warranty` text DEFAULT NULL,
-          `RiskPoints` text DEFAULT NULL,
-          `OpportunityAssessment` text DEFAULT NULL,
-
-          -- Core Legacy Individual Columns (Preserved for compatibility and fast lookup)
-          `Department` varchar(255) DEFAULT NULL,
-          `ZoneRegion` varchar(255) DEFAULT NULL,
-          `TenderTitle` varchar(500) DEFAULT NULL,
-          `TenderType` varchar(100) DEFAULT NULL,
-          `TenderRefNo` varchar(150) DEFAULT NULL,
-          `TenderDate` varchar(100) DEFAULT NULL,
-          `ProjectValue` varchar(100) DEFAULT NULL,
-          `ProjectValueAmount` decimal(15,2) DEFAULT NULL,
-          `ContractType` varchar(100) DEFAULT NULL,
-          `WarrantyAmc` varchar(255) DEFAULT NULL,
-          `BidSystem` varchar(100) DEFAULT NULL,
-
-          -- Audit & Metadata
-          `CreatedBy` int(11) DEFAULT NULL,
-          `CreationTs` datetime DEFAULT CURRENT_TIMESTAMP,
-          `LastChangeTs` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-          PRIMARY KEY (`Tfsid`),
-          KEY `idx_bcid` (`Bcid`),
-          KEY `idx_docpath` (`DocumentPath`),
-          KEY `idx_dochash` (`DocumentHash`)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-
-        $this->db->query($sql);
-
-        // Ensure 12 section columns exist in existing table
-        $sectionColumns = [
-            'TenderOverview',
-            'ImportantDates',
-            'TenderValue',
-            'ScopeOfWork',
-            'AreasCovered',
-            'ContractPeriod',
-            'AwardCriteria',
-            'PerformanceGuarantee',
-            'BidValidity',
-            'Warranty',
-            'RiskPoints',
-            'OpportunityAssessment'
-        ];
-
-        foreach ($sectionColumns as $col) {
-            if (!$this->db->field_exists($col, $this->table)) {
-                $this->db->query("ALTER TABLE `{$this->table}` ADD COLUMN `{$col}` TEXT NULL");
-            }
+        if (isset($this->load) && !isset($this->db)) {
+            $this->load->database();
         }
-
-        // Migrate any legacy pipe-delimited data to clean JSON
-        $this->migrateLegacyRowsToJson();
     }
+
 
     /**
      * Serializes an associative array of key-value pairs into safely encoded JSON.
@@ -229,52 +151,20 @@ class Factsheet_model extends CI_Model
         return $out;
     }
 
+
     /**
-     * Safely migrates existing rows in TenderFactSheet from legacy pipe-delimited format to JSON.
+     * Checks if a string is a valid JSON array or object.
+     *
+     * @param mixed $str
+     * @return bool
      */
-    public function migrateLegacyRowsToJson()
+    public static function isJsonString($str)
     {
-        $rows = $this->db->get($this->table)->result_array();
-        if (empty($rows)) return;
-
-        foreach ($rows as $row) {
-            $updates = [];
-
-            // KV sections
-            $kvCols = ['TenderOverview', 'ImportantDates', 'TenderValue', 'AreasCovered', 'ContractPeriod', 'AwardCriteria', 'PerformanceGuarantee', 'BidValidity', 'Warranty', 'OpportunityAssessment'];
-            foreach ($kvCols as $col) {
-                if (!empty($row[$col])) {
-                    $val = trim($row[$col]);
-                    // Check if already valid JSON object
-                    $decoded = json_decode($val, true);
-                    if (json_last_error() !== JSON_ERROR_NONE || !is_array($decoded)) {
-                        $parsed = self::deserializeKeyValue($val);
-                        if (!empty($parsed)) {
-                            $updates[$col] = self::serializeKeyValue($parsed);
-                        }
-                    }
-                }
-            }
-
-            // List sections
-            $listCols = ['ScopeOfWork', 'RiskPoints'];
-            foreach ($listCols as $col) {
-                if (!empty($row[$col])) {
-                    $val = trim($row[$col]);
-                    $decoded = json_decode($val, true);
-                    if (json_last_error() !== JSON_ERROR_NONE || !is_array($decoded)) {
-                        $parsed = self::deserializeList($val);
-                        if (!empty($parsed)) {
-                            $updates[$col] = self::serializeList($parsed);
-                        }
-                    }
-                }
-            }
-
-            if (!empty($updates)) {
-                $this->db->where('Tfsid', $row['Tfsid'])->update($this->table, $updates);
-            }
-        }
+        if (!is_string($str)) return false;
+        $trim = trim($str);
+        if ($trim === '' || ($trim[0] !== '{' && $trim[0] !== '[')) return false;
+        json_decode($trim);
+        return (json_last_error() === JSON_ERROR_NONE);
     }
 
     /**
@@ -287,66 +177,87 @@ class Factsheet_model extends CI_Model
     public function buildSectionPayload(array $data)
     {
         // 1. TenderOverview (JSON object)
-        if (empty($data['TenderOverview']) || (!is_string($data['TenderOverview']) || (strpos($data['TenderOverview'], '{') !== 0 && strpos($data['TenderOverview'], ' | ') !== false))) {
-            $overviewKV = [
-                'Department'            => isset($data['Department']) ? $data['Department'] : '',
-                'Zone'                  => isset($data['ZoneRegion']) ? $data['ZoneRegion'] : '',
-                'Tender Title'          => isset($data['TenderTitle']) ? $data['TenderTitle'] : '',
-                'Tender Type'           => isset($data['TenderType']) ? $data['TenderType'] : '',
-                'Tender Reference No'   => isset($data['TenderRefNo']) ? $data['TenderRefNo'] : '',
-                'Tender Date'           => isset($data['TenderDate']) ? $data['TenderDate'] : '',
-                'Project Value'         => isset($data['ProjectValue']) ? $data['ProjectValue'] : (isset($data['EstimatedValue']) ? $data['EstimatedValue'] : ''),
-                'Contract Type'         => isset($data['ContractType']) ? $data['ContractType'] : '',
-                'Warranty + AMC'        => isset($data['WarrantyAmc']) ? $data['WarrantyAmc'] : '',
-                'Bid System'            => isset($data['BidSystem']) ? $data['BidSystem'] : ''
-            ];
-            $data['TenderOverview'] = self::serializeKeyValue($overviewKV);
+        if (empty($data['TenderOverview']) || !self::isJsonString($data['TenderOverview'])) {
+            if (!empty($data['TenderOverview']) && is_string($data['TenderOverview']) && strpos($data['TenderOverview'], ': ') !== false) {
+                $data['TenderOverview'] = self::serializeKeyValue(self::deserializeKeyValue($data['TenderOverview']));
+            } else {
+                $overviewKV = [
+                    'Department'            => isset($data['Department']) ? $data['Department'] : '',
+                    'Zone'                  => isset($data['ZoneRegion']) ? $data['ZoneRegion'] : '',
+                    'Tender Title'          => isset($data['TenderTitle']) ? $data['TenderTitle'] : '',
+                    'Tender Type'           => isset($data['TenderType']) ? $data['TenderType'] : '',
+                    'Tender Reference No'   => isset($data['TenderRefNo']) ? $data['TenderRefNo'] : '',
+                    'Tender Date'           => isset($data['TenderDate']) ? $data['TenderDate'] : '',
+                    'Project Value'         => isset($data['ProjectValue']) ? $data['ProjectValue'] : (isset($data['EstimatedValue']) ? $data['EstimatedValue'] : ''),
+                    'Contract Type'         => isset($data['ContractType']) ? $data['ContractType'] : '',
+                    'Warranty + AMC'        => isset($data['WarrantyAmc']) ? $data['WarrantyAmc'] : '',
+                    'Bid System'            => isset($data['BidSystem']) ? $data['BidSystem'] : ''
+                ];
+                $data['TenderOverview'] = self::serializeKeyValue($overviewKV);
+            }
         }
 
         // 2. ImportantDates (JSON object)
-        if (empty($data['ImportantDates']) || (!is_string($data['ImportantDates']) || (strpos($data['ImportantDates'], '{') !== 0 && strpos($data['ImportantDates'], ' | ') !== false))) {
-            $datesKV = [];
-            if (!empty($data['ImportantDatesJson'])) {
-                $arr = json_decode($data['ImportantDatesJson'], true);
-                if (is_array($arr)) {
-                    foreach ($arr as $d) {
-                        if (!empty($d['activity']) && !empty($d['date_text'])) {
-                            $datesKV[$d['activity']] = $d['date_text'];
+        if (empty($data['ImportantDates']) || !self::isJsonString($data['ImportantDates'])) {
+            if (!empty($data['ImportantDates']) && is_string($data['ImportantDates']) && strpos($data['ImportantDates'], ': ') !== false) {
+                $data['ImportantDates'] = self::serializeKeyValue(self::deserializeKeyValue($data['ImportantDates']));
+            } else {
+                $datesKV = [];
+                if (!empty($data['ImportantDatesJson'])) {
+                    $arr = json_decode($data['ImportantDatesJson'], true);
+                    if (is_array($arr)) {
+                        foreach ($arr as $d) {
+                            if (!empty($d['activity']) && !empty($d['date_text'])) {
+                                $datesKV[$d['activity']] = $d['date_text'];
+                            }
                         }
                     }
                 }
+                if (empty($datesKV)) {
+                    if (!empty($data['TenderPublishedDate']))   $datesKV['Tender Published'] = $data['TenderPublishedDate'];
+                    if (!empty($data['TenderDownloadPeriod']))  $datesKV['Tender Download'] = $data['TenderDownloadPeriod'];
+                    if (!empty($data['PreBidQueryDeadline']))   $datesKV['Pre-Bid Query Submission'] = $data['PreBidQueryDeadline'];
+                    if (!empty($data['PreBidMeeting']))          $datesKV['Pre-Bid Meeting'] = $data['PreBidMeeting'];
+                    if (!empty($data['BidSubmissionDeadline']))  $datesKV['Bid Submission'] = $data['BidSubmissionDeadline'];
+                    if (!empty($data['TechnicalBidOpening']))    $datesKV['Technical Bid Opening'] = $data['TechnicalBidOpening'];
+                    if (!empty($data['FinancialBidOpening']))    $datesKV['Financial Bid Opening'] = $data['FinancialBidOpening'];
+                }
+                $data['ImportantDates'] = self::serializeKeyValue($datesKV);
             }
-            if (empty($datesKV)) {
-                if (!empty($data['TenderPublishedDate']))   $datesKV['Tender Published'] = $data['TenderPublishedDate'];
-                if (!empty($data['TenderDownloadPeriod']))  $datesKV['Tender Download'] = $data['TenderDownloadPeriod'];
-                if (!empty($data['PreBidQueryDeadline']))   $datesKV['Pre-Bid Query Submission'] = $data['PreBidQueryDeadline'];
-                if (!empty($data['PreBidMeeting']))          $datesKV['Pre-Bid Meeting'] = $data['PreBidMeeting'];
-                if (!empty($data['BidSubmissionDeadline']))  $datesKV['Bid Submission'] = $data['BidSubmissionDeadline'];
-                if (!empty($data['TechnicalBidOpening']))    $datesKV['Technical Bid Opening'] = $data['TechnicalBidOpening'];
-                if (!empty($data['FinancialBidOpening']))    $datesKV['Financial Bid Opening'] = $data['FinancialBidOpening'];
-            }
-            $data['ImportantDates'] = self::serializeKeyValue($datesKV);
         }
 
         // 3. TenderValue (JSON object)
-        if (empty($data['TenderValue']) || (!is_string($data['TenderValue']) || (strpos($data['TenderValue'], '{') !== 0 && strpos($data['TenderValue'], ' | ') !== false))) {
-            $valKV = [
-                'Estimated Value'               => isset($data['EstimatedValue']) ? $data['EstimatedValue'] : (isset($data['ProjectValue']) ? $data['ProjectValue'] : ''),
-                'EMD'                           => isset($data['EmdAmount']) ? $data['EmdAmount'] : '',
-                'Performance Bank Guarantee'    => isset($data['PbgDetails']) ? $data['PbgDetails'] : (isset($data['PbgAmount']) ? $data['PbgAmount'] : ''),
-                'Bid Validity'                  => isset($data['BidValidityDays']) ? $data['BidValidityDays'] : (isset($data['BidValidityDuration']) ? $data['BidValidityDuration'] : '')
-            ];
-            $data['TenderValue'] = self::serializeKeyValue($valKV);
+        if (empty($data['TenderValue']) || !self::isJsonString($data['TenderValue'])) {
+            if (!empty($data['TenderValue']) && is_string($data['TenderValue']) && strpos($data['TenderValue'], ': ') !== false) {
+                $data['TenderValue'] = self::serializeKeyValue(self::deserializeKeyValue($data['TenderValue']));
+            } else {
+                $valKV = [
+                    'Tender Fee'                    => isset($data['TenderFee']) ? $data['TenderFee'] : '',
+                    'EMD'                           => isset($data['EmdAmount']) ? $data['EmdAmount'] : '',
+                    'Performance Bank Guarantee'    => isset($data['PbgDetails']) ? $data['PbgDetails'] : (isset($data['PbgAmount']) ? $data['PbgAmount'] : ''),
+                    'Bid Validity'                  => isset($data['BidValidityDays']) ? $data['BidValidityDays'] : (isset($data['BidValidityDuration']) ? $data['BidValidityDuration'] : '')
+                ];
+                if (!empty($data['EstimatedValue']) && $data['EstimatedValue'] !== 'Not specified in document') {
+                    $valKV['Estimated Value'] = $data['EstimatedValue'];
+                }
+                $data['TenderValue'] = self::serializeKeyValue($valKV);
+            }
         }
 
         // 4. ScopeOfWork (JSON array)
-        if (empty($data['ScopeOfWork']) || (!is_string($data['ScopeOfWork']) || (strpos($data['ScopeOfWork'], '[') !== 0 && strpos($data['ScopeOfWork'], ' | ') !== false))) {
+        if (empty($data['ScopeOfWork']) || !self::isJsonString($data['ScopeOfWork'])) {
             $scopesArr = [];
             if (!empty($data['ScopeItemsJson'])) {
                 $scopesArr = json_decode($data['ScopeItemsJson'], true);
             }
             if (empty($scopesArr) && !empty($data['ScopeOfWork'])) {
-                $scopesArr = preg_split('/[\r\n]+|[•·*∩é╖]|\x{F0B7}|\x{00B7}/u', $data['ScopeOfWork']);
+                if (is_array($data['ScopeOfWork'])) {
+                    $scopesArr = $data['ScopeOfWork'];
+                } elseif (strpos($data['ScopeOfWork'], ' | ') !== false) {
+                    $scopesArr = self::deserializeList($data['ScopeOfWork']);
+                } else {
+                    $scopesArr = preg_split('/[\r\n]+|[•·*∩é╖]|\x{F0B7}|\x{00B7}/u', $data['ScopeOfWork']);
+                }
             }
             if (!empty($scopesArr) && is_array($scopesArr)) {
                 $data['ScopeOfWork'] = self::serializeList($scopesArr);
@@ -356,93 +267,123 @@ class Factsheet_model extends CI_Model
         }
 
         // 5. AreasCovered (JSON object)
-        if (empty($data['AreasCovered']) || (!is_string($data['AreasCovered']) || (strpos($data['AreasCovered'], '{') !== 0 && strpos($data['AreasCovered'], ' | ') !== false))) {
-            $areasKV = [];
-            if (!empty($data['AreasCoveredJson'])) {
-                $arr = json_decode($data['AreasCoveredJson'], true);
-                if (is_array($arr)) {
-                    foreach ($arr as $a) {
-                        if (!empty($a['region']) && !empty($a['coverage'])) {
-                            if (strtolower(trim($a['region'])) !== 'region') {
-                                $areasKV[$a['region']] = $a['coverage'];
+        if (empty($data['AreasCovered']) || !self::isJsonString($data['AreasCovered'])) {
+            if (!empty($data['AreasCovered']) && is_string($data['AreasCovered']) && strpos($data['AreasCovered'], ' | ') !== false && strpos($data['AreasCovered'], ': ') !== false) {
+                $data['AreasCovered'] = self::serializeKeyValue(self::deserializeKeyValue($data['AreasCovered']));
+            } else {
+                $areasKV = [];
+                if (!empty($data['AreasCoveredJson'])) {
+                    $arr = json_decode($data['AreasCoveredJson'], true);
+                    if (is_array($arr)) {
+                        foreach ($arr as $a) {
+                            if (!empty($a['region']) && !empty($a['coverage'])) {
+                                if (strtolower(trim($a['region'])) !== 'region') {
+                                    $areasKV[$a['region']] = $a['coverage'];
+                                }
                             }
                         }
                     }
                 }
-            }
-            if (empty($areasKV) && !empty($data['AreasCovered'])) {
-                $lines = preg_split('/[\r\n]+/', $data['AreasCovered']);
-                foreach ($lines as $ln) {
-                    $p = explode(':', $ln, 2);
-                    if (count($p) == 2 && strtolower(trim($p[0])) !== 'region') {
-                        $areasKV[trim($p[0])] = trim($p[1]);
+                if (empty($areasKV) && !empty($data['AreasCovered'])) {
+                    $lines = preg_split('/[\r\n]+/', $data['AreasCovered']);
+                    foreach ($lines as $ln) {
+                        $p = explode(':', $ln, 2);
+                        if (count($p) == 2 && strtolower(trim($p[0])) !== 'region') {
+                            $areasKV[trim($p[0])] = trim($p[1]);
+                        }
                     }
                 }
+                $data['AreasCovered'] = self::serializeKeyValue($areasKV);
             }
-            $data['AreasCovered'] = self::serializeKeyValue($areasKV);
         }
 
         // 6. ContractPeriod (JSON object)
-        if (empty($data['ContractPeriod']) || (!is_string($data['ContractPeriod']) || (strpos($data['ContractPeriod'], '{') !== 0 && strpos($data['ContractPeriod'], ' | ') !== false))) {
-            $cpKV = [
-                'Initial Contract'      => isset($data['ContractInitialDuration']) ? $data['ContractInitialDuration'] : '',
-                'Extendable'            => isset($data['ContractExtendable']) ? $data['ContractExtendable'] : '',
-                'Maximum Period'        => isset($data['ContractMaxPeriod']) ? $data['ContractMaxPeriod'] : '',
-                'Extension Conditions'  => isset($data['ContractExtensionConditions']) ? $data['ContractExtensionConditions'] : ''
-            ];
-            $data['ContractPeriod'] = self::serializeKeyValue($cpKV);
+        if (empty($data['ContractPeriod']) || !self::isJsonString($data['ContractPeriod'])) {
+            if (!empty($data['ContractPeriod']) && is_string($data['ContractPeriod']) && strpos($data['ContractPeriod'], ': ') !== false) {
+                $data['ContractPeriod'] = self::serializeKeyValue(self::deserializeKeyValue($data['ContractPeriod']));
+            } else {
+                $cpKV = [
+                    'Initial Contract'      => isset($data['ContractInitialDuration']) ? $data['ContractInitialDuration'] : '',
+                    'Extendable'            => isset($data['ContractExtendable']) ? $data['ContractExtendable'] : '',
+                    'Maximum Period'        => isset($data['ContractMaxPeriod']) ? $data['ContractMaxPeriod'] : '',
+                    'Extension Conditions'  => isset($data['ContractExtensionConditions']) ? $data['ContractExtensionConditions'] : ''
+                ];
+                $data['ContractPeriod'] = self::serializeKeyValue($cpKV);
+            }
         }
 
         // 7. AwardCriteria (JSON object)
-        if (empty($data['AwardCriteria']) || (!is_string($data['AwardCriteria']) || (strpos($data['AwardCriteria'], '{') !== 0 && strpos($data['AwardCriteria'], ' | ') !== false))) {
-            $acKV = [
-                'Evaluation Method'     => isset($data['AwardEvaluationMethod']) ? $data['AwardEvaluationMethod'] : '',
-                'Split Work'            => isset($data['AwardSplitWork']) ? $data['AwardSplitWork'] : '',
-                'Possible Allocation'   => isset($data['AwardAllocation']) ? $data['AwardAllocation'] : '',
-                'Matching Requirements' => isset($data['AwardL2L3Matching']) ? $data['AwardL2L3Matching'] : ''
-            ];
-            $data['AwardCriteria'] = self::serializeKeyValue($acKV);
+        if (empty($data['AwardCriteria']) || !self::isJsonString($data['AwardCriteria'])) {
+            if (!empty($data['AwardCriteria']) && is_string($data['AwardCriteria']) && strpos($data['AwardCriteria'], ': ') !== false) {
+                $data['AwardCriteria'] = self::serializeKeyValue(self::deserializeKeyValue($data['AwardCriteria']));
+            } else {
+                $acKV = [
+                    'Evaluation Method'     => isset($data['AwardEvaluationMethod']) ? $data['AwardEvaluationMethod'] : '',
+                    'Split Work'            => isset($data['AwardSplitWork']) ? $data['AwardSplitWork'] : '',
+                    'Possible Allocation'   => isset($data['AwardAllocation']) ? $data['AwardAllocation'] : '',
+                    'Matching Requirements' => isset($data['AwardL2L3Matching']) ? $data['AwardL2L3Matching'] : ''
+                ];
+                $data['AwardCriteria'] = self::serializeKeyValue($acKV);
+            }
         }
 
         // 8. PerformanceGuarantee (JSON object)
-        if (empty($data['PerformanceGuarantee']) || (!is_string($data['PerformanceGuarantee']) || (strpos($data['PerformanceGuarantee'], '{') !== 0 && strpos($data['PerformanceGuarantee'], ' | ') !== false))) {
-            $pgKV = [
-                'Amount'        => isset($data['PbgAmount']) ? $data['PbgAmount'] : (isset($data['PbgPercentage']) ? $data['PbgPercentage'] . '%' : ''),
-                'Validity'      => isset($data['PbgValidity']) ? $data['PbgValidity'] : '',
-                'Submission'    => isset($data['PbgSubmissionDeadline']) ? $data['PbgSubmissionDeadline'] : ''
-            ];
-            $data['PerformanceGuarantee'] = self::serializeKeyValue($pgKV);
+        if (empty($data['PerformanceGuarantee']) || !self::isJsonString($data['PerformanceGuarantee'])) {
+            if (!empty($data['PerformanceGuarantee']) && is_string($data['PerformanceGuarantee']) && strpos($data['PerformanceGuarantee'], ': ') !== false) {
+                $data['PerformanceGuarantee'] = self::serializeKeyValue(self::deserializeKeyValue($data['PerformanceGuarantee']));
+            } else {
+                $pgKV = [
+                    'Amount'        => isset($data['PbgAmount']) ? $data['PbgAmount'] : (isset($data['PbgPercentage']) ? $data['PbgPercentage'] . '%' : ''),
+                    'Validity'      => isset($data['PbgValidity']) ? $data['PbgValidity'] : '',
+                    'Submission'    => isset($data['PbgSubmissionDeadline']) ? $data['PbgSubmissionDeadline'] : ''
+                ];
+                $data['PerformanceGuarantee'] = self::serializeKeyValue($pgKV);
+            }
         }
 
         // 9. BidValidity (JSON object)
-        if (empty($data['BidValidity']) || (!is_string($data['BidValidity']) || (strpos($data['BidValidity'], '{') !== 0 && strpos($data['BidValidity'], ' | ') !== false))) {
-            $bvKV = [
-                'Duration' => isset($data['BidValidityDuration']) ? $data['BidValidityDuration'] : (isset($data['BidValidityDays']) ? $data['BidValidityDays'] : '')
-            ];
-            $data['BidValidity'] = self::serializeKeyValue($bvKV);
+        if (empty($data['BidValidity']) || !self::isJsonString($data['BidValidity'])) {
+            if (!empty($data['BidValidity']) && is_string($data['BidValidity']) && strpos($data['BidValidity'], ': ') !== false) {
+                $data['BidValidity'] = self::serializeKeyValue(self::deserializeKeyValue($data['BidValidity']));
+            } else {
+                $bvKV = [
+                    'Duration' => isset($data['BidValidityDuration']) ? $data['BidValidityDuration'] : (isset($data['BidValidityDays']) ? $data['BidValidityDays'] : '')
+                ];
+                $data['BidValidity'] = self::serializeKeyValue($bvKV);
+            }
         }
 
         // 10. Warranty (JSON object)
-        if (empty($data['Warranty']) || (!is_string($data['Warranty']) || (strpos($data['Warranty'], '{') !== 0 && strpos($data['Warranty'], ' | ') !== false))) {
-            $wKV = [
-                'Scope'         => isset($data['WarrantyAmc']) ? $data['WarrantyAmc'] : '',
-                'Terms'         => isset($data['WarrantyTerms']) ? $data['WarrantyTerms'] : '',
-                'Replacement'   => isset($data['WarrantyReplacement']) ? $data['WarrantyReplacement'] : '',
-                'Repair'        => isset($data['WarrantyRepair']) ? $data['WarrantyRepair'] : '',
-                'Support'       => isset($data['WarrantySupport']) ? $data['WarrantySupport'] : '',
-                'AMC Terms'     => isset($data['AmcTerms']) ? $data['AmcTerms'] : ''
-            ];
-            $data['Warranty'] = self::serializeKeyValue($wKV);
+        if (empty($data['Warranty']) || !self::isJsonString($data['Warranty'])) {
+            if (!empty($data['Warranty']) && is_string($data['Warranty']) && strpos($data['Warranty'], ': ') !== false) {
+                $data['Warranty'] = self::serializeKeyValue(self::deserializeKeyValue($data['Warranty']));
+            } else {
+                $wKV = [
+                    'Scope'         => isset($data['WarrantyAmc']) ? $data['WarrantyAmc'] : '',
+                    'Terms'         => isset($data['WarrantyTerms']) ? $data['WarrantyTerms'] : '',
+                    'Replacement'   => isset($data['WarrantyReplacement']) ? $data['WarrantyReplacement'] : '',
+                    'Repair'        => isset($data['WarrantyRepair']) ? $data['WarrantyRepair'] : '',
+                    'Support'       => isset($data['WarrantySupport']) ? $data['WarrantySupport'] : '',
+                    'AMC Terms'     => isset($data['AmcTerms']) ? $data['AmcTerms'] : ''
+                ];
+                $data['Warranty'] = self::serializeKeyValue($wKV);
+            }
         }
 
         // 11. RiskPoints (JSON array)
-        if (empty($data['RiskPoints']) || (!is_string($data['RiskPoints']) || (strpos($data['RiskPoints'], '[') !== 0 && strpos($data['RiskPoints'], ' | ') !== false))) {
+        if (empty($data['RiskPoints']) || !self::isJsonString($data['RiskPoints'])) {
             $risksArr = [];
             if (!empty($data['RiskPointsJson'])) {
                 $risksArr = json_decode($data['RiskPointsJson'], true);
             }
             if (empty($risksArr) && !empty($data['RiskPoints'])) {
-                $risksArr = preg_split('/[\r\n]+|[•·*∩é╖]|\x{F0B7}|\x{00B7}/u', $data['RiskPoints']);
+                if (is_array($data['RiskPoints'])) {
+                    $risksArr = $data['RiskPoints'];
+                } elseif (strpos($data['RiskPoints'], ' | ') !== false) {
+                    $risksArr = self::deserializeList($data['RiskPoints']);
+                } else {
+                    $risksArr = preg_split('/[\r\n]+|[•·*∩é╖]|\x{F0B7}|\x{00B7}/u', $data['RiskPoints']);
+                }
             }
             if (!empty($risksArr) && is_array($risksArr)) {
                 $data['RiskPoints'] = self::serializeList($risksArr);
@@ -452,25 +393,29 @@ class Factsheet_model extends CI_Model
         }
 
         // 12. OpportunityAssessment (JSON object)
-        if (empty($data['OpportunityAssessment']) || (!is_string($data['OpportunityAssessment']) || (strpos($data['OpportunityAssessment'], '{') !== 0 && strpos($data['OpportunityAssessment'], ' | ') !== false))) {
-            $oaKV = [];
-            if (!empty($data['PrebidQueryNotes'])) {
-                $oaKV['Pre-Bid Queries'] = $data['PrebidQueryNotes'];
-            }
-            if (!empty($data['OpportunityAssessmentJson'])) {
-                $arr = json_decode($data['OpportunityAssessmentJson'], true);
-                if (is_array($arr)) {
-                    $idx = 1;
-                    foreach ($arr as $item) {
-                        $oaKV["Key Attention Area {$idx}"] = $item;
-                        $idx++;
+        if (empty($data['OpportunityAssessment']) || !self::isJsonString($data['OpportunityAssessment'])) {
+            if (!empty($data['OpportunityAssessment']) && is_string($data['OpportunityAssessment']) && strpos($data['OpportunityAssessment'], ': ') !== false) {
+                $data['OpportunityAssessment'] = self::serializeKeyValue(self::deserializeKeyValue($data['OpportunityAssessment']));
+            } else {
+                $oaKV = [];
+                if (!empty($data['PrebidQueryNotes'])) {
+                    $oaKV['Pre-Bid Queries'] = $data['PrebidQueryNotes'];
+                }
+                if (!empty($data['OpportunityAssessmentJson'])) {
+                    $arr = json_decode($data['OpportunityAssessmentJson'], true);
+                    if (is_array($arr)) {
+                        $idx = 1;
+                        foreach ($arr as $item) {
+                            $oaKV["Key Attention Area {$idx}"] = $item;
+                            $idx++;
+                        }
                     }
                 }
+                if (empty($oaKV) && !empty($data['OpportunityAssessment'])) {
+                    $oaKV['Assessment'] = $data['OpportunityAssessment'];
+                }
+                $data['OpportunityAssessment'] = self::serializeKeyValue($oaKV);
             }
-            if (empty($oaKV) && !empty($data['OpportunityAssessment'])) {
-                $oaKV['Assessment'] = $data['OpportunityAssessment'];
-            }
-            $data['OpportunityAssessment'] = self::serializeKeyValue($oaKV);
         }
 
         return $data;
@@ -567,32 +512,198 @@ class Factsheet_model extends CI_Model
     }
 
     /**
-     * Retrieves a Fact Sheet associated with a Bid creation ID (Bcid)
+     * Generates or synchronizes a Fact Sheet record directly from a saved Bid (BidCreationDetails).
+     * Ensures that the Fact Sheet resembles and perfectly matches all details of the saved bid.
+     *
+     * @param int $bcid Bid creation ID
+     * @param array $bidData Optional bid data array (if already loaded)
+     * @return array|false The synchronized Fact Sheet record
      */
-    public function getFactSheetByBcid($bcid)
+    public function generateOrSyncFactsheetForBid($bcid, array $bidData = [])
     {
-        $fs = $this->db->order_by('Tfsid', 'DESC')->get_where($this->table, ['Bcid' => (int)$bcid])->row_array();
-        if (!$fs && (int)$bcid > 0) {
-            $bid = $this->db->get_where('BidCreationDetails', ['Bcid' => (int)$bcid])->row_array();
-            if ($bid) {
-                if (!empty($bid['NASPath'])) {
-                    $fs = $this->db->order_by('Tfsid', 'DESC')->get_where($this->table, ['DocumentPath' => $bid['NASPath']])->row_array();
-                }
-                if (!$fs && !empty($bid['TenderId'])) {
-                    $fs = $this->db->order_by('Tfsid', 'DESC')->get_where($this->table, ['TenderRefNo' => $bid['TenderId']])->row_array();
-                }
-                if (!$fs && !empty($bid['BidTitle'])) {
-                    $fs = $this->db->order_by('Tfsid', 'DESC')->like('TenderTitle', substr($bid['BidTitle'], 0, 30))->get($this->table)->row_array();
-                }
-                if ($fs) {
-                    $this->linkFactSheetToBid($fs['Tfsid'], $bcid);
+        $bcid = (int)$bcid;
+        if ($bcid <= 0) {
+            return false;
+        }
+
+        if (empty($bidData)) {
+            $bid = $this->db->get_where('BidCreationDetails', ['Bcid' => $bcid])->row_array();
+        } else {
+            $bid = $bidData;
+            $bid['Bcid'] = $bcid;
+        }
+
+        if (empty($bid)) {
+            return false;
+        }
+
+        // 1. Locate existing Fact Sheet record for this bid
+        $fs = $this->db->order_by('Tfsid', 'DESC')->get_where($this->table, ['Bcid' => $bcid])->row_array();
+        if (!$fs && !empty($bid['NASPath'])) {
+            $fs = $this->db->order_by('Tfsid', 'DESC')->get_where($this->table, ['DocumentPath' => $bid['NASPath']])->row_array();
+        }
+        if (!$fs && !empty($bid['TenderId'])) {
+            $fs = $this->db->order_by('Tfsid', 'DESC')->get_where($this->table, ['TenderRefNo' => $bid['TenderId']])->row_array();
+        }
+
+        // If still no Fact Sheet, but a valid document file exists at NASPath, extract it first
+        if (!$fs && !empty($bid['NASPath'])) {
+            $fullDocPath = FCPATH . ltrim($bid['NASPath'], '/\\');
+            if (file_exists($fullDocPath)) {
+                if (file_exists(APPPATH . 'libraries/Document_extractor.php')) {
+                    require_once APPPATH . 'libraries/Document_extractor.php';
+                    $extractor = new Document_extractor();
+                    $extractedFs = $extractor->extractFactSheet($fullDocPath);
+                    if (!empty($extractedFs) && is_array($extractedFs)) {
+                        $extractedFs['DocumentPath'] = $bid['NASPath'];
+                        $extractedFs['DocumentName'] = basename($bid['NASPath']);
+                        $extractedFs['DocumentHash'] = @md5_file($fullDocPath);
+                        $extractedFs['Bcid']         = $bcid;
+                        $tfsid = $this->saveFactSheet($extractedFs);
+                        if ($tfsid > 0) {
+                            $fs = $this->getFactSheetById($tfsid);
+                        }
+                    }
                 }
             }
         }
-        if (!$fs) {
-            $fs = $this->db->order_by('Tfsid', 'DESC')->get($this->table, 1)->row_array();
+
+        // Standardize Bid fields
+        $bidTitle = isset($bid['BidTitle']) ? trim((string)$bid['BidTitle']) : '';
+        $dept     = isset($bid['BidDepartment']) ? trim((string)$bid['BidDepartment']) : '';
+        $bidType  = isset($bid['BidType']) ? trim((string)$bid['BidType']) : '';
+        $refNo    = isset($bid['TenderId']) ? trim((string)$bid['TenderId']) : '';
+        $estVal   = isset($bid['EstimatedValue']) ? trim((string)$bid['EstimatedValue']) : '';
+        $emdVal   = isset($bid['EmdValue']) ? trim((string)$bid['EmdValue']) : '';
+        $pubDate  = isset($bid['PublishedDate']) ? trim((string)$bid['PublishedDate']) : '';
+        $subDate  = isset($bid['SubmissionDate']) ? trim((string)$bid['SubmissionDate']) : '';
+        $opDate   = isset($bid['OpeningDate']) ? trim((string)$bid['OpeningDate']) : '';
+        $keywords = isset($bid['SummaryKeywords']) ? trim((string)$bid['SummaryKeywords']) : '';
+        $portal   = isset($bid['TenderPortalUrl']) ? trim((string)$bid['TenderPortalUrl']) : '';
+        $remarks  = isset($bid['Remarks']) ? trim((string)$bid['Remarks']) : '';
+        $nasPath  = isset($bid['NASPath']) ? trim((string)$bid['NASPath']) : '';
+
+        // 2. Build or overlay the 12 main section columns to match Bid details exactly
+        
+        // ── Section 1: TenderOverview ──
+        $overview = !empty($fs['TenderOverview']) ? self::deserializeKeyValue($fs['TenderOverview']) : [];
+        if ($bidTitle !== '') $overview['Tender Title'] = $bidTitle;
+        if ($dept !== '')     $overview['Department'] = $dept;
+        if ($refNo !== '')    $overview['Tender Reference No'] = $refNo;
+        if ($bidType !== '' && $bidType !== '0') $overview['Tender Type'] = $bidType;
+        if ($pubDate !== '')  $overview['Tender Date'] = $pubDate;
+        if ($estVal !== '')   $overview['Project Value'] = $estVal;
+        if (empty($overview['Contract Type'])) $overview['Contract Type'] = 'Rate Contract / Supply';
+        if (empty($overview['Bid System']))    $overview['Bid System'] = 'Two Bid System';
+
+        // ── Section 2: ImportantDates ──
+        $dates = !empty($fs['ImportantDates']) ? self::deserializeKeyValue($fs['ImportantDates']) : [];
+        if ($pubDate !== '') $dates['Published Date'] = $pubDate;
+        if ($subDate !== '') $dates['Bid Submission Deadline'] = $subDate;
+        if ($opDate !== '')  $dates['Technical Bid Opening'] = $opDate;
+
+        // ── Section 3: TenderValue ──
+        $valSec = !empty($fs['TenderValue']) ? self::deserializeKeyValue($fs['TenderValue']) : [];
+        if ($estVal !== '') $valSec['Estimated Value'] = $estVal;
+        if ($emdVal !== '') $valSec['EMD'] = $emdVal;
+
+        // ── Section 4: ScopeOfWork ──
+        $scopes = !empty($fs['ScopeOfWork']) ? self::deserializeList($fs['ScopeOfWork']) : [];
+        if (empty($scopes) && $keywords !== '') {
+            $kwItems = preg_split('/[,;\r\n]+/', $keywords);
+            foreach ($kwItems as $k) {
+                $k = trim($k);
+                if (!empty($k)) $scopes[] = $k;
+            }
         }
-        return $fs;
+        if (empty($scopes) && $bidTitle !== '') {
+            $scopes[] = $bidTitle;
+        }
+
+        // ── Section 5: AreasCovered ──
+        $areas = !empty($fs['AreasCovered']) ? self::deserializeKeyValue($fs['AreasCovered']) : [];
+        if (empty($areas) && $dept !== '') {
+            $areas['Jurisdiction'] = $dept;
+        }
+
+        // ── Section 6: ContractPeriod ──
+        $period = !empty($fs['ContractPeriod']) ? self::deserializeKeyValue($fs['ContractPeriod']) : [];
+
+        // ── Section 7: AwardCriteria ──
+        $award = !empty($fs['AwardCriteria']) ? self::deserializeKeyValue($fs['AwardCriteria']) : [];
+
+        // ── Section 8: PerformanceGuarantee ──
+        $pbg = !empty($fs['PerformanceGuarantee']) ? self::deserializeKeyValue($fs['PerformanceGuarantee']) : [];
+
+        // ── Section 9: BidValidity ──
+        $validity = !empty($fs['BidValidity']) ? self::deserializeKeyValue($fs['BidValidity']) : [];
+
+        // ── Section 10: Warranty ──
+        $warranty = !empty($fs['Warranty']) ? self::deserializeKeyValue($fs['Warranty']) : [];
+
+        // ── Section 11: RiskPoints ──
+        $risks = !empty($fs['RiskPoints']) ? self::deserializeList($fs['RiskPoints']) : [];
+
+        // ── Section 12: OpportunityAssessment ──
+        $opp = !empty($fs['OpportunityAssessment']) ? self::deserializeKeyValue($fs['OpportunityAssessment']) : [];
+        if ($remarks !== '') $opp['Remarks'] = $remarks;
+        if ($portal !== '')  $opp['Tender Portal'] = $portal;
+
+        // 3. Assemble payload for database
+        $numVal = null;
+        if ($estVal !== '') {
+            $cleanEst = str_replace(',', '', $estVal);
+            if (is_numeric($cleanEst)) {
+                $numVal = (float)$cleanEst;
+            }
+        }
+
+        $payload = [
+            'Bcid'                  => $bcid,
+            'TenderTitle'           => $bidTitle ?: (isset($fs['TenderTitle']) ? $fs['TenderTitle'] : null),
+            'Department'            => $dept ?: (isset($fs['Department']) ? $fs['Department'] : null),
+            'TenderType'            => ($bidType !== '' && $bidType !== '0') ? $bidType : (isset($fs['TenderType']) ? $fs['TenderType'] : null),
+            'TenderRefNo'           => $refNo ?: (isset($fs['TenderRefNo']) ? $fs['TenderRefNo'] : null),
+            'TenderDate'            => $pubDate ?: (isset($fs['TenderDate']) ? $fs['TenderDate'] : null),
+            'ProjectValue'          => $estVal ?: (isset($fs['ProjectValue']) ? $fs['ProjectValue'] : null),
+            'ProjectValueAmount'    => $numVal !== null ? $numVal : (isset($fs['ProjectValueAmount']) ? $fs['ProjectValueAmount'] : null),
+            'TenderOverview'        => self::serializeKeyValue($overview),
+            'ImportantDates'        => self::serializeKeyValue($dates),
+            'TenderValue'           => self::serializeKeyValue($valSec),
+            'ScopeOfWork'           => self::serializeList($scopes),
+            'AreasCovered'          => self::serializeKeyValue($areas),
+            'ContractPeriod'        => self::serializeKeyValue($period),
+            'AwardCriteria'         => self::serializeKeyValue($award),
+            'PerformanceGuarantee'  => self::serializeKeyValue($pbg),
+            'BidValidity'           => self::serializeKeyValue($validity),
+            'Warranty'              => self::serializeKeyValue($warranty),
+            'RiskPoints'            => self::serializeList($risks),
+            'OpportunityAssessment' => self::serializeKeyValue($opp)
+        ];
+
+        if ($fs) {
+            // Update existing record
+            $this->db->where('Tfsid', (int)$fs['Tfsid'])->update($this->table, $payload);
+            return $this->getFactSheetById($fs['Tfsid']);
+        } else {
+            // Create new record
+            $payload['DocumentPath']         = $nasPath ?: 'bid_' . $bcid;
+            $payload['DocumentName']         = $nasPath ? basename($nasPath) : ($bidTitle ?: 'Bid_' . $bcid);
+            $payload['Classification']       = ($bidType !== '' && $bidType !== '0') ? strtolower($bidType) : 'unknown';
+            $payload['ClassificationStatus'] = 'classified';
+            $this->db->insert($this->table, $payload);
+            $newTfsid = (int)$this->db->insert_id();
+            return $this->getFactSheetById($newTfsid);
+        }
+    }
+
+    /**
+     * Retrieves a Fact Sheet associated with a Bid creation ID (Bcid)
+     * Automatically synchronizes with BidCreationDetails so Fact Sheet matches the bid.
+     */
+    public function getFactSheetByBcid($bcid)
+    {
+        return $this->generateOrSyncFactsheetForBid($bcid);
     }
 
     /**

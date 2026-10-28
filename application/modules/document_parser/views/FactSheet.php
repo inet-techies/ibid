@@ -1,24 +1,11 @@
+<?php $employee_det = $this->session->userdata('logged_in');
+   $theme_path = $this->config->item('theme_locations').$this->config->item('active_template');
+
+  if(empty($employee_det)) { redirect($this->config->item('base_url').'bid/index'); }
+?>
 <?php
-/**
- * Tender Fact Sheet View (document_parser module)
- *
- * Reads Fact Sheet data directly from the 12 main heading section columns:
- *   1. TenderOverview
- *   2. ImportantDates
- *   3. TenderValue
- *   4. ScopeOfWork
- *   5. AreasCovered
- *   6. ContractPeriod
- *   7. AwardCriteria
- *   8. PerformanceGuarantee
- *   9. BidValidity
- *   10. Warranty
- *   11. RiskPoints
- *   12. OpportunityAssessment
- *
- * Stored in the database as 'Label: Value | Label: Value' per section.
- * Deserializes each column into clean, structured tables and lists matching BANK OF BARODA- FACTSHEET.pdf.
- */
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 $fs = isset($factsheet) ? $factsheet : [];
 $isAjax = !empty($is_ajax);
 $theme_path = $this->config->item('theme_locations') . $this->config->item('active_template');
@@ -131,7 +118,8 @@ if (empty($secDates) && !empty($fs['ImportantDatesJson'])) {
 
 // ── 3. Parse Section 3: TenderValue ──
 $secValue   = !empty($fs['TenderValue']) ? parseSectionKV($fs['TenderValue']) : [];
-$estVal     = isset($secValue['Estimated Value']) ? $secValue['Estimated Value'] : (!empty($fs['EstimatedValue']) ? $fs['EstimatedValue'] : $projVal);
+$tenderFee  = isset($secValue['Tender Fee']) ? $secValue['Tender Fee'] : (!empty($fs['TenderFee']) ? $fs['TenderFee'] : '');
+$estVal     = isset($secValue['Estimated Value']) ? $secValue['Estimated Value'] : (!empty($fs['EstimatedValue']) ? $fs['EstimatedValue'] : '');
 $emdVal     = isset($secValue['EMD']) ? $secValue['EMD'] : (!empty($fs['EmdAmount']) ? $fs['EmdAmount'] : '');
 $pbgSummary = isset($secValue['Performance Bank Guarantee']) ? $secValue['Performance Bank Guarantee'] : (!empty($fs['PbgDetails']) ? $fs['PbgDetails'] : (!empty($fs['PbgAmount']) ? $fs['PbgAmount'] : ''));
 $validVal   = isset($secValue['Bid Validity']) ? $secValue['Bid Validity'] : (!empty($fs['BidValidityDays']) ? $fs['BidValidityDays'] : (!empty($fs['BidValidityDuration']) ? $fs['BidValidityDuration'] : ''));
@@ -209,103 +197,11 @@ if (empty($attentionAreas) && !empty($fs['OpportunityAssessmentJson'])) {
 <link rel="stylesheet" type="text/css" href="<?= $theme_path ?>/assets/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<?= $theme_path ?>/assets/vendors/css/vendors.min.css">
 <link rel="stylesheet" type="text/css" href="<?= $theme_path ?>/assets/css/theme.min.css">
+<link rel="stylesheet" type="text/css" href="<?= $theme_path ?>/assets/css/document.css">
 <?php endif; ?>
 
-<style>
-/* Exact PDF Table and Bullet Styling using Theme Palette */
-.pdf-factsheet-sheet {
-    background: #ffffff;
-    max-width: 820px;
-    margin: 0 auto;
-    padding: <?= $isAjax ? '24px 28px' : '36px 44px' ?>;
-    font-family: Calibri, Arial, "Segoe UI", sans-serif;
-    color: #111827;
-    font-size: 13.5px;
-    line-height: 1.45;
-}
-.pdf-main-title {
-    font-size: 17px;
-    font-weight: 700;
-    color: #000000;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 20px;
-}
-.pdf-section-title {
-    font-size: 14.5px;
-    font-weight: 700;
-    color: #000000;
-    margin-top: 22px;
-    margin-bottom: 8px;
-}
-.pdf-fact-table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 3px double #000000 !important;
-    margin-bottom: 18px;
-    font-size: 13px;
-    background: #ffffff;
-}
-.pdf-fact-table th, 
-.pdf-fact-table td {
-    border: 1px solid #000000 !important;
-    padding: 5px 10px;
-    vertical-align: top;
-    color: #000000;
-}
-.pdf-fact-table th {
-    font-weight: 700;
-    background: #ffffff;
-}
-.pdf-blue-text {
-    color: #1a56db !important;
-    font-weight: 700 !important;
-}
-.pdf-red-bullet {
-    color: #dc2626 !important;
-    font-weight: 700 !important;
-}
-.pdf-disc-list {
-    margin: 6px 0 16px 22px;
-    padding-left: 6px;
-    list-style-type: disc;
-}
-.pdf-disc-list li {
-    margin-bottom: 4px;
-    font-size: 13px;
-    color: #000000;
-}
-.pdf-circle-list {
-    margin: 3px 0 6px 20px;
-    padding-left: 6px;
-    list-style-type: circle;
-}
-.pdf-circle-list li {
-    margin-bottom: 2px;
-    font-size: 13px;
-    color: #000000;
-}
-.pdf-text-lead {
-    margin-bottom: 6px;
-    font-size: 13px;
-    color: #000000;
-}
-.pdf-text-follow {
-    margin-top: 6px;
-    margin-bottom: 16px;
-    font-size: 13px;
-    color: #000000;
-}
-@media print {
-    body { background: #fff !important; margin: 0 !important; padding: 0 !important; }
-    .no-print, header, .sidebar, .navbar, .page-header, .breadcrumb, .right-form-header { display: none !important; }
-    .pdf-factsheet-sheet { box-shadow: none !important; border: none !important; padding: 10px 15px !important; max-width: 100% !important; }
-    .pdf-fact-table { page-break-inside: avoid; }
-}
-</style>
-
 <?php if (!$isAjax): ?>
-<div class="no-print d-flex justify-content-between align-items-center mb-3 pt-2 px-1" style="max-width: 820px; margin: 0 auto;">
+<div class="no-print d-flex justify-content-between align-items-center mb-3 pt-2 px-1 pdf-factsheet-actions">
     <a href="javascript:window.history.back();" class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1">
         <i class="feather-arrow-left"></i> Back
     </a>
@@ -349,7 +245,7 @@ function downloadFactSheetAsPdf() {
 </script>
 <?php endif; ?>
 
-<div class="pdf-factsheet-wrapper py-2" id="pdfPrintableArea">
+<div class="pdf-factsheet-wrapper py-2 <?= $isAjax ? 'pdf-factsheet-ajax' : '' ?>" id="pdfPrintableArea">
     <div class="pdf-factsheet-sheet shadow-sm border rounded-1">
 
         <!-- Main Header -->
@@ -469,8 +365,8 @@ function downloadFactSheetAsPdf() {
             </thead>
             <tbody>
                 <tr>
-                    <td>Estimated Value</td>
-                    <td><?= safeVal($estVal) ?></td>
+                    <td>Tender Fee</td>
+                    <td><?= safeVal($tenderFee) ?></td>
                 </tr>
                 <tr>
                     <td>EMD</td>
@@ -484,6 +380,12 @@ function downloadFactSheetAsPdf() {
                     <td>Bid Validity</td>
                     <td><?= safeVal($validVal) ?></td>
                 </tr>
+                <?php if (!empty($estVal) && $estVal !== 'Not specified in document'): ?>
+                <tr>
+                    <td>Estimated Value</td>
+                    <td><?= htmlspecialchars($estVal) ?></td>
+                </tr>
+                <?php endif; ?>
             </tbody>
         </table>
 
@@ -533,29 +435,31 @@ function downloadFactSheetAsPdf() {
         <ul class="pdf-disc-list">
             <li>Initial Contract:
                 <ul class="pdf-circle-list">
-                    <li><?= safeVal($initialDur, 'As specified in contract terms') ?></li>
+                    <li><?= safeVal($initialDur, 'Not specified in document') ?></li>
                 </ul>
             </li>
             <li>Extendable:
                 <ul class="pdf-circle-list">
                     <?php $cleanExt = trim((string)$extendable, " :\t\n\r"); ?>
-                    <li><?= safeVal(!empty($cleanExt) ? $cleanExt : null, 'Subject to mutual agreement') ?></li>
+                    <li><?= safeVal(!empty($cleanExt) ? $cleanExt : null, 'Not specified in document') ?></li>
                 </ul>
             </li>
             <li>Maximum Period:
                 <ul class="pdf-circle-list">
-                    <li><?= safeVal($maxPeriod, 'As per tender limits') ?></li>
+                    <li><?= safeVal($maxPeriod, 'Not specified in document') ?></li>
                 </ul>
             </li>
         </ul>
-        <div class="pdf-text-follow"><?= safeVal($extCond, 'Extension depends upon satisfactory performance.') ?></div>
+        <?php if (!empty($extCond)): ?>
+            <div class="pdf-text-follow"><?= htmlspecialchars($extCond) ?></div>
+        <?php endif; ?>
 
         <!-- 7. Award Criteria -->
         <div class="pdf-section-title">7. Award Criteria</div>
-        <div class="pdf-text-lead">The Bank / Tendering Authority shall determine:</div>
+        <div class="pdf-text-lead">The Tendering Authority criteria:</div>
         <ul class="pdf-disc-list">
-            <li><?= safeVal($evalMethod, 'L1 based on Package Cost') ?></li>
-            <li><?= safeVal($splitWork, 'Bank may split work as per tender terms') ?></li>
+            <li>Evaluation Method: <?= safeVal($evalMethod, 'Not specified in document') ?></li>
+            <li>Split Work: <?= safeVal($splitWork, 'Not specified in document') ?></li>
         </ul>
         <?php if (!empty($allocation) && trim($allocation) !== ':'): ?>
         <div class="pdf-text-lead">Possible allocation:</div>
@@ -563,7 +467,9 @@ function downloadFactSheetAsPdf() {
             <li><?= nl2br(htmlspecialchars($allocation)) ?></li>
         </ul>
         <?php endif; ?>
-        <div class="pdf-text-follow"><?= safeVal($matching, 'L2/L3 should match L1 rates where splitting is applicable.') ?></div>
+        <?php if (!empty($matching)): ?>
+            <div class="pdf-text-follow"><?= htmlspecialchars($matching) ?></div>
+        <?php endif; ?>
 
         <!-- 08. Performance Guarantee -->
         <div class="pdf-section-title">08. Performance Guarantee</div>
@@ -577,69 +483,96 @@ function downloadFactSheetAsPdf() {
             <tbody>
                 <tr>
                     <td>Amount</td>
-                    <td><?= safeVal($pbgAmt) ?></td>
+                    <td><?= safeVal($pbgAmt, 'Not specified in document') ?></td>
                 </tr>
                 <tr>
                     <td>Validity</td>
-                    <td><?= safeVal($pbgValidity) ?></td>
+                    <td><?= safeVal($pbgValidity, 'Not specified in document') ?></td>
                 </tr>
                 <tr>
                     <td>Submission</td>
-                    <td><?= safeVal($pbgSub) ?></td>
+                    <td><?= safeVal($pbgSub, 'Not specified in document') ?></td>
                 </tr>
             </tbody>
         </table>
 
         <!-- 09. Bid Validity -->
         <div class="pdf-section-title">09. Bid Validity</div>
-        <div class="pdf-text-follow"><?= safeVal($bidValDur, '180 Days') ?></div>
+        <?php if (!empty($bidValDur) && (stripos($bidValDur, 'conflict') !== false || (stripos($bidValDur, '180') !== false && stripos($bidValDur, '120') !== false))): ?>
+            <div class="alert alert-warning py-2 px-3 my-2" style="font-size: 13px; border-left: 4px solid #f59e0b; background: #fffbeb; color: #92400e;">
+                <i class="feather-alert-triangle mr-1 me-1 text-warning"></i>
+                <strong>Conflicting Clauses Flagged:</strong> <?= htmlspecialchars($bidValDur) ?>
+            </div>
+        <?php else: ?>
+            <div class="pdf-text-follow"><?= safeVal($bidValDur, 'Not specified in document') ?></div>
+        <?php endif; ?>
 
         <!-- 10. Warranty -->
         <div class="pdf-section-title">10. Warranty</div>
-        <div class="pdf-text-lead">Supplier shall provide:</div>
-        <ul class="pdf-disc-list">
-            <li>Warranty</li>
-            <li>Replacement</li>
-            <li>Repair</li>
-            <li>Support</li>
-        </ul>
-        <div class="pdf-text-follow"><?= safeVal($warrScope, 'followed by AMC.') ?></div>
+        <div class="pdf-text-lead">Warranty & Maintenance Terms:</div>
+        <div class="pdf-text-follow"><?= safeVal(!empty($warrTerms) ? $warrTerms : (!empty($warrScope) ? $warrScope : null), 'Not specified in document') ?></div>
 
         <!-- 11. Risk Points -->
         <div class="pdf-section-title">11. Risk Points</div>
+        <?php 
+        $explicitRisks = [];
+        $inferredRisks = [];
+        foreach ($risksList as $r) {
+            $rStr = trim((string)$r);
+            if (empty($rStr)) continue;
+            if (stripos($rStr, '[Inferred]') !== false || stripos($rStr, 'Inferred:') !== false) {
+                $inferredRisks[] = preg_replace('/^\[Inferred\]\s*|^Inferred:\s*/i', '', $rStr);
+            } else {
+                $explicitRisks[] = $rStr;
+            }
+        }
+        ?>
+        <div class="pdf-text-lead" style="font-weight:600;">Explicit Tender Requirements:</div>
         <ul class="pdf-disc-list">
-            <?php if (!empty($risksList)): ?>
-                <?php foreach ($risksList as $r): ?>
-                    <?php $rText = trim((string)$r); if (empty($rText)) continue; ?>
-                    <li><?= htmlspecialchars($rText) ?></li>
+            <?php if (!empty($explicitRisks)): ?>
+                <?php foreach ($explicitRisks as $er): ?>
+                    <li><?= htmlspecialchars($er) ?></li>
                 <?php endforeach; ?>
             <?php else: ?>
-                <li>Financial Bid inside Technical Bid will lead to rejection.</li>
-                <li>OEM letter must be original (hard copy); photocopies or email printouts are not accepted.</li>
-                <li>Equipment must comply with specified technical specifications.</li>
-                <li>All pages of bid submission must be signed.</li>
-                <li>Late bids will not be accepted.</li>
-                <li>Conditional bids are liable to rejection.</li>
+                <li class="text-muted" style="font-style:italic;">Not specified in document</li>
             <?php endif; ?>
         </ul>
-
-        <!-- 12. Opportunity Assessment for I-Net Secure Labs -->
-        <div class="pdf-section-title">12. Opportunity Assessment for I-Net Secure Labs</div>
+        <?php if (!empty($inferredRisks)): ?>
+        <div class="pdf-text-lead" style="font-weight:600; color:#b45309;"><i class="feather-info mr-1 me-1"></i> Inferred Operational Risks (Analysis):</div>
         <ul class="pdf-disc-list">
-            <li class="pdf-red-bullet"><?= safeVal($prebidNotes, 'Minimum few Changes is required and the same will raise in Prebid Queries.') ?></li>
+            <?php foreach ($inferredRisks as $ir): ?>
+                <li style="color:#92400e;"><?= htmlspecialchars($ir) ?> <span class="badge bg-warning text-dark ms-1 ml-1" style="font-size:10.5px;">Inferred</span></li>
+            <?php endforeach; ?>
         </ul>
-        <div style="font-weight: 700; margin-top: 10px; margin-bottom: 6px; font-size: 13px;">Key Attention Areas</div>
+        <?php endif; ?>
+
+        <!-- 12. Opportunity Assessment -->
+        <div class="pdf-section-title">12. Opportunity Assessment</div>
+        <?php if (!empty($prebidNotes)): ?>
+            <div class="pdf-text-lead" style="font-weight:600;">Pre-Bid Queries:</div>
+            <ul class="pdf-disc-list">
+                <li class="pdf-red-bullet"><?= htmlspecialchars($prebidNotes) ?></li>
+            </ul>
+        <?php endif; ?>
+        <div style="font-weight: 600; margin-top: 10px; margin-bottom: 6px; font-size: 13px;">Key Attention Areas:</div>
         <ul class="pdf-disc-list">
             <?php if (!empty($attentionAreas)): ?>
                 <?php foreach ($attentionAreas as $as): ?>
-                    <?php $asText = trim((string)$as); if (empty($asText)) continue; ?>
-                    <li><?= htmlspecialchars($asText) ?></li>
+                    <?php 
+                        $asText = trim((string)$as); 
+                        if (empty($asText)) continue; 
+                        $isInferred = (stripos($asText, '[Inferred]') !== false || stripos($asText, 'Inferred:') !== false);
+                        $cleanText = preg_replace('/^\[Inferred\]\s*|^Inferred:\s*/i', '', $asText);
+                    ?>
+                    <li>
+                        <?= htmlspecialchars($cleanText) ?>
+                        <?php if ($isInferred): ?>
+                            <span class="badge bg-warning text-dark ms-1 ml-1" style="font-size:10.5px;">Inferred</span>
+                        <?php endif; ?>
+                    </li>
                 <?php endforeach; ?>
             <?php else: ?>
-                <li>Ensure OEM authorization and required spare support commitment.</li>
-                <li>Verify compliance of all proposed equipment with the detailed technical specifications.</li>
-                <li>Prepare original OEM letters and all mandatory compliance documents.</li>
-                <li>Carefully package bids in the prescribed three-envelope format to avoid rejection.</li>
+                <li class="text-muted" style="font-style:italic;">Not specified in document</li>
             <?php endif; ?>
         </ul>
 

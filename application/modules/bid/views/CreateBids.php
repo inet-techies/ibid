@@ -86,25 +86,6 @@
             <input type="hidden" id="factSheetId" name="factSheetId" value="">
             <input type="hidden" id="factSheetUrl" name="factSheetUrl" value="">
             <div class="card-body general-info">
-                <!-- Attached Document Indicator -->
-                <div id="attachedDocumentBadge" class="alert alert-light border d-flex align-items-center justify-content-between mb-4 py-2 px-3" style="display:none;border-radius:8px;background:#f8fafc;border-color:#cbd5e1 !important;">
-                    <div class="d-flex align-items-center gap-2">
-                        <i class="feather-file-text text-primary me-2 mr-2" style="font-size:20px;"></i>
-                        <div>
-                            <strong id="attachedDocName" class="text-dark"></strong>
-                            <span id="attachedDocSize" class="text-muted small ms-2 ml-2"></span>
-                            <span class="badge bg-success-subtle text-success ms-2 ml-2" style="font-size:11px;border:1px solid #86efac;">Attached to Bid</span>
-                            <span id="attachedDocClassification" class="badge ms-2 ml-2" style="display:none;font-size:11px;"></span>
-                            <a id="attachedDocFactSheetLink" href="javascript:void(0);" target="_blank" class="badge ms-2 ml-2 text-decoration-none" style="display:none;font-size:11px;background:#0284c7;color:#ffffff;border:1px solid #0369a1;cursor:pointer;">
-                                <i class="feather-file-text me-1 mr-1"></i>View Fact Sheet
-                            </a>
-                            <div id="attachedDocTxtPath" class="text-muted mt-1" style="display:none;font-size:11.5px;font-family:monospace;"></div>
-                        </div>
-                    </div>
-                    <button type="button" class="btn btn-sm btn-link text-muted p-0" id="btnRemoveAttachedDoc" title="Remove attachment">
-                        <i class="feather-x" style="font-size:16px;"></i>
-                    </button>
-                </div>
                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
                         <label class="fw-semibold">Bid Type: </label>
@@ -261,7 +242,7 @@
 
                  <div class="d-flex justify-content-center align-items-center gap-2 mt-3 flex-wrap">
                     <button type="reset" class="btn btn-md bg-danger text-white" id="btnClearBidForm">Clear</button>
-                    <button type="button" class="btn btn-md text-white fw-bold d-inline-flex align-items-center" id="btnViewFactSheet" title="View Document Fact Sheet" style="background:linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);border:none;border-radius:6px;padding:8px 18px;box-shadow:0 3px 10px rgba(14,165,233,0.3);">
+                    <button type="button" class="btn btn-md text-white fw-bold d-inline-flex align-items-center" id="btnViewFactSheet" title="View Document Fact Sheet" style="display:none !important;background:linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);border:none;border-radius:6px;padding:8px 18px;box-shadow:0 3px 10px rgba(14,165,233,0.3);">
                         <i class="feather-file-text me-2 mr-2" style="font-size:15px;"></i>
                         <span>Fact Sheet</span>
                     </button>
@@ -403,25 +384,12 @@
     var ai   = resp.ai_summary || {};
     var filled = [];
 
-    // ── Bid Type (Do not auto-select; user selects on their own) ──
-    var bidTypeEl = document.getElementById('bidTypeInput');
-    if (bidTypeEl) {
-      bidTypeEl.value = '0';
-      if (window.jQuery && $(bidTypeEl).data('select2')) {
-        $(bidTypeEl).val('0').trigger('change');
-      } else {
-        bidTypeEl.dispatchEvent(new Event('change', {bubbles: true}));
-      }
-    }
-
     // ── Tender Document Attachment ──
     var filePath = resp.file_path || '';
     var fileName = resp.file_name || resp.filename || '';
     if (filePath) {
       setField('attachedDocumentPath', filePath);
       setField('attachedDocumentName', fileName);
-      // NAS Path kept empty after extraction as requested
-      setField('bidNASIDInput', '');
       var attachBadge = document.getElementById('attachedDocumentBadge');
       var nameEl = document.getElementById('attachedDocName');
       var sizeEl = document.getElementById('attachedDocSize');
@@ -470,28 +438,19 @@
       var fsLink = document.getElementById('attachedDocFactSheetLink');
       if (fsLink) {
         fsLink.href = fsUrl;
-        fsLink.style.display = 'inline-block';
+        fsLink.style.display = 'none';
       }
-      filled.push('Fact Sheet');
     }
 
-    // ── Bid Title (Issuing Authority + Concise Scope) ──
-    var title = ai.short_title || ai.title || ai.document_title || '';
+    // ── Bid Title (The document's first line) ──
+    var title = resp.first_line || resp.bid_title || (ai && ai.first_line) || (ai && ai.bid_title) || '';
+    if (!title) {
+      title = ai.full_title || ai.title || ai.document_title || ai.short_title || '';
+    }
     if (title && setField('bidTitleInput', title)) filled.push('Bid Title');
 
-    // ── Department / Organization (Kept empty after extraction as requested) ──
-    setField('bidDepartmentInput', '');
-
-    // ── Estimated Tender Value ──
-    var estVal = (ai.estimated_value || '').toString().trim();
-    if (estVal && estVal !== '0' && setField('bidEstimatedInput', estVal)) {
-      filled.push('Estimated Value');
-      var estNum = estVal.replace(/,/g, '');
-      if (!isNaN(estNum) && estNum !== '') {
-        var ewEl = document.getElementById('EstemdInWords');
-        if (ewEl) ewEl.innerHTML = convertNumberToWords(estNum) + ' Only';
-      }
-    }
+    // Note: Department, Bid Type, Estimated Tender Value, NAS Path, and Remarks
+    // are EXCLUDED fields and must never be populated or overwritten by extraction.
 
     // ── EMD Value ──
     var emdVal = (ai.emd_value || '').toString().trim();
@@ -510,6 +469,9 @@
 
     // ── Submission End Date & Time ──
     var subDate = ai.submission_date || '';
+    if (!subDate && ai.submission_deadline) {
+      subDate = ai.submission_deadline.indexOf(' at ') !== -1 ? ai.submission_deadline.split(' at ')[0].trim() : ai.submission_deadline;
+    }
     if (subDate && setField('dueDate', subDate)) filled.push('Submission End Date');
 
     // Display submission time in helper badge if available
@@ -528,7 +490,8 @@
 
     // ── Bid Opening Date ──
     var opDate = ai.opening_date || '';
-    if (opDate && setField('dateofBirth', opDate)) filled.push('Opening Date');
+    var cleanOpDate = (opDate.indexOf(' at ') !== -1) ? opDate.split(' at ')[0].trim() : opDate;
+    if (cleanOpDate && setField('dateofBirth', cleanOpDate)) filled.push('Opening Date');
 
     // ── Keywords for Summary ──
     // Use the dedicated 'keywords' field (concise terms), NOT the long objective paragraph.
@@ -552,9 +515,6 @@
     // ── Tender ID ──
     var refNo = ai.ref_no || ai.ref_code || ai.tender_id || '';
     if (refNo && setField('bidTenderIDInput', refNo)) filled.push('Tender ID');
-
-    // ── Remarks (Kept empty after extraction as requested) ──
-    setField('bidRemarksInput', '');
 
     return filled;
   }

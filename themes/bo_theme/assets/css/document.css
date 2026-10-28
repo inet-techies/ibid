@@ -1,0 +1,156 @@
+/**
+ * Document Parser / Tender Fact Sheet Stylesheet
+ * Integrates Document Parser and Fact Sheet with the existing Bid Management design language
+ * Location: themes/bo_theme/assets/css/document.css
+ */
+
+/* Fact Sheet Container & Typography */
+.pdf-factsheet-sheet {
+    background: #ffffff;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 36px 44px;
+    font-family: Calibri, Arial, "Segoe UI", sans-serif;
+    color: #111827;
+    font-size: 13.5px;
+    line-height: 1.45;
+}
+
+.pdf-factsheet-ajax .pdf-factsheet-sheet,
+.modal-body .pdf-factsheet-sheet {
+    padding: 24px 28px;
+}
+
+.pdf-factsheet-actions {
+    max-width: 820px;
+    margin: 0 auto;
+}
+
+.pdf-main-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+}
+
+.pdf-section-title {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #000000;
+    margin-top: 22px;
+    margin-bottom: 8px;
+}
+
+/* Fact Sheet Grid & Tables */
+.pdf-fact-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 3px double #000000 !important;
+    margin-bottom: 18px;
+    font-size: 13px;
+    background: #ffffff;
+}
+
+.pdf-fact-table th, 
+.pdf-fact-table td {
+    border: 1px solid #000000 !important;
+    padding: 5px 10px;
+    vertical-align: top;
+    color: #000000;
+}
+
+.pdf-fact-table th {
+    font-weight: 700;
+    background: #ffffff;
+}
+
+/* Status & Emphasis Elements */
+.pdf-blue-text {
+    color: #1a56db !important;
+    font-weight: 700 !important;
+}
+
+.pdf-red-bullet {
+    color: #dc2626 !important;
+    font-weight: 700 !important;
+}
+
+/* List Formatting */
+.pdf-disc-list {
+    margin: 6px 0 16px 22px;
+    padding-left: 6px;
+    list-style-type: disc;
+}
+
+.pdf-disc-list li {
+    margin-bottom: 4px;
+    font-size: 13px;
+    color: #000000;
+}
+
+.pdf-circle-list {
+    margin: 3px 0 6px 20px;
+    padding-left: 6px;
+    list-style-type: circle;
+}
+
+.pdf-circle-list li {
+    margin-bottom: 2px;
+    font-size: 13px;
+    color: #000000;
+}
+
+.pdf-text-lead {
+    margin-bottom: 6px;
+    font-size: 13px;
+    color: #000000;
+}
+
+.pdf-text-follow {
+    margin-top: 6px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: #000000;
+}
+
+/* Document Parser Upload Button Component */
+.btn-doc-parser-upload {
+    border-radius: 8px;
+    padding: 8px 18px;
+    background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+    border: none;
+    font-size: 13.5px;
+    box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.btn-doc-parser-upload:hover {
+    background: linear-gradient(135deg, #4338ca 0%, #2563eb 100%);
+    color: #ffffff;
+    box-shadow: 0 6px 18px rgba(79, 70, 229, 0.45);
+}
+
+/* Print Optimization */
+@media print {
+    body {
+        background: #fff !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .no-print, header, .sidebar, .navbar, .page-header, .breadcrumb, .right-form-header {
+        display: none !important;
+    }
+    .pdf-factsheet-sheet {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 10px 15px !important;
+        max-width: 100% !important;
+    }
+    .pdf-fact-table {
+        page-break-inside: avoid;
+    }
+}

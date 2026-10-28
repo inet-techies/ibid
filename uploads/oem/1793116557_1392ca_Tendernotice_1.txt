@@ -1,0 +1,3454 @@
+WEBEL TECHNOLOGY LIMITED
+
+                                         NOTICE INVITING e-TENDER
+
+e-Tenders are invited for implementation of Supply, Installation, Testing, Commissioning of 804 Nos. CCTV
+cameras with 01 years Storage at 67 PS with setup for Central Monitoring System and Health Monitoring System of
+CCTV surveillance system of total 91 PS from Lalbazar HQ of Kolkata Police and monitoring from 10 Division offices
+with 01 (One) year onsite comprehensive warranty for Kolkata Police, West Bengal. Bids are invited from reputed
+System Integrators having sufficient experience and credentials for successful completion of “Similar Nature” of
+work in a Central or State Government Department/PSU/Autonomous Body. WTL has been chosen as the execution
+authority for the same. Bidder must have adequate Service Engineer for providing on-site support service within
+the stipulated time as prevalent for IP Based CCTV System setups.
+
+1.    Tender No. & Date                                 WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+2.    Tender Version No.                                1.0
+3.    Brief description of material                     Supply, Installation, Testing, Commissioning of 804 Nos.
+                                                        CCTV cameras with 01 years Storage at 67 PS with setup for
+                                                        Central Monitoring System and Health Monitoring System of
+                                                        CCTV surveillance system of total 91 PS from Lalbazar HQ of
+                                                        Kolkata Police and monitoring from 10 Division offices with
+                                                        01 (One) year onsite comprehensive warranty for Kolkata
+                                                        Police
+4.    Tender Fee                                        Rs.10,000 (Rs Ten Thousand only). The amount to be
+                                                        transferred online through e-tender portal.
+5.    Earnest Money Deposit                             Rs. 31,00,000.00 (Thirty-One Lacs Only). The amount to be
+                                                        transferred online through e-tender portal.
+6.    Date of Downloading                               09-09-2026
+7.    Pre-Bid Meeting date & time                       15-09-2026 at 4 PM. (Online)
+                                                             Pre-Bid meeting will be organized in online platform
+                                                                only.
+                                                             Only queries as per format (Section - M) reaching
+                                                                WTL by 14-09-26 at 3 PM. will be taken for decision.
+                                                             Interest bidders are requested to send mail to
+                                                                purchase@wtl.co.in for participation of online pre-
+                                                                bid meeting. Based on request WTL will share
+                                                                meeting id / links for meeting. If there is any change
+                                                                in date and time, then it will be informed
+
+8.    Bid Submission Start date & time                  22-09-2026 at 12 PM
+9.    Last date & time of EMD & Tender Fee submission   Before Uploading of Tender
+      intimation.
+10.   Last date & time of Bid Submission                29-09-2026 at 12 PM
+11.   Date & time of Technical Bid Opening              01-10-2026 at 12 PM
+12.   WTL Address                                       WEBEL TECHNOLOGY LIMITED
+                                                        (A Govt. of West Bengal Undertaking)
+                                                        Plot - 5, Block – BP, Sector – V, Salt Lake City,
+                                                        Kolkata – 700091.
+13.   Contact person                                    033-23673403-06
+
+                                                                                                                         1
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                              WEBEL TECHNOLOGY LIMITED
+  1. Intending bidder may download the tender documents from the website https://wbtenders.gov.in directly
+     with the help of Digital Signature Certificate. Necessary Tender fee may be remitted online through e-tender
+     portal in favour of “Webel Technology Limited” and also to be documented through e-filling. Necessary
+     Earnest Money Deposit (EMD) may be remitted online through e-tender portal in favour of “Webel
+     Technology Limited” and also to be documented through e-filling.
+
+  2. Both Techno Commercial Bid and Financial Bid are to be submitted concurrently duly digitally signed in the
+     website https://wbtenders.gov.in.
+
+  3. Tender documents may be downloaded from website and submission of Techno Commercial Bid and
+     Financial Bid will be done as per Time Schedule stated in Section – C of this Tender Document.
+
+  4. The Financial Bid of the prospective Bidder will be considered only if the Techno Commercial Bid of the
+     bidder is found qualified by the Tender Committee. The decision of the ‘Tender Committee’ will be final and
+     absolute in this respect. The list of Qualified Bidders will be displayed in the website.
+
+  5. All clarifications / corrigenda will be published only on the https://wbtenders.gov.in.
+
+                                                                                                               2
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                         WEBEL TECHNOLOGY LIMITED
+
+                           CONTENTS OF THE TENDER DOCUMENT
+
+The Tender document comprises of the following:
+SECTION – A        OBJECTIVE OF THE PROJECT
+
+SECTION – B        SCOPE OF WORK
+
+SECTION – C        DATE AND TIME SCHEDULE
+
+SECTION – D        BIDDER’S ELIGIBILITY CRITERIA
+
+SECTION – E        INSTRUCTION TO BIDDER
+
+SECTION – F        BID FORM
+
+SECTION – G        TECHNO COMMERCIAL EVALUATION & AWARDING OF CONTRACT
+
+SECTION – H        GUIDANCE FOR E-TENDERING
+
+SECTION – I        UN-PRICE BILL OF MATERIAL
+
+SECTION – J        DETAILS OF TECHNICAL CAPABILITY OF BIDDER
+
+SECTION – K        FINANCIAL CAPABILITY OF BIDDER
+
+SECTION – L        BIDDER’S DETAILS
+
+SECTION – M        FORMAT FOR PRE-BID MEETING QUERY
+
+SECTION – N        LIST OF CLIENTS OF SIMILAR ORDERS
+
+SECTION – O        PROFORMA FOR PERFORMANCE BANK GUARANTEE
+
+SECTION – P        NIT DECLARATION
+
+SECTION – Q        MAKE, MODEL & PART NUMBER DECLARATION
+
+SECTION – R        TECHNICAL SPECIFICATION COMPLIANCE STATEMENT
+
+SECTION – S        MANUFACTURER’S AUTHORIZATION FORM
+
+SECTION – T        CHECKLIST FOR ELIGIBILITY CRITERIA
+
+                                                                         3
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                             WEBEL TECHNOLOGY LIMITED
+
+                                              SECTION – A
+                                  OBJECTIVE OF THE PROJECT
+
+The State Level Empowered Committee (SLEC) has decided that funds under the Modernization of Police
+Force (MPF) Scheme earmarked for procurement of VMS Storage devices would be utilized for installation
+of CCTV Cameras (including Audio & Night Vision) with 12 months local storage facility in Police Stations.
+
+The Order dated 02.12.2020 of Hon’ble Supreme Court of India in SLP (Criminal) No. 3543/2020 in (Pramvir
+Singh Saini V/s Baljit Singh & Others). The Hon’ble SC directed to all states and union territory governments
+should ensure that CCTV cameras are installed in each and every police Stations functioning in the
+respective State and/or union territory. Further, in order to ensure that no part of a Police Station is left
+uncovered, it is imperative to ensure that CCTV cameras are installed at all entry and exit points, main gate
+of police station, all lock-ups, all corridors, lobby, the reception area, all verandas / outhouses, inspector’s
+room, sub-inspector’s room, areas outside the lock-ups room, station hall, in front of the police station
+compound, outside wash room/ toilets, duty officers room, back part of the police station, child friendly
+corner and any other important areas identified during site inspection and implementation of the project.
+As per the plan submitted by WTL, the following units of the Kolkata Police shall be covered by 31st
+December 2026.
+
+67 (Sixty-seven) Police Stations to be covered by CCTV surveillance system under Kolkata Police with
+Central Monitoring system for all CCTV surveillance under 91 PSs from 10 DRO and Kolkata Police HQ.
+
+Kolkata Police authority unanimously decided that Webel Technology Ltd (WTL) will be given
+responsibility for execution of this work (Phase -II Project) like previously executed Phase -I Project.
+
+                                                                                                              4
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                              WEBEL TECHNOLOGY LIMITED
+                                            SECTION – B
+                                          SCOPE OF WORK
+
+Kolkata Police Phase II Police Station CCTV Project & Centralised Monitoring System
+
+The scope of work under Phase II of the Kolkata Police Station CCTV Project shall cover 67 (Sixty-Seven)
+Police Stations identified for implementation by 31st December 2026, as per the requirements of Kolkata
+Police and the approved budgetary provision.
+
+The scope shall include Supply, Installation, Testing and Commissioning (SITC), integration and
+comprehensive maintenance of CCTV surveillance systems, associated network infrastructure,
+recording and storage systems, and Centralised Monitoring System at the identified locations.
+
+The CCTV system shall provide facilities for real-time live viewing, recording, playback and retrieval
+of video footage from the respective Police Stations. The system shall also facilitate authorised live
+monitoring and playback from 10 (Ten) designated DRO Offices and the Central Control Room,
+enabling centralised surveillance and monitoring by Kolkata Police.
+
+1. CCTV Surveillance Coverage
+
+CCTV cameras shall be installed at all identified Police Stations to ensure comprehensive coverage of
+important, vulnerable and sensitive areas. The coverage shall include, but shall not be limited to:
+
+      Entry and exit points of the Police Station building;
+
+      Main gate and approach areas;
+
+      Lock-ups and areas outside the lock-up rooms, subject to applicable rules and privacy
+       requirements;
+
+      Corridors, lobbies and reception areas;
+
+      Verandas and outhouses;
+
+      Inspector's and Sub-Inspector's rooms, wherever required;
+
+      Station hall;
+
+      Duty Officer's room;
+
+      Areas in front of the Police Station compound;
+
+      Areas outside washrooms/toilets;
+
+      Rear and peripheral areas of the Police Station;
+
+      Child Friendly Corner;
+
+The actual location, type, number and orientation of cameras shall be finalised based on the detailed site
+survey, site layout, security requirements and operational requirements of Kolkata Police.
+
+2. Technical Scope
+
+The Implementation Partner shall undertake complete SITC and maintenance of all required active and
+passive components, including but not limited to:
+
+                                                                                                           5
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                            WEBEL TECHNOLOGY LIMITED
+      CCTV cameras;
+
+      Network Video Recorders (NVRs)/recording servers;
+
+      Storage/HDD infrastructure;
+
+      Video Management System (VMS);
+
+      PoE and other network switches;
+
+      Servers and workstations;
+
+      Monitoring displays;
+
+      Routers, firewalls and other network equipment, wherever required;
+
+      UPS and power backup systems;
+
+      Racks and associated accessories;
+
+      Structured cabling and fibre optic connectivity, wherever required;
+
+      Power and network cables;
+
+      Patch panels, patch cords and connectors;
+
+      Camera mounting brackets and accessories;
+
+      Conduits, cable trays and cable management accessories;
+
+      Earthing and other electrical protection arrangements, wherever required; and
+
+      All other accessories, materials and equipment necessary for complete and functional
+       implementation of the CCTV system.
+
+          User Level and Admin Level training shall be given before the time of hand-over the site.
+
+          All documents like architecture, user manual, passwords and others shall be handed over to
+           the KP.
+
+          During support tenure SI shall assist to retrieve the footage backup whenever required.
+
+          “Site Acceptance Test (SAT)” will be signed during the Go-Live. Parameter of SAT shall be
+           given in details in due course of time.
+
+3. Recording and Storage
+
+The Implementation Partner shall provide adequate recording and storage infrastructure (Minimum 1
+year storage) at the Police Stations as per the prescribed technical specifications and required retention
+period.
+
+The system shall support continuous/event-based recording, secure storage, search, playback, retrieval
+and authorised export of recorded video footage.
+
+The storage capacity shall be suitably designed considering the number of cameras, resolution, frame
+rate, bitrate, compression technology, recording mode and required retention period.
+
+                                                                                                             6
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                            WEBEL TECHNOLOGY LIMITED
+4. Centralised Monitoring System
+
+The Implementation Partner shall establish and integrate the CCTV systems with the Centralised
+Monitoring System to enable authorised personnel to:
+
+      View live CCTV feeds from the Police Stations;
+
+      View live feeds at the designated DRO Offices and Central Control Room;
+
+      Search and playback recorded footage;
+
+      Retrieve and export recorded video;
+
+      Monitor the health/status of cameras, NVRs, servers and network equipment;
+
+      Manage users and access permissions;
+
+      Monitor events and alarms, wherever applicable; and
+
+      Maintain system logs and audit trails.
+
+The proposed system shall be scalable and capable of accommodating additional CCTV cameras/sites in
+the future, subject to the capacity of the proposed system architecture.
+
+5. Site Survey and Installation
+
+The Implementation Partner shall conduct a detailed site survey of all 67 Police Stations, 10 designated
+DRO Offices and the Central Control Room, as applicable, before commencement of installation.
+
+The survey shall assess the existing site infrastructure, camera coverage requirements, network
+connectivity, bandwidth, power availability, equipment locations, cabling routes, racks, UPS
+requirements, earthing and other associated requirements.
+
+Based on the site survey, the Implementation Partner shall undertake complete installation, configuration,
+integration, testing and commissioning of the system.
+
+6. Logistics and Infrastructure
+
+The Implementation Partner shall be responsible for transportation, delivery, unloading, installation and
+commissioning of all equipment and materials required for the project.
+
+The scope shall also include all necessary minor civil, electrical, cabling, mounting and associated works
+required for successful implementation of the CCTV system, unless specifically excluded in the BOQ.
+
+7. Integration
+
+The Implementation Partner shall integrate the Police Station-level CCTV systems with the designated
+DRO Offices and Central Control Room through the available network connectivity.
+
+The integration shall ensure reliable transmission of live video and authorised access to recorded footage
+without adversely affecting the recording and operational performance of the Police Station CCTV
+system.
+
+8. End of Life (EOL)
+
+The OEM of IP Based CCTV System should declare that no offered products will be EOL in next 7 years. A
+                                                                                                            7
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                                  WEBEL TECHNOLOGY LIMITED
+letter of Confirmation by OEM shall be mandatory during tender process. During the Comprehensive
+warranty period of 1 year, no other active component / accessories should be declared End of Life. In case
+it is declared “End of Life” during this period, the vendor has to replace such equipment at their own cost
+with same or higher specification mentioned in the tender.
+
+9. Proposed Project Timeline
+
+                                                       Post Work Order Project Timeline
+                                                       (Supply, Installation, Testing, Commissioning & Handover)
+                                             Task
+                                             Days
+               Task name                   (Start to                               " T " + 60 Days
+                                             End)
+ Project Kick off & Pre Execution
+                                              2
+ Planning after issue of WO = "T"
+ Passive Materials delivery at all sites     10
+ Passive Materials Installation
+ (Cabling, conduiting, Rack setup            25
+ etc.)
+ Active Materials delivery at all sites      35
+ Active Materials Installation               40
+ Commissioning & Configuration               40
+ Training & Handover                         18
+                Go-Live                       2
+
+10. Repair Center
+Repair center will be available from OEMs in Kolkata for rectification of faults and will ensure. Repair center
+must complete proper repair and send back the item within 7 days to ensure healthy stock status, as part of
+SLA. In case of any delay, the OEM must arrange for replacement of the faulty item.
+
+11. Service & Support Infrastructure Setup in Kolkata
+The successful bidder (contractor) shall have the required services and support setup, with qualified
+manpower and adequate spares to ensure delivery of the support services as per the SLA required, across
+Kolkata. Details of existing setup, manpower and location, must be provided with documentary proof, for
+the purpose of technical evaluation of bid.
+
+12. Site Locations Details
+
+                        Locations for SITC of CCTV Surveillance system
+ Division/DRO                      Name of PSs                  1st Phase CCTV         2nd Phase CCTV
+                       Shyampukur PS                                                        Allotted
+                       Jorabagan PS                                                         Allotted
+        ND
+                       Burtola PS                                                           Allotted
+                       Amherst Street PS                                                    Allotted
+
+                                                                                                                   8
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                            WEBEL TECHNOLOGY LIMITED
+
+               Cossipore PS                            Allotted
+               Sinthee PS                              Allotted
+               Chitpore PS                             Allotted
+               Tala PS                                 Allotted
+               Amherst St Women PS                     Allotted
+               Burrabazar PS                           Allotted
+               Posta PS                                Allotted
+               Jorasanko PS                            Allotted
+               Girish Park PS                          Allotted
+               Hare Street PS                          Allotted
+     CD
+               Bowbazar PS                             Allotted
+               Muchipara PS                            Allotted
+               Taltala PS                              Allotted
+               New Market PS                           Allotted
+               Taltala Women PS                        Allotted
+               Park Street PS                          Allotted
+               Shakespeare Sarani PS                   Allotted
+               Hastings PS                             Allotted
+               Maidan PS                               Allotted
+               Bhowanipore PS                          Allotted
+               Kalighat PS                             Allotted
+     SD
+               Tollygunge PS                           Allotted
+               Charu Market PS                         Allotted
+               Alipore PS                              Allotted
+               New Alipore PS                          Allotted
+               Chetla PS                               Allotted
+               Tollygunge Women PS                     Allotted
+               Manicktala PS             Completed
+               Ultadanga PS              Completed
+               Beliaghata PS             Completed
+               Phoolbagan PS             Completed
+     ESD
+               Narkeldanga PS            Completed
+               Entaly PS                 Completed
+               Tangra PS                 Completed
+               Ultadanga Women PS        Completed
+               Ballygunge PS             Completed
+               Gariahat PS               Completed
+               Lake PS                   Completed
+               Rabindra Sarobar PS       Completed
+     SED       Karaya PS                 Completed
+               Beniapukur PS             Completed
+               Topsia PS                 Completed
+               Tiljala PS                Completed
+               Karaya Women PS           Completed
+     SSD       Kasba PS                                Allotted
+
+                                                                  9
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                           WEBEL TECHNOLOGY LIMITED
+
+               Garfa PS                                 Allotted
+               Regent Park PS                           Allotted
+               Bansdroni PS                             Allotted
+               Jadavpur PS                              Allotted
+               Golf Green PS                            Allotted
+               Patuli PS                                Allotted
+               Netaji Nagar PS                          Allotted
+               Patuli Women PS                          Allotted
+               Watgunge PS                              Allotted
+               Gardenreach PS                           Allotted
+               Ekbalpore PS                             Allotted
+               West Port PS                             Allotted
+               South Port PS                            Allotted
+     PD
+               North Port PS                            Allotted
+               Metiabruz PS                             Allotted
+               Nadial PS                                Allotted
+               Rajabagan PS                             Allotted
+               Watgunge Women PS                        Allotted
+               Taratala PS                  Completed
+               Behala PS                    Completed
+               Parnashree PS                Completed
+    SWD        Thakurpukur PS               Completed
+               Sarsuna PS                   Completed
+               Haridevpur PS                Completed
+               Behala Women PS              Completed
+               Purba Jadavpur PS                        Allotted
+               Panchasayar PS                           Allotted
+               Survey Park PS                           Allotted
+     ED        Anandapur PS                             Allotted
+               Pragati Maidan PS                        Allotted
+               Kolkata Leather Complex PS               Allotted
+               Survey Park Women PS                     Allotted
+               Bhangar PS                               Allotted
+               Uttar Kashipur PS                        Allotted
+               Chandaneswar PS                          Allotted
+               Polerhat PS                              Allotted
+     BD
+               Madhabpur PS                             Allotted
+               Bijoyganj Bazar PS                       Allotted
+               Bodra PS                                 Allotted
+               Hatishala PS                             Allotted
+               STF PS                                   Allotted
+   Others
+               Cyber PS                                 Allotted
+                   Total                       24         67
+
+                                                                   10
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                       WEBEL TECHNOLOGY LIMITED
+
+                                         DRO LIST
+
+                      1    BHANGAR DIVISION
+                      2    CENTRAL DIVISION
+                      3    EAST DIVISION
+                      4    EASTERN SUBURBAN DIVISION
+                      5    NORTH AND NORTH SUBURBAN DIVISION
+                      6    PORT DIVISION
+                      7    SOUTH DIVISION
+                      8    SOUTH EAST DIVISION
+                      9    SOUTH SUBURBAN DIVISION
+                      10   SOUTH WEST DIVISION
+
+              HEAD QUARTER/CENTRAL MONITORING LOCATION
+
+                Kolkata Police HQ at 18 Lalbazar Street, Kolkata -700101
+
+                                                                           11
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                         WEBEL TECHNOLOGY LIMITED
+
+                                           SECTION – C
+
+                                DATE AND TIME SCHEDULE
+
+      Sl. No.                         Particulars                  Date & Time
+         1      Date of uploading of N.I.T. & other Documents        09-09-26
+
+        2       Pre-Bid Meeting (Online)                          15-09-26 at 4 PM
+
+        3       Bid Submission start date & time (Online)            22-09-26
+
+        4       Bid Submission closing date & time (Online)          29-09-26
+
+        5       Bid opening date & time for Technical Proposals      01-10-26
+                (Online)
+
+                                                                                     12
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                          WEBEL TECHNOLOGY LIMITED
+
+                                          SECTION – D
+
+                            BIDDER’S ELIGIBILITY CRITERIA
+
+  1. The bidder must be a company registered under Companies Act, 1956/2013 or Partnership or LLP
+     or OPC or Proprietary Firm. Documentary (Certificate of incorporation/Relevant document)
+     evidence to be submitted.
+
+  2. The bidder must be a System Integrator in CCTV Surveillance sector. Relevant document to be
+     submitted.
+
+  3. The bidder should have been operating for the last 10 years in India. Certificate of Incorporation
+     and/ or Certificate of Commencement of Business issued by the Registrar of Companies/
+     Partnership Registration/ sole proprietorship registration under the Shops & Establishments Act to
+     be submitted.
+
+  4. The bidder must have their Registered/ Branch office in Kolkata, West Bengal. Valid trade license
+     and local GST Registration Certificate are to be submitted
+
+  5. The bidder should have valid GST Registration Certificate & PAN. Bidder shall have to submit
+     photocopy of the documents.
+
+  6. Bidder should have own local call center number (Undertaking letter should be submitted from
+     the bidders) OEM Call Centre number will not be treated as bidder’s call center number. Call Center
+     details for bidder with number & detailed to be submitted. Bidder shall have to submit the
+     Complain/Call escalation matrix in their own letterhead with undertaking.
+
+  7. The bidder shall have executed “Similar Nature” of single order an amount not less than Rs.
+     12.80 Cr. (Twelve Cr. Eighty Lac only) in last 05 (Five) financial years (considering FY – 2020-
+     21, 2021-22, 2022-23. 2023-24, 2024-25) in Government Department/PSU/Autonomous Body.
+     References order copy with the completion certificate for the project to be provided.
+
+                                                   OR
+      The bidder shall have executed “Similar Nature” of two orders each order amount not less than
+      Rs.7.80 Cr. (Seven Cr. Eighty Lac Only) in last 05 (Five) financial years (considering FY – 2020-
+      21, 2021-22, 2022-23. 2023-24, 2024-25) in Government Department/PSU/Autonomous Body.
+      References order copy with the completion certificate for the project to be provided.
+
+                                                    OR
+      The bidder shall have executed “Similar Nature” of three orders in total amount not less than
+      Rs.6.40 Cr. (Six Cr. Forty Lac only) in last 05 (Five) financial years (considering FY – 2020-21,
+      2021-22, 2022-23. 2023-24, 2024-25) in Government Department/PSU/Autonomous Body.
+      References order copy with the completion certificate for the project to be provided.
+
+  8. The bidder should have a minimum average annual turnover of not less than Rs. 24.00 Cr.
+     (Twenty-Four Crore) in the last three financial years (2022-23, 2023-24, 2024-25). Bidder shall
+     have to submit Audited Balance Sheet / Audited Accounts / Auditor Certificate in support of their
+     claim.
+
+  9. Bidder should have Positive net worth for last three financial years (2022-23, 2023-24, 2024-25).
+     Bidder shall have to submit Audited Balance Sheet / Audited Accounts / Auditor Certificate in
+     support of their claim.
+
+  10. The bidder should have ISO certification of ISO 9001:2015, ISO 14001:2015 Certificate to be
+      submitted.
+
+  11. The bidder must submit the Manufacturers Authentication Form (MAF) for Camera, NVR, HDD,
+                                                                                                          13
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                          WEBEL TECHNOLOGY LIMITED
+      Display, Networking Switches, Racks, Enclosers, Network Passive component and UPS as per
+      prescribed format enclosed (Section - S).
+
+  12. Technical Compliance statements to be submitted. Without these documents from the OEMs, the
+      offer will be treated as non-responsive and summarily rejected.
+
+  13. The bidder shall submit Bid Form (Section – F) duly signed by the authorized signatory of the
+      company as per the format enclosed. Deviation in format may not be accepted.
+
+  14. Bidder shall submit NIT Declaration (Section – P) duly signed by the authorized signatory of the
+      company as per the format. Deviation in format may not be accepted.
+
+  15. The bidder shall not have been blacklisted by any State/Central Government or PSU Organization
+      or bilateral/multilateral funding agencies for breach of ethical conduct or fraudulent practices as
+      on date of submission of the proposal (as per DIT guidance note issued on 26-Dec-2011).
+      Declaration on bidder’s letter head to be submitted.
+
+                                                                                                         14
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                          WEBEL TECHNOLOGY LIMITED
+
+                                          SECTION – E
+
+                               INSTRUCTIONS TO BIDDER
+
+1. DEFINITIONS
+
+  In this document, the following terms shall have following respective meanings:
+
+  “Agreement" means the Agreement to be signed between the successful bidder and WTL including all
+  attachments, appendices, all documents incorporated by reference thereto together with any
+  subsequent modifications, the RFP, the bid offer, the acceptance and all related correspondences,
+  clarifications, presentations.
+
+  “Acceptance Test Document” means a document, which defines procedures for testing the
+  functioning of installed system. The document will be finalized with the contractor within 7 days of
+  issuance of the Letter of Award.
+
+  “Bidder” means any firm offering the solution(s), service(s) and /or materials required in the RFP. The
+  word Bidder when used in the pre award period shall be synonymous with Bidder, and when used after
+  award of the Contract shall mean the successful Bidder.
+
+  “Contract” is used synonymously with Agreement.
+
+  “Contract Price” means the price to be paid to the Contractor for providing the Solution, in accordance
+  with the payment terms.
+
+  “Contractor” means the Bidder whose bid to perform the Contract has been accepted by Tender
+  Committee and is named as such in the Letter of Award.
+
+  “Default Notice” mean the written notice of Default of the Agreement issued by one Party to the other.
+
+  “Installation” means installation of supplied Hardware & Software.
+
+  “Fraudulent Practice” means a misrepresentation of facts in order to influence a procurement process
+  or the execution of a Contract and includes collusive practice among Bidders (prior to or after Bid
+  submission) designed to establish Bid prices at artificial noncompetitive levels and to deprive WTL and
+  eventually Departments of Gov. of W. Bengal of the benefits of free and open competition.
+
+  “GoI” shall stand for the Government of India.
+
+  “GoWB” means Government of West Bengal.
+
+  “Personnel” means persons hired by the Bidder as employees and assigned to the performance of the
+  Infrastructure Solution or any part thereof.
+
+  “Similar Nature of Work” means Works entailing completion of project/s in the field of CCTV
+  Surveillance for any Govt. Departments or Public Sector Undertakings
+
+  “Project” Supply, Installation, Testing, Commissioning of 804 Nos. CCTV cameras with 01 years
+  Storage at 67 PS with and setup for Central Monitoring System and Health Monitoring System of CCTV
+  surveillance system of total 91 PS from Lalbazar HQ of Kolkata Police and monitoring from 10 Division
+  offices with 01 (One) year onsite comprehensive warranty for Kolkata Police
+
+  “Services” means the work to be performed by the Bidder pursuant to this Contract, as described in
+  the detailed Scope of Work.
+                                                                                                      15
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                            WEBEL TECHNOLOGY LIMITED
+
+  “Interest rate” means “364 days Government of India (GoI) Treasury Bills” rate.
+
+   "Law" shall mean any Act, notification, bye law, rules and regulations, directive, ordinance, order or
+   instruction having the force of law enacted or issued by the Central Government and/or the
+   Government of West Bengal or any other Government or regulatory authority or political subdivision
+   of government agency.
+
+   “LOI” means issuing of Letter of Intent shall constitute the intention of the WTL to place the Purchase
+   Order with the successful bidder.
+
+   “Requirements” shall mean and include schedules, details, description, statement of technical data,
+   performance characteristics, standards (Indian as well as International) as applicable and specified in
+   the Contract.
+
+   “Termination Notice” means the written notice of termination of the Agreement issued by WTL.
+
+   "Uptime" means the time period when specified services are available with specified technical and
+   service standards as mentioned in section titled WARRANTY SUPPORT” "%Uptime" means ratio of 'up
+   time' (in minutes) as mentioned in section titled “Warranty support”.
+
+   "Service Down Time" (SDT) means the time period when specified services with specified technical
+   and operational requirements as mentioned in section titled “WARRANTY SUPPORT”” are not available
+   to Gov. of W. Bengal and its user departments and organizations.
+
+   “WTL” means Webel Technology Limited a Govt. of West Bengal undertaking.
+
+2. PRE BID MEETING
+   Pre Bid Meeting will be held on 15-09-26 at 4 PM (On-Line Meeting). Bidder can send their queries as
+   per format (Section - L) to Purchase Department (purchase@wtl.co.in). Only the queries received within
+   the stipulated date prior to the Pre Bid Meeting will be answered. Interest bidders are requested to
+   send mail to (purchase@wtl.co.in) for participation of online pre-bid meeting. Based on request WTL
+   will share meeting id / links for meeting. If there is any change in date and time then will inform.
+
+3. COST OF BIDDING
+   The bidder shall bear all costs associated with the preparation and submission of the bid and WTL will
+   no case be responsible for those costs regardless of the conduct or outcome of the bidding process.
+
+4. BID DOCUMENT
+   Bidder is expected to examine all instructions, forms, terms and requirement in the bid document. The
+   invitation to bid together with all its attachment thereto shall be considered to be read, understood and
+   accepted by the bidder unless deviations are specifically stated in the seriatim by the bidder. Failure
+   to furnish all information required by the bid document or a bid not substantially responsive to the bid
+   document in every respect may result of the bid.
+
+5. AMENDMENT OF BID DOCUMENT
+   At any time prior to the deadline for submission of proposals, WTL reserves the right to
+   add/modify/delete any portion of this document by issuance of a Corrigendum, which would be
+   published on the website and will also be made available to the all the Bidder who have been issued
+   the tender document. The Corrigendum shall be binding on all bidders and will form part of the bid
+   documents.
+
+                                                                                                         16
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                            WEBEL TECHNOLOGY LIMITED
+
+6. MODIFICATION AND WITHDRAWAL OF BIDS
+   The bidder cannot modify or withdraw its bid after submission.
+
+7. LANGUAGE OF BID & CORRESPONDENCE
+   The proposal will be prepared by the Bidder in English language only. All the documents relating to
+   the proposal (including brochures) supplied by the firm should also be in English, and the
+   correspondence between the Bidder & WTL will be in English language only. The correspondence by
+   fax/E-mail must be subsequently confirmed by a duly signed formal copy.
+
+8. BIDDER’S SOLUTION
+   The bidders are requested to study the Bill of Material supplied with this document carefully. While
+   working out the solution the bidder has to work with the broad minimum specification provided in the
+   tender documents, conforming to the model, make and Part number (wherever provided). While
+   submitting the bid the bidder has to detail out all components needed to complete the system BOM.
+   The bidder is required quote for each item retaining all major components/sub system detailed and
+   specified. As the contractor will be responsible for smooth functioning of the system, availability of
+   spares during the tenure of the warranty period have to be take care by the contractor to maintain the
+   guaranteed uptime.
+
+9. EARNEST MONEY DEPOSIT (EMD) & TENDER FEE
+   The bidder shall furnish Online Receipt against payment of Tender Fees and Earnest Money Deposit.
+
+10. REFUND OF EMD
+    EMD will be refunded to the unsuccessful bidders without interest by following guidelines of circular
+    3975-F(Y) dated 28/07/2016 on final selection of Successful Bidders.
+
+11. FORFEITURE OF EMD
+    EMD made by Bidder may be forfeited under the following conditions:
+    If Bidder withdraws the proposal before the expiry of validity period.
+    During the evaluation process, if a Bidder indulges in any such activity as would jeopardize the process,
+    the decision of WTL regarding forfeiture of EMD shall be final and shall not be called upon question
+    under any circumstances.
+
+    If Bidder violates any of the provisions of the terms and conditions of the proposal.
+
+    In the case of a successful Bidder, if Bidder fails to:
+    a) Accept the work order along with the terms and conditions.
+    b) Furnish performance security.
+    c) Violates any of the work conditions of this proposal or indulges in any such activities as would
+    jeopardize the work.
+    d) Submitting false/misleading information/declaration/documents/proof/etc.
+
+    The decision of WTL regarding forfeiture of EMD shall be final and shall not be called upon to question
+    under any circumstances, besides, forfeiture of EMD even the Bidder will be deferred from
+    participating in any job for a period of one year.
+
+12. FORMS AND FORMATS
+    The various inputs for the Techno Commercial as Financial Bids are to be submitted in the format
+    specified. The bidder shall use the form, wherever specified, to provide relevant information. If form
+    does not provide space for any required information, space at the end of the form or additional sheets
+    shall be used to convey the said information. For all other cases, the bidder shall design a form to hold
+    the required information.
+
+                                                                                                          17
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                              WEBEL TECHNOLOGY LIMITED
+
+13. LACK OF INFORMATION TO BIDDER
+    The bidder shall be deemed to have carefully examined the Bid document to his entire satisfaction. Any
+    lack of information shall not relieve the bidder of his responsibility to fulfill his obligation under the bid.
+    If bidder has any queries relating to bid document, then he can send the queries before the Pre Bid
+    Meeting.
+
+14. CONTRACT EXECUTION
+    On receipt of the Letter of Award the contractor should submit a Performance Bank Guarantee (PBG)
+    equivalent to 10% of the total contract value within three weeks from the date of receipt of Letter of
+    Award/Order. The PBG should be valid for six month more than the warranty period. All delivery of the
+    material will have to be completed within 60 days from the date of acceptance of contract and the
+    contractor has to ensure all activities leading to the commissioning of the contract to be completed
+    within 60 days from the date of award. Subsequent to the award of contract, the contractor will have to
+    arrange for the requisite material as per BOM.
+
+15. TIME SCHEDULE FOR DELIVERY & INSTALLATION
+    The IP Based CCTV system project for KP, shall commence on the award of the contract to the
+    implementation partner through a selection process.
+    Overall Project Implementation Timeline – 60 Days from the date of issue of Work Order.
+
+16. LOCATION FOR DELIVERY & INSTALLATION
+    As mentioned in Section – B (Scope of Work)
+
+17. LIQUIDATED DAMAGE
+    Hardware: LD clause:
+       I.  0.5% of the total Hardware bill value of this segment for every 7 days delay in meeting
+           the delivery schedule
+      II.  The maximum deductible is capped at 5% of the total year wise SLA value.
+     III.  Vendor Termination Clause: -
+    Termination possibility of MSI in the case of multiple cases of failure to
+    meet SLA terms beyond monthly commitments for 6 continuous months
+
+    WTL reserves the right to terminate the contract and WTL will get the job completed by any other
+    competent party. The difference of cost incurred by WTL will be recovered from the contractor and
+    PBG will be invoked.
+
+18. LIABILITY
+    In case of a default on bidder’s part or other liability, WTL shall be entitled to recover damages from
+    the Contractor. In each such instance, regardless of the basis on which WTL is entitled to claim damages
+    from the Contractor (including fundamental breach, negligence, misrepresentation, or other contract
+    or tort claim), Contractor shall be liable for no more than:
+     Payment referred to in the Patents and Copyrights clause.
+     Liability for bodily injury (including death) or damage to real property and tangible personal
+        property limited to that cause by the Contractor’s negligence.
+     As to any other actual damage arising in any situation involving nonperformance by Contractor
+        pursuant to or in any way related to the subject of this Agreement, the charge paid by WTL for the
+        individual product or Service that is the subject of the Claim. However, the contractor shall not be
+        liable for
+     For any indirect, consequential loss or damage, lost profits, third party loss or damage to property
+        or loss of or damage to data.
+     For any direct loss or damage that exceeds the total payment for Contract Price made or expected
+        to be made to the Contractor hereunder.
+                                                                                                                18
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                             WEBEL TECHNOLOGY LIMITED
+
+19. PATENTS & COPYRIGHT
+    If a third party claims that a product delivered by the Contractor to WTL infringes that party’s patent or
+    copyright, the Contractor shall defend WTL against that claim at Contractor’s expense and pay all costs,
+    damages, and attorney’s fees that a court finally awards or that are included in a settlement approved
+    by the Contractor, provided that WTL.
+     Promptly notifies Contractor in writing of the claim
+     Allows Contractor to control and co-operate with Contractor in the defense and any related
+          settlement negotiations.
+    Remedies: If such a claim is made or appears likely to be made, WTL would permit Contractor to enable
+    WTL to continue to use the product, or to modify it, or replace it with one that is at least functionally
+    equivalent. If Contractor determines that none of these alternatives is reasonably available, WTL agrees
+    to return the product to Contractor on Contractor’s written request. Contractor will then give WTL a
+    credit equal to for a machine. WTL’s net book value (provided WTL has followed generally accepted
+    accounting principles for a generally available software product produced by Contractor (Program)
+    the amount paid by WTL or 12 months charges (whichever is lesser) and for materials the amount paid
+    by WTL for the materials. These will be Contractor’s entire obligation regarding any claim of
+    infringement.
+
+20. SUSPENSION OF WORK
+    WTL shall have the power at any time and from time to time by notice to the Contractor to delay or
+    suspend the progress of the work or any part of the work due to any other adequate reasons and on
+    receipt of such notice the contractor shall forthwith suspend further progress of the work until further
+    notice from WTL. The Contractor shall recommence work immediately after receiving a notice to do so
+    from WTL. The whole or any part of the time lost for such delay or suspension shall, if WTL in its absolute
+    discretion thinks fit, but not otherwise, be added to the time allowed for completion.
+
+21. TERMS OF PAYMENT
+
+    Payment shall be made on Back-to-Back basis on submission of bills, subject to satisfactory
+    performance of services and certification by the authorized representative of the Kolkata
+    Police.
+
+    Payment Terms: (a) 50% on completion of supply of active & passive components. (b) 40% on
+    completion of Installation. (c) 10% on completion on successful “GO LIVE” of the Project
+
+                    .
+
+22. GOVERNING LAWS
+    This contract should be governed by and interpreted by Arbitration clause in accordance with Laws in
+    force in India. The courts at Kolkata shall have exclusive jurisdiction in all matters arising under the
+    contract. The selected vendor shall keep himself fully informed of all current national, state and
+    municipal law and ordinances. The selected vendor shall at their own expense, obtain all necessary
+    permits and license and pay all fees and taxes required by law. These will be selected vendor’s entire
+    obligation regarding any claim of infringement. The selected vendor hereto agrees that it shall comply
+    with all applicable union, state and local laws, ordinances, regulations and codes in performing its
+    obligations hereunder, including the procurement of licenses, permits certificates and payment of taxes
+    where required. The selected vendor shall establish and maintain all proper records (particularly, but
+    without limitation, accounting records) required by any law, code/practice of corporate policy
+    applicable to it from time to time including records and returns as applicable under labor legislation.
+
+23. CORRUPT OR FRAUDULENT PRATICES
+    The Tender Committee requires that the bidders under this Tender observe the highest standards of
+
+                                                                                                            19
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                              WEBEL TECHNOLOGY LIMITED
+    ethics during the procurement and execution of such contracts. For this purpose, the definition of
+    corrupt and fraudulent practices will follow the provisions of the relevant laws in force. The Tender
+    Committee will reject a proposal for award if it detects that the bidder has engaged in corrupt or
+    fraudulent practices in competing for the contract in question. The Tender Committee will declare a
+    firm ineligible, either indefinitely or for a stated period of time, if it at any time determines that the firm
+    has engaged in corrupt and fraudulent practices in competing for, or in executing, a contract.
+
+24. BINDING CLAUSE
+    All decisions taken by the Tender Committee regarding the processing of this tender and award of
+    contract shall be final and binding on all parties concerned. The Tender Committee reserves the right:
+     To vary, modify, revise, amend or change any of the terms and conditions mentioned above and,
+     To reject any or all the Tender/s without assigning any reason whatsoever thereof or to annul the
+        bidding process and reject all bids at any time prior to award of contract, without thereby incurring
+        any liability to the affected bidder(s) or any obligation to inform the affected bidder(s) of the
+        grounds for such decision.
+
+25. WORKMEN’S COMPENSATION
+    In every case in which by virtue of the provision of the workmen’s compensation Act 1923 or any other
+    relevant acts and rules, compensation to a workman employed by the contractor, is payable, then this
+    should be done by the Contractor. If WTL is obliged to make any compensation under the said rules
+    and acts, then the amount shall be recovered without prejudice, from the bills and due of the Contractor.
+    WTL shall not be bound to contest any claim made against the Contractor in respect of workmen’s
+    compensation.
+
+26. CONTRACTOR’S EMPLOYEES
+    The Contractor shall comply with the provision of all labour legislation including the requirement of the
+    payment of Wage Act 1936 and the rules framed there under and modifications thereof in respect of
+    men employed by him in carrying out the contract. The Contractor must ensure that he complies with
+    PF, ESI regulation for all his deployed employees. The Contractor shall see that all authorized Sub
+    Contractors under him similarly complied with the above requirement.
+
+27. SAFETY MEASURES
+    The Contractor shall in the course of execution of the work take all necessary precaution for the
+    protection of all persons and property. The Contractor shall take adequate measures to protect the work
+    and present accident during the work. In the event of any accident to any person or persons or damage
+    or injury of any description to any person or property due to failure on the part of the contractor in
+    taking proper precautionary measures the contractor shall be responsible for and must make good the
+    loss the damage at his own cost to the satisfaction of the department and employees of the department
+    shall be indemnified from all claims or liabilities arising there from or any expenses incurred on account
+    thereof.
+
+28. EQUIPMENT
+    All tools & tackles necessary for the work shall have to be procured by the contractor unless otherwise
+    specified elsewhere in these tender documents. The equipment used by the contractor for a particular
+    work must be appropriate for the type of work. The contractor shall maintain the equipment used on
+    the work properly so that they are in good working condition. In no case shall the contractor use
+    defective or imperfect equipment in the work. The contractor shall arrange to replace or repair all
+    defective equipment so that the progress of the work is not hampered. No defective equipment should
+    be left at the site of work and the department shall not be responsible for any loss or damage to any of
+    these equipment during the course of the execution of the work.
+
+29. SUB-CONTRACT
+30. The purchaser (WTL) does not recognize the existence of Sub-Contractors. The Contractor’s
+    responsibility is not transferable. No consortium partner is allowed.
+                                                                                                                20
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                             WEBEL TECHNOLOGY LIMITED
+
+31. TERMINATION FOR DEFAULT
+    WTL may without prejudice to any other remedy or right of claim for breach of contract by giving not
+    less than 30 days written notice of default sent to the contractor, terminate the order in whole or in part.
+    If the contractor materially fails to render any or all the services within the time period specified in the
+    contract or any extension thereof granted by WTL in writing and fails to remedy its failure within a
+    period of thirty days after receipt of default notice from WTL. If the project (delivery, commissioning as
+    well as warranty maintenance support is not carried out according to specification due to deficiency in
+    service as per terms of the contract. In such case WTL will invoke the amount held back from the
+    contractor as PBG.
+
+32. BANKRUPTCY
+    If the contractor becomes bankrupt or have a receiving order made against him or compound with his
+    creditors or being a corporation commence to be wound up, not being a voluntary winding up for the
+    purpose only or amalgamation or reconstruction, or carry on their business under a receiver for the
+    benefit of their creditors or any of them, WTL shall be at liberty to terminate the engagement forthwith
+    without any notice in writing to the contractor or to the liquidator or receiver or to any person in whom
+    the contractor may become vested and without any compensation to give such liquidator or receiver or
+    other person the option of carrying out the engagement subject to their providing a guarantee for the
+    due and faithful performance of the engagement up to an amount to be determined by WTL.
+
+33. FORCE MAJEURE
+    It is hereby defined as any cause, which is beyond the control of the Contractor or WTL as the case may
+    be, which such party could not foresee or with a reasonable amount of diligence could not have
+    foreseen and which substantially affect the performance of the contract, such as
+     War, Hostilities or warlike operations (whether a state of war be declared or not), invasion, act of
+          foreign enemy and civil war.
+     Rebellion, revolution, insurrection, mutiny, usurpation of civil or military, government, conspiracy,
+          riot, civil commotion and terrorist area.
+     Confiscation, nationalization, mobilization, commandeering or requisition by or under the order of
+          any government or de facto authority or ruler, or any other act or failure to act of any local state or
+          national government authority.
+     Strike, sabotage, lockout, embargo, import restriction, port congestion, lack of usual means of
+          public transportation and communication, industrial dispute, shipwreck, shortage of power supply
+          epidemics, quarantine and plague.
+     Earthquake, landslide, volcanic activity, fire flood or inundation, tidal wave, typhoon or cyclone,
+          hurricane, nuclear and pressure waves or other natural or physical disaster.
+
+    If either party is prevented, hindered or delayed from or in performing any of its obligations under the
+    Contract by an event of Force Majeure, then it shall notify the other in writing of the occurrence of such
+    event and the circumstances of the event of Force Majeure within fourteen days after the occurrence of
+    such event. The party who has given such notice shall be excused from the performance or punctual
+    performance of its obligations under the Contract for so long as the relevant event of Force Majeure
+    continues and to the extent that such party’s performance is prevented, hindered or delayed.
+
+    The party or parties affected by the event of Force Majeure shall use reasonable efforts to mitigate the
+    effect of the event of Force Majeure upto its or their performance of the Contract and to fulfill its or their
+    obligation under the Contract but without prejudice to either party’s right to terminate the Contract.
+
+    No delay or nonperformance by either party to this Contract caused by the occurrence of any event of
+    Force Majeure shall.
+        Constitute a default or breach of the contract.
+        Give rise to any claim fro damages or additional cost or expense occurred by the delay or
+           nonperformance. If, and to the extent, that such delay or nonperformance is caused by the
+           occurrence of an event of Force Majeure.
+
+                                                                                                               21
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                             WEBEL TECHNOLOGY LIMITED
+
+34. INSURANCE COVERAGE
+    Appropriate insurance to cover all solution components for the transit period and until the time of its
+    acceptance at the respective site is to be taken by the contractor. As the contractor will carry the risk
+    for the material in his books during transit, the contractor should arrange insurance for the total system
+    as period from the dispatch till Acceptance Test is successfully achieved.
+
+35. WARRANTY & MAINTENANCE
+       Contractor will have to provide 1 Year onsite comprehensive warranty on all components for
+         CCTV surveillance system, Hardware etc. installed at PS, DRO and Kolkata Police HQ from
+         the date of go-live of the whole project.
+         After completion of comprehensive warranty period WTL may go for fresh AMC with the
+           supplier.
+         During the warranty period, no active component should be declared “End of Life”. In case it
+           is declared “End of Life” during this period, the vendor has to replace such equipment at
+           their own cost.
+
+36. PERFORMANCE BANK GUARANTEE (PBG)
+    As a guarantee for timely delivery, installation and commissioning of equipment as well as performance
+    of on-site warranty support, as mentioned in Bill of Material, from the date of final acceptance of systems
+    and pertaining to proper running of the systems, the bidder will have to submit 10% of the contract
+    value as security in the form of Performance Bank Guarantee from any nationalized bank as per format
+    enclosed (Section – N).
+
+37. SI/BIDDER/CONTRACTOR’S RESPONSIBILITIES
+    Refer Section - B
+
+38. NO WAIVER OF RIGHTS
+    Neither the inspection by WTL or any of their agents nor any order by WTL for payment of money or
+    any payment for or acceptance of the whole or any part of the works by WTL, nor any extension of time,
+    nor any possession taken by WTL shall operate as a waiver of any provision of the contract or of any
+    power reserved to WTL, or any right to damages here in provided, nor shall any waiver of any breach
+    in the contract be held to be a waiver of any other subsequent breach.
+
+39. ENFORCEMENT OF TERMS
+    The failure of either party to enforce at any time any of the provision of this contract or any rights in
+    respect thereto or to exercise any option here in provided shall in no way be construed to be a waiver
+    to such provisions, rights or options or in any way to affect the validity of the contract. The exercise by
+    either party of any of its rights herein shall not preclude or prejudice either party from exercising the
+    same or any other right it may have hereunder.
+
+40. PERIOD OF VALIDITY OF OFFER
+    For the purpose of placing the order, the proposals shall remain valid till 180 days. During the period
+    of validity of proposals, the rates quoted shall not change. In exceptional circumstances, WTL may ask
+    for extension of the period of validity and such a request shall be binding on Bidders. WTL’s request
+    and the response to such a request by various Bidders shall be in writing. A Bidder agreeing to such an
+    extension will not be permitted to increase its rates.
+
+41. TAXES & DUTIES
+        The prices shall be inclusive of all taxes & levies including GST and other statutory duties as
+          applicable. Rate of taxes should be indicated separately in the Price Bid.
+        Contract Price specified in Price Bid should be based on the taxes & duties and charges
+          prevailing at the date one day prior to the last date of Bid submission.
+                                                                                                            22
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                             WEBEL TECHNOLOGY LIMITED
+           Statutory deduction, wherever applicable, shall be made from invoice as per government rules.
+            Necessary certificate will be issued for such deductions.
+           Bidder submitting a bid shall produce valid statutory documents / certificates with respect to
+            GST, Income Tax, ROC, Prof. Tax, Trade License, etc. All such documents / certificates shall
+            remain valid on the last date of tender submission.
+           In case of inter-state transaction, WTL will provide “Waybill”. However, statutory charges, if
+            any will be borne by the bidder.
+           GST component of the invoice of the bidder may be kept on hold in case there ia any mismatch
+            / irregularity in GST return filling on the part of the bidder.
+
+42. DISCREPANCIES IN BID
+     Discrepancy between description in words and figures, the rate which corresponds to the words
+       quoted by the bidder shall be taken as correct.
+     Discrepancy in the amount quoted by the bidder due to calculation mistake of the unit rate then the
+       unit rate shall be regarded as firm.
+     Discrepancy in totaling or carry forward in the amount quoted by the bidder shall be corrected.
+
+43. BID DUE DATE
+    The tender shall be submitted not later than the due date and time specified in the Important Dates
+    Sheet. WTL may as its discretion on giving reasonable notice by fax, or any other written communication
+    to all prospective bidders who have been issued the bid documents, extend the bid due date, in which
+    case all rights and obligations of the WTL and the bidders, previously subject to the bid due date, shall
+    thereafter be subject to the new bid due date as extended.
+
+44. LATE BID
+    Any proposal received after the deadline for submission of proposals may not be accepted.
+
+45. OPENING OF BID BY WTL
+    Bids shall be opened and downloaded electronically through operation of the process in the e-
+    Tender portal in presence of Tender Committee. Bidders interested to remain present during
+    electronic bid opening may attend the bid opening session at WTL premises at scheduled date &
+    time.
+
+46. CONTACTING WTL
+    Bidder shall not approach WTL officers beyond office hours and/or outside WTL office premises from
+    the time of the Bid opening to the time of finalization of successful bidder. Any effort by bidder to
+    influence WTL office in the decision on Bid evaluation, Bid comparison or finalization may result in
+    rejection of the Bidder’s offer. If the bidder wishes to bring additional information to the notice of WTL,
+    it should be in writing.
+
+47. WTL’S RIGHT TO REJECT ANY OR ALL BIDS
+    WTL reserves the right to reject any bid and to annul the bidding process and reject all bids at any time
+    prior to award of Contract, without thereby incurring any liability to the affected bidder(s) or any
+    obligation to inform the affected bidder(s) of the grounds for such decision.
+
+48. BID CURRENCIES
+    Prices shall be quoted in Indian Rupees, inclusive of all prevailing taxes, levies, duties, cess etc.
+
+49. PRICE
+     Price should be quoted in the BOQ format only. No deviation is acceptable.
+     Price quoted should be firm, inclusive of packing, forwarding, insurance and freight charges.
+
+                                                                                                            23
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                             WEBEL TECHNOLOGY LIMITED
+       Percentage/specified amount of taxes & duties should be clearly mentioned otherwise WTL
+        reserves the right to reject such vague offer.
+       Price to be quoted inclusive of supply, installation & commissioning charges.
+
+50. CANVASSING
+    Canvassing or support in any form for the acceptance of any tender is strictly prohibited. Any bidder
+    doing so will render him liable to penalties, which may include removal of this name from the register
+    of approved Contractors.
+
+51. NON-TRANSFERABILITY OF TENDER
+    This tender document is not transferable.
+
+52. FORMATS AND SIGNING OF BID
+    The original and all copies of the proposals shall be neatly typed and shall be signed by an authorized
+    signatory(ies) on behalf of the Bidder. The authorization shall be provided by written Power of Attorney
+    accompanying the proposal. All pages of the proposal, except for un-amended printed literature, shall
+    be initialed by the person or persons signing the proposal. The proposal shall contain no
+    interlineations, erase or overwriting. In order to correct errors made by the Bidder, all corrections shall
+    be done & initialed with date by the authorized signatory after striking out the original words/figures
+    completely.
+
+53. WITHDRAWAL OF BID
+    Bid cannot be withdrawn during the interval between their submission and expiry of Bid’s validity
+    period. Fresh Bid may be called from eligible bidders for any additional item(s) of work not mentioned
+    herein, if so required.
+
+54. INTERPRETATION OF DOCUMENTS
+    If any bidder should find discrepancies or omission in the specifications or other tender documents, or
+    if he should be in doubt as to the true meaning of any part thereof, he shall make a written request to
+    the tender inviting authority for correction/clarification or interpretation or can put in a separate sheet
+    along with his technical bid document.
+
+55. SPLITTING OF THE CONTRACT AND CURTAILMENT OF WORK
+    WTL reserves the right to split up and distribute the work among the successful technically qualified
+    bidders and to curtail any item of work in the schedule partly or fully based on scheme requirement.
+    As it is a time constrained process, the work may be distributed as mentioned above at L1 rate arrived
+    through the process.
+
+56. PREPARATION OF TENDER
+    Tender shall be submitted in accordance with the following instructions:
+       a) Tenders shall be submitted in the prescribed forms. Digital signatures shall be used. Where
+           there is conflict between the words and the figures, the words shall govern.
+       b) All notations must be in ink or type written. No erasing or overwriting will be permitted.
+           Mistakes may be crossed out and corrections typed or written with ink adjacent thereto and
+           must be initialed in ink by the person or persons signing the tender.
+       c) Tenders shall not contain any recapitulation of the work to be done. Alternative proposals will
+           not be considered unless called for. No written, oral, telegraphic or telephonic proposals for
+           modifications will be acceptable.
+       d) Tenders shall be uploaded as notified on or before the date and time set for the opening of
+           tenders in the Notice Inviting Tenders.
+       e) Tenders subject to any conditions or stipulations imposed by the bidder are liable to be
+           rejected.
+                                                                                                            24
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                             WEBEL TECHNOLOGY LIMITED
+        f)   Each and every page of the tender document must be signed with company seal by the bidder.
+
+57. CLARIFICATION OF BIDS
+    During evaluation of the bids, the Customer/Tender Committee, at its discretion may ask the bidder for
+    clarification of its bid. The request for the clarification and the response shall be in writing (fax/email)
+    and no change in the substance of the bid shall seek offered or permitted.
+
+58. COMPLIANCE WITH LAW
+    The contractor hereto agrees that it shall comply with all applicable union, state and local laws,
+    ordinances, regulations and codes in performing its obligations hereunder, including the procurement
+    of licenses, permits certificates and payment of taxes where required.
+    The contractor shall establish and maintain all proper records (particularly, but without limitation,
+    accounting records) required by any law, code/practice of corporate policy applicable to it from time
+    to time including records and returns as applicable under labor legislation.
+
+59. ERASURES OR ALTERNATIONS
+    The offers with overwriting and erasures may make the tender liable for rejection if each of such
+    overwriting/erasures/manuscript ions is not only signed by the authorized signatory of the bidder.
+    There should be no hand-written material, corrections or alterations in the offer. Technical details must
+    be completely filled up. Correct technical information of the product being offered must be filled in.
+    Filling up of the information using terms such as “OK”, “accepted”, “noted”, “as given in
+    brochure/manual” is not acceptable. The Customer may treat offers not adhering to these guidelines
+    as unacceptable. The Customer may, at its discretion, waive any minor non-conformity or any minor
+    irregularity in the offer. This shall be binding on all bidders and the Tender Committee reserves the
+    right for such waivers.
+
+60. FINAL INSPECTION
+    Final inspection may be carried by the authorized representative from WTL & Client.
+
+61. PRE-DISPATCH INSTRUCTION
+    All materials / equipment’s supplied against the purchase order may be subjected to Inspection, check
+    and /or test by the authorized representative from WTL.
+
+62. SITE INSPECTION
+    Bidder can inspect (at their own cost) the sites if required, for which they have to take necessary
+    permission from WTL in writing. WTL will take at least four days to organize such permission.
+
+63. QUALITY CONTROL
+       The contractor is obliged to work closely with WTL act within its authority and abide by
+         directive issued by them on implementation activities.
+       The contractor will abide by the safety measures and free WTL from all demands or
+         responsibilities arising from accident/loss of life, the cause of which is due to their negligence.
+         The bidder will pay all indemnities arising from such incidents and will not hold WTL
+         responsible.
+       The contractor will treat as confidential all data and information about the system, obtained in
+         the execution of its responsibilities in strict confidence and will not reveal such information to
+         any party without the prior written approval of WTL.
+
+                                                                                                             25
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                                  WEBEL TECHNOLOGY LIMITED
+                 WTL reserves the right to inspect all phases of contractor’s operation to ensure conformity to
+                  the specifications. WTL shall have engineers, inspectors or other duly authorized
+                  representatives made known to the contractor, present during the progress of the work and
+                  such representatives shall have free access to the work at all times. The presence or absence
+                  of representatives of WTL does not relieve the contractor of the responsibility for quality control
+                  in all phases.
+                 The Court of Kolkata only will have the jurisdiction to deal with and decide any legal matters or
+                  dispute whatsoever arising out of the contract.
+
+64. SERVICE LEVEL SUPPORT – MATRIX
+
+ #              SLA Parameter                                    Turnaround Time for Support Target Uptime /
+                                                                                             year
+ 1              Availability of Cameras                          48 Hrs. / 2 Days            99.00%
+
+ 2              Availability of Storage and Switches,            48 Hrs. / 2 Days                  99.00%
+
+ 3              Availability Passive Network & VMS               48 Hrs. / 2 Days                  99.00%
+
+ 4              Availability Work Stations, Server, HMS          48 Hrs. / 2 Days                  99.00%
+                application
+
+     Definition:
+        1. “Availability” means availability of
+                  Camera installed in the Police Stations
+                  Active Components: PoE Switch/Storage & HDD/UPS/Desktop/Display Unit
+                  Passive Components: Network Points
+                  VMS Software
+        2. Turnaround time for support: Calculated based on of days
+
+     The support performance shall be calculated for a quarterly/half yearly basis, based on all
+     equipment supplied and based on the calls logged and the resolution of the calls for support. WTL
+     reserves the right to impose penalty on the bidder in case the support SLA performance is lower
+     than the target turnaround time for repair/replacement, as shown below:
+
+                Resolution of complaint for camera, active and passive components within turnaround
+                 time (days) – no penalty
+                Resolution of complaint for camera, active and passive components beyond target
+                 turnaround time for support:
+                     o Rs. 500/- per day, after the allowed turnaround time for support, per camera
+
+                     o   Rs. 1000/- per day after the allowed turnaround time for support, for Storage
+                         work station, server, HMS application components
+                     o   Rs. 400/- per day after the allowed turnaround time for support, for each of
+                         the other active components (PoE Switches, Display & UPS)
+                     o   Rs. 100/- per day after the allowed turnaround time for support for passive
+                         components, excluding power outlets and other accessories.
+                     o   The total amount of penalty for the entire project period should not exceed
+                         3% of the billable amount. Otherwise PBG will be forfeited.
+                     o   If any complain comes within office hours (10 am to 6 pm) will be treated as day 1.
+
+     The SLA for service support in compliance to the minimum SLA required must be submitted by the L1
+     bidder on placement of order. WTL reserves the right to change/modify the SLAs during the
+     finalization of the contractual agreement with the successful bidder.
+
+65. GENERAL TERMS
+                                                                                                                  26
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                            WEBEL TECHNOLOGY LIMITED
+           a) All the documents to be submitted by the bidder along with their offer should be duly
+               authenticated by the person signing the offer and if at any point of time during
+               procurement process or subsequently it is detected that documents submitted are
+               forged/tampered/manipulated in any way, the total responsibility lies with the bidder
+               and WTL reserves the full right to take action as may be deemed fit including rejection
+               of the offer and such case is to be kept recorded for any future dealing with them.
+
+           b) No Technical/Commercial clarification will be entertained after opening of the tender.
+
+           c) Quantity mentioned in the tender document is indicative only and orders shall be placed
+               subject to actual requirement. WTL reserve the right to increase or decrease the quantity
+               specified in the tender.
+
+           d) WTL reserve the right to reject or accept or withdraw the tender in full or part as the case
+               may be without assigning the reasons thereof. No dispute of any kind can be raised the
+               right of buyer in any court of law or elsewhere.
+
+           e) WTL reserve the right to ask for clarification in the bid documents submitted by the
+               bidder. Documents may be taken if decided by the committee.
+
+           f) Supporting technical brochures/catalogues indicating each feature in respect of offered
+               model and make must be submitted along with the offer, in absence of which the offer is
+               liable to be ignored.
+
+           g) No dispute by the bidders in regard to Technical/Commercial points will be entertained
+               by WTL and decision taken by the Tender Committee will be final.
+
+           h) Discrepancy in the amount quoted by the bidder due to calculation mistake, the unit rate
+               shall be regarded as firm and the totaling or carry in the amount quoted by the bidder
+               shall be corrected accordingly.
+
+           i) The price offers shall remain firm within the currency of contract and no escalation of price
+               will be allowed.
+
+           j) The acceptance of the tender will rest with the accepting authority who is not bound to
+               accept the lowest or any tender and reserves the right to reject in part or in full any or all
+               tender(s) received and to split up the work among participants without assigning any
+               reason thereof.
+
+           k) The customer/WTL at its discretion may extend the deadline for the submission of Bids.
+
+           l) The Court of Kolkata only will have the jurisdiction to deal with and decide any legal
+               matters or dispute whatsoever arising out of the contract.
+
+           m) Below mentioned clauses are applicable for all Bidders:
+
+Any bidder from a country which shares a land border with India will not eligible to bid in this tender
+only if the bidder is registered with the Competent Authority [DPIIT OM No.6/18/2019- PPD dated
+23.07.2020].
+                    i. “Bidder” (including the term ‘tenderer’, ‘consultant’ or ‘service provider’ in
+                       certain contexts) means any person or firm or company, every artificial
+                       juridical person not falling in any of the descriptions of bidders stated
+                       hereinbefore, including any agency branch or office controlled by such
+                       person, participating in a procurement process.
+                   ii. “Bidder from a country which shares a land border with India” for the
+                       purpose of above- mentioned Order means:
+
+                                                                                                                27
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                         WEBEL TECHNOLOGY LIMITED
+
+         n) The successful bidder shall not be allowed to sub-contract works to any contractor from a
+             country which shares a land border with India unless such contractor is registered with
+             the Competent Authority.
+
+                                                                                                        28
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                               WEBEL TECHNOLOGY LIMITED
+                                                 SECTION – F
+
+                                                    BID FORM
+
+  (Bidders are requested to furnish the Bid Form in the Format given in this section, filling the entire Blank and to be
+                                         submitted on Letter Head in original)
+
+ To
+ Webel Technology Limited
+ Plot – 5, Block – BP,
+ Sector - V,
+ Salt Lake City,
+ Kolkata – 700091.
+
+Sub: Supply, Installation, Testing, Commissioning of 804 Nos. CCTV cameras with 01 years Storage at 67
+PS with setup for Central Monitoring System and Health Monitoring System of CCTV surveillance system
+of total 91 PS from Lalbazar HQ of Kolkata Police and monitoring from 10 Division offices with 01 (One)
+year onsite comprehensive warranty for Kolkata Police
+
+Dear Sir,
+
+We the undersigned bidder/(s), having read and examined in details the specifications and other
+documents of the subject tender no. WTL/KP/CCTV/26-27/049 Dated 09-09-2026, do hereby propose to
+execute the job as per specification as set forth in your Bid documents.
+
+    1. The prices of all items stated in the bid are firm during the entire period of job irrespective of date
+       of completion and not subject to any price adjusted as per in line with the bidding documents. All
+       prices and other terms & conditions of this proposal are valid for a period of 180 (one hundred
+       eighty) days from the date of opening of bid. We further declare that prices stated in our proposal
+       are in accordance with your bidding.
+
+    2. We confirm that our bid prices include all other taxes and duties and levies applicable on bought
+       out components, materials, equipment and other items and confirm that any such taxes, duties and
+       levies additionally payable shall be to our account.
+
+    3. Earnest Money Deposit & Tender fee: We have transferred EMD & Tender Fee amount online
+       through e-Tender portal.
+
+    4. We declare that items shall be executed strictly in accordance with the specifications and
+       documents irrespective of whatever has been stated to the contrary anywhere else in our proposal.
+       Further, we agree that additional conditions, deviations, if any, found in the proposal documents
+       other than those stated in our deviation schedule, save that pertaining to any rebates offered shall
+       not be given effect to.
+
+    5. If this proposal is accepted by you, we agree to provide services and complete the entire work, in
+       accordance with schedule indicated in the proposal. We fully understand that the work completion
+       schedule stipulated in the proposal is the essence of the job, if awarded.
+
+    6. We further agree that if our proposal is accepted, we shall provide a Performance Bank Guarantee
+       of the value equivalent to ten percent (10%) of the Order value as stipulated in Financial Bid (BOQ).
+
+    7. We agree that WTL reserves the right to accept in full/part or reject any or all the bids received or
+       split order within successful bidders without any explanation to bidders and his decision on the
+       subject will be final and binding on Bidder.
+
+Dated, this …………………..day of ……………………2026
+
+Thanking you, we remain,
+
+                                                                                                                       29
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                       WEBEL TECHNOLOGY LIMITED
+
+Yours faithfully
+
+…………………………………………………
+Signature
+
+………………………………………………………..
+Name in full
+
+………………………………………………………..
+Designation
+
+                                         Signature & Authorized Verified by
+
+                                                  …………………………………………………
+                                                                 Signature
+
+                                                  …………………………………………………
+                                                                Name in full
+
+                                                  …………………………………………………
+                                                               Designation
+
+                                                  …………………………………………………
+                                                             Company Stamp
+
+                                                                              30
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                              WEBEL TECHNOLOGY LIMITED
+                                                SECTION – G
+
+      TECHNO COMMERCIAL EVALUATION & AWARDING OF CONTRACT
+
+1. EVALUATION PROCEDURE
+       The Eligibility Criteria (Section - D) will be evaluated by Tender Committee and those qualify
+         will be considered for further evaluation.
+       The Tender Committee shall verify the Technical Specification (Technical Specification &
+         Compliance Statement, Section – Q) Deviation in specification shall not be allowed. Bidder
+         qualified in Technical Specification shall be considered for further evaluation.
+       The Tender Committee would evaluate the Techno Commercial Evaluation.
+       Bidders after qualifying in Techno Commercial Evaluation will only be considers for Financial
+         Bid Evaluation.
+
+2. EVALUATION CRITERIA
+     Techno Commercial Evaluation
+     The evaluation methodology would take into consideration both the Techno Commercial
+     responsiveness as well as the financial response. During the evaluation process, the evaluation
+     committee will assign each desirable/preferred feature against the Techno Commercial Bid.
+
+3.   FINAL EVALUATION
+     Financial Proposal of the bidders qualifying in the evaluation of Techno Commercial will be evaluated.
+     The bidder who has qualified in the Techno Commercial and returns with lowest quote (L1) in Financial
+     Bid will normally be awarded the contract subject to Post Qualification.
+
+4.   AWARDING OF CONTRACT
+     An affirmative Post Qualification determination will be prerequisite for award of the contract to the most
+     overall responsive bidder for this project. Bidders, if disqualified in the technical evaluation, it will
+     result in rejection of bidder’s bid. Technically qualified bidders shall be evaluated for price bid. The
+     lowest bidder shall be determined through price bid evaluation. WTL will award the contract to the
+     successful bidder whose bid has been determined to be substantially responsive after final negotiation
+     may held with the most responsive bidder (L1), if required.
+
+         Bidders must submit price bid for this project. Any non-compliance to the price bid shall
+          lead to rejection.
+         L1 Bidders shall be awarded the contract for this project.
+
+5.   POST QUALIFICATION
+     The determination will evaluate the Bidder’s financial, technical, design, integration, customization,
+     production, management and support capabilities and will be based on an examination of the
+     documentary evidence of the Bidder’s qualification, as well as other information WTL deems
+     necessary and appropriate. This determination may include visits or interviews with the Bidder’s
+     client’s reference in its bid, site inspection, and any other measures. At the time of post-qualification,
+     Department of Par & e-Governance may also carry out tests to determine that the performance or
+     functionality of the Information System offered meets those stated in the detailed Technical
+     Specification.
+
+                                                                                                              31
+ WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                             WEBEL TECHNOLOGY LIMITED
+
+                                              SECTION – H
+
+                                GUIDANCE FOR E-TENDERING
+
+ Instructions / Guidelines for electronic submission of the tenders have been annexed for
+ assisting the Bidders to participate in e-Tendering.
+
+    1.   Registration of Bidder:
+         Any Bidder willing to take part in the process of e-Tendering will have to be enrolled &
+         registered with the Government e-Procurement System through logging on to
+         https://wbtenders.gov.in. The Bidder is to click on the link for e-Tendering site as given on
+         the web portal.
+
+    2.   Digital Signature Certificate (DSC):
+         Each Bidder is required to obtain a Class-II or Class-III Digital Signature Certificate (DSC)
+         for submission of tenders from the approved service provider of the National Informatics
+         Centre (NIC) on payment of requisite
+         amount. Details are available at the Web Site stated above. DSC is given
+         as a USB e-Token.
+
+    3.   The Bidder can search & download N.I.T. & BOQ electronically from computer once he logs
+         on to the website mentioned above using the Digital Signature Certificate. This is the only mode
+         of collection of Tender Documents.
+
+    4.   Participation in more than one work:
+         A prospective bidder shall be allowed to participate in the job either in the capacity of individual
+         or as a partner of a firm. If, found to be applied severally in a single job all the applications will
+         be rejected.
+
+    5.   Submission of Tenders:
+         Tenders are to be submitted through online to the website stated above in two folders at a time,
+         one in Techno Commercial Proposal & the other is Financial Proposal before the prescribed
+         date & time using the Digital Signature Certificate (DSC). The documents are to be uploaded
+         virus scanned copy duly Digitally Signed. The documents will get encrypted (transformed into
+         non readable formats)
+
+ The proposal should contain scanned copies of the following in two covers (folders).
+
+Techno Commercial Cover:
+
+Technical Document1
+   1. Bid Form as per format (Section – F)
+   2. Other documents, if any
+
+Technical Document2
+   1. N I T Declaration duly stamped & signed in bidder’s letter head, (Section – P)
+   2. Other documents, if any
+
+ Technical Compliance
+    1. Detailed Technical Specification with required documents, Section – R
+    2. Manufacturer Authorization Form, Section – S
+    3. Detailed Make, Mode with required documents, Section – Q
+
+Financial Cover:
+BOQ (Bill of Quantity) will be downloaded and same will be uploaded with quoted rates. While uploading
+BOQ file name shall remain unchanged. Absence of this document shall lead to summary rejection of the
+bid.
+
+                                                                                                              32
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                          WEBEL TECHNOLOGY LIMITED
+
+NON-STATUTARY COVER (MY SPACE) CONTAIN FOLLOWING DOCUMENT:
+(In each folder, scanned coy will be uploaded with single file having multiple pages)
+
+ Sl.     Category Name         Sub Category Name                  Sub Category Description
+ No.
+
+  A     CERTIFICATES         A1. CERTIFICATES                GST Registration Number
+                                                             PAN
+                                                             Document as per Section – D
+  B     COMPANY DETAILS      B1. COMPANY                     Document as per Section – D
+                             DETAILS 1                       Declaration as per Section – B
+                             B2. COMPANY                     ISO Certificate as per Section –D
+                             DETAILS 2
+  C     CREDENTIAL           CREDENTIAL 1                    Order copies as per Section – D
+                             CREDENTIAL 2                    Product brochure
+                                                             Other documents, if any
+  D     DECLARATION          DECLARATION 1                   List of Clients as per format (Section – N)
+                                                             Financial Capability of Bidder as per format
+                                                              (Section – K)
+                             DECLARATION 2                 Document as per Section – D
+                                                           Other documents, if any
+                             DECLARATION 3                 Bidder’s Details as per format (Section – L)
+                                                           Service Centre Details as per format
+                                                              (Section – R)
+                             DECLARATION 4                 Details of Capability as per format (Section
+                                                              – J)
+                                                           Checklist as per Section – T
+                             DECLARATION 5                 Other documents, if any
+  F     FINANCIAL INFO       P/L & BALANCE SHEET       P/L & BALANCE SHEET 2022-2023
+                             2022-2023
+                             P/L & BALANCE SHEET       P/L & BALANCE SHEET 2023-2024
+                             2023-2024
+                             P/L & BALANCE SHEET       P/L & BALANCE SHEET 2024-2025
+                             2024-2025
+
+                                                                                                    33
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                              WEBEL TECHNOLOGY LIMITED
+
+                                                  SECTION – I
+
+                              TOTAL UN-PRICE BILL OF MATERIAL
+
+             (As per Technical Specification as mentioned in SECTION – R)
+
+ A        Unpriced BoQ of for SITC of CCTV Surveillance System with 1 year onsite warranty at 67 Nos. PS
+
+ SL.                                  Item Descriptions                                  Qty       UoM
+
+ 1     4 MP fixed Lens Bullet Camera with two-way built-in voice/audio feature.         737        Nos.
+       4 MP Motorized Varifocal Bullet Camera with two-way built-in voice/audio
+ 2     feature.                                                                          67        Nos.
+
+ 3     64 Channel NVR with 16 SATA ports (Backup for minimum 12 months)                  67        Nos.
+ 4     8 TB Surveillance HDD (16 HDD per NVR)                                           1072       Nos.
+ 5     24 Port PoE Switch with minimum 370 W power budget                               67         Nos.
+ 6     VMS (Video Management Software) License for client systems                       804        Nos.
+ 7     43 inch LED TV for monitoring                                                    67         Nos.
+       2 KVA Online UPS with minimum 1 hours backup
+ 8                                                                                       67        Nos.
+
+  9    15U Rack with fan for mounting NVR, PoE switch and accessories                    67        Nos.
+ 10    CAT-6 UTP Cable                                                                  58960      Mtrs.
+       Client Workstation with Key board, Mouse, Monitor at Police Station and Police
+ 11    Posts (256 GB SSD and 1 TB SATA HDD)                                              67        Nos.
+
+       Miscellaneous Cost (Materials and installation charges including earthing,
+ 12    protection devices, ISI marked PVC conduit, and all accessories                   67     Lump sum
+
+           Unpriced BoQ of for SITC of CCTV Surveillance monitoring system for 91 PS with 1 year onsite
+ B
+                             comprehensive warranty for 10 DROs of Kolkata Police.
+
+ SL.                                  Item Descriptions                                  Qty       UoM
+
+       Client Workstation with Key board, Mouse, Monitor at Police Headquarter and
+ 14                                                                                      10        Nos.
+       higher offices (512 GB SSD and 6 TB SATA HDD)
+
+       Line Interactive UPS with load capacity of 360 Watts / 600 VA with 15 mnts
+ 15                                                                                      10        Nos.
+       backup.
+       Video Management Application for viewing on demand and viewing recorded
+ 16                                                                                      10        Nos.
+       data
+ 17    55 inch LED TV for monitoring                                                    10         Nos.
+ C          Unpriced BoQ for SITC of CCTV surveillance monitoring system for 91 PS with 1 year onsite
+                                 comprehensive warranty at Kolkata Police HQ.
+
+                                      Item Descriptions                                  Qty       UoM
+       Client Workstation with Key board, Mouse, Monitor at Police Headquarter and
+ 18    higher offices (512 GB SSD and 6 TB SATA HDD)                                      1               No.
+
+                                                                                                                34
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                              WEBEL TECHNOLOGY LIMITED
+       Line Interactive UPS with load capacity of 360 Watts / 600 VA with 15 mnts
+ 19    backup.                                                                      1        No.
+
+       Centralized Video Management Application for viewing on demand and viewing
+ 20                                                                                 1        No.
+       recorded data
+ 21    HMS Application (Health Monitoring Software)                                 1        No.
+ 22    HMS Server (High Availability Mode)                                          1        No.
+ 23    55 inch LED TV for monitoring                                                1        No.
+ 24    2 KVA Online UPS with minimum 1 hours backup                                 1        No.
+
+       Unpriced BoQ of Establishment of network connectivity with 91 PSs, 10 DROs and 1 HQ for
+ D                                Centralised Monitoring System.
+ SL.                                  Item Descriptions                             Qty   UoM
+       Installation, Integration (along with required equipment), Testing and
+ 25    Commissioning of existing WAN network infrastructure of KP with LAN of 10    102   Nos.
+       DROs, 1 HQ and 91 Police Stations. (One year warranty)
+
+        Unpriced BoQ of Centralised Monitoring System of Existing 616 Nos. CCTV installed at 24
+ E                                   PSs from 10 DROs and 1 HQ.
+ SL.                                  Item Descriptions                             Qty   UoM
+       VMS (Video Management Software) License for client systems
+ 26                                                                                 616   Nos.
+
+                                                                                                   35
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                             WEBEL TECHNOLOGY LIMITED
+
+                                                     SECTION – J
+
+                       DETAILS OF TECHNICAL CAPABILITY OF BIDDER
+                                    WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                                                  Brief description of project
+  Sl.                                 End Date          & scope of work          Type of   Approx value     Contact details
+        Project Name   Start Date
+  No.                                  / Status   (Implementation, operation     project   of the project   of the Customer
+                                                        & maintenance)
+
+Authorized Signatory (Signature In full): _________________________________
+
+Name and title of Signatory: __________________________________________
+
+Stamp of the Company: ______________________________________________
+
+           a.   Type of Project shall indicate the implementation of services (Networking Setup, System Integration).
+           b.   Scope of work shall indicate whether it is implementation, Operation or maintenance.
+           c.   Submit Customer Order Copy details of the order indicating the project value, customer contact
+                details, project completion certificate, customer satisfaction certificate etc.
+
+                                                                                                                     36
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                          WEBEL TECHNOLOGY LIMITED
+
+                                           SECTION – K
+
+                           FINANCIAL CAPABILITY OF BIDDER
+
+                      (TENDER NO-WTL/KP/CCTV/26-27/049 Dated 09-09-2026)
+
+                                  FINANCIAL INFORMATION
+
+                                                                Turnover (Rs. / Crores)
+ Sl.      Name of the Bidder
+                                                    2024-2025         2023-2024           2022-2023
+ No.
+
+ 1
+
+       Authorized Signatory (Signature In full): _________________________________
+
+       Name and title of Signatory: __________________________________________
+
+       Stamp of the Company: ______________________________________________
+
+                                                                                                      37
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                           WEBEL TECHNOLOGY LIMITED
+
+                                            SECTION – L
+
+                                       BIDDERS’S DETAILS
+
+                      (TENDER NO-WTL/KP/CCTV/26-27/049 Dated 09-09-2026)
+
+1    Name of the Firm
+2    Registered Office Address
+     Contact Number
+     Fax Number
+     E-mail
+3    Correspondence / Contact address
+     Name & Designation of Contact person
+     Address
+     Contact Number
+     Fax Number
+     E-mail
+4    Is the firm a registered company? If yes, submit
+     documentary proof
+     Year and Place of the establishment of the company
+6    Former name of the company, if any
+7    Is the firm
+           a Government/ Public Sector Undertaking
+           a propriety firms
+           a partnership firm (if yes, give partnership deed)
+           a limited company or limited corporation
+           a member of a group of companies, (if yes, give
+           name and address and description of other
+               companies)
+           a subsidiary of a large corporation (if yes give the
+               name and address of the parent organization). If
+               the company is subsidiary, state what
+               involvement if any, will the parent company have
+               in the project.
+8    Is the firm registered with Sales Tax department? If yes,
+     submit valid GST Registration certificate.
+9    Is the firm registered for Service Tax with Central Excise
+     Department (Service Tax Cell)? If yes, submit valid
+     Service Tax registration certificate.
+10   Total number of employees. Attach the organizational
+     chart showing the structure of the organization.
+11   Are you registered with any Government/ Department/
+     Public Sector Undertaking (if yes, give details)
+12   How many years has your organization been in business
+     under your present name? What were your fields when
+     you established your organization
+13   What type best describes your firm? (Purchaser reserves
+     the right to verify the claims if necessary)
+                Manufacturer
+                Supplier
+                System Integrator
+                Consultant
+                Service Provider (Pl. specify details)
+                Software Development
+                Total Solution provider (Design, Supply,
+
+                                                                           38
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                           WEBEL TECHNOLOGY LIMITED
+                  Integration, O&M)
+                IT Company
+ 14   Number of Offices in district headquarters in West Bengal
+ 15   Is your organization having ISO 9001:2015 certificates?
+ 16   List the major clients with whom your organization has
+      been / is currently associated.
+ 17   Have you in any capacity not completed any work
+      awarded to you? (If so, give the name of project and
+      reason for not completing the work)
+ 18   Have you ever been denied tendering facilities by any
+      Government / Department / Public sector Undertaking?
+      (Give details)
+
+Authorized Signatory (Signature In full): _________________________________
+
+Name and title of Signatory: __________________________________________
+
+Company Rubber Stamp: __________________________________________________
+
+                                                                              39
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                            WEBEL TECHNOLOGY LIMITED
+                                             SECTION – M
+
+                                    PRE-BID MEETING QUERY
+
+                        (TENDER NO-WTL/KP/CCTV/26-27/049 Dated 09-09-2026)
+
+Name of the Bidder:
+
+Queries
+
+  Sl.      Section     Clause      Page                                 Queries
+  No.        No.        No.         No.
+
+Note: The filled form to be submitted in XLS and PDF Format. There is a cut off date for receiving of
+queries before Pre Bid Meeting. Queries received after the cutoff period will not be accepted. The
+Purchaser reserves the right to respond all queries over e-mail.
+
+Authorized Signatory (Signature In full): _________________________________
+
+Name and title of Signatory: __________________________________________
+
+Company Rubber Stamp: __________________________________________________
+
+                                                                                                        40
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                           WEBEL TECHNOLOGY LIMITED
+                                            SECTION - N
+
+                           LIST OF CLIENTS OF SIMILAR ORDERS
+                       (TENDER NO-WTL/KP/CCTV/26-27/049 Dated 09-09-2026)
+
+  Sl.                                                            Contact                    Contact
+              Name of the Client              Address                         Designation
+  No.                                                            Person                     Numbers
+
+Authorized Signatory (Signature In full): _________________________________
+
+Name and title of Signatory: __________________________________________
+
+Company Rubber Stamp: __________________________________________________
+
+                                                                                                41
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                             WEBEL TECHNOLOGY LIMITED
+                                              SECTION – O
+
+                  PROFORMA FOR PERFORMANCE BANK GUARANTEE
+   (On non-judicial stamp paper of appropriate value to be purchased in the name of executing Bank)
+
+            PROFORMA OF BANK GUARANTEE FOR SECURITY DEPOSIT –CUM-PRFORMANCE
+                                      GUARANTEE
+
+Ref …………………….. Bank Guarantee no…………….
+
+Date…………………..
+                                PROFORMA OF BG FOR SECURITY DEPOSIT
+
+KNOW ALL MEN BY THESE PRESENTS that in consideration of WEBEL TECHNOLOGY LIMTED, a
+Government of West Bengal Undertaking incorporated under the Companies Act, 1956 having its
+Registered office at Plot - 5, Block BP, Sector V, Kolkata-700 091 (hereinafter called “The Purchaser”) having
+agreed to accept from ______________________(hereinafter called “The Contractor”) Having its Head Office
+at ______________________, a Bank guarantee for Rs. _____________ in lieu of Cash Security Deposit for the
+due fulfillment by the Contractor of the terms & conditions of the Work Order No.
+___________________dated____________ issued by the Purchaser for ________________________________
+(hereinafter called “the said work order ________________ _______dated____________)”. We
+________________ (Name & detailed address of the branch) (hereinafter called “the Guarantor”) do hereby
+undertake to indemnify and keep indemnified the Purchaser to the extent of Rs.__________ (Rupees
+____________ _____________) only against any loss or damage caused to or suffered by the Purchaser by
+reason of any breach by the Contractor of any of the terms and conditions contained in the said Work Order
+No. ____________________ dated__________________ of which breach the opinion of the Purchaser shall be
+final and conclusive.
+
+(2) AND WE, ____________________DO HEREBY Guarantee and undertake to pay forthwith on demand to
+the Purchaser such sum not exceeding the said sum of ________Rupees_______________) only as may be
+specified in such demand, in the event of the Contractor failing or neglecting to execute fully efficiently and
+satisfactorily the order for __________________________ _______________ Work Order no. ,
+_______________dated _________
+
+(3) WE __________________________ further agree that the guarantee herein contained shall remain in full
+force and effect during the period that would be taken for the performance of the said order as laid down
+in the said Work Order No. ________________ dated _______________ including the warranty obligations and
+that it shall continue to be enforceable till all the dues of the Purchaser under or by virtue of the said Work
+Order No. _________________ dated _____________ have been fully paid and its claims satisfied or is charged
+or till the Purchaser or its authorized representative certified that the terms and conditions of the said Work
+Order No. ______________________ dated _________________ have been fully and properly carried out by
+the said contractor and accordingly discharged the guarantee.
+(4) We _____________________________ the Guarantor undertake to extend the validity of Bank Guarantee
+at the request of the contractor for further period of periods from time to time beyond its present validity
+period failing which we shall pay the Purchaser the amount of Guarantee.
+
+(5) The liability under the Guarantee is restricted to Rs. _________ (Rupees ______________
+___________________) only and will expire on ______________ and unless a claim in writing is presented to
+us or an action or suit to enforce the claim is filled against us within 6 months from _______________ all your
+rights will be forfeited and we shall be relieved of and discharged from all our liabilities (thereinafter)
+
+(6) The Guarantee herein contained shall not be determined or affected by liquidation or winding up or
+insolvency or closer of the Contractor.
+
+(7) The executants has the power to issue this guarantee on behalf of Guarantor and holds full and valid
+power of Attorney granted in his favour by the Guarantor authorizing him to execute the Guarantee.
+
+(8) Notwithstanding anything contained herein above, our liability under this guarantee is restricted to Rs.
+                                                                                                            42
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                           WEBEL TECHNOLOGY LIMITED
+__________ (Rupees _________________________) only and our guarantee shall remain in force up to
+_______________ and unless a demand or claim under the guarantee is made on us in writing on or before
+_______________ all your rights under the guarantee shall be forfeited and we shall be relieved and
+discharged from all liabilities there under.
+
+WE, __________________________ lastly undertake not to revoke this guarantee during the currency except
+with the previous consent of the Purchaser in writing. In witness whereof we
+___________________________have set and subscribed our hand on this ________________________ day of
+_____________________.
+
+                                                            SIGNED, SEALED AND DELIVERED
+
+                                                                    ______________________
+                                                                    (Stamp of the executants)
+WITNESS
+   1) ______________________
+
+   2) ______________________
+   (Name & address in full with Rubber Stamp)
+
+                                                                                                    43
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                          WEBEL TECHNOLOGY LIMITED
+
+                     INSTRUCTIONS FOR FURNISHING BANK GUARANTEE
+
+  1. Bank Guarantee (B.G.) for Advance payment, Mobilization Advance, B.G. for security Deposit-cum-
+      Performance Guarantee, Earnest Money should be executed on the Non- Judicial Stamp paper of
+      the applicable value and to be purchased in the name of the Bank.
+  2. The Executor (Bank authorities) may mention the Power of Attorney No. and date of execution in
+      his/her favour with authorization to sign the documents. The Power of Attorney is to be witnessed
+      by two persons mentioning their full name and address.
+  3. The B.G. should be executed by a Nationalised Bank/ Scheduled Commercial Bank preferably on a
+      branch located in Kolkata. B.G. from Co-operative Bank / Rural Banks is not acceptable.
+  4. A Confirmation Letter of the concerned Bank must be furnished as a proof of genuineness of the
+      Guarantee issued by them.
+  5. Any B.G. if executed on Non-Judicial Stamp paper after 6 (six) months of the purchase of such stamp
+      shall be treated as non-valid.
+  6. Each page of the B.G. must bear signature and seal of the Bank and B.G. Number.
+  7. The content of the B.G. shall be strictly as Proforma prescribed by WTL in line with Purchase Order
+      /LOI/ Work Order etc. and must contain all factual details.
+  8. Any correction, deletion etc. in the B.G. should be authenticated by the Bank Officials signing the
+      B.G.
+  9. In case of extension of a Contract the validity of the B.G. must be extended accordingly.
+  10. B.G. must be furnished within the stipulated period as mentioned in Purchase Order / LOI / Work
+      Order etc.
+  11. Issuing Bank / The Bidder are requested to mention the Purchase Order / Contract / Work Order
+      reference along with the B.G. No. For making any future queries to WTL.
+
+                                                                                                     44
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                              WEBEL TECHNOLOGY LIMITED
+
+                                                 SECTION – P
+
+                                 NIT DECLARATION FOR BIDDER
+ (Bidders are requested to furnish the Format given in this section, filling the entire Blank and to be submitted on
+                                              Bidder’s Letter Head)
+
+ To
+ Webel Technology Limited
+ Plot–5, Block–BP, Sector-V,
+ Salt Lake City,
+ Kolkata–700091.
+
+ Sub : Supply, Installation, Testing, Commissioning of 804 Nos. CCTV cameras with 01 years Storage at 67
+ PS with setup for Central Monitoring System and Health Monitoring System of CCTV surveillance system
+ of total 91 PS from Lalbazar HQ of Kolkata Police and monitoring from 10 Division offices with 01 (One)
+ year onsite comprehensive warranty for Kolkata Police
+
+Dear Sir,
+
+We the undersigned bidder/(s) declare that we have read and examined in details the specifications
+and other documents of the subject (TENDER NO-WTL/KP/CCTV/26-27/049 Dated 09-09-2026)for Supply,
+Installation, Testing, Commissioning of 804 Nos. CCTV cameras with 01 years Storage at 67 PS with and
+setup for Central Monitoring System and Health Monitoring System of CCTV surveillance system of total 91
+PS from Lalbazar HQ of Kolkata Police and monitoring from 10 Division offices with 01 (One) year onsite
+comprehensive warranty for Kolkata Police in e-Tender website.
+
+We further declare that we have agreed and accepted all the clauses / sub-clauses / formats / terms &
+conditions other requirements related to the said tender and we will abide by the same as mentioned in
+the tender document while participating and executing the said tender.
+
+Thanking you, we remain
+
+Yours faithfully
+
+ …………………………………………………
+ Signature
+
+ ………………………………………………………..
+ Name in full
+
+ ………………………………………………………..
+ Designation
+
+ ………………………………………………………..
+ Company Stamp
+
+ Dated, this…………………..day of………………2026
+
+                                                                                                                   45
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                              WEBEL TECHNOLOGY LIMITED
+
+                                                 SECTION – Q
+
+                     MAKE & MODEL / PART NUMBER DECLARATION
+                         (TENDER NO-WTL/KP/CCTV/26-27/049 Dated 09-09-2026)
+
+ A     SITC of CCTV Surveillance System with 1 year onsite warranty at 67 Nos. PS
+
+ SL.                  Item Descriptions                  Qty    UoM       Make        Model         Part No.
+       4 MP fixed Lens Bullet Camera with two-way
+ 1     built-in voice/audio feature.                    737      Nos.
+
+       4 MP Motorized Varifocal Bullet Camera with
+ 2     two-way built-in voice/audio feature.             67      Nos.
+
+       64 Channel NVR with 16 SATA ports (Backup
+ 3                                                       67      Nos.
+       for minimum 12 months)
+       8 TB Surveillance HDD (16 HDD per NVR)
+ 4                                                      1072     Nos.
+       24 Port PoE Switch with minimum 370 W
+ 5                                                       67      Nos.
+       power budget
+       VMS (Video Management Software) License
+ 6                                                      804      Nos.
+       for client systems
+ 7     43 inch LED TV for monitoring                     67      Nos.
+       2 KVA Online UPS with minimum 1 hour
+ 8     backup                                            67      Nos.
+
+       15U Rack with fan for mounting NVR, PoE
+ 9                                                       67      Nos.
+       switch and accessories
+ 10    CAT-6 UTP Cable                                  58960   Mtrs.
+       Client Workstation with Key board, Mouse,
+ 11    Monitor at Police Station and Police Posts        67      Nos.
+       (256 GB SSD and 1 TB SATA HDD)
+
+       SITC of CCTV Surveillance monitoring system for 91 PS with 1 year onsite comprehensive warranty for 10
+ B
+       DROs of Kolkata Police.
+
+ SL.                 Item Descriptions                   Qty    UoM       Make        Model         Part No.
+       Workstation with Key board, Mouse, Monitor
+ 12    at Police Headquarter and higher offices (512     10      Nos.
+       GB SSD and 6 TB SATA HDD)
+       Line Interactive UPS with load capacity of 360
+ 13    Watts / 600 VA with 1 no.7 AH battery             10      Nos.
+
+       Video Management Application for viewing
+ 14    on demand and viewing recorded data               10      Nos.
+
+ 15    55 inch LED TV for monitoring                     10      Nos.
+
+                                                                                                                46
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                              WEBEL TECHNOLOGY LIMITED
+ C     SITC of CCTV surveillance monitoring system for 91 PS with 1 year onsite comprehensive warranty at
+       Kolkata Police HQ.
+
+                     Item Descriptions                  Qty    UoM       Make         Model         Part No.
+       Workstation with Key board, Mouse, Monitor
+ 16    at Police Headquarter and higher offices (512     1       No.
+       GB SSD and 6 TB SATA HDD)
+       Line Interactive UPS with load capacity of 360
+ 17    Watts / 600 VA with 1 no.7 AH battery             1       No.
+
+       Centralized Video Management Application
+ 18    for viewing on demand and viewing recorded        1       No.
+       data
+       HMS Application (Health Monitoring
+ 19                                                      1       No.
+       Software)
+ 20    HMS Server (High Availability Mode)               1       No.
+ 21    55 inch LED TV for monitoring                     1       No.
+       2 KVA Online UPS with minimum 1 hour
+ 22                                                      1       No.
+       backup
+       Centralised Monitoring System of Existing 616 Nos. CCTV installed at 24 PSs from 10 DROs and 1
+ D     HQ.
+ SL.                   Item Descriptions                Qty    UoM       Make         Model         Part No.
+       VMS (Video Management Software) License
+ 23                                                     616    Nos.
+       for client systems
+
+          Authorized Signatory (Signature In full):
+
+          Name and title of Signatory:
+
+          Company Rubber Stamp:
+
+                                                                                                               47
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                        WEBEL TECHNOLOGY LIMITED
+
+                                        SECTION – R
+
+            TECHNICAL SPECIFICATION COMPLIANCE STATEMENT
+                  (Tender No- WTL/KP/CCTV/26-27/049 Dated 09-09-2026)
+
+  A. Eligibility Criteria for IP CCTV Camera, Network Video Recorder & VMS OEM
+
+ SL                    Minimum Eligibility Criteria for CCTV OEM:
+                                                                                         Compliance
+      A. OEM Presence and Registration in India
+      The OEM of CCTV and all associated subsystems must have a direct presence
+      in India, with a registered office under the Companies Act, 1956/2013,
+      continuously for the past ten (10) years or more.
+      Representation through any dealer, distributor, partnership, or consortium shall
+      not be considered as OEM presence.
+  1
+      The OEM must submit relevant statutory documents as proof of compliance.
+      B. OEM Manufacturing Capability
+      The OEM of CCTV must have an operational manufacturing facility, either within
+      India or globally, for a minimum period of seven (7) years or more.
+      Appropriate documentary evidence supporting the existence and operational
+      status of the manufacturing facility must be submitted.
+      The OEM of CCTV must have an average annual turnover of at least ₹500
+      Crore, derived from CCTV, or other similar surveillance-technology business
+      operations in India, during the last three (3) financial years — FY 2025-26, FY
+  2
+      2024-25, and FY 2023-24.
+      To establish compliance, the OEM shall submit audited financial statements, duly
+      certified by a statutory auditor, as documentary evidence.
+      The OEM of CCTV and the offered products must not originate from any country
+      sharing a land border with India, in compliance with General Financial Rule
+      (GFR) 144.
+  3   The CCTV OEM must also be listed among the Top 20 global security
+      companies, as published by asmag.com.
+      Products whose origin is from any border-sharing country with India shall not be
+      permitted to participate under any circumstances.
+
+                                                                                              48
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                          WEBEL TECHNOLOGY LIMITED
+
+       The OEM of CCTV must possess valid ISO certifications covering Quality
+       Management, Environmental Management, Information Security Management,
+       Occupational Health & Safety, Energy Management, IT Service Management,
+       and Cybersecurity Guidelines, applicable to the manufacturing of all types of
+       CCTV, their sub-systems, and other similar surveillance-technology products.
+       The bidder shall submit copies of the OEM’s ISO certificates along with the bid
+       as documentary evidence.
+  4    The required certifications include:
+       ISO 9001:2015 — Quality Management System
+       ISO 14001:2015 — Environmental Management System
+       ISO 27001:2013 — Information Security Management System
+       ISO 45001:2018 — Occupational Health & Safety Management System
+       IEC 27032:2012 — Cybersecurity Guidelines
+       ISO 50001:2018 — Energy Management System
+       ISO 20000-1:2018 — IT Service Management
+
+       CMMI Level 5 — Capability Maturity Model Integration (Development/Services)
+       The OEM of -CCTV must comply with the General Data Protection Regulation
+       (GDPR) for data protection and privacy management in all relevant product and
+       system operations.
+       The OEM must also possess a valid Extended Producer Responsibility (EPR)
+  5    License/Authorization Number issued by the Central Pollution Control Board
+       (CPCB) for Electrical and Electronic Equipment (EEE) E-Waste management.
+       The bidder shall submit copies of the OEM’s GDPR compliance declaration or
+       GDPR Certificate and the CPCB-issued EPR authorization certificate along with
+       the technical bid as documentary evidence.
+       The OEM of CCTV must operate a self-owned Research and Development
+       (R&D) Centre located in India.
+       The R&D Centre must be registered with the Department of Scientific and
+  6
+       Industrial Research (DSIR) under the applicable Government of India guidelines.
+       Documentary evidence confirming DSIR registration shall be submitted along
+       with the bid.
+       The OEM of CCTV must maintain an established office along with a fully
+       functional service/support centre in the state of West Bengal, continuously for a
+       minimum period of ten (10) years.
+  7
+       The bidder shall submit documentary evidence demonstrating the OEM’s
+       presence and operational tenure, including sales tax, service tax, or other
+       applicable statutory registration certificates, as part of the bid.
+       The CCTV OEM must have supplied a minimum quantity of 5,000 CCTV camera
+       units in a single order to any security agency or department in India during the
+  8    three (3) years, as on the bid submission date.
+       Documentary evidence, including purchase orders and supply records, must be
+       submitted to establish compliance.
+       The OEM shall mandatorily submit valid and verifiable STQC-ER, BIS, RoHS,
+       FCC, CE compliance certificates, and HEVC (H.265) license—each issued
+  9    strictly in the name of the OEM and corresponding exactly to the
+       offered - Camera model; all such certifications shall be physically verified by the
+       BOO/Inspection Team during technical evaluation and demonstration.
+       With reference to ‘Make in India’, following policies (including any further
+ 10
+       amendments, if any, as on bid submission day) will be applicable:
+       Policy released by Ministry of Electronics and Information Technology (MeitY),
+  I.   Government of India dated 14th September 2017 having no. F.No.33(1)/2017-
+       IPHW and any further amendments.
+
+                                                                                             49
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                           WEBEL TECHNOLOGY LIMITED
+       Policy released by Ministry of Communications, Department of
+  II.  Telecommunications (DoT), Government of India dated 29th August 2018 having
+       no. 18-10/2017-IP and any further amendments.
+       Policy released by Department of Promotion of Industry and Internal Trade,
+  III. Ministry of commerce and industry, Government of India dated 4th June 2020
+       having no. P-45021/2/2017-PP (BE-II) and any further amendments.
+       The Gazette of India : Ministry of Electronics and Information Technology
+       (MeitY), (IPHW Division), Extraordinary, Part II – Section 3 – Sub Section (ii)
+  IV.
+       dated 7th March 2024 dated 6th March 2024 having No. 1062 (CG-DL-E-
+       08032024-252738)
+        Note : In compliance to the said notification from MeitY, Bidder has to ensure that
+        OEMs must submit BIS Certificate with ER of the offered CCTV Camera.
+
+B. (1 ) Video Management Software (VMS)
+
+                                                                                              Compliance
+  SL                          Video Management Software (VMS)
+                                                                                               (Yes/No)
+        VMS should be Centralized Management system designed for large-scale and
+  1     industrial applications
+  2     VMS should be capable to add up to 20000 Channels through Cascading.
+  3     VMS Should be capable to add 2 PB Storage with Multiple Sub Servers.
+        VMS should Supports hot standby N + M redundancy that enable the failover
+  4     servers to serve as backup to primary recording and event servers.
+  5     VMS should allows integration of other systems and devices via ONVIF.
+        VMS Should provides centralized video monitoring, alarm controller, POS, and
+        supports AI features such as face Recognition, Automatic Number Plate
+  6     Recognition (ANPR), and Video Metadata
+        Features :
+  7     Automatically back up system database by day, week or month.
+  8     Manually Backup
+  9     Data & Event Synchrinization
+  10    Third-party devices via ONVIF protocol
+        Supports intelligent channels such as Motion detection, Tripwire, Intrusion, Face
+  11    detection, Face Recognition, People Counting, and Heat map and more.
+  12    Three Layer User - Super Admin, Admin & User
+        Manage the user’s permissions by role (device permissions, control permissions,
+  13    and menu permissions)
+  14    Log in to different clients with the same account at the same time
+  15    Supports edge storage, central storage and Extend storage via iSCSI.
+  16    Disk quota: Group disks, and cameras can be allocated to different disk groups
+  17    Add, edit, and delete vehicle information& their owner information
+  18    View real-time video
+  19    Layout (1/4/6/8/9/13/16/20/25/36/64 ) and customized layout
+        Open more than one channel at the same time. Up to 16 channels are
+  20    supported.
+                                                                                                   50
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                        WEBEL TECHNOLOGY LIMITED
+ 21   Digital & Optical zoom supported
+ 22   PTZ features like Pan, Tilt, Optical zoom, Digital Zoom
+ 23   Fisheye & Panoramic Camera view
+      Region of interest: Divides one window into 4 or 6 parts, one for whole image,
+ 24   others for the details
+ 25   Save the current monitoring image as a view
+ 26   Up to 4 live view tabs
+ 27   Video tour by device, organization, favorites, and view
+ 28   Play back video recordings from devices or central storage
+ 29   Slow and fast forward (up to 64X and 1/64X)
+ 30   Play back video recordings frame by frame.
+ 31   Lock or mark important recordings for central storage
+ 32   Download the video in avi, dav, mp4 and asf formats
+ 33   Google online map, Google offline map and raster map.
+ 34   Up to 8-level sub map
+ 35   View the live or recorded video on the map
+ 36   Area or distance measurement on GIS map
+      Events - Linkage: Recording, snapshot, live video, alarm output, audio
+ 37   and light, PTZ, video wall, HTTP URL command, E-mail
+ 38   Acknowledge the event
+ 39   Forward the event to relevant user.
+ 40   Generate tracks based on person, vehicle records
+ 41   Server running status: CPU, RAM, disk, network and service
+ 42   Storage information: Video, face/alarm picture, ANPR picture and incident file
+ 43   Organizations 10 levels; up to 999 organizations in total
+ 44   Users 190 online users and 2,000 total users
+ 45   Number of Raster Maps 256
+      Personnel and Vehicle Management
+ 46   Persons 300,000
+ 47   Faces 300,000
+ 48   Vehicles 50,000
+ 49   Faces per Face Watch List 50,000
+ 50   Vehicle Watch Lists 32
+ 51   Total Event Records 20,000,000
+ 52   Face Recognition Records 20,000,000
+ 53   Number Plate Recognition Records 5,000,00
+ 54   Heat Map Records 5,000,000
+ 55   Video Metadata Records 5,000,000
+ 56   Operator Logs 5,000,000
+      Per Server Video Devices and Channels
+ 57   Video Devices and Channels 1,000 devices; 2,000 channels
+ 58   ANPR Channels 500 channels
+ 59   Face Recognition 100 devices; 500 channels
+ 60   Video Metadata 500 Channels
+ 61   Heat Map 100 Channels
+ 62   People Counting 100 Channels
+
+                                                                                       51
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                           WEBEL TECHNOLOGY LIMITED
+ 63     Total Incoming Bandwidth 600 Mbps per Server
+ 64     Total Outgoing Bandwidth 600 Mbps per Server
+ 65     Total Storage Bandwidth 600 Mbps per Server
+ 66     Maximum Capacity Storage 200TB per Server
+ 67     Total Events 300 per second
+ 68     Face Capture Events 50 per second (500 KB per picture)
+ 69     Number of Sub Servers supported Up to 10
+        Total Video Devices and Channels
+ 70     Devices and Channels 10,000 devices; 20,000 channels
+ 71     ANPR channels 5,000 channels
+ 72     Face Recognition Devices and Channels 1,000 devices; 5,000 channels
+ 73     Video Metadata Channels 5,000
+ 74     People Counting Channels 300
+ 75     Heat Map Channels 300
+
+ B. (2) 4 MP Fixed Lens Bullet Camera - 50Mtr. IR with Audio Feature
+
+                                                                                     Compliance
+ Sr. No        Parameters                Minimum Technical Specification
+                                                                                      (Yes/No)
+                                 1/2.7” 4 Megapixel Progressive Scan CMOS or
+    1      Image Sensor
+                                 better
+           Minimum
+    2                            0.001 lux@F1.4 (Color), 0.0001 lux@F1.4 (B/W)
+           Illumination
+    3      Effective Pixels      2688(H) x 1520(V) or better
+    4      MTBF                  1,00,000 Hours
+    5      Shutter Speed         Auto/Manual, 1/3 s~1/100000s
+                                 Auto, Manual, Natural, Regional Custome, Street
+    6      White Balance
+                                 Lamp, outdoor
+   7       Lens                  3.6 mm or better
+   8       RAM &ROM              128 MB and 128 MB or better
+   9       Iris Control          Fixed
+   10      Gain Control (AGC)    Auto/Manual
+   11      Max. Aperture         F1.4
+   12      S/N Ratio             >58 dB
+   13      Video Compression     H.265+ or equivalent/H.265
+   14      Light Compensation    BLC, HLC
+                                 120 dB
+   15      WDR
+
+                                 Quad Steam supported; Main stream : 4 MP @25
+                                 fps; Second Stream: 720p @25 fps;
+   16      Video Streaming
+                                 Third stream: D1 @25 fps; Fourth Stream: D1 @1fps
+
+   17      Mirror                Yes
+
+                                                                                           52
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                           WEBEL TECHNOLOGY LIMITED
+                                  4MP (2688 × 1520); 3MP (2304 × 1296); 1080P
+                                  (1920 × 1080); 1.3MP (1280 × 960);
+   18     Resolution
+                                  720P (1280 × 720); D1 (704 × 576); VGA (640 ×
+                                  480); CIF (352 × 288)
+   19     Motion detection        Up to 4 Zone
+   20     Privacy Masking         Up to 4 area
+   21     Audio Input / Output    1 Channel/1 Channel
+   22     Built in Mic            Yes
+   23     Audio Compression       G.711a/ G.711Mu/ AAC/ G.726
+   24     Alarm IN/Out            1 Channel /1 Channel
+   25     Bit Rate                3 Kbps–6144 Kbps for H.264 and H.265
+                                  SFTP, IPv6, IPv4, DNS,RTCP, NTP, RTP, RTMP,
+                                  HTTP, HTTPS, SNMP V3, TLS Version 1.2,
+   26     Protocol                TCP/IP,PPPoE, NFS, UDP, ICMP, IGMP, SSL,
+                                  DHCP, SMTP, RTSPS, ONVIF (Profile S,Profile G,
+                                  Profile T),unicast, multicast
+                                  Tripwire, Intrusion, Classification of Human and
+   27     Smart Detection
+                                  Vehicle
+   28     Ethernet                RJ-45 (10/100Base-T)
+   29     User/Host               6
+   30     IR                      IR Range of 50 Mtrs
+   31     Warm Light              Up to 30 meter
+   32     Micro SD                Micro SD Card, Max 512GB or better
+          Operating
+   33                             -30°C to +60°C
+          Temperature
+   34     Humidity                Less than 95% RH or better
+   35     Power Source            DC12V, ePoE, PoE (802.3af)
+          Weatherproof
+   36                             IP67
+          Standard
+
+                                  AES 256-bit Encryption, Configuration encryption,
+                                  trusted execution, Digest, security logs, WSSE,
+   37     Cyber Security
+                                  account lockout, syslog, video encryption, IP/MAC
+                                  filtering, HTTPS, trusted upgrade, trusted boot
+
+   38     Certification           CE, FCC, BIS,ER, ROHS
+   39     Compliance              ONVIF, STQC
+
+  B. (3) 4MP Varifocal Bullet Camera - 60Mtr. IR with Audio Feature
+
+                                                                                      Complian
+ Sl.No.         Feature                              Specification                       ce
+                                                                                      (Yes/No)
+   1      Image Sensor            1/2.7” CMOS sensor or better
+   2      Effective Pixels        2688 × 1520
+   3      Shutter Speed           Auto/Manual 1/3 s–1/100,000 s
+   2      IR                      IR Range of 60 Mtr. Or higher
+   3      Angle Adjustment        Pan: 0°–360°, Tilt: 0°–90°, Rotation: 0°–360°
+                                                                                             53
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                         WEBEL TECHNOLOGY LIMITED
+                              Auto, Natural, Street lamp, Outdoor, Manual,
+   4     White Balance
+                              Regional custom
+         Minimum              0.001 lux@F1.4 (Color), 0.0001 lux@F1.4 (B/W), 0
+   3
+         Illumination         lux (IR on)
+   4     RAM/ROM              128MB / 128MB
+   5     Gain Control         Auto/ Manual
+   4     Max. Aperture        F1.4
+   5     Lens                 2.7-13.5mm or better
+   6     S/N Ratio            ＞58 dB or better
+         Back Light
+   5                          BLC/ HLC
+         Compensation
+   6     Smart IR             Support
+   7     WDR                  WDR(120dB)
+   6     Day/Night            Auto(ICR)/Color/B/W
+   7     IR Control           Auto, Manual
+   8     Bit Rate              32 kbps–6144 kbps
+   7     Iris Control         Fixed
+   8     Smart search         Support
+   9     Stream Capability    Quad Stream
+                              Main stream: 4MP (2688 × 1520)@1–25/30fps,
+                              (2560 × 1440)@1-25/30fps, 3MP (2304 ×
+                              1296)@1-25/30fps,1080P (1920 × 1080)@1-
+                              25/30fps,1.3MP (1280 × 960)@1-25/30fps,
+                              720P (1280 × 720)@1-25/30fps
+                              Sub stream 1: 720P (1280 x 720)@1-25/30fps,
+   8     Frame Rate           VGA (640 x 480)@1-25/30fps, CIF (352 x 288/
+                              352 x 240)@1-25/30fps, D1 (704 × 576/ 704 ×
+                              480)@1-25/30fps
+                              Sub stream 2: VGA (640 x 480)@1-25/30fps, CIF
+                              (352 x 288/ 352 x 240)@1-25/30fps, D1
+                              (704 × 576/ 704 × 480)@1-25/30fps
+                              Sub stream 3: D1 (704 × 576/ 704 × 480)@1fps
+
+    9    Video Compression    H.265+ or equivalent, H.265
+   10    Bit Rate Control     CBR/ VBR
+                              4MP (2688 × 1520)/ (2560 × 1440), 3MP (2304 ×
+                              1296), 2MP (1920 × 1080), 1.3MP (1280 ×
+   9     Resolution           960), 720p (1280 × 720), D1 (704 × 576/704 ×
+                              480), VGA (640 × 480), CIF (352 × 288/352 ×
+                              240)
+   10    Noise Reduction      3DNR
+   11    Motion detection     4 areas
+   10    Video format         PAL/NTSC
+   11    Privacy Mask         4 areas
+   12    ROI                  Support (4 areas)
+   11    Audio Compression    G.711a, G.711Mu, G.726, PCM, AAC
+
+                                                                                 54
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                           WEBEL TECHNOLOGY LIMITED
+                                  SFTP, IPv6, IPv4, DNS,RTCP, NTP, RTP, HTTP,
+                                  HTTPS, SNMP V3, TLS Version 1.2, TCP/IP,
+   12     Protocol                PPPoE,
+                                  NFS, UDP, ICMP, IGMP, SSL, DHCP, SMTP,
+                                  RTSPS, unicast,multicast
+   13     SDK and API             Support
+   12     Ethernet                RJ-45 (10/100 Base-T)
+   13     ONVIF                   ONVIF (Profile S, Profile G, Profile T)
+                                  No SD card, SD card full, SD card error, Network
+                                  disconnection, IP conflict, illegal access, Motion
+   14     Alarm Event             detection, Video tampering, Audio detection,
+                                  Voltage detection, Security exception, External
+                                  alarm
+
+                                  AES 256-bit Encryption, Configuration encryption,
+                                  trusted execution, Digest, security logs,
+   13     Cyber Security          WSSE, account lockout, syslog, video encryption,
+                                  IP/MAC filtering, HTTPS, trusted upgrade,
+                                  trusted boot
+
+   14     Audio                   Built-in Mic
+   15     Image Rotation          0°/90°/180°/270°
+   16     Audio Input/Output      1/1 Channel
+   17     Alarm IN/Out            1/1 Channel
+          Operating
+   18                             –30 °C to +60 °C (–40 °F to +140 °F)
+          Temperature
+   19     Browser                 IE, Chrome, Firefox or latest
+   20     User/Host               5 or better
+   21     Storage                 SFTP, NAS, Mirco SD card (Max. 512GB)
+   22     Power Source            12 VDC/PoE (802.3af)
+          Weatherproof
+   23                             IP67
+          Standard
+   24     Operating Humidity      ≤95%
+   25     Housing                 Metal
+   26     Certification           CE, FCC, BIS, ER, RoHS
+   27     Compliance              ONVIF, STQC
+
+  B (4) 64 Channel NVR with 16 SATA ports
+
+                                                                                       Compliance
+ SL.      Parameters                     Minimum Technical Specification
+                                                                                        (Yes/No)
+        IP Camera Input
+  1                          64
+        Channel
+  2     Operating System     Embedded Linux
+                             Up to 1280/1280/1024 Mbps
+        Network
+  3                          Incoming/Recording/Outgoing bandwidth
+        Bandwidth
+                             respectively
+
+                                                                                             55
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                          WEBEL TECHNOLOGY LIMITED
+                           2 Channel 32MP@30 fps, 2 Channel 24MP@30 fps, 4
+                           Channel 16 MP@30 fps, 5 Channel 12MP@30 fps, 8
+       Decoding
+  4                        Channel 8MP@30 fps, 11 Channel 6 MP@30 fps, 12
+       Capability
+                           Channel 5MP@30 fps, 16 Channel 4MP@30 fps, 32
+                           Channel 1080p@30 fps, 128 Channel D1@30 fps
+       Video
+  5                        H.265+, H.265
+       Compression
+                           Face detection, Face recognition, Perimeter
+  6    Smart Function
+                           protection
+       Perimeter
+  7                        24 Channels or better
+       Protection
+  8    Face Recognition    At Least 4 Channel
+  9    Face Detection      At Least 4 Channel
+                           32 MP, 24 MP, 16 MP, 12 MP, 8 MP, 6 MP, 5 MP, 4 MP, 3
+  10   Resolution
+                           MP, 2MP, 720p, 960p, D1, CIF, QCIF
+       Video Display
+  11                        1/4/8/9/16/25/36/64
+       Split
+                           2-channel VGA, 2-channel HDMI video output.
+  12   Video Output        Heterogeneous video source output for HDMI1 and
+                           HDMI2 Simultaneous
+  13   Cluster             N+M
+  14   HDD Support         16 SATA ports, Up to 20 TB Per slot
+  15   RAID                0/1/5/6/10
+  16   Hot Swap            Yes
+  17   Disk Group          Supported
+       Simultaneous
+  18                       Up to 16 Channels
+       Playback
+  19   Record Mode         General, Motion detection, Intelligent, Alarm
+  20   Playback Mode       Instant playback, General playback, Event playback
+       Smart Mobile
+  21                       iPhone, iPad, Android Phone
+       Phone
+  22   Browser             Chrome, IE, Edge
+  23   Interface           3 USB , 1 RS232, 1 RS485
+  24   Audio In            1 channel
+  25   Audio Out           1 channel
+       Audio
+  26                       G.711a; G.726;PCM, AAC
+       Compression
+  27   Alarm I/O           32/16 channel In/Out
+  28   Ethernet            4 no. of RJ-45 (10/100Base-T)
+                           HTTP, HTTPS, TCP/IP, IPv4, IPv6, UDP, SNMP, NTP,
+                           DHCP, DNS, SMTP, UPnP, IP Filter, PPPoE, FTP, DDNS,
+  29   Protocols
+                           Multicast, InstaOn,Auto connect, Iscsi, ONVIF
+                           23.12(Profile T, Profile S, Profile G)
+       Operating
+  30                       –10 °C to +55 °C
+       Temperature
+       Operating
+  31                       10%–93% (RH)
+       Humidity
+  32   Power Source        100–240 VAC, 50-60 Hz
+  33   Certification       CE,FCC,BIS, ROHS
+                                                                                   56
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                            WEBEL TECHNOLOGY LIMITED
+
+  (C) Eligibility Criteria for Network and Switching Equipment OEM
+
+                                                                                          Compliance
+                                                                Supporting
+ SL No     Description                                                                    with
+                                                                Documents
+                                                                                          Document
+           OEM should have valid ISO 9001:2015, ISO
+           14001:2015, ISO 27001:2022, ISO 27032:2012           Valid supporting
+    1
+           and ISO 45001:2018 for wired & wireless              documents submitted
+           networking products.
+           OEM should have had a presence in India for          Valid supporting
+    2
+           the last 12 years                                    documents submitted
+           MII should be available with a minimum Class         Valid supporting
+    3
+           II                                                   documents submitted
+                                                                Valid supporting
+    4      OEM products should be available on GeM
+                                                                documents submitted
+                                                                Valid supporting
+    5      Undertaking of Non Malicious Code
+                                                                documents submitted
+                                                                Declaration of OEM on
+    6      No-Obsolete & Warranty Declaration
+                                                                Letterhead
+                                                                certification copy
+    7      OEM should have UDYAM registration
+                                                                submitted
+           OEM should have shop & establishment                 certification copy
+    8
+           certificate                                          submitted
+
+  C. (1) Minimum Specification of quoted L2 Gigabit Access Switch (24-Port)
+
+                                                                                        Complianc
+   SL            Features                            Specification
+                                                                                        e (Yes/No)
+                                  24*10/100/1000Base-T PoE +
+                                  4*10/100/1000Base-X (SFP) Auto-MIDX, 1
+   1      Port                    Console, 1 Reset,
+                                  1 USB Ports Populated with Same Brand SFP
+                                  Module
+          Switching capacity
+   2                              56 Gbps or better
+          Non-Blocking
+   3      Packet Forwarding       41.7Mbps or better
+   4      MAC Address             Should be 16K or better
+   5      Jumbo Frame             Should be 10K or better
+   6      Packet Buffer           12M
+   7      ACL Table               1000
+   8      VLAN Table              4K
+   9      Cooling Features        Active
+                                  IEEE 802.3af POE (15.4W), IEEE 802.3at POE+
+   10     PoE
+                                  (30W)
+   11     PoE Budget              370W
+                                  Port-based VLAN, IEEE802.1Q, private VLAN,
+                                  Protocol VLAN, Voice VLAN, MAC VLAN,
+   12     VLAN
+                                  Normal QinQ, Selective QinQ, Flexible QinQ,
+                                  VLAN Translation, N:1 VLAN Translation
+                                                                                                57
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                         WEBEL TECHNOLOGY LIMITED
+                              IPv4/IPv6 DHCP Client, IPv4/IPv6 DHCP Relay
+                              Option 82, Option 37/38
+   13    DHCP
+                              IPv4/IPv6 DHCP Snooping, IPv4/IPv6 DHCP
+                              Server
+   14    L3 Features & VSF    Should be available Static Routing, PBR
+   15    ERPS                 G.8032 and G.8032 v2
+                              MRPP, ITU-T G.8032, Loopback Detection
+   16    L2 Ring Protection
+                              Fast Link
+                              8 Queues Per Port, Bandwidth Control
+                              Flow Redirect, Classification based on ACL,
+                              VLAN ID, COS, TOS, DSCP, Policing Based on
+                              Port and VLAN
+   17    QoS                  Single Rate single barrel double color for
+                              Policing
+                              Remark DSCP, COS/802.1p, Precedence, TOS
+                              SP, WRR, SWRR, WDRR for Scheduling
+                              Match the IP fragmentation of message
+                              802.1D STP, 802.1W RSTP, 802.1S MSTP, Root
+   18    Spanning Tree
+                              Guard, BPDU Guard, BPDU Forwarding
+                              8 Queues Per Port, Bandwidth Control, Flow
+         Quality of Service   Redirect, ACL, VLAN ID, COS, TOS, DSCP,
+   19
+         (QoS)                WRR, SWRR, WDRR for Scheduling Match the IP
+                              Fragmentation
+                              IGMP v1/v2/v3 snooping, IGMP Proxy,
+   20    Multicast
+                              IGMP v3, MLD v1/v2 snooping
+                              IP ACL, MAC ACL, MAC-IP ACL, User-Defined
+                              ACL
+                              Time Range ACL, ACL on VLAN interface
+                              Storm Control based on packets and bytes
+                              Port Security, MAC Limit based on VLAN and
+   21    Security             Port
+                              Anti-ARP-Spoofing, Anti-ARP-Scan, ARP Binding
+                              ND Snooping
+                              DAI, IEEE 802.1x
+                              Authentication, Authorization, Accounting
+                              Radius, TACACS+
+                              TFTP/FTP, CLI, Telnet, Console, Reset
+                              Web/SSL (IPv4/IPv6), SSH (IPv4/IPv6),
+                              SNMPv1/v2c/v3
+                              SNMP Trap Public & Private MIB interface
+                              RMON 1,2,3,9 Ping, Trace Route
+                              Radius Authentication
+         Maintenance and      Syslog (IPv4/IPv6)
+   22    Operation            SNTP/NTP (IPv4/IPv6)
+         Management           Dual IMG, Multiple Configuration Files
+                              Port Mirror, CPU Mirror, RSPAN
+                              sFlow (SG4500-28P/52P)
+                              OAM EFM
+                              VCT, DDM
+                              ULDP(like Cisco UDLD)
+                              LLDP/LLDP MED
+   23    Green Energy         Fanless, LED Shut Off
+   24    Operating            0°C to 50°C
+                                                                              58
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                             WEBEL TECHNOLOGY LIMITED
+                 temperature
+                 Storage
+       25                        ‐40°C to 70°C
+                 temperature
+                 Dimension(W×H×D
+       26                        Should be match 440mm x 43.6mm x 260mm
+                 )
+                                 Should be TEC certified,and EN60950-1,
+       27        Certification   IEC61000-4-29, ISO 45001:2018, ISO
+                                 14001:2015, ISO27032:2012
+
+   (2) Work station for 67 Nos. Police Stations
+
+                                                                                             Compliance
+  Sl             Component                           Minimum specification
+                                                                                              (Yes/No)
+   1        Processor          Intel Core i5 or Ultra 5 , 64 bits or equivalent/latest
+   2        CPU cores          Minimum 4 cores
+            Max Turbo
+   3                           Up to 5.0 GHz
+            Frequency
+   4        Memory             32 GB DDR5 RAM
+                               256 GB NVMe SSD
+   5        Storage
+                               HDD 1 TB
+   6        Graphics           GeForce GTX 1060 3GB dedicated GPU or Higher
+            Network            Gigabit Ethernet or faster
+   7
+            USB                Minimum 4 × USB ports, including USB 3.x2
+   8        OS                 Windows 11 Pro 64-bit, genuine licensed
+   9        Accessories        USB keyboard and USB optical/wired mouse
+
+(3) Work Station For 10 Nos -DRO
+
+                                                                                         Compliance
+  Sl          Component                           Minimum specification
+                                                                                          (Yes/No)
+  1     Processor             Intel Core i5 or Ultra 5 , 64 bits or equivalent/latest
+  2     CPU cores             Minimum 4 cores
+        Max Turbo
+  3                           Up to 5.0 GHz
+        Frequency
+  4     Memory                32 GB DDR5 RAM
+                              256 GB NVMe SSD
+  5     Storage
+                              HDD 6 TB
+  6     Graphics              GeForce GTX 1060 3GB dedicated GPU or Higher
+        Network               Gigabit Ethernet or faster
+  7
+        USB                   Minimum 4 × USB ports, including USB 3.x2
+  8     OS                    Windows 11 Pro 64-bit, genuine licensed
+  9     Accessories           USB keyboard and USB optical/wired mouse
+
+   (4) Work station & Server for Main Control Room
+
+                                                                                              59
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                           WEBEL TECHNOLOGY LIMITED
+                                                                                         Compliance
+ Sl        Component                           Minimum specification
+                                                                                          (Yes/No)
+ 1    Processor             Intel Core i9 or Ultra 9, 64 bits or equivalent/latest
+ 2    CPU cores             Minimum 20 cores
+      Max Turbo
+ 3                          Up to 5.0 GHz
+      Frequency
+ 4    Memory                32 GB DDR5 RAM
+                            256 GB NVMe SSD
+ 5    Storage
+                            HDD 6 TB
+ 6    Graphics              GeForce GTX 1060 4GB dedicated GPU or Higher
+
+      Network               Gigabit Ethernet or faster
+ 7
+      USB                   Minimum 4 × USB ports, including USB 3.x2
+
+ 8    OS                    Windows 11 Pro 64-bit, genuine licensed
+
+ 9    Accessories           USB keyboard and USB optical/wired mouse
+
+  (5) Server
+
+                                                                                         Compliance
+ Sl    Component                             Minimum specification
+                                                                                          (Yes/No)
+ 1    Form Factor          Tower / Rack server
+                           2 nos. 8 core / 16 thread, min 2.6GHz, 5th generation
+ 2    Processors
+                         processor
+      Memory
+ 3                         2 x 16GB RDIMM, 5600MT/s
+      configured
+      RAID
+ 4                         12Gbps, 8 GB cache, RAID support 0, 1, 5, 6, 10, 50,60
+      Controller
+      Disks
+ 5                         2 x 960GB hot-plug SSD
+      configured
+ 6    Ethernet ports       4 x 10G baseT ports with support for iSCSI
+                           Certified for Red Hat Enterprise Linux 10, SUSE Linux
+ 7    OS certification   Enterprise Server 15, Microsoft Windows Server 2025, Ubuntu
+                         24.04 LTS & VMWare ESXi 8.0 U3
+ 8    Power Supply         Dual, hot plug, redundant power supply (1+1)
+ 9    BIS certificate      BIS certificate for the specific quoted model to be
+
+  (D) Eligibility Criteria for Display OEM
+
+                                                                                      Compliance
+                                                                         Supporting
+ SL    Description                                                                     with
+                                                                         Documents
+                                                                                       Document
+
+                                                                                                   60
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                          WEBEL TECHNOLOGY LIMITED
+      OEM must have a presence in India for at least 15 years.
+  1   (Certificate of Incorporation to be submitted.),
+      OEM must possess a valid PF Registration in India
+  2   (Supporting documents to be submitted.),
+      OEM must have a minimum annual turnover of ₹1,000
+      Crores in each of the last three financial years in India.
+  3   (Supporting documents to be submitted.),
+      OEM must have a Registered Office in West bengal for at
+  4   least 10 years. (Valid documentary proof required.),
+      OEM must have a direct service setup in Kolkata with at
+      least two (2) trained Service Managers/Engineers on its
+      payroll, holding a Bachelor or Diploma degree and having
+      a minimum of 8 years’ experience with the company. (Valid
+  5   documentary proof required.),
+      OEM must hold valid ISO 9001:2015, ISO 14001:2015, and
+  6   ISO 45001:2018 / BS OHSAS 18001:2007 certifications,
+      OEM must have its own manufacturing facility in India.
+  7   (Relevant documentary proof required.),
+      The Interactive Touch Panel offered must be manufactured
+  8   in the OEM’s own factory located in India
+
+  D (1) Display Panel Unit (43”) – Specification
+
+                                                                                   Compliance
+ SL                         Minimum Technical Specification
+                                                                                   ( Yes/No)
+ 1                       Screen Size               43" or higher
+ 2                       Panel Technology          IPS/VA
+ 3                       Back Light Type           Direct
+ 4                       Refresh Rate              60 Hz or higher
+ 5                       Aspect Ratio              16:9
+ 6                       Native Resolution         3,840 x 2,160 (UHD)
+ 7                       Brightness (cd/m2)        500nit or more
+ 8                       Contrast Ratio            1,200:1 or more
+ 9         Panel         Dynamic Contrast Ratio    10,00,000 : 1 or more
+ 10                      Viewing Angle (H x V)     178° x 178°
+ 11                      Response Time             8ms (G to G) or less
+ 12                      Color gamut               DCI 80 %
+                                                   10 bit, 1.07 Billon colors or
+ 13                      Color Depth
+                                                   more
+                         Operation Hours (Hours
+ 14                                                24 / 7
+                         / Days)
+ 15                      Orientation               Landscape & Portrait
+                                                   HDMI (3, HDCP 2.2 / 1.4), USB
+ 16                      Input
+       Connectivity                                2.0 Type A (2)
+ 17                      Audio Output              Yes
+                                                                                          61
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                          WEBEL TECHNOLOGY LIMITED
+                                                 RS232C In / Out (4 Pin Phone
+ 18                      External Control
+                                                 Jack), RJ45 (LAN) In
+                      Internal Memory 8 GB or more, Built-in Wi-Fi,
+                      Temperature Sensor, Auto Brightness Sensor, Local
+                      Content Scheduling, Local Key Operation, Fail Over,
+                      Booting Logo Image, No Signal Image, Screen Share, Play
+ 19     Key Feature
+                      via URL, Setting Data Cloning, Control Manager, External
+                      Input Rotation, Smart Energy Saving, Gapless Play Back,
+                      Tile Mode, webRTC, PM Mode, Wake on LAN, BEACON,
+                      Pro:Idiom, HDMI-CEC, SNMP, SI Server Setting
+ 20        Sound      Speaker                    10W + 10W
+                                                 0 °C to 40 °C (Portrait Scene : 0
+ 21    Environmental Operation Temperature °C to 35 °C)
+        Conditions
+ 22                   Operation Humidity         10% to 80%
+ 23                   Power Supply               AC 100-240V~, 50/60Hz
+ 24        Power      Power Type                 Built-In Power
+ 25                   Power Off Consunption      0.5W
+                      Content Management
+ 26                                              Built-In
+         Software     Software
+       Compatibility Control and Monitoring
+ 27                                              Built-In
+                      Software
+ 28                   Safety                     CB
+ 29     Certification EMC                        FCC Class "A" / CE
+ 30                   Energy Star                Yes
+
+  D (2) Display Panel Unit (55”) – Specification
+
+                                                                                     Compliance
+ SL.                       Minimum Technical Specification
+                                                                                     (Yes/No)
+  1                      Screen Size               55" or higher
+  2                      Panel Technology          IPS/VA/ADS
+  3                      Back Light Type           Direct
+  4                      Refresh Rate              60 Hz or higher
+  5                      Aspect Ratio              16:9
+  6                      Native Resolution         3,840 x 2,160 (UHD)
+  7                      Brightness (cd/m2)        500nit or more
+  8                      Contrast Ratio            4,500:1 or more
+                         Dynamic Contrast
+  9        Panel                                   10,00,000 : 1 or more
+                         Ratio
+                         Viewing Angle (H x
+ 10                                                178° x 178°
+                         V)
+ 11                      Response Time             8ms (G to G) or less
+ 12                      Color gamut               DCI 80 %
+                                                   10 bit, 1.07 Billon colors or
+ 13                      Color Depth
+                                                   more
+                         Operation Hours
+ 14                                                24 / 7
+                         (Hours / Days)
+ 15                      Orientation               Landscape & Portrait
+                                                                                              62
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                        WEBEL TECHNOLOGY LIMITED
+                                              HDMI (3, HDCP 2.2 / 1.4), USB
+ 16                    Input
+                                              2.0 Type A (2)
+ 17    Connectivity Audio Output              Yes
+                                              RS232C In / Out (4 Pin Phone
+ 18                  External Control
+                                              Jack), RJ45 (LAN) In
+                     Internal Memory 8 GB or more, Built-in Wi-Fi,
+                     Temperature Sensor, Auto Brightness Sensor, Local
+                     Content Scheduling, Local Key Operation, Fail Over,
+                     Booting Logo Image, No Signal Image, Screen Share,
+ 19    Key Feature   Play via URL, Setting Data Cloning, Control Manager,
+                     External Input Rotation, Smart Energy Saving, Gapless
+                     Play Back, Tile Mode, webRTC, PM Mode, Wake on
+                     LAN, BEACON, Pro:Idiom, HDMI-CEC, SNMP, SI Server
+                     Setting
+ 20       Sound      Speaker                  10W + 10W
+                     Operation                0 °C to 40 °C (Portrait Scene : 0
+ 21   Environmental
+                     Temperature              °C to 35 °C)
+        Conditions
+ 22                  Operation Humidity       10% to 80%
+ 23                  Power Supply             AC 100-240V~, 50/60Hz
+ 24                  Power Type               Built-In Power
+          Power
+                     Power Off
+ 25                                           0.5W
+                     Consunption
+                     Content Management
+ 26                                           Built-In
+         Software    Software
+      Compatibility Control and
+ 27                                           Built-In
+                     Monitoring Software
+ 28                  Safety                   CB
+ 29    Certification EMC                      FCC Class "A" / CE
+ 30                  Energy Star              Yes
+  E (1) 2 KVA Online UPS with minimum 1 hour backup
+
+ SL   Subject    Features                    Particulars                          Compliance
+                                                                                  (Yes/No)
+  1              Rating                      2kVA (1in - 1out)
+                 Rated voltage               220VAC/230VAC
+                 Voltage Range               176VAC TO 288VAC
+  2     Input    Rated Frequency             50Hz/60Hz
+                 Frequency Range             40Hz ~ 70Hz
+                 Power factor                ≥0.99 at full load.
+                 Rated power                 2kVa/2kW
+                 Voltage                     220/230/240VAC (single phase)
+                                             Rated frequency±3Hz.
+                 Frequency
+                                             Configurable range: ±0.5Hz ~
+                 synchronization range
+                                             ±5Hz
+  3    OUTPUT
+                 Rated Power Factor          Unity
+                 Crest Factor                3:1'
+                 Voltage harmonic            < 1% (linear load); < 3% (non-
+                 distortion                  linear load)
+                 Voltage Regulation          ± 1%
+
+                                                                                         63
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                         WEBEL TECHNOLOGY LIMITED
+                  Dynamic response
+                  recovery time             0ms
+                  Inverter Overload         At 25°C: 105% ~ 125%- 10min;
+                  Capability on utility     125% ~ 150%-1min; 150%- more
+                  mode                      than 200ms
+                  Inverter Overload         At 25°C: 105% ~ 125%- 10min;
+                  Capability on battery     125% ~ 150%-1min; 150%- more
+                  mode                      than 200ms
+                  Separate bypass           No
+  4    Bypass     Static bypass             Inbuilt
+
+                  ECO Mode                  98%
+      Efficienc   Online mode (AC-AC)       > 95%
+  5
+          y       Inverter Efficiency(DC-
+                  AC)                       >93%
+                                            Sealed, lead-acid, maintenance-
+                  Type
+                                            free battery,li ion battery
+       BATTER     Battery Fuse
+  6
+         Y        disconnector              Inbuilt
+                  Battery charging
+                  capacity                  8A
+  7
+                  Mains - Battery           0ms
+       Transfer                             Synchronous transfer: ≤0ms
+  8
+        Time      Inverter-Bypass           Synchronous transfer: less than 1
+                                            ms
+  9     Noise                               <50db
+ 10
+                                            Colorful Gravity Sense LCD
+ 11   Panel display mode
+                                            display
+                                            0 °C to 50 °C, Linearly Derates to
+                  Operating temperature     90% and 80% capacity at 40 °C
+                                            and 50 °C respectively
+      Ambient                               -20 °C to +60 °C (battery
+ 12   conditio    Storage temperature       excluded); -15° C to +40°C
+        ns                                  (battery included)
+                  Relative humidity         5%RH ~ 95%RH, non-condensing
+                                            ≤3000m; derating when higher
+                  Altitude
+                                            than 3000m
+               W*H*D (mm)                   430 X 470 X 85 mm
+               Weight (Kg)                  8.6Kg(Approx)
+      Mechani
+               Ventilation                  Forced -air cooled
+         cal
+      paramete Ingress protection
+ 13                                         IP20
+          r                                 Powder coated Black Texture
+               Color
+                                            finish
+                  Cable entry               Rear
+                                            Supports Windows
+      Network     Smart RS232/USB           2000/2003/XP/Vista/2008,Windo
+ 14   Manage                                ws 7,Linux,unix and MAC
+       ment                                 Built-in. Supports HTTP and SNMP
+                  SNMP
+                                            protocol
+                                                                                 64
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                           WEBEL TECHNOLOGY LIMITED
+
+                    Modbus                        Optional through SIC card
+                    Safety (CE)                   IEC/EN 62040-1:2008+A1:2013
+                                                  Conducted Emission:IEC/EN
+                    Electromagnetic
+                                                  62040-2 C2, Harmonic
+                    Compatibility (EMC)
+  15      Safety                                  current:IEC/EN 61000-3-2
+                    Surge Protection              Built-in. IEC/EN 61000-4-5
+                    RoHS                          Yes
+                    BIS Certification             Yes
+
+(2) 600 VA UPS
+
+                                                                                         Compliance
+ SL.        Parameter                         Minimum specification
+                                                                                          (Yes/No)
+   1    Item                   Line Interactive UPS
+   2    Capacity               600 VA / 360 Watts minimum
+   3    Technology             Line Interactive with AVR
+   4    Controller             Microprocessor controlled
+        Input Voltage
+   5                           140–300 VAC or wider
+        Range
+   6    Input Frequency        50 Hz ± 5%
+   7    Output Voltage         230 VAC ± 10%
+   8    Output Frequency       50 Hz ± 1 Hz in battery mode
+   9    Battery                1 No. × 12 V, 7 Ah Min,15 mnts backup
+  10    Battery Type           Sealed Maintenance Free (SMF/VRLA) Lead Acid
+  11 Battery Recharge          Automatic charging; ≤ 6–8 hours to 90% capacity
+  12 Backup                    Suitable backup at specified load minimum 15 mnts.
+  13 AVR                       Automatic Voltage Regulation (Buck/Boost)
+                               Overload, short circuit, overcharge and deep-
+  14 Protection
+                               discharge protection
+  15 Cold Start                Available
+  16 Indicators                Mains, Battery and Fault/Overload
+
+  17 Audible Alarm             Battery mode, low battery and overload indication
+
+  18 Output Sockets            Minimum 3 Nos. Indian 3-pin/6A sockets
+  19 Safety                    Applicable BIS/Indian safety standards
+     Operating
+  20                           0–40°C or better
+     Temperature
+  21 Accessories               Input power cord and all standard accessories
+
+   (F) Cat 6 UTP Cable
+
+                                                                                         Compliance
+  SL.                 SPECIFICATION / QUALITATIVE REQUIREMENT
+                                                                                          (Yes/No)
+   1     The 4 pair Unshielded Twisted Pair cable shall be ULÒ Listed and ETL verified
+
+                                                                                                65
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                                WEBEL TECHNOLOGY LIMITED
+           This cable well exceeds the requirements of ANSI/TIA-568-C.2 and ISO/IEC
+  2
+           11801 Class E
+           Nominal Outer Diameter of Cable should be 5.8 ± 0.2 mm and Conductor
+  3
+           Diameter 23 AWG
+           Construction: 4 twisted pairs separated by internal PE Cross Separator. Full
+  4
+           separator. Half shall not be accepted. Rip Cord is must.
+           Conductor: Solid bare Copper, Outer jacket sheath: FRPVC with UL approved
+  5
+           CM/CMR rated cable. Jacket color: Grey
+           Insulation Material: High Density Polyethylene (HDPE) with Insulation Diameter :
+  6
+           0.89 ± 0.01 mm
+  7        Dielectric Strength of cable should be 2.5 KVDC for 2 seconds
+           Bending Radius : < 4X Cable Diameter at -20°C ± 1°C
+  8
+           Pulling Force: 25.35 lbs
+           Electrical Parameters: Insertion loss (Attenuation), NEXT, PSNEXT, ELFEXT
+  9
+           (ACRF), PSELFEXT (PSACRF), Return Loss, ACR and PS ACR.
+  10       Insertion Loss of 32.8 db/100m at 250 MHz
+  11       Cable should support operating temperature from -20° to +70°C
+  12       Cable support Conductor Resistance ≤ 9.38 Ω/100m Max.
+  13       Mutual Capacitance of cable should be < 5.6 nF/100m Max.
+  14       Resistance Unbalance of cable should be 5% Max.
+  15       Capacitance Unbalance of cable should Max. 330 pF/100m
+  16       Cable support Delay Skew: < 45 ns/100m, Operating Voltage: 72V
+  17       Nominal Voltage of Propagation (NVP): 69% and Current Rating: 1.5 A Max.
+           Impedance: 100 ± 15 Ω @100 MHz. and Propagation Delay @250 MHz : 536
+  18
+           ns/100m
+  19       ETL Verified 4-Connector Channel performance certificate
+           Need to submit complete and satisfactory type test Report from Central
+  20       Government NABL accredited laboratory to conformity of the specification along
+           with bid.
+           Need to submit Zero Bit Error Channel Performance Certificate
+  21
+           along with the bid
+  22       RoHS Compliant
+
+  (G) 15U network rack
+
+                                                                                              Compliance
+   SL             Feature                              Description                             (yes/No)
+      1        Dimensions        720mm(H)X550mm(W)X550mm(D)
+      2        Material          0.8 mm CRCA Steel or better
+      3        Front Door        Toughened glass door; Lockable
+      4        Cable entry       Top & Bottom Cable Entry Provision
+      5        powder coating    RAL 7035 Grey)
+                                 PDU 5Amp/6 Socket - 1pc, Cooling Fan - 1pc, Cable
+      6        Accessories       Manager (PVC) - 1pc, Cantilever Tray (400mm Depth)
+
+  (H) HMS Application Specification
+
+                                                                                              Compliance
+          SL                             Minimum specification
+                                                                                               (Yes/No)
+      1        Should work on low bandwidth
+
+                                                                                                     66
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                           WEBEL TECHNOLOGY LIMITED
+    2     Should provide alerts for Video Lost, Device Fail, HDD Fail, SD card Fail
+    4     Should provide Live Dashboard
+    5     Device management: should be able to add user, device, group
+    6     Provide instant notification on camera malfunction
+          Should be able to provide Image checks: Out of focus, Blur, obstruction in FOV,
+    7
+          etc.
+    8     Should provide system checks for IP and Non-IP systems
+    9     Should provide Geo tagging and detection of Ring failure in map
+   10     Should provide alert on failure of camera and devices
+   11     Should provide storage availability details with date and time
+   12     Should be able to create SLA reports
+   13     Should be able to find out uptime of all connected IP device
+   14     Should be able to create Helpdesk Tickets
+   15     Should be able to manage Multiple brand NVR/DVR
+
+ Authorized Signatory (Signature In full):
+
+ Name and title of Signatory:
+
+ Stamp of the Company:
+
+                                                                                            67
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                               WEBEL TECHNOLOGY LIMITED
+                                                  SECTION – S
+
+                          MANUFACTURER’S AUTHORIZATION FORM
+
+Date:
+
+To
+Webel Technology limited
+Plot-5, Block-BP, Sector-V
+Salt Lake
+Kolkata-700 091
+
+Ref: Tender No- WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+WHEREAS       _______________________________________     who      are     official    producers       of
+_______________________________________________      and    having       production      facilities    at
+__________________________________________________________          do         hereby           authorize
+__________________________________________________________________                located              at
+_____________________________________________________ (hereinafter, the “Bidder”) to submit a bid of the
+following Products produced by us, for the Supply Requirements associated with the above Invitation for
+Bids.
+
+When resold by ____________________________, these products are subject to our applicable standard end
+user warranty terms.
+
+We assure you that in the event of _________________________, not being able to fulfill its obligation as our
+Service Provider in respect of our standard Warranty Terms we would continue to meet our Warranty Terms
+through alternate arrangements.
+
+We also confirm that _______________________________is our authorized service provider/system integrator
+and can hence provide maintenance and upgrade support for our products.
+
+We also confirm that the products quoted are on our current product list and are not likely to be
+discontinued within from the day of this letter. We assure availability of spares for the products for the next
+two years after warranty period.
+
+We also confirm that the material will be delivered within 30(thirty) days from the date of placement of
+confirmed order.
+
+Name                                       In the capacity of
+
+Signed
+
+Duly authorized to sign the authorization for and on behalf of ________________________
+
+Dated on _________________ day of_____________2026
+
+ Note: This letter of authority must be on the letterhead of the Manufacturer and duly signed by an authorized
+ signatory.
+
+                                                                                                                 68
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                           WEBEL TECHNOLOGY LIMITED
+
+                                             SECTION – T
+                    CHECKLIST FOR ELIGIBILITY CRITERIA
+                       (Tender No. WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+Sl.                             Eligibility Criteria                            Compliance        Documents
+No.                                                                              (Yes / No )   Attached at Page
+                                                                                               No of Technical
+                                                                                                     Bid
+ 1.   The bidder must be a company registered under Companies Act,
+      1956/2013 or Partnership or LLP or OPC or Proprietary Firm.
+      Documentary (Certificate of incorporation/Relevant document)
+      evidence to be submitted.
+ 2    The bidder must be a System Integrator in IT/ITS or Audio Video
+      sector. Relevant document to be submitted.
+ 3    The bidder should have been operating for the last 5 years in India.
+      Certificate of Incorporation and/ or Certificate of Commencement of
+      Business issued by the Registrar of Companies/ Partnership
+      Registration/ sole proprietorship registration under the Shops &
+      Establishments Act to be submitted.
+ 4    The bidder must have their Registered/ Branch office in West Bengal.
+      Valid trade license and local GST Registration Certificate are to be
+      submitted.
+ 5    The bidder should have valid GST Registration Certificate & PAN.
+      Bidder shall have to submit photocopy of the documents.
+ 6    Bidder should have own support service / call booking number
+      (Undertaking letter should be submitted from the bidders) OEM
+      support service number will not be treated as bidder’s support service
+      number. Support service number details for bidder with number &
+      detailed to be submitted. Bidder shall have to submit the Complain/Call
+      escalation matrix in their own letterhead with undertaking.
+ 7    The bidder shall have executed “Similar Nature” of single order an
+      amount not less than Rs. 12.80 Cr. (Twelve Cr. Eighty Lac only) in
+      last 05 (Five) financial years (considering FY – 2020-21, 2021-22,
+      2022-23.         2023-24,        2024-25)        in      Government
+      Department/PSU/Autonomous Body. References order copy with
+      the completion certificate for the project to be provided.
+
+                                            OR
+      The bidder shall have executed “Similar Nature” of two orders each
+      order amount not less than Rs.7.80 Cr. (Seven Cr. Eighty Lac Only)
+      in last 05 (Five) financial years (considering FY – 2020-21, 2021-22,
+      2022-23.         2023-24,        2024-25)        in      Government
+      Department/PSU/Autonomous Body. References order copy with
+      the completion certificate for the project to be provided.
+                   .
+                                            OR
+      The bidder shall have executed “Similar Nature” of three orders in
+      total amount not less than Rs.6.40 Cr. (Six Cr. Forty Lac only) in last
+      05 (Five) financial years (considering FY – 2020-21, 2021-22, 2022-23.
+      2023-24, 2024-25) in Government Department/PSU/Autonomous
+      Body. References order copy with the completion certificate for the
+      project to be provided.
+
+ 8    The bidder should have a minimum average annual turnover of not
+                                                                                                       69
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026
+
+                           WEBEL TECHNOLOGY LIMITED
+       less than Rs. 24.00 (Twenty) Crore in the last three financial year
+       (2022-23, 2023-24, 2024-25). Bidder shall have to submit Audited
+       Balance Sheet / Audited Accounts / Auditor Certificate in support of
+       their claim.
+       / Audited Accounts / Auditor Certificate in support of their claim.
+
+  9    Bidder should have Positive net worth for last three financial years
+       (2022-23. 2023-24, 2024-25). Bidder shall have to submit Audited
+       Balance Sheet / Audited Accounts / Auditor Certificate in support of
+       their claim.
+ 10    The bidder should have ISO certification of ISO 9001:2015, ISO
+       14001:2015. Certificate to be submitted.
+ 11    The bidder must submit the Manufacturers Authentication Form (MAF)
+       for IP Based CCTV, Networking Switches, Display, UPS, Server, Work
+       Station, HMS & Network Passive component as per prescribed format
+       enclosed (Section - S).
+ 12    Technical Compliance statements to be submitted. Without these
+       documents from the OEMs, the offer will be treated as non-responsive
+       and summarily rejected.
+ 13    The bidder shall submit Bid Form (Section – E) duly signed by the
+       authorized signatory of the company as per the format enclosed.
+       Deviation in format may not be accepted.
+ 14    Bidder shall submit NIT Declaration (Section – O) duly signed by the
+       authorized signatory of the company as per the format. Deviation in
+       format may not be accepted.
+ 15    The bidder shall not have been blacklisted by any State/Central
+       Government or PSU Organization or bilateral/multilateral funding
+       agencies for breach of ethical conduct or fraudulent practices as on
+       date of submission of the proposal (as per DIT guidance note issued on
+       26-Dec-2011). Declaration on bidder’s letter head to be submitted.
+
+Note: Bidder should clearly mention the page no or identification mark for contents of the document. The
+document submitted should mention all their respective submission as per RFP with proper page no. or
+identification marking
+
+Authorized Signatory (Signature In full): _________________________________
+
+Name and title of Signatory: __________________________________________
+
+Company Rubber Stamp: __________________________________________________
+
+                                                                     Signature Not Verified
+                                                                     Digitally signed by ANIRUDDHA GHOSH
+                                                                                                    70
+WTL/KP/CCTV/26-27/049 Dated 09-09-2026                               Date: 2026.09.09 11:48:35 IST
+                                                                     Location: West Bengal-WB

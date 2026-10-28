@@ -1,21 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-/**
- * Document_parser Controller
- * 
- * Standalone & Embeddable HMVC Module for Document Text Extraction & Intelligence.
- * Supports: PDF, DOCX, DOC, RTF, and TXT files.
- * 
- * Copy & Paste Ready:
- * Simply copy the entire 'document_parser' folder into 'application/modules/' of any CodeIgniter 3 project.
- * 
- * Routes:
- * - Standalone Page:   GET  /document_parser
- * - AJAX Extraction:   POST /document_parser/extract
- * - HMVC Widget View:  <?= Modules::run('document_parser/widget'); ?>
- *                      or <?php $this->load->view('document_parser/widget'); ?>
- */
 class Document_parser extends MX_Controller
 {
     public function __construct()
@@ -89,17 +74,23 @@ class Document_parser extends MX_Controller
      */
     public function upload_button($config = [])
     {
-        if (empty($config)) {
-            redirect($this->config->item('base_url') . "bid/CreateBids");
-            return;
+        $Bid_Session = $this->session->userdata('logged_in');
+        if (isset($Bid_Session) && !empty($Bid_Session)) {
+            if (empty($config)) {
+                redirect($this->config->item('base_url') . "bid/CreateBids");
+                return;
+            }
+
+            $data = [
+                'button_text'  => isset($config['button_text']) ? $config['button_text'] : 'Upload File',
+                'button_class' => isset($config['button_class']) ? $config['button_class'] : '',
+            ];
+
+            return $this->load->view('document_parser/upload_button', $data, true);
+        } else {
+            $this->session->set_flashdata('err', 'Invalid Session.Please Login Again..!!');
+            redirect($this->config->item('base_url') . "bid/index");
         }
-
-        $data = [
-            'button_text'  => isset($config['button_text']) ? $config['button_text'] : 'Upload File',
-            'button_class' => isset($config['button_class']) ? $config['button_class'] : '',
-        ];
-
-        return $this->load->view('document_parser/upload_button', $data, true);
     }
 
     /**
@@ -107,7 +98,13 @@ class Document_parser extends MX_Controller
      */
     public function button()
     {
-        redirect($this->config->item('base_url') . "bid/CreateBids");
+        $Bid_Session = $this->session->userdata('logged_in');
+        if (isset($Bid_Session) && !empty($Bid_Session)) {
+            redirect($this->config->item('base_url') . "bid/CreateBids");
+        } else {
+            $this->session->set_flashdata('err', 'Invalid Session.Please Login Again..!!');
+            redirect($this->config->item('base_url') . "bid/index");
+        }
     }
 
     /**
@@ -140,15 +137,7 @@ class Document_parser extends MX_Controller
 
         // Validate user session following the bid module authentication structure
         $Bid_Session = $this->session->userdata('logged_in');
-        if (empty($Bid_Session)) {
-            $this->_jsonResponse([
-                'status'   => 'error',
-                'success'  => false,
-                'message'  => 'Invalid Session. Please Login Again..!!',
-                'redirect' => $this->config->item('base_url') . 'bid/index'
-            ], 401);
-            return;
-        }
+        if (isset($Bid_Session) && !empty($Bid_Session)) {
 
         // Validate upload existence & errors
         if (!isset($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
@@ -276,6 +265,26 @@ class Document_parser extends MX_Controller
                 $result['title']          = $title;
                 $result['document_title'] = $title;
 
+                // Document's first non-empty line for Bid Title
+                if (empty($result['first_line'])) {
+                    $rawText = !empty($result['formatted_text']) ? $result['formatted_text'] : (!empty($result['extracted_text']) ? $result['extracted_text'] : '');
+                    foreach (preg_split('/[\r\n]+/', $rawText) as $l) {
+                        $l = trim($l);
+                        if ($l !== '' && !preg_match('/^(?:page\s*\d+|\d+)$/i', $l)) {
+                            $result['first_line'] = preg_replace('/\s+/', ' ', $l);
+                            break;
+                        }
+                    }
+                }
+                if (empty($result['first_line'])) {
+                    $result['first_line'] = $title;
+                }
+                $result['bid_title'] = $result['first_line'];
+                if (isset($result['ai_summary'])) {
+                    $result['ai_summary']['first_line'] = $result['first_line'];
+                    $result['ai_summary']['bid_title']  = $result['first_line'];
+                }
+
                 // Handle classification and save extracted .txt file
                 if ($classification === 'oem' || $classification === 'service') {
                     $txtRelPath = $this->document_extractor->saveExtractedText(
@@ -296,8 +305,9 @@ class Document_parser extends MX_Controller
 
                 // Extract and persist structured 12-section Fact Sheet into single table TenderFactSheet
                 try {
+                    $textForFs = !empty($result['formatted_text']) ? $result['formatted_text'] : (!empty($result['extracted_text']) ? $result['extracted_text'] : '');
                     $factSheetData = $this->document_extractor->extractFactSheet(
-                        isset($result['extracted_text']) ? $result['extracted_text'] : '',
+                        $textForFs,
                         $origName,
                         isset($result['ai_summary']) ? $result['ai_summary'] : []
                     );
@@ -346,6 +356,10 @@ class Document_parser extends MX_Controller
         }
 
         $this->_jsonResponse($result);
+        } else {
+            $this->session->set_flashdata('err', 'Invalid Session.Please Login Again..!!');
+            redirect($this->config->item('base_url') . "bid/index");
+        }
     }
 
     /**

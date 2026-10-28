@@ -215,7 +215,8 @@ class Oem extends MX_Controller
 			}
 		} else
 		{
-			echo json_encode(['status' => false, 'success' => false, 'message' => 'Invalid session']);
+			$this->session->set_flashdata('err','Invalid Session.Please Login Again..!!');
+			redirect($this->config->item('base_url')."bid/index");
 		}
 	}
 
@@ -386,7 +387,8 @@ class Oem extends MX_Controller
 			}
 		} else
 		{
-			echo json_encode(['status' => false, 'success' => false, 'message' => 'Invalid session']);
+			$this->session->set_flashdata('err','Invalid Session.Please Login Again..!!');
+			redirect($this->config->item('base_url')."bid/index");
 		}
 	}
 
@@ -570,7 +572,8 @@ class Oem extends MX_Controller
 			}
 		} else
 		{
-			echo json_encode(['status' => false, 'success' => false, 'message' => 'Invalid session']);
+			$this->session->set_flashdata('err','Invalid Session.Please Login Again..!!');
+			redirect($this->config->item('base_url')."bid/index");
 		}
 	}
 
@@ -749,7 +752,8 @@ class Oem extends MX_Controller
 			}
 		} else
 		{
-			echo json_encode(['status' => false, 'success' => false, 'message' => 'Invalid session']);
+			$this->session->set_flashdata('err','Invalid Session.Please Login Again..!!');
+			redirect($this->config->item('base_url')."bid/index");
 		}
 	}
 
@@ -935,7 +939,8 @@ class Oem extends MX_Controller
 			}
 		} else
 		{
-			echo json_encode(['status' => false, 'success' => false, 'message' => 'Invalid session']);
+			$this->session->set_flashdata('err','Invalid Session.Please Login Again..!!');
+			redirect($this->config->item('base_url')."bid/index");
 		}
 	}
 
@@ -1028,7 +1033,8 @@ class Oem extends MX_Controller
 			}
 		} else
 		{
-			echo json_encode(['status' => false, 'success' => false, 'message' => 'Invalid session']);
+			$this->session->set_flashdata('err','Invalid Session.Please Login Again..!!');
+			redirect($this->config->item('base_url')."bid/index");
 		}
 	}
 
@@ -1214,7 +1220,8 @@ class Oem extends MX_Controller
 			}
 		} else
 		{
-			echo json_encode(['status' => false, 'success' => false, 'message' => 'Invalid session']);
+			$this->session->set_flashdata('err','Invalid Session.Please Login Again..!!');
+			redirect($this->config->item('base_url')."bid/index");
 		}
 	}
 

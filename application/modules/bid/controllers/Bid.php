@@ -582,22 +582,26 @@ public function updateUserStatus(){
 
 public function getUserData()
 {
-    $id = $this->input->post('id');
+	$Bid_Session=$this->session->userdata('logged_in');  
+ 		
+ 	if(isset($Bid_Session) && !empty($Bid_Session))
+	{
+	    $id = $this->input->post('id');
 
-    $user = $this->db->where('Buid', $id)
-                     ->get('BidUsers')
-                     ->row_array();
+	    $user = $this->db->where('Buid', $id)
+	                     ->get('BidUsers')
+	                     ->row_array();
 
-    if($user){
-        // echo "
-        // <p><strong>Name:</strong> {$user['Name']}</p>
-        // <p><strong>Mobile:</strong> {$user['Mobile']}</p>
-        // <p><strong>Email:</strong> {$user['Email']}</p>
-        // <p><strong>Designation:</strong> {$user['Designation']}</p>
-        // <p><strong>Status:</strong> ".($user['Status']==1?'Active':'Inactive')."</p>
-        // <p><strong>Created On:</strong> {$user['CreationTs']}</p>
-        // ";
-    echo '
+	    if($user){
+	        // echo "
+	        // <p><strong>Name:</strong> {$user['Name']}</p>
+	        // <p><strong>Mobile:</strong> {$user['Mobile']}</p>
+	        // <p><strong>Email:</strong> {$user['Email']}</p>
+	        // <p><strong>Designation:</strong> {$user['Designation']}</p>
+	        // <p><strong>Status:</strong> ".($user['Status']==1?'Active':'Inactive')."</p>
+	        // <p><strong>Created On:</strong> {$user['CreationTs']}</p>
+	        // ";
+	    echo '
 
 <!-- Name -->
 <div class="mb-4 pb-1 d-flex">
@@ -670,7 +674,12 @@ public function getUserData()
 
 ';
 
-    }
+	    }
+	} else
+	{
+		$this->session->set_flashdata('err','Invalid Session.Please Login Again..!!');
+		redirect($this->config->item('base_url')."bid/index");
+	}
 }
 // public function PQEvaluation(){
 
@@ -777,6 +786,8 @@ public function AddBidData(){
 					                $this->Factsheet_model->linkFactSheetToBid($fs['Tfsid'], $id);
 					            }
 					        }
+					        // Immediately generate/sync Fact Sheet so it resembles the saved Bid details 1:1
+					        $this->Factsheet_model->generateOrSyncFactsheetForBid($id, $Biddata);
 
 					   		 $this->session->set_flashdata('true', 'Successfully Added Bid Details');
 					   		 redirect($this->config->item('base_url').'bid/CreateBids');
@@ -835,32 +846,35 @@ private function status($statusKey)
 {
     $Bid_Session = $this->session->userdata('logged_in');
 
-    if(empty($Bid_Session)){
-        redirect(base_url('bid/index'));
+    if(isset($Bid_Session) && !empty($Bid_Session))
+    {
+        // Get status from master table
+        $status = $this->db->where('StatusName', $statusKey)
+                           ->where('IsActive',1)
+                           ->get('BidStatusMaster')
+                           ->row();
+
+        if(!$status){
+            show_404();
+        }
+
+        // Fetch bids of that status
+        $this->db->select('b.*, s.DisplayName, s.BadgeClass');
+        $this->db->from('BidCreationDetails b');
+        $this->db->join('BidStatusMaster s','s.Sid = b.BidStatus','left');
+        $this->db->where('b.BidStatus', $status->Sid);
+        $this->db->order_by('b.CreationTs','DESC');
+
+        $data['BidData'] = $this->db->get()->result_array();
+        $data['PageTitle'] = $status->DisplayName;
+
+        $this->template->write_view('content', 'bid/BidDetails', $data);
+        $this->template->render();
+    } else
+    {
+        $this->session->set_flashdata('err','Invalid Session.Please Login Again..!!');
+        redirect($this->config->item('base_url')."bid/index");
     }
-
-    // Get status from master table
-    $status = $this->db->where('StatusName', $statusKey)
-                       ->where('IsActive',1)
-                       ->get('BidStatusMaster')
-                       ->row();
-
-    if(!$status){
-        show_404();
-    }
-
-    // Fetch bids of that status
-    $this->db->select('b.*, s.DisplayName, s.BadgeClass');
-    $this->db->from('BidCreationDetails b');
-    $this->db->join('BidStatusMaster s','s.Sid = b.BidStatus','left');
-    $this->db->where('b.BidStatus', $status->Sid);
-    $this->db->order_by('b.CreationTs','DESC');
-
-    $data['BidData'] = $this->db->get()->result_array();
-    $data['PageTitle'] = $status->DisplayName;
-
-    $this->template->write_view('content', 'bid/BidDetails', $data);
-	$this->template->render();
 }
 
 
@@ -1027,30 +1041,39 @@ public function BidRoleUsers(){
 }
 public function manageRoleMenus()
 {
-    $roleId = $this->input->post('roleId');
+    $Bid_Session = $this->session->userdata('logged_in');
 
-    if(empty($roleId)){
-        show_error("Role ID missing");
+    if(isset($Bid_Session) && !empty($Bid_Session))
+    {
+        $roleId = $this->input->post('roleId');
+
+        if(empty($roleId)){
+            show_error("Role ID missing");
+        }
+
+        $this->db->select('m.*, 
+            IF(r.MenuId IS NOT NULL, 1, 0) as IsAssigned')
+            ->from('BidMenus m')
+            ->join(
+                'RoleMenuPermissions r',
+                'r.MenuId = m.Bmid AND r.RoleId = '.$this->db->escape($roleId),
+                'left'
+            )
+            ->where('m.IsActive', 1)
+            ->order_by('m.ParentId, m.SortOrder');
+
+        $menus = $this->db->get()->result_array();
+
+        $data['menus'] = $this->buildTree($menus);
+        $data['roleId'] = $roleId;
+
+        // IMPORTANT: For AJAX, load only partial view
+        $this->load->view('bid/BidMenus', $data);
+    } else
+    {
+        $this->session->set_flashdata('err','Invalid Session.Please Login Again..!!');
+        redirect($this->config->item('base_url')."bid/index");
     }
-
-    $this->db->select('m.*, 
-        IF(r.MenuId IS NOT NULL, 1, 0) as IsAssigned')
-        ->from('BidMenus m')
-        ->join(
-            'RoleMenuPermissions r',
-            'r.MenuId = m.Bmid AND r.RoleId = '.$this->db->escape($roleId),
-            'left'
-        )
-        ->where('m.IsActive', 1)
-        ->order_by('m.ParentId, m.SortOrder');
-
-    $menus = $this->db->get()->result_array();
-
-    $data['menus'] = $this->buildTree($menus);
-    $data['roleId'] = $roleId;
-
-    // IMPORTANT: For AJAX, load only partial view
-    $this->load->view('bid/BidMenus', $data);
 }
 private function buildTree($menus)
 {
@@ -1073,34 +1096,43 @@ private function buildTree($menus)
     return $tree;
 }
 
- public function updatePermission()
+public function updatePermission()
 {
-    $roleId = $this->input->post('roleId');
-    $menuId = $this->input->post('menuId');
-    $action = $this->input->post('action');
+    $Bid_Session = $this->session->userdata('logged_in');
 
-    if($action == 'add'){
+    if(isset($Bid_Session) && !empty($Bid_Session))
+    {
+        $roleId = $this->input->post('roleId');
+        $menuId = $this->input->post('menuId');
+        $action = $this->input->post('action');
 
-        $exists = $this->db->where('RoleId',$roleId)
-                           ->where('MenuId',$menuId)
-                           ->get('RoleMenuPermissions')
-                           ->row();
+        if($action == 'add'){
 
-        if(!$exists){
-            $this->db->insert('RoleMenuPermissions',[
-                'RoleId' => $roleId,
-                'MenuId' => $menuId
-            ]);
+            $exists = $this->db->where('RoleId',$roleId)
+                               ->where('MenuId',$menuId)
+                               ->get('RoleMenuPermissions')
+                               ->row();
+
+            if(!$exists){
+                $this->db->insert('RoleMenuPermissions',[
+                    'RoleId' => $roleId,
+                    'MenuId' => $menuId
+                ]);
+            }
+
+        } else {
+
+            $this->db->where('RoleId',$roleId)
+                     ->where('MenuId',$menuId)
+                     ->delete('RoleMenuPermissions');
         }
 
-    } else {
-
-        $this->db->where('RoleId',$roleId)
-                 ->where('MenuId',$menuId)
-                 ->delete('RoleMenuPermissions');
+        echo "Updated";
+    } else
+    {
+        $this->session->set_flashdata('err','Invalid Session.Please Login Again..!!');
+        redirect($this->config->item('base_url')."bid/index");
     }
-
-    echo "Updated";
 }
 
 public  function logout()
@@ -1132,124 +1164,123 @@ public  function logout()
      */
     public function factsheet()
     {
-        $this->load->model('document_parser/Factsheet_model');
+        $Bid_Session = $this->session->userdata('logged_in');
 
-        $fsid = $this->input->get_post('id') ? (int)$this->input->get_post('id') : (int)$this->input->get_post('fsid');
-        $bcid = (int)$this->input->get_post('bcid');
-        $doc  = $this->input->get_post('doc');
+        if (isset($Bid_Session) && !empty($Bid_Session))
+        {
+            $this->load->model('document_parser/Factsheet_model');
 
-        $factsheet = null;
-        if ($fsid > 0) {
-            $factsheet = $this->Factsheet_model->getFactSheetById($fsid);
-        } elseif ($bcid > 0) {
-            $factsheet = $this->Factsheet_model->getFactSheetByBcid($bcid);
-        } elseif (!empty($doc)) {
-            $factsheet = $this->Factsheet_model->getFactSheetByDocPath($doc);
-        }
+            $fsid = $this->input->get_post('id') ? (int)$this->input->get_post('id') : (int)$this->input->get_post('fsid');
+            $bcid = (int)$this->input->get_post('bcid');
+            $doc  = $this->input->get_post('doc');
 
-        // If no specific record requested, get the latest Fact Sheet as preview
-        if (!$factsheet) {
-            $latest = $this->db->order_by('Tfsid', 'DESC')->get('TenderFactSheet', 1)->row_array();
-            if ($latest) {
-                $factsheet = $latest;
-            }
-        }
-
-        // Allow live overlay/sync from current CreateBids form fields passed via POST
-        $formSync = $this->input->post();
-        if (!empty($formSync) && is_array($formSync)) {
-            $updatedFields = [];
-            if (!empty($formSync['bidTitle'])) {
-                $factsheet['TenderTitle'] = trim($formSync['bidTitle']);
-                $updatedFields['TenderTitle'] = $factsheet['TenderTitle'];
-            }
-            if (!empty($formSync['bidDepartment'])) {
-                $factsheet['Department'] = trim($formSync['bidDepartment']);
-                $updatedFields['Department'] = $factsheet['Department'];
-            }
-            if (!empty($formSync['bidType']) && $formSync['bidType'] !== '0') {
-                $factsheet['TenderType'] = trim($formSync['bidType']);
-                $updatedFields['TenderType'] = $factsheet['TenderType'];
-            }
-            if (!empty($formSync['bidEstimated'])) {
-                $factsheet['ProjectValue'] = trim($formSync['bidEstimated']);
-                $factsheet['EstimatedValue'] = trim($formSync['bidEstimated']);
-                $updatedFields['ProjectValue'] = $factsheet['ProjectValue'];
-                $updatedFields['EstimatedValue'] = $factsheet['EstimatedValue'];
-            }
-            if (!empty($formSync['bidEmd'])) {
-                $factsheet['EmdAmount'] = trim($formSync['bidEmd']);
-                $updatedFields['EmdAmount'] = $factsheet['EmdAmount'];
-            }
-            if (!empty($formSync['bidTenderID'])) {
-                $factsheet['TenderRefNo'] = trim($formSync['bidTenderID']);
-                $updatedFields['TenderRefNo'] = $factsheet['TenderRefNo'];
-            }
-            if (!empty($formSync['startDate'])) {
-                $factsheet['TenderPublishedDate'] = trim($formSync['startDate']);
-                $factsheet['TenderDate'] = trim($formSync['startDate']);
-                $updatedFields['TenderPublishedDate'] = $factsheet['TenderPublishedDate'];
-                $updatedFields['TenderDate'] = $factsheet['TenderDate'];
-            }
-            if (!empty($formSync['dueDate'])) {
-                $factsheet['BidSubmissionDeadline'] = trim($formSync['dueDate']);
-                $updatedFields['BidSubmissionDeadline'] = $factsheet['BidSubmissionDeadline'];
-            }
-            if (!empty($formSync['dateofBirth'])) {
-                $factsheet['TechnicalBidOpening'] = trim($formSync['dateofBirth']);
-                $updatedFields['TechnicalBidOpening'] = $factsheet['TechnicalBidOpening'];
-            }
-            if (!empty($formSync['bidSummary'])) {
-                $factsheet['ScopeOfWork'] = trim($formSync['bidSummary']);
-                $updatedFields['ScopeOfWork'] = $factsheet['ScopeOfWork'];
+            $factsheet = null;
+            if ($fsid > 0) {
+                $factsheet = $this->Factsheet_model->getFactSheetById($fsid);
+                if (!empty($factsheet['Bcid'])) {
+                    $factsheet = $this->Factsheet_model->generateOrSyncFactsheetForBid($factsheet['Bcid']);
+                }
+            } elseif ($bcid > 0) {
+                $factsheet = $this->Factsheet_model->getFactSheetByBcid($bcid);
+            } elseif (!empty($doc)) {
+                $factsheet = $this->Factsheet_model->getFactSheetByDocPath($doc);
             }
 
-            // Keep the 12 section columns in perfect sync with the updated form fields
-            $factsheet = $this->Factsheet_model->buildSectionPayload($factsheet);
-            foreach ([
-                'TenderOverview', 'ImportantDates', 'TenderValue', 'ScopeOfWork',
-                'AreasCovered', 'ContractPeriod', 'AwardCriteria', 'PerformanceGuarantee',
-                'BidValidity', 'Warranty', 'RiskPoints', 'OpportunityAssessment'
-            ] as $secCol) {
-                if (isset($factsheet[$secCol])) {
-                    $updatedFields[$secCol] = $factsheet[$secCol];
+            // Allow live overlay/sync from current CreateBids form fields passed via POST
+            $formSync = $this->input->post();
+            if (!empty($formSync) && is_array($formSync)) {
+                $updatedFields = [];
+                if (!empty($formSync['bidTitle'])) {
+                    $factsheet['TenderTitle'] = trim($formSync['bidTitle']);
+                    $updatedFields['TenderTitle'] = $factsheet['TenderTitle'];
+                }
+                if (!empty($formSync['bidDepartment'])) {
+                    $factsheet['Department'] = trim($formSync['bidDepartment']);
+                    $updatedFields['Department'] = $factsheet['Department'];
+                }
+                if (!empty($formSync['bidType']) && $formSync['bidType'] !== '0') {
+                    $factsheet['TenderType'] = trim($formSync['bidType']);
+                    $updatedFields['TenderType'] = $factsheet['TenderType'];
+                }
+                if (!empty($formSync['bidEstimated'])) {
+                    $factsheet['ProjectValue'] = trim($formSync['bidEstimated']);
+                    $factsheet['EstimatedValue'] = trim($formSync['bidEstimated']);
+                    $updatedFields['ProjectValue'] = $factsheet['ProjectValue'];
+                    $updatedFields['EstimatedValue'] = $factsheet['EstimatedValue'];
+                }
+                if (!empty($formSync['bidEmd'])) {
+                    $factsheet['EmdAmount'] = trim($formSync['bidEmd']);
+                    $updatedFields['EmdAmount'] = $factsheet['EmdAmount'];
+                }
+                if (!empty($formSync['bidTenderID'])) {
+                    $factsheet['TenderRefNo'] = trim($formSync['bidTenderID']);
+                    $updatedFields['TenderRefNo'] = $factsheet['TenderRefNo'];
+                }
+                if (!empty($formSync['startDate'])) {
+                    $factsheet['TenderPublishedDate'] = trim($formSync['startDate']);
+                    $factsheet['TenderDate'] = trim($formSync['startDate']);
+                    $updatedFields['TenderPublishedDate'] = $factsheet['TenderPublishedDate'];
+                    $updatedFields['TenderDate'] = $factsheet['TenderDate'];
+                }
+                if (!empty($formSync['dueDate'])) {
+                    $factsheet['BidSubmissionDeadline'] = trim($formSync['dueDate']);
+                    $updatedFields['BidSubmissionDeadline'] = $factsheet['BidSubmissionDeadline'];
+                }
+                if (!empty($formSync['dateofBirth'])) {
+                    $factsheet['TechnicalBidOpening'] = trim($formSync['dateofBirth']);
+                    $updatedFields['TechnicalBidOpening'] = $factsheet['TechnicalBidOpening'];
+                }
+                if (!empty($formSync['bidSummary']) && empty($factsheet['ScopeOfWork'])) {
+                    $factsheet['ScopeOfWork'] = trim($formSync['bidSummary']);
+                    $updatedFields['ScopeOfWork'] = $factsheet['ScopeOfWork'];
+                }
+
+                // Keep the 12 section columns in perfect sync with the updated form fields
+                $factsheet = $this->Factsheet_model->buildSectionPayload($factsheet);
+                foreach ([
+                    'TenderOverview', 'ImportantDates', 'TenderValue', 'ScopeOfWork',
+                    'AreasCovered', 'ContractPeriod', 'AwardCriteria', 'PerformanceGuarantee',
+                    'BidValidity', 'Warranty', 'RiskPoints', 'OpportunityAssessment'
+                ] as $secCol) {
+                    if (isset($factsheet[$secCol])) {
+                        $updatedFields[$secCol] = $factsheet[$secCol];
+                    }
+                }
+
+                if (!empty($updatedFields) && !empty($factsheet['Tfsid'])) {
+                    $this->db->where('Tfsid', (int)$factsheet['Tfsid'])->update('tenderfactsheet', $updatedFields);
                 }
             }
 
-            if (!empty($updatedFields) && !empty($factsheet['Tfsid'])) {
-                $this->db->where('Tfsid', (int)$factsheet['Tfsid'])->update('TenderFactSheet', $updatedFields);
+            if (!$factsheet) {
+                $this->session->set_flashdata('err', 'No Fact Sheet found. Please upload a tender document first.');
+                redirect($this->config->item('base_url') . 'bid/CreateBids');
+                return;
             }
-        }
 
-        if (!$factsheet) {
-            $this->session->set_flashdata('err', 'No Fact Sheet found. Please upload a tender document first.');
-            redirect($this->config->item('base_url') . 'bid/CreateBids');
-            return;
-        }
+            $data = [
+                'page_title' => 'Tender Fact Sheet - ' . (!empty($factsheet['TenderRefNo']) ? $factsheet['TenderRefNo'] : (!empty($factsheet['DocumentName']) ? $factsheet['DocumentName'] : 'Document')),
+                'factsheet'  => $factsheet
+            ];
 
-        $data = [
-            'page_title' => 'Tender Fact Sheet - ' . (!empty($factsheet['TenderRefNo']) ? $factsheet['TenderRefNo'] : (!empty($factsheet['DocumentName']) ? $factsheet['DocumentName'] : 'Document')),
-            'factsheet'  => $factsheet
-        ];
+            if ($this->input->get('ajax') || $this->input->is_ajax_request()) {
+                $data['is_ajax'] = true;
+                $this->load->view('document_parser/FactSheet', $data);
+                return;
+            }
 
-        if ($this->input->get('ajax') || $this->input->is_ajax_request()) {
-            $data['is_ajax'] = true;
-            $this->load->view('document_parser/FactSheet', $data);
-            return;
-        }
-
-        if ($this->input->get('print') || $this->input->get('standalone')) {
-            $this->load->view('document_parser/FactSheet', $data);
-        } else {
-            $Bid_Session = $this->session->userdata('logged_in');
-            if (isset($Bid_Session) && !empty($Bid_Session)) {
+            if ($this->input->get('print') || $this->input->get('standalone')) {
+                $this->load->view('document_parser/FactSheet', $data);
+            } else {
                 $currentUrl = strtolower(uri_string());
                 $data['currentUrlArray'] = $this->bid_model->getBreadcrumb($currentUrl);
                 $this->template->write_view('content', 'document_parser/FactSheet', $data);
                 $this->template->render();
-            } else {
-                $this->load->view('document_parser/FactSheet', $data);
             }
+        } else
+        {
+            $this->session->set_flashdata('err', 'Invalid Session.Please Login Again..!!');
+            redirect($this->config->item('base_url') . "bid/index");
         }
     }
 

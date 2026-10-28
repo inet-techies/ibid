@@ -47,6 +47,7 @@ $isActive   = !empty($currentUrlArray['child'])
     <link rel="stylesheet" type="text/css" href="<?=$theme_path?>/assets/css/theme.min.css" />
     <link rel="stylesheet" href="<?=$theme_path?>/css/canvas-modal.css">
     <link rel="stylesheet" href="<?=$theme_path?>/assets/css/oem.css">
+    <link rel="stylesheet" href="<?=$theme_path?>/assets/css/document.css">
 
     <!--! END: Custom CSS-->
     <!--! HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries !-->
