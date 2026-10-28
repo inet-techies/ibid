@@ -681,45 +681,121 @@ public function AddBidData(){
 
         //Fetch breadcrumb data
         $data['currentUrlArray'] = $this->bid_model->getBreadcrumb($currentUrl);
- 		
- 		$inputs = $this->input->post();;
- 		// echo "<ptr>inps"; print_r($inputs); exit;
- 		 if(!$inputs){
- 
-		   		 $this->session->set_flashdata('err', 'No Inputs Received');
-		   		 redirect($this->config->item('base_url').'bid/CreateBids');
-		   		 //echo"success";exit;
-		   		}
-		   		else{
-		   			
-		   			 $nasPath = !empty($inputs['bidNASIDInput']) ? $inputs['bidNASIDInput'] : (!empty($inputs['attachedDocumentPath']) ? $inputs['attachedDocumentPath'] : '');
-		   			 if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
-		   			 	$uploadDir = FCPATH . 'uploads/tender/';
-		   			 	if (!is_dir($uploadDir)) {
-		   			 		@mkdir($uploadDir, 0777, true);
-		   			 	}
-		   			 	$safeName = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $_FILES['file']['name']);
-		   			 	if (@move_uploaded_file($_FILES['file']['tmp_name'], $uploadDir . $safeName)) {
-		   			 		$nasPath = 'uploads/tender/' . $safeName;
-		   			 	}
-		   			 }
+ 		 		$inputs = $this->input->post();
+ 		if(!$inputs){
+		    $this->session->set_flashdata('err', 'No Inputs Received');
+		    redirect($this->config->item('base_url').'bid/CreateBids');
+		    return;
+		}
+		else{
+			// Server-side validation for all required fields
+			$validationErrors = [];
 
-		   			 $Biddata = [
-			            'BidType'        => $inputs['bidTypeInput'],
-			            'BidTitle'       => $inputs['bidTitleInput'],
-			            'BidDepartment'  => $inputs['bidDepartmentInput'],
-			            'EstimatedValue' => $inputs['bidEstimatedInput'],
-			            'EmdValue'       => $inputs['bidEmdInput'],
-			            'PublishedDate'  => (!empty($inputs['PublishedDate']) && strtotime($inputs['PublishedDate'])) ? date('Y-m-d', strtotime($inputs['PublishedDate'])) : null,
-			            'SubmissionDate' => (!empty($inputs['SubmissionDate']) && strtotime($inputs['SubmissionDate'])) ? date('Y-m-d', strtotime($inputs['SubmissionDate'])) : null,
-			            'OpeningDate'    => (!empty($inputs['OpeningDate']) && strtotime($inputs['OpeningDate'])) ? date('Y-m-d', strtotime($inputs['OpeningDate'])) : null,
-			            'SummaryKeywords'=> $inputs['bidSummaryInput'],
-			            'TenderPortalUrl'=> $inputs['bidTenderPortalInput'],
-			            'TenderId'       => $inputs['bidTenderIDInput'],
-			            'NASPath'        => $nasPath,
-			            'Remarks'        => $inputs['bidRemarksInput'],
-			            'BidStatus'      => 1
-			        ];
+			$bidType = trim($inputs['bidTypeInput'] ?? '');
+			if (empty($bidType) || $bidType === '0') {
+				$validationErrors[] = 'Bid Type is required (OEM or Service).';
+			}
+
+			$bidTitle = trim($inputs['bidTitleInput'] ?? '');
+			if (empty($bidTitle)) {
+				$validationErrors[] = 'Bid Title is required.';
+			}
+
+			$bidDepartment = trim($inputs['bidDepartmentInput'] ?? '');
+			if (empty($bidDepartment)) {
+				$validationErrors[] = 'Department/Organization is required.';
+			}
+
+			$rawEstimated = str_replace(',', '', trim($inputs['bidEstimatedInput'] ?? ''));
+			if ($rawEstimated === '' || !is_numeric($rawEstimated) || (float)$rawEstimated <= 0) {
+				$validationErrors[] = 'Estimated Tender Value must be a valid positive amount.';
+			}
+
+			$rawEmd = str_replace(',', '', trim($inputs['bidEmdInput'] ?? ''));
+			if ($rawEmd === '' || !is_numeric($rawEmd) || (float)$rawEmd < 0) {
+				$validationErrors[] = 'Bid EMD Value must be a valid amount (enter 0 if exempt).';
+			}
+
+			$publishedDate = trim($inputs['PublishedDate'] ?? '');
+			if (empty($publishedDate) || !strtotime($publishedDate)) {
+				$validationErrors[] = 'Valid Bid Published Date is required.';
+			}
+
+			$submissionDate = trim($inputs['SubmissionDate'] ?? '');
+			if (empty($submissionDate) || !strtotime($submissionDate)) {
+				$validationErrors[] = 'Valid Bid Submission End Date is required.';
+			}
+
+			$openingDate = trim($inputs['OpeningDate'] ?? '');
+			if (empty($openingDate) || !strtotime($openingDate)) {
+				$validationErrors[] = 'Valid Bid Opening Date is required.';
+			}
+
+			if (!empty($publishedDate) && !empty($submissionDate) && strtotime($submissionDate) < strtotime($publishedDate)) {
+				$validationErrors[] = 'Submission End Date cannot be earlier than Published Date.';
+			}
+
+			if (!empty($submissionDate) && !empty($openingDate) && strtotime($openingDate) < strtotime($submissionDate)) {
+				$validationErrors[] = 'Opening Date cannot be earlier than Submission End Date.';
+			}
+
+			$bidSummary = trim($inputs['bidSummaryInput'] ?? '');
+			if (empty($bidSummary)) {
+				$validationErrors[] = 'Keywords for Summary is required.';
+			}
+
+			$bidTenderPortal = trim($inputs['bidTenderPortalInput'] ?? '');
+			if (empty($bidTenderPortal)) {
+				$validationErrors[] = 'Tender Portal URL is required.';
+			}
+
+			$bidTenderId = trim($inputs['bidTenderIDInput'] ?? '');
+			if (empty($bidTenderId)) {
+				$validationErrors[] = 'Tender ID is required.';
+			}
+
+			$nasPath = !empty($inputs['bidNASIDInput']) ? trim($inputs['bidNASIDInput']) : (!empty($inputs['attachedDocumentPath']) ? trim($inputs['attachedDocumentPath']) : '');
+			if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
+				$uploadDir = FCPATH . 'uploads/tender/';
+				if (!is_dir($uploadDir)) {
+					@mkdir($uploadDir, 0777, true);
+				}
+				$safeName = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $_FILES['file']['name']);
+				if (@move_uploaded_file($_FILES['file']['tmp_name'], $uploadDir . $safeName)) {
+					$nasPath = 'uploads/tender/' . $safeName;
+				}
+			}
+			if (empty($nasPath)) {
+				$validationErrors[] = 'NAS Path or uploaded tender document is required.';
+			}
+
+			$bidRemarks = trim($inputs['bidRemarksInput'] ?? '');
+			if (empty($bidRemarks)) {
+				$validationErrors[] = 'Remarks is required.';
+			}
+
+			if (!empty($validationErrors)) {
+				$this->session->set_flashdata('err', implode('<br>', $validationErrors));
+				redirect($this->config->item('base_url').'bid/CreateBids');
+				return;
+			}
+
+			$Biddata = [
+	            'BidType'        => $bidType,
+	            'BidTitle'       => $bidTitle,
+	            'BidDepartment'  => $bidDepartment,
+	            'EstimatedValue' => (float)$rawEstimated,
+	            'EmdValue'       => (float)$rawEmd,
+	            'PublishedDate'  => date('Y-m-d', strtotime($publishedDate)),
+	            'SubmissionDate' => date('Y-m-d', strtotime($submissionDate)),
+	            'OpeningDate'    => date('Y-m-d', strtotime($openingDate)),
+	            'SummaryKeywords'=> $bidSummary,
+	            'TenderPortalUrl'=> $bidTenderPortal,
+	            'TenderId'       => $bidTenderId,
+	            'NASPath'        => $nasPath,
+	            'Remarks'        => $bidRemarks,
+	            'BidStatus'      => 1
+	        ];
 					$sql_query=$this->db->insert('BidCreationDetails',$Biddata);
 					$id = $this->db->insert_id();
 			         if($id>0){

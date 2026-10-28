@@ -88,7 +88,7 @@
             <div class="card-body general-info">
                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label class="fw-semibold">Bid Type: </label>
+                        <label class="fw-semibold">Bid Type: <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-lg-8">
                         <select class="form-control" data-select2-selector="category" id="bidTypeInput" name="bidTypeInput">
@@ -100,7 +100,7 @@
                 </div><!---------Bid Type----------->
                  <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="bidTitleInput" class="fw-semibold">Bid Title: </label>
+                        <label for="bidTitleInput" class="fw-semibold">Bid Title: <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -111,7 +111,7 @@
                 </div><!---------Bid Title----------->
                  <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="bidDepartmentInput" class="fw-semibold">Department/Organization: </label>
+                        <label for="bidDepartmentInput" class="fw-semibold">Department/Organization: <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -122,7 +122,7 @@
                 </div><!---------Bid Department/Organization----------->
                  <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="bidEstimatedInput" class="fw-semibold">Estimated Tender Value: </label>
+                        <label for="bidEstimatedInput" class="fw-semibold">Estimated Tender Value: <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -134,7 +134,7 @@
                 </div><!---------Bid ETV----------->
                  <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="bidEmdInput" class="fw-semibold">Bid EMD Value: </label>
+                        <label for="bidEmdInput" class="fw-semibold">Bid EMD Value: <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -146,7 +146,7 @@
                 </div><!---------Bid EMD----------->
                  <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="bidPublishedDateInput" class="fw-semibold">Bid Published Date: </label>
+                        <label for="bidPublishedDateInput" class="fw-semibold">Bid Published Date: <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -157,7 +157,7 @@
                 </div><!---------Bid Published Date----------->
                  <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="bidSubmissionDateInput" class="fw-semibold">Bid Submission End Date: </label>
+                        <label for="bidSubmissionDateInput" class="fw-semibold">Bid Submission End Date: <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -185,7 +185,7 @@
 
                  <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="bidSummaryInput" class="fw-semibold">Keywords for Summary:</label>
+                        <label for="bidSummaryInput" class="fw-semibold">Keywords for Summary: <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -197,7 +197,7 @@
 
                  <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="bidTenderPortalInput" class="fw-semibold">Tender Portal URL:</label>
+                        <label for="bidTenderPortalInput" class="fw-semibold">Tender Portal URL: <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -208,7 +208,7 @@
                 </div><!---------Bid Tender Portal URL----------->
                  <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="bidTenderIDInput" class="fw-semibold">Tender ID:</label>
+                        <label for="bidTenderIDInput" class="fw-semibold">Tender ID: <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -219,7 +219,7 @@
                 </div><!---------Bid Tender ID----------->
                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="bidNASIDInput" class="fw-semibold">NAS Path:</label>
+                        <label for="bidNASIDInput" class="fw-semibold">NAS Path: <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -230,7 +230,7 @@
                 </div><!---------NAS Path----------->
                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="bidRemarksInput" class="fw-semibold">Remarks:</label>
+                        <label for="bidRemarksInput" class="fw-semibold">Remarks: <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -313,6 +313,27 @@
     z-index: 1055;
 }
 .right-form-overlay.show {
+    display: block;
+}
+
+/* Form Validation Styling */
+.is-invalid {
+    border-color: #ef4444 !important;
+    background-color: #fef2f2 !important;
+}
+.input-group.has-validation-error .form-control {
+    border-color: #ef4444 !important;
+}
+.input-group.has-validation-error .input-group-text {
+    border-color: #ef4444 !important;
+    background-color: #fee2e2 !important;
+    color: #ef4444 !important;
+}
+.field-error-feedback {
+    color: #dc2626;
+    font-size: 11.5px;
+    font-weight: 500;
+    margin-top: 4px;
     display: block;
 }
 </style>
@@ -665,115 +686,275 @@
       });
     }
 
-    // ── Field Validation Before Opening Fact Sheet ──
-    function validateFormFieldsForFactSheet() {
-      var requiredFields = [
-        { id: 'bidTypeInput', label: 'Bid Type', isSelect: true },
-        { id: 'bidTitleInput', label: 'Bid Title' },
-        { id: 'bidDepartmentInput', label: 'Department/Organization' },
-        { id: 'bidEstimatedInput', label: 'Estimated Tender Value' },
-        { id: 'bidEmdInput', label: 'Bid EMD Value' },
-        { id: 'startDate', label: 'Bid Published Date' },
-        { id: 'dueDate', label: 'Bid Submission End Date' },
-        { id: 'dateofBirth', label: 'Bid Opening Date' },
-        { id: 'bidSummaryInput', label: 'Keywords for Summary' },
-        { id: 'bidTenderPortalInput', label: 'Tender Portal URL' },
-        { id: 'bidTenderIDInput', label: 'Tender ID' },
-        { id: 'bidNASIDInput', label: 'NAS Path' },
-        { id: 'bidRemarksInput', label: 'Remarks' }
-      ];
+    // ── Comprehensive Bid Form Validation (All Fields) ──
+    window.validateBidForm = function(showInline, showSummary) {
+      var errors = [];
+      var firstEl = null;
 
-      var missing = [];
-      var firstMissingEl = null;
-
-      requiredFields.forEach(function(item) {
-        var el = document.getElementById(item.id);
-        if (!el) return;
-        var val = el.value ? el.value.trim() : '';
-        var isEmpty = false;
-        if (item.isSelect) {
-          isEmpty = (val === '' || val === '0');
-        } else {
-          isEmpty = (val === '');
-        }
-
-        if (isEmpty) {
-          missing.push(item.label);
+      function addErr(el, msg) {
+        errors.push({ el: el, msg: msg });
+        if (!firstEl) firstEl = el;
+        if (showInline && el) {
           el.classList.add('is-invalid');
-          if (!firstMissingEl) firstMissingEl = el;
+          var group = el.closest('.input-group');
+          if (group) group.classList.add('has-validation-error');
+          
+          if (el.id === 'bidTypeInput') {
+            var s2 = el.nextElementSibling;
+            if (s2 && s2.classList.contains('select2-container')) {
+              s2.style.border = '1px solid #ef4444';
+              s2.style.borderRadius = '6px';
+            }
+          }
+
+          var col = el.closest('.col-lg-8');
+          if (col) {
+            var feed = col.querySelector('.field-error-feedback');
+            if (!feed) {
+              feed = document.createElement('div');
+              feed.className = 'field-error-feedback text-danger fw-semibold mt-1';
+              col.appendChild(feed);
+            }
+            feed.textContent = msg;
+            feed.style.display = 'block';
+          }
+        }
+      }
+
+      function removeErr(el) {
+        if (!el) return;
+        el.classList.remove('is-invalid');
+        var group = el.closest('.input-group');
+        if (group) group.classList.remove('has-validation-error');
+        if (el.id === 'bidTypeInput') {
+          var s2 = el.nextElementSibling;
+          if (s2 && s2.classList.contains('select2-container')) {
+            s2.style.border = '';
+          }
+        }
+        var col = el.closest('.col-lg-8');
+        if (col) {
+          var feed = col.querySelector('.field-error-feedback');
+          if (feed) feed.style.display = 'none';
+        }
+      }
+
+      // 1. Bid Type
+      var elType = document.getElementById('bidTypeInput');
+      if (elType) {
+        var valType = elType.value ? elType.value.trim() : '';
+        if (valType === '' || valType === '0') {
+          addErr(elType, 'Please select a Bid Type (OEM or Service).');
         } else {
-          el.classList.remove('is-invalid');
+          removeErr(elType);
         }
-      });
+      }
 
-      // Clear is-invalid on user input
-      requiredFields.forEach(function(item) {
-        var el = document.getElementById(item.id);
-        if (el && !el._hasFactSheetValidationListener) {
-          el._hasFactSheetValidationListener = true;
-          el.addEventListener('input', function() {
-            if (this.value.trim() !== '' && this.value !== '0') {
-              this.classList.remove('is-invalid');
-              var alertBox = document.getElementById('factSheetValidationAlert');
-              if (alertBox) alertBox.style.display = 'none';
-            }
-          });
-          el.addEventListener('change', function() {
-            if (this.value.trim() !== '' && this.value !== '0') {
-              this.classList.remove('is-invalid');
-              var alertBox = document.getElementById('factSheetValidationAlert');
-              if (alertBox) alertBox.style.display = 'none';
-            }
-          });
+      // 2. Bid Title
+      var elTitle = document.getElementById('bidTitleInput');
+      if (elTitle) {
+        var valTitle = elTitle.value ? elTitle.value.trim() : '';
+        if (valTitle === '') {
+          addErr(elTitle, 'Please enter the Bid Title.');
+        } else {
+          removeErr(elTitle);
         }
-      });
+      }
 
-      return {
-        isValid: missing.length === 0,
-        missing: missing,
-        firstMissingEl: firstMissingEl
+      // 3. Department
+      var elDept = document.getElementById('bidDepartmentInput');
+      if (elDept) {
+        var valDept = elDept.value ? elDept.value.trim() : '';
+        if (valDept === '') {
+          addErr(elDept, 'Please enter Department/Organization.');
+        } else {
+          removeErr(elDept);
+        }
+      }
+
+      // 4. Estimated Tender Value
+      var elEst = document.getElementById('bidEstimatedInput');
+      if (elEst) {
+        var rawEst = elEst.value ? elEst.value.replace(/,/g, '').trim() : '';
+        if (rawEst === '' || isNaN(rawEst) || parseFloat(rawEst) <= 0) {
+          addErr(elEst, 'Please enter a valid positive Estimated Tender Value (e.g. 500000).');
+        } else {
+          removeErr(elEst);
+        }
+      }
+
+      // 5. Bid EMD Value
+      var elEmd = document.getElementById('bidEmdInput');
+      if (elEmd) {
+        var rawEmd = elEmd.value ? elEmd.value.replace(/,/g, '').trim() : '';
+        if (rawEmd === '' || isNaN(rawEmd) || parseFloat(rawEmd) < 0) {
+          addErr(elEmd, 'Please enter a valid EMD Value (enter 0 if exempt).');
+        } else {
+          removeErr(elEmd);
+        }
+      }
+
+      // 6. Bid Published Date
+      var elPub = document.getElementById('startDate');
+      if (elPub) {
+        var valPub = elPub.value ? elPub.value.trim() : '';
+        if (valPub === '') {
+          addErr(elPub, 'Please select the Bid Published Date.');
+        } else {
+          removeErr(elPub);
+        }
+      }
+
+      // 7. Bid Submission End Date
+      var elSub = document.getElementById('dueDate');
+      if (elSub) {
+        var valSub = elSub.value ? elSub.value.trim() : '';
+        if (valSub === '') {
+          addErr(elSub, 'Please select the Bid Submission End Date.');
+        } else if (elPub && elPub.value && new Date(valSub) < new Date(elPub.value)) {
+          addErr(elSub, 'Submission Date cannot be earlier than Published Date.');
+        } else {
+          removeErr(elSub);
+        }
+      }
+
+      // 8. Bid Opening Date
+      var elOpen = document.getElementById('dateofBirth');
+      if (elOpen) {
+        var valOpen = elOpen.value ? elOpen.value.trim() : '';
+        if (valOpen === '') {
+          addErr(elOpen, 'Please select the Bid Opening Date.');
+        } else if (elSub && elSub.value && new Date(valOpen) < new Date(elSub.value)) {
+          addErr(elOpen, 'Opening Date cannot be earlier than Submission Date.');
+        } else {
+          removeErr(elOpen);
+        }
+      }
+
+      // 9. Summary Keywords
+      var elSumm = document.getElementById('bidSummaryInput');
+      if (elSumm) {
+        var valSumm = elSumm.value ? elSumm.value.trim() : '';
+        if (valSumm === '') {
+          addErr(elSumm, 'Please enter Keywords for Summary.');
+        } else {
+          removeErr(elSumm);
+        }
+      }
+
+      // 10. Tender Portal URL
+      var elPortal = document.getElementById('bidTenderPortalInput');
+      if (elPortal) {
+        var valPortal = elPortal.value ? elPortal.value.trim() : '';
+        if (valPortal === '') {
+          addErr(elPortal, 'Please enter the Tender Portal URL.');
+        } else {
+          removeErr(elPortal);
+        }
+      }
+
+      // 11. Tender ID
+      var elTenderId = document.getElementById('bidTenderIDInput');
+      if (elTenderId) {
+        var valTenderId = elTenderId.value ? elTenderId.value.trim() : '';
+        if (valTenderId === '') {
+          addErr(elTenderId, 'Please enter the Tender ID.');
+        } else {
+          removeErr(elTenderId);
+        }
+      }
+
+      // 12. NAS Path
+      var elNas = document.getElementById('bidNASIDInput');
+      var elAttached = document.getElementById('attachedDocumentPath');
+      if (elNas) {
+        var valNas = elNas.value ? elNas.value.trim() : '';
+        var valAttached = elAttached && elAttached.value ? elAttached.value.trim() : '';
+        if (valNas === '' && valAttached === '') {
+          addErr(elNas, 'Please enter the NAS Path or upload a tender document.');
+        } else {
+          removeErr(elNas);
+        }
+      }
+
+      // 13. Remarks
+      var elRemarks = document.getElementById('bidRemarksInput');
+      if (elRemarks) {
+        var valRemarks = elRemarks.value ? elRemarks.value.trim() : '';
+        if (valRemarks === '') {
+          addErr(elRemarks, 'Please enter Remarks.');
+        } else {
+          removeErr(elRemarks);
+        }
+      }
+
+      var alertBox = document.getElementById('bidFormValidationSummary');
+      if (errors.length > 0) {
+        if (showSummary) {
+          if (!alertBox) {
+            alertBox = document.createElement('div');
+            alertBox.id = 'bidFormValidationSummary';
+            alertBox.className = 'alert alert-danger mx-4 shadow-sm';
+            alertBox.style.cssText = 'border-radius:8px;border-left:4px solid #ef4444 !important;';
+            var formEl = document.querySelector('form[action*="AddBidData"]');
+            if (formEl) formEl.insertBefore(alertBox, formEl.firstChild);
+          }
+          alertBox.innerHTML = `
+            <div class="d-flex align-items-start gap-2">
+              <i class="feather-alert-circle text-danger mt-1 me-2 mr-2" style="font-size:18px;flex-shrink:0;"></i>
+              <div style="flex:1;">
+                <strong class="text-danger">Please correct the following ${errors.length} required field(s) before submitting:</strong>
+                <ul class="mb-0 mt-1 ps-3" style="font-size:12.5px;line-height:1.6;">
+                  ${errors.map(function(e) { return '<li>' + e.msg + '</li>'; }).join('')}
+                </ul>
+              </div>
+              <button type="button" class="btn btn-sm btn-link text-danger p-0 ms-2 ml-2" onclick="document.getElementById('bidFormValidationSummary').style.display='none';">
+                <i class="feather-x" style="font-size:16px;"></i>
+              </button>
+            </div>
+          `;
+          alertBox.style.display = 'block';
+
+          if (firstEl) {
+            firstEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            setTimeout(function() {
+              try { firstEl.focus(); } catch(err){}
+            }, 300);
+          }
+        }
+        return false;
+      } else {
+        if (alertBox) alertBox.style.display = 'none';
+        return true;
+      }
+    };
+
+    // Global validate() function called by form onsubmit="return validate();"
+    window.validate = function() {
+      return window.validateBidForm(true, true);
+    };
+
+    // Attach real-time input and change listeners to clear error states as user types
+    [
+      'bidTypeInput', 'bidTitleInput', 'bidDepartmentInput', 'bidEstimatedInput',
+      'bidEmdInput', 'startDate', 'dueDate', 'dateofBirth', 'bidSummaryInput',
+      'bidTenderPortalInput', 'bidTenderIDInput', 'bidNASIDInput', 'bidRemarksInput'
+    ].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var liveClear = function() {
+        window.validateBidForm(true, false);
       };
-    }
+      el.addEventListener('input', liveClear);
+      el.addEventListener('change', liveClear);
+    });
 
     // ── Open Right-Side Fact Sheet Modal ──
     function openFactSheetPanel() {
-      // Check if all fields in CreateBids.php are full
-      var validation = validateFormFieldsForFactSheet();
-      var alertBox = document.getElementById('factSheetValidationAlert');
-
-      if (!validation.isValid) {
-        if (!alertBox) {
-          alertBox = document.createElement('div');
-          alertBox.id = 'factSheetValidationAlert';
-          alertBox.className = 'alert alert-warning border shadow-sm my-3';
-          alertBox.style.cssText = 'border-radius:8px; border-left:4px solid #f59e0b !important;';
-          var btnContainer = document.querySelector('.card-body.general-info');
-          if (btnContainer) {
-            btnContainer.insertBefore(alertBox, btnContainer.querySelector('.d-flex.justify-content-center'));
-          }
-        }
-        alertBox.innerHTML = `
-          <div class="d-flex align-items-start gap-2">
-            <i class="feather-alert-triangle text-warning mt-1 me-2 mr-2" style="font-size:18px;flex-shrink:0;"></i>
-            <div style="flex:1;">
-              <strong class="text-dark">Please complete all fields before opening the Fact Sheet</strong>
-              <div class="small text-muted mt-1">The following <strong>${validation.missing.length}</strong> required field(s) are empty:</div>
-              <div class="small text-danger fw-bold mt-1">${validation.missing.join(', ')}</div>
-            </div>
-            <button type="button" class="btn btn-sm btn-link text-muted p-0 ms-2 ml-2" onclick="this.parentElement.parentElement.style.display='none';">
-              <i class="feather-x" style="font-size:16px;"></i>
-            </button>
-          </div>
-        `;
-        alertBox.style.display = 'block';
-        alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        if (validation.firstMissingEl) {
-          validation.firstMissingEl.focus();
-        }
+      var isFormValid = window.validateBidForm(true, true);
+      if (!isFormValid) {
         return;
       }
-
-      if (alertBox) alertBox.style.display = 'none';
 
       var fsId = document.getElementById('factSheetId') ? document.getElementById('factSheetId').value : '';
       var attachedPath = document.getElementById('attachedDocumentPath') ? document.getElementById('attachedDocumentPath').value : '';
