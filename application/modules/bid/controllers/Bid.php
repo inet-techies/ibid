@@ -121,74 +121,37 @@ class Bid extends MX_Controller
 	
 public function dashboard(){
 
-		$Bid_Session=$this->session->userdata('logged_in');  
+		$Bid_Session = $this->session->userdata('logged_in');  
  		
  		if(isset($Bid_Session) && !empty($Bid_Session))
 		{	
-			//Get current URL (bid/CreateBids)
-        $currentUrl = strtolower(uri_string());
+			// Get current URL (bid/dashboard)
+			$currentUrl = strtolower(uri_string());
 
-        //Fetch breadcrumb data
-        $data['currentUrlArray'] = $this->bid_model->getBreadcrumb($currentUrl);
+			// Fetch breadcrumb data
+			$data['currentUrlArray'] = $this->bid_model->getBreadcrumb($currentUrl);
 				
-				  // Get grouped counts
-					    $this->db->select('BidStatus, COUNT(*) as total');
-					    $this->db->group_by('BidStatus');
-					    $counts = $this->db->get('BidCreationDetails')->result_array();
+			// Optional date filtering from query string
+			$startDate = $this->input->get('start_date');
+			$endDate   = $this->input->get('end_date');
 
-					    $countArray = [];
-					    foreach($counts as $row){
-					        $countArray[$row['BidStatus']] = $row['total'];
-					    }
+			// Load Current and Overview datasets from model
+			$data['current']   = $this->bid_model->getCurrentDashboardData($startDate, $endDate);
+			$data['overview']  = $this->bid_model->getOverviewDashboardData($startDate, $endDate);
+			$data['allBids']   = $this->bid_model->getAllBidsWithStatus();
+			$data['statuses']  = $this->db->order_by('SortOrder', 'ASC')->get('BidStatusMaster')->result_array();
+			$data['startDate'] = $startDate;
+			$data['endDate']   = $endDate;
 
-					    // Get all statuses
-					    $statuses = $this->db->get('BidStatusMaster')
-					                         ->result_array();
+			// Theme path for asset references
+			$data['theme_path'] = $this->config->item('theme_locations') . $this->config->item('active_template');
 
-					    $statusMap = [];
-					    foreach($statuses as $status){
-					        $statusMap[$status['StatusName']] = [
-					            'DisplayName' => $status['DisplayName'],
-					            'BadgeClass' => $status['BadgeClass'],
-					            'Sid' => $status['Sid'],
-					            'Count' => isset($countArray[$status['Sid']]) ? $countArray[$status['Sid']] : 0,
-					            'IconClass'   => $status['IconClass']
-					        ];
-					    }
-
-					    // $data['statusName'] = $statuses['DisplayName'];
-					    $data['statusCounts'] = $statusMap;
-					    $data['totalBids'] = array_sum($countArray);
-
-					     // Bootstrap color mapping
-						    $data['colorMap'] = [
-						        'bg-primary'   => '#0d6efd',
-						        'bg-success'   => '#198754',
-						        'bg-danger'    => '#dc3545',
-						        'bg-warning'   => '#ffc107',
-						        'bg-info'      => '#0dcaf0',
-						        'bg-dark'      => '#212529',
-						        'bg-secondary' => '#6c757d'
-						    ];
-
-				// Get Last 10 Bids (latest first)
-				$lastBids = $this->db
-				    ->select('b.Bcid, b.BidTitle, b.BidType, b.BidDepartment, b.PublishedDate,b.OpeningDate,b.SubmissionDate,b.CreationTs,s.DisplayName as StatusName, s.BadgeClass')
-				    ->from('BidCreationDetails b')
-				    ->join('BidStatusMaster s', 's.Sid = b.BidStatus', 'left')
-				    ->order_by('b.CreationTs', 'DESC')
-				    ->limit(10)
-				    ->get()
-				    ->result_array();
-
-				$data['lastBids'] = $lastBids;
-		    
-				$this->template->write_view('content', 'bid/masterdashboard', $data);
-				$this->template->render();
+			$this->template->write_view('content', 'bid/masterdashboard', $data);
+			$this->template->render();
 
 		} else
 		{
-		$this->session->set_flashdata('err','Invalid Session.Please Login Again..!!');
+			$this->session->set_flashdata('err','Invalid Session.Please Login Again..!!');
 			redirect($this->config->item('base_url')."bid/index");
 		}
 }

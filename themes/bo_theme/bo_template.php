@@ -48,6 +48,7 @@ $isActive   = !empty($currentUrlArray['child'])
     <link rel="stylesheet" href="<?=$theme_path?>/css/canvas-modal.css">
     <link rel="stylesheet" href="<?=$theme_path?>/assets/css/oem.css">
     <link rel="stylesheet" href="<?=$theme_path?>/assets/css/document.css">
+    <link rel="stylesheet" href="<?=$theme_path?>/assets/css/dashboard.css">
 
     <!--! END: Custom CSS-->
     <!--! HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries !-->
@@ -712,6 +713,7 @@ $isActive   = !empty($currentUrlArray['child'])
          <script src="<?=$theme_path?>/assets/js/customers-create-init.min.js"></script>
 
     <script src="<?=$theme_path?>/assets/js/dashboard-init.min.js"></script>
+    <script src="<?=$theme_path?>/assets/js/dashboard.js"></script>
     <!--! END: Apps Init !-->
     <!--! BEGIN: Theme Customizer  !-->
     <script src="<?=$theme_path?>/assets/js/theme-customizer-init.min.js"></script>
