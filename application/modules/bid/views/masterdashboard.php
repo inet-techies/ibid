@@ -94,6 +94,7 @@
                                                 <th>Submission Date</th>
                                                 <th>Status</th>
                                                 <th>Creation Date</th>
+                                                <th>Remarks</th>
                                              </tr>
                                         </thead>
                                         <tbody>
@@ -137,6 +138,11 @@
                                                     </span>
                                                 </td>
                                                  <td><?= date('d-m-Y H:i:s', strtotime($bid['CreationTs'])); ?> </td>
+                                                 <td>
+                                                     <span class="d-inline-block text-truncate" style="max-width: 180px;" title="<?= htmlspecialchars($bid['Remarks'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
+                                                         <?= !empty($bid['Remarks']) ? htmlspecialchars($bid['Remarks'], ENT_QUOTES, 'UTF-8') : '-'; ?>
+                                                     </span>
+                                                 </td>
                                             </tr>
 
                                             <?php endforeach; ?>
@@ -144,7 +150,7 @@
                                             <?php else: ?>
 
                                             <tr>
-                                                <td colspan="5" class="text-center text-muted">
+                                                <td colspan="9" class="text-center text-muted">
                                                     No bids found
                                                 </td>
                                             </tr>

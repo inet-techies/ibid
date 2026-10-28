@@ -173,7 +173,7 @@ public function dashboard(){
 
 				// Get Last 10 Bids (latest first)
 				$lastBids = $this->db
-				    ->select('b.Bcid, b.BidTitle, b.BidType, b.BidDepartment, b.PublishedDate,b.OpeningDate,b.SubmissionDate,b.CreationTs,s.DisplayName as StatusName, s.BadgeClass')
+				    ->select('b.Bcid, b.BidTitle, b.BidType, b.BidDepartment, b.PublishedDate,b.OpeningDate,b.SubmissionDate,b.CreationTs,b.Remarks,s.DisplayName as StatusName, s.BadgeClass')
 				    ->from('BidCreationDetails b')
 				    ->join('BidStatusMaster s', 's.Sid = b.BidStatus', 'left')
 				    ->order_by('b.CreationTs', 'DESC')
@@ -789,6 +789,38 @@ public function AddBidData(){
 					        // Immediately generate/sync Fact Sheet so it resembles the saved Bid details 1:1
 					        $this->Factsheet_model->generateOrSyncFactsheetForBid($id, $Biddata);
 
+					        // Send Email Notification to Prasanna Kumari (TO), with Reka and Fazil in CC
+					        try {
+					            require_once(APPPATH . 'libraries/InetMailer.php');
+					            $objs = new InetMailer();
+					            $mail = $objs->load();
+
+					            $mail->setFrom('info@inetcsc.com', 'I-NET Bid Management');
+					            $mail->addAddress('prasannakumari@inetcsc.com', 'Prasanna Kumari');
+					            $mail->addCC('reka@inetcsc.com', 'Reka');
+					            $mail->addCC('Mohamedfazil@inetcsc.com', 'Fazil');
+
+					            $mail->isHTML(true);
+					            $mail->Subject = "New Bid Created: " . $Biddata['BidTitle'];
+
+					            if (file_exists(FCPATH . 'images/inet_logo.png')) {
+					                $mail->AddEmbeddedImage(FCPATH . 'images/inet_logo.png', 'I-NET');
+					            }
+
+					            $emailData = [
+					                'Bcid'      => $id,
+					                'bid'       => $Biddata,
+					                'createdBy' => $Bid_Session['BName'] ?? ($Bid_Session['Name'] ?? 'Administrator'),
+					                'createdOn' => date('d M Y, h:i A'),
+					                'portalUrl' => $this->config->item('base_url') . 'bid/CreateBids'
+					            ];
+
+					            $mail->Body = $this->load->view('bid/NewBidCreatedMail', $emailData, TRUE);
+					            $mail->send();
+					        } catch (\Throwable $e) {
+					            log_message('error', 'Bid Creation Email Notification Failed: ' . $e->getMessage());
+					        }
+
 					   		 $this->session->set_flashdata('true', 'Successfully Added Bid Details');
 					   		 redirect($this->config->item('base_url').'bid/CreateBids');
 				   		 //echo"success";exit;
@@ -964,6 +996,17 @@ public function updateBidStatus()
 		        $approvedMgmt = $this->input->post('ApprovedByManagement');
 		        $approvedWhom = $this->input->post('ApprovedByWhom');
 		        $remarks = $this->input->post('Remarks');
+		        $techSelected = $this->input->post('TechnicalSelected');
+		        $techSelectedVal = ($techSelected !== '' && $techSelected !== null) ? intval($techSelected) : null;
+		        $priceDetails = $this->input->post('PriceDetails');
+		        $loaReceived = $this->input->post('LoaReceived');
+		        $loaReceivedVal = ($loaReceived !== '' && $loaReceived !== null) ? intval($loaReceived) : null;
+		        $bgSubmitted = $this->input->post('BgSubmitted');
+		        $bgSubmittedVal = ($bgSubmitted !== '' && $bgSubmitted !== null) ? intval($bgSubmitted) : null;
+		        $woReceived = $this->input->post('WoReceived');
+		        $woReceivedVal = ($woReceived !== '' && $woReceived !== null) ? intval($woReceived) : null;
+		        $ccReceived = $this->input->post('CompletionCertificateReceived');
+		        $ccReceivedVal = ($ccReceived !== '' && $ccReceived !== null) ? intval($ccReceived) : null;
 
 		        $user = $this->session->userdata('logged_in');
 
@@ -973,7 +1016,7 @@ public function updateBidStatus()
 		        }
 
 		        // Get Current Status
-		        $current = $this->db->select('BidStatus')
+		        $current = $this->db->select('BidStatus, LoaReceived, LoaDocumentPath, BgSubmitted, BgDocumentPath, WoReceived, WoDocumentPath, CompletionCertificateReceived, CompletionCertificateDocumentPath')
 		                            ->where('Bcid', $bcid)
 		                            ->get('BidCreationDetails')
 		                            ->row();
@@ -985,7 +1028,266 @@ public function updateBidStatus()
 
 		        $oldStatus = $current->BidStatus;
 
-		        // Prevent same status update
+		        // CASE 0: Technical Selected is explicitly selected as "No" (0)
+		        // User requirement: Bid remains in its current status / table / menu, with date & remarks saved to DB.
+		        if ($techSelectedVal === 0) {
+		            $this->db->trans_start();
+
+		            $updateMain = [
+		                'TechnicalSelected' => 0,
+		                'Remarks'           => $remarks !== null ? trim($remarks) : '',
+		                'ActualDate'        => !empty($actualDate) ? $actualDate : NULL,
+		            ];
+
+		            $this->db->where('Bcid', $bcid)->update('BidCreationDetails', $updateMain);
+
+		            $trackingData = [
+		                'Bcid'              => $bcid,
+		                'OldStatusId'       => $oldStatus,
+		                'CurrentStatusId'   => $oldStatus,
+		                'TechnicalSelected' => 0,
+		                'ActualDate'        => !empty($actualDate) ? $actualDate : NULL,
+		                'Remarks'           => $remarks !== null ? trim($remarks) : 'Technical Evaluated: Not Selected',
+		                'UpdatedBy'         => $Bid_Session['Bid'],
+		                'Ipaddress'         => $ipAddress,
+		                'UserAgent'         => $userAgent
+		            ];
+
+		            $this->db->insert('BidStatusTracking', $trackingData);
+		            $this->db->trans_complete();
+
+		            echo json_encode([
+		                'status'  => true,
+		                'message' => 'Technical evaluation marked as Not Selected. Bid remains in current status.'
+		            ]);
+		            return;
+		        }
+
+		        // CASE 1: LOA Received is explicitly selected as "No" (0)
+		        // User requirement: Bid remains in its current status / table / menu, with date & remarks saved to DB.
+		        if ($loaReceivedVal === 0) {
+		            $this->db->trans_start();
+
+		            $updateMain = [
+		                'LoaReceived' => 0,
+		                'Remarks'     => $remarks !== null ? trim($remarks) : '',
+		                'ActualDate'  => !empty($actualDate) ? $actualDate : NULL,
+		            ];
+
+		            $this->db->where('Bcid', $bcid)->update('BidCreationDetails', $updateMain);
+
+		            $trackingData = [
+		                'Bcid'            => $bcid,
+		                'OldStatusId'     => $oldStatus,
+		                'CurrentStatusId' => $oldStatus,
+		                'LoaReceived'     => 0,
+		                'ActualDate'      => !empty($actualDate) ? $actualDate : NULL,
+		                'Remarks'         => $remarks !== null ? trim($remarks) : 'LOA Not Received',
+		                'UpdatedBy'       => $Bid_Session['Bid'],
+		                'Ipaddress'       => $ipAddress,
+		                'UserAgent'       => $userAgent
+		            ];
+
+		            $this->db->insert('BidStatusTracking', $trackingData);
+		            $this->db->trans_complete();
+
+		            echo json_encode([
+		                'status'  => true,
+		                'message' => 'LOA marked as Not Received. Bid remains in current status.'
+		            ]);
+		            return;
+		        }
+
+		        // CASE 2: LOA Received is selected as "Yes" (1) -> Handle document upload
+		        $loaDocPath = $current->LoaDocumentPath ?? null;
+		        if (isset($_FILES['loa_document']) && $_FILES['loa_document']['error'] === UPLOAD_ERR_OK) {
+		            $uploadDir = FCPATH . 'uploads/loa/';
+		            if (!is_dir($uploadDir)) {
+		                @mkdir($uploadDir, 0777, true);
+		            }
+		            $safeName = 'loa_' . time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $_FILES['loa_document']['name']);
+		            if (@move_uploaded_file($_FILES['loa_document']['tmp_name'], $uploadDir . $safeName)) {
+		                $loaDocPath = 'uploads/loa/' . $safeName;
+		            } else {
+		                echo json_encode(['status' => false, 'message' => 'Failed to upload LOA document']);
+		                return;
+		            }
+		        }
+
+		        if ($loaReceivedVal === 1 && empty($loaDocPath)) {
+		            echo json_encode(['status' => false, 'message' => 'Please upload the LOA Document']);
+		            return;
+		        }
+
+		        // CASE 3: BG Submitted is explicitly selected as "No" (0)
+		        // User requirement: Bid remains in its current status / table / menu, with date & remarks saved to DB.
+		        if ($bgSubmittedVal === 0) {
+		            $this->db->trans_start();
+
+		            $updateMain = [
+		                'BgSubmitted' => 0,
+		                'Remarks'     => $remarks !== null ? trim($remarks) : '',
+		                'ActualDate'  => !empty($actualDate) ? $actualDate : NULL,
+		            ];
+
+		            $this->db->where('Bcid', $bcid)->update('BidCreationDetails', $updateMain);
+
+		            $trackingData = [
+		                'Bcid'            => $bcid,
+		                'OldStatusId'     => $oldStatus,
+		                'CurrentStatusId' => $oldStatus,
+		                'BgSubmitted'     => 0,
+		                'ActualDate'      => !empty($actualDate) ? $actualDate : NULL,
+		                'Remarks'         => $remarks !== null ? trim($remarks) : 'BG Not Submitted',
+		                'UpdatedBy'       => $Bid_Session['Bid'],
+		                'Ipaddress'       => $ipAddress,
+		                'UserAgent'       => $userAgent
+		            ];
+
+		            $this->db->insert('BidStatusTracking', $trackingData);
+		            $this->db->trans_complete();
+
+		            echo json_encode([
+		                'status'  => true,
+		                'message' => 'BG marked as Not Submitted. Bid remains in current status.'
+		            ]);
+		            return;
+		        }
+
+		        // CASE 4: BG Submitted is selected as "Yes" (1) -> Handle document upload
+		        $bgDocPath = $current->BgDocumentPath ?? null;
+		        if (isset($_FILES['bg_document']) && $_FILES['bg_document']['error'] === UPLOAD_ERR_OK) {
+		            $uploadDir = FCPATH . 'uploads/bg/';
+		            if (!is_dir($uploadDir)) {
+		                @mkdir($uploadDir, 0777, true);
+		            }
+		            $safeName = 'bg_' . time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $_FILES['bg_document']['name']);
+		            if (@move_uploaded_file($_FILES['bg_document']['tmp_name'], $uploadDir . $safeName)) {
+		                $bgDocPath = 'uploads/bg/' . $safeName;
+		            } else {
+		                echo json_encode(['status' => false, 'message' => 'Failed to upload BG document']);
+		                return;
+		            }
+		        }
+
+		        if ($bgSubmittedVal === 1 && empty($bgDocPath)) {
+		            echo json_encode(['status' => false, 'message' => 'Please upload the BG Document']);
+		            return;
+		        }
+
+		        // CASE 5: WO Received is explicitly selected as "No" (0)
+		        // User requirement: Bid remains in its current status / table / menu, with date & remarks saved to DB.
+		        if ($woReceivedVal === 0) {
+		            $this->db->trans_start();
+
+		            $updateMain = [
+		                'WoReceived' => 0,
+		                'Remarks'    => $remarks !== null ? trim($remarks) : '',
+		                'ActualDate' => !empty($actualDate) ? $actualDate : NULL,
+		            ];
+
+		            $this->db->where('Bcid', $bcid)->update('BidCreationDetails', $updateMain);
+
+		            $trackingData = [
+		                'Bcid'            => $bcid,
+		                'OldStatusId'     => $oldStatus,
+		                'CurrentStatusId' => $oldStatus,
+		                'WoReceived'      => 0,
+		                'ActualDate'      => !empty($actualDate) ? $actualDate : NULL,
+		                'Remarks'         => $remarks !== null ? trim($remarks) : 'WO Not Received',
+		                'UpdatedBy'       => $Bid_Session['Bid'],
+		                'Ipaddress'       => $ipAddress,
+		                'UserAgent'       => $userAgent
+		            ];
+
+		            $this->db->insert('BidStatusTracking', $trackingData);
+		            $this->db->trans_complete();
+
+		            echo json_encode([
+		                'status'  => true,
+		                'message' => 'WO marked as Not Received. Bid remains in current status.'
+		            ]);
+		            return;
+		        }
+
+		        // CASE 6: WO Received is selected as "Yes" (1) -> Handle document upload
+		        $woDocPath = $current->WoDocumentPath ?? null;
+		        if (isset($_FILES['wo_document']) && $_FILES['wo_document']['error'] === UPLOAD_ERR_OK) {
+		            $uploadDir = FCPATH . 'uploads/wo/';
+		            if (!is_dir($uploadDir)) {
+		                @mkdir($uploadDir, 0777, true);
+		            }
+		            $safeName = 'wo_' . time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $_FILES['wo_document']['name']);
+		            if (@move_uploaded_file($_FILES['wo_document']['tmp_name'], $uploadDir . $safeName)) {
+		                $woDocPath = 'uploads/wo/' . $safeName;
+		            } else {
+		                echo json_encode(['status' => false, 'message' => 'Failed to upload WO document']);
+		                return;
+		            }
+		        }
+
+		        if ($woReceivedVal === 1 && empty($woDocPath)) {
+		            echo json_encode(['status' => false, 'message' => 'Please upload the WO Document']);
+		            return;
+		        }
+
+		        // CASE 7: Completion Certificate is explicitly selected as "No" (0)
+		        // User requirement: Bid remains in its current status / table / menu, with date & remarks saved to DB.
+		        if ($ccReceivedVal === 0) {
+		            $this->db->trans_start();
+
+		            $updateMain = [
+		                'CompletionCertificateReceived' => 0,
+		                'Remarks'                       => $remarks !== null ? trim($remarks) : '',
+		                'ActualDate'                    => !empty($actualDate) ? $actualDate : NULL,
+		            ];
+
+		            $this->db->where('Bcid', $bcid)->update('BidCreationDetails', $updateMain);
+
+		            $trackingData = [
+		                'Bcid'                          => $bcid,
+		                'OldStatusId'                   => $oldStatus,
+		                'CurrentStatusId'               => $oldStatus,
+		                'CompletionCertificateReceived' => 0,
+		                'ActualDate'                    => !empty($actualDate) ? $actualDate : NULL,
+		                'Remarks'                       => $remarks !== null ? trim($remarks) : 'Completion Certificate Not Received',
+		                'UpdatedBy'                     => $Bid_Session['Bid'],
+		                'Ipaddress'                     => $ipAddress,
+		                'UserAgent'                     => $userAgent
+		            ];
+
+		            $this->db->insert('BidStatusTracking', $trackingData);
+		            $this->db->trans_complete();
+
+		            echo json_encode([
+		                'status'  => true,
+		                'message' => 'Completion Certificate marked as Not Received. Bid remains in current status.'
+		            ]);
+		            return;
+		        }
+
+		        // CASE 8: Completion Certificate is selected as "Yes" (1) -> Handle document upload
+		        $ccDocPath = $current->CompletionCertificateDocumentPath ?? null;
+		        if (isset($_FILES['completion_certificate_document']) && $_FILES['completion_certificate_document']['error'] === UPLOAD_ERR_OK) {
+		            $uploadDir = FCPATH . 'uploads/completion_certificate/';
+		            if (!is_dir($uploadDir)) {
+		                @mkdir($uploadDir, 0777, true);
+		            }
+		            $safeName = 'cc_' . time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $_FILES['completion_certificate_document']['name']);
+		            if (@move_uploaded_file($_FILES['completion_certificate_document']['tmp_name'], $uploadDir . $safeName)) {
+		                $ccDocPath = 'uploads/completion_certificate/' . $safeName;
+		            } else {
+		                echo json_encode(['status' => false, 'message' => 'Failed to upload Completion Certificate document']);
+		                return;
+		            }
+		        }
+
+		        if ($ccReceivedVal === 1 && empty($ccDocPath)) {
+		            echo json_encode(['status' => false, 'message' => 'Please upload the Completion Certificate Document']);
+		            return;
+		        }
+
+		        // Prevent same status update for standard transitions
 		        if($oldStatus == $newStatus){
 		            echo json_encode(['status'=>false,'message'=>'Status already same']);
 		            return;
@@ -994,26 +1296,96 @@ public function updateBidStatus()
 		        $this->db->trans_start();
 
 		        // 1️⃣ Update Main Table
+		        $updateMain = [
+		            'BidStatus' => $newStatus,
+		            'Remarks'   => $remarks !== null ? trim($remarks) : '',
+		            'ActualDate'=> !empty($actualDate) ? $actualDate : NULL,
+		            'ApprovedByManagement' => !empty($approvedMgmt) ? (int)$approvedMgmt : 0,
+		            'ApprovedByWhom'       => !empty($approvedWhom) ? (int)$approvedWhom : NULL,
+		        ];
+		        if ($techSelectedVal !== null) {
+		            $updateMain['TechnicalSelected'] = $techSelectedVal;
+		        }
+		        if ($priceDetails !== null && $priceDetails !== '') {
+		            $updateMain['PriceDetails'] = trim($priceDetails);
+		        }
+		        if ($loaReceivedVal !== null) {
+		            $updateMain['LoaReceived'] = $loaReceivedVal;
+		        }
+		        if (!empty($loaDocPath)) {
+		            $updateMain['LoaDocumentPath'] = $loaDocPath;
+		        }
+		        if ($bgSubmittedVal !== null) {
+		            $updateMain['BgSubmitted'] = $bgSubmittedVal;
+		        }
+		        if (!empty($bgDocPath)) {
+		            $updateMain['BgDocumentPath'] = $bgDocPath;
+		        }
+		        if ($woReceivedVal !== null) {
+		            $updateMain['WoReceived'] = $woReceivedVal;
+		        }
+		        if (!empty($woDocPath)) {
+		            $updateMain['WoDocumentPath'] = $woDocPath;
+		        }
+		        if ($ccReceivedVal !== null) {
+		            $updateMain['CompletionCertificateReceived'] = $ccReceivedVal;
+		        }
+		        if (!empty($ccDocPath)) {
+		            $updateMain['CompletionCertificateDocumentPath'] = $ccDocPath;
+		        }
+
 		        $this->db->where('Bcid', $bcid)
-		                 ->update('BidCreationDetails', [
-		                     'BidStatus' => $newStatus
-		                 ]);
+		                 ->update('BidCreationDetails', $updateMain);
 
 		        // 2️⃣ Insert Tracking Record
-		        $this->db->insert('BidStatusTracking', [
+		        $trackingData = [
 		            'Bcid' => $bcid,
 		            'OldStatusId' => $oldStatus,
 		            'CurrentStatusId' => $newStatus,
-		            'ActualDate' => $actualDate,
-		            'ApprovedByManagement' => $approvedMgmt ?: 0,
-		            'ApprovedByWhom' => !empty($approvedWhom) ? $approvedWhom : NULL,
-		            'Remarks' => $remarks,
-		            'UpdatedBy' => $Bid_Session['Bid']
-		        ]);
+		            'ActualDate' => !empty($actualDate) ? $actualDate : NULL,
+		            'ApprovedByManagement' => !empty($approvedMgmt) ? (int)$approvedMgmt : 0,
+		            'ApprovedByWhom' => !empty($approvedWhom) ? (int)$approvedWhom : NULL,
+		            'Remarks' => $remarks !== null ? trim($remarks) : '',
+		            'UpdatedBy' => $Bid_Session['Bid'],
+		            'Ipaddress' => $ipAddress,
+		            'UserAgent' => $userAgent
+		        ];
+		        if ($techSelectedVal !== null) {
+		            $trackingData['TechnicalSelected'] = $techSelectedVal;
+		        }
+		        if ($priceDetails !== null && $priceDetails !== '') {
+		            $trackingData['PriceDetails'] = trim($priceDetails);
+		        }
+		        if ($loaReceivedVal !== null) {
+		            $trackingData['LoaReceived'] = $loaReceivedVal;
+		        }
+		        if (!empty($loaDocPath)) {
+		            $trackingData['AttachmentPath'] = $loaDocPath;
+		        }
+		        if ($bgSubmittedVal !== null) {
+		            $trackingData['BgSubmitted'] = $bgSubmittedVal;
+		        }
+		        if (!empty($bgDocPath)) {
+		            $trackingData['AttachmentPath'] = $bgDocPath;
+		        }
+		        if ($woReceivedVal !== null) {
+		            $trackingData['WoReceived'] = $woReceivedVal;
+		        }
+		        if (!empty($woDocPath)) {
+		            $trackingData['AttachmentPath'] = $woDocPath;
+		        }
+		        if ($ccReceivedVal !== null) {
+		            $trackingData['CompletionCertificateReceived'] = $ccReceivedVal;
+		        }
+		        if (!empty($ccDocPath)) {
+		            $trackingData['AttachmentPath'] = $ccDocPath;
+		        }
+
+		        $this->db->insert('BidStatusTracking', $trackingData);
 
 		        $this->db->trans_complete();
 
-		        echo json_encode(['status'=>true]);
+		        echo json_encode(['status'=>true, 'message'=>'Status Updated Successfully']);
 		} else
 		{
 			$this->session->set_flashdata('err','Invalid Session.Please Login Again..!!');
