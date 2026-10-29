@@ -500,6 +500,10 @@ class Factsheet_model extends CI_Model
             return false;
         }
 
+        if ($tfsid > 0 && !empty($data['evidence_records']) && is_array($data['evidence_records'])) {
+            $this->saveEvidenceRecords($tfsid, $data['evidence_records'], $savePayload['DocumentPath'] ?? null, $savePayload['DocumentHash'] ?? null);
+        }
+
         return $tfsid;
     }
 
@@ -598,9 +602,17 @@ class Factsheet_model extends CI_Model
 
         // ── Section 2: ImportantDates ──
         $dates = !empty($fs['ImportantDates']) ? self::deserializeKeyValue($fs['ImportantDates']) : [];
-        if ($pubDate !== '') $dates['Published Date'] = $pubDate;
-        if ($subDate !== '') $dates['Bid Submission Deadline'] = $subDate;
-        if ($opDate !== '')  $dates['Technical Bid Opening'] = $opDate;
+        if ($pubDate !== '' && empty($dates['Published Date'])) $dates['Published Date'] = $pubDate;
+        if ($subDate !== '') {
+            if (empty($dates['Bid Submission Deadline']) || (strpos($dates['Bid Submission Deadline'], ':') === false && strpos($subDate, ':') !== false)) {
+                $dates['Bid Submission Deadline'] = $subDate;
+            }
+        }
+        if ($opDate !== '') {
+            if (empty($dates['Technical Bid Opening']) || (strpos($dates['Technical Bid Opening'], ':') === false && strpos($opDate, ':') !== false)) {
+                $dates['Technical Bid Opening'] = $opDate;
+            }
+        }
 
         // ── Section 3: TenderValue ──
         $valSec = !empty($fs['TenderValue']) ? self::deserializeKeyValue($fs['TenderValue']) : [];
@@ -720,5 +732,121 @@ class Factsheet_model extends CI_Model
     public function linkFactSheetToBid($tfsid, $bcid)
     {
         return $this->db->where('Tfsid', (int)$tfsid)->update($this->table, ['Bcid' => (int)$bcid]);
+    }
+    /**
+     * Persists evidence records for a Fact Sheet.
+     * Prevents duplicate evidence records on re-extraction.
+     */
+    public function saveEvidenceRecords($tfsid, array $evidenceRecords, $docPath = null, $docHash = null)
+    {
+        $tfsid = (int)$tfsid;
+        if ($tfsid <= 0) return false;
+
+        // Delete old records for this tfsid
+        $this->db->delete('tender_factsheet_evidence', ['tfsid' => $tfsid]);
+
+        if (empty($evidenceRecords)) return true;
+
+        $batch = [];
+        $now = date('Y-m-d H:i:s');
+        foreach ($evidenceRecords as $rec) {
+            $batch[] = [
+                'tfsid'               => $tfsid,
+                'bcid'                => isset($rec['bcid']) ? $rec['bcid'] : null,
+                'document_path'       => !empty($rec['document_path']) ? $rec['document_path'] : $docPath,
+                'document_hash'       => !empty($rec['document_hash']) ? $rec['document_hash'] : $docHash,
+                'field_key'           => $rec['field_key'] ?? '',
+                'field_section'       => $rec['field_section'] ?? '',
+                'extracted_value'     => $rec['extracted_value'] ?? '',
+                'page_number'         => isset($rec['page_number']) ? (int)$rec['page_number'] : null,
+                'supporting_quote'    => $rec['supporting_quote'] ?? '',
+                'verification_status' => $rec['verification_status'] ?? 'needs_review',
+                'confidence_score'    => isset($rec['confidence_score']) ? (float)$rec['confidence_score'] : null,
+                'confidence_level'    => $rec['confidence_level'] ?? 'medium',
+                'extraction_method'   => $rec['extraction_method'] ?? 'text',
+                'coordinates_json'    => $rec['coordinates_json'] ?? null,
+                'created_at'          => $now,
+                'updated_at'          => $now
+            ];
+        }
+
+        if (!empty($batch)) {
+            return $this->db->insert_batch('tender_factsheet_evidence', $batch);
+        }
+        return true;
+    }
+
+    /**
+     * Retrieves all evidence records for a Fact Sheet, indexed and grouped by field_key.
+     * If no evidence records exist in DB yet, but document file is available, generates and caches them on-the-fly.
+     *
+     * @param int $tfsid
+     * @return array [ 'by_field' => [ fieldKey => primaryEvidence ], 'all' => [ fieldKey => [ ...records ] ] ]
+     */
+    public function getEvidenceByTfsid($tfsid)
+    {
+        $tfsid = (int)$tfsid;
+        if ($tfsid <= 0) return ['by_field' => [], 'all' => []];
+
+        $rows = $this->db->get_where('tender_factsheet_evidence', ['tfsid' => $tfsid])->result_array();
+
+        // If no evidence records found, attempt on-the-fly extraction from source document
+        if (empty($rows)) {
+            $fs = $this->getFactSheetById($tfsid);
+            if ($fs && !empty($fs['DocumentPath'])) {
+                $fullPath = FCPATH . ltrim($fs['DocumentPath'], '/\\');
+                if (file_exists($fullPath)) {
+                    if (file_exists(APPPATH . 'libraries/Document_extractor.php')) {
+                        require_once APPPATH . 'libraries/Document_extractor.php';
+                        $extractor = new \Document_extractor();
+                        $pageMap = $extractor->extractPageMap($fullPath);
+
+                        if (!empty($pageMap)) {
+                            require_once APPPATH . 'libraries/Factsheet_evidence_service.php';
+                            $evService = new \Factsheet_evidence_service();
+                            $generated = $evService->collectEvidence($fs, $pageMap, [
+                                'tfsid'         => $tfsid,
+                                'bcid'          => $fs['Bcid'] ?? null,
+                                'document_path' => $fs['DocumentPath'],
+                                'document_hash' => $fs['DocumentHash'] ?? md5_file($fullPath)
+                            ]);
+
+                            if (!empty($generated)) {
+                                $this->saveEvidenceRecords($tfsid, $generated, $fs['DocumentPath'], $fs['DocumentHash'] ?? null);
+                                $rows = $this->db->get_where('tender_factsheet_evidence', ['tfsid' => $tfsid])->result_array();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        $byField = [];
+        $all = [];
+        foreach ($rows as $r) {
+            $k = trim($r['field_key']);
+            if (!isset($all[$k])) {
+                $all[$k] = [];
+            }
+            $all[$k][] = $r;
+
+            // Pick highest confidence / verified record as primary
+            if (!isset($byField[$k]) || ($r['verification_status'] === 'verified' && $byField[$k]['verification_status'] !== 'verified')) {
+                $byField[$k] = $r;
+            }
+        }
+
+        return ['by_field' => $byField, 'all' => $all];
+    }
+
+    /**
+     * Retrieves evidence records for a specific field in a Fact Sheet.
+     */
+    public function getEvidenceForField($tfsid, $fieldKey)
+    {
+        return $this->db->get_where('tender_factsheet_evidence', [
+            'tfsid'     => (int)$tfsid,
+            'field_key' => trim($fieldKey)
+        ])->result_array();
     }
 }
