@@ -450,4 +450,264 @@ function getBidDetailsData(){
         return '₹' . number_format($val, 2);
     }
 
+    /**
+     * Get login user credentials
+     */
+    public function getLoginUser($username, $password)
+    {
+        $this->db->select('bu.*');
+        $this->db->where('bu.Email', $username);
+        $this->db->where('bu.Passwd', md5($password));
+        $this->db->where('bu.Status', 1);
+        return $this->db->get('BidUsers as bu')->result_array();
+    }
+
+    /**
+     * Insert login/logout log
+     */
+    public function insertLoginLog($data)
+    {
+        return $this->db->insert('BidLogin_Log', $data);
+    }
+
+    /**
+     * Get all active status master records ordered by SortOrder
+     */
+    public function getStatuses()
+    {
+        return $this->db->order_by('SortOrder', 'ASC')->get('BidStatusMaster')->result_array();
+    }
+
+    /**
+     * Check if user exists by mobile and email
+     */
+    public function checkUserExists($mobile, $email)
+    {
+        $this->db->select('bu.*');
+        $this->db->where('bu.Mobile', $mobile);
+        $this->db->where('bu.Email', $email);
+        return $this->db->get('BidUsers as bu')->num_rows();
+    }
+
+    /**
+     * Insert new Bid User
+     */
+    public function insertBidUser($data)
+    {
+        $this->db->insert('BidUsers', $data);
+        return $this->db->insert_id();
+    }
+
+    /**
+     * Get user details by BUID as array
+     */
+    public function getUserById($buid)
+    {
+        $this->db->select('*');
+        $this->db->where('bu.Buid', $buid);
+        return $this->db->get('BidUsers as bu')->result_array();
+    }
+
+    /**
+     * Update Bid User record
+     */
+    public function updateBidUser($buid, $updateData)
+    {
+        $this->db->where('Buid', $buid);
+        return $this->db->update('BidUsers', $updateData);
+    }
+
+    /**
+     * Get single user row by BUID
+     */
+    public function getBidUserRow($buid)
+    {
+        return $this->db->get_where('BidUsers', ['Buid' => $buid])->row();
+    }
+
+    /**
+     * Increment OTP attempts count
+     */
+    public function incrementOtpAttempts($buid)
+    {
+        return $this->db->set('OTPAttempts', 'OTPAttempts+1', FALSE)
+                        ->where('Buid', $buid)
+                        ->update('BidUsers');
+    }
+
+    /**
+     * Check user exists by BUID
+     */
+    public function checkUserExistsById($buid)
+    {
+        $this->db->select('bu.Buid,bu.Name,bu.Mobile,bu.Email,bu.Status');
+        $this->db->where('bu.Buid', $buid);
+        return $this->db->get('BidUsers as bu')->num_rows();
+    }
+
+    /**
+     * Get user row as array by BUID
+     */
+    public function getUserRowArray($buid)
+    {
+        return $this->db->where('Buid', $buid)
+                        ->get('BidUsers')
+                        ->row_array();
+    }
+
+    /**
+     * Insert new Bid creation details and return insert ID
+     */
+    public function insertBidCreationDetails($data)
+    {
+        $this->db->insert('BidCreationDetails', $data);
+        return $this->db->insert_id();
+    }
+
+    /**
+     * Get single BidCreationDetails row by BCID
+     */
+    public function getBidCreationRow($bcid)
+    {
+        return $this->db->get_where('BidCreationDetails', ['Bcid' => $bcid])->row();
+    }
+
+    /**
+     * Insert record into BidStatusTracking
+     */
+    public function insertBidStatusTracking($trackingData)
+    {
+        return $this->db->insert('BidStatusTracking', $trackingData);
+    }
+
+    /**
+     * Get active status record by StatusName
+     */
+    public function getStatusByName($statusKey)
+    {
+        return $this->db->where('StatusName', $statusKey)
+                        ->where('IsActive', 1)
+                        ->get('BidStatusMaster')
+                        ->row();
+    }
+
+    /**
+     * Fetch bids of specific status with status metadata
+     */
+    public function getBidsByStatusId($statusId)
+    {
+        $this->db->select('b.*, s.DisplayName, s.BadgeClass');
+        $this->db->from('BidCreationDetails b');
+        $this->db->join('BidStatusMaster s', 's.Sid = b.BidStatus', 'left');
+        $this->db->where('b.BidStatus', $statusId);
+        $this->db->order_by('b.CreationTs', 'DESC');
+        return $this->db->get()->result_array();
+    }
+
+    /**
+     * Get status SortOrder by Sid
+     */
+    public function getStatusSortOrder($sid)
+    {
+        return $this->db->select('SortOrder')
+                        ->where('Sid', $sid)
+                        ->get('BidStatusMaster')
+                        ->row();
+    }
+
+    /**
+     * Get forward stages relative to currentSortOrder
+     */
+    public function getForwardStatuses($currentSortOrder)
+    {
+        $this->db->where('IsActive', 1);
+        $this->db->where('SortOrder >', $currentSortOrder);
+        $this->db->order_by('SortOrder', 'ASC');
+        return $this->db->get('BidStatusMaster')->result();
+    }
+
+    /**
+     * Get active management approver users
+     */
+    public function getManagementUsers()
+    {
+        return $this->db->where('Status', 0)
+                        ->get('BidApproverdetails')
+                        ->result();
+    }
+
+    /**
+     * Get status fields for a bid
+     */
+    public function getBidStatusInfo($bcid)
+    {
+        return $this->db->select('BidStatus, LoaReceived, LoaDocumentPath, BgSubmitted, BgDocumentPath, WoReceived, WoDocumentPath, CompletionCertificateReceived, CompletionCertificateDocumentPath')
+                        ->where('Bcid', $bcid)
+                        ->get('BidCreationDetails')
+                        ->row();
+    }
+
+    /**
+     * Update Bid status and insert tracking in a database transaction
+     */
+    public function updateBidStatusAndTracking($bcid, $updateMain, $trackingData)
+    {
+        $this->db->trans_start();
+        $this->db->where('Bcid', $bcid)->update('BidCreationDetails', $updateMain);
+        $this->db->insert('BidStatusTracking', $trackingData);
+        $this->db->trans_complete();
+        return $this->db->trans_status();
+    }
+
+    /**
+     * Get menus with assignment flag for role
+     */
+    public function getMenusWithAssignmentByRole($roleId)
+    {
+        $this->db->select('m.*, 
+            IF(r.MenuId IS NOT NULL, 1, 0) as IsAssigned')
+            ->from('BidMenus m')
+            ->join(
+                'RoleMenuPermissions r',
+                'r.MenuId = m.Bmid AND r.RoleId = ' . $this->db->escape($roleId),
+                'left'
+            )
+            ->where('m.IsActive', 1)
+            ->order_by('m.ParentId, m.SortOrder');
+
+        return $this->db->get()->result_array();
+    }
+
+    /**
+     * Add or delete role menu permission
+     */
+    public function updateRoleMenuPermission($roleId, $menuId, $action)
+    {
+        if ($action == 'add') {
+            $exists = $this->db->where('RoleId', $roleId)
+                               ->where('MenuId', $menuId)
+                               ->get('RoleMenuPermissions')
+                               ->row();
+
+            if (!$exists) {
+                $this->db->insert('RoleMenuPermissions', [
+                    'RoleId' => $roleId,
+                    'MenuId' => $menuId
+                ]);
+            }
+        } else {
+            $this->db->where('RoleId', $roleId)
+                     ->where('MenuId', $menuId)
+                     ->delete('RoleMenuPermissions');
+        }
+    }
+
+    /**
+     * Update Tender Factsheet fields
+     */
+    public function updateTenderFactsheet($tfsid, $data)
+    {
+        return $this->db->where('Tfsid', (int)$tfsid)->update('tenderfactsheet', $data);
+    }
+
 } //Main Class

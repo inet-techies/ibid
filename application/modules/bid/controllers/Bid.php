@@ -69,15 +69,7 @@ class Bid extends MX_Controller
 		  if($username!="")
 			{ 
 
-			$this->db->select('bu.*');
-			$this->db->where('bu.Email',$username);
-			$this->db->where('bu.Passwd',md5($yourpassword));
-			$this->db->where('bu.Status',1); 
-
-			$Buquery = $this->db->get('BidUsers as bu')->result_array();
-			
-			// echo"<pre>";print_r($userquery);
-			 	 // echo $this->db->last_query(); exit;
+			$Buquery = $this->bid_model->getLoginUser($username, $yourpassword);
 				
 				if(!empty($Buquery)){
  
@@ -100,7 +92,7 @@ class Bid extends MX_Controller
                     $data['LogOutTime'] ='';
                      // exit;
                      $data['Status'] ='1';
-                     $this->db->insert('BidLogin_Log',$data);
+                     $this->bid_model->insertLoginLog($data);
                    
                      redirect($this->config->item('base_url').'bid/dashboard');
  
@@ -139,7 +131,7 @@ public function dashboard(){
 			$data['current']   = $this->bid_model->getCurrentDashboardData($startDate, $endDate);
 			$data['overview']  = $this->bid_model->getOverviewDashboardData($startDate, $endDate);
 			$data['allBids']   = $this->bid_model->getAllBidsWithStatus();
-			$data['statuses']  = $this->db->order_by('SortOrder', 'ASC')->get('BidStatusMaster')->result_array();
+			$data['statuses']  = $this->bid_model->getStatuses();
 			$data['startDate'] = $startDate;
 			$data['endDate']   = $endDate;
 
@@ -215,10 +207,7 @@ public function saveUsers(){
 
 	    		// echo"<pre>"; print_r($inps);exit;
 
-	    			$this->db->select('bu.*');
-					$this->db->where('bu.Mobile',$inps['phoneInput']); 
-					$this->db->where('bu.Email',$inps['mailInput']); 
-					$BidUsersDetails = $this->db->get('BidUsers as bu')->num_rows();
+	    			$BidUsersDetails = $this->bid_model->checkUserExists($inps['phoneInput'], $inps['mailInput']);
 					//echo"<pre>"; print_r($emp_details); exit;	
 				   	if($BidUsersDetails>0){
 
@@ -228,17 +217,12 @@ public function saveUsers(){
 				   	} else {
 
 				   			$BidUsersdata=array('Name'=>$inps['fullnameInput'],'Mobile'=>$inps['phoneInput'],'Email' =>$inps['mailInput'],'Designation' =>$inps['designationInput'],'Brid' =>$inps['usertypeInput'],'Status' =>0);
-					   	   		//$this->db->last_query();
 
-							   	 $sql_query=$this->db->insert('BidUsers',$BidUsersdata);
-							   	 $id = $this->db->insert_id();
+							   	 $id = $this->bid_model->insertBidUser($BidUsersdata);
 							   	  // echo"<pre>id";print_r($id);exit;
-							   	if($sql_query>0){
+							   	if($id>0){
 
-							   	 $this->db->select('*');
-				 		    	 $this->db->where('bu.Buid', $id); 
-								 $data['RegMail']=$this->db->get('BidUsers as bu')->result_array();
-								 // echo $this->db->last_query();
+								 $data['RegMail'] = $this->bid_model->getUserById($id);
 								 // echo "<pre>"; print_r( $data['email']); exit;
 								        try {
 								            // otp to mail
@@ -304,8 +288,7 @@ public function SendOtpVerify($Buid)
     $data['Buid'] = base64_decode(base64_decode(base64_decode(base64_decode(urldecode($Buid)))));
 
     // Fetch user
-    $this->db->where('bu.Buid', $data['Buid']);
-    $data['RegMail'] = $this->db->get('BidUsers as bu')->result_array();
+    $data['RegMail'] = $this->bid_model->getUserById($data['Buid']);
 
     if (empty($data['RegMail'])) {
       $this->session->set_flashdata('err','Invalid Session.Please Login Again..!!');
@@ -324,8 +307,7 @@ public function SendOtpVerify($Buid)
         'OTPAttempts' => 0
     ];
 
-    $this->db->where('Buid', $data['Buid']);
-    $this->db->update('BidUsers', $updateData);
+    $this->bid_model->updateBidUser($data['Buid'], $updateData);
 
     // Pass OTP data to email template
     $data['otp']  = $otp;
@@ -373,7 +355,7 @@ public function VerifyOtpAjax()
     $enteredOtp = $this->input->post('otp');
     $Buid = $this->input->post('Buid');
 
-    $user = $this->db->get_where('BidUsers', ['Buid' => $Buid])->row();
+    $user = $this->bid_model->getBidUserRow($Buid);
 
     if (!$user) {
         echo "Invalid user";
@@ -390,16 +372,14 @@ public function VerifyOtpAjax()
     if (!password_verify($enteredOtp, $user->OTPHash)) {
 
         // Increment attempts
-        $this->db->set('OTPAttempts', 'OTPAttempts+1', FALSE)
-                 ->where('Buid', $Buid)
-                 ->update('BidUsers');
+        $this->bid_model->incrementOtpAttempts($Buid);
 
         echo "Invalid OTP";
         return;
     }
 
     // OTP success → clear OTP
-    $this->db->where('Buid', $Buid)->update('BidUsers', [
+    $this->bid_model->updateBidUser($Buid, [
         'OTPHash' => NULL,
         'OTPExpiry' => NULL,
         'OTPAttempts' => 0
@@ -415,9 +395,7 @@ public function VerifyOtpAjax()
 
 public function ChangePass($Buid){
 
-	$this->db->select('bu.Buid,bu.Name,bu.Mobile,bu.Email,bu.Status');
-	$this->db->where('bu.Buid', $Buid);
-    $data['RegMail'] = $this->db->get('BidUsers as bu')->result_array();
+    $data['RegMail'] = $this->bid_model->getUserById($Buid);
      //echo "<pre>"; print_r( $data['RegMail']); exit;
     if (empty($data['RegMail'])) {
 
@@ -443,16 +421,12 @@ public function UpdatePasswordDetails($Bid){
 		$ups = $this->input->post();
 	 
 		 
-		$this->db->select('bu.Buid,bu.Name,bu.Mobile,bu.Email,bu.Status');
-		$this->db->where('bu.Buid', $Bid);
-	 	$UpdateId=$this->db->get('BidUsers as bu')->num_rows();
+		$UpdateId = $this->bid_model->checkUserExistsById($Bid);
 	 	// echo"<pre>NPassInput"; print_r($ups['NPassInput']); 
-	 	// echo $this->db->last_query(); exit;
 	 	if($UpdateId>0)
 	 	{
           $data=array('Passwd' =>md5($ups['NPassInput']),'ActivateTEmail' =>1,'Status' =>1);
-          $this->db->where('Buid',$Bid);
-	 	  $UpdateQuery=$this->db->update('BidUsers',$data); 
+	 	  $UpdateQuery = $this->bid_model->updateBidUser($Bid, $data); 
 	 		 if($UpdateQuery>0){
  
 		   		 $this->session->set_flashdata('yes', 'Successfully Updated Your Password');
@@ -517,8 +491,7 @@ public function updateUserStatus(){
 			        return;
 			    }
 
-			    $this->db->where('Buid', $id);
-			    $update = $this->db->update('BidUsers', [
+			    $update = $this->bid_model->updateBidUser($id, [
 			        'Status' => $status
 			    ]);
 
@@ -551,9 +524,7 @@ public function getUserData()
 	{
 	    $id = $this->input->post('id');
 
-	    $user = $this->db->where('Buid', $id)
-	                     ->get('BidUsers')
-	                     ->row_array();
+	    $user = $this->bid_model->getUserRowArray($id);
 
 	    if($user){
 	        // echo "
@@ -691,6 +662,7 @@ public function AddBidData(){
 			// Server-side validation for all required fields
 			$validationErrors = [];
 
+<<<<<<< HEAD
 			$bidType = trim($inputs['bidTypeInput'] ?? '');
 			if (empty($bidType) || $bidType === '0') {
 				$validationErrors[] = 'Bid Type is required (OEM or Service).';
@@ -798,9 +770,28 @@ public function AddBidData(){
 	        ];
 					$sql_query=$this->db->insert('BidCreationDetails',$Biddata);
 					$id = $this->db->insert_id();
+=======
+		   			 $Biddata = [
+			            'BidType'        => $inputs['bidTypeInput'],
+			            'BidTitle'       => $inputs['bidTitleInput'],
+			            'BidDepartment'  => $inputs['bidDepartmentInput'],
+			            'EstimatedValue' => $inputs['bidEstimatedInput'],
+			            'EmdValue'       => $inputs['bidEmdInput'],
+			            'PublishedDate'  => (!empty($inputs['PublishedDate']) && strtotime($inputs['PublishedDate'])) ? date('Y-m-d', strtotime($inputs['PublishedDate'])) : null,
+			            'SubmissionDate' => (!empty($inputs['SubmissionDate']) && strtotime($inputs['SubmissionDate'])) ? date('Y-m-d', strtotime($inputs['SubmissionDate'])) : null,
+			            'OpeningDate'    => (!empty($inputs['OpeningDate']) && strtotime($inputs['OpeningDate'])) ? date('Y-m-d', strtotime($inputs['OpeningDate'])) : null,
+			            'SummaryKeywords'=> $inputs['bidSummaryInput'],
+			            'TenderPortalUrl'=> $inputs['bidTenderPortalInput'],
+			            'TenderId'       => $inputs['bidTenderIDInput'],
+			            'NASPath'        => $nasPath,
+			            'Remarks'        => $inputs['bidRemarksInput'],
+			            'BidStatus'      => 1
+			        ];
+					$id = $this->bid_model->insertBidCreationDetails($Biddata);
+>>>>>>> 532bec266a39e919488f2fbacc77dc893addf476
 			         if($id>0){
  							
- 						$status = $this->db->get_where('BidCreationDetails', ['Bcid' => $id])->row();
+ 						$status = $this->bid_model->getBidCreationRow($id);
 
 			         	  $tracking = [
 					            'Bcid'             => $id,
@@ -812,7 +803,7 @@ public function AddBidData(){
 					            'IsSystemGenerated'=> 0
 					        ];
 
-					        $this->db->insert('BidStatusTracking', $tracking);
+					        $this->bid_model->insertBidStatusTracking($tracking);
 
 					        $factSheetId = !empty($inputs['factSheetId']) ? (int)$inputs['factSheetId'] : 0;
 					        $attachedDoc = !empty($inputs['attachedDocumentPath']) ? $inputs['attachedDocumentPath'] : $nasPath;
@@ -889,8 +880,10 @@ public function BidDetails(){
  		if(isset($Bid_Session) && !empty($Bid_Session))
 		{
 	 
-        //Fetch breadcrumb data
-        $data['currentUrlArray'] = $this->bid_model->getBreadcrumb($currentUrl);
+        $currentUrl = strtolower(uri_string());
+
+$data['currentUrlArray'] =
+    $this->bid_model->getBreadcrumb($currentUrl);
 
         	$data['BidData'] = $this->bid_model->getBidDetailsData();
         	$this->template->write_view('content', 'bid/BidDetails', $data);
@@ -920,23 +913,14 @@ private function status($statusKey)
     if(isset($Bid_Session) && !empty($Bid_Session))
     {
         // Get status from master table
-        $status = $this->db->where('StatusName', $statusKey)
-                           ->where('IsActive',1)
-                           ->get('BidStatusMaster')
-                           ->row();
+        $status = $this->bid_model->getStatusByName($statusKey);
 
         if(!$status){
             show_404();
         }
 
         // Fetch bids of that status
-        $this->db->select('b.*, s.DisplayName, s.BadgeClass');
-        $this->db->from('BidCreationDetails b');
-        $this->db->join('BidStatusMaster s','s.Sid = b.BidStatus','left');
-        $this->db->where('b.BidStatus', $status->Sid);
-        $this->db->order_by('b.CreationTs','DESC');
-
-        $data['BidData'] = $this->db->get()->result_array();
+        $data['BidData'] = $this->bid_model->getBidsByStatusId($status->Sid);
         $data['PageTitle'] = $status->DisplayName;
 
         $this->template->write_view('content', 'bid/BidDetails', $data);
@@ -956,19 +940,9 @@ public function getStatuses()
  		if(isset($Bid_Session) && !empty($Bid_Session))
 		{
 		    $currentStatus = $this->input->post('current_status');
-		    // echo "<ptr>currentStatus"; print_r($currentStatus);// exit;
-		    // $this->db->where('IsActive', 1);
-		    // $this->db->where('Sid !=', $currentStatus);
-		    // $this->db->order_by('SortOrder', 'ASC');
-
-		    // $statuses = $this->db->get('BidStatusMaster')->result();
-		     // echo "<ptr>query"; print_r($statuses);// exit;
 
 		    // 1️⃣ Get current status SortOrder
-		        $current = $this->db->select('SortOrder')
-		                            ->where('Sid', $currentStatus)
-		                            ->get('BidStatusMaster')
-		                            ->row();
+		        $current = $this->bid_model->getStatusSortOrder($currentStatus);
 
 		        if(!$current){
 		            echo json_encode([]);
@@ -978,11 +952,7 @@ public function getStatuses()
 		        $currentSortOrder = $current->SortOrder;
 
 		        // 2️⃣ Get only forward stages
-		        $this->db->where('IsActive', 1);
-		        $this->db->where('SortOrder >', $currentSortOrder);
-		        $this->db->order_by('SortOrder', 'ASC');
-
-		        $statuses = $this->db->get('BidStatusMaster')->result();
+		        $statuses = $this->bid_model->getForwardStatuses($currentSortOrder);
 
 		    echo json_encode($statuses);
 		} else
@@ -999,9 +969,7 @@ public function getManagementUsers()
  		if(isset($Bid_Session) && !empty($Bid_Session))
 		{
 
-			$users = $this->db->where('Status', 0)
-                      ->get('BidApproverdetails')
-                      ->result();
+			$users = $this->bid_model->getManagementUsers();
 
   			  echo json_encode($users);
   		} else
@@ -1017,7 +985,6 @@ public function updateBidStatus()
  		
  		if(isset($Bid_Session) && !empty($Bid_Session))
 		{
-				//$this->db->trans_begin();
  				// print_r($_POST);
 				$ipAddress = $_SERVER['REMOTE_ADDR'];
 
@@ -1113,10 +1080,7 @@ public function updateBidStatus()
 		        }
 
 		        // Get Current Status
-		        $current = $this->db->select('BidStatus, LoaReceived, LoaDocumentPath, BgSubmitted, BgDocumentPath, WoReceived, WoDocumentPath, CompletionCertificateReceived, CompletionCertificateDocumentPath')
-		                            ->where('Bcid', $bcid)
-		                            ->get('BidCreationDetails')
-		                            ->row();
+		        $current = $this->bid_model->getBidStatusInfo($bcid);
 
 		        if(!$current){
 		            echo json_encode(['status'=>false,'message'=>'Invalid Bid']);
@@ -1128,15 +1092,11 @@ public function updateBidStatus()
 		        // CASE 0: Technical Selected is explicitly selected as "No" (0)
 		        // User requirement: Bid remains in its current status / table / menu, with date & remarks saved to DB.
 		        if ($techSelectedVal === 0) {
-		            $this->db->trans_start();
-
 		            $updateMain = [
 		                'TechnicalSelected' => 0,
 		                'Remarks'           => $remarks !== null ? trim($remarks) : '',
 		                'ActualDate'        => !empty($actualDate) ? $actualDate : NULL,
 		            ];
-
-		            $this->db->where('Bcid', $bcid)->update('BidCreationDetails', $updateMain);
 
 		            $trackingData = [
 		                'Bcid'              => $bcid,
@@ -1150,8 +1110,7 @@ public function updateBidStatus()
 		                'UserAgent'         => $userAgent
 		            ];
 
-		            $this->db->insert('BidStatusTracking', $trackingData);
-		            $this->db->trans_complete();
+		            $this->bid_model->updateBidStatusAndTracking($bcid, $updateMain, $trackingData);
 
 		            echo json_encode([
 		                'status'  => true,
@@ -1163,15 +1122,11 @@ public function updateBidStatus()
 		        // CASE 1: LOA Received is explicitly selected as "No" (0)
 		        // User requirement: Bid remains in its current status / table / menu, with date & remarks saved to DB.
 		        if ($loaReceivedVal === 0) {
-		            $this->db->trans_start();
-
 		            $updateMain = [
 		                'LoaReceived' => 0,
 		                'Remarks'     => $remarks !== null ? trim($remarks) : '',
 		                'ActualDate'  => !empty($actualDate) ? $actualDate : NULL,
 		            ];
-
-		            $this->db->where('Bcid', $bcid)->update('BidCreationDetails', $updateMain);
 
 		            $trackingData = [
 		                'Bcid'            => $bcid,
@@ -1185,8 +1140,7 @@ public function updateBidStatus()
 		                'UserAgent'       => $userAgent
 		            ];
 
-		            $this->db->insert('BidStatusTracking', $trackingData);
-		            $this->db->trans_complete();
+		            $this->bid_model->updateBidStatusAndTracking($bcid, $updateMain, $trackingData);
 
 		            echo json_encode([
 		                'status'  => true,
@@ -1219,15 +1173,11 @@ public function updateBidStatus()
 		        // CASE 3: BG Submitted is explicitly selected as "No" (0)
 		        // User requirement: Bid remains in its current status / table / menu, with date & remarks saved to DB.
 		        if ($bgSubmittedVal === 0) {
-		            $this->db->trans_start();
-
 		            $updateMain = [
 		                'BgSubmitted' => 0,
 		                'Remarks'     => $remarks !== null ? trim($remarks) : '',
 		                'ActualDate'  => !empty($actualDate) ? $actualDate : NULL,
 		            ];
-
-		            $this->db->where('Bcid', $bcid)->update('BidCreationDetails', $updateMain);
 
 		            $trackingData = [
 		                'Bcid'            => $bcid,
@@ -1241,8 +1191,7 @@ public function updateBidStatus()
 		                'UserAgent'       => $userAgent
 		            ];
 
-		            $this->db->insert('BidStatusTracking', $trackingData);
-		            $this->db->trans_complete();
+		            $this->bid_model->updateBidStatusAndTracking($bcid, $updateMain, $trackingData);
 
 		            echo json_encode([
 		                'status'  => true,
@@ -1275,15 +1224,11 @@ public function updateBidStatus()
 		        // CASE 5: WO Received is explicitly selected as "No" (0)
 		        // User requirement: Bid remains in its current status / table / menu, with date & remarks saved to DB.
 		        if ($woReceivedVal === 0) {
-		            $this->db->trans_start();
-
 		            $updateMain = [
 		                'WoReceived' => 0,
 		                'Remarks'    => $remarks !== null ? trim($remarks) : '',
 		                'ActualDate' => !empty($actualDate) ? $actualDate : NULL,
 		            ];
-
-		            $this->db->where('Bcid', $bcid)->update('BidCreationDetails', $updateMain);
 
 		            $trackingData = [
 		                'Bcid'            => $bcid,
@@ -1297,8 +1242,7 @@ public function updateBidStatus()
 		                'UserAgent'       => $userAgent
 		            ];
 
-		            $this->db->insert('BidStatusTracking', $trackingData);
-		            $this->db->trans_complete();
+		            $this->bid_model->updateBidStatusAndTracking($bcid, $updateMain, $trackingData);
 
 		            echo json_encode([
 		                'status'  => true,
@@ -1331,15 +1275,11 @@ public function updateBidStatus()
 		        // CASE 7: Completion Certificate is explicitly selected as "No" (0)
 		        // User requirement: Bid remains in its current status / table / menu, with date & remarks saved to DB.
 		        if ($ccReceivedVal === 0) {
-		            $this->db->trans_start();
-
 		            $updateMain = [
 		                'CompletionCertificateReceived' => 0,
 		                'Remarks'                       => $remarks !== null ? trim($remarks) : '',
 		                'ActualDate'                    => !empty($actualDate) ? $actualDate : NULL,
 		            ];
-
-		            $this->db->where('Bcid', $bcid)->update('BidCreationDetails', $updateMain);
 
 		            $trackingData = [
 		                'Bcid'                          => $bcid,
@@ -1353,8 +1293,7 @@ public function updateBidStatus()
 		                'UserAgent'                     => $userAgent
 		            ];
 
-		            $this->db->insert('BidStatusTracking', $trackingData);
-		            $this->db->trans_complete();
+		            $this->bid_model->updateBidStatusAndTracking($bcid, $updateMain, $trackingData);
 
 		            echo json_encode([
 		                'status'  => true,
@@ -1389,8 +1328,6 @@ public function updateBidStatus()
 		            echo json_encode(['status'=>false,'message'=>'Status already same']);
 		            return;
 		        }
-
-		        $this->db->trans_start();
 
 		        // 1️⃣ Update Main Table
 		        $updateMain = [
@@ -1430,9 +1367,6 @@ public function updateBidStatus()
 		        if (!empty($ccDocPath)) {
 		            $updateMain['CompletionCertificateDocumentPath'] = $ccDocPath;
 		        }
-
-		        $this->db->where('Bcid', $bcid)
-		                 ->update('BidCreationDetails', $updateMain);
 
 		        // 2️⃣ Insert Tracking Record
 		        $trackingData = [
@@ -1478,9 +1412,7 @@ public function updateBidStatus()
 		            $trackingData['AttachmentPath'] = $ccDocPath;
 		        }
 
-		        $this->db->insert('BidStatusTracking', $trackingData);
-
-		        $this->db->trans_complete();
+		        $this->bid_model->updateBidStatusAndTracking($bcid, $updateMain, $trackingData);
 
 		        echo json_encode(['status'=>true, 'message'=>'Status Updated Successfully']);
 		} else
@@ -1520,18 +1452,7 @@ public function manageRoleMenus()
             show_error("Role ID missing");
         }
 
-        $this->db->select('m.*, 
-            IF(r.MenuId IS NOT NULL, 1, 0) as IsAssigned')
-            ->from('BidMenus m')
-            ->join(
-                'RoleMenuPermissions r',
-                'r.MenuId = m.Bmid AND r.RoleId = '.$this->db->escape($roleId),
-                'left'
-            )
-            ->where('m.IsActive', 1)
-            ->order_by('m.ParentId, m.SortOrder');
-
-        $menus = $this->db->get()->result_array();
+        $menus = $this->bid_model->getMenusWithAssignmentByRole($roleId);
 
         $data['menus'] = $this->buildTree($menus);
         $data['roleId'] = $roleId;
@@ -1575,26 +1496,7 @@ public function updatePermission()
         $menuId = $this->input->post('menuId');
         $action = $this->input->post('action');
 
-        if($action == 'add'){
-
-            $exists = $this->db->where('RoleId',$roleId)
-                               ->where('MenuId',$menuId)
-                               ->get('RoleMenuPermissions')
-                               ->row();
-
-            if(!$exists){
-                $this->db->insert('RoleMenuPermissions',[
-                    'RoleId' => $roleId,
-                    'MenuId' => $menuId
-                ]);
-            }
-
-        } else {
-
-            $this->db->where('RoleId',$roleId)
-                     ->where('MenuId',$menuId)
-                     ->delete('RoleMenuPermissions');
-        }
+        $this->bid_model->updateRoleMenuPermission($roleId, $menuId, $action);
 
         echo "Updated";
     } else
@@ -1618,7 +1520,7 @@ public  function logout()
 				 $curr_time=time();
                  $data['LogOutTime'] = date("Y-m-d H:i:s",$curr_time);
 				 $data['Status'] ='0';
-				$this->db->insert('BidLogin_Log', $data);
+				$this->bid_model->insertLoginLog($data);
 
 				$this->session->unset_userdata('logged_in');
 				redirect($this->config->item('base_url').'bid/index');
@@ -1717,7 +1619,7 @@ public  function logout()
                 }
 
                 if (!empty($updatedFields) && !empty($factsheet['Tfsid'])) {
-                    $this->db->where('Tfsid', (int)$factsheet['Tfsid'])->update('tenderfactsheet', $updatedFields);
+                    $this->bid_model->updateTenderFactsheet($factsheet['Tfsid'], $updatedFields);
                 }
             }
 
