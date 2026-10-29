@@ -399,6 +399,7 @@ $(document).on('click', '.view-user', function () {
             // $('#userModal').modal('show');
         }
     });
+});
 
 function formatBidDateTime(dateStr) {
     if (!dateStr) return '-';
