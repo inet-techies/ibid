@@ -592,6 +592,20 @@ function getBidDetailsData(){
     }
 
     /**
+     * Get single status record by Sid
+     *
+     * @param int $sid Status ID
+     * @return object|null
+     */
+    public function getStatusById($sid)
+    {
+        return $this->db->select('Sid, StatusName, DisplayName, SortOrder, BadgeClass, IsActive, IconClass')
+                        ->where('Sid', (int)$sid)
+                        ->get('BidStatusMaster')
+                        ->row();
+    }
+
+    /**
      * Fetch bids of specific status with status metadata
      */
     public function getBidsByStatusId($statusId)
@@ -710,4 +724,142 @@ function getBidDetailsData(){
         return $this->db->where('Tfsid', (int)$tfsid)->update('tenderfactsheet', $data);
     }
 
+    /* =========================================================================
+     * NOTIFICATION SYSTEM MODEL METHODS
+     * ========================================================================= */
+
+    /**
+     * Get Bid details joined with Status information for notification emails
+     *
+     * @param int $bcid Bid ID
+     * @return array|null
+     */
+    public function getBidDetailsForNotification($bcid)
+    {
+        return $this->db->select('b.Bcid, b.BidType, b.BidTitle, b.BidDepartment, b.EstimatedValue, b.EmdValue, 
+                                  b.PublishedDate, b.SubmissionDate, b.OpeningDate, b.SummaryKeywords, 
+                                  b.TenderPortalUrl, b.TenderId, b.NASPath, b.Remarks, b.BidStatus, 
+                                  b.ActualDate, b.CreationTs,
+                                  s.DisplayName as CurrentStatus, s.StatusName, s.BadgeClass')
+                        ->from('BidCreationDetails b')
+                        ->join('BidStatusMaster s', 's.Sid = b.BidStatus', 'left')
+                        ->where('b.Bcid', (int)$bcid)
+                        ->get()
+                        ->row_array();
+    }
+
+    /**
+     * Insert a record into BidNotificationLog
+     *
+     * @param array $logData
+     * @return int Insert ID
+     */
+    public function insertNotificationLog($logData)
+    {
+        $this->db->insert('BidNotificationLog', $logData);
+        return $this->db->insert_id();
+    }
+
+    /**
+     * Check if a successful notification of a specific type has been sent for a bid within the specified interval (in hours)
+     *
+     * @param int $bcid
+     * @param string $notificationType 'STATUS_CHANGE' or 'OPENING_DATE_REMINDER'
+     * @param int $hoursInterval Default 24 hours
+     * @return bool
+     */
+    public function wasNotificationSentWithinInterval($bcid, $notificationType, $hoursInterval = 24)
+    {
+        $cutoff = date('Y-m-d H:i:s', strtotime("-{$hoursInterval} hours"));
+        $count = $this->db->where('Bcid', (int)$bcid)
+                          ->where('NotificationType', $notificationType)
+                          ->where('Status', 'SENT')
+                          ->where('SentAt >=', $cutoff)
+                          ->count_all_results('BidNotificationLog');
+        return $count > 0;
+    }
+
+    /**
+     * Get the most recent notification record for a bid
+     *
+     * @param int $bcid
+     * @param string|null $notificationType
+     * @return array|null
+     */
+    public function getLastNotification($bcid, $notificationType = null)
+    {
+        $this->db->where('Bcid', (int)$bcid);
+        if ($notificationType !== null) {
+            $this->db->where('NotificationType', $notificationType);
+        }
+        return $this->db->order_by('SentAt', 'DESC')
+                        ->order_by('NotificationId', 'DESC')
+                        ->limit(1)
+                        ->get('BidNotificationLog')
+                        ->row_array();
+    }
+
+    /**
+     * Get eligible bids for 24-hour opening date reminder
+     *
+     * A bid is eligible if:
+     * 1. OpeningDate is not null / valid
+     * 2. OpeningDate is upcoming or today (OpeningDate >= CURDATE())
+     * 3. BidStatus is active (not Inactive [6] or Cancelled [8])
+     * 4. An OPENING_DATE_REMINDER has NOT been successfully sent in the last 24 hours
+     *
+     * @param int $hoursInterval Default 24 hours
+     * @return array
+     */
+    public function getBidsEligibleForOpeningReminder($hoursInterval = 24)
+    {
+        $cutoff = date('Y-m-d H:i:s', strtotime("-{$hoursInterval} hours"));
+
+        // Compile subquery for Bcids that received a reminder within the last interval
+        $subquery = $this->db->select('Bcid')
+                             ->from('BidNotificationLog')
+                             ->where('NotificationType', 'OPENING_DATE_REMINDER')
+                             ->where('Status', 'SENT')
+                             ->where('SentAt >=', $cutoff)
+                             ->get_compiled_select();
+
+        $this->db->select('b.Bcid, b.BidType, b.BidTitle, b.BidDepartment, b.EstimatedValue, b.EmdValue, 
+                          b.PublishedDate, b.SubmissionDate, b.OpeningDate, b.SummaryKeywords, 
+                          b.TenderPortalUrl, b.TenderId, b.NASPath, b.Remarks, b.BidStatus, 
+                          s.DisplayName as CurrentStatus, s.StatusName, s.BadgeClass')
+                 ->from('BidCreationDetails b')
+                 ->join('BidStatusMaster s', 's.Sid = b.BidStatus', 'left')
+                 ->where('b.OpeningDate IS NOT NULL')
+                 ->where('b.OpeningDate !=', '0000-00-00')
+                 ->where('b.OpeningDate >=', date('Y-m-d'))
+                 ->where_not_in('b.BidStatus', [6, 8]) // 6: BidInactive, 8: BidCancelled
+                 ->where("b.Bcid NOT IN ($subquery)", NULL, FALSE)
+                 ->order_by('b.OpeningDate', 'ASC');
+
+        return $this->db->get()->result_array();
+    }
+
+    /**
+     * Get notification log history with bid metadata
+     *
+     * @param int|null $bcid
+     * @param int $limit
+     * @return array
+     */
+    public function getNotificationLogs($bcid = null, $limit = 50)
+    {
+        $this->db->select('nl.*, b.BidTitle, b.TenderId')
+                 ->from('BidNotificationLog nl')
+                 ->join('BidCreationDetails b', 'b.Bcid = nl.Bcid', 'left')
+                 ->order_by('nl.NotificationId', 'DESC')
+                 ->limit($limit);
+
+        if ($bcid !== null) {
+            $this->db->where('nl.Bcid', (int)$bcid);
+        }
+
+        return $this->db->get()->result_array();
+    }
+
 } //Main Class
+

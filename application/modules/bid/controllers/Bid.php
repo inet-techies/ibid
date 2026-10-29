@@ -768,8 +768,14 @@ public function AddBidData(){
 	            'BidStatus'      => 1
 	        ];
 			$id = $this->bid_model->insertBidCreationDetails($Biddata);
+<<<<<<< HEAD
 			if($id>0){
 				$status = $this->bid_model->getBidCreationRow($id);
+=======
+			         if($id>0){
+ 							
+ 						$status = $this->bid_model->getBidCreationRow($id);
+>>>>>>> 7910d04301accf8756d1badf36ba5d987995e94c
 
 				$tracking = [
 					'Bcid'             => $id,
@@ -1003,10 +1009,7 @@ public function updateBidStatus()
 		        }
 
 		        // Fetch target status details for contextual validation
-		        $targetStatusRow = $this->db->select('StatusName, DisplayName')
-		                                    ->where('Sid', $newStatus)
-		                                    ->get('BidStatusMaster')
-		                                    ->row();
+		        $targetStatusRow = $this->bid_model->getStatusById($newStatus);
 		        $targetStatusName = $targetStatusRow ? $targetStatusRow->StatusName : '';
 
 		        if ($targetStatusName === 'TechnicalEvaluated' && $techSelectedVal === null) {
@@ -1383,7 +1386,11 @@ public function updateBidStatus()
 		            $trackingData['AttachmentPath'] = $ccDocPath;
 		        }
 
-		        $this->bid_model->updateBidStatusAndTracking($bcid, $updateMain, $trackingData);
+		        $updateResult = $this->bid_model->updateBidStatusAndTracking($bcid, $updateMain, $trackingData);
+
+		        if ($updateResult) {
+		            $this->sendStatusChangeNotification($bcid, $newStatus);
+		        }
 
 		        echo json_encode(['status'=>true, 'message'=>'Status Updated Successfully']);
 		} else
@@ -1626,6 +1633,7 @@ public  function logout()
         }
     }
 
+<<<<<<< HEAD
     /**
      * Securely streams a tender PDF document to authenticated users for the Evidence-Linked Fact Sheet viewer.
      * Prevents path traversal and verifies session.
@@ -1729,3 +1737,309 @@ public  function logout()
         ]));
     }
 }
+=======
+    /* =========================================================================
+     * NEW BID NOTIFICATION SYSTEM METHODS
+     * ========================================================================= */
+
+    /**
+     * Send professional email notification immediately when an existing Bid's status changes
+     * Triggered by updateBidStatus() only after database update successfully completes.
+     *
+     * @param int $bcid Bid ID
+     * @param int $newStatus Target status ID
+     * @return bool
+     */
+    private function sendStatusChangeNotification($bcid, $newStatus)
+    {
+        try {
+            $bid = $this->bid_model->getBidDetailsForNotification($bcid);
+            if (!$bid) {
+                log_message('error', "Status Change Notification: Bid #{$bcid} details not found.");
+                return false;
+            }
+
+            require_once(APPPATH . 'libraries/InetMailer.php');
+            $objs = new InetMailer();
+            $mail = $objs->load();
+
+            $mail->setFrom('info@inetcsc.com', 'I-NET Bid Management');
+            $mail->addAddress('prasannakumari@inetcsc.com', 'Prasanna Kumari');
+            $mail->addCC('reka@inetcsc.com', 'Reka');
+            $mail->addCC('Mohamedfazil@inetcsc.com', 'Fazil');
+
+            $mail->isHTML(true);
+            $subject = 'Bid Status Update - ' . (!empty($bid['BidTitle']) ? $bid['BidTitle'] : 'Bid #' . $bcid);
+            $mail->Subject = $subject;
+
+            if (file_exists(FCPATH . 'images/inet_logo.png')) {
+                $mail->AddEmbeddedImage(FCPATH . 'images/inet_logo.png', 'I-NET');
+            }
+
+            $userSession = $this->session->userdata('logged_in');
+            $senderName = !empty($userSession['Name']) ? $userSession['Name'] : (!empty($userSession['BName']) ? $userSession['BName'] : 'Reka R.');
+
+            $emailData = [
+                'Bcid'          => $bcid,
+                'bid'           => $bid,
+                'currentStatus' => $bid['CurrentStatus'] ?? 'Updated',
+                'senderName'    => $senderName,
+                'portalUrl'     => $this->config->item('base_url') . 'bid/BidDetails'
+            ];
+
+            $mail->Body = $this->load->view('bid/BidStatusUpdateMail', $emailData, TRUE);
+            $mail->send();
+
+            // Record successful notification in log
+            $this->bid_model->insertNotificationLog([
+                'Bcid'             => (int)$bcid,
+                'NotificationType' => 'STATUS_CHANGE',
+                'RecipientEmail'   => 'prasannakumari@inetcsc.com (CC: reka@inetcsc.com, Mohamedfazil@inetcsc.com)',
+                'Status'           => 'SENT',
+                'SentAt'           => date('Y-m-d H:i:s'),
+                'CurrentStatusId'  => (int)$newStatus,
+                'OpeningDate'      => !empty($bid['OpeningDate']) ? $bid['OpeningDate'] : null,
+                'Subject'          => $subject,
+                'ErrorMessage'     => null
+            ]);
+
+            return true;
+        } catch (\Throwable $e) {
+            log_message('error', 'Bid Status Change Notification Failed: ' . $e->getMessage());
+
+            // Record failure (do NOT mark as SENT)
+            try {
+                $this->bid_model->insertNotificationLog([
+                    'Bcid'             => (int)$bcid,
+                    'NotificationType' => 'STATUS_CHANGE',
+                    'RecipientEmail'   => 'prasannakumari@inetcsc.com (CC: reka@inetcsc.com, Mohamedfazil@inetcsc.com)',
+                    'Status'           => 'FAILED',
+                    'SentAt'           => null,
+                    'CurrentStatusId'  => (int)$newStatus,
+                    'OpeningDate'      => isset($bid['OpeningDate']) ? $bid['OpeningDate'] : null,
+                    'Subject'          => isset($subject) ? $subject : 'Bid Status Update',
+                    'ErrorMessage'     => $e->getMessage()
+                ]);
+            } catch (\Throwable $logEx) {
+                log_message('error', 'Failed to log notification error: ' . $logEx->getMessage());
+            }
+
+            return false;
+        }
+    }
+
+    /**
+     * Dedicated 24-Hour Opening Date Notification Checker
+     *
+     * Business Logic:
+     * 1. Finds eligible bids (OpeningDate >= today, not Inactive/Cancelled, no reminder in last 24h)
+     * 2. Checks notification history to prevent duplicate emails
+     * 3. Determines whether the required 24-hour interval has elapsed
+     * 4. Sends professional opening-date reminder email when due
+     * 5. Records successful notification in BidNotificationLog
+     * 6. If email fails, records failure and does NOT mark as SENT
+     *
+     * Execution Methods:
+     * - CLI / Linux Cron: php index.php bid checkOpeningReminders
+     * - Browser / Manual test: GET /bid/checkOpeningReminders (optionally ?bcid=8&force=1)
+     *
+     * @param int|null $testBcid Optional Bcid for manual testing
+     */
+    public function checkOpeningReminders($testBcid = null)
+    {
+        $isCli = (function_exists('is_cli') && is_cli()) || (PHP_SAPI === 'cli');
+        $targetBcid = $testBcid ? (int)$testBcid : (int)$this->input->get('bcid');
+        $force = (bool)$this->input->get('force'); // Allows forcing send during manual dev testing
+
+        $results = [
+            'status'         => true,
+            'timestamp'      => date('Y-m-d H:i:s'),
+            'mode'           => $isCli ? 'CLI' : 'HTTP',
+            'interval_hours' => 24,
+            'eligible_count' => 0,
+            'sent_count'     => 0,
+            'skipped_count'  => 0,
+            'failed_count'   => 0,
+            'details'        => []
+        ];
+
+        // Retrieve eligible bids
+        if ($targetBcid > 0) {
+            $bid = $this->bid_model->getBidDetailsForNotification($targetBcid);
+            $eligibleBids = $bid ? [$bid] : [];
+        } else {
+            $eligibleBids = $this->bid_model->getBidsEligibleForOpeningReminder(24);
+        }
+
+        $results['eligible_count'] = count($eligibleBids);
+
+        if (empty($eligibleBids)) {
+            $results['message'] = 'No bids currently due for 24-hour opening date reminder.';
+            $this->outputCheckerResponse($results, $isCli);
+            return;
+        }
+
+        require_once(APPPATH . 'libraries/InetMailer.php');
+
+        foreach ($eligibleBids as $bid) {
+            $bcid = (int)$bid['Bcid'];
+            $bidTitle = $bid['BidTitle'] ?? "Bid #{$bcid}";
+
+            // Interval check: Check if reminder was sent within the last 24 hours
+            $wasSentIn24h = $this->bid_model->wasNotificationSentWithinInterval($bcid, 'OPENING_DATE_REMINDER', 24);
+
+            if ($wasSentIn24h && !$force) {
+                $results['skipped_count']++;
+                $results['details'][] = [
+                    'bcid'   => $bcid,
+                    'title'  => $bidTitle,
+                    'action' => 'SKIPPED',
+                    'reason' => 'Notification already sent within the last 24 hours. Duplicate prevented.'
+                ];
+                continue;
+            }
+
+            // Notification is due: Send reminder email
+            $subject = 'Bid Opening Reminder - ' . $bidTitle;
+            try {
+                $objs = new InetMailer();
+                $mail = $objs->load();
+
+                $mail->setFrom('info@inetcsc.com', 'I-NET Bid Management');
+                $mail->addAddress('prasannakumari@inetcsc.com', 'Prasanna Kumari');
+                $mail->addCC('reka@inetcsc.com', 'Reka');
+                $mail->addCC('Mohamedfazil@inetcsc.com', 'Fazil');
+
+                $mail->isHTML(true);
+                $mail->Subject = $subject;
+
+                if (file_exists(FCPATH . 'images/inet_logo.png')) {
+                    $mail->AddEmbeddedImage(FCPATH . 'images/inet_logo.png', 'I-NET');
+                }
+
+                $emailData = [
+                    'Bcid'          => $bcid,
+                    'bid'           => $bid,
+                    'currentStatus' => $bid['CurrentStatus'] ?? 'Active',
+                    'senderName'    => 'Reka R.',
+                    'portalUrl'     => $this->config->item('base_url') . 'bid/BidDetails'
+                ];
+
+                $mail->Body = $this->load->view('bid/BidOpeningReminderMail', $emailData, TRUE);
+                $mail->send();
+
+                // Record successful notification in log
+                $this->bid_model->insertNotificationLog([
+                    'Bcid'             => $bcid,
+                    'NotificationType' => 'OPENING_DATE_REMINDER',
+                    'RecipientEmail'   => 'prasannakumari@inetcsc.com (CC: reka@inetcsc.com, Mohamedfazil@inetcsc.com)',
+                    'Status'           => 'SENT',
+                    'SentAt'           => date('Y-m-d H:i:s'),
+                    'CurrentStatusId'  => (int)$bid['BidStatus'],
+                    'OpeningDate'      => !empty($bid['OpeningDate']) ? $bid['OpeningDate'] : null,
+                    'Subject'          => $subject,
+                    'ErrorMessage'     => null
+                ]);
+
+                $results['sent_count']++;
+                $results['details'][] = [
+                    'bcid'        => $bcid,
+                    'title'       => $bidTitle,
+                    'action'      => 'SENT',
+                    'openingDate' => $bid['OpeningDate'] ?? null
+                ];
+
+            } catch (\Throwable $e) {
+                log_message('error', "Opening Reminder Failed for Bid #{$bcid}: " . $e->getMessage());
+
+                // Record failure (do NOT mark as SENT)
+                $this->bid_model->insertNotificationLog([
+                    'Bcid'             => $bcid,
+                    'NotificationType' => 'OPENING_DATE_REMINDER',
+                    'RecipientEmail'   => 'prasannakumari@inetcsc.com (CC: reka@inetcsc.com, Mohamedfazil@inetcsc.com)',
+                    'Status'           => 'FAILED',
+                    'SentAt'           => null,
+                    'CurrentStatusId'  => (int)$bid['BidStatus'],
+                    'OpeningDate'      => !empty($bid['OpeningDate']) ? $bid['OpeningDate'] : null,
+                    'Subject'          => $subject,
+                    'ErrorMessage'     => $e->getMessage()
+                ]);
+
+                $results['failed_count']++;
+                $results['details'][] = [
+                    'bcid'   => $bcid,
+                    'title'  => $bidTitle,
+                    'action' => 'FAILED',
+                    'error'  => $e->getMessage()
+                ];
+            }
+        }
+
+        $this->outputCheckerResponse($results, $isCli);
+    }
+
+    /**
+     * Helper to render response for CLI and HTTP checker execution
+     */
+    private function outputCheckerResponse($results, $isCli)
+    {
+        if ($isCli) {
+            echo "========================================================\n";
+            echo "I-NET BID MANAGEMENT - 24-HOUR OPENING REMINDER CHECKER\n";
+            echo "========================================================\n";
+            echo "Timestamp: {$results['timestamp']}\n";
+            echo "Eligible Bids: {$results['eligible_count']}\n";
+            echo "Sent: {$results['sent_count']} | Skipped: {$results['skipped_count']} | Failed: {$results['failed_count']}\n";
+            if (!empty($results['message'])) {
+                echo "Notice: {$results['message']}\n";
+            }
+            if (!empty($results['details'])) {
+                echo "--------------------------------------------------------\n";
+                foreach ($results['details'] as $d) {
+                    echo "[{$d['action']}] Bid #{$d['bcid']}: {$d['title']}";
+                    if (!empty($d['reason'])) echo " - {$d['reason']}";
+                    if (!empty($d['error'])) echo " - Error: {$d['error']}";
+                    echo "\n";
+                }
+            }
+            echo "========================================================\n";
+        } else {
+            $this->output
+                 ->set_content_type('application/json')
+                 ->set_output(json_encode($results, JSON_PRETTY_PRINT));
+        }
+    }
+
+    public function notificationLogs($bcid = null)
+    {
+        $targetBcid = $bcid ? (int)$bcid : ($this->input->get('bcid') ? (int)$this->input->get('bcid') : null);
+        $logs = $this->bid_model->getNotificationLogs($targetBcid, 100);
+
+        $isCli = (function_exists('is_cli') && is_cli()) || (PHP_SAPI === 'cli');
+        if ($isCli) {
+            echo json_encode($logs, JSON_PRETTY_PRINT) . PHP_EOL;
+        } else {
+            $this->output
+                 ->set_content_type('application/json')
+                 ->set_output(json_encode(['status' => true, 'total' => count($logs), 'logs' => $logs], JSON_PRETTY_PRINT));
+        }
+    }
+
+
+    public function testStatusNotification($bcid = null)
+    {
+        $targetBcid = $bcid ? (int)$bcid : ($this->input->get('bcid') ? (int)$this->input->get('bcid') : 8);
+        $res = $this->sendStatusChangeNotification($targetBcid, 3); // 3: PQ Evaluated
+
+        $isCli = (function_exists('is_cli') && is_cli()) || (PHP_SAPI === 'cli');
+        if ($isCli) {
+            echo "Status Notification Test for Bid #{$targetBcid}: " . ($res ? "SENT SUCCESSFULLY" : "FAILED") . PHP_EOL;
+        } else {
+            $this->output
+                 ->set_content_type('application/json')
+                 ->set_output(json_encode(['status' => $res, 'bcid' => $targetBcid, 'action' => 'STATUS_CHANGE_TEST']));
+        }
+    }
+
+} //MAIN
+>>>>>>> 7910d04301accf8756d1badf36ba5d987995e94c
