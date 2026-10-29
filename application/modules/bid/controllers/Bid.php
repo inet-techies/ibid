@@ -768,14 +768,8 @@ public function AddBidData(){
 	            'BidStatus'      => 1
 	        ];
 			$id = $this->bid_model->insertBidCreationDetails($Biddata);
-<<<<<<< HEAD
 			if($id>0){
 				$status = $this->bid_model->getBidCreationRow($id);
-=======
-			         if($id>0){
- 							
- 						$status = $this->bid_model->getBidCreationRow($id);
->>>>>>> 7910d04301accf8756d1badf36ba5d987995e94c
 
 				$tracking = [
 					'Bcid'             => $id,
@@ -1633,7 +1627,6 @@ public  function logout()
         }
     }
 
-<<<<<<< HEAD
     /**
      * Securely streams a tender PDF document to authenticated users for the Evidence-Linked Fact Sheet viewer.
      * Prevents path traversal and verifies session.
@@ -1736,10 +1729,7 @@ public  function logout()
             'evidence' => $evidence
         ]));
     }
-}
-=======
-    /* =========================================================================
-     * NEW BID NOTIFICATION SYSTEM METHODS
+    /* ==================================================================     * NEW BID NOTIFICATION SYSTEM METHODS
      * ========================================================================= */
 
     /**
@@ -2042,4 +2032,3 @@ public  function logout()
     }
 
 } //MAIN
->>>>>>> 7910d04301accf8756d1badf36ba5d987995e94c

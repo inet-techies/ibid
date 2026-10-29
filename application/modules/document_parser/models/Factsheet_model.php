@@ -438,6 +438,10 @@ class Factsheet_model extends CI_Model
         // Build the 12 main section column values as JSON
         $data = $this->buildSectionPayload($data);
 
+        if (!empty($data['evidence_records']) && is_array($data['evidence_records'])) {
+            $data['EvidenceJson'] = json_encode($data['evidence_records'], JSON_UNESCAPED_UNICODE);
+        }
+
         // Allowed database columns: metadata + 12 sections + required legacy indexing fields
         $allowedFields = [
             // Metadata & Keys
@@ -457,6 +461,7 @@ class Factsheet_model extends CI_Model
             'Warranty',
             'RiskPoints',
             'OpportunityAssessment',
+            'EvidenceJson',
 
             // Legacy Indexing Columns (Preserved for compatibility and fast lookup)
             'Department', 'ZoneRegion', 'TenderTitle', 'TenderType', 'TenderRefNo',
@@ -742,80 +747,83 @@ class Factsheet_model extends CI_Model
         $tfsid = (int)$tfsid;
         if ($tfsid <= 0) return false;
 
-        // Delete old records for this tfsid
-        $this->db->delete('tender_factsheet_evidence', ['tfsid' => $tfsid]);
-
-        if (empty($evidenceRecords)) return true;
-
-        $batch = [];
-        $now = date('Y-m-d H:i:s');
-        foreach ($evidenceRecords as $rec) {
-            $batch[] = [
-                'tfsid'               => $tfsid,
-                'bcid'                => isset($rec['bcid']) ? $rec['bcid'] : null,
-                'document_path'       => !empty($rec['document_path']) ? $rec['document_path'] : $docPath,
-                'document_hash'       => !empty($rec['document_hash']) ? $rec['document_hash'] : $docHash,
-                'field_key'           => $rec['field_key'] ?? '',
-                'field_section'       => $rec['field_section'] ?? '',
-                'extracted_value'     => $rec['extracted_value'] ?? '',
-                'page_number'         => isset($rec['page_number']) ? (int)$rec['page_number'] : null,
-                'supporting_quote'    => $rec['supporting_quote'] ?? '',
-                'verification_status' => $rec['verification_status'] ?? 'needs_review',
-                'confidence_score'    => isset($rec['confidence_score']) ? (float)$rec['confidence_score'] : null,
-                'confidence_level'    => $rec['confidence_level'] ?? 'medium',
-                'extraction_method'   => $rec['extraction_method'] ?? 'text',
-                'coordinates_json'    => $rec['coordinates_json'] ?? null,
-                'created_at'          => $now,
-                'updated_at'          => $now
-            ];
-        }
-
-        if (!empty($batch)) {
-            return $this->db->insert_batch('tender_factsheet_evidence', $batch);
-        }
-        return true;
+        $json = !empty($evidenceRecords) ? json_encode($evidenceRecords, JSON_UNESCAPED_UNICODE) : null;
+        return $this->db->where('Tfsid', $tfsid)->update($this->table, ['EvidenceJson' => $json]);
     }
 
     /**
      * Retrieves all evidence records for a Fact Sheet, indexed and grouped by field_key.
-     * If no evidence records exist in DB yet, but document file is available, generates and caches them on-the-fly.
+     * Uses the EvidenceJson column stored directly in tenderfactsheet (No separate table needed).
+     * If no evidence records exist yet, generates and caches them in EvidenceJson on-the-fly.
      *
      * @param int $tfsid
+     * @param array|null $fs Optional already-loaded Fact Sheet record
      * @return array [ 'by_field' => [ fieldKey => primaryEvidence ], 'all' => [ fieldKey => [ ...records ] ] ]
      */
-    public function getEvidenceByTfsid($tfsid)
+    public function getEvidenceByTfsid($tfsid, array $fs = null)
     {
         $tfsid = (int)$tfsid;
         if ($tfsid <= 0) return ['by_field' => [], 'all' => []];
 
-        $rows = $this->db->get_where('tender_factsheet_evidence', ['tfsid' => $tfsid])->result_array();
-
-        // If no evidence records found, attempt on-the-fly extraction from source document
-        if (empty($rows)) {
+        if ($fs === null || !array_key_exists('EvidenceJson', $fs)) {
             $fs = $this->getFactSheetById($tfsid);
-            if ($fs && !empty($fs['DocumentPath'])) {
-                $fullPath = FCPATH . ltrim($fs['DocumentPath'], '/\\');
-                if (file_exists($fullPath)) {
-                    if (file_exists(APPPATH . 'libraries/Document_extractor.php')) {
-                        require_once APPPATH . 'libraries/Document_extractor.php';
-                        $extractor = new \Document_extractor();
-                        $pageMap = $extractor->extractPageMap($fullPath);
+        }
 
-                        if (!empty($pageMap)) {
-                            require_once APPPATH . 'libraries/Factsheet_evidence_service.php';
-                            $evService = new \Factsheet_evidence_service();
-                            $generated = $evService->collectEvidence($fs, $pageMap, [
-                                'tfsid'         => $tfsid,
-                                'bcid'          => $fs['Bcid'] ?? null,
-                                'document_path' => $fs['DocumentPath'],
-                                'document_hash' => $fs['DocumentHash'] ?? md5_file($fullPath)
-                            ]);
+        $rows = [];
+        if (!empty($fs['EvidenceJson'])) {
+            $decoded = json_decode($fs['EvidenceJson'], true);
+            if (is_array($decoded)) {
+                $rows = $decoded;
+            }
+        }
 
-                            if (!empty($generated)) {
-                                $this->saveEvidenceRecords($tfsid, $generated, $fs['DocumentPath'], $fs['DocumentHash'] ?? null);
-                                $rows = $this->db->get_where('tender_factsheet_evidence', ['tfsid' => $tfsid])->result_array();
-                            }
+                // If no evidence records stored, attempt on-the-fly extraction and cache directly into EvidenceJson
+        if (empty($rows) && !empty($fs['DocumentPath'])) {
+            $fullPath = FCPATH . ltrim($fs['DocumentPath'], '/\\');
+            if (file_exists($fullPath) && is_file($fullPath)) {
+                if (file_exists(APPPATH . 'libraries/Document_extractor.php')) {
+                    require_once APPPATH . 'libraries/Document_extractor.php';
+                    $extractor = new \Document_extractor();
+                    $pageMap = $extractor->extractPageMap($fullPath);
+
+                    if (!empty($pageMap)) {
+                        require_once APPPATH . 'libraries/Factsheet_evidence_service.php';
+                        $evService = new \Factsheet_evidence_service();
+                        $rows = $evService->collectEvidence($fs, $pageMap, [
+                            'tfsid'         => $tfsid,
+                            'bcid'          => $fs['Bcid'] ?? null,
+                            'document_path' => $fs['DocumentPath'],
+                            'document_hash' => $fs['DocumentHash'] ?? (file_exists($fullPath) ? md5_file($fullPath) : null)
+                        ]);
+
+                        if (!empty($rows)) {
+                            $this->saveEvidenceRecords($tfsid, $rows);
                         }
+                    }
+                }
+            }
+        }
+
+        // Resilient fallback: If evidence is still empty, look up any existing FactSheet with the same TenderTitle or RefNo
+        if (empty($rows) && (!empty($fs['TenderTitle']) || !empty($fs['TenderRefNo']))) {
+            $alt = null;
+            if (!empty($fs['TenderTitle'])) {
+                $alt = $this->db->where('TenderTitle', $fs['TenderTitle'])->where('EvidenceJson IS NOT NULL')->where('EvidenceJson !=', '')->order_by('Tfsid', 'DESC')->get($this->table)->row_array();
+            }
+            if (!$alt && !empty($fs['TenderRefNo'])) {
+                $alt = $this->db->where('TenderRefNo', $fs['TenderRefNo'])->where('EvidenceJson IS NOT NULL')->where('EvidenceJson !=', '')->order_by('Tfsid', 'DESC')->get($this->table)->row_array();
+            }
+            if ($alt && !empty($alt['EvidenceJson'])) {
+                $decoded = json_decode($alt['EvidenceJson'], true);
+                if (is_array($decoded) && !empty($decoded)) {
+                    $rows = $decoded;
+                    $this->saveEvidenceRecords($tfsid, $rows);
+                    if (!empty($alt['DocumentPath'])) {
+                        $this->db->where('Tfsid', $tfsid)->update($this->table, [
+                            'DocumentPath' => $alt['DocumentPath'],
+                            'DocumentName' => $alt['DocumentName'] ?? basename($alt['DocumentPath']),
+                            'DocumentHash' => $alt['DocumentHash'] ?? null
+                        ]);
                     }
                 }
             }
@@ -824,14 +832,15 @@ class Factsheet_model extends CI_Model
         $byField = [];
         $all = [];
         foreach ($rows as $r) {
-            $k = trim($r['field_key']);
+            $k = trim($r['field_key'] ?? '');
+            if (empty($k)) continue;
             if (!isset($all[$k])) {
                 $all[$k] = [];
             }
             $all[$k][] = $r;
 
             // Pick highest confidence / verified record as primary
-            if (!isset($byField[$k]) || ($r['verification_status'] === 'verified' && $byField[$k]['verification_status'] !== 'verified')) {
+            if (!isset($byField[$k]) || (($r['verification_status'] ?? '') === 'verified' && ($byField[$k]['verification_status'] ?? '') !== 'verified')) {
                 $byField[$k] = $r;
             }
         }
@@ -844,9 +853,8 @@ class Factsheet_model extends CI_Model
      */
     public function getEvidenceForField($tfsid, $fieldKey)
     {
-        return $this->db->get_where('tender_factsheet_evidence', [
-            'tfsid'     => (int)$tfsid,
-            'field_key' => trim($fieldKey)
-        ])->result_array();
+        $evData = $this->getEvidenceByTfsid($tfsid);
+        $cleanKey = trim($fieldKey);
+        return $evData['all'][$cleanKey] ?? (isset($evData['by_field'][$cleanKey]) ? [$evData['by_field'][$cleanKey]] : []);
     }
 }

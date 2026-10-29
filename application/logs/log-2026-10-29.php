@@ -13,3 +13,8 @@ ERROR - 2026-10-29 08:03:08 --> 404 Page Not Found: /index
 ERROR - 2026-10-29 08:24:44 --> 404 Page Not Found: /index
 ERROR - 2026-10-29 09:27:26 --> 404 Page Not Found: /index
 ERROR - 2026-10-29 09:40:38 --> 404 Page Not Found: /index
+ERROR - 2026-10-29 10:07:47 --> Severity: error --> Exception: syntax error, unexpected '<<' (T_SL) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 771
+ERROR - 2026-10-29 10:14:25 --> Severity: error --> Exception: syntax error, unexpected '<<' (T_SL) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 771
+ERROR - 2026-10-29 10:14:52 --> Severity: error --> Exception: syntax error, unexpected '<<' (T_SL) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 771
+ERROR - 2026-10-29 10:19:36 --> Severity: error --> Exception: syntax error, unexpected 'private' (T_PRIVATE), expecting end of file D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 1744
+ERROR - 2026-10-29 10:19:39 --> Severity: error --> Exception: syntax error, unexpected 'private' (T_PRIVATE), expecting end of file D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 1744

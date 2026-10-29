@@ -96,12 +96,12 @@ $evidenceData = ['by_field' => [], 'all' => []];
 if (!empty($fs['Tfsid'])) {
     $ci =& get_instance();
     $ci->load->model('document_parser/Factsheet_model');
-    $evidenceData = $ci->Factsheet_model->getEvidenceByTfsid((int)$fs['Tfsid']);
+    $evidenceData = $ci->Factsheet_model->getEvidenceByTfsid((int)$fs['Tfsid'], $fs);
 }
 $evidenceByField = $evidenceData['by_field'] ?? [];
 $evidenceAll     = $evidenceData['all'] ?? [];
 
-$renderEvidenceBadge = function($fieldKey) use ($evidenceByField, $evidenceAll) {
+$renderEvidenceBadge = function($fieldKey, $fieldVal = '') use ($evidenceByField, $evidenceAll) {
     $cleanKey = trim($fieldKey);
     // CRITICAL: Skip manual fields (Department, Tender Title, Project Value)
     if (in_array(strtolower($cleanKey), ['department', 'tender title', 'project value'])) {
@@ -120,31 +120,36 @@ $renderEvidenceBadge = function($fieldKey) use ($evidenceByField, $evidenceAll) 
         }
     }
 
-    if (!$ev) return '';
-
-    $status = $ev['verification_status'] ?? 'needs_review';
-    $page   = !empty($ev['page_number']) ? (int)$ev['page_number'] : '';
-    $conf   = (isset($ev['confidence_score']) && $ev['confidence_score'] > 0) ? round($ev['confidence_score'] * 100) . '%' : '';
-    $quote  = htmlspecialchars($ev['supporting_quote'] ?? '', ENT_QUOTES, 'UTF-8');
     $fEsc   = htmlspecialchars($cleanKey, ENT_QUOTES, 'UTF-8');
-    $valEsc = htmlspecialchars($ev['extracted_value'] ?? '', ENT_QUOTES, 'UTF-8');
-    $allPassages = isset($evidenceAll[$cleanKey]) ? $evidenceAll[$cleanKey] : [$ev];
-    $allJson= htmlspecialchars(json_encode($allPassages, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP), ENT_QUOTES, 'UTF-8');
+    $valEsc = htmlspecialchars($ev['extracted_value'] ?? (string)$fieldVal, ENT_QUOTES, 'UTF-8');
 
-    if ($status === 'verified') {
-        return '<button type="button" class="btn-evidence verified" data-field="' . $fEsc . '" data-value="' . $valEsc . '" data-page="' . $page . '" data-status="verified" data-conf="' . $conf . '" data-quote="' . $quote . '" data-all="' . $allJson . '" title="Verified supporting evidence on Page ' . $page . ' (' . $conf . ' confidence)">' .
-               '<i class="fa fa-shield text-success"></i> Pg ' . $page . ' <span class="evidence-link-text">Evidence</span>' .
+    if ($ev) {
+        $status = $ev['verification_status'] ?? 'needs_review';
+        $page   = !empty($ev['page_number']) ? (int)$ev['page_number'] : '';
+        $conf   = (isset($ev['confidence_score']) && $ev['confidence_score'] > 0) ? round($ev['confidence_score'] * 100) . '%' : '';
+        $quote  = htmlspecialchars($ev['supporting_quote'] ?? '', ENT_QUOTES, 'UTF-8');
+        $allPassages = isset($evidenceAll[$cleanKey]) ? $evidenceAll[$cleanKey] : [$ev];
+        $allJson= htmlspecialchars(json_encode($allPassages, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP), ENT_QUOTES, 'UTF-8');
+
+        if ($status === 'verified') {
+            return '<button type="button" class="btn-evidence verified" data-field="' . $fEsc . '" data-value="' . $valEsc . '" data-page="' . $page . '" data-status="verified" data-conf="' . $conf . '" data-quote="' . $quote . '" data-all="' . $allJson . '" title="Verified supporting evidence on Page ' . $page . ' (' . $conf . ' confidence)">' .
+                   '<i class="fa fa-shield text-success"></i> Pg ' . $page . ' <span class="evidence-link-text">Evidence</span>' .
+                   '</button>';
+        } elseif ($status === 'needs_review') {
+            return '<button type="button" class="btn-evidence needs-review" data-field="' . $fEsc . '" data-value="' . $valEsc . '" data-page="' . $page . '" data-status="needs_review" data-conf="' . $conf . '" data-quote="' . $quote . '" data-all="' . $allJson . '" title="Needs Review: ambiguous or unconfirmed supporting evidence">' .
+                   '<i class="fa fa-exclamation-triangle text-warning"></i> ' . ($page ? 'Pg ' . $page . ' ' : '') . '<span class="evidence-link-text">Review</span>' .
+                   '</button>';
+        } else {
+            return '<button type="button" class="btn-evidence not-found" data-field="' . $fEsc . '" data-value="' . $valEsc . '" data-page="" data-status="not_found" data-conf="0%" data-quote="No direct supporting passage located in the source document." data-all="[]" title="Evidence not located in document">' .
+                   '<i class="fa fa-minus-circle text-muted"></i> <span class="evidence-link-text">No Source</span>' .
+                   '</button>';
+        }
+    } else {
+        // Fallback: If no evidence is linked yet, show "No Source" button
+        return '<button type="button" class="btn-evidence not-found" data-field="' . $fEsc . '" data-value="' . $valEsc . '" data-page="" data-status="not_found" data-conf="0%" data-quote="No supporting source document linked for this field." data-all="[]" title="No source document linked">' .
+               '<i class="fa fa-question-circle text-muted"></i> <span class="evidence-link-text">No Source</span>' .
                '</button>';
-    } elseif ($status === 'needs_review') {
-        return '<button type="button" class="btn-evidence needs-review" data-field="' . $fEsc . '" data-value="' . $valEsc . '" data-page="' . $page . '" data-status="needs_review" data-conf="' . $conf . '" data-quote="' . $quote . '" data-all="' . $allJson . '" title="Needs Review: ambiguous or unconfirmed supporting evidence">' .
-               '<i class="fa fa-exclamation-triangle text-warning"></i> ' . ($page ? 'Pg ' . $page . ' ' : '') . '<span class="evidence-link-text">Review</span>' .
-               '</button>';
-    } elseif ($status === 'not_found') {
-        return '<span class="evidence-tag not-found text-muted" title="Not found in document">' .
-               '<i class="fa fa-minus-circle"></i> Not found' .
-               '</span>';
     }
-    return '';
 };
 
 // ── 1. Parse Section 1: TenderOverview ──
