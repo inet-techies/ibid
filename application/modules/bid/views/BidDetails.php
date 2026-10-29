@@ -187,7 +187,6 @@
     </div>
 </div>
 
-<<<<<<< HEAD
 <style>
 .factsheet-panel {
     position: fixed;
@@ -223,8 +222,6 @@
     line-height: 1.3;
 }
 </style>
-=======
->>>>>>> 532bec266a39e919488f2fbacc77dc893addf476
 
 <!-- Right Side Update Panel -->
 <div class="right-form" id="bidCanvas">
