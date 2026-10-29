@@ -652,7 +652,7 @@ public function AddBidData(){
 
         //Fetch breadcrumb data
         $data['currentUrlArray'] = $this->bid_model->getBreadcrumb($currentUrl);
- 		 		$inputs = $this->input->post();
+ 		$inputs = $this->input->post();
  		if(!$inputs){
 		    $this->session->set_flashdata('err', 'No Inputs Received');
 		    redirect($this->config->item('base_url').'bid/CreateBids');
@@ -768,88 +768,86 @@ public function AddBidData(){
 	            'BidStatus'      => 1
 	        ];
 			$id = $this->bid_model->insertBidCreationDetails($Biddata);
+<<<<<<< HEAD
 			         if($id>0){
  							
  						$status = $this->bid_model->getBidCreationRow($id);
+=======
+			if($id>0){
+				$status = $this->bid_model->getBidCreationRow($id);
+>>>>>>> 4952a30ce9681739531ea1471f010bf2ccea8718
 
-			         	  $tracking = [
-					            'Bcid'             => $id,
-					            'OldStatusId'      => $status->BidStatus,
-					            'CurrentStatusId'  => $status->BidStatus,
-					            'UpdatedBy'        => $Bid_Session['Bid'],
-					            'Ipaddress'        => $ip,
-					            'UserAgent'        => $userAgent,
-					            'IsSystemGenerated'=> 0
-					        ];
+				$tracking = [
+					'Bcid'             => $id,
+					'OldStatusId'      => $status->BidStatus,
+					'CurrentStatusId'  => $status->BidStatus,
+					'UpdatedBy'        => $Bid_Session['Bid'],
+					'Ipaddress'        => $ip,
+					'UserAgent'        => $userAgent,
+					'IsSystemGenerated'=> 0
+				];
 
-					        $this->bid_model->insertBidStatusTracking($tracking);
+				$this->bid_model->insertBidStatusTracking($tracking);
 
-					        $factSheetId = !empty($inputs['factSheetId']) ? (int)$inputs['factSheetId'] : 0;
-					        $attachedDoc = !empty($inputs['attachedDocumentPath']) ? $inputs['attachedDocumentPath'] : $nasPath;
-					        $this->load->model('document_parser/Factsheet_model');
-					        if ($factSheetId > 0) {
-					            $this->Factsheet_model->linkFactSheetToBid($factSheetId, $id);
-					        } elseif (!empty($attachedDoc)) {
-					            $fs = $this->Factsheet_model->getFactSheetByDocPath($attachedDoc);
-					            if ($fs) {
-					                $this->Factsheet_model->linkFactSheetToBid($fs['Tfsid'], $id);
-					            }
-					        }
-					        // Immediately generate/sync Fact Sheet so it resembles the saved Bid details 1:1
-					        $this->Factsheet_model->generateOrSyncFactsheetForBid($id, $Biddata);
+				$factSheetId = !empty($inputs['factSheetId']) ? (int)$inputs['factSheetId'] : 0;
+				$attachedDoc = !empty($inputs['attachedDocumentPath']) ? $inputs['attachedDocumentPath'] : $nasPath;
+				$this->load->model('document_parser/Factsheet_model');
+				if ($factSheetId > 0) {
+					$this->Factsheet_model->linkFactSheetToBid($factSheetId, $id);
+				} elseif (!empty($attachedDoc)) {
+					$fs = $this->Factsheet_model->getFactSheetByDocPath($attachedDoc);
+					if ($fs) {
+						$this->Factsheet_model->linkFactSheetToBid($fs['Tfsid'], $id);
+					}
+				}
+				// Immediately generate/sync Fact Sheet so it resembles the saved Bid details 1:1
+				$this->Factsheet_model->generateOrSyncFactsheetForBid($id, $Biddata);
 
-					        // Send Email Notification to Prasanna Kumari (TO), with Reka and Fazil in CC
-					        try {
-					            require_once(APPPATH . 'libraries/InetMailer.php');
-					            $objs = new InetMailer();
-					            $mail = $objs->load();
+				// Send Email Notification to Prasanna Kumari (TO), with Reka and Fazil in CC
+				try {
+					require_once(APPPATH . 'libraries/InetMailer.php');
+					$objs = new InetMailer();
+					$mail = $objs->load();
 
-					            $mail->setFrom('info@inetcsc.com', 'I-NET Bid Management');
-					            $mail->addAddress('prasannakumari@inetcsc.com', 'Prasanna Kumari');
-					            $mail->addCC('reka@inetcsc.com', 'Reka');
-					            $mail->addCC('Mohamedfazil@inetcsc.com', 'Fazil');
+					$mail->setFrom('info@inetcsc.com', 'I-NET Bid Management');
+					$mail->addAddress('prasannakumari@inetcsc.com', 'Prasanna Kumari');
+					$mail->addCC('reka@inetcsc.com', 'Reka');
+					$mail->addCC('Mohamedfazil@inetcsc.com', 'Fazil');
 
-					            $mail->isHTML(true);
-					            $mail->Subject = "New Bid Created: " . $Biddata['BidTitle'];
+					$mail->isHTML(true);
+					$mail->Subject = "New Bid Created: " . $Biddata['BidTitle'];
 
-					            if (file_exists(FCPATH . 'images/inet_logo.png')) {
-					                $mail->AddEmbeddedImage(FCPATH . 'images/inet_logo.png', 'I-NET');
-					            }
+					if (file_exists(FCPATH . 'images/inet_logo.png')) {
+						$mail->AddEmbeddedImage(FCPATH . 'images/inet_logo.png', 'I-NET');
+					}
 
-					            $emailData = [
-					                'Bcid'      => $id,
-					                'bid'       => $Biddata,
-					                'createdBy' => $Bid_Session['BName'] ?? ($Bid_Session['Name'] ?? 'Administrator'),
-					                'createdOn' => date('d M Y, h:i A'),
-					                'portalUrl' => $this->config->item('base_url') . 'bid/CreateBids'
-					            ];
+					$emailData = [
+						'Bcid'      => $id,
+						'bid'       => $Biddata,
+						'createdBy' => $Bid_Session['BName'] ?? ($Bid_Session['Name'] ?? 'Administrator'),
+						'createdOn' => date('d M Y, h:i A'),
+						'portalUrl' => $this->config->item('base_url') . 'bid/CreateBids'
+					];
 
-					            $mail->Body = $this->load->view('bid/NewBidCreatedMail', $emailData, TRUE);
-					            $mail->send();
-					        } catch (\Throwable $e) {
-					            log_message('error', 'Bid Creation Email Notification Failed: ' . $e->getMessage());
-					        }
+					$mail->Body = $this->load->view('bid/NewBidCreatedMail', $emailData, TRUE);
+					$mail->send();
+				} catch (\Throwable $e) {
+					log_message('error', 'Bid Creation Email Notification Failed: ' . $e->getMessage());
+				}
 
-					   		 $this->session->set_flashdata('true', 'Successfully Added Bid Details');
-					   		 redirect($this->config->item('base_url').'bid/CreateBids');
-				   		 //echo"success";exit;
-				   		}
-				   		else{
-				   			
-				   			$this->session->set_flashdata('err','Failed to Create Bid.Please try Again..!!');
-				   			 redirect($this->config->item('base_url').'bid/CreateBids');
-				   			//echo"Failed";exit;
-				   		}
-
-		   		}
-
-
-
-		} else
-		{
-			$this->session->set_flashdata('err','Invalid Session.Please Login Again..!!');
-			redirect($this->config->item('base_url')."bid/index");
+				$this->session->set_flashdata('true', 'Successfully Added Bid Details');
+				redirect($this->config->item('base_url').'bid/CreateBids');
+			}
+			else{
+				$this->session->set_flashdata('err','Failed to Create Bid.Please try Again..!!');
+				redirect($this->config->item('base_url').'bid/CreateBids');
+			}
 		}
+	} else
+	{
+		$this->session->set_flashdata('err','Invalid Session.Please Login Again..!!');
+		redirect($this->config->item('base_url')."bid/index");
+	}
 }
 
 public function BidDetails(){
@@ -1635,6 +1633,7 @@ public  function logout()
         }
     }
 
+<<<<<<< HEAD
     /* =========================================================================
      * NEW BID NOTIFICATION SYSTEM METHODS
      * ========================================================================= */
@@ -1939,3 +1938,108 @@ public  function logout()
     }
 
 } //MAIN
+=======
+    /**
+     * Securely streams a tender PDF document to authenticated users for the Evidence-Linked Fact Sheet viewer.
+     * Prevents path traversal and verifies session.
+     */
+    public function view_tender_document()
+    {
+        $Bid_Session = $this->session->userdata('logged_in');
+        if (!isset($Bid_Session) || empty($Bid_Session)) {
+            show_error('Unauthorized access. Please log in.', 401);
+            return;
+        }
+
+        $tfsid = (int)$this->input->get('tfsid');
+        $bcid  = (int)$this->input->get('bcid');
+
+        $docPath = '';
+        $docName = 'tender_document.pdf';
+
+        $this->load->model('document_parser/Factsheet_model');
+        if ($tfsid > 0) {
+            $fs = $this->Factsheet_model->getFactSheetById($tfsid);
+            if ($fs && !empty($fs['DocumentPath'])) {
+                $docPath = $fs['DocumentPath'];
+                $docName = !empty($fs['DocumentName']) ? $fs['DocumentName'] : basename($docPath);
+            }
+        } elseif ($bcid > 0) {
+            $fs = $this->Factsheet_model->getFactSheetByBcid($bcid);
+            if ($fs && !empty($fs['DocumentPath'])) {
+                $docPath = $fs['DocumentPath'];
+                $docName = !empty($fs['DocumentName']) ? $fs['DocumentName'] : basename($docPath);
+            }
+        }
+
+        if (empty($docPath)) {
+            show_404();
+            return;
+        }
+
+        // Canonical path & Path traversal protection
+        $fullPath = realpath(FCPATH . ltrim($docPath, '/\\'));
+        $allowedBase = realpath(FCPATH . 'uploads');
+
+        if (!$fullPath || !$allowedBase || strpos($fullPath, $allowedBase) !== 0 || !file_exists($fullPath)) {
+            show_404();
+            return;
+        }
+
+        $mime = 'application/pdf';
+        $ext = strtolower(pathinfo($fullPath, PATHINFO_EXTENSION));
+        if ($ext === 'pdf') {
+            $mime = 'application/pdf';
+        }
+
+        // Stream file safely
+        header('Content-Type: ' . $mime);
+        header('Content-Disposition: inline; filename="' . basename($docName) . '"');
+        header('Content-Length: ' . filesize($fullPath));
+        header('Cache-Control: private, max-age=3600, must-revalidate');
+        header('Pragma: public');
+        readfile($fullPath);
+        exit;
+    }
+
+    /**
+     * AJAX API to retrieve evidence records for a specific field or all fields in a Fact Sheet.
+     */
+    public function get_field_evidence()
+    {
+        $Bid_Session = $this->session->userdata('logged_in');
+        if (!isset($Bid_Session) || empty($Bid_Session)) {
+            $this->output->set_status_header(401)->set_content_type('application/json')->set_output(json_encode(['error' => 'Unauthorized']));
+            return;
+        }
+
+        $tfsid = (int)$this->input->get('tfsid');
+        $field = trim($this->input->get('field') ?? '');
+
+        if ($tfsid <= 0) {
+            $this->output->set_status_header(400)->set_content_type('application/json')->set_output(json_encode(['error' => 'Invalid Fact Sheet ID']));
+            return;
+        }
+
+        $this->load->model('document_parser/Factsheet_model');
+        $evidence = $this->Factsheet_model->getEvidenceByTfsid($tfsid);
+
+        if (!empty($field)) {
+            $matched = isset($evidence['by_field'][$field]) ? $evidence['by_field'][$field] : null;
+            $allPassages = isset($evidence['all'][$field]) ? $evidence['all'][$field] : [];
+            $this->output->set_content_type('application/json')->set_output(json_encode([
+                'success' => true,
+                'field'   => $field,
+                'primary' => $matched,
+                'all'     => $allPassages
+            ]));
+            return;
+        }
+
+        $this->output->set_content_type('application/json')->set_output(json_encode([
+            'success'  => true,
+            'evidence' => $evidence
+        ]));
+    }
+}
+>>>>>>> 4952a30ce9681739531ea1471f010bf2ccea8718

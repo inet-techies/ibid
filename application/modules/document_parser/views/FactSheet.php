@@ -90,6 +90,63 @@ if (!function_exists('safeVal')) {
     }
 }
 
+
+// ── Evidence Data for Traceable Verification ──
+$evidenceData = ['by_field' => [], 'all' => []];
+if (!empty($fs['Tfsid'])) {
+    $ci =& get_instance();
+    $ci->load->model('document_parser/Factsheet_model');
+    $evidenceData = $ci->Factsheet_model->getEvidenceByTfsid((int)$fs['Tfsid']);
+}
+$evidenceByField = $evidenceData['by_field'] ?? [];
+$evidenceAll     = $evidenceData['all'] ?? [];
+
+$renderEvidenceBadge = function($fieldKey) use ($evidenceByField, $evidenceAll) {
+    $cleanKey = trim($fieldKey);
+    // CRITICAL: Skip manual fields (Department, Tender Title, Project Value)
+    if (in_array(strtolower($cleanKey), ['department', 'tender title', 'project value'])) {
+        return '';
+    }
+
+    $ev = null;
+    if (isset($evidenceByField[$cleanKey])) {
+        $ev = $evidenceByField[$cleanKey];
+    } else {
+        foreach ($evidenceByField as $k => $item) {
+            if (strcasecmp($k, $cleanKey) === 0) {
+                $ev = $item;
+                break;
+            }
+        }
+    }
+
+    if (!$ev) return '';
+
+    $status = $ev['verification_status'] ?? 'needs_review';
+    $page   = !empty($ev['page_number']) ? (int)$ev['page_number'] : '';
+    $conf   = (isset($ev['confidence_score']) && $ev['confidence_score'] > 0) ? round($ev['confidence_score'] * 100) . '%' : '';
+    $quote  = htmlspecialchars($ev['supporting_quote'] ?? '', ENT_QUOTES, 'UTF-8');
+    $fEsc   = htmlspecialchars($cleanKey, ENT_QUOTES, 'UTF-8');
+    $valEsc = htmlspecialchars($ev['extracted_value'] ?? '', ENT_QUOTES, 'UTF-8');
+    $allPassages = isset($evidenceAll[$cleanKey]) ? $evidenceAll[$cleanKey] : [$ev];
+    $allJson= htmlspecialchars(json_encode($allPassages, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP), ENT_QUOTES, 'UTF-8');
+
+    if ($status === 'verified') {
+        return '<button type="button" class="btn-evidence verified" data-field="' . $fEsc . '" data-value="' . $valEsc . '" data-page="' . $page . '" data-status="verified" data-conf="' . $conf . '" data-quote="' . $quote . '" data-all="' . $allJson . '" title="Verified supporting evidence on Page ' . $page . ' (' . $conf . ' confidence)">' .
+               '<i class="fa fa-shield text-success"></i> Pg ' . $page . ' <span class="evidence-link-text">Evidence</span>' .
+               '</button>';
+    } elseif ($status === 'needs_review') {
+        return '<button type="button" class="btn-evidence needs-review" data-field="' . $fEsc . '" data-value="' . $valEsc . '" data-page="' . $page . '" data-status="needs_review" data-conf="' . $conf . '" data-quote="' . $quote . '" data-all="' . $allJson . '" title="Needs Review: ambiguous or unconfirmed supporting evidence">' .
+               '<i class="fa fa-exclamation-triangle text-warning"></i> ' . ($page ? 'Pg ' . $page . ' ' : '') . '<span class="evidence-link-text">Review</span>' .
+               '</button>';
+    } elseif ($status === 'not_found') {
+        return '<span class="evidence-tag not-found text-muted" title="Not found in document">' .
+               '<i class="fa fa-minus-circle"></i> Not found' .
+               '</span>';
+    }
+    return '';
+};
+
 // ── 1. Parse Section 1: TenderOverview ──
 $secOverview = !empty($fs['TenderOverview']) ? parseSectionKV($fs['TenderOverview']) : [];
 $dept       = isset($secOverview['Department']) ? $secOverview['Department'] : (!empty($fs['Department']) ? $fs['Department'] : '');
@@ -193,6 +250,361 @@ if (empty($attentionAreas) && !empty($fs['OpportunityAssessmentJson'])) {
 }
 ?>
 
+<style>
+/* ── Fact Sheet Core Document Styles ── */
+.pdf-factsheet-wrapper {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1e293b;
+    background: #f8fafc;
+}
+.pdf-factsheet-sheet {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+.pdf-main-title {
+    font-size: 20px;
+    font-weight: 800;
+    text-align: center;
+    color: #0f172a;
+    letter-spacing: 0.5px;
+    padding-bottom: 14px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #0284c7;
+    text-transform: uppercase;
+}
+.pdf-section-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0369a1;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    padding: 6px 12px;
+    background: #f0f9ff;
+    border-left: 4px solid #0284c7;
+    border-radius: 0 6px 6px 0;
+}
+.pdf-fact-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    font-size: 13px;
+}
+.pdf-fact-table th {
+    background: #f1f5f9;
+    color: #334155;
+    font-weight: 700;
+    text-align: left;
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+    font-size: 12.5px;
+}
+.pdf-fact-table td {
+    padding: 8px 12px;
+    border: 1px solid #e2e8f0;
+    vertical-align: middle;
+    color: #334155;
+    line-height: 1.5;
+}
+.pdf-fact-table tr:nth-child(even) {
+    background-color: #fafbfc;
+}
+.pdf-blue-text {
+    color: #0369a1 !important;
+    font-weight: 600;
+}
+.pdf-text-lead {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #334155;
+    margin: 8px 0 4px 0;
+}
+.pdf-text-follow {
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+.pdf-disc-list, .pdf-circle-list {
+    margin: 6px 0 12px 20px;
+    padding: 0;
+    font-size: 13px;
+    color: #334155;
+    line-height: 1.6;
+}
+.pdf-circle-list {
+    list-style-type: circle;
+}
+.pdf-red-bullet {
+    color: #b91c1c;
+    font-weight: 500;
+}
+
+/* ── Clean PDF Export & Print Rules (Previous clean layout without badges) ── */
+@media print {
+    .btn-evidence,
+    .evidence-tag,
+    .evidence-modal-backdrop,
+    #evidenceModal,
+    .no-print {
+        display: none !important;
+    }
+}
+.pdf-export-mode .btn-evidence,
+.pdf-export-mode .evidence-tag,
+.pdf-export-mode .evidence-modal-backdrop,
+.pdf-export-mode #evidenceModal,
+.pdf-export-mode .no-print {
+    display: none !important;
+}
+.pdf-export-mode.pdf-factsheet-wrapper,
+.pdf-export-mode .pdf-factsheet-sheet {
+    box-shadow: none !important;
+    background: #ffffff !important;
+}
+
+/* ── Evidence Badges ── */
+.btn-evidence {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.3;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-left: 6px;
+    transition: all 0.15s ease-in-out;
+    background: transparent;
+    text-decoration: none;
+    font-family: inherit;
+}
+.btn-evidence.verified {
+    color: #15803d;
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+}
+.btn-evidence.verified:hover {
+    background: #dcfce7;
+    border-color: #86efac;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(22, 101, 52, 0.15);
+}
+.btn-evidence.needs-review {
+    color: #b45309;
+    background: #fffbeb;
+    border-color: #fde68a;
+}
+.btn-evidence.needs-review:hover {
+    background: #fef3c7;
+    border-color: #fcd34d;
+    transform: translateY(-1px);
+}
+.evidence-tag.not-found {
+    font-size: 10.5px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: #f1f5f9;
+    color: #94a3b8;
+    margin-left: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+/* ── Evidence Source Modal & Viewer ── */
+.evidence-modal-backdrop {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(15, 23, 42, 0.72) !important;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 99999999 !important;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-sizing: border-box;
+}
+.evidence-modal-dialog {
+    background: #ffffff;
+    border-radius: 12px;
+    width: 95%;
+    max-width: 920px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
+    border: 1px solid #cbd5e1;
+    overflow: hidden;
+    animation: evPopIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes evPopIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+.evidence-modal-header {
+    padding: 14px 20px;
+    background: #0f172a;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #334155;
+}
+.evidence-modal-title {
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    color: #f8fafc;
+}
+.evidence-modal-close {
+    background: rgba(255, 255, 255, 0.12);
+    border: none;
+    color: #e2e8f0;
+    font-size: 22px;
+    line-height: 1;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.evidence-modal-close:hover {
+    background: rgba(255, 255, 255, 0.28);
+    color: #ffffff;
+}
+.evidence-modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.evidence-tabs {
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 8px;
+    flex-wrap: wrap;
+}
+.evidence-tab-btn {
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.evidence-tab-btn:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+.evidence-tab-btn.active {
+    background: #0284c7;
+    color: #ffffff;
+    border-color: #0284c7;
+}
+.evidence-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+}
+.evidence-meta-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 14px;
+}
+.evidence-meta-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #64748b;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+.evidence-meta-value {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #0f172a;
+    word-break: break-word;
+}
+.evidence-quote-box {
+    background: #f1f5f9;
+    border-left: 4px solid #64748b;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    max-height: 180px;
+    overflow-y: auto;
+}
+.evidence-quote-box.verified {
+    background: #f0fdf4;
+    border-left-color: #16a34a;
+}
+.evidence-quote-box.needs-review {
+    background: #fffbeb;
+    border-left-color: #f59e0b;
+}
+.evidence-quote-text {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #1e293b;
+    font-style: italic;
+}
+.evidence-pdf-viewer-wrap {
+    display: none;
+    flex-direction: column;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 8px;
+    background: #0f172a;
+}
+.evidence-pdf-viewer-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 12px;
+    background: #1e293b;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+}
+.evidence-pdf-frame {
+    width: 100%;
+    height: 380px;
+    border: none;
+    background: #ffffff;
+}
+</style>
+
+
+
 <?php if (!$isAjax && !empty($standalone_view)): ?>
 <link rel="stylesheet" type="text/css" href="<?= $theme_path ?>/assets/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<?= $theme_path ?>/assets/vendors/css/vendors.min.css">
@@ -217,19 +629,35 @@ function downloadFactSheetAsPdf() {
         return;
     }
     var filename = 'Tender_FactSheet.pdf';
+
     function executeDownload() {
         if (window.html2pdf) {
-            html2pdf().set({
+            // Apply export mode so evidence badges & modals disappear in PDF (preserving clean previous output)
+            printArea.classList.add('pdf-export-mode');
+
+            var opt = {
                 margin:       [8, 8, 8, 8],
                 filename:     filename,
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2, useCORS: true, logging: false },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            }).from(printArea).save();
+            };
+
+            var cleanUp = function() {
+                printArea.classList.remove('pdf-export-mode');
+            };
+
+            var worker = html2pdf().set(opt).from(printArea).save();
+            if (worker && typeof worker.then === 'function') {
+                worker.then(cleanUp).catch(cleanUp);
+            } else {
+                setTimeout(cleanUp, 1500);
+            }
         } else {
             window.print();
         }
     }
+
     if (window.html2pdf) {
         executeDownload();
     } else {
@@ -275,15 +703,15 @@ function downloadFactSheetAsPdf() {
                 </tr>
                 <tr>
                     <td>Tender Type</td>
-                    <td><?= safeVal($type) ?></td>
+                    <td><?= safeVal($type) ?> <?= $renderEvidenceBadge("Tender Type") ?></td>
                 </tr>
                 <tr>
                     <td>Tender Reference No.</td>
-                    <td><?= safeVal($refNo) ?></td>
+                    <td><?= safeVal($refNo) ?> <?= $renderEvidenceBadge("Tender Reference No") ?></td>
                 </tr>
                 <tr>
                     <td>Tender Date</td>
-                    <td><?= safeVal($tDate) ?></td>
+                    <td><?= safeVal($tDate) ?> <?= $renderEvidenceBadge("Tender Date") ?></td>
                 </tr>
                 <tr>
                     <td>Project Value</td>
@@ -291,15 +719,15 @@ function downloadFactSheetAsPdf() {
                 </tr>
                 <tr>
                     <td>Contract Type</td>
-                    <td><?= safeVal($contType) ?></td>
+                    <td><?= safeVal($contType) ?> <?= $renderEvidenceBadge("Contract Type") ?></td>
                 </tr>
                 <tr>
                     <td>Warranty + AMC</td>
-                    <td><?= safeVal($warrAmc) ?></td>
+                    <td><?= safeVal($warrAmc) ?> <?= $renderEvidenceBadge("Warranty") ?></td>
                 </tr>
                 <tr>
                     <td>Bid System</td>
-                    <td><?= safeVal($bidSys) ?></td>
+                    <td><?= safeVal($bidSys) ?> <?= $renderEvidenceBadge("Bid System") ?></td>
                 </tr>
             </tbody>
         </table>
@@ -318,7 +746,7 @@ function downloadFactSheetAsPdf() {
                     <?php foreach ($secDates as $act => $dt): ?>
                         <tr>
                             <td><?= htmlspecialchars($act) ?></td>
-                            <td><?= htmlspecialchars($dt) ?></td>
+                            <td><?= htmlspecialchars($dt) ?> <?= $renderEvidenceBadge($act) ?></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -366,19 +794,19 @@ function downloadFactSheetAsPdf() {
             <tbody>
                 <tr>
                     <td>Tender Fee</td>
-                    <td><?= safeVal($tenderFee) ?></td>
+                    <td><?= safeVal($tenderFee) ?> <?= $renderEvidenceBadge("Tender Fee") ?></td>
                 </tr>
                 <tr>
                     <td>EMD</td>
-                    <td><?= safeVal($emdVal) ?></td>
+                    <td><?= safeVal($emdVal) ?> <?= $renderEvidenceBadge("EMD") ?></td>
                 </tr>
                 <tr>
                     <td>Performance Bank Guarantee</td>
-                    <td><?= safeVal($pbgSummary) ?></td>
+                    <td><?= safeVal($pbgSummary) ?> <?= $renderEvidenceBadge("Performance Bank Guarantee") ?></td>
                 </tr>
                 <tr>
                     <td>Bid Validity</td>
-                    <td><?= safeVal($validVal) ?></td>
+                    <td><?= safeVal($validVal) ?> <?= $renderEvidenceBadge("Bid Validity") ?></td>
                 </tr>
                 <?php if (!empty($estVal) && $estVal !== 'Not specified in document'): ?>
                 <tr>
@@ -578,3 +1006,223 @@ function downloadFactSheetAsPdf() {
 
     </div>
 </div>
+
+
+<!-- Evidence Source Modal & PDF Viewer -->
+<div class="evidence-modal-backdrop" id="evidenceModal" style="display:none !important;">
+    <div class="evidence-modal-dialog">
+        <div class="evidence-modal-header">
+            <h4 class="evidence-modal-title">
+                <i class="fa fa-file-text-o text-info"></i>
+                <span id="evModalFieldTitle">Field Evidence</span>
+            </h4>
+            <button type="button" class="evidence-modal-close" id="evCloseBtn" title="Close">&times;</button>
+        </div>
+        <div class="evidence-modal-body">
+            <div id="evPassageTabs" class="evidence-tabs" style="display:none;"></div>
+            
+            <div class="evidence-meta-grid">
+                <div class="evidence-meta-card">
+                    <div class="evidence-meta-label">Extracted Value</div>
+                    <div class="evidence-meta-value" id="evMetaValue">-</div>
+                </div>
+                <div class="evidence-meta-card">
+                    <div class="evidence-meta-label">Verification Status</div>
+                    <div class="evidence-meta-value" id="evMetaStatus">-</div>
+                </div>
+                <div class="evidence-meta-card">
+                    <div class="evidence-meta-label">Source Document Page</div>
+                    <div class="evidence-meta-value" id="evMetaPage">-</div>
+                </div>
+                <div class="evidence-meta-card">
+                    <div class="evidence-meta-label">Confidence Score</div>
+                    <div class="evidence-meta-value" id="evMetaConf">-</div>
+                </div>
+            </div>
+
+            <div>
+                <div style="font-weight: 600; font-size: 13px; color:#334155; margin-bottom: 6px;">
+                    <i class="fa fa-quote-left text-muted mr-1"></i> Exact Supporting Quotation from Original Document:
+                </div>
+                <div class="evidence-quote-box" id="evQuoteBox">
+                    <p class="evidence-quote-text" id="evQuoteText">Supporting quotation text...</p>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 10px; align-items: center; margin-top: 4px;">
+                <button type="button" class="btn btn-primary btn-sm" id="btnTogglePdfViewer">
+                    <i class="fa fa-file-pdf-o"></i> View in Original PDF Page
+                </button>
+                <a href="#" target="_blank" class="btn btn-default btn-sm" id="btnOpenPdfNewTab" style="display:none;">
+                    <i class="fa fa-external-link"></i> Open PDF in New Tab
+                </a>
+                <span class="text-muted" style="font-size: 12px;" id="evPdfNote">Navigates directly to the exact page of the tender.</span>
+            </div>
+
+            <div class="evidence-pdf-viewer-wrap" id="evPdfViewerWrap">
+                <div class="evidence-pdf-viewer-bar">
+                    <span id="evPdfBarTitle"><i class="fa fa-file-pdf-o"></i> PDF Viewer - Page <span id="evPdfPageNum">1</span></span>
+                    <button type="button" class="btn btn-xs btn-default" id="btnClosePdfViewer" style="color:#000;">Hide PDF</button>
+                </div>
+                <iframe src="" class="evidence-pdf-frame" id="evPdfFrame" title="Tender PDF Viewer"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    var modal = document.getElementById('evidenceModal');
+    var closeBtn = document.getElementById('evCloseBtn');
+    var fieldTitle = document.getElementById('evModalFieldTitle');
+    var metaVal = document.getElementById('evMetaValue');
+    var metaStatus = document.getElementById('evMetaStatus');
+    var metaPage = document.getElementById('evMetaPage');
+    var metaConf = document.getElementById('evMetaConf');
+    var quoteBox = document.getElementById('evQuoteBox');
+    var quoteText = document.getElementById('evQuoteText');
+    var tabsContainer = document.getElementById('evPassageTabs');
+    var btnTogglePdf = document.getElementById('btnTogglePdfViewer');
+    var btnOpenNewTab = document.getElementById('btnOpenPdfNewTab');
+    var btnClosePdf = document.getElementById('btnClosePdfViewer');
+    var pdfWrap = document.getElementById('evPdfViewerWrap');
+    var pdfFrame = document.getElementById('evPdfFrame');
+    var pdfPageNum = document.getElementById('evPdfPageNum');
+
+    var currentPassages = [];
+    var currentTfsid = <?= (int)(!empty($fs['Tfsid']) ? $fs['Tfsid'] : 0) ?>;
+    var basePdfUrl = '<?= site_url("bid/view_tender_document?tfsid=") ?>' + currentTfsid;
+
+    function closeModal() {
+        if (modal) modal.style.setProperty('display', 'none', 'important');
+        if (pdfFrame) pdfFrame.src = '';
+        if (pdfWrap) pdfWrap.style.display = 'none';
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeModal();
+        });
+    }
+
+    function renderPassage(idx) {
+        var p = currentPassages[idx];
+        if (!p) return;
+
+        // Active tab styling
+        var tabBtns = tabsContainer.querySelectorAll('.evidence-tab-btn');
+        tabBtns.forEach(function(b, i) {
+            if (i === idx) b.classList.add('active');
+            else b.classList.remove('active');
+        });
+
+        metaVal.textContent = p.extracted_value || '-';
+        
+        var statusHtml = '';
+        quoteBox.className = 'evidence-quote-box';
+        if (p.verification_status === 'verified') {
+            statusHtml = '<span class="text-success"><i class="fa fa-check-circle"></i> Verified</span>';
+            quoteBox.classList.add('verified');
+        } else if (p.verification_status === 'needs_review') {
+            statusHtml = '<span class="text-warning"><i class="fa fa-exclamation-triangle"></i> Needs Review</span>';
+            quoteBox.classList.add('needs-review');
+        } else {
+            statusHtml = '<span class="text-muted"><i class="fa fa-minus-circle"></i> Not Found</span>';
+        }
+        metaStatus.innerHTML = statusHtml;
+
+        metaPage.textContent = p.page_number ? ('Page ' + p.page_number) : 'Not specified';
+        metaConf.textContent = p.confidence_score ? (Math.round(p.confidence_score * 100) + '% (' + (p.confidence_level || 'Rule') + ')') : '-';
+        
+        // Highlight matching extracted value in quotation if present
+        var quote = p.supporting_quote || 'No supporting passage located.';
+        quoteText.textContent = quote;
+
+        // PDF Navigation setup
+        var targetPage = p.page_number || 1;
+        pdfPageNum.textContent = targetPage;
+        var pageUrl = basePdfUrl + '#page=' + targetPage;
+        
+        btnOpenNewTab.href = pageUrl;
+        btnOpenNewTab.style.display = p.page_number ? 'inline-block' : 'none';
+        btnTogglePdf.style.display = p.page_number ? 'inline-block' : 'none';
+
+        if (pdfWrap.style.display === 'flex') {
+            pdfFrame.src = pageUrl;
+        }
+    }
+
+    if (btnTogglePdf) {
+        btnTogglePdf.addEventListener('click', function() {
+            if (pdfWrap.style.display === 'flex') {
+                pdfWrap.style.display = 'none';
+                pdfFrame.src = '';
+            } else {
+                pdfWrap.style.display = 'flex';
+                var targetPage = parseInt(pdfPageNum.textContent, 10) || 1;
+                pdfFrame.src = basePdfUrl + '#page=' + targetPage;
+            }
+        });
+    }
+
+    if (btnClosePdf) {
+        btnClosePdf.addEventListener('click', function() {
+            pdfWrap.style.display = 'none';
+            pdfFrame.src = '';
+        });
+    }
+
+    // Attach click listeners to all evidence badges
+    document.addEventListener('click', function(e) {
+        var trigger = e.target.closest('.btn-evidence');
+        if (!trigger) return;
+        e.preventDefault();
+
+        var fieldName = trigger.getAttribute('data-field') || 'Field Evidence';
+        fieldTitle.textContent = fieldName;
+
+        var allRaw = trigger.getAttribute('data-all');
+        currentPassages = [];
+        try {
+            if (allRaw) {
+                currentPassages = JSON.parse(allRaw);
+            }
+        } catch (err) {}
+
+        if (!currentPassages || !currentPassages.length) {
+            currentPassages = [{
+                field_key: fieldName,
+                extracted_value: trigger.getAttribute('data-value') || '',
+                page_number: trigger.getAttribute('data-page') || null,
+                verification_status: trigger.getAttribute('data-status') || 'verified',
+                confidence_score: parseFloat(trigger.getAttribute('data-conf')) / 100 || 0.95,
+                confidence_level: 'high',
+                supporting_quote: trigger.getAttribute('data-quote') || ''
+            }];
+        }
+
+        // Render passage tabs if multiple passages
+        tabsContainer.innerHTML = '';
+        if (currentPassages.length > 1) {
+            tabsContainer.style.display = 'flex';
+            currentPassages.forEach(function(p, i) {
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'evidence-tab-btn' + (i === 0 ? ' active' : '');
+                btn.textContent = 'Passage ' + (i + 1) + (p.page_number ? ' (Page ' + p.page_number + ')' : '');
+                btn.addEventListener('click', function() { renderPassage(i); });
+                tabsContainer.appendChild(btn);
+            });
+        } else {
+            tabsContainer.style.display = 'none';
+        }
+
+        renderPassage(0);
+        if (modal && modal.parentElement !== document.body) {
+            document.body.appendChild(modal);
+        }
+        modal.style.setProperty('display', 'flex', 'important');
+    });
+})();
+</script>

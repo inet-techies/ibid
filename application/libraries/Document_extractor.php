@@ -1033,7 +1033,7 @@ class Document_extractor
 
         // Pre-bid date
         $preBidPatterns = [
-            '/(?:Pre[-\s]?Bid\s+(?:Conference|Meeting|Discussion|Date))(?:\s*[:\-.]|\s+Date\s*[:\-.]|\s+on)?\s*(?:Dt\.?\s*)?' . $dateCapRx . $timeRx . '/iu',
+            '/(?:Pre[-\s]?Bid\s+(?:Conference|Meeting|Discussion|Date))(?:\s*[:\-.]|\s+Date\s*[:\-.]|\s+on|\s+date(?:\s*(?:and|&)\s*time)?)?\s*(?:Dt\.?\s*)?' . $dateCapRx . $timeRx . '/iu',
             '/(?:Date\s+(?:and|&)\s+Time\s+of\s+Pre[-\s]?Bid\s+(?:Meeting|Conference))\s*[:\-.]?\s*(?:Dt\.?\s*)?' . $dateCapRx . $timeRx . '/iu',
         ];
         $preBidRes = $extractDateTime($preBidPatterns);
@@ -1041,7 +1041,7 @@ class Document_extractor
 
         // Opening date: Technical Bid Opening preferred over Financial
         $openPatterns = [
-            '/(?:(?:Date\s+(?:and|&)\s+Time\s+of\s+)?Opening\s+(?:of\s+)?(?:(?:General\s*(?:and|&)\s*)?Technical\s+Bids?|Technical\s+Proposal|Physical\s+Bid|Cover\s+1)|Technical\s+Bid\s+Opening(?:\s+Date)?)\s*[:\-.]?\s*(?:Dt\.?\s*)?' . $dateCapRx . $timeRx . '/iu',
+            '/(?:(?:Date\s+(?:and|&)\s+Time\s+of\s+)?Opening\s+(?:of\s+)?(?:(?:General\s*(?:and|&)\s*)?Technical\s+Bids?|Technical\s+Proposal|Physical\s+Bid|Cover\s+1)|Technical\s+Bid\s+Opening(?:\s+date(?:\s*(?:and|&)\s*time)?)?|Date\s+(?:and|&)\s+time\s+of\s+Technical\s+Bid\s+Opening)\s*[:\-.]?\s*(?:Dt\.?\s*)?' . $dateCapRx . $timeRx . '/iu',
             '/(?:(?:Date\s+(?:and|&)\s+Time\s+of\s+)?Opening\s+(?:of\s+)?(?:Bids?|Tenders?|Physical\s+Bid)|Bid\s+Opening(?:\s+Date)?|Date\s+of\s+Opening\s+of\s+(?:Physical\s+Bid|Technical\s+Bid|Bids?|Tenders?))\s*[:\-.]?\s*(?:Dt\.?\s*)?' . $dateCapRx . $timeRx . '/iu',
         ];
         $openRes = $extractDateTime($openPatterns);
@@ -2484,7 +2484,7 @@ class Document_extractor
             return '₹' . $restFormatted . ',' . $last3;
         };
 
-        // Helper to normalize date with optional time to "DD-MM-YYYY at H:MM AM/PM"
+        // Helper to normalize date with optional time to "YYYY-MM-DD HH:MM AM/PM"
         $normDateWithTime = function($str) {
             $str = trim(preg_replace('/\s+/', ' ', $str));
             if (empty($str) || strtolower($str) === 'not specified in document') return 'Not specified in document';
@@ -2493,20 +2493,57 @@ class Document_extractor
             if (preg_match('/^(.*?)\s*(?:at\s*|,\s*|@\s*)\s*(.*)$/i', $str, $parts)) {
                 $datePart = trim($parts[1]);
                 $timePart = trim($parts[2]);
+            } elseif (preg_match('/^(.*?\d{2,4})\s+(\d{1,2}(?::\d{2})?\s*(?:AM|PM|hrs?|hours?)?.*)$/i', $str, $parts)) {
+                $datePart = trim($parts[1]);
+                $timePart = trim($parts[2]);
             }
+
+            // Normalize Date Part to YYYY-MM-DD
             if (preg_match('/^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{2,4})$/', $datePart, $dm)) {
                 $y = (int)$dm[3];
                 if ($y < 100) $y += ($y < 50 ? 2000 : 1900);
-                $datePart = sprintf('%02d-%02d-%04d', (int)$dm[1], (int)$dm[2], $y);
-            }
-            if (!empty($timePart)) {
-                if (preg_match('/^(\d{1,2})\s*(am|pm)$/i', $timePart, $tm)) {
-                    $timePart = (int)$tm[1] . ':00 ' . strtoupper($tm[2]);
-                } elseif (preg_match('/^(\d{1,2}):(\d{2})\s*(am|pm)$/i', $timePart, $tm)) {
-                    $timePart = (int)$tm[1] . ':' . sprintf('%02d', (int)$tm[2]) . ' ' . strtoupper($tm[3]);
+                $datePart = sprintf('%04d-%02d-%02d', $y, (int)$dm[2], (int)$dm[1]);
+            } elseif (preg_match('/^(\d{4})[.\/-](\d{1,2})[.\/-](\d{1,2})$/', $datePart, $dm)) {
+                $datePart = sprintf('%04d-%02d-%02d', (int)$dm[1], (int)$dm[2], (int)$dm[3]);
+            } else {
+                $months = ['jan'=>'01','feb'=>'02','mar'=>'03','apr'=>'04','may'=>'05','jun'=>'06',
+                           'jul'=>'07','aug'=>'08','sep'=>'09','oct'=>'10','nov'=>'11','dec'=>'12'];
+                if (preg_match('/^(\d{1,2})\s*[-\/\s]\s*([A-Za-z]{3,9})\s*[-\/\s]\s*(\d{2,4})$/', $datePart, $dm)) {
+                    $mon = strtolower(substr(trim($dm[2]), 0, 3));
+                    if (isset($months[$mon])) {
+                        $y = (int)$dm[3];
+                        if ($y < 100) $y += ($y < 50 ? 2000 : 1900);
+                        $datePart = sprintf('%04d-%s-%02d', $y, $months[$mon], (int)$dm[1]);
+                    }
                 }
             }
-            return !empty($timePart) ? ($datePart . ' at ' . $timePart) : $datePart;
+
+            // Normalize Time Part to H:MM AM/PM
+            if (!empty($timePart)) {
+                if (preg_match('/^(\d{1,2}(?::\d{2})?\s*(?:am|pm|hrs?|hours?)?)/i', $timePart, $mTime)) {
+                    $rawTime = trim($mTime[1]);
+                    if (preg_match('/^(\d{1,2})\s*(am|pm)$/i', $rawTime, $tm)) {
+                        $timePart = (int)$tm[1] . ':00 ' . strtoupper($tm[2]);
+                    } elseif (preg_match('/^(\d{1,2}):(\d{2})\s*(am|pm)$/i', $rawTime, $tm)) {
+                        $timePart = (int)$tm[1] . ':' . sprintf('%02d', (int)$tm[2]) . ' ' . strtoupper($tm[3]);
+                    } elseif (preg_match('/^(\d{1,2}):(\d{2})\s*(?:hrs?|hours?)?\.?$/i', $rawTime, $tm)) {
+                        $h = (int)$tm[1];
+                        $min = (int)$tm[2];
+                        $ampm = $h >= 12 ? 'PM' : 'AM';
+                        $h12 = $h % 12;
+                        if ($h12 === 0) $h12 = 12;
+                        $timePart = $h12 . ':' . sprintf('%02d', $min) . ' ' . $ampm;
+                    } elseif (preg_match('/^(\d{1,2})\s*(?:hrs?|hours?)?\.?$/i', $rawTime, $tm)) {
+                        $h = (int)$tm[1];
+                        $ampm = $h >= 12 ? 'PM' : 'AM';
+                        $h12 = $h % 12;
+                        if ($h12 === 0) $h12 = 12;
+                        $timePart = $h12 . ':00 ' . $ampm;
+                    }
+                }
+            }
+
+            return !empty($timePart) ? ($datePart . ' ' . $timePart) : $datePart;
         };
 
         // ── SECTION 2: Important Dates ──
@@ -2540,7 +2577,7 @@ class Document_extractor
 
         // 4. Bid submission start
         $subStart = '';
-        if (preg_match('/(?:Bid\s+Submission\s+Start(?:\s+date(?:\s*(?:and|&)\s*time)?)?)\s*[:\- \t]*([0-9]{1,2}[.\/-][0-9]{1,2}[.\/-][0-9]{2,4}(?:\s*(?:at\s*|,\s*|@\s*)?[0-9]{1,2}(?::[0-9]{2})?\s*(?:AM|PM|hrs)?)?)/iu', $cleanText, $sm)) {
+        if (preg_match('/(?:(?:Bid\s+Submission\s+Start|Start\s+date(?:\s*(?:and|&)\s*time)?\s+of\s+Bid\s+Submission)(?:\s+date(?:\s*(?:and|&)\s*time)?)?)\s*[:\- \t]*([0-9]{1,2}[.\/-][0-9]{1,2}[.\/-][0-9]{2,4}(?:\s*(?:at\s*|,\s*|@\s*)?[0-9]{1,2}(?::[0-9]{2})?\s*(?:AM|PM|hrs)?)?)/iu', $cleanText, $sm)) {
             $subStart = trim($sm[1]);
         }
         if (!empty($subStart)) {
@@ -3026,5 +3063,91 @@ class Document_extractor
         }
         return $text;
     }
-}
+    /**
+     * Extracts an array of [ pageNum (1-based) => string pageText ] from a document.
+     * Retains page boundaries for evidence mapping.
+     *
+     * @param string $filePath Absolute path to document
+     * @return array [ 1 => string, 2 => string, ... ]
+     */
+    public function extractPageMap($filePath)
+    {
+        if (empty($filePath) || !file_exists($filePath)) {
+            return [];
+        }
 
+        $ext = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
+        $pageMap = [];
+
+        if ($ext === 'pdf') {
+            // Strategy 1: Poppler pdftotext CLI (preserves exact form-feed \x0C page boundaries)
+            $popplerPaths = [
+                FCPATH . 'application/third_party/poppler-23.11.0-0/Library/bin/pdftotext.exe',
+                __DIR__ . '/../third_party/poppler-23.11.0-0/Library/bin/pdftotext.exe',
+                FCPATH . 'application/modules/document_parser/third_party/poppler-23.11.0-0/Library/bin/pdftotext.exe',
+                '/usr/bin/pdftotext',
+                '/usr/local/bin/pdftotext'
+            ];
+
+            $whichPdf = @trim(@shell_exec('which pdftotext 2>/dev/null'));
+            if (!empty($whichPdf) && file_exists($whichPdf)) {
+                array_unshift($popplerPaths, $whichPdf);
+            }
+
+            foreach ($popplerPaths as $bin) {
+                if (!empty($bin) && file_exists($bin)) {
+                    $cmd = escapeshellarg($bin) . ' -enc UTF-8 -layout ' . escapeshellarg($filePath) . ' -';
+                    $out = @shell_exec($cmd);
+                    if (!empty($out)) {
+                        $rawPages = preg_split('/\x0c|\f/', $out);
+                        foreach ($rawPages as $i => $p) {
+                            if (trim($p) !== '') {
+                                $pageMap[$i + 1] = $p;
+                            }
+                        }
+                        if (!empty($pageMap)) {
+                            return $pageMap;
+                        }
+                    }
+                }
+            }
+
+            // Strategy 2: Smalot PdfParser
+            if (file_exists(FCPATH . 'vendor/autoload.php')) {
+                require_once FCPATH . 'vendor/autoload.php';
+            }
+            if (class_exists('\\Smalot\\PdfParser\\Parser')) {
+                try {
+                    $parser = new \Smalot\PdfParser\Parser();
+                    $pdf = $parser->parseFile($filePath);
+                    $pages = $pdf->getPages();
+                    foreach ($pages as $i => $page) {
+                        $pt = $page->getText();
+                        if (trim($pt) !== '') {
+                            $pageMap[$i + 1] = $pt;
+                        }
+                    }
+                    if (!empty($pageMap)) {
+                        return $pageMap;
+                    }
+                } catch (\Throwable $e) {}
+            }
+        } else {
+            $raw = $this->extractRawText($filePath, $ext);
+            $text = isset($raw['text']) ? $raw['text'] : '';
+            if (!empty($text)) {
+                $pages = preg_split('/\x0c|\f/', $text);
+                foreach ($pages as $i => $p) {
+                    if (trim($p) !== '') {
+                        $pageMap[$i + 1] = $p;
+                    }
+                }
+                if (empty($pageMap)) {
+                    $pageMap[1] = $text;
+                }
+            }
+        }
+
+        return $pageMap;
+    }
+}

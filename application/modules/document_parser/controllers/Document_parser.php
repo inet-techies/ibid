@@ -318,6 +318,21 @@ class Document_parser extends MX_Controller
                     $factSheetData['Classification']       = $result['classification'];
                     $factSheetData['ClassificationStatus'] = $result['classification_status'];
 
+                    // Evidence Extraction & Linking
+                    try {
+                        $pageMap = $this->document_extractor->extractPageMap($targetPath);
+                        if (!empty($pageMap)) {
+                            $this->load->library('factsheet_evidence_service');
+                            $evidenceRecords = $this->factsheet_evidence_service->collectEvidence($factSheetData, $pageMap, [
+                                'document_path' => $relPath,
+                                'document_hash' => $factSheetData['DocumentHash']
+                            ]);
+                            $factSheetData['evidence_records'] = $evidenceRecords;
+                        }
+                    } catch (\Throwable $eve) {
+                        log_message('error', 'Evidence extraction error: ' . $eve->getMessage());
+                    }
+
                     $this->load->model('document_parser/Factsheet_model');
                     $tfsid = $this->Factsheet_model->saveFactSheet($factSheetData);
 

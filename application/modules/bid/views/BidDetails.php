@@ -173,9 +173,6 @@
             <button type="button" class="btn btn-sm btn-outline-success d-inline-flex align-items-center py-1 px-2" id="btnDownloadFactSheetInModal" title="Download Fact Sheet">
                 <i class="feather-download me-1 mr-1"></i> Download
             </button>
-            <a href="javascript:void(0);" target="_blank" class="btn btn-sm btn-outline-primary d-inline-flex align-items-center py-1 px-2" id="btnOpenFactSheetTab" title="Open in New Tab">
-                <i class="feather-external-link me-1 mr-1"></i> Full Page
-            </a>
             <button type="button" class="close-btn ms-2 ml-2" id="closeFactSheetPanel" title="Close Panel" style="font-size:24px;line-height:1;border:none;background:none;cursor:pointer;">&times;</button>
         </div>
     </div>
@@ -1216,6 +1213,9 @@ function downloadFactSheetAsPdf() {
 
     function executeDownload() {
         if (window.html2pdf) {
+            // Apply export mode so evidence badges & modals disappear in PDF (preserving clean previous output)
+            printArea.classList.add('pdf-export-mode');
+
             var opt = {
                 margin:       [8, 8, 8, 8],
                 filename:     filename,
@@ -1223,7 +1223,17 @@ function downloadFactSheetAsPdf() {
                 html2canvas:  { scale: 2, useCORS: true, logging: false },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
-            html2pdf().set(opt).from(printArea).save();
+
+            var cleanUp = function() {
+                printArea.classList.remove('pdf-export-mode');
+            };
+
+            var worker = html2pdf().set(opt).from(printArea).save();
+            if (worker && typeof worker.then === 'function') {
+                worker.then(cleanUp).catch(cleanUp);
+            } else {
+                setTimeout(cleanUp, 1500);
+            }
         } else {
             window.print();
         }
