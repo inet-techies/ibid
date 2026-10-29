@@ -155,7 +155,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                     <!-- Matrix Table Body -->
                     <div class="card-body p-0">
                         <div class="table-responsive">
-                            <table class="table table-hover align-middle mb-0" id="comparisonTable">
+                            <table class="table table-hover align-middle mb-0 text-nowrap wrap-no-text" id="comparisonTable">
                                 <thead class="table-light">
                                     <tr>
                                         <th style="width: 50px;">#</th>

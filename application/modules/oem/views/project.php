@@ -157,7 +157,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                                     </button>
                                 </div>
                                 <div class="table-responsive">
-                                    <table class="table table-bordered align-middle" id="materialsTable">
+                                    <table class="table table-bordered align-middle text-nowrap wrap-no-text" id="materialsTable">
                                         <thead class="table-light">
                                             <tr>
                                                 <th>Product / Equipment <span class="text-danger">*</span></th>
@@ -229,7 +229,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
-                            <table class="table table-hover align-middle mb-0" id="projectDirectoryTable">
+                            <table class="table table-hover align-middle mb-0 text-nowrap wrap-no-text" id="projectDirectoryTable">
                                 <thead class="table-light">
                                     <tr>
                                         <th style="width: 60px;">#</th>

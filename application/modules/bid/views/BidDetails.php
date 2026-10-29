@@ -28,7 +28,7 @@
                           <div id="responseMessage"></div>
                              <div class="card-body p-0">
                                 <div class="table-responsive">
-                                   <table class="table table-hover" id="customerList">
+                                   <table class="table table-hover text-nowrap wrap-no-text" id="customerList">
                                         <thead>
                                             <tr> 
                                                 <th>#</th>
@@ -80,7 +80,7 @@
                                                                 <?= $val['DisplayName'] ?>
                                                             </span>
                                                         </td>
-                                                        <td><?= $val['CreationTs'] ?></td>
+                                                        <td><?= (!empty($val['CreationTs']) && strtotime($val['CreationTs'])) ? date('d M Y, h:i A', strtotime($val['CreationTs'])) : '-' ?></td>
                                                         <td>
                                                             <span class="d-inline-block text-truncate" style="max-width: 180px;" title="<?= htmlspecialchars($val['Remarks'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
                                                                 <?= !empty($val['Remarks']) ? htmlspecialchars($val['Remarks'], ENT_QUOTES, 'UTF-8') : '-'; ?>
@@ -400,7 +400,21 @@ $(document).on('click', '.view-user', function () {
         }
     });
 
-});
+function formatBidDateTime(dateStr) {
+    if (!dateStr) return '-';
+    var d = new Date(dateStr.replace(/-/g, '/'));
+    if (isNaN(d.getTime())) return dateStr;
+    var day = ('0' + d.getDate()).slice(-2);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var month = months[d.getMonth()];
+    var year = d.getFullYear();
+    var hours = d.getHours();
+    var minutes = ('0' + d.getMinutes()).slice(-2);
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? ('0' + hours).slice(-2) : '12';
+    return day + ' ' + month + ' ' + year + ', ' + hours + ':' + minutes + ' ' + ampm;
+}
 
 $(document).on('click', '.view-bid', function () {
 
@@ -410,7 +424,7 @@ $(document).on('click', '.view-bid', function () {
     <div class="card border-0 shadow-sm">
         <div class="card-body p-0">
 
-            <table class="table table-bordered mb-0">
+            <table class="table table-bordered text-nowrap wrap-no-text mb-0">
                 <tbody>
 
                     <tr>
@@ -590,6 +604,12 @@ $(document).on('click', '.view-bid', function () {
                     <tr>
                         <th>Status Date</th>
                         <td>${bid.ActualDate}</td>
+                    </tr>` : ''}
+
+                    ${(bid.CreationTs) ? `
+                    <tr>
+                        <th>Creation Date</th>
+                        <td>${formatBidDateTime(bid.CreationTs)}</td>
                     </tr>` : ''}
 
                     <tr>

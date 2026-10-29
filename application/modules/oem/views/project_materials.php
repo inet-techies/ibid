@@ -53,7 +53,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
             <!-- Table Body -->
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0" id="projectMaterialsTable" style="min-width: 950px;">
+                    <table class="table table-hover align-middle mb-0 text-nowrap wrap-no-text" id="projectMaterialsTable" style="min-width: 950px;">
                         <thead class="table-light">
                             <tr>
                                 <th style="width: 60px;">#</th>

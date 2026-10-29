@@ -50,6 +50,38 @@ $isActive   = !empty($currentUrlArray['child'])
     <link rel="stylesheet" href="<?=$theme_path?>/assets/css/document.css">
     <link rel="stylesheet" href="<?=$theme_path?>/assets/css/dashboard.css">
 
+    <style>
+        /* Always keep footer at the bottom of the viewport */
+        html, body {
+            height: 100%;
+        }
+        .nxl-container {
+            min-height: 100vh !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+        .nxl-content {
+            flex: 1 0 auto !important;
+        }
+        footer.footer {
+            margin-top: auto !important;
+        }
+
+        /* Tables: wrap no text (prevent cell text from breaking onto multiple lines) */
+        .table th,
+        .table td,
+        .table.text-nowrap th,
+        .table.text-nowrap td,
+        .table.wrap-no-text th,
+        .table.wrap-no-text td,
+        .wrap-no-text th,
+        .wrap-no-text td,
+        table.text-nowrap th,
+        table.text-nowrap td {
+            white-space: nowrap !important;
+        }
+    </style>
+
     <!--! END: Custom CSS-->
     <!--! HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries !-->
     <!--! WARNING: Respond.js doesn"t work if you view the page via file: !-->
@@ -499,19 +531,14 @@ $isActive   = !empty($currentUrlArray['child'])
             <!-- [ Main-Content ] End -->
         </div>
         <!-- [ Footer ] start -->
-        <footer class="footer">
+        <footer class="footer d-flex align-items-center justify-content-between flex-wrap gap-2 py-3 px-4">
             <p class="fs-11 text-muted fw-medium text-uppercase mb-0 copyright">
                 <span>Copyright ©</span>
                 <script>
                     document.write(new Date().getFullYear());
                 </script>
             </p>
-            <p><span>Designed & Developed By: <a target="_blank" href="https://www.i-net.in/" target="_blank">I-NET Secure Labs Pvt Ltd</a></span></p>
-            <div class="d-flex align-items-center gap-4">
-                <a href="javascript:void(0);" class="fs-11 fw-semibold text-uppercase">Help</a>
-                <a href="javascript:void(0);" class="fs-11 fw-semibold text-uppercase">Terms</a>
-                <a href="javascript:void(0);" class="fs-11 fw-semibold text-uppercase">Privacy</a>
-            </div>
+            <p class="fs-11 text-muted mb-0"><span>Designed & Developed By: <a target="_blank" href="https://www.i-net.in/">I-NET Secure Labs Pvt Ltd</a></span></p>
         </footer>
         <!-- [ Footer ] end -->
     </main>

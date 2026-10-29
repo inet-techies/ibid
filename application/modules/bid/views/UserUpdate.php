@@ -29,7 +29,7 @@
                           <div id="responseMessage"></div>
                              <div class="card-body p-0">
                                 <div class="table-responsive">
-                                   <table class="table table-hover" id="customerList">
+                                   <table class="table table-hover text-nowrap wrap-no-text" id="customerList">
                                         <thead>
                                             <tr>
                                                 <!-- <th class="wd-30">
@@ -69,7 +69,7 @@
                                                     </td>
                                                     <td><?=$val['Email']?></td>
                                                     <td><?=$val['Mobile']?></td>
-                                                    <td><?=$val['CreationTs']?></td>
+                                                    <td><?= htmlspecialchars($val['Designation'] ?? '', ENT_QUOTES, 'UTF-8'); ?></td>
                                                     <td><?=$val['RoleName']?></td>
                                                      <td>
                                                         <!-- <select class="form-control status-change"  data-id="<?= $val['Buid']; ?>">
@@ -82,7 +82,7 @@
                                                             <option value="0" <?= ($val['Status'] == 0) ? 'selected' : ''; ?>>Inactive</option>
                                                         </select>
                                                     </td>
-                                                     <td><?=$val['CreationTs']?></td>
+                                                     <td><?= (!empty($val['CreationTs']) && strtotime($val['CreationTs'])) ? date('d M Y, h:i A', strtotime($val['CreationTs'])) : '-' ?></td>
                                                       <td>
                                                     <div class="hstack gap-2 justify-content-end">
                                                        <a href="javascript:void(0)" 

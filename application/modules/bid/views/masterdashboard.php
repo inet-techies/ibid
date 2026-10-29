@@ -134,7 +134,7 @@
                         </div>
                         <div class="col-7 ps-1">
                             <div class="table-responsive">
-                                <table class="table table-sm table-borderless align-middle mb-0 fs-11" id="table-overview-status-breakdown">
+                                <table class="table table-sm table-borderless align-middle mb-0 fs-11 text-nowrap wrap-no-text" id="table-overview-status-breakdown">
                                     <thead>
                                         <tr class="text-muted border-bottom" style="font-size: 10px;">
                                             <th class="ps-1 py-0">Status</th>
@@ -169,7 +169,7 @@
                 <div class="card-body p-2">
                     <div id="chart-overview-value" style="min-height: 135px;"></div>
                     <div class="table-responsive mt-1">
-                        <table class="table table-sm table-bordered align-middle text-center mb-0 fs-10" id="table-overview-value-activity">
+                        <table class="table table-sm table-bordered align-middle text-center mb-0 fs-10 text-nowrap wrap-no-text" id="table-overview-value-activity">
                             <thead class="bg-light text-muted">
                                 <tr>
                                     <th>Month</th>
@@ -262,7 +262,7 @@
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-hover table-sm align-middle mb-0 fs-11" id="table-overview-registry">
+                        <table class="table table-hover table-sm align-middle mb-0 fs-11 text-nowrap wrap-no-text" id="table-overview-registry">
                             <thead class="bg-light text-muted border-bottom" style="font-size: 11px;">
                                 <tr>
                                     <th style="width: 40px;" class="ps-3">#</th>

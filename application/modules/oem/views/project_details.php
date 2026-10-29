@@ -49,7 +49,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                         <h6 class="text-uppercase text-muted fw-bold fs-12 mb-3">
                             <i class="feather-briefcase me-1"></i> Project Information
                         </h6>
-                        <table class="table table-borderless table-sm mb-0">
+                        <table class="table table-borderless table-sm mb-0 text-nowrap wrap-no-text">
                             <tr>
                                 <td class="text-muted ps-0" style="width: 120px;">State / Region:</td>
                                 <td class="fw-semibold text-dark"><?= htmlspecialchars($project['State'] ?? '-'); ?></td>
@@ -78,7 +78,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                         <h6 class="text-uppercase text-muted fw-bold fs-12 mb-3">
                             <i class="feather-hash me-1"></i> Tender Details
                         </h6>
-                        <table class="table table-borderless table-sm mb-0">
+                        <table class="table table-borderless table-sm mb-0 text-nowrap wrap-no-text">
                             <tr>
                                 <td class="text-muted ps-0" style="width: 130px;">Tender Number:</td>
                                 <td class="fw-bold text-primary"><?= htmlspecialchars($project['TenderNumber'] ?? '-'); ?></td>
@@ -101,7 +101,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                         <h6 class="text-uppercase text-muted fw-bold fs-12 mb-3">
                             <i class="feather-calendar me-1"></i> Timeline & Status
                         </h6>
-                        <table class="table table-borderless table-sm mb-0">
+                        <table class="table table-borderless table-sm mb-0 text-nowrap wrap-no-text">
                             <tr>
                                 <td class="text-muted ps-0" style="width: 140px;">Current Status:</td>
                                 <td>
@@ -142,7 +142,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0">
+                    <table class="table table-hover align-middle mb-0 text-nowrap wrap-no-text">
                         <thead class="table-light">
                             <tr>
                                 <th style="width: 60px;">#</th>
@@ -199,7 +199,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0">
+                    <table class="table table-hover align-middle mb-0 text-nowrap wrap-no-text">
                         <thead class="table-light">
                             <tr>
                                 <th style="width: 60px;">#</th>

@@ -80,7 +80,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                             </button>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-bordered align-middle mb-0" id="quotesInputTable" style="min-width: 1100px;">
+                            <table class="table table-bordered align-middle mb-0 text-nowrap wrap-no-text" id="quotesInputTable" style="min-width: 1100px;">
                                 <thead class="table-light">
                                     <tr>
                                         <th style="width: 180px; min-width: 180px;">Category <span class="text-danger">*</span></th>
@@ -182,7 +182,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0" id="existingQuotesTable" style="min-width: 980px;">
+                    <table class="table table-hover align-middle mb-0 text-nowrap wrap-no-text" id="existingQuotesTable" style="min-width: 980px;">
                         <thead class="table-light">
                             <tr>
                                 <th style="width: 50px;">#</th>
