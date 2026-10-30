@@ -249,9 +249,28 @@ class Document_parser extends MX_Controller
 
         $relPath = 'uploads/tender/' . $safeName;
 
-        // Run multi-tier extraction and intelligence pipeline
         try {
             $result = $this->document_extractor->extract($targetPath, $origName, $ext);
+
+            // ── Immediate Rejection: Irrelevant / Non-Tender Document ──
+            if (isset($result['is_relevant']) && $result['is_relevant'] === false) {
+                if (file_exists($targetPath)) {
+                    @unlink($targetPath);
+                }
+                $this->_jsonResponse([
+                    'status'                => 'error',
+                    'success'               => false,
+                    'is_relevant'           => false,
+                    'is_tender'             => false,
+                    'error_type'            => 'irrelevant_document',
+                    'title'                 => htmlspecialchars($origName),
+                    'document_title'        => htmlspecialchars($origName),
+                    'classification'        => 'irrelevant',
+                    'classification_status' => 'irrelevant',
+                    'relevance_category'    => isset($result['relevance_category']) ? $result['relevance_category'] : 'Irrelevant Document',
+                    'message'               => !empty($result['relevance_reason']) ? $result['relevance_reason'] : 'Irrelevant Document: The uploaded document does not appear to be a tender or RFP. Please upload a valid tender document.'
+                ]);
+            }
 
             $result['file_path']      = $relPath;
             $result['file_name']      = $origName;

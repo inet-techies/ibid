@@ -44,6 +44,25 @@
   </div>
 </div>
 
+<!-- Irrelevant Document Alert (hidden by default) -->
+<div id="docParseIrrelevantAlert" style="display:none;" class="mb-3">
+  <div class="alert alert-warning d-flex align-items-start gap-3 mb-0" style="border-radius:10px;border:none;background:linear-gradient(135deg,#fffbeb 0%,#fef3c7 100%);border-left:5px solid #d97706 !important;box-shadow:0 4px 14px rgba(217,119,6,0.18);">
+    <div style="font-size:24px;color:#d97706;line-height:1;flex-shrink:0;">
+      <i class="feather-alert-triangle"></i>
+    </div>
+    <div style="flex:1;">
+      <div class="d-flex align-items-center gap-2">
+        <strong style="color:#b45309;font-size:15px;">Irrelevant Document Detected</strong>
+        <span class="badge" style="background:#dc2626;color:#ffffff;font-size:10.5px;padding:3px 7px;font-weight:700;letter-spacing:0.5px;">NOT A TENDER</span>
+      </div>
+      <div id="docParseIrrelevantMsg" style="color:#92400e;font-size:13px;margin-top:4px;line-height:1.5;"></div>
+    </div>
+    <button type="button" class="btn btn-sm btn-link p-0 ms-2 ml-2" onclick="document.getElementById('docParseIrrelevantAlert').style.display='none';" style="color:#b45309;flex-shrink:0;">
+      <i class="feather-x" style="font-size:18px;"></i>
+    </button>
+  </div>
+</div>
+
 <div class="row">
     <div class="col-lg-12">
         <div class="card stretch stretch-full">
@@ -377,6 +396,9 @@
   function showSuccess(fields) {
     document.getElementById('docParseSuccessAlert').style.display = 'block';
     document.getElementById('docParseErrorAlert').style.display = 'none';
+    var irrAlert = document.getElementById('docParseIrrelevantAlert');
+    if (irrAlert) irrAlert.style.display = 'none';
+
     var el = document.getElementById('docParseFilledFields');
     if (el && fields && fields.length) {
       el.textContent = 'Auto-filled: ' + fields.join(', ');
@@ -393,8 +415,41 @@
   function showError(msg) {
     document.getElementById('docParseErrorAlert').style.display = 'block';
     document.getElementById('docParseSuccessAlert').style.display = 'none';
+    var irrAlert = document.getElementById('docParseIrrelevantAlert');
+    if (irrAlert) irrAlert.style.display = 'none';
+
     var el = document.getElementById('docParseErrorMsg');
     if (el) el.textContent = msg || 'An error occurred during parsing.';
+  }
+
+  function showIrrelevantDocError(msg) {
+    var irrAlert = document.getElementById('docParseIrrelevantAlert');
+    var successAlert = document.getElementById('docParseSuccessAlert');
+    var errAlert = document.getElementById('docParseErrorAlert');
+    var attachBadge = document.getElementById('attachedDocumentBadge');
+
+    if (successAlert) successAlert.style.display = 'none';
+    if (errAlert) errAlert.style.display = 'none';
+    if (attachBadge) attachBadge.style.display = 'none';
+
+    // Clear hidden attachment fields
+    setField('attachedDocumentPath', '');
+    setField('attachedDocumentName', '');
+    setField('factSheetId', '');
+    setField('factSheetUrl', '');
+
+    if (irrAlert) {
+      var msgEl = document.getElementById('docParseIrrelevantMsg');
+      if (msgEl) {
+        msgEl.textContent = msg || 'Irrelevant Document: The uploaded file does not contain tender or bidding information. Please upload a valid tender document.';
+      }
+      irrAlert.style.display = 'block';
+      setTimeout(function() {
+        irrAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    } else {
+      showError(msg);
+    }
   }
 
   // ── Auto-fill form from parsed AI data ────────────────────────────────────
@@ -551,6 +606,8 @@
     // Show spinner, hide old alerts
     document.getElementById('docParseSuccessAlert').style.display = 'none';
     document.getElementById('docParseErrorAlert').style.display   = 'none';
+    var irrAlert = document.getElementById('docParseIrrelevantAlert');
+    if (irrAlert) irrAlert.style.display = 'none';
 
     // Move status bar right above the form — prepend to card-body area
     var statusBar = document.getElementById('docParseStatusBar');
@@ -594,6 +651,12 @@
 
       if (resp && resp.redirect) {
         window.location.href = resp.redirect;
+        return;
+      }
+
+      // Immediate Irrelevant Document Detection
+      if (resp && (resp.error_type === 'irrelevant_document' || resp.classification === 'irrelevant' || resp.is_relevant === false)) {
+        showIrrelevantDocError(resp.message || 'Irrelevant Document: The uploaded document is not a tender or RFP. Please upload a valid tender document.');
         return;
       }
 

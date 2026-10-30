@@ -102,6 +102,13 @@
                                                                     <i class="feather feather-file-text"></i>
                                                                 </a>
                                                                 <a href="javascript:void(0)"
+                                                                    class="avatar-text avatar-md view-timeline"
+                                                                    data-bcid="<?= $val['Bcid']; ?>"
+                                                                    title="View Timeline Intelligence"
+                                                                    style="color:#6366f1;background:#eef2ff;border:1px solid #c7d2fe;">
+                                                                    <i class="feather feather-clock"></i>
+                                                                </a>
+                                                                <a href="javascript:void(0)"
                                                                     class="avatar-text avatar-md update-bid"
                                                                     data-id="<?= $val['Bcid']; ?>"
                                                                     data-current="<?= $val['BidStatus']; ?>"
@@ -184,8 +191,31 @@
     </div>
 </div>
 
+<!-- Right-Side Timeline Intelligence Slide-out Modal Panel -->
+<div id="timelinePanel" class="right-form timeline-panel">
+    <div class="right-form-header d-flex justify-content-between align-items-center py-2 px-3 border-bottom bg-white" style="position:sticky;top:0;z-index:10;">
+        <div class="d-flex align-items-center gap-2">
+            <i class="feather-clock text-primary" style="font-size:19px;"></i>
+            <div>
+                <h5 class="mb-0 fw-bold fs-15 text-dark">Timeline Intelligence</h5>
+                <span class="text-muted" style="font-size:11px;">Schedule &amp; Corrigenda Tracking</span>
+            </div>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            <button type="button" class="close-btn ms-2 ml-2" id="closeTimelinePanel" title="Close Panel" style="font-size:24px;line-height:1;border:none;background:none;cursor:pointer;">&times;</button>
+        </div>
+    </div>
+    <div class="right-form-body p-0" id="timelinePanelBody" style="background:#f8fafc;overflow-y:auto;flex:1;">
+        <div class="text-center py-5 text-muted" style="min-height:350px;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <div class="spinner-border spinner-border-sm text-primary mb-2" role="status"></div>
+            <div>Loading Timeline Intelligence...</div>
+        </div>
+    </div>
+</div>
+
 <style>
-.factsheet-panel {
+.factsheet-panel,
+.timeline-panel {
     position: fixed;
     top: 0;
     right: -920px;
@@ -199,7 +229,8 @@
     display: flex;
     flex-direction: column;
 }
-.factsheet-panel.open {
+.factsheet-panel.open,
+.timeline-panel.open {
     right: 0 !important;
 }
 
@@ -615,6 +646,15 @@ $(document).on('click', '.view-bid', function () {
                         <td>
                             <button type="button" class="btn btn-sm text-white fw-bold d-inline-flex align-items-center py-1 px-3 view-factsheet" data-bcid="${bid.Bcid}" style="background:linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);border:none;border-radius:6px;box-shadow:0 2px 6px rgba(14,165,233,0.3);">
                                 <i class="feather-file-text me-1 mr-1"></i> View Fact Sheet
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Timeline Intelligence</th>
+                        <td>
+                            <button type="button" class="btn btn-sm text-white fw-bold d-inline-flex align-items-center py-1 px-3 view-timeline" data-bcid="${bid.Bcid}" style="background:linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);border:none;border-radius:6px;box-shadow:0 2px 6px rgba(99,102,241,0.3);">
+                                <i class="feather-clock me-1 mr-1"></i> View Timeline Intelligence
                             </button>
                         </td>
                     </tr>
@@ -1159,6 +1199,7 @@ $(document).on('click', '.view-factsheet', function (e) {
     // Close other panels if open
     $('#rightForm').removeClass('open');
     $('#bidCanvas').removeClass('open');
+    $('#timelinePanel').removeClass('open');
 
     // Update full page link
     var tabUrl = "<?= base_url('bid/factsheet'); ?>?bcid=" + encodeURIComponent(bcid) + "&standalone=1";
@@ -1199,6 +1240,54 @@ $(document).on('click', '.view-factsheet', function (e) {
 $(document).on('click', '#closeFactSheetPanel', function (e) {
     e.preventDefault();
     $('#factSheetPanel').removeClass('open');
+    $('#rightFormOverlay').removeClass('show');
+});
+
+// ── Timeline Intelligence Slide-out Modal Handlers ──
+$(document).on('click', '.view-timeline', function (e) {
+    e.preventDefault();
+    var bcid = $(this).data('bcid') || $(this).attr('data-bcid');
+
+    // Close other panels if open
+    $('#rightForm').removeClass('open');
+    $('#bidCanvas').removeClass('open');
+    $('#factSheetPanel').removeClass('open');
+
+    // Show loading spinner
+    $('#timelinePanelBody').html(`
+        <div class="text-center py-5 text-muted" style="min-height:350px;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <div class="spinner-border text-primary mb-3" role="status" style="width:2.2rem;height:2.2rem;"></div>
+            <div class="fw-bold" style="font-size:14px;color:#1e293b;">Loading Timeline Intelligence...</div>
+            <div class="small text-muted mt-1">Analyzing schedule milestones &amp; corrigenda</div>
+        </div>
+    `);
+
+    // Slide open right modal
+    $('#timelinePanel').addClass('open');
+    $('#rightFormOverlay').addClass('show');
+
+    // Fetch Timeline Intelligence via AJAX
+    $.ajax({
+        url: "<?= base_url('bid/timeline'); ?>",
+        type: "GET",
+        data: { bcid: bcid, ajax: 1 },
+        success: function (response) {
+            $('#timelinePanelBody').html(response);
+        },
+        error: function () {
+            $('#timelinePanelBody').html(`
+                <div class="alert alert-danger m-4 border-0 shadow-sm" style="border-radius:8px;">
+                    <div class="fw-bold"><i class="feather-alert-triangle me-1"></i> Unable to Load Timeline Intelligence</div>
+                    <div class="small mt-1">No timeline milestones or fact sheet found for this bid.</div>
+                </div>
+            `);
+        }
+    });
+});
+
+$(document).on('click', '#closeTimelinePanel', function (e) {
+    e.preventDefault();
+    $('#timelinePanel').removeClass('open');
     $('#rightFormOverlay').removeClass('show');
 });
 

@@ -167,9 +167,20 @@ class Document_extractor
         $aiSummary['first_line'] = $firstLine;
         $aiSummary['bid_title']  = $firstLine;
 
+        // ── Validate Tender / RFP Relevance ──
+        $relevance = $this->validateTenderRelevance($formattedText, $origName);
+        if (!$relevance['is_relevant']) {
+            $classification = 'irrelevant';
+            $classificationStatus = 'irrelevant';
+        }
+
         return [
-            'status'                => 'success',
-            'success'               => true,
+            'status'                => $relevance['is_relevant'] ? 'success' : 'error',
+            'success'               => $relevance['is_relevant'],
+            'is_relevant'           => $relevance['is_relevant'],
+            'is_tender'             => $relevance['is_tender'],
+            'relevance_category'    => $relevance['category'],
+            'relevance_reason'      => $relevance['reason'],
             'first_line'            => $firstLine,
             'bid_title'             => $firstLine,
             'title'                 => $extractedTitle,
@@ -192,7 +203,8 @@ class Document_extractor
             'extracted_text'        => $trimmedText,
             'formatted_text'        => $formattedText,
             'modules'               => $modules,
-            'ai_summary'            => $aiSummary
+            'ai_summary'            => $aiSummary,
+            'message'               => $relevance['is_relevant'] ? '' : $relevance['reason']
         ];
     }
 
@@ -2269,6 +2281,144 @@ class Document_extractor
             'score_oem'             => $oemScore,
             'score_service'         => $serviceScore,
             'reason'                => 'Ambiguous evidence with balanced OEM (' . $oemScore . ') and Service (' . $serviceScore . ') signals without a definitive primary purpose.'
+        ];
+    }
+
+    /**
+     * Validates whether the document is relevant to Tenders / RFPs / Procurement Bidding.
+     * Rejects non-tender documents (resumes, invoices, receipts, utility bills, personal IDs, random letters).
+     *
+     * @param string $cleanText Document clean extracted text
+     * @param string $origName Original filename
+     * @return array [ 'is_relevant' => bool, 'is_tender' => bool, 'category' => string, 'reason' => string ]
+     */
+    public function validateTenderRelevance($cleanText, $origName = '')
+    {
+        $text = trim((string)$cleanText);
+        $charLen = mb_strlen($text, 'UTF-8');
+
+        if ($charLen < 50) {
+            return [
+                'is_relevant'       => false,
+                'is_tender'         => false,
+                'category'          => 'Empty or Unreadable Document',
+                'reason'            => 'Irrelevant Document: The uploaded file contains insufficient readable text to identify it as a tender or RFP.'
+            ];
+        }
+
+        // 1. Calculate Positive Tender / Procurement Signals
+        $tenderSignals = [
+            3 => [
+                '/\b(?:NOTICE\s+INVITING\s+(?:TENDER|BIDS?|QUOTATIONS?)|NIT|N\.I\.T\.)\b/i' => 'NIT / Notice Inviting Tender',
+                '/\b(?:REQUEST\s+FOR\s+PROPOSAL|RFP\b)\b/i' => 'RFP',
+                '/\b(?:e-?TENDER(?:ING)?|e-?PROCUREMENT|GeM\s+(?:BID|PORTAL)|Government\s+e-?Marketplace)\b/i' => 'e-Tender / GeM',
+                '/\b(?:EARNEST\s+MONEY\s+DEPOSIT|EMD\b|BID\s+SECURITY)\b/i' => 'EMD / Bid Security',
+                '/\b(?:TECHNICAL\s+BID|COMMERCIAL\s+BID|PRICE\s+BID|FINANCIAL\s+BID|TWO\s+BID\s+SYSTEM|TWO\s+COVER\s+SYSTEM)\b/i' => 'Bidding System / Bids',
+                '/\b(?:BID\s+SUBMISSION|SUBMISSION\s+OF\s+(?:BIDS?|TENDERS?|PROPOSALS?)|LAST\s+DATE\s+OF\s+SUBMISSION|CLOSING\s+DATE\s+FOR\s+SUBMISSION)\b/i' => 'Bid Submission Details',
+                '/\b(?:TENDER\s+DOCUMENT|BIDDING\s+DOCUMENT|TENDER\s+FEE|COST\s+OF\s+TENDER)\b/i' => 'Tender Document / Fee',
+                '/\b(?:PERFORMANCE\s+BANK\s+GUARANTEE|PBG\b|SECURITY\s+DEPOSIT)\b/i' => 'PBG / Security Deposit',
+                '/\b(?:PRE-?BID\s+(?:MEETING|CONFERENCE|DISCUSSION|QUERIES))\b/i' => 'Pre-Bid Meeting',
+                '/\b(?:ELIGIBILITY\s+CRITERIA|PRE-?QUALIFICATION\s+CRITERIA|EVALUATION\s+CRITERIA)\b/i' => 'Eligibility Criteria',
+            ],
+            1 => [
+                '/\b(?:TENDER\s+NO|TENDER\s+ID|BID\s+NO|ENQUIRY\s+NO|NIT\s+NO|TENDER\s+REF)\b/i' => 'Tender/Bid ID',
+                '/\b(?:SCOPE\s+OF\s+WORK|SCHEDULE\s+OF\s+REQUIREMENTS?|BILL\s+OF\s+QUANTIT(?:Y|IES)|BOQ)\b/i' => 'Scope / BOQ',
+                '/\b(?:QUALIFYING\s+REQUIREMENTS?|ANNUAL\s+TURNOVER|SIMILAR\s+WORK)\b/i' => 'Financial/Turnover Criteria',
+                '/\b(?:TENDER\s+COMMITTEE|AUTHORISED\s+SIGNATORY|PURCHASER|INVITING\s+AUTHORITY)\b/i' => 'Tender Authority',
+                '/\b(?:RATE\s+CONTRACT|SUPPLY\s+AND\s+INSTALLATION|SITC|LETTER\s+OF\s+AWARD|LOA)\b/i' => 'Contract / SITC / LOA',
+                '/\b(?:BIDDER|BIDDERS|PROSPECTIVE\s+BIDDER|SUCCESSFUL\s+BIDDER)\b/i' => 'Bidder reference',
+                '/\b(?:TENDER|TENDERS|TENDERING)\b/i' => 'Tender keyword',
+            ]
+        ];
+
+        $tenderScore = 0;
+        $matchedSignals = [];
+        foreach ($tenderSignals as $weight => $patterns) {
+            foreach ($patterns as $pattern => $label) {
+                if (preg_match($pattern, $text)) {
+                    $tenderScore += $weight;
+                    $matchedSignals[] = $label;
+                }
+            }
+        }
+
+        // If tender signals are solid, confirm it as a relevant tender document
+        if ($tenderScore >= 4) {
+            return [
+                'is_relevant'       => true,
+                'is_tender'         => true,
+                'category'          => 'Tender / Bidding Document',
+                'score'             => $tenderScore,
+                'matched_signals'   => array_slice($matchedSignals, 0, 5),
+                'reason'            => 'Valid tender document confirmed with procurement signals: ' . implode(', ', array_slice($matchedSignals, 0, 4))
+            ];
+        }
+
+        // Filename indication with moderate signals
+        if (preg_match('/\b(?:tender|nit|rfp|bid|gem)\b/i', $origName) && $tenderScore >= 2) {
+            return [
+                'is_relevant'       => true,
+                'is_tender'         => true,
+                'category'          => 'Tender / Bidding Document',
+                'score'             => $tenderScore,
+                'matched_signals'   => $matchedSignals,
+                'reason'            => 'Tender document identified from title and procurement signals.'
+            ];
+        }
+
+        // 2. Identify specific irrelevant document type for clear user feedback
+        // A) Resume / CV
+        if (preg_match('/\b(?:CURRICULUM\s+VITAE|RESUME\b|CAREER\s+OBJECTIVE|DECLARATION\s*:\s*I\s+hereby\s+declare|MY\s+SKILLS|TECHNICAL\s+SKILLS)\b/i', $text)
+            || (preg_match('/\b(?:EDUCATIONAL\s+QUALIFICATIONS?|ACADEMIC\s+QUALIFICATIONS?)\b/i', $text) && preg_match('/\b(?:WORK\s+EXPERIENCE|PROJECTS\s+HANDLED)\b/i', $text))) {
+            return [
+                'is_relevant'       => false,
+                'is_tender'         => false,
+                'category'          => 'Candidate Resume / CV',
+                'score'             => $tenderScore,
+                'reason'            => 'Irrelevant Document: The uploaded document appears to be a candidate Resume / CV, not a tender document. Please upload a valid tender document.'
+            ];
+        }
+
+        // B) Utility / Bills / Tickets
+        if (preg_match('/\b(?:ELECTRICITY\s+BILL|WATER\s+BILL|BOARDING\s+PASS|AIRLINE\s+TICKET|RAILWAY\s+TICKET|BUS\s+TICKET|HOTEL\s+RESERVATION)\b/i', $text)) {
+            return [
+                'is_relevant'       => false,
+                'is_tender'         => false,
+                'category'          => 'Personal Utility Bill / Ticket',
+                'score'             => $tenderScore,
+                'reason'            => 'Irrelevant Document: The uploaded document appears to be a utility bill or ticket, not a tender document. Please upload a valid tender document.'
+            ];
+        }
+
+        // C) Commercial Invoice / Receipt
+        if (preg_match('/\b(?:TAX\s+INVOICE|CASH\s+MEMO|RETAIL\s+INVOICE|SALES\s+INVOICE|PAYMENT\s+RECEIPT)\b/i', $text)) {
+            return [
+                'is_relevant'       => false,
+                'is_tender'         => false,
+                'category'          => 'Invoice / Sales Receipt',
+                'score'             => $tenderScore,
+                'reason'            => 'Irrelevant Document: The uploaded document appears to be a commercial invoice or receipt without tender/procurement specifications. Please upload a valid tender document.'
+            ];
+        }
+
+        // D) Identity / KYC
+        if (preg_match('/\b(?:AADHAAR|UNIQUE\s+IDENTIFICATION\s+AUTHORITY|INCOME\s+TAX\s+DEPARTMENT|PERMANENT\s+ACCOUNT\s+NUMBER|PAN\s+CARD|DRIVING\s+LICENCE|PASSPORT\s+REPUBLIC\s+OF\s+INDIA|VOTER\s+IDENTITY\s+CARD)\b/i', $text)) {
+            return [
+                'is_relevant'       => false,
+                'is_tender'         => false,
+                'category'          => 'Personal Identity / KYC',
+                'score'             => $tenderScore,
+                'reason'            => 'Irrelevant Document: The uploaded document appears to be a personal ID or KYC document, not a tender document. Please upload a valid tender document.'
+            ];
+        }
+
+        // Generic Irrelevant Document
+        return [
+            'is_relevant'       => false,
+            'is_tender'         => false,
+            'category'          => 'Irrelevant Document',
+            'score'             => $tenderScore,
+            'reason'            => 'Irrelevant Document: The uploaded document does not contain tender or bidding details (no tender notice, bid submission dates, or RFP parameters found). Please upload a valid tender document.'
         ];
     }
 

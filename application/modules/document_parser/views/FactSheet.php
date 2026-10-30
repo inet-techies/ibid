@@ -93,10 +93,17 @@ if (!function_exists('safeVal')) {
 
 // ── Evidence Data for Traceable Verification ──
 $evidenceData = ['by_field' => [], 'all' => []];
+$timelineData = null;
+$corrigendaList = [];
 if (!empty($fs['Tfsid'])) {
     $ci =& get_instance();
     $ci->load->model('document_parser/Factsheet_model');
     $evidenceData = $ci->Factsheet_model->getEvidenceByTfsid((int)$fs['Tfsid'], $fs);
+
+    // ── Tender Timeline Intelligence & Corrigenda ──
+    $ci->load->model('document_parser/Timeline_model');
+    $timelineData = $ci->Timeline_model->getTimeline((int)$fs['Tfsid']);
+    $corrigendaList = $ci->Timeline_model->getCorrigenda((int)$fs['Tfsid']);
 }
 $evidenceByField = $evidenceData['by_field'] ?? [];
 $evidenceAll     = $evidenceData['all'] ?? [];
@@ -255,358 +262,7 @@ if (empty($attentionAreas) && !empty($fs['OpportunityAssessmentJson'])) {
 }
 ?>
 
-<style>
-/* ── Fact Sheet Core Document Styles ── */
-.pdf-factsheet-wrapper {
-    width: 100%;
-    padding: 12px;
-    box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    color: #1e293b;
-    background: #f8fafc;
-}
-.pdf-factsheet-sheet {
-    background: #ffffff;
-    border-radius: 8px;
-    padding: 24px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e2e8f0;
-}
-.pdf-main-title {
-    font-size: 20px;
-    font-weight: 800;
-    text-align: center;
-    color: #0f172a;
-    letter-spacing: 0.5px;
-    padding-bottom: 14px;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #0284c7;
-    text-transform: uppercase;
-}
-.pdf-section-title {
-    font-size: 15px;
-    font-weight: 700;
-    color: #0369a1;
-    margin-top: 24px;
-    margin-bottom: 12px;
-    padding: 6px 12px;
-    background: #f0f9ff;
-    border-left: 4px solid #0284c7;
-    border-radius: 0 6px 6px 0;
-}
-.pdf-fact-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 16px;
-    font-size: 13px;
-}
-.pdf-fact-table th {
-    background: #f1f5f9;
-    color: #334155;
-    font-weight: 700;
-    text-align: left;
-    padding: 8px 12px;
-    border: 1px solid #cbd5e1;
-    font-size: 12.5px;
-}
-.pdf-fact-table td {
-    padding: 8px 12px;
-    border: 1px solid #e2e8f0;
-    vertical-align: middle;
-    color: #334155;
-    line-height: 1.5;
-}
-.pdf-fact-table tr:nth-child(even) {
-    background-color: #fafbfc;
-}
-.pdf-blue-text {
-    color: #0369a1 !important;
-    font-weight: 600;
-}
-.pdf-text-lead {
-    font-size: 13.5px;
-    font-weight: 600;
-    color: #334155;
-    margin: 8px 0 4px 0;
-}
-.pdf-text-follow {
-    font-size: 13px;
-    color: #475569;
-    line-height: 1.6;
-    margin-bottom: 10px;
-}
-.pdf-disc-list, .pdf-circle-list {
-    margin: 6px 0 12px 20px;
-    padding: 0;
-    font-size: 13px;
-    color: #334155;
-    line-height: 1.6;
-}
-.pdf-circle-list {
-    list-style-type: circle;
-}
-.pdf-red-bullet {
-    color: #b91c1c;
-    font-weight: 500;
-}
-
-/* ── Clean PDF Export & Print Rules (Previous clean layout without badges) ── */
-@media print {
-    .btn-evidence,
-    .evidence-tag,
-    .evidence-modal-backdrop,
-    #evidenceModal,
-    .no-print {
-        display: none !important;
-    }
-}
-.pdf-export-mode .btn-evidence,
-.pdf-export-mode .evidence-tag,
-.pdf-export-mode .evidence-modal-backdrop,
-.pdf-export-mode #evidenceModal,
-.pdf-export-mode .no-print {
-    display: none !important;
-}
-.pdf-export-mode.pdf-factsheet-wrapper,
-.pdf-export-mode .pdf-factsheet-sheet {
-    box-shadow: none !important;
-    background: #ffffff !important;
-}
-
-/* ── Evidence Badges ── */
-.btn-evidence {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 2px 8px;
-    font-size: 11px;
-    font-weight: 600;
-    line-height: 1.3;
-    border-radius: 4px;
-    border: 1px solid transparent;
-    cursor: pointer;
-    vertical-align: middle;
-    margin-left: 6px;
-    transition: all 0.15s ease-in-out;
-    background: transparent;
-    text-decoration: none;
-    font-family: inherit;
-}
-.btn-evidence.verified {
-    color: #15803d;
-    background: #f0fdf4;
-    border-color: #bbf7d0;
-}
-.btn-evidence.verified:hover {
-    background: #dcfce7;
-    border-color: #86efac;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(22, 101, 52, 0.15);
-}
-.btn-evidence.needs-review {
-    color: #b45309;
-    background: #fffbeb;
-    border-color: #fde68a;
-}
-.btn-evidence.needs-review:hover {
-    background: #fef3c7;
-    border-color: #fcd34d;
-    transform: translateY(-1px);
-}
-.evidence-tag.not-found {
-    font-size: 10.5px;
-    padding: 2px 6px;
-    border-radius: 4px;
-    background: #f1f5f9;
-    color: #94a3b8;
-    margin-left: 6px;
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-}
-
-/* ── Evidence Source Modal & Viewer ── */
-.evidence-modal-backdrop {
-    display: none;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    background: rgba(15, 23, 42, 0.72) !important;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    z-index: 99999999 !important;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    box-sizing: border-box;
-}
-.evidence-modal-dialog {
-    background: #ffffff;
-    border-radius: 12px;
-    width: 95%;
-    max-width: 920px;
-    max-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
-    border: 1px solid #cbd5e1;
-    overflow: hidden;
-    animation: evPopIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-@keyframes evPopIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-}
-.evidence-modal-header {
-    padding: 14px 20px;
-    background: #0f172a;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #334155;
-}
-.evidence-modal-title {
-    font-size: 15px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 0;
-    color: #f8fafc;
-}
-.evidence-modal-close {
-    background: rgba(255, 255, 255, 0.12);
-    border: none;
-    color: #e2e8f0;
-    font-size: 22px;
-    line-height: 1;
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.15s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.evidence-modal-close:hover {
-    background: rgba(255, 255, 255, 0.28);
-    color: #ffffff;
-}
-.evidence-modal-body {
-    padding: 20px;
-    overflow-y: auto;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-.evidence-tabs {
-    display: flex;
-    gap: 8px;
-    border-bottom: 1px solid #e2e8f0;
-    padding-bottom: 8px;
-    flex-wrap: wrap;
-}
-.evidence-tab-btn {
-    padding: 5px 12px;
-    font-size: 12px;
-    font-weight: 600;
-    border-radius: 6px;
-    border: 1px solid #cbd5e1;
-    background: #f8fafc;
-    color: #475569;
-    cursor: pointer;
-    transition: all 0.15s;
-}
-.evidence-tab-btn:hover {
-    background: #f1f5f9;
-    color: #0f172a;
-}
-.evidence-tab-btn.active {
-    background: #0284c7;
-    color: #ffffff;
-    border-color: #0284c7;
-}
-.evidence-meta-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 10px;
-}
-.evidence-meta-card {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 10px 14px;
-}
-.evidence-meta-label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #64748b;
-    font-weight: 600;
-    margin-bottom: 3px;
-}
-.evidence-meta-value {
-    font-size: 13.5px;
-    font-weight: 700;
-    color: #0f172a;
-    word-break: break-word;
-}
-.evidence-quote-box {
-    background: #f1f5f9;
-    border-left: 4px solid #64748b;
-    padding: 12px 16px;
-    border-radius: 0 8px 8px 0;
-    max-height: 180px;
-    overflow-y: auto;
-}
-.evidence-quote-box.verified {
-    background: #f0fdf4;
-    border-left-color: #16a34a;
-}
-.evidence-quote-box.needs-review {
-    background: #fffbeb;
-    border-left-color: #f59e0b;
-}
-.evidence-quote-text {
-    margin: 0;
-    font-size: 13px;
-    line-height: 1.6;
-    color: #1e293b;
-    font-style: italic;
-}
-.evidence-pdf-viewer-wrap {
-    display: none;
-    flex-direction: column;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    overflow: hidden;
-    margin-top: 8px;
-    background: #0f172a;
-}
-.evidence-pdf-viewer-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6px 12px;
-    background: #1e293b;
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: 600;
-}
-.evidence-pdf-frame {
-    width: 100%;
-    height: 380px;
-    border: none;
-    background: #ffffff;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="<?= $theme_path ?>/assets/css/document.css">
 
 
 
@@ -617,14 +273,19 @@ if (empty($attentionAreas) && !empty($fs['OpportunityAssessmentJson'])) {
 <link rel="stylesheet" type="text/css" href="<?= $theme_path ?>/assets/css/document.css">
 <?php endif; ?>
 
-<?php if (!$isAjax): ?>
 <div class="no-print d-flex justify-content-between align-items-center mb-3 pt-2 px-1 pdf-factsheet-actions">
-    <a href="javascript:window.history.back();" class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1">
-        <i class="feather-arrow-left"></i> Back
-    </a>
-    <button type="button" class="btn btn-sm btn-success d-inline-flex align-items-center gap-1" onclick="downloadFactSheetAsPdf();">
-        <i class="feather-download"></i> Download Fact Sheet
-    </button>
+    <div>
+        <?php if (!$isAjax): ?>
+        <a href="javascript:window.history.back();" class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1">
+            <i class="feather-arrow-left"></i> Back
+        </a>
+        <?php endif; ?>
+    </div>
+    <div class="d-flex align-items-center gap-2">
+        <button type="button" class="btn btn-sm btn-success d-inline-flex align-items-center gap-1" onclick="downloadFactSheetAsPdf();">
+            <i class="feather-download"></i> Download Fact Sheet
+        </button>
+    </div>
 </div>
 <script>
 function downloadFactSheetAsPdf() {
@@ -676,7 +337,6 @@ function downloadFactSheetAsPdf() {
     }
 }
 </script>
-<?php endif; ?>
 
 <div class="pdf-factsheet-wrapper py-2 <?= $isAjax ? 'pdf-factsheet-ajax' : '' ?>" id="pdfPrintableArea">
     <div class="pdf-factsheet-sheet shadow-sm border rounded-1">
@@ -757,35 +417,20 @@ function downloadFactSheetAsPdf() {
                 <?php else: ?>
                     <tr>
                         <td>Tender Published</td>
-                        <td><?= safeVal(!empty($fs['TenderPublishedDate']) ? $fs['TenderPublishedDate'] : null) ?></td>
+                        <td><?= safeVal(!empty($fs['TenderPublishedDate']) ? $fs['TenderPublishedDate'] : null) ?> <?= $renderEvidenceBadge("Tender Date") ?></td>
                     </tr>
                     <tr>
-                        <td>Tender Download</td>
-                        <td><?= safeVal(!empty($fs['TenderDownloadPeriod']) ? $fs['TenderDownloadPeriod'] : null) ?></td>
-                    </tr>
-                    <tr>
-                        <td>Pre-Bid Query Submission</td>
-                        <td><?= safeVal(!empty($fs['PreBidQueryDeadline']) ? $fs['PreBidQueryDeadline'] : null) ?></td>
-                    </tr>
-                    <tr>
-                        <td>Pre-Bid Meeting</td>
-                        <td><?= safeVal(!empty($fs['PreBidMeeting']) ? $fs['PreBidMeeting'] : null) ?></td>
-                    </tr>
-                    <tr>
-                        <td>Bid Submission</td>
-                        <td><?= safeVal(!empty($fs['BidSubmissionDeadline']) ? $fs['BidSubmissionDeadline'] : null) ?></td>
+                        <td>Bid Submission Deadline</td>
+                        <td><?= safeVal(!empty($fs['BidSubmissionDeadline']) ? $fs['BidSubmissionDeadline'] : null) ?> <?= $renderEvidenceBadge("Bid Submission") ?></td>
                     </tr>
                     <tr>
                         <td>Technical Bid Opening</td>
-                        <td><?= safeVal(!empty($fs['TechnicalBidOpening']) ? $fs['TechnicalBidOpening'] : null) ?></td>
-                    </tr>
-                    <tr>
-                        <td>Financial Bid Opening</td>
-                        <td><?= safeVal(!empty($fs['FinancialBidOpening']) ? $fs['FinancialBidOpening'] : null, 'Will be intimated later') ?></td>
+                        <td><?= safeVal(!empty($fs['TechnicalBidOpening']) ? $fs['TechnicalBidOpening'] : null) ?> <?= $renderEvidenceBadge("Technical Bid Opening") ?></td>
                     </tr>
                 <?php endif; ?>
             </tbody>
         </table>
+
 
         <!-- 3. Tender Value -->
         <div class="pdf-section-title">3. Tender Value</div>
@@ -1230,4 +875,321 @@ function downloadFactSheetAsPdf() {
         modal.style.setProperty('display', 'flex', 'important');
     });
 })();
+</script>
+
+<!-- ═════════════════════════════════════════════════════════════════════
+     TENDER TIMELINE INTELLIGENCE MODALS & SCRIPTS
+     ═════════════════════════════════════════════════════════════════════ -->
+
+<!-- 0. Dedicated Right-Side Tender Timeline Intelligence Modal (Matches project right-form) -->
+<div id="timelineModalOverlay" class="timeline-right-overlay" onclick="closeTimelineModal();"></div>
+
+<div id="timelineIntelligenceModal" class="timeline-right-panel right-form">
+    <div class="right-form-header d-flex justify-content-between align-items-center py-2 px-3 border-bottom bg-white" style="position:sticky;top:0;z-index:10;">
+        <div class="d-flex align-items-center gap-2">
+            <i class="feather-clock text-primary" style="font-size:18px;"></i>
+            <div>
+                <h5 class="mb-0 fw-bold text-dark" style="font-size:15px;">Timeline Intelligence</h5>
+                <span class="text-muted" style="font-size:11px;">Schedule &amp; Corrigenda Tracking</span>
+            </div>
+            <?php if (!empty($timelineData['timezone'])): ?>
+                <span class="badge bg-secondary ms-1" style="font-size:9.5px;"><?= htmlspecialchars($timelineData['timezone']) ?></span>
+            <?php endif; ?>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            <button type="button" class="btn btn-xs btn-outline-secondary d-inline-flex align-items-center gap-1 py-1 px-2" id="btnToggleTimelineView" onclick="toggleTimelineMode();" style="font-size:11px;">
+                <i class="feather-list"></i> <span id="lblTimelineToggle">Table View</span>
+            </button>
+            <button type="button" class="close-btn ms-2" onclick="closeTimelineModal();" style="font-size:24px; line-height:1; border:none; background:none; cursor:pointer;" title="Close">&times;</button>
+        </div>
+    </div>
+
+    <div class="right-form-body" style="flex:1; overflow-y:auto; padding:15px; background:#f8fafc;">
+        <?php 
+            $tlMilestones = $timelineData['milestones'] ?? [];
+            $tlMetrics    = $timelineData['metrics'] ?? ($timelineData['executive_summary'] ?? []);
+            $tlValidation = $timelineData['validation'] ?? [];
+            $tlWarnings   = $tlValidation['warnings'] ?? ($tlValidation['issues'] ?? []);
+            $tlConflicts  = $timelineData['conflicts'] ?? [];
+        ?>
+
+
+
+        <!-- Intelligent Validation Warnings Banner -->
+        <?php if (!empty($tlWarnings)): ?>
+            <div class="timeline-warning-box <?= (strpos(json_encode($tlWarnings), 'CONFLICT') !== false || strpos(json_encode($tlWarnings), 'DANGER') !== false) ? 'danger' : '' ?> mb-3" style="margin:0 0 14px 0;">
+                <div class="timeline-warning-title">
+                    <i class="feather-alert-triangle"></i> Intelligent Date &amp; Sequence Validation Warnings (<?= count($tlWarnings) ?> detected)
+                </div>
+                <ul class="mb-0 ps-3" style="font-size:11.5px;line-height:1.4;">
+                    <?php foreach ($tlWarnings as $w): ?>
+                        <li>
+                            <strong><?= htmlspecialchars($w['code'] ?? ($w['type'] ?? 'NOTICE')) ?>:</strong>
+                            <?= htmlspecialchars($w['message'] ?? '') ?>
+                            <?php if (!empty($w['supporting_quote'])): ?>
+                                <em class="text-muted ms-1">"<?= htmlspecialchars(substr($w['supporting_quote'], 0, 80)) ?>..."</em>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+
+        <!-- Interactive Timeline Stream View -->
+        <div class="timeline-stream-container" id="timelineStreamView" style="background:#fff;border:1px solid #e2e8f0;border-radius:6px;padding:12px;">
+            <div class="timeline-stream">
+                <?php if (empty($tlMilestones)): ?>
+                    <div class="text-center text-muted py-4">
+                        <i class="feather-calendar fs-3 d-block mb-2"></i>
+                        No timeline milestones available for this tender.
+                    </div>
+                <?php else: ?>
+                    <?php foreach ($tlMilestones as $mIndex => $m): 
+                        $status = $m['status'] ?? 'upcoming';
+                        $statusClass = 'status-' . $status;
+                        $hasTime = !empty($m['has_time']) || (!empty($m['time_specified']));
+                        $dtDisplay = !empty($m['normalized_datetime']) ? date('d-m-Y \a\t h:i A', strtotime($m['normalized_datetime'])) : (!empty($m['normalized_date']) ? date('d-m-Y', strtotime($m['normalized_date'])) . ' <span class="text-muted" style="font-size:11px;">(Time not specified)</span>' : 'Date unstated in document');
+                        $rawQuote = $m['supporting_quote'] ?? ($m['quote'] ?? '');
+                        $page = $m['source_page'] ?? ($m['page'] ?? null);
+                        $type = $m['milestone_type'] ?? ($m['type'] ?? 'milestone');
+                        $title = $m['milestone_title'] ?? ($m['title'] ?? ucfirst(str_replace('_', ' ', $type)));
+                        $countdown = $m['countdown_text'] ?? ($m['status_badge']['label'] ?? '');
+                        $isCorrigendum = !empty($m['is_corrigendum']);
+                    ?>
+                        <div class="timeline-step <?= htmlspecialchars($status) ?>">
+                            <div class="timeline-step-dot">
+                                <?php if ($status === 'completed'): ?><i class="feather-check"></i>
+                                <?php elseif ($status === 'overdue'): ?><i class="feather-alert-circle"></i>
+                                <?php elseif ($status === 'due_soon'): ?><i class="feather-clock"></i>
+                                <?php elseif ($status === 'needs_review'): ?><i class="feather-help-circle"></i>
+                                <?php else: ?><i class="feather-calendar"></i>
+                                <?php endif; ?>
+                            </div>
+                            <div class="timeline-step-card">
+                                <div class="timeline-step-top">
+                                    <div>
+                                        <span class="timeline-step-name"><?= htmlspecialchars($title) ?></span>
+                                        <?php if ($isCorrigendum): ?>
+                                            <span class="badge bg-primary text-white ms-1" style="font-size:9.5px;">Corrigendum Revision</span>
+                                        <?php endif; ?>
+                                        <?php if (!empty($m['is_calculated'])): ?>
+                                            <span class="badge bg-secondary ms-1" style="font-size:9.5px;" title="<?= htmlspecialchars($m['calculation_rule'] ?? '') ?>">Calculated Relative Deadline</span>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div>
+                                        <span class="timeline-status-badge <?= $statusClass ?>">
+                                            <?= htmlspecialchars(str_replace('_', ' ', $status)) ?>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="timeline-step-dates">
+                                    <span class="norm-dt"><i class="feather-clock"></i> <?= $dtDisplay ?></span>
+                                    <?php if (!empty($countdown)): ?>
+                                        <span class="countdown-badge"><?= htmlspecialchars($countdown) ?></span>
+                                    <?php endif; ?>
+                                    <?php if (!empty($m['timezone'])): ?>
+                                        <span class="text-muted" style="font-size:10.5px;">(<?= htmlspecialchars($m['timezone']) ?>)</span>
+                                    <?php endif; ?>
+                                </div>
+
+                                <?php if (!empty($rawQuote)): ?>
+                                    <div class="timeline-step-quote" onclick="openTimelineQuoteModal('<?= htmlspecialchars(addslashes($title)) ?>', '<?= htmlspecialchars(addslashes($rawQuote)) ?>', '<?= (int)$page ?>', '<?= htmlspecialchars($m['normalized_datetime'] ?? '') ?>', '<?= htmlspecialchars($status) ?>');" title="Click to inspect exact passage from tender">
+                                        <i class="feather-file-text me-1"></i>
+                                        "<?= htmlspecialchars(substr($rawQuote, 0, 110)) ?><?= strlen($rawQuote) > 110 ? '...' : '' ?>"
+                                        <?php if (!empty($page)): ?>
+                                            <strong class="text-primary ms-1">[Page <?= (int)$page ?>]</strong>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <div class="timeline-step-footer timeline-interactive-bar">
+                                    <span class="text-muted">
+                                        <?= !empty($m['extraction_method']) ? htmlspecialchars($m['extraction_method']) : 'Deterministic Schedule Parser' ?>
+                                    </span>
+                                    <?php if (!empty($page)): ?>
+                                        <button type="button" class="timeline-btn-action" onclick="openTimelineQuoteModal('<?= htmlspecialchars(addslashes($title)) ?>', '<?= htmlspecialchars(addslashes($rawQuote)) ?>', '<?= (int)$page ?>', '<?= htmlspecialchars($m['normalized_datetime'] ?? '') ?>', '<?= htmlspecialchars($status) ?>');">
+                                            <i class="feather-search"></i> Evidence
+                                        </button>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <!-- Alternate Accessible Table View inside Modal -->
+        <div id="timelineTableView" style="display:none; background:#fff; border:1px solid #e2e8f0; border-radius:6px; overflow:hidden;">
+            <table class="table table-sm table-striped mb-0" style="font-size:12px;">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 36%;">Activity / Milestone</th>
+                        <th style="width: 34%;">Normalized Date &amp; Time</th>
+                        <th style="width: 15%;">Status</th>
+                        <th style="width: 15%; text-align:right;">Evidence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (!empty($timelineData['milestones'])): ?>
+                        <?php foreach ($timelineData['milestones'] as $m): 
+                            $mTitle = $m['milestone_title'] ?? ($m['title'] ?? ucfirst(str_replace('_', ' ', $m['milestone_type'] ?? '')));
+                            $mDt = !empty($m['normalized_datetime']) ? date('d-m-Y h:i A', strtotime($m['normalized_datetime'])) : (!empty($m['normalized_date']) ? date('d-m-Y', strtotime($m['normalized_date'])) . ' (Time unstated)' : 'Date unstated');
+                            $mStatus = $m['status'] ?? 'upcoming';
+                            $mPage = $m['source_page'] ?? ($m['page'] ?? null);
+                            $mQuote = $m['supporting_quote'] ?? ($m['quote'] ?? '');
+                        ?>
+                            <tr>
+                                <td class="fw-bold text-dark"><?= htmlspecialchars($mTitle) ?></td>
+                                <td><?= htmlspecialchars($mDt) ?></td>
+                                <td><span class="timeline-status-badge status-<?= htmlspecialchars($mStatus) ?>"><?= htmlspecialchars(str_replace('_', ' ', $mStatus)) ?></span></td>
+                                <td style="text-align:right;">
+                                    <?php if (!empty($mPage)): ?>
+                                        <a href="javascript:void(0);" onclick="openTimelineQuoteModal('<?= htmlspecialchars(addslashes($mTitle)) ?>', '<?= htmlspecialchars(addslashes($mQuote)) ?>', '<?= (int)$mPage ?>', '<?= htmlspecialchars($m['normalized_datetime'] ?? '') ?>', '<?= htmlspecialchars($mStatus) ?>');" class="badge bg-light text-primary border">Page <?= (int)$mPage ?></a>
+                                    <?php else: ?>
+                                        <span class="text-muted">-</span>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr><td colspan="4" class="text-center text-muted py-3">No milestones available.</td></tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="right-form-footer d-flex justify-content-between align-items-center py-2 px-3 border-top bg-white" style="position:sticky;bottom:0;z-index:10;">
+        <span class="text-muted small" style="font-size:11px;">Timeline stored directly in Factsheet (Zero extra tables)</span>
+        <button type="button" class="btn btn-sm btn-secondary py-1 px-3" onclick="closeTimelineModal();">Close</button>
+    </div>
+</div>
+
+<!-- 1. Milestone Supporting Evidence Modal -->
+<div id="timelineQuoteModal" class="evidence-modal-backdrop" style="display:none;">
+    <div class="evidence-modal-dialog">
+        <div class="evidence-modal-header">
+            <div>
+                <div class="evidence-modal-title" id="tlModalTitle">Milestone Verification</div>
+                <div class="evidence-modal-subtitle">Exact Supporting Passage from Tender Document</div>
+            </div>
+            <button type="button" class="evidence-modal-close" onclick="closeTimelineQuoteModal();">&times;</button>
+        </div>
+        <div class="evidence-modal-body">
+            <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
+                <div>
+                    <span class="text-muted small">Status: </span>
+                    <span id="tlModalStatusBadge" class="timeline-status-badge status-upcoming">Upcoming</span>
+                </div>
+                <div>
+                    <span class="text-muted small">Schedule: </span>
+                    <strong id="tlModalDatetime" class="text-primary small">-</strong>
+                </div>
+            </div>
+
+            <div class="evidence-card">
+                <div class="evidence-card-label">Supporting Clause / Schedule Text</div>
+                <div class="evidence-quote-box" id="tlModalQuote">-</div>
+            </div>
+
+            <div class="d-flex align-items-center gap-2 mt-3" id="tlModalPageBadgeWrap">
+                <span class="badge bg-primary px-3 py-2" id="tlModalPageBadge"><i class="feather-file"></i> Page -</span>
+            </div>
+        </div>
+        <div class="evidence-modal-footer">
+            <button type="button" class="btn btn-sm btn-secondary" onclick="closeTimelineQuoteModal();">Close</button>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+// ── Tender Timeline Intelligence Interactive Handlers ──
+
+function openTimelineModal() {
+    var modal = document.getElementById('timelineIntelligenceModal');
+    var overlay = document.getElementById('timelineModalOverlay');
+    if (!modal) return;
+    if (modal.parentElement !== document.body) {
+        document.body.appendChild(modal);
+    }
+    if (overlay && overlay.parentElement !== document.body) {
+        document.body.appendChild(overlay);
+    }
+    if (overlay) overlay.classList.add('show');
+    requestAnimationFrame(function() {
+        modal.classList.add('open');
+    });
+}
+
+function closeTimelineModal() {
+    var modal = document.getElementById('timelineIntelligenceModal');
+    var overlay = document.getElementById('timelineModalOverlay');
+    if (modal) modal.classList.remove('open');
+    if (overlay) overlay.classList.remove('show');
+}
+
+// Close right modal on Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeTimelineModal();
+    }
+});
+
+function toggleTimelineMode() {
+    var stream = document.getElementById('timelineStreamView');
+    var table = document.getElementById('timelineTableView');
+    var lbl = document.getElementById('lblTimelineToggle');
+
+    if (!stream || !table) return;
+
+    if (stream.style.display === 'none') {
+        stream.style.display = 'block';
+        table.style.display = 'none';
+        if (lbl) lbl.textContent = 'Table View';
+    } else {
+        stream.style.display = 'none';
+        table.style.display = 'block';
+        if (lbl) lbl.textContent = 'Timeline Stream';
+    }
+}
+
+function openTimelineQuoteModal(title, quote, page, datetime, status) {
+    var modal = document.getElementById('timelineQuoteModal');
+    if (!modal) return;
+
+    document.getElementById('tlModalTitle').textContent = title || 'Milestone Verification';
+    document.getElementById('tlModalQuote').textContent = quote || 'No quote passage available.';
+    document.getElementById('tlModalDatetime').textContent = datetime || 'Time not specified';
+
+    var statusBadge = document.getElementById('tlModalStatusBadge');
+    if (statusBadge) {
+        statusBadge.className = 'timeline-status-badge status-' + (status || 'upcoming');
+        statusBadge.textContent = (status || 'upcoming').replace('_', ' ').toUpperCase();
+    }
+
+    var pageWrap = document.getElementById('tlModalPageBadgeWrap');
+    var pageBadge = document.getElementById('tlModalPageBadge');
+    if (page && parseInt(page, 10) > 0) {
+        pageBadge.textContent = 'Page ' + page + ' Evidence';
+        pageWrap.style.display = 'flex';
+    } else {
+        pageWrap.style.display = 'none';
+    }
+
+    if (modal.parentElement !== document.body) {
+        document.body.appendChild(modal);
+    }
+    modal.style.setProperty('display', 'flex', 'important');
+}
+
+function closeTimelineQuoteModal() {
+    var modal = document.getElementById('timelineQuoteModal');
+    if (modal) modal.style.display = 'none';
+}
+
 </script>

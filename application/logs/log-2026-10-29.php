@@ -18,3 +18,22 @@ ERROR - 2026-10-29 10:14:25 --> Severity: error --> Exception: syntax error, une
 ERROR - 2026-10-29 10:14:52 --> Severity: error --> Exception: syntax error, unexpected '<<' (T_SL) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 771
 ERROR - 2026-10-29 10:19:36 --> Severity: error --> Exception: syntax error, unexpected 'private' (T_PRIVATE), expecting end of file D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 1744
 ERROR - 2026-10-29 10:19:39 --> Severity: error --> Exception: syntax error, unexpected 'private' (T_PRIVATE), expecting end of file D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 1744
+ERROR - 2026-10-29 13:08:31 --> 404 Page Not Found: /index
+ERROR - 2026-10-29 13:23:55 --> Severity: error --> Exception: syntax error, unexpected 'public' (T_PUBLIC) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 2039
+ERROR - 2026-10-29 13:23:57 --> Severity: error --> Exception: syntax error, unexpected 'public' (T_PUBLIC) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 2039
+ERROR - 2026-10-29 13:23:58 --> Severity: error --> Exception: syntax error, unexpected 'public' (T_PUBLIC) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 2039
+ERROR - 2026-10-29 13:24:33 --> Severity: error --> Exception: syntax error, unexpected 'public' (T_PUBLIC) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 2039
+ERROR - 2026-10-29 13:25:27 --> Severity: error --> Exception: syntax error, unexpected 'public' (T_PUBLIC) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 2039
+ERROR - 2026-10-29 13:26:19 --> Severity: error --> Exception: syntax error, unexpected 'public' (T_PUBLIC) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 2039
+ERROR - 2026-10-29 13:26:43 --> Severity: error --> Exception: syntax error, unexpected 'public' (T_PUBLIC) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 2039
+ERROR - 2026-10-29 13:27:11 --> Severity: error --> Exception: syntax error, unexpected 'public' (T_PUBLIC) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 2039
+ERROR - 2026-10-29 13:27:20 --> Severity: error --> Exception: syntax error, unexpected 'public' (T_PUBLIC) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 2039
+ERROR - 2026-10-29 13:27:51 --> Severity: error --> Exception: syntax error, unexpected 'public' (T_PUBLIC) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 2039
+ERROR - 2026-10-29 13:28:16 --> Severity: error --> Exception: syntax error, unexpected 'public' (T_PUBLIC) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 2039
+ERROR - 2026-10-29 13:28:31 --> Severity: error --> Exception: syntax error, unexpected 'public' (T_PUBLIC) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 2039
+ERROR - 2026-10-29 13:28:55 --> Severity: error --> Exception: syntax error, unexpected 'public' (T_PUBLIC) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 2039
+ERROR - 2026-10-29 13:29:32 --> Severity: error --> Exception: syntax error, unexpected 'public' (T_PUBLIC) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 2039
+ERROR - 2026-10-29 18:20:44 --> Query error: Table 'bid_core_db.tender_corrigenda' doesn't exist - Invalid query: SELECT *
+FROM `tender_corrigenda`
+WHERE `Tfsid` = 19
+ORDER BY `Id` DESC

@@ -462,6 +462,7 @@ class Factsheet_model extends CI_Model
             'RiskPoints',
             'OpportunityAssessment',
             'EvidenceJson',
+            'TimelineJson',
 
             // Legacy Indexing Columns (Preserved for compatibility and fast lookup)
             'Department', 'ZoneRegion', 'TenderTitle', 'TenderType', 'TenderRefNo',

@@ -2031,4 +2031,209 @@ public  function logout()
         }
     }
 
+    // =========================================================================
+    // TENDER TIMELINE INTELLIGENCE & CORRIGENDUM SUITE
+    // =========================================================================
+
+    /**
+     * Dedicated Timeline Intelligence view for a Bid or Fact Sheet
+     */
+    public function timeline()
+    {
+        $Bid_Session = $this->session->userdata('logged_in');
+
+        if (isset($Bid_Session) && !empty($Bid_Session))
+        {
+            $this->load->model('document_parser/Factsheet_model');
+            $this->load->model('document_parser/Timeline_model');
+
+            $fsid = $this->input->get_post('id') ? (int)$this->input->get_post('id') : (int)$this->input->get_post('fsid');
+            $bcid = (int)$this->input->get_post('bcid');
+
+            $factsheet = null;
+            if ($fsid > 0) {
+                $factsheet = $this->Factsheet_model->getFactSheetById($fsid);
+                if (!empty($factsheet['Bcid'])) {
+                    $factsheet = $this->Factsheet_model->generateOrSyncFactsheetForBid($factsheet['Bcid']);
+                }
+            } elseif ($bcid > 0) {
+                $factsheet = $this->Factsheet_model->getFactSheetByBcid($bcid);
+            }
+
+            if (!$factsheet) {
+                if ($this->input->get('ajax') || $this->input->is_ajax_request()) {
+                    echo '<div class="alert alert-warning m-4 border-0 shadow-sm" style="border-radius:8px;">' .
+                         '<div class="fw-bold"><i class="feather-alert-circle me-1"></i> No Fact Sheet Found</div>' .
+                         '<div class="small mt-1">Please ensure a tender document is uploaded to analyze timeline milestones.</div>' .
+                         '</div>';
+                    return;
+                }
+                $this->session->set_flashdata('err', 'No Fact Sheet found for this tender.');
+                redirect($this->config->item('base_url') . 'bid/masterdashboard');
+                return;
+            }
+
+            $tfsId = (int)$factsheet['Tfsid'];
+            $timelineData = $this->Timeline_model->getTimeline($tfsId);
+            $corrigendaList = $this->Timeline_model->getCorrigenda($tfsId);
+
+            $data = [
+                'factsheet'      => $factsheet,
+                'timelineData'   => $timelineData,
+                'corrigendaList' => $corrigendaList,
+                'tfs_id'         => $tfsId,
+                'bcid'           => $factsheet['Bcid'] ?? $bcid,
+                'isAjax'         => $this->input->get('ajax') || $this->input->is_ajax_request()
+            ];
+
+            if ($this->input->get('ajax') || $this->input->is_ajax_request()) {
+                $this->load->view('document_parser/TimelineIntelligenceView', $data);
+                return;
+            }
+
+            $data['page_title'] = 'Timeline Intelligence - ' . (!empty($factsheet['TenderRefNo']) ? $factsheet['TenderRefNo'] : 'Tender');
+            $currentUrl = strtolower(uri_string());
+            $data['currentUrlArray'] = $this->bid_model->getBreadcrumb($currentUrl);
+            $this->template->write_view('content', 'document_parser/TimelineIntelligenceView', $data);
+            $this->template->render();
+        } else {
+            if ($this->input->get('ajax') || $this->input->is_ajax_request()) {
+                echo '<div class="alert alert-danger m-4">Session expired. Please log in again.</div>';
+                return;
+            }
+            $this->session->set_flashdata('err', 'Invalid Session. Please Login Again..!!');
+            redirect($this->config->item('base_url') . "bid/index");
+        }
+    }
+
+    /**
+     * Fetch timeline data as JSON for Fact Sheet or dynamic widgets
+     */
+    public function ajaxGetTimeline()
+    {
+        $tfsId = (int)$this->input->get_post('tfs_id');
+        $bcid  = (int)$this->input->get_post('bcid');
+
+        $this->load->model('document_parser/Timeline_model');
+        $this->load->model('document_parser/Factsheet_model');
+
+        if (!$tfsId && $bcid > 0) {
+            $fs = $this->Factsheet_model->getFactSheetByBcid($bcid);
+            if (!empty($fs['Tfsid'])) {
+                $tfsId = (int)$fs['Tfsid'];
+            }
+        }
+
+        if (!$tfsId) {
+            return $this->output->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'Missing Factsheet ID']));
+        }
+
+        $timeline = $this->Timeline_model->getTimeline($tfsId);
+
+        return $this->output->set_content_type('application/json')
+            ->set_output(json_encode(['status' => !empty($timeline), 'timeline' => $timeline, 'tfs_id' => $tfsId]));
+    }
+
+
+
+    /**
+     * Schedule a deadline reminder for an authorized user
+     */
+    public function saveMilestoneReminder()
+    {
+        $Bid_Session = $this->session->userdata('logged_in');
+        if (empty($Bid_Session)) {
+            return $this->output->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'Session expired. Please log in again.']));
+        }
+
+        $tfsId        = (int)$this->input->post('tfs_id');
+        $type         = trim($this->input->post('milestone_type'));
+        $remType      = trim($this->input->post('reminder_type') ?: '3_days');
+        $scheduledAt  = trim($this->input->post('scheduled_at'));
+        $notes        = trim($this->input->post('notes'));
+        $emailAddress = trim($this->input->post('email_address') ?: ($Bid_Session['EmailId'] ?? ''));
+
+        if (!$tfsId || empty($type)) {
+            return $this->output->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'Missing tender or milestone parameters.']));
+        }
+
+        $this->load->model('document_parser/Timeline_model');
+        $remId = $this->Timeline_model->saveReminder([
+            'tfs_id'          => $tfsId,
+            'milestone_type'  => $type,
+            'user_id'         => $Bid_Session['UserId'] ?? 1,
+            'reminder_type'   => $remType,
+            'scheduled_at'    => $scheduledAt,
+            'recipient_email' => $emailAddress,
+            'notes'           => $notes,
+            'delivery_status' => 'pending'
+        ]);
+
+        return $this->output->set_content_type('application/json')
+            ->set_output(json_encode([
+                'status'      => true,
+                'reminder_id' => $remId,
+                'message'     => 'Reminder scheduled successfully.'
+            ]));
+    }
+
+    /**
+     * Cancel an existing reminder
+     */
+    public function cancelMilestoneReminder()
+    {
+        $Bid_Session = $this->session->userdata('logged_in');
+        if (empty($Bid_Session)) {
+            return $this->output->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'Session expired.']));
+        }
+
+        $reminderId = (int)$this->input->post('reminder_id');
+        $this->load->model('document_parser/Timeline_model');
+        $res = $this->Timeline_model->cancelReminder($reminderId, $Bid_Session['UserId'] ?? null);
+
+        return $this->output->set_content_type('application/json')
+            ->set_output(json_encode(['status' => (bool)$res, 'message' => 'Reminder cancelled.']));
+    }
+
+    /**
+     * Cron endpoint to process and dispatch due timeline reminders
+     */
+    public function processTimelineRemindersCron()
+    {
+        $this->load->model('document_parser/Timeline_model');
+        $due = $this->Timeline_model->getPendingRemindersDue();
+        $sentCount = 0;
+        $now = date('Y-m-d H:i:s');
+
+        foreach ($due as $rem) {
+            // Send email if recipient email exists
+            if (!empty($rem['recipient_email'])) {
+                @$this->email->clear();
+                @$this->email->from('noreply@ibid-system.local', 'iBid Tender Timeline Intelligence');
+                @$this->email->to($rem['recipient_email']);
+                @$this->email->subject('Tender Milestone Reminder: ' . ucfirst(str_replace('_', ' ', $rem['milestone_type'])) . ' for ' . ($rem['TenderNo'] ?: 'Tender #' . $rem['tfs_id']));
+                @$this->email->message("This is a reminder for {$rem['milestone_type']}.\nScheduled at: {$rem['scheduled_at']}\nNotes: {$rem['notes']}");
+                @$this->email->send();
+            }
+
+            $this->db->where('id', $rem['id'])->update('tender_timeline_reminders', [
+                'delivery_status' => 'sent',
+                'delivered_at'    => $now,
+                'updated_at'      => $now
+            ]);
+            $sentCount++;
+        }
+
+        return $this->output->set_content_type('application/json')
+            ->set_output(json_encode([
+                'status'     => true,
+                'dispatched' => $sentCount,
+                'timestamp'  => $now
+            ]));
+    }
+
 } //MAIN
