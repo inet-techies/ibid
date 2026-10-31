@@ -1627,8 +1627,114 @@ public  function logout()
         }
     }
 
+<<<<<<< HEAD
     /* =========================================================================
      * NEW BID NOTIFICATION SYSTEM METHODS
+=======
+    /**
+     * Securely streams a tender PDF document to authenticated users for the Evidence-Linked Fact Sheet viewer.
+     * Prevents path traversal and verifies session.
+     */
+    public function view_tender_document()
+    {
+        $Bid_Session = $this->session->userdata('logged_in');
+        if (!isset($Bid_Session) || empty($Bid_Session)) {
+            show_error('Unauthorized access. Please log in.', 401);
+            return;
+        }
+
+        $tfsid = (int)$this->input->get('tfsid');
+        $bcid  = (int)$this->input->get('bcid');
+
+        $docPath = '';
+        $docName = 'tender_document.pdf';
+
+        $this->load->model('document_parser/Factsheet_model');
+        if ($tfsid > 0) {
+            $fs = $this->Factsheet_model->getFactSheetById($tfsid);
+            if ($fs && !empty($fs['DocumentPath'])) {
+                $docPath = $fs['DocumentPath'];
+                $docName = !empty($fs['DocumentName']) ? $fs['DocumentName'] : basename($docPath);
+            }
+        } elseif ($bcid > 0) {
+            $fs = $this->Factsheet_model->getFactSheetByBcid($bcid);
+            if ($fs && !empty($fs['DocumentPath'])) {
+                $docPath = $fs['DocumentPath'];
+                $docName = !empty($fs['DocumentName']) ? $fs['DocumentName'] : basename($docPath);
+            }
+        }
+
+        if (empty($docPath)) {
+            show_404();
+            return;
+        }
+
+        // Canonical path & Path traversal protection
+        $fullPath = realpath(FCPATH . ltrim($docPath, '/\\'));
+        $allowedBase = realpath(FCPATH . 'uploads');
+
+        if (!$fullPath || !$allowedBase || strpos($fullPath, $allowedBase) !== 0 || !file_exists($fullPath)) {
+            show_404();
+            return;
+        }
+
+        $mime = 'application/pdf';
+        $ext = strtolower(pathinfo($fullPath, PATHINFO_EXTENSION));
+        if ($ext === 'pdf') {
+            $mime = 'application/pdf';
+        }
+
+        // Stream file safely
+        header('Content-Type: ' . $mime);
+        header('Content-Disposition: inline; filename="' . basename($docName) . '"');
+        header('Content-Length: ' . filesize($fullPath));
+        header('Cache-Control: private, max-age=3600, must-revalidate');
+        header('Pragma: public');
+        readfile($fullPath);
+        exit;
+    }
+
+    /**
+     * AJAX API to retrieve evidence records for a specific field or all fields in a Fact Sheet.
+     */
+    public function get_field_evidence()
+    {
+        $Bid_Session = $this->session->userdata('logged_in');
+        if (!isset($Bid_Session) || empty($Bid_Session)) {
+            $this->output->set_status_header(401)->set_content_type('application/json')->set_output(json_encode(['error' => 'Unauthorized']));
+            return;
+        }
+
+        $tfsid = (int)$this->input->get('tfsid');
+        $field = trim($this->input->get('field') ?? '');
+
+        if ($tfsid <= 0) {
+            $this->output->set_status_header(400)->set_content_type('application/json')->set_output(json_encode(['error' => 'Invalid Fact Sheet ID']));
+            return;
+        }
+
+        $this->load->model('document_parser/Factsheet_model');
+        $evidence = $this->Factsheet_model->getEvidenceByTfsid($tfsid);
+
+        if (!empty($field)) {
+            $matched = isset($evidence['by_field'][$field]) ? $evidence['by_field'][$field] : null;
+            $allPassages = isset($evidence['all'][$field]) ? $evidence['all'][$field] : [];
+            $this->output->set_content_type('application/json')->set_output(json_encode([
+                'success' => true,
+                'field'   => $field,
+                'primary' => $matched,
+                'all'     => $allPassages
+            ]));
+            return;
+        }
+
+        $this->output->set_content_type('application/json')->set_output(json_encode([
+            'success'  => true,
+            'evidence' => $evidence
+        ]));
+    }
+    /* ==================================================================     * NEW BID NOTIFICATION SYSTEM METHODS
+>>>>>>> f237aad1c4a287ca5a4118d164d85a8efacceb10
      * ========================================================================= */
 
     /**
@@ -1930,106 +2036,215 @@ public  function logout()
         }
     }
 
+<<<<<<< HEAD
+=======
+    // =========================================================================
+    // TENDER TIMELINE INTELLIGENCE & CORRIGENDUM SUITE
+    // =========================================================================
+
+>>>>>>> f237aad1c4a287ca5a4118d164d85a8efacceb10
     /**
-     * Securely streams a tender PDF document to authenticated users for the Evidence-Linked Fact Sheet viewer.
-     * Prevents path traversal and verifies session.
+     * Dedicated Timeline Intelligence view for a Bid or Fact Sheet
      */
-    public function view_tender_document()
+    public function timeline()
     {
         $Bid_Session = $this->session->userdata('logged_in');
-        if (!isset($Bid_Session) || empty($Bid_Session)) {
-            show_error('Unauthorized access. Please log in.', 401);
-            return;
-        }
 
-        $tfsid = (int)$this->input->get('tfsid');
-        $bcid  = (int)$this->input->get('bcid');
+        if (isset($Bid_Session) && !empty($Bid_Session))
+        {
+            $this->load->model('document_parser/Factsheet_model');
+            $this->load->model('document_parser/Timeline_model');
 
-        $docPath = '';
-        $docName = 'tender_document.pdf';
+            $fsid = $this->input->get_post('id') ? (int)$this->input->get_post('id') : (int)$this->input->get_post('fsid');
+            $bcid = (int)$this->input->get_post('bcid');
 
-        $this->load->model('document_parser/Factsheet_model');
-        if ($tfsid > 0) {
-            $fs = $this->Factsheet_model->getFactSheetById($tfsid);
-            if ($fs && !empty($fs['DocumentPath'])) {
-                $docPath = $fs['DocumentPath'];
-                $docName = !empty($fs['DocumentName']) ? $fs['DocumentName'] : basename($docPath);
+            $factsheet = null;
+            if ($fsid > 0) {
+                $factsheet = $this->Factsheet_model->getFactSheetById($fsid);
+                if (!empty($factsheet['Bcid'])) {
+                    $factsheet = $this->Factsheet_model->generateOrSyncFactsheetForBid($factsheet['Bcid']);
+                }
+            } elseif ($bcid > 0) {
+                $factsheet = $this->Factsheet_model->getFactSheetByBcid($bcid);
             }
-        } elseif ($bcid > 0) {
+
+            if (!$factsheet) {
+                if ($this->input->get('ajax') || $this->input->is_ajax_request()) {
+                    echo '<div class="alert alert-warning m-4 border-0 shadow-sm" style="border-radius:8px;">' .
+                         '<div class="fw-bold"><i class="feather-alert-circle me-1"></i> No Fact Sheet Found</div>' .
+                         '<div class="small mt-1">Please ensure a tender document is uploaded to analyze timeline milestones.</div>' .
+                         '</div>';
+                    return;
+                }
+                $this->session->set_flashdata('err', 'No Fact Sheet found for this tender.');
+                redirect($this->config->item('base_url') . 'bid/masterdashboard');
+                return;
+            }
+
+            $tfsId = (int)$factsheet['Tfsid'];
+            $timelineData = $this->Timeline_model->getTimeline($tfsId);
+            $corrigendaList = $this->Timeline_model->getCorrigenda($tfsId);
+
+            $data = [
+                'factsheet'      => $factsheet,
+                'timelineData'   => $timelineData,
+                'corrigendaList' => $corrigendaList,
+                'tfs_id'         => $tfsId,
+                'bcid'           => $factsheet['Bcid'] ?? $bcid,
+                'isAjax'         => $this->input->get('ajax') || $this->input->is_ajax_request()
+            ];
+
+            if ($this->input->get('ajax') || $this->input->is_ajax_request()) {
+                $this->load->view('document_parser/TimelineIntelligenceView', $data);
+                return;
+            }
+
+            $data['page_title'] = 'Timeline Intelligence - ' . (!empty($factsheet['TenderRefNo']) ? $factsheet['TenderRefNo'] : 'Tender');
+            $currentUrl = strtolower(uri_string());
+            $data['currentUrlArray'] = $this->bid_model->getBreadcrumb($currentUrl);
+            $this->template->write_view('content', 'document_parser/TimelineIntelligenceView', $data);
+            $this->template->render();
+        } else {
+            if ($this->input->get('ajax') || $this->input->is_ajax_request()) {
+                echo '<div class="alert alert-danger m-4">Session expired. Please log in again.</div>';
+                return;
+            }
+            $this->session->set_flashdata('err', 'Invalid Session. Please Login Again..!!');
+            redirect($this->config->item('base_url') . "bid/index");
+        }
+    }
+
+    /**
+     * Fetch timeline data as JSON for Fact Sheet or dynamic widgets
+     */
+    public function ajaxGetTimeline()
+    {
+        $tfsId = (int)$this->input->get_post('tfs_id');
+        $bcid  = (int)$this->input->get_post('bcid');
+
+        $this->load->model('document_parser/Timeline_model');
+        $this->load->model('document_parser/Factsheet_model');
+
+        if (!$tfsId && $bcid > 0) {
             $fs = $this->Factsheet_model->getFactSheetByBcid($bcid);
-            if ($fs && !empty($fs['DocumentPath'])) {
-                $docPath = $fs['DocumentPath'];
-                $docName = !empty($fs['DocumentName']) ? $fs['DocumentName'] : basename($docPath);
+            if (!empty($fs['Tfsid'])) {
+                $tfsId = (int)$fs['Tfsid'];
             }
         }
 
-        if (empty($docPath)) {
-            show_404();
-            return;
+        if (!$tfsId) {
+            return $this->output->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'Missing Factsheet ID']));
         }
 
-        // Canonical path & Path traversal protection
-        $fullPath = realpath(FCPATH . ltrim($docPath, '/\\'));
-        $allowedBase = realpath(FCPATH . 'uploads');
+        $timeline = $this->Timeline_model->getTimeline($tfsId);
 
-        if (!$fullPath || !$allowedBase || strpos($fullPath, $allowedBase) !== 0 || !file_exists($fullPath)) {
-            show_404();
-            return;
+        return $this->output->set_content_type('application/json')
+            ->set_output(json_encode(['status' => !empty($timeline), 'timeline' => $timeline, 'tfs_id' => $tfsId]));
+    }
+
+
+
+    /**
+     * Schedule a deadline reminder for an authorized user
+     */
+    public function saveMilestoneReminder()
+    {
+        $Bid_Session = $this->session->userdata('logged_in');
+        if (empty($Bid_Session)) {
+            return $this->output->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'Session expired. Please log in again.']));
         }
 
-        $mime = 'application/pdf';
-        $ext = strtolower(pathinfo($fullPath, PATHINFO_EXTENSION));
-        if ($ext === 'pdf') {
-            $mime = 'application/pdf';
+        $tfsId        = (int)$this->input->post('tfs_id');
+        $type         = trim($this->input->post('milestone_type'));
+        $remType      = trim($this->input->post('reminder_type') ?: '3_days');
+        $scheduledAt  = trim($this->input->post('scheduled_at'));
+        $notes        = trim($this->input->post('notes'));
+        $emailAddress = trim($this->input->post('email_address') ?: ($Bid_Session['EmailId'] ?? ''));
+
+        if (!$tfsId || empty($type)) {
+            return $this->output->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'Missing tender or milestone parameters.']));
         }
 
-        // Stream file safely
-        header('Content-Type: ' . $mime);
-        header('Content-Disposition: inline; filename="' . basename($docName) . '"');
-        header('Content-Length: ' . filesize($fullPath));
-        header('Cache-Control: private, max-age=3600, must-revalidate');
-        header('Pragma: public');
-        readfile($fullPath);
-        exit;
+        $this->load->model('document_parser/Timeline_model');
+        $remId = $this->Timeline_model->saveReminder([
+            'tfs_id'          => $tfsId,
+            'milestone_type'  => $type,
+            'user_id'         => $Bid_Session['UserId'] ?? 1,
+            'reminder_type'   => $remType,
+            'scheduled_at'    => $scheduledAt,
+            'recipient_email' => $emailAddress,
+            'notes'           => $notes,
+            'delivery_status' => 'pending'
+        ]);
+
+        return $this->output->set_content_type('application/json')
+            ->set_output(json_encode([
+                'status'      => true,
+                'reminder_id' => $remId,
+                'message'     => 'Reminder scheduled successfully.'
+            ]));
     }
 
     /**
-     * AJAX API to retrieve evidence records for a specific field or all fields in a Fact Sheet.
+     * Cancel an existing reminder
      */
-    public function get_field_evidence()
+    public function cancelMilestoneReminder()
     {
         $Bid_Session = $this->session->userdata('logged_in');
-        if (!isset($Bid_Session) || empty($Bid_Session)) {
-            $this->output->set_status_header(401)->set_content_type('application/json')->set_output(json_encode(['error' => 'Unauthorized']));
-            return;
+        if (empty($Bid_Session)) {
+            return $this->output->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'Session expired.']));
         }
 
-        $tfsid = (int)$this->input->get('tfsid');
-        $field = trim($this->input->get('field') ?? '');
+        $reminderId = (int)$this->input->post('reminder_id');
+        $this->load->model('document_parser/Timeline_model');
+        $res = $this->Timeline_model->cancelReminder($reminderId, $Bid_Session['UserId'] ?? null);
 
-        if ($tfsid <= 0) {
-            $this->output->set_status_header(400)->set_content_type('application/json')->set_output(json_encode(['error' => 'Invalid Fact Sheet ID']));
-            return;
-        }
-
-        $this->load->model('document_parser/Factsheet_model');
-        $evidence = $this->Factsheet_model->getEvidenceByTfsid($tfsid);
-
-        if (!empty($field)) {
-            $matched = isset($evidence['by_field'][$field]) ? $evidence['by_field'][$field] : null;
-            $allPassages = isset($evidence['all'][$field]) ? $evidence['all'][$field] : [];
-            $this->output->set_content_type('application/json')->set_output(json_encode([
-                'success' => true,
-                'field'   => $field,
-                'primary' => $matched,
-                'all'     => $allPassages
-            ]));
-            return;
-        }
-
-        $this->output->set_content_type('application/json')->set_output(json_encode([
-            'success'  => true,
-            'evidence' => $evidence
-        ]));
+        return $this->output->set_content_type('application/json')
+            ->set_output(json_encode(['status' => (bool)$res, 'message' => 'Reminder cancelled.']));
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * Cron endpoint to process and dispatch due timeline reminders
+     */
+    public function processTimelineRemindersCron()
+    {
+        $this->load->model('document_parser/Timeline_model');
+        $due = $this->Timeline_model->getPendingRemindersDue();
+        $sentCount = 0;
+        $now = date('Y-m-d H:i:s');
+
+        foreach ($due as $rem) {
+            // Send email if recipient email exists
+            if (!empty($rem['recipient_email'])) {
+                @$this->email->clear();
+                @$this->email->from('noreply@ibid-system.local', 'iBid Tender Timeline Intelligence');
+                @$this->email->to($rem['recipient_email']);
+                @$this->email->subject('Tender Milestone Reminder: ' . ucfirst(str_replace('_', ' ', $rem['milestone_type'])) . ' for ' . ($rem['TenderNo'] ?: 'Tender #' . $rem['tfs_id']));
+                @$this->email->message("This is a reminder for {$rem['milestone_type']}.\nScheduled at: {$rem['scheduled_at']}\nNotes: {$rem['notes']}");
+                @$this->email->send();
+            }
+
+            $this->db->where('id', $rem['id'])->update('tender_timeline_reminders', [
+                'delivery_status' => 'sent',
+                'delivered_at'    => $now,
+                'updated_at'      => $now
+            ]);
+            $sentCount++;
+        }
+
+        return $this->output->set_content_type('application/json')
+            ->set_output(json_encode([
+                'status'     => true,
+                'dispatched' => $sentCount,
+                'timestamp'  => $now
+            ]));
+    }
+
+>>>>>>> f237aad1c4a287ca5a4118d164d85a8efacceb10
 } //MAIN

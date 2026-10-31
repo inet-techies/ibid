@@ -164,10 +164,29 @@ class Factsheet_evidence_service
                         $matchedText = $match[0];
                         $offset      = $match[1];
 
-                        // Extract clean context window (approx 200-280 chars around match)
-                        $quote = $this->_extractCleanQuote($normPage, $offset, strlen($matchedText));
+                        // Extract precision context quote around match without bleeding into other items
+                        $quote = $this->_extractCleanQuote($normPage, $offset, strlen($matchedText), $matchedText);
 
                         if ($this->_isMeaningfulQuote($quote, $cfg['required_tokens'] ?? [])) {
+                            // Check for duplicates
+                            $isDuplicate = false;
+                            foreach ($results as $existing) {
+                                if ($existing['supporting_quote'] === $quote) {
+                                    $isDuplicate = true;
+                                    break;
+                                }
+                                if ($existing['page_number'] === (int)$pageNum) {
+                                    similar_text($existing['supporting_quote'], $quote, $sim);
+                                    if ($sim > 70) {
+                                        $isDuplicate = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if ($isDuplicate) {
+                                continue;
+                            }
+
                             $results[] = [
                                 'field_key'           => $fieldKeyTrim,
                                 'field_section'       => $section,
@@ -180,12 +199,19 @@ class Factsheet_evidence_service
                                 'extraction_method'   => 'text',
                                 'coordinates_json'    => null
                             ];
+
+                            // Found the top verified quote on this page; proceed to find on next page (cap 2 pages)
+                            if (count($results) >= 2) {
+                                break 3;
+                            } else {
+                                break 2;
+                            }
                         }
                     }
                 }
             }
 
-            // Cap at 2 distinct evidence passages per field to keep output clean and fast
+            // Cap at 2 distinct evidence passages per field
             if (count($results) >= 2) {
                 break;
             }
@@ -237,40 +263,45 @@ class Factsheet_evidence_service
 
             if (strpos($keyLower, 'submission') !== false && strpos($keyLower, 'start') === false) {
                 $configs[] = [
-                    'pattern' => '/(?:(?:Last\s+date(?:\s*(?:and|&)\s*time)?\s+(?:for|of)\s+(?:Bid\s+Submission|Submission|Receipt)|Bid\s+Submission\s+(?:closing|end|last|due)\s+date(?:\s*(?:and|&)\s*time)?|Submission\s+Deadline).{0,80}?)(?:' . $dateRx . ')/iu',
-                    'status' => 'verified', 'confidence' => 0.98, 'level' => 'high'
+                    'pattern' => '/(?:(?:\d+[\.\)]\s*)?(?:Last\s+date(?:\s*(?:and|&)\s*time)?\s+(?:for|of)\s+Bid\s+Submission|Bid\s+Submission\s+(?:closing|end|last|due)\s+date(?:\s*(?:and|&)\s*time)?|Submission\s+Deadline)[^.\n\r]{0,60}?(?:' . $dateRx . ')(?:\s+(?:at\s+)?[0-9]{1,2}(?::[0-9]{2})?\s*(?:AM|PM))?)/iu',
+                    'status' => 'verified', 'confidence' => 0.99, 'level' => 'high'
                 ];
                 $configs[] = [
-                    'pattern' => '/([^\.\n\r]{0,60}?(?:Submission\s+closing|Bid\s+Submission)[^\.\n\r]{0,60}?(?:' . $dateRx . '))/iu',
+                    'pattern' => '/([^\.\n\r]{0,40}?(?:Bid\s+Submission\s+closing|Last\s+date\s+of\s+Bid\s+Submission)[^\.\n\r]{0,40}?(?:' . $dateRx . '))/iu',
                     'status' => 'verified', 'confidence' => 0.90, 'level' => 'high'
                 ];
             } elseif (strpos($keyLower, 'opening') !== false) {
                 $configs[] = [
-                    'pattern' => '/(?:(?:Date(?:\s*(?:and|&)\s*time)?\s+of\s+Technical\s+Bid\s+Opening|Technical\s+Bid\s+Opening(?:\s+date(?:\s*(?:and|&)\s*time)?)?|Bid\s+opening\s+date(?:\s*(?:and|&)\s*time)?\s+for\s+Technical\s+Proposals).{0,80}?)(?:' . $dateRx . ')/iu',
-                    'status' => 'verified', 'confidence' => 0.98, 'level' => 'high'
+                    'pattern' => '/(?:(?:\d+[\.\)]\s*)?(?:Date(?:\s*(?:and|&)\s*time)?\s+of\s+Technical\s+Bid\s+Opening|Technical\s+Bid\s+Opening(?:\s+date(?:\s*(?:and|&)\s*time)?)?|Bid\s+opening\s+date(?:\s*(?:and|&)\s*time)?\s+for\s+Technical\s+Proposals)[^.\n\r]{0,60}?(?:' . $dateRx . ')(?:\s+(?:at\s+)?[0-9]{1,2}(?::[0-9]{2})?\s*(?:AM|PM))?)/iu',
+                    'status' => 'verified', 'confidence' => 0.99, 'level' => 'high'
                 ];
                 $configs[] = [
-                    'pattern' => '/([^\.\n\r]{0,60}?(?:Technical\s+Bid\s+Opening|Technical\s+Proposals)[^\.\n\r]{0,60}?(?:' . $dateRx . '))/iu',
+                    'pattern' => '/([^\.\n\r]{0,40}?(?:Technical\s+Bid\s+Opening|Technical\s+Proposals)[^\.\n\r]{0,40}?(?:' . $dateRx . '))/iu',
                     'status' => 'verified', 'confidence' => 0.90, 'level' => 'high'
                 ];
             } elseif (strpos($keyLower, 'start') !== false) {
                 $configs[] = [
-                    'pattern' => '/(?:(?:Bid\s+Submission\s+Start|Start\s+date(?:\s*(?:and|&)\s*time)?\s+of\s+Bid\s+Submission).{0,80}?)(?:' . $dateRx . ')/iu',
-                    'status' => 'verified', 'confidence' => 0.98, 'level' => 'high'
+                    'pattern' => '/(?:(?:\d+[\.\)]\s*)?(?:Bid\s+Submission\s+Start(?:\s+date(?:\s*(?:and|&)\s*time)?)?|Start\s+date(?:\s*(?:and|&)\s*time)?\s+of\s+Bid\s+Submission)[^.\n\r]{0,60}?(?:' . $dateRx . ')(?:\s+(?:at\s+)?[0-9]{1,2}(?::[0-9]{2})?\s*(?:AM|PM))?)/iu',
+                    'status' => 'verified', 'confidence' => 0.99, 'level' => 'high'
                 ];
             } elseif (strpos($keyLower, 'meeting') !== false) {
                 $configs[] = [
-                    'pattern' => '/(?:(?:Pre[-\s]?Bid\s+(?:Meeting|Conference)(?:\s+date(?:\s*(?:and|&)\s*time)?)?).{0,80}?)(?:' . $dateRx . ')/iu',
-                    'status' => 'verified', 'confidence' => 0.98, 'level' => 'high'
+                    'pattern' => '/(?:(?:\d+[\.\)]\s*)?(?:Pre[-\s]?Bid\s+(?:Meeting|Conference)(?:\s+date(?:\s*(?:and|&)\s*time)?)?)[^.\n\r]{0,60}?(?:' . $dateRx . ')(?:\s+(?:at\s+)?[0-9]{1,2}(?::[0-9]{2})?\s*(?:AM|PM))?(?:\s*\([^\)]+\))?)/iu',
+                    'status' => 'verified', 'confidence' => 0.99, 'level' => 'high'
                 ];
             } elseif (strpos($keyLower, 'quer') !== false) {
                 $configs[] = [
-                    'pattern' => '/(?:[Qq]ueries.{0,140}?(?:reaching|by|deadline).{0,40}?(?:' . $dateRx . ')|[Qq]uery\s+(?:Deadline|End\s+Date).{0,40}?(?:' . $dateRx . '))/iu',
+                    'pattern' => '/(?:(?:\d+[\.\)]\s*)?(?:(?:Only\s+)?queries\s+as\s+per\s+format|query\s+submission|queries\s+reaching)[^.\n\r]{0,80}?(?:reaching|by|deadline)?[^.\n\r]{0,40}?(?:' . $dateRx . ')(?:\s+(?:at\s+)?[0-9]{1,2}(?::[0-9]{2})?\s*(?:AM|PM))?)/iu',
                     'status' => 'verified', 'confidence' => 0.95, 'level' => 'high'
                 ];
-            } elseif (strpos($keyLower, 'publish') !== false || $keyLower === 'tender date') {
+            } elseif (strpos($keyLower, 'publish') !== false) {
                 $configs[] = [
-                    'pattern' => '/(?:(?:Date\s+of\s+(?:downloading|uploading|publication|issue|NIT)|Tender\s+Date|Published\s+Date|NIT\s+Date|Dated).{0,80}?)(?:' . $dateRx . ')/iu',
+                    'pattern' => '/(?:(?:\d+[\.\)]\s*)?(?:Date\s+of\s+(?:downloading|uploading(?:\s+of\s+N\.?I\.?T\.?)?|publication|issue)|Published\s+(?:Date|on))\s*[:\-]?\s*[^.\n\r]{0,60}?(?:' . $dateRx . '))/iu',
+                    'status' => 'verified', 'confidence' => 0.95, 'level' => 'high'
+                ];
+            } elseif ($keyLower === 'tender date') {
+                $configs[] = [
+                    'pattern' => '/(?:(?:\d+[\.\)]\s*)?(?:Tender\s+No\.?\s*(?:and|&)?\s*Date|Tender\s+Date|Dated)\s*[:\-]?\s*[^.\n\r]{0,60}?(?:' . $dateRx . '))/iu',
                     'status' => 'verified', 'confidence' => 0.95, 'level' => 'high'
                 ];
             }
@@ -278,30 +309,31 @@ class Factsheet_evidence_service
 
         // Money fields: EMD, Tender Fee
         if ($keyLower === 'emd' || strpos($keyLower, 'earnest') !== false) {
-            $patterns = [
-                '/(?:(?:Earnest\s+Money\s+Deposit|EMD(?:\s+Amount)?|Bid\s+Security).{0,60}?(?:Rs\.?|INR|₹)?\s*[0-9,]+(?:\.[0-9]{2})?)/iu',
-                '/(?:Rs\.?|INR|₹)?\s*31,00,000/iu',
-                '/(?:Thirty-One\s+Lacs|31\s+Lakh)/iu'
+            $configs[] = [
+                'pattern' => '/(?:(?:\d+[\.\)]\s*)?(?:Earnest\s+Money\s+Deposit|EMD(?:\s+Amount)?|Bid\s+Security)[^.\n\r]{0,50}?(?:Rs\.?|INR|₹)?\s*[0-9,]+(?:\.[0-9]{2})?(?:\s*\([^\)]+\))?)/iu',
+                'status' => 'verified', 'confidence' => 0.98, 'level' => 'high'
             ];
-            foreach ($patterns as $p) {
-                $configs[] = ['pattern' => $p, 'status' => 'verified', 'confidence' => 0.98, 'level' => 'high'];
-            }
+            $configs[] = [
+                'pattern' => '/(?:(?:Rs\.?|INR|₹)?\s*31,00,000|Thirty-One\s+Lacs)/iu',
+                'status' => 'verified', 'confidence' => 0.95, 'level' => 'high'
+            ];
         } elseif ($keyLower === 'tender fee' || strpos($keyLower, 'cost of tender') !== false) {
-            $patterns = [
-                '/(?:(?:Tender\s+Fee|Cost\s+of\s+Tender(?:\s+Document)?).{0,60}?(?:Rs\.?|INR|₹)?\s*[0-9,]+(?:\.[0-9]{2})?)/iu',
-                '/(?:Rs\.?|INR|₹)?\s*10,000/iu'
+            $configs[] = [
+                'pattern' => '/(?:(?:\d+[\.\)]\s*)?(?:Tender\s+Fee|Cost\s+of\s+Tender(?:\s+Document)?)[^.\n\r]{0,50}?(?:Rs\.?|INR|₹)?\s*[0-9,]+(?:\.[0-9]{2})?(?:\s*\([^\)]+\))?)/iu',
+                'status' => 'verified', 'confidence' => 0.98, 'level' => 'high'
             ];
-            foreach ($patterns as $p) {
-                $configs[] = ['pattern' => $p, 'status' => 'verified', 'confidence' => 0.98, 'level' => 'high'];
-            }
         }
 
         // Reference Number
         if (strpos($keyLower, 'reference') !== false || strpos($keyLower, 'tender no') !== false) {
             $refEsc = preg_quote($val, '/');
             $configs[] = [
-                'pattern' => '/(.{0,40}?' . $refEsc . '.{0,40}?)/iu',
+                'pattern' => '/(?:(?:\d+[\.\)]\s*)?Tender\s+No\.?\s*&\s*Date[^.\n\r]{0,40}?' . $refEsc . ')/iu',
                 'status' => 'verified', 'confidence' => 0.99, 'level' => 'high'
+            ];
+            $configs[] = [
+                'pattern' => '/(' . $refEsc . ')/iu',
+                'status' => 'verified', 'confidence' => 0.90, 'level' => 'high'
             ];
         }
 
@@ -325,20 +357,33 @@ class Factsheet_evidence_service
     }
 
     /**
-     * Extracts clean context sentence around the match offset.
+     * Extracts clean precision context quote around the match without bleeding into adjacent numbered items.
      */
-    protected function _extractCleanQuote($text, $offset, $matchLen)
+    protected function _extractCleanQuote($text, $offset, $matchLen, $matchedText = '')
     {
-        $start = max(0, $offset - 60);
-        $length = $matchLen + 120;
-        $snippet = substr($text, $start, $length);
+        $cleanMatched = trim(preg_replace('/\s+/', ' ', $matchedText));
+        $cleanMatched = trim($cleanMatched, " \t\n\r\0\x0B.,;:-");
 
-        // Clean leading and trailing fragments to whole words/sentences
-        $snippet = preg_replace('/^\S*\s+/', '', $snippet);
-        $snippet = preg_replace('/\s+\S*$/', '', $snippet);
-        $clean = trim(preg_replace('/\s+/', ' ', $snippet));
+        // If the regex match is already self-descriptive and bounded (contains words and length >= 15)
+        if (strlen($cleanMatched) >= 15 && preg_match('/[a-zA-Z]/', $cleanMatched)) {
+            return $cleanMatched;
+        }
 
-        return $clean;
+        // Otherwise, extract bounded window without crossing adjacent numbered items or newlines
+        $start = max(0, $offset - 40);
+        $before = substr($text, $start, $offset - $start);
+        if (preg_match('/(?:^|[\r\n]|\s+(\d+[\.\)]))\s*([^0-9\.\)].*)$/', $before, $bm)) {
+            $before = $bm[2];
+        }
+
+        $after = substr($text, $offset + $matchLen, 50);
+        if (preg_match('/^(.*?)(?:\s+\d+[\.\)]|[\r\n]|\.\s+|$)/', $after, $am)) {
+            $after = $am[1];
+        }
+
+        $combined = trim($before . ' ' . $matchedText . ' ' . $after);
+        $clean = trim(preg_replace('/\s+/', ' ', $combined));
+        return trim($clean, " \t\n\r\0\x0B.,;:-");
     }
 
     /**
