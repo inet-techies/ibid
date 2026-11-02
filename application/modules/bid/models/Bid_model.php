@@ -373,6 +373,29 @@ function getBidDetailsData(){
             ];
         }
 
+        // 8. Bids by States/ UT's (OEM Blue vs Service Orange matching screenshot)
+        $this->db->select("State, 
+                           SUM(CASE WHEN BidType = 'OEM' THEN 1 ELSE 0 END) as BlueCount,
+                           SUM(CASE WHEN BidType = 'Service' THEN 1 ELSE 0 END) as OrangeCount,
+                           COUNT(*) as TotalCount");
+        $this->db->from('BidCreationDetails');
+        $dateFilter($this->db);
+        $this->db->where('State IS NOT NULL', null, false);
+        $this->db->where("TRIM(State) !=", '');
+        $this->db->group_by('State');
+        $this->db->order_by('State', 'ASC');
+        $stateRows = $this->db->get()->result_array();
+
+        // 9. Categories Breakdown
+        $this->db->select("Category, COUNT(*) as Count");
+        $this->db->from('BidCreationDetails');
+        $dateFilter($this->db);
+        $this->db->where('Category IS NOT NULL', null, false);
+        $this->db->where("TRIM(Category) !=", '');
+        $this->db->group_by('Category');
+        $this->db->order_by('Category', 'ASC');
+        $catRows = $this->db->get()->result_array();
+
         $conversionRate = ($totalBids > 0) ? round(($awarded / $totalBids) * 100, 1) : 0;
 
         return [
@@ -417,7 +440,15 @@ function getBidDetailsData(){
                 'values'     => array_map(function($v) { return (float) $v; }, array_column($monthRows, 'TotalValue')),
                 'emdValues'  => array_map(function($v) { return (float) $v; }, array_column($monthRows, 'EmdValue'))
             ],
-            'monthlyTable' => $monthlyTable
+            'monthlyTable' => $monthlyTable,
+            'stateBreakdown' => [
+                'categories'   => array_column($stateRows, 'State'),
+                'blueSeries'   => array_map('intval', array_column($stateRows, 'BlueCount')),
+                'orangeSeries' => array_map('intval', array_column($stateRows, 'OrangeCount')),
+                'totalSeries'  => array_map('intval', array_column($stateRows, 'TotalCount')),
+                'raw'          => $stateRows
+            ],
+            'categoryBreakdown' => $catRows
         ];
     }
 
@@ -426,12 +457,42 @@ function getBidDetailsData(){
      */
     public function getAllBidsWithStatus()
     {
-        return $this->db->select('b.Bcid, b.BidTitle, b.BidType, b.BidDepartment, b.EstimatedValue, b.EmdValue, b.PublishedDate, b.OpeningDate, b.SubmissionDate, b.CreationTs, b.BidStatus, s.DisplayName as StatusName, s.BadgeClass, s.IconClass')
+        return $this->db->select('b.Bcid, b.BidTitle, b.BidType, b.BidDepartment, b.State, b.Category, b.EstimatedValue, b.EmdValue, b.PublishedDate, b.OpeningDate, b.SubmissionDate, b.CreationTs, b.BidStatus, s.DisplayName as StatusName, s.BadgeClass, s.IconClass')
                         ->from('BidCreationDetails b')
                         ->join('BidStatusMaster s', 's.Sid = b.BidStatus', 'left')
                         ->order_by('b.CreationTs', 'DESC')
                         ->get()
                         ->result_array();
+    }
+
+    /**
+     * Get distinct list of Categories for dashboard filters
+     */
+    public function getDistinctCategories()
+    {
+        $rows = $this->db->distinct()
+                         ->select('Category')
+                         ->where('Category IS NOT NULL', null, false)
+                         ->where("TRIM(Category) !=", '')
+                         ->order_by('Category', 'ASC')
+                         ->get('BidCreationDetails')
+                         ->result_array();
+        return array_values(array_unique(array_filter(array_map('trim', array_column($rows, 'Category')))));
+    }
+
+    /**
+     * Get distinct list of States/UTs for dashboard filters
+     */
+    public function getDistinctStates()
+    {
+        $rows = $this->db->distinct()
+                         ->select('State')
+                         ->where('State IS NOT NULL', null, false)
+                         ->where("TRIM(State) !=", '')
+                         ->order_by('State', 'ASC')
+                         ->get('BidCreationDetails')
+                         ->result_array();
+        return array_values(array_unique(array_filter(array_map('trim', array_column($rows, 'State')))));
     }
 
     /**

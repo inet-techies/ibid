@@ -132,6 +132,8 @@ public function dashboard(){
 			$data['overview']  = $this->bid_model->getOverviewDashboardData($startDate, $endDate);
 			$data['allBids']   = $this->bid_model->getAllBidsWithStatus();
 			$data['statuses']  = $this->bid_model->getStatuses();
+			$data['categories']= $this->bid_model->getDistinctCategories();
+			$data['states']    = $this->bid_model->getDistinctStates();
 			$data['startDate'] = $startDate;
 			$data['endDate']   = $endDate;
 
@@ -615,6 +617,12 @@ public function getUserData()
 		redirect($this->config->item('base_url')."bid/index");
 	}
 }
+
+public function profile()
+{
+	redirect($this->config->item('base_url') . "bid/dashboard");
+}
+
 // public function PQEvaluation(){
 
 // 		$Bid_Session=$this->session->userdata('logged_in');  
@@ -1291,13 +1299,13 @@ public function updateBidStatus()
 		            return;
 		        }
 
-		        // Prevent same status update for standard transitions
+		    
 		        if($oldStatus == $newStatus){
 		            echo json_encode(['status'=>false,'message'=>'Status already same']);
 		            return;
 		        }
 
-		        // 1️⃣ Update Main Table
+		       
 		        $updateMain = [
 		            'BidStatus' => $newStatus,
 		            'Remarks'   => $remarks !== null ? trim($remarks) : '',
@@ -1336,7 +1344,7 @@ public function updateBidStatus()
 		            $updateMain['CompletionCertificateDocumentPath'] = $ccDocPath;
 		        }
 
-		        // 2️⃣ Insert Tracking Record
+		        
 		        $trackingData = [
 		            'Bcid' => $bcid,
 		            'OldStatusId' => $oldStatus,
@@ -1501,10 +1509,7 @@ public  function logout()
 			}
 	}
 
-    /**
-     * Render the 12-Section Tender Fact Sheet
-     * Route: GET/POST /bid/factsheet?id=X or ?bcid=Y or ?doc=Z
-     */
+    
     public function factsheet()
     {
         $Bid_Session = $this->session->userdata('logged_in');
@@ -1627,14 +1632,6 @@ public  function logout()
         }
     }
 
-<<<<<<< HEAD
-    /* =========================================================================
-     * NEW BID NOTIFICATION SYSTEM METHODS
-=======
-    /**
-     * Securely streams a tender PDF document to authenticated users for the Evidence-Linked Fact Sheet viewer.
-     * Prevents path traversal and verifies session.
-     */
     public function view_tender_document()
     {
         $Bid_Session = $this->session->userdata('logged_in');
@@ -1684,7 +1681,7 @@ public  function logout()
             $mime = 'application/pdf';
         }
 
-        // Stream file safely
+        
         header('Content-Type: ' . $mime);
         header('Content-Disposition: inline; filename="' . basename($docName) . '"');
         header('Content-Length: ' . filesize($fullPath));
@@ -1694,9 +1691,7 @@ public  function logout()
         exit;
     }
 
-    /**
-     * AJAX API to retrieve evidence records for a specific field or all fields in a Fact Sheet.
-     */
+   
     public function get_field_evidence()
     {
         $Bid_Session = $this->session->userdata('logged_in');
@@ -1733,8 +1728,9 @@ public  function logout()
             'evidence' => $evidence
         ]));
     }
-    /* ==================================================================     * NEW BID NOTIFICATION SYSTEM METHODS
->>>>>>> f237aad1c4a287ca5a4118d164d85a8efacceb10
+
+    /* =========================================================================
+     * NEW BID NOTIFICATION SYSTEM METHODS
      * ========================================================================= */
 
     /**
@@ -1880,7 +1876,7 @@ public  function logout()
             $bcid = (int)$bid['Bcid'];
             $bidTitle = $bid['BidTitle'] ?? "Bid #{$bcid}";
 
-            // Interval check: Check if reminder was sent within the last 24 hours
+           
             $wasSentIn24h = $this->bid_model->wasNotificationSentWithinInterval($bcid, 'OPENING_DATE_REMINDER', 24);
 
             if ($wasSentIn24h && !$force) {
@@ -1894,7 +1890,7 @@ public  function logout()
                 continue;
             }
 
-            // Notification is due: Send reminder email
+         
             $subject = 'Bid Opening Reminder - ' . $bidTitle;
             try {
                 $objs = new InetMailer();
@@ -2036,13 +2032,10 @@ public  function logout()
         }
     }
 
-<<<<<<< HEAD
-=======
     // =========================================================================
     // TENDER TIMELINE INTELLIGENCE & CORRIGENDUM SUITE
     // =========================================================================
 
->>>>>>> f237aad1c4a287ca5a4118d164d85a8efacceb10
     /**
      * Dedicated Timeline Intelligence view for a Bid or Fact Sheet
      */
@@ -2206,8 +2199,6 @@ public  function logout()
         return $this->output->set_content_type('application/json')
             ->set_output(json_encode(['status' => (bool)$res, 'message' => 'Reminder cancelled.']));
     }
-<<<<<<< HEAD
-=======
 
     /**
      * Cron endpoint to process and dispatch due timeline reminders
@@ -2245,6 +2236,4 @@ public  function logout()
                 'timestamp'  => $now
             ]));
     }
-
->>>>>>> f237aad1c4a287ca5a4118d164d85a8efacceb10
 } //MAIN
