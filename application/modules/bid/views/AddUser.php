@@ -1,7 +1,7 @@
  <?php $employee_det = $this->session->userdata('logged_in');
   if(empty($employee_det)) { redirect($this->config->item('base_url').'bid/index'); }
 ?>
-  <!-- [ Main Content ] start -->
+ 
  
                 <div class="row">
                     <div class="col-lg-12">

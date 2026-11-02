@@ -1,15 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-/**
- * Timeline_model
- *
- * Lightweight DB-driven model for Tender Timeline Intelligence.
- * Builds the timeline directly from existing database records:
- * - `tenderfactsheet.ImportantDates`
- * - `BidCreationDetails` (`PublishedDate`, `SubmissionDate`, `OpeningDate`)
- * Zero heavy external libraries or PDF re-parsing needed.
- */
+
 class Timeline_model extends CI_Model {
 
     public function __construct() {
@@ -17,12 +9,7 @@ class Timeline_model extends CI_Model {
         $this->load->database();
     }
 
-    /**
-     * Get structured timeline directly from database records
-     *
-     * @param int $tfs_id FactSheet ID
-     * @return array|null Standardized timeline intelligence payload
-     */
+  
     public function getTimeline($tfs_id) {
         $fs = $this->db->select('Tfsid, Bcid, TenderRefNo, TenderTitle, ImportantDates, TimelineJson, DocumentName')
             ->from('tenderfactsheet')

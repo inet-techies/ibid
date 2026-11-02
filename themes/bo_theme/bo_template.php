@@ -738,6 +738,7 @@ $isActive   = !empty($currentUrlArray['child'])
     <script src="<?=$theme_path?>/assets/js/common-init.min.js"></script>
      <script src="<?=$theme_path?>/assets/js/proposal-create-init.min.js"></script>
          <script src="<?=$theme_path?>/assets/js/customers-create-init.min.js"></script>
+         <script src="<?=$theme_path?>/assets/js/customers-init.min.js"></script>
 
     <script src="<?=$theme_path?>/assets/js/dashboard-init.min.js"></script>
     <script src="<?=$theme_path?>/assets/js/dashboard.js"></script>

@@ -745,6 +745,33 @@ public function AddBidData(){
 				$validationErrors[] = 'Remarks is required.';
 			}
 
+			$bidState = trim($inputs['bidStateInput'] ?? '');
+			if (empty($bidState)) {
+				$validationErrors[] = 'State is required.';
+			}
+
+			$bidCustomerName = trim($inputs['bidCustomerNameInput'] ?? '');
+			if (empty($bidCustomerName)) {
+				$validationErrors[] = 'Customer Name is required.';
+			}
+
+			$bidCustomerPhone = trim($inputs['bidCustomerPhoneInput'] ?? '');
+			if (empty($bidCustomerPhone)) {
+				$validationErrors[] = 'Customer Phone is required.';
+			} elseif (!preg_match('/^[0-9+\-\s()]{7,20}$/', $bidCustomerPhone)) {
+				$validationErrors[] = 'Customer Phone must be a valid phone number (7-20 digits).';
+			}
+
+			$bidCustomerAddress = trim($inputs['bidCustomerAddressInput'] ?? '');
+			if (empty($bidCustomerAddress)) {
+				$validationErrors[] = 'Customer Address is required.';
+			}
+
+			$bidCategory = trim($inputs['bidCategoryInput'] ?? '');
+			if (empty($bidCategory)) {
+				$validationErrors[] = 'Category is required.';
+			}
+
 			if (!empty($validationErrors)) {
 				$this->session->set_flashdata('err', implode('<br>', $validationErrors));
 				redirect($this->config->item('base_url').'bid/CreateBids');
@@ -752,20 +779,25 @@ public function AddBidData(){
 			}
 
 			$Biddata = [
-	            'BidType'        => $bidType,
-	            'BidTitle'       => $bidTitle,
-	            'BidDepartment'  => $bidDepartment,
-	            'EstimatedValue' => (float)$rawEstimated,
-	            'EmdValue'       => (float)$rawEmd,
-	            'PublishedDate'  => date('Y-m-d', strtotime($publishedDate)),
-	            'SubmissionDate' => date('Y-m-d', strtotime($submissionDate)),
-	            'OpeningDate'    => date('Y-m-d', strtotime($openingDate)),
-	            'SummaryKeywords'=> $bidSummary,
-	            'TenderPortalUrl'=> $bidTenderPortal,
-	            'TenderId'       => $bidTenderId,
-	            'NASPath'        => $nasPath,
-	            'Remarks'        => $bidRemarks,
-	            'BidStatus'      => 1
+	            'BidType'          => $bidType,
+	            'BidTitle'         => $bidTitle,
+	            'BidDepartment'    => $bidDepartment,
+	            'State'            => $bidState,
+	            'CustomerName'     => $bidCustomerName,
+	            'CustomerPhone'    => $bidCustomerPhone,
+	            'CustomerAddress'  => $bidCustomerAddress,
+	            'Category'         => $bidCategory,
+	            'EstimatedValue'   => (float)$rawEstimated,
+	            'EmdValue'         => (float)$rawEmd,
+	            'PublishedDate'    => date('Y-m-d', strtotime($publishedDate)),
+	            'SubmissionDate'   => date('Y-m-d', strtotime($submissionDate)),
+	            'OpeningDate'      => date('Y-m-d', strtotime($openingDate)),
+	            'SummaryKeywords'  => $bidSummary,
+	            'TenderPortalUrl'  => $bidTenderPortal,
+	            'TenderId'         => $bidTenderId,
+	            'NASPath'          => $nasPath,
+	            'Remarks'          => $bidRemarks,
+	            'BidStatus'        => 1
 	        ];
 			$id = $this->bid_model->insertBidCreationDetails($Biddata);
 			if($id>0){
@@ -883,14 +915,14 @@ private function status($statusKey)
 
     if(isset($Bid_Session) && !empty($Bid_Session))
     {
-        // Get status from master table
+        
         $status = $this->bid_model->getStatusByName($statusKey);
 
         if(!$status){
             show_404();
         }
 
-        // Fetch bids of that status
+      
         $data['BidData'] = $this->bid_model->getBidsByStatusId($status->Sid);
         $data['PageTitle'] = $status->DisplayName;
 
@@ -912,7 +944,7 @@ public function getStatuses()
 		{
 		    $currentStatus = $this->input->post('current_status');
 
-		    // 1️⃣ Get current status SortOrder
+		  
 		        $current = $this->bid_model->getStatusSortOrder($currentStatus);
 
 		        if(!$current){
@@ -1297,7 +1329,7 @@ public function updateBidStatus()
 		            return;
 		        }
 
-		        // 1️⃣ Update Main Table
+		        
 		        $updateMain = [
 		            'BidStatus' => $newStatus,
 		            'Remarks'   => $remarks !== null ? trim($remarks) : '',
@@ -1818,28 +1850,12 @@ public  function logout()
         }
     }
 
-    /**
-     * Dedicated 24-Hour Opening Date Notification Checker
-     *
-     * Business Logic:
-     * 1. Finds eligible bids (OpeningDate >= today, not Inactive/Cancelled, no reminder in last 24h)
-     * 2. Checks notification history to prevent duplicate emails
-     * 3. Determines whether the required 24-hour interval has elapsed
-     * 4. Sends professional opening-date reminder email when due
-     * 5. Records successful notification in BidNotificationLog
-     * 6. If email fails, records failure and does NOT mark as SENT
-     *
-     * Execution Methods:
-     * - CLI / Linux Cron: php index.php bid checkOpeningReminders
-     * - Browser / Manual test: GET /bid/checkOpeningReminders (optionally ?bcid=8&force=1)
-     *
-     * @param int|null $testBcid Optional Bcid for manual testing
-     */
+  
     public function checkOpeningReminders($testBcid = null)
     {
         $isCli = (function_exists('is_cli') && is_cli()) || (PHP_SAPI === 'cli');
         $targetBcid = $testBcid ? (int)$testBcid : (int)$this->input->get('bcid');
-        $force = (bool)$this->input->get('force'); // Allows forcing send during manual dev testing
+        $force = (bool)$this->input->get('force'); 
 
         $results = [
             'status'         => true,
@@ -2031,13 +2047,7 @@ public  function logout()
         }
     }
 
-    // =========================================================================
-    // TENDER TIMELINE INTELLIGENCE & CORRIGENDUM SUITE
-    // =========================================================================
-
-    /**
-     * Dedicated Timeline Intelligence view for a Bid or Fact Sheet
-     */
+    
     public function timeline()
     {
         $Bid_Session = $this->session->userdata('logged_in');
