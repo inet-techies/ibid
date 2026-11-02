@@ -1,16 +1,71 @@
 /* ==========================================================================
    Bid Tracking Dashboard Styles
-   Exact Layout, Colors & Structure matching Reference Screenshot
+   100% Dynamic, Data-Driven Interface Styling
    ========================================================================== */
 
-/* Top 7 KPI Metric Cards */
-@media (min-width: 1400px) {
-    #overview-kpi-row .kpi-col {
-        flex: 0 0 14.285%;
-        max-width: 14.285%;
-    }
+/* Filter Control Panel */
+.filter-control-panel {
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
 }
 
+.filter-select {
+    font-size: 12px;
+    font-weight: 500;
+    color: #1e293b;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    transition: all 0.15s ease-in-out;
+}
+
+.filter-select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.filter-select.filter-active {
+    border-color: #2563eb !important;
+    background-color: #eff6ff !important;
+    font-weight: 700;
+}
+
+.reportrange-picker {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 5px 10px;
+    height: 31px;
+}
+
+.reportrange-picker.filter-active {
+    border-color: #16a34a !important;
+    background-color: #f0fdf4 !important;
+    font-weight: 700;
+}
+
+/* Active Filter Badges */
+.active-filter-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 20px;
+}
+
+.active-filter-badge .badge-clear-btn {
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.8;
+}
+
+.active-filter-badge .badge-clear-btn:hover {
+    opacity: 1;
+}
+
+/* Top KPI Metric Cards */
 .kpi-card-box {
     background: #ffffff;
     border: 1px solid #cbd5e1;
@@ -24,9 +79,8 @@
     box-shadow: 0 3px 8px rgba(0,0,0,0.06);
 }
 
-/* Purple KPI Labels matching reference screenshot */
 .kpi-card-box .kpi-label {
-    color: #6b21a8 !important; /* Bold purple text matching reference */
+    color: #6b21a8 !important;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.2px;
@@ -73,15 +127,20 @@
     font-size: 10px;
 }
 
-/* Card titles matching reference */
+/* Card titles */
 .card-title {
     font-size: 13px !important;
     font-weight: 700 !important;
     color: #0f172a;
 }
 
-/* Dashboard container */
-#dashboard-main-view {
-    width: 100%;
-    overflow-x: hidden;
+/* Chart Cards */
+#chart-overview-category,
+#chart-overview-state {
+    width: 100% !important;
+}
+
+/* Utility */
+.c-pointer {
+    cursor: pointer;
 }

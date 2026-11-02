@@ -9,6 +9,17 @@ $isActive   = !empty($currentUrlArray['child'])
               && strtolower($currentUrlArray['child']['MenuUrl']) === $currentUrl;
        // echo "<pre>cur_view isActive"; print_r($isActive); exit;       
      if(empty($employee_det)) { redirect($this->config->item('base_url').'bid/index'); }
+
+$currentUserProfile = null;
+$currentUserRoleName = 'User';
+if (!empty($employee_det['Bid'])) {
+    $currentUserProfile = $this->bid_model->getUserRowArray($employee_det['Bid']);
+    $userBrid = $currentUserProfile['Brid'] ?? ($employee_det['RoleId'] ?? null);
+    if (!empty($userBrid)) {
+        $roleRow = $this->db->get_where('BidUsersRoles', ['Brid' => $userBrid])->row_array();
+        $currentUserRoleName = $roleRow['RoleName'] ?? 'User';
+    }
+}
 ?>
 <?php $theme_path = $this->config->item('theme_locations').$this->config->item('active_template'); ?>
 <!DOCTYPE html>
@@ -48,7 +59,7 @@ $isActive   = !empty($currentUrlArray['child'])
     <link rel="stylesheet" href="<?=$theme_path?>/css/canvas-modal.css">
     <link rel="stylesheet" href="<?=$theme_path?>/assets/css/oem.css">
     <link rel="stylesheet" href="<?=$theme_path?>/assets/css/document.css">
-    <link rel="stylesheet" href="<?=$theme_path?>/assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?=$theme_path?>/assets/css/dashboard.css?v=<?= time(); ?>">
 
     <style>
         /* Always keep footer at the bottom of the viewport */
@@ -311,69 +322,6 @@ $isActive   = !empty($currentUrlArray['child'])
                         </div>
                     </div> -->
                     <div class="dropdown nxl-h-item">
-                        <a class="nxl-head-link me-3" data-bs-toggle="dropdown" href="#" role="button" data-bs-auto-close="outside">
-                            <i class="feather-bell"></i>
-                            <span class="badge bg-danger nxl-h-badge">3</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end nxl-h-dropdown nxl-notifications-menu">
-                            <div class="d-flex justify-content-between align-items-center notifications-head">
-                                <h6 class="fw-bold text-dark mb-0">Notifications</h6>
-                                <a href="javascript:void(0);" class="fs-11 text-success text-end ms-auto" data-bs-toggle="tooltip" title="Make as Read">
-                                    <i class="feather-check"></i>
-                                    <span>Make as Read</span>
-                                </a>
-                            </div>
-                            <div class="notifications-item">
-                                <img src="<?=$theme_path?>/assets/images/avatar/2.png" alt="" class="rounded me-3 border" />
-                                <div class="notifications-desc">
-                                    <a href="javascript:void(0);" class="font-body text-truncate-2-line"> <span class="fw-semibold text-dark">Malanie Hanvey</span> We should talk about that at lunch!</a>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="notifications-date text-muted border-bottom border-bottom-dashed">2 minutes ago</div>
-                                        <div class="d-flex align-items-center float-end gap-2">
-                                            <a href="javascript:void(0);" class="d-block wd-8 ht-8 rounded-circle bg-gray-300" data-bs-toggle="tooltip" title="Make as Read"></a>
-                                            <a href="javascript:void(0);" class="text-danger" data-bs-toggle="tooltip" title="Remove">
-                                                <i class="feather-x fs-12"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="notifications-item">
-                                <img src="<?=$theme_path?>/assets/images/avatar/3.png" alt="" class="rounded me-3 border" />
-                                <div class="notifications-desc">
-                                    <a href="javascript:void(0);" class="font-body text-truncate-2-line"> <span class="fw-semibold text-dark">Valentine Maton</span> You can download the latest invoices now.</a>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="notifications-date text-muted border-bottom border-bottom-dashed">36 minutes ago</div>
-                                        <div class="d-flex align-items-center float-end gap-2">
-                                            <a href="javascript:void(0);" class="d-block wd-8 ht-8 rounded-circle bg-gray-300" data-bs-toggle="tooltip" title="Make as Read"></a>
-                                            <a href="javascript:void(0);" class="text-danger" data-bs-toggle="tooltip" title="Remove">
-                                                <i class="feather-x fs-12"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="notifications-item">
-                                <img src="<?=$theme_path?>/assets/images/avatar/4.png" alt="" class="rounded me-3 border" />
-                                <div class="notifications-desc">
-                                    <a href="javascript:void(0);" class="font-body text-truncate-2-line"> <span class="fw-semibold text-dark">Archie Cantones</span> Don't forget to pickup Jeremy after school!</a>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="notifications-date text-muted border-bottom border-bottom-dashed">53 minutes ago</div>
-                                        <div class="d-flex align-items-center float-end gap-2">
-                                            <a href="javascript:void(0);" class="d-block wd-8 ht-8 rounded-circle bg-gray-300" data-bs-toggle="tooltip" title="Make as Read"></a>
-                                            <a href="javascript:void(0);" class="text-danger" data-bs-toggle="tooltip" title="Remove">
-                                                <i class="feather-x fs-12"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center notifications-footer">
-                                <a href="javascript:void(0);" class="fs-13 fw-semibold text-dark">Alls Notifications</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dropdown nxl-h-item">
                         <a href="javascript:void(0);" data-bs-toggle="dropdown" role="button" data-bs-auto-close="outside">
                             <img src="<?=$theme_path?>/assets/images/avatar/1.png" alt="user-image" class="img-fluid user-avtar me-0" />
                         </a>
@@ -387,7 +335,7 @@ $isActive   = !empty($currentUrlArray['child'])
                                     </div>
                                 </div>
                             </div>  
-                             <a href="javascript:void(0);" class="dropdown-item">
+                             <a href="javascript:void(0);" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#userProfileModal">
                                 <i class="feather-user"></i>
                                 <span>Profile Details</span>
                             </a>
@@ -464,56 +412,6 @@ $isActive   = !empty($currentUrlArray['child'])
                             </a>
                         </div>
                         <div class="d-flex align-items-center gap-2 page-header-right-items-wrapper">
-                            <div id="reportrange" class="reportrange-picker d-flex align-items-center">
-                                <span class="reportrange-picker-field"></span>
-                            </div>
-                            <div class="dropdown filter-dropdown">
-                                <a class="btn btn-md btn-light-brand" data-bs-toggle="dropdown" data-bs-offset="0, 10" data-bs-auto-close="outside">
-                                    <i class="feather-filter me-2"></i>
-                                    <span>Filter</span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <div class="dropdown-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="Role" checked="checked" />
-                                            <label class="custom-control-label c-pointer" for="Role">Role</label>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="Team" checked="checked" />
-                                            <label class="custom-control-label c-pointer" for="Team">Team</label>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="Email" checked="checked" />
-                                            <label class="custom-control-label c-pointer" for="Email">Email</label>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="Member" checked="checked" />
-                                            <label class="custom-control-label c-pointer" for="Member">Member</label>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-item">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="Recommendation" checked="checked" />
-                                            <label class="custom-control-label c-pointer" for="Recommendation">Recommendation</label>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="javascript:void(0);" class="dropdown-item">
-                                        <i class="feather-plus me-3"></i>
-                                        <span>Create New</span>
-                                    </a>
-                                    <a href="javascript:void(0);" class="dropdown-item">
-                                        <i class="feather-filter me-3"></i>
-                                        <span>Manage Filter</span>
-                                    </a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="d-md-none d-flex align-items-center">
@@ -542,6 +440,102 @@ $isActive   = !empty($currentUrlArray['child'])
         </footer>
         <!-- [ Footer ] end -->
     </main>
+
+    <!-- User Profile Details Modal -->
+    <div class="modal fade" id="userProfileModal" tabindex="-1" aria-labelledby="userProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow-lg" style="border-radius: 12px; overflow: hidden;">
+                <div class="modal-header bg-light py-3 px-4 border-bottom">
+                    <h5 class="modal-title fw-bold text-dark d-flex align-items-center mb-0" id="userProfileModalLabel">
+                        <i class="feather-user text-primary me-2 fs-18"></i> Profile Details
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-md-4 text-center border-end-md pb-3 pb-md-0">
+                            <div class="avatar-image avatar-xl mx-auto mb-3">
+                                <img src="<?=$theme_path?>/assets/images/avatar/1.png" alt="user-avatar" class="img-fluid rounded-circle border shadow-sm" style="width: 90px; height: 90px; object-fit: cover;" />
+                            </div>
+                            <h5 class="fw-bold mb-1 text-dark"><?= htmlspecialchars($currentUserProfile['Name'] ?? ($employee_det['BName'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></h5>
+                            <p class="text-muted fs-12 mb-2"><?= htmlspecialchars($currentUserProfile['Designation'] ?? 'Bid Management Team', ENT_QUOTES, 'UTF-8'); ?></p>
+                            <div class="mb-2">
+                                <span class="badge bg-primary px-3 py-1 fs-12"><?= htmlspecialchars($currentUserRoleName, ENT_QUOTES, 'UTF-8'); ?></span>
+                            </div>
+                            <div>
+                                <?php if (($currentUserProfile['Status'] ?? 1) == 1): ?>
+                                    <span class="badge bg-soft-success text-success border border-success px-2 py-1 fs-11"><i class="feather-check-circle me-1"></i>Active Account</span>
+                                <?php else: ?>
+                                    <span class="badge bg-soft-danger text-danger border border-danger px-2 py-1 fs-11"><i class="feather-x-circle me-1"></i>Inactive</span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <div class="p-3 bg-light rounded-3 border">
+                                        <div class="fs-11 text-muted text-uppercase fw-semibold mb-1">User Role</div>
+                                        <div class="fs-14 fw-bold text-dark d-flex align-items-center">
+                                            <i class="feather-shield text-primary me-2"></i> <?= htmlspecialchars($currentUserRoleName, ENT_QUOTES, 'UTF-8'); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="p-3 bg-light rounded-3 border">
+                                        <div class="fs-11 text-muted text-uppercase fw-semibold mb-1">Account Status</div>
+                                        <div class="fs-14 fw-bold d-flex align-items-center">
+                                            <?php if (($currentUserProfile['Status'] ?? 1) == 1): ?>
+                                                <i class="feather-check-circle text-success me-2"></i>
+                                                <span class="text-success">Active</span>
+                                            <?php else: ?>
+                                                <i class="feather-x-circle text-danger me-2"></i>
+                                                <span class="text-danger">Inactive</span>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="p-3 bg-light rounded-3 border">
+                                        <div class="fs-11 text-muted text-uppercase fw-semibold mb-1">Email Address</div>
+                                        <div class="fs-14 fw-bold text-dark d-flex align-items-center text-truncate" title="<?= htmlspecialchars($currentUserProfile['Email'] ?? ($employee_det['BEmail'] ?? ''), ENT_QUOTES, 'UTF-8'); ?>">
+                                            <i class="feather-mail text-primary me-2"></i> <?= htmlspecialchars($currentUserProfile['Email'] ?? ($employee_det['BEmail'] ?? ''), ENT_QUOTES, 'UTF-8'); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="p-3 bg-light rounded-3 border">
+                                        <div class="fs-11 text-muted text-uppercase fw-semibold mb-1">Mobile Number</div>
+                                        <div class="fs-14 fw-bold text-dark d-flex align-items-center">
+                                            <i class="feather-phone text-primary me-2"></i> <?= !empty($currentUserProfile['Mobile']) ? htmlspecialchars($currentUserProfile['Mobile'], ENT_QUOTES, 'UTF-8') : '<span class="text-muted fw-normal">Not Provided</span>'; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="p-3 bg-light rounded-3 border">
+                                        <div class="fs-11 text-muted text-uppercase fw-semibold mb-1">Designation</div>
+                                        <div class="fs-14 fw-bold text-dark d-flex align-items-center">
+                                            <i class="feather-briefcase text-primary me-2"></i> <?= !empty($currentUserProfile['Designation']) ? htmlspecialchars($currentUserProfile['Designation'], ENT_QUOTES, 'UTF-8') : '<span class="text-muted fw-normal">Not Specified</span>'; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="p-3 bg-light rounded-3 border">
+                                        <div class="fs-11 text-muted text-uppercase fw-semibold mb-1">Member Since</div>
+                                        <div class="fs-14 fw-semibold text-dark d-flex align-items-center">
+                                            <i class="feather-calendar text-primary me-2"></i> <?= (!empty($currentUserProfile['CreationTs']) && strtotime($currentUserProfile['CreationTs'])) ? date('d M Y', strtotime($currentUserProfile['CreationTs'])) : '<span class="text-muted fw-normal">-</span>'; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light py-2 px-4 border-top">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--! ================================================================ !-->
     <!--! [End] Main Content !-->
     <!--! ================================================================ !-->
@@ -741,7 +735,7 @@ $isActive   = !empty($currentUrlArray['child'])
          <script src="<?=$theme_path?>/assets/js/customers-init.min.js"></script>
 
     <script src="<?=$theme_path?>/assets/js/dashboard-init.min.js"></script>
-    <script src="<?=$theme_path?>/assets/js/dashboard.js"></script>
+    <script src="<?=$theme_path?>/assets/js/dashboard.js?v=<?= time(); ?>"></script>
     <!--! END: Apps Init !-->
     <!--! BEGIN: Theme Customizer  !-->
     <script src="<?=$theme_path?>/assets/js/theme-customizer-init.min.js"></script>
