@@ -139,6 +139,105 @@
                         </div>
                     </div>
                 </div><!---------Bid Department/Organization----------->
+
+                 <div class="row mb-4 align-items-center">
+                    <div class="col-lg-4">
+                        <label for="bidStateInput" class="fw-semibold">State: <span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="input-group">
+                            <div class="input-group-text"><i class="feather-map-pin"></i></div>
+                            <select class="form-control" id="bidStateInput" name="bidStateInput">
+                                <option value="">Select State</option>
+                                <option>Andhra Pradesh</option>
+                                <option>Arunachal Pradesh</option>
+                                <option>Assam</option>
+                                <option>Bihar</option>
+                                <option>Chhattisgarh</option>
+                                <option>Goa</option>
+                                <option>Gujarat</option>
+                                <option>Haryana</option>
+                                <option>Himachal Pradesh</option>
+                                <option>Jharkhand</option>
+                                <option>Karnataka</option>
+                                <option>Kerala</option>
+                                <option>Madhya Pradesh</option>
+                                <option>Maharashtra</option>
+                                <option>Manipur</option>
+                                <option>Meghalaya</option>
+                                <option>Mizoram</option>
+                                <option>Nagaland</option>
+                                <option>Odisha</option>
+                                <option>Punjab</option>
+                                <option>Rajasthan</option>
+                                <option>Sikkim</option>
+                                <option>Tamil Nadu</option>
+                                <option>Telangana</option>
+                                <option>Tripura</option>
+                                <option>Uttar Pradesh</option>
+                                <option>Uttarakhand</option>
+                                <option>West Bengal</option>
+                                <option>Andaman and Nicobar Islands</option>
+                                <option>Chandigarh</option>
+                                <option>Dadra and Nagar Haveli and Daman and Diu</option>
+                                <option>Delhi</option>
+                                <option>Jammu and Kashmir</option>
+                                <option>Ladakh</option>
+                                <option>Lakshadweep</option>
+                                <option>Puducherry</option>
+                            </select>
+                        </div>
+                    </div>
+                </div><!---------State----------->
+
+                 <div class="row mb-4 align-items-center">
+                    <div class="col-lg-4">
+                        <label for="bidCustomerNameInput" class="fw-semibold">Customer Name: <span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="input-group">
+                            <div class="input-group-text"><i class="feather-user"></i></div>
+                            <input type="text" class="form-control" id="bidCustomerNameInput" name="bidCustomerNameInput" placeholder="Enter Customer / Client Name">
+                        </div>
+                    </div>
+                </div><!---------Customer Name----------->
+
+                 <div class="row mb-4 align-items-center">
+                    <div class="col-lg-4">
+                        <label for="bidCustomerPhoneInput" class="fw-semibold">Customer Phone: <span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="input-group">
+                            <div class="input-group-text"><i class="feather-phone"></i></div>
+                            <input type="text" class="form-control" id="bidCustomerPhoneInput" name="bidCustomerPhoneInput" placeholder="Enter Customer Phone Number" maxlength="20">
+                        </div>
+                    </div>
+                </div><!---------Customer Phone----------->
+
+                 <div class="row mb-4 align-items-center">
+                    <div class="col-lg-4">
+                        <label for="bidCustomerAddressInput" class="fw-semibold">Customer Address: <span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="input-group">
+                            <div class="input-group-text"><i class="feather-home"></i></div>
+                            <textarea class="form-control" id="bidCustomerAddressInput" name="bidCustomerAddressInput" cols="30" rows="3" placeholder="Enter Customer Address"></textarea>
+                        </div>
+                    </div>
+                </div><!---------Customer Address----------->
+
+                 <div class="row mb-4 align-items-center">
+                    <div class="col-lg-4">
+                        <label for="bidCategoryInput" class="fw-semibold">Category: <span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="input-group">
+                            <div class="input-group-text"><i class="feather-tag"></i></div>
+                            <input type="text" class="form-control" id="bidCategoryInput" name="bidCategoryInput" placeholder="Enter Tender Category (e.g. IT, Civil, Electrical)">
+                        </div>
+                    </div>
+                </div><!---------Category----------->
+
                  <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
                         <label for="bidEstimatedInput" class="fw-semibold">Estimated Tender Value: <span class="text-danger">*</span></label>
@@ -452,7 +551,7 @@
     }
   }
 
-  // ── Auto-fill form from parsed AI data ────────────────────────────────────
+
   function autoFillForm(resp) {
     var ai   = resp.ai_summary || {};
     var filled = [];
@@ -522,10 +621,7 @@
     }
     if (title && setField('bidTitleInput', title)) filled.push('Bid Title');
 
-    // Note: Department, Bid Type, Estimated Tender Value, NAS Path, and Remarks
-    // are EXCLUDED fields and must never be populated or overwritten by extraction.
 
-    // ── EMD Value ──
     var emdVal = (ai.emd_value || '').toString().trim();
     if (emdVal && emdVal !== '0' && setField('bidEmdInput', emdVal)) {
       filled.push('EMD Value');
@@ -536,11 +632,11 @@
       }
     }
 
-    // ── Published Date ──
+    
     var pubDate = ai.published_date || '';
     if (pubDate && setField('startDate', pubDate)) filled.push('Published Date');
 
-    // ── Submission End Date & Time ──
+   
     var subDate = ai.submission_date || '';
     if (!subDate && ai.submission_deadline) {
       subDate = ai.submission_deadline.indexOf(' at ') !== -1 ? ai.submission_deadline.split(' at ')[0].trim() : ai.submission_deadline;
@@ -561,16 +657,15 @@
       }
     }
 
-    // ── Bid Opening Date ──
+   
     var opDate = ai.opening_date || '';
     var cleanOpDate = (opDate.indexOf(' at ') !== -1) ? opDate.split(' at ')[0].trim() : opDate;
     if (cleanOpDate && setField('dateofBirth', cleanOpDate)) filled.push('Opening Date');
 
-    // ── Keywords for Summary ──
-    // Use the dedicated 'keywords' field (concise terms), NOT the long objective paragraph.
+   
     var kw = ai.keywords || '';
     if (!kw && ai.highlights && ai.highlights.length) {
-      // Fallback: extract just the values part from highlights (strip labels like "Scope: ")
+     
       var kwParts = [];
       ai.highlights.forEach(function(h) {
         var idx = h.indexOf(': ');
@@ -581,18 +676,17 @@
     }
     if (kw && setField('bidSummaryInput', kw)) filled.push('Keywords');
 
-    // ── Tender Portal URL ──
+    //  Tender Portal URL
     var portal = ai.portal || ai.portal_or_mode || '';
     if (portal && setField('bidTenderPortalInput', portal)) filled.push('Portal URL');
 
-    // ── Tender ID ──
+    // Tender ID 
     var refNo = ai.ref_no || ai.ref_code || ai.tender_id || '';
     if (refNo && setField('bidTenderIDInput', refNo)) filled.push('Tender ID');
 
     return filled;
   }
 
-  // ── Upload & parse ─────────────────────────────────────────────────────────
   function uploadAndParse(file) {
     if (!file) return;
 
@@ -609,7 +703,7 @@
     var irrAlert = document.getElementById('docParseIrrelevantAlert');
     if (irrAlert) irrAlert.style.display = 'none';
 
-    // Move status bar right above the form — prepend to card-body area
+    
     var statusBar = document.getElementById('docParseStatusBar');
     var cardBody  = document.querySelector('.card-body.general-info');
     if (statusBar && cardBody) {
@@ -678,7 +772,7 @@
     xhr.send(formData);
   }
 
-  // ── Wire up button & file input ────────────────────────────────────────────
+  
   document.addEventListener('DOMContentLoaded', function() {
     var btn       = document.getElementById('btnUploadParseDoc');
     var fileInput = document.getElementById('docParseFileInput');
@@ -937,7 +1031,64 @@
         }
       }
 
-      // 13. Remarks
+      // 13. State
+      var elState = document.getElementById('bidStateInput');
+      if (elState) {
+        var valState = elState.value ? elState.value.trim() : '';
+        if (valState === '') {
+          addErr(elState, 'Please select a State.');
+        } else {
+          removeErr(elState);
+        }
+      }
+
+      // 14. Customer Name
+      var elCustName = document.getElementById('bidCustomerNameInput');
+      if (elCustName) {
+        var valCustName = elCustName.value ? elCustName.value.trim() : '';
+        if (valCustName === '') {
+          addErr(elCustName, 'Please enter the Customer Name.');
+        } else {
+          removeErr(elCustName);
+        }
+      }
+
+      // 15. Customer Phone
+      var elCustPhone = document.getElementById('bidCustomerPhoneInput');
+      if (elCustPhone) {
+        var valCustPhone = elCustPhone.value ? elCustPhone.value.trim() : '';
+        if (valCustPhone === '') {
+          addErr(elCustPhone, 'Please enter the Customer Phone number.');
+        } else if (!/^[0-9+\-\s()]{7,20}$/.test(valCustPhone)) {
+          addErr(elCustPhone, 'Please enter a valid phone number (7–20 digits).');
+        } else {
+          removeErr(elCustPhone);
+        }
+      }
+
+      // 16. Customer Address
+      var elCustAddr = document.getElementById('bidCustomerAddressInput');
+      if (elCustAddr) {
+        var valCustAddr = elCustAddr.value ? elCustAddr.value.trim() : '';
+        if (valCustAddr === '') {
+          addErr(elCustAddr, 'Please enter the Customer Address.');
+        } else {
+          removeErr(elCustAddr);
+        }
+      }
+
+      // 17. Category
+      var elCategory = document.getElementById('bidCategoryInput');
+      if (elCategory) {
+        var valCategory = elCategory.value ? elCategory.value.trim() : '';
+        if (valCategory === '') {
+          addErr(elCategory, 'Please enter the Tender Category.');
+        } else {
+          removeErr(elCategory);
+        }
+      }
+
+      // 18. Remarks
       var elRemarks = document.getElementById('bidRemarksInput');
       if (elRemarks) {
         var valRemarks = elRemarks.value ? elRemarks.value.trim() : '';
@@ -989,7 +1140,8 @@
     [
       'bidTypeInput', 'bidTitleInput', 'bidDepartmentInput', 'bidEstimatedInput',
       'bidEmdInput', 'startDate', 'dueDate', 'dateofBirth', 'bidSummaryInput',
-      'bidTenderPortalInput', 'bidTenderIDInput', 'bidNASIDInput', 'bidRemarksInput'
+      'bidTenderPortalInput', 'bidTenderIDInput', 'bidNASIDInput', 'bidRemarksInput',
+      'bidStateInput', 'bidCustomerNameInput', 'bidCustomerPhoneInput', 'bidCustomerAddressInput', 'bidCategoryInput'
     ].forEach(function(id) {
       var el = document.getElementById(id);
       if (!el) return;

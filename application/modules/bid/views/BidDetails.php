@@ -7,7 +7,24 @@
       || (strtolower($this->uri->segment(2)) === 'technicalevaluated');
 ?>
 
-  <div class="row">
+  <style>
+#customerList_wrapper {
+    padding: 1rem 1.25rem;
+}
+#customerList_wrapper .dataTables_length,
+#customerList_wrapper .dataTables_filter {
+    margin-bottom: 0.85rem;
+}
+#customerList_wrapper .dataTables_info,
+#customerList_wrapper .dataTables_paginate {
+    margin-top: 0.85rem;
+}
+#customerList_wrapper .dataTables_paginate ul.pagination {
+    margin-bottom: 0;
+    gap: 2px;
+}
+</style>
+<div class="row">
                     <div class="col-lg-12">
                         <div class="card stretch stretch-full">
                             <br/>
@@ -31,7 +48,7 @@
                                    <table class="table table-hover text-nowrap wrap-no-text" id="customerList">
                                         <thead>
                                             <tr> 
-                                                <th>#</th>
+                                                <th data-orderable="false" style="width: 40px;">#</th>
                                                 <th>Bid Title</th>
                                                 <th>Bid Type</th>
                                                 <th>Department</th>
@@ -40,8 +57,7 @@
                                                 <th>Submission Date</th> 
                                                 <th>Bid Status</th>
                                                 <th>Creation Date</th>
-                                                <th>Remarks</th>
-                                                <th class="text-end">Actions</th>
+                                                <th class="text-center" data-orderable="false" style="width: 140px;">Actions</th>
                                             </tr>
                                         </thead>
                                          <tbody>
@@ -75,19 +91,14 @@
                                                         <td>
                                                             <?php
                                                             $statusBadge = !empty($val['BadgeClass']) ? $val['BadgeClass'] : 'bg-secondary';
-                                                            ?>
-                                                            <span class="badge <?= $statusBadge ?>">
+                                                                            ?>
+<span class="badge <?= $statusBadge ?>">
                                                                 <?= $val['DisplayName'] ?>
                                                             </span>
                                                         </td>
                                                         <td><?= (!empty($val['CreationTs']) && strtotime($val['CreationTs'])) ? date('d M Y, h:i A', strtotime($val['CreationTs'])) : '-' ?></td>
-                                                        <td>
-                                                            <span class="d-inline-block text-truncate" style="max-width: 180px;" title="<?= htmlspecialchars($val['Remarks'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
-                                                                <?= !empty($val['Remarks']) ? htmlspecialchars($val['Remarks'], ENT_QUOTES, 'UTF-8') : '-'; ?>
-                                                            </span>
-                                                        </td>
-                                                        <td>
-                                                            <div class="hstack gap-2 justify-content-end">
+                                                        <td class="text-center">
+                                                            <div class="hstack gap-2 justify-content-center">
                                                                 <a href="javascript:void(0)"
                                                                     class="avatar-text avatar-md openAddForm view-bid"
                                                                     data-bid='<?= json_encode($val); ?>'
@@ -135,18 +146,9 @@
                                             <?php
                                                     $i++;
                                                 }
-                                            } else {
-                                            ?>
-                                                <tr>
-                                                    <td colspan="11" class="text-center text-muted py-4">
-                                                        <i class="feather-alert-circle me-1"></i>
-                                                        No details found
-                                                    </td>
-                                                </tr>
-                                            <?php
-                                            }
-                                            ?>
-                                        </tbody>
+                                             }
+                                         ?>
+                                         </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -482,6 +484,36 @@ $(document).on('click', '.view-bid', function () {
                         <th>Department</th>
                         <td>${bid.BidDepartment ?? '-'}</td>
                     </tr>
+
+                    ${(bid.State) ? `
+                    <tr>
+                        <th>State</th>
+                        <td>${bid.State}</td>
+                    </tr>` : ''}
+
+                    ${(bid.CustomerName) ? `
+                    <tr>
+                        <th>Customer Name</th>
+                        <td>${bid.CustomerName}</td>
+                    </tr>` : ''}
+
+                    ${(bid.CustomerPhone) ? `
+                    <tr>
+                        <th>Customer Phone</th>
+                        <td>${bid.CustomerPhone}</td>
+                    </tr>` : ''}
+
+                    ${(bid.CustomerAddress) ? `
+                    <tr>
+                        <th>Customer Address</th>
+                        <td>${bid.CustomerAddress}</td>
+                    </tr>` : ''}
+
+                    ${(bid.Category) ? `
+                    <tr>
+                        <th>Category</th>
+                        <td>${bid.Category}</td>
+                    </tr>` : ''}
 
                     <tr>
                         <th>Bid Type</th>
