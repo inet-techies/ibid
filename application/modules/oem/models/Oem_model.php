@@ -65,7 +65,7 @@ class Oem_model extends CI_Model
         $this->db->select('p.PId, p.ProductList, p.CategoryId, p.OemId, p.Status, p.CreatedAt, c.CategoryList, o.OemName');
         $this->db->from('Product as p');
         $this->db->join('Category as c', 'c.CId = p.CategoryId', 'left');
-        $this->db->join('OemTable as o', 'o.SNo = p.OemId', 'left');
+        $this->db->join('OemTable as o', 'o.OId = p.OemId', 'left');
 
         if (!empty($categoryId)) {
             $this->db->where('p.CategoryId', $categoryId);
@@ -82,7 +82,7 @@ class Oem_model extends CI_Model
         $this->db->select('p.*, c.CategoryList, o.OemName');
         $this->db->from('Product as p');
         $this->db->join('Category as c', 'c.CId = p.CategoryId', 'left');
-        $this->db->join('OemTable as o', 'o.SNo = p.OemId', 'left');
+        $this->db->join('OemTable as o', 'o.OId = p.OemId', 'left');
         $this->db->where('p.PId', $pId);
         return $this->db->get()->row_array();
     }
@@ -161,7 +161,7 @@ class Oem_model extends CI_Model
 
     public function getOemById($sNo)
     {
-        return $this->db->get_where('OemTable', ['SNo' => $sNo])->row_array();
+        return $this->db->get_where('OemTable', ['OId' => $sNo])->row_array();
     }
 
     public function insertOem($data)
@@ -186,19 +186,19 @@ class Oem_model extends CI_Model
             'Address'      => trim($data['Address'] ?? ''),
             'Status'       => isset($data['Status']) ? (int)$data['Status'] : 1
         ];
-        $this->db->where('SNo', $sNo);
+        $this->db->where('OId', $sNo);
         return $this->db->update('OemTable', $updateData);
     }
 
     public function updateOemStatus($sNo, $status)
     {
-        $this->db->where('SNo', $sNo);
+        $this->db->where('OId', $sNo);
         return $this->db->update('OemTable', ['Status' => $status]);
     }
 
     public function deleteOem($sNo)
     {
-        $this->db->where('SNo', $sNo);
+        $this->db->where('OId', $sNo);
         return $this->db->delete('OemTable');
     }
 
@@ -303,13 +303,13 @@ class Oem_model extends CI_Model
             $this->db->group_end();
         }
 
-        $this->db->order_by('SNo', 'DESC');
+        $this->db->order_by('PTId', 'DESC');
         return $this->db->get()->result_array();
     }
 
     public function getProjectById($sNo)
     {
-        return $this->db->get_where('ProjectTable', ['SNo' => $sNo])->row_array();
+        return $this->db->get_where('ProjectTable', ['PTId' => $sNo])->row_array();
     }
 
     public function getProjectByTender($tenderNumber)
@@ -352,7 +352,7 @@ class Oem_model extends CI_Model
             'Status'            => isset($data['Status']) ? (int)$data['Status'] : 1,
             'ProjectAwarded'    => trim($data['ProjectAwarded'] ?? '')
         ];
-        $this->db->where('SNo', $sNo);
+        $this->db->where('PTId', $sNo);
         return $this->db->update('ProjectTable', $updateData);
     }
 
@@ -360,7 +360,7 @@ class Oem_model extends CI_Model
     {
         $this->db->where('ProjectId', $sNo)->delete('ProjectMaterials');
         $this->db->where('ProjectId', $sNo)->delete('PriceEntries');
-        $this->db->where('SNo', $sNo);
+        $this->db->where('PTId', $sNo);
         return $this->db->delete('ProjectTable');
     }
 
@@ -384,7 +384,7 @@ class Oem_model extends CI_Model
     {
         $this->db->select('pm.*, pt.ProjectName, pt.TenderNumber, p.ProductList, c.CategoryList, m.MaterialName');
         $this->db->from('ProjectMaterials as pm');
-        $this->db->join('ProjectTable as pt', 'pt.SNo = pm.ProjectId', 'left');
+        $this->db->join('ProjectTable as pt', 'pt.PTId = pm.ProjectId', 'left');
         $this->db->join('Product as p', 'p.PId = pm.PId', 'left');
         $this->db->join('Category as c', 'c.CId = pm.CategoryId', 'left');
         $this->db->join('MaterialMaster as m', 'm.MId = pm.MId', 'left');
@@ -417,8 +417,8 @@ class Oem_model extends CI_Model
         $this->db->select('pe.*, pt.ProductList, o.OemName, pro.ProjectName, pro.TenderNumber, c.CategoryList, m.MaterialName');
         $this->db->from('PriceEntries as pe');
         $this->db->join('Product as pt', 'pt.PId = pe.PId', 'left');
-        $this->db->join('OemTable as o', 'o.SNo = pe.OemId', 'left');
-        $this->db->join('ProjectTable as pro', 'pro.SNo = pe.ProjectId', 'left');
+        $this->db->join('OemTable as o', 'o.OId = pe.OemId', 'left');
+        $this->db->join('ProjectTable as pro', 'pro.PTId = pe.ProjectId', 'left');
         $this->db->join('Category as c', 'c.CId = pe.CId', 'left');
         $this->db->join('MaterialMaster as m', 'm.MId = pe.MId', 'left');
 
@@ -451,11 +451,11 @@ class Oem_model extends CI_Model
 
     public function getExistingPriceEntries($projectId = null, $tenderNo = null)
     {
-        $this->db->select('pe.SNo, pe.ProjectId, pe.TId, pe.CId, pe.PId, pe.MId, pe.OemId, pe.Price, pe.Unit, pe.ChangeReason, pe.CreatedAt, c.CategoryList, p.ProductList, o.OemName, m.MaterialName');
+        $this->db->select('pe.PrId, pe.ProjectId, pe.TId, pe.CId, pe.PId, pe.MId, pe.OemId, pe.Price, pe.Unit, pe.ChangeReason, pe.CreatedAt, c.CategoryList, p.ProductList, o.OemName, m.MaterialName');
         $this->db->from('PriceEntries as pe');
         $this->db->join('Category as c', 'c.CId = pe.CId', 'left');
         $this->db->join('Product as p', 'p.PId = pe.PId', 'left');
-        $this->db->join('OemTable as o', 'o.SNo = pe.OemId', 'left');
+        $this->db->join('OemTable as o', 'o.OId = pe.OemId', 'left');
         $this->db->join('MaterialMaster as m', 'm.MId = pe.MId', 'left');
 
         if (!empty($projectId)) {
@@ -490,13 +490,13 @@ class Oem_model extends CI_Model
             'Price'        => $price,
             'ChangeReason' => $changeReason
         ];
-        $this->db->where('SNo', $sNo);
+        $this->db->where('PrId', $sNo);
         return $this->db->update('PriceEntries', $data);
     }
 
     public function deletePriceEntry($sNo)
     {
-        $this->db->where('SNo', $sNo);
+        $this->db->where('PrId', $sNo);
         return $this->db->delete('PriceEntries');
     }
 
@@ -506,10 +506,10 @@ class Oem_model extends CI_Model
 
     public function getProjectMaterialPrices($projectId, $categoryId = null, $productId = null)
     {
-        $this->db->select('pe.SNo, pe.ProjectId, pe.CId, pe.PId, pe.MId, pe.OemId, pe.Price, pe.Unit, pe.CreatedAt, o.OemName, pt.ProjectName, p.ProductList, c.CategoryList');
+        $this->db->select('pe.PrId, pe.ProjectId, pe.CId, pe.PId, pe.MId, pe.OemId, pe.Price, pe.Unit, pe.CreatedAt, o.OemName, pt.ProjectName, p.ProductList, c.CategoryList');
         $this->db->from('PriceEntries as pe');
-        $this->db->join('OemTable as o', 'o.SNo = pe.OemId', 'left');
-        $this->db->join('ProjectTable as pt', 'pt.SNo = pe.ProjectId', 'left');
+        $this->db->join('OemTable as o', 'o.OId = pe.OemId', 'left');
+        $this->db->join('ProjectTable as pt', 'pt.PTId = pe.ProjectId', 'left');
         $this->db->join('Product as p', 'p.PId = pe.PId', 'left');
         $this->db->join('Category as c', 'c.CId = pe.CId', 'left');
         $this->db->where('pe.ProjectId', $projectId);
@@ -527,10 +527,10 @@ class Oem_model extends CI_Model
 
     public function getProjectsWithPriceSummary()
     {
-        $this->db->select('pt.SNo, pt.ProjectName, pt.TenderNumber, COUNT(pe.SNo) as QuoteCount, COUNT(DISTINCT pe.OemId) as OemCount');
+        $this->db->select('pt.PTId, pt.ProjectName, pt.TenderNumber, COUNT(pe.PrId) as QuoteCount, COUNT(DISTINCT pe.OemId) as OemCount');
         $this->db->from('ProjectTable as pt');
-        $this->db->join('PriceEntries as pe', 'pe.ProjectId = pt.SNo', 'inner');
-        $this->db->group_by(['pt.SNo', 'pt.ProjectName', 'pt.TenderNumber']);
+        $this->db->join('PriceEntries as pe', 'pe.ProjectId = pt.PTId', 'inner');
+        $this->db->group_by(['pt.PTId', 'pt.ProjectName', 'pt.TenderNumber']);
         $this->db->order_by('pt.ProjectName', 'ASC');
         return $this->db->get()->result_array();
     }

@@ -1086,7 +1086,8 @@ class Oem extends MX_Controller
 					{
 						$batch[] = [
 							'ProjectId'    => $projectId,
-							'TId'          => (int)$tenderNo,
+							// 'TId'          => (int)$tenderNo,
+							'TId' => trim($tenderNo),
 							'CId'          => (int)$categories[$i],
 							'PId'          => (int)$products[$i],
 							'MId'          => null,
@@ -1282,7 +1283,7 @@ class Oem extends MX_Controller
 			$quoteCounts = [];
 			if (!empty($data['projectsWithPrices'])) {
 				foreach ($data['projectsWithPrices'] as $pwp) {
-					$quoteCounts[$pwp['SNo']] = [
+					$quoteCounts[$pwp['PTId']] = [
 						'quotes' => (int)$pwp['QuoteCount'],
 						'oems'   => (int)$pwp['OemCount'],
 					];

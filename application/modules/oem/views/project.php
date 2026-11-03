@@ -247,7 +247,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                                             <tr class="single-item">
                                                 <td><?= $i++; ?></td>
                                                 <td class="fw-semibold text-dark">
-                                                    <a href="<?= base_url('oem/projectDetails/'.$pro['SNo']); ?>" class="text-primary text-decoration-none">
+                                                    <a href="<?= base_url('oem/projectDetails/'.$pro['PTId']); ?>" class="text-primary text-decoration-none">
                                                         <?= htmlspecialchars($pro['ProjectName'] ?? '', ENT_QUOTES, 'UTF-8'); ?>
                                                     </a>
                                                     <?php if (!empty($pro['PortalLink'])): ?>
@@ -281,7 +281,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                                                 </td>
                                                 <td>
                                                     <div class="hstack gap-2 justify-content-end">
-                                                        <a href="<?= base_url('oem/projectDetails/'.$pro['SNo']); ?>"
+                                                        <a href="<?= base_url('oem/projectDetails/'.$pro['PTId']); ?>"
                                                             class="avatar-text avatar-md"
                                                             title="View Project Details & Quotes">
                                                             <i class="feather-eye"></i>
@@ -289,7 +289,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                                                         <a href="javascript:void(0)"
                                                             class="avatar-text avatar-md edit-proj-btn"
                                                             title="Edit Project"
-                                                            data-sno="<?= $pro['SNo']; ?>"
+                                                            data-sno="<?= $pro['PTId']; ?>"
                                                             data-name="<?= htmlspecialchars($pro['ProjectName'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
                                                             data-tender="<?= htmlspecialchars($pro['TenderNumber'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
                                                             data-state="<?= htmlspecialchars($pro['State'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
@@ -305,7 +305,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                                                         <a href="javascript:void(0)"
                                                             class="avatar-text avatar-md delete-proj-btn text-danger"
                                                             title="Delete Project & Bill of Materials"
-                                                            data-sno="<?= $pro['SNo']; ?>"
+                                                            data-sno="<?= $pro['PTId']; ?>"
                                                             data-name="<?= htmlspecialchars($pro['ProjectName'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
                                                             <i class="feather-trash-2"></i>
                                                         </a>

@@ -68,7 +68,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                                     <option value="">-- Select OEM (Optional) --</option>
                                     <?php if (!empty($oems)): ?>
                                         <?php foreach ($oems as $oem): ?>
-                                            <option value="<?= $oem['SNo']; ?>">
+                                            <option value="<?= $oem['OId']; ?>">
                                                 <?= htmlspecialchars($oem['OemName'] ?? '', ENT_QUOTES, 'UTF-8'); ?>
                                             </option>
                                         <?php endforeach; ?>
@@ -220,7 +220,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                     <option value="">-- Select OEM (Optional) --</option>
                     <?php if (!empty($oems)): ?>
                         <?php foreach ($oems as $oem): ?>
-                            <option value="<?= $oem['SNo']; ?>">
+                            <option value="<?= $oem['OId']; ?>">
                                 <?= htmlspecialchars($oem['OemName'] ?? '', ENT_QUOTES, 'UTF-8'); ?>
                             </option>
                         <?php endforeach; ?>

@@ -27,7 +27,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                             <option value="">-- All Projects --</option>
                             <?php if (!empty($projects)): ?>
                                 <?php foreach ($projects as $pr): ?>
-                                    <option value="<?= $pr['SNo']; ?>" <?= ($filter_inps['project'] ?? '') == $pr['SNo'] ? 'selected' : ''; ?>>
+                                    <option value="<?= $pr['PTId']; ?>" <?= ($filter_inps['project'] ?? '') == $pr['PTId'] ? 'selected' : ''; ?>>
                                         <?= htmlspecialchars($pr['ProjectName'] ?? ''); ?>
                                     </option>
                                 <?php endforeach; ?>
@@ -53,7 +53,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                             <option value="">-- All OEMs --</option>
                             <?php if (!empty($oems)): ?>
                                 <?php foreach ($oems as $om): ?>
-                                    <option value="<?= $om['SNo']; ?>" <?= ($filter_inps['oem'] ?? '') == $om['SNo'] ? 'selected' : ''; ?>>
+                                    <option value="<?= $om['OId']; ?>" <?= ($filter_inps['oem'] ?? '') == $om['OId'] ? 'selected' : ''; ?>>
                                         <?= htmlspecialchars($om['OemName'] ?? ''); ?>
                                     </option>
                                 <?php endforeach; ?>

@@ -101,9 +101,9 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                                         </td>
                                         <td>
                                             <?php if ((int)($oem['Status'] ?? 1) === 1): ?>
-                                                <span class="badge bg-success" id="badge-oem-<?= $oem['SNo']; ?>">Active</span>
+                                                <span class="badge bg-success" id="badge-oem-<?= $oem['OId']; ?>">Active</span>
                                             <?php else: ?>
-                                                <span class="badge bg-danger" id="badge-oem-<?= $oem['SNo']; ?>">Inactive</span>
+                                                <span class="badge bg-danger" id="badge-oem-<?= $oem['OId']; ?>">Inactive</span>
                                             <?php endif; ?>
                                         </td>
                                         <td>
@@ -111,7 +111,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                                                 <a href="javascript:void(0)"
                                                     class="avatar-text avatar-md edit-oem-btn"
                                                     title="Edit OEM Details"
-                                                    data-id="<?= $oem['SNo']; ?>"
+                                                    data-id="<?= $oem['OId']; ?>"
                                                     data-name="<?= htmlspecialchars($oem['OemName'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
                                                     data-mobile="<?= htmlspecialchars($oem['MobileNumber'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
                                                     data-email="<?= htmlspecialchars($oem['EmailId'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
@@ -122,7 +122,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                                                 <a href="javascript:void(0)"
                                                     class="avatar-text avatar-md toggle-oem-btn"
                                                     title="Toggle Status (Active/Inactive)"
-                                                    data-id="<?= $oem['SNo']; ?>"
+                                                    data-id="<?= $oem['OId']; ?>"
                                                     data-status="<?= $oem['Status']; ?>"
                                                     data-name="<?= htmlspecialchars($oem['OemName'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
                                                     <i class="feather-refresh-cw"></i>
@@ -130,7 +130,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                                                 <a href="javascript:void(0)"
                                                     class="avatar-text avatar-md delete-oem-btn text-danger"
                                                     title="Delete OEM Vendor"
-                                                    data-id="<?= $oem['SNo']; ?>"
+                                                    data-id="<?= $oem['OId']; ?>"
                                                     data-name="<?= htmlspecialchars($oem['OemName'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
                                                     <i class="feather-trash-2"></i>
                                                 </a>

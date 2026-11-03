@@ -30,11 +30,11 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                                 <option value="">-- Choose Project to Compare OEM Quotations --</option>
                                 <?php if (!empty($projects)): ?>
                                     <?php foreach ($projects as $pr): 
-                                        $hasQuotes = isset($quoteCounts[$pr['SNo']]);
-                                        $qCount = $hasQuotes ? $quoteCounts[$pr['SNo']]['quotes'] : 0;
-                                        $oCount = $hasQuotes ? $quoteCounts[$pr['SNo']]['oems'] : 0;
+                                        $hasQuotes = isset($quoteCounts[$pr['PTId']]);
+                                        $qCount = $hasQuotes ? $quoteCounts[$pr['PTId']]['quotes'] : 0;
+                                        $oCount = $hasQuotes ? $quoteCounts[$pr['PTId']]['oems'] : 0;
                                     ?>
-                                        <option value="<?= $pr['SNo']; ?>" <?= ($selectedProjectId == $pr['SNo']) ? 'selected' : ''; ?>>
+                                        <option value="<?= $pr['PTId']; ?>" <?= ($selectedProjectId == $pr['PTId']) ? 'selected' : ''; ?>>
                                             <?= htmlspecialchars($pr['ProjectName'] ?? ''); ?>
                                             <?= !empty($pr['TenderNumber']) ? ' ('.htmlspecialchars($pr['TenderNumber']).')' : ''; ?>
                                             <?= $hasQuotes ? ' — ['.$qCount.' quote'.($qCount > 1 ? 's' : '').' from '.$oCount.' OEM'.($oCount > 1 ? 's' : '').']' : ' — [No Quotes Yet]'; ?>
@@ -70,7 +70,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                             </div>
                         </div>
                         <div>
-                            <a href="<?= base_url('oem/priceEntries?project='.$project['SNo']); ?>" class="btn btn-sm btn-primary">
+                            <a href="<?= base_url('oem/priceEntries?project='.$project['PTId']); ?>" class="btn btn-sm btn-primary">
                                 <i class="feather-plus me-1"></i> Add OEM Quotes
                             </a>
                         </div>
@@ -102,7 +102,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                                             </p>
                                             <div class="d-flex flex-wrap gap-2">
                                                 <?php foreach ($projectsWithPrices as $pwp): ?>
-                                                    <a href="<?= base_url('oem/priceComparison?project_id='.$pwp['SNo']); ?>" class="btn btn-sm btn-outline-primary">
+                                                    <a href="<?= base_url('oem/priceComparison?project_id='.$pwp['PTId']); ?>" class="btn btn-sm btn-outline-primary">
                                                         <i class="feather-bar-chart-2 me-1"></i>
                                                         <?= htmlspecialchars($pwp['ProjectName']); ?>
                                                         <span class="badge bg-primary text-white ms-1"><?= $pwp['QuoteCount']; ?> quote<?= ($pwp['QuoteCount'] > 1 ? 's' : ''); ?></span>
@@ -117,7 +117,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                                     <?php endif; ?>
 
                                     <div class="d-flex flex-wrap gap-2 pt-2">
-                                        <a href="<?= base_url('oem/priceEntries?project='.$project['SNo']); ?>" class="btn btn-primary">
+                                        <a href="<?= base_url('oem/priceEntries?project='.$project['PTId']); ?>" class="btn btn-primary">
                                             <i class="feather-plus me-1"></i> Add OEM Quotes for <?= htmlspecialchars($project['ProjectName'] ?? ''); ?>
                                         </a>
                                         <a href="<?= base_url('oem/priceEntries'); ?>" class="btn btn-outline-secondary">
@@ -145,7 +145,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                                         <strong>Only 1 OEM Quote Recorded:</strong> Only 1 OEM vendor (<strong><?= htmlspecialchars($quotes[0]['OemName'] ?? 'OEM'); ?></strong>) has submitted quotations for this project. To effectively compare prices, at least two OEM quotations are recommended.
                                     </span>
                                 </div>
-                                <a href="<?= base_url('oem/priceEntries?project='.$project['SNo']); ?>" class="btn btn-sm btn-warning text-dark fw-semibold">
+                                <a href="<?= base_url('oem/priceEntries?project='.$project['PTId']); ?>" class="btn btn-sm btn-warning text-dark fw-semibold">
                                     <i class="feather-plus me-1"></i> Add Another OEM Quote
                                 </a>
                             </div>
@@ -237,7 +237,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                             </span>
                             <div class="d-flex flex-wrap gap-2 justify-content-center">
                                 <?php foreach ($projectsWithPrices as $pwp): ?>
-                                    <a href="<?= base_url('oem/priceComparison?project_id='.$pwp['SNo']); ?>" class="btn btn-sm btn-primary">
+                                    <a href="<?= base_url('oem/priceComparison?project_id='.$pwp['PTId']); ?>" class="btn btn-sm btn-primary">
                                         <i class="feather-eye me-1"></i> <?= htmlspecialchars($pwp['ProjectName']); ?>
                                         <span class="badge bg-white text-primary ms-1"><?= $pwp['QuoteCount']; ?> quote<?= ($pwp['QuoteCount'] > 1 ? 's' : ''); ?></span>
                                     </a>

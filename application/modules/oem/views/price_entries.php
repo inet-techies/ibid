@@ -50,7 +50,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                                     <option value="">-- Choose Project --</option>
                                     <?php if (!empty($projects)): ?>
                                         <?php foreach ($projects as $proj): ?>
-                                            <option value="<?= $proj['SNo']; ?>" data-tender="<?= htmlspecialchars($proj['TenderNumber'] ?? ''); ?>">
+                                            <option value="<?= $proj['PTId']; ?>" data-tender="<?= htmlspecialchars($proj['TenderNumber'] ?? ''); ?>">
                                                 <?= htmlspecialchars($proj['ProjectName'] ?? '', ENT_QUOTES, 'UTF-8'); ?>
                                                 <?= !empty($proj['TenderNumber']) ? ' ('.htmlspecialchars($proj['TenderNumber']).')' : ''; ?>
                                             </option>
@@ -123,7 +123,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                                                 <option value="">-- OEM Vendor --</option>
                                                 <?php if (!empty($oems)): ?>
                                                     <?php foreach ($oems as $oem): ?>
-                                                        <option value="<?= $oem['SNo']; ?>">
+                                                        <option value="<?= $oem['OId']; ?>">
                                                             <?= htmlspecialchars($oem['OemName'] ?? '', ENT_QUOTES, 'UTF-8'); ?>
                                                         </option>
                                                     <?php endforeach; ?>
@@ -348,7 +348,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                 <a href="javascript:void(0)"
                                     class="avatar-text avatar-md edit-price-btn"
                                     title="Edit Price"
-                                    data-sno="${item.SNo}"
+                                    data-sno="${item.PrId}"
                                     data-info="${item.ProductList} - ${item.OemName}"
                                     data-price="${item.Price}"
                                     data-reason="${item.ChangeReason || ''}">
@@ -357,7 +357,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                 <a href="javascript:void(0)"
                                     class="avatar-text avatar-md delete-price-btn text-danger"
                                     title="Delete Price Entry"
-                                    data-sno="${item.SNo}"
+                                    data-sno="${item.PrId}"
                                     data-info="${item.ProductList} - ${item.OemName}">
                                     <i class="feather-trash-2"></i>
                                 </a>

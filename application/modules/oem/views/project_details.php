@@ -25,10 +25,10 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                     </div>
                 </div>
                 <div class="d-flex align-items-center gap-2">
-                    <a href="<?= base_url('oem/priceComparison?project_id='.$project['SNo']); ?>" class="btn btn-outline-primary btn-md">
+                    <a href="<?= base_url('oem/priceComparison?project_id='.$project['PTId']); ?>" class="btn btn-outline-primary btn-md">
                         <i class="feather-bar-chart-2 me-1"></i> Price Comparison
                     </a>
-                    <a href="<?= base_url('oem/priceEntries?project='.$project['SNo']); ?>" class="btn btn-primary btn-md">
+                    <a href="<?= base_url('oem/priceEntries?project='.$project['PTId']); ?>" class="btn btn-primary btn-md">
                         <i class="feather-plus me-1"></i> Add OEM Quotes
                     </a>
                 </div>
@@ -193,7 +193,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                     <i class="feather-dollar-sign text-primary me-2"></i>Recorded OEM Price Quotes
                     <span class="badge bg-success ms-2 fs-11"><?= !empty($prices) ? count($prices) : 0; ?> Quotes</span>
                 </h5>
-                <a href="<?= base_url('oem/priceComparison?project_id='.$project['SNo']); ?>" class="btn btn-sm btn-outline-primary">
+                <a href="<?= base_url('oem/priceComparison?project_id='.$project['PTId']); ?>" class="btn btn-sm btn-outline-primary">
                     <i class="feather-eye me-1"></i> Open Comparison Matrix
                 </a>
             </div>

@@ -297,7 +297,7 @@ public function SendOtpVerify($Buid)
       redirect($this->config->item('base_url')."bid/index");
     }
 
-    /* ================= OTP GENERATION ================= */
+  
 
     // Secure 6-digit OTP
     $otp = random_int(100000, 999999);
@@ -315,10 +315,9 @@ public function SendOtpVerify($Buid)
     $data['otp']  = $otp;
     $data['name'] = $data['RegMail'][0]['Name'];
 
-    /* ================= SEND OTP EMAIL ================= */
+  
 
     try {
-
         $to = $data['RegMail'][0]['Email'];
         $subject = "Employee Verification OTP - Bid Management";
 
