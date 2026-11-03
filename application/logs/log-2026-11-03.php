@@ -27,3 +27,7 @@ ERROR - 2026-11-03 12:39:48 --> BidNotificationLog table is unavailable; notific
 ERROR - 2026-11-03 08:38:24 --> 404 Page Not Found: /index
 ERROR - 2026-11-03 09:53:55 --> 404 Page Not Found: /index
 >>>>>>> 733f4e3cbc39a724c8e9c0cb907d28c71ec2c9bf
+ERROR - 2026-11-03 15:15:05 --> Query error: Unknown column 'PTId' in 'order clause' - Invalid query: SELECT *
+FROM `ProjectTable`
+ORDER BY `PTId` DESC
+ERROR - 2026-11-03 12:15:39 --> 404 Page Not Found: /index

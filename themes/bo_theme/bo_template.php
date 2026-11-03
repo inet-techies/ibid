@@ -189,9 +189,8 @@ if (!empty($employee_det['Bid'])) {
 
                                                 <a class="nxl-link" href="<?= base_url($child['MenuUrl']); ?>">
 
-                                                    <?php if (!empty($child['IconClass'])): ?>
-                                                        <i class="<?= $child['IconClass']; ?> me-2"></i>
-                                                    <?php endif; ?>
+                                                    <?php $childIcon = !empty($child['IconClass']) ? str_replace('feather-calender', 'feather-calendar', $child['IconClass']) : 'feather-circle'; ?>
+                                                    <i class="<?= $childIcon; ?> me-2" aria-hidden="true"></i>
 
                                                     <?= $child['MenuName']; ?>
                                                 </a>

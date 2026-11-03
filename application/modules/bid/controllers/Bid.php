@@ -315,9 +315,10 @@ public function SendOtpVerify($Buid)
     $data['otp']  = $otp;
     $data['name'] = $data['RegMail'][0]['Name'];
 
-  
+    /* ================= SEND OTP EMAIL ================= */
 
     try {
+
         $to = $data['RegMail'][0]['Email'];
         $subject = "Employee Verification OTP - Bid Management";
 
@@ -731,22 +732,7 @@ public function AddBidData(){
 			if (empty($bidTenderId)) {
 				$validationErrors[] = 'Tender ID is required.';
 			}
-							// Check whether this Tender ID already exists
-				if (!empty($bidTenderId)) {
 
-					$this->db->where('TenderId', $bidTenderId);
-					$existingTender = $this->db->count_all_results('BidCreationDetails');
-
-					if ($existingTender > 0) {
-						$this->session->set_flashdata(
-							'err',
-							'Duplicate Tender ID! We already have a bid with this Tender ID.'
-						);
-
-						redirect($this->config->item('base_url').'bid/CreateBids');
-						return;
-					}
-				}
 			$nasPath = !empty($inputs['bidNASIDInput']) ? trim($inputs['bidNASIDInput']) : (!empty($inputs['attachedDocumentPath']) ? trim($inputs['attachedDocumentPath']) : '');
 			if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
 				$uploadDir = FCPATH . 'uploads/tender/';
@@ -799,11 +785,11 @@ public function AddBidData(){
 				redirect($this->config->item('base_url').'bid/CreateBids');
 				return;
 			}
-		$docTenderId = $this->bid_model->generateBidId(
-    $bidType,
-    $bidDepartment,
-    date('Y-m-d')
-);
+						$docTenderId = $this->bid_model->generateBidId(
+				$bidType,
+				$bidDepartment,
+				date('Y-m-d', strtotime($publishedDate))
+			);
 
 			if (!$docTenderId) {
 				$this->session->set_flashdata('err', 'Unable to generate Bid ID. Please try again.');
@@ -869,7 +855,7 @@ public function AddBidData(){
 					$mail = $objs->load();
 
 					$mail->setFrom('info@inetcsc.com', 'I-NET Bid Management');
-					$mail->addAddress('prasannakumari@inetcsc.com', 'Prasanna Kumari');
+					// $mail->addAddress('prasannakumari@inetcsc.com', 'Prasanna Kumari');
 					$mail->addCC('reka@inetcsc.com', 'Reka');
 					$mail->addCC('Mohamedfazil@inetcsc.com', 'Fazil');
 
