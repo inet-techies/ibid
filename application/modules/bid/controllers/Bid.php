@@ -975,7 +975,8 @@ public function getStatuses()
 
 		        $currentSortOrder = $current->SortOrder;
 
-		        // 2️⃣ Get only forward stages
+		       
+				
 		        $statuses = $this->bid_model->getForwardStatuses($currentSortOrder);
 
 		    echo json_encode($statuses);
