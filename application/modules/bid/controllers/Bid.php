@@ -286,10 +286,10 @@ public function saveUsers(){
 
 public function SendOtpVerify($Buid)
 {
-    // Decode BUID
+ 
     $data['Buid'] = base64_decode(base64_decode(base64_decode(base64_decode(urldecode($Buid)))));
 
-    // Fetch user
+  
     $data['RegMail'] = $this->bid_model->getUserById($data['Buid']);
 
     if (empty($data['RegMail'])) {

@@ -1,146 +1,983 @@
-/* ==========================================================================
-   Bid Tracking Dashboard Styles
-   100% Dynamic, Data-Driven Interface Styling
-   ========================================================================== */
+/* ================================================================
+   Bid Intelligence Dashboard — dashboard.css
+   iinet Theme · Track. Analyze. Win.
+   Light enterprise theme matching the reference dashboard
+   ================================================================ */
 
-/* Filter Control Panel */
-.filter-control-panel {
-    background: #ffffff;
-    border-radius: 8px;
-    border: 1px solid #e2e8f0;
+:root {
+    --bid-primary:       #1565C0;
+    --bid-primary-dk:    #0D47A1;
+    --bid-primary-lt:    #1976D2;
+    --bid-accent:        #42A5F5;
+    --bid-accent-lt:     #90CAF9;
+    --bid-bg:            #EEF2FB;
+    --bid-card:          #FFFFFF;
+    --bid-border:        #DDE5F7;
+    --bid-border-lt:     #EEF2FB;
+    --bid-text-hdr:      #1A237E;
+    --bid-text-dk:       #1E293B;
+    --bid-text-md:       #475569;
+    --bid-text-lt:       #94A3B8;
+    --bid-success:       #4CAF50;
+    --bid-success-dk:    #388E3C;
+    --bid-success-lt:    #E8F5E9;
+    --bid-warning:       #FF9800;
+    --bid-warning-lt:    #FFF3E0;
+    --bid-danger:        #F44336;
+    --bid-danger-lt:     #FFEBEE;
+    --bid-purple:        #7E57C2;
+    --bid-purple-lt:     #EDE7F6;
+    --bid-teal:          #009688;
+    --bid-teal-lt:       #E0F2F1;
+    --bid-orange:        #FF9800;
+    --bid-orange-lt:     #FFF3E0;
+    --card-shadow:       0 1px 8px rgba(21,101,192,.08), 0 0 1px rgba(21,101,192,.06);
+    --card-shadow-hov:   0 4px 18px rgba(21,101,192,.14);
+    --card-radius:       10px;
+    --row-gap:           12px;
 }
 
-.filter-select {
-    font-size: 12px;
-    font-weight: 500;
-    color: #1e293b;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    transition: all 0.15s ease-in-out;
+/* ── Page Background ── */
+body,
+.content-wrapper,
+.main-content,
+#content,
+.page-content,
+.wrapper {
+    background-color: var(--bid-bg) !important;
 }
 
-.filter-select:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-}
-
-.filter-select.filter-active {
-    border-color: #2563eb !important;
-    background-color: #eff6ff !important;
-    font-weight: 700;
-}
-
-.reportrange-picker {
-    background: #ffffff;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    padding: 5px 10px;
-    height: 31px;
-}
-
-.reportrange-picker.filter-active {
-    border-color: #16a34a !important;
-    background-color: #f0fdf4 !important;
-    font-weight: 700;
-}
-
-/* Active Filter Badges */
-.active-filter-badge {
-    display: inline-flex;
+/* ================================================================
+   HEADER — Minimal & Clean (Financial Year + Date Range only)
+   ================================================================ */
+.bid-intel-header {
+    display: flex;
     align-items: center;
-    gap: 4px;
-    padding: 3px 8px;
-    font-size: 11px;
-    font-weight: 600;
-    border-radius: 20px;
+    justify-content: space-between;
+    background: #fff;
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    padding: 12px 22px;
+    margin-bottom: var(--row-gap);
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
-.active-filter-badge .badge-clear-btn {
-    cursor: pointer;
-    line-height: 1;
-    opacity: 0.8;
+.bih-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
-
-.active-filter-badge .badge-clear-btn:hover {
-    opacity: 1;
-}
-
-/* Top KPI Metric Cards */
-.kpi-card-box {
-    background: #ffffff;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-    transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.kpi-card-box:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 3px 8px rgba(0,0,0,0.06);
-}
-
-.kpi-card-box .kpi-label {
-    color: #6b21a8 !important;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.2px;
-}
-
-.kpi-card-box .kpi-num {
-    color: #0f172a;
-    font-size: 1.35rem;
-    font-weight: 700;
-    line-height: 1;
-    margin-top: 3px;
-}
-
-.kpi-icon-square {
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
-    display: inline-flex;
+.bih-icon-wrap {
+    width: 44px;
+    height: 44px;
+    background: #E3F2FD;
+    border-radius: 9px;
+    display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 15px;
+    flex-shrink: 0;
+}
+.bih-title {
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--bid-text-hdr);
+    margin: 0;
+    line-height: 1.2;
+}
+.bih-subtitle {
+    font-size: 11.5px;
+    color: var(--bid-text-md);
+    margin: 2px 0 0;
+    font-style: italic;
+}
+
+/* Center controls: FY + Date Range */
+.bih-center {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.bih-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.bih-filter-label {
+    font-size: 9.5px;
+    color: var(--bid-text-lt);
+    font-weight: 700;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+}
+.bih-select {
+    height: 32px;
+    padding: 0 10px;
+    border: 1.5px solid var(--bid-border);
+    border-radius: 7px;
+    font-size: 12.5px;
+    color: var(--bid-text-dk);
+    background: #fff;
+    outline: none;
+    min-width: 130px;
+    cursor: pointer;
+    transition: border-color .2s;
+}
+.bih-select:focus {
+    border-color: var(--bid-primary);
+}
+.bih-date-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.bih-daterange {
+    min-width: 200px;
+    padding-right: 28px;
+    cursor: pointer;
+}
+.bih-calendar-icon {
+    position: absolute;
+    right: 9px;
+    color: var(--bid-text-lt);
+    pointer-events: none;
+}
+.bih-filter-icon-btn {
+    height: 32px;
+    width: 32px;
+    border: 1.5px solid var(--bid-border);
+    border-radius: 7px;
+    background: #fff;
+    color: var(--bid-text-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .2s;
+    padding: 0;
+}
+.bih-filter-icon-btn:hover {
+    background: var(--bid-primary);
+    color: #fff;
+    border-color: var(--bid-primary);
+}
+
+/* Right logo */
+.bih-right { flex-shrink: 0; }
+.bih-logo-box {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.bih-logo-text {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--bid-primary);
+    line-height: 1;
+    letter-spacing: -1px;
+}
+.bih-logo-tag {
+    font-size: 9.5px;
+    color: var(--bid-text-lt);
+    letter-spacing: .3px;
+}
+
+/* ================================================================
+   ROW 1 — 5 KPI CARDS (Clean Enterprise Style)
+   ================================================================ */
+.bid-kpi-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--row-gap);
+    margin-bottom: var(--row-gap);
+}
+.bid-kpi-card {
+    background: var(--bid-card);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    padding: 16px 18px;
+    transition: box-shadow .2s, transform .15s;
+    border-top: 3px solid var(--bid-primary);
+    cursor: pointer;
+    min-height: 84px;
+    display: flex;
+    align-items: center;
+}
+.bid-kpi-card:hover {
+    box-shadow: var(--card-shadow-hov);
+    transform: translateY(-2px);
+}
+.bkc-border-blue   { border-top-color: var(--bid-primary); }
+.bkc-border-purple { border-top-color: var(--bid-purple); }
+.bkc-border-green  { border-top-color: var(--bid-success); }
+.bkc-border-teal   { border-top-color: var(--bid-teal); }
+.bkc-border-orange { border-top-color: var(--bid-orange); }
+
+.bkc-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 8px;
+}
+.bkc-body { flex: 1; min-width: 0; }
+.bkc-label {
+    font-size: 11px;
+    color: var(--bid-text-md);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-bottom: 5px;
+}
+.bkc-value {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--bid-text-dk);
+    line-height: 1;
+}
+.bkc-value-sm { font-size: 20px; }
+
+.bkc-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.bkc-icon-blue   { background: #E3F2FD; color: var(--bid-primary); }
+.bkc-icon-purple { background: var(--bid-purple-lt); color: var(--bid-purple); }
+.bkc-icon-green  { background: var(--bid-success-lt); color: var(--bid-success-dk); }
+.bkc-icon-orange { background: var(--bid-orange-lt); color: var(--bid-orange); }
+
+.bkc-gauge { width: 56px; height: 56px; flex-shrink: 0; }
+
+/* ================================================================
+   CHART CARD BASE
+   ================================================================ */
+.bid-chart-card {
+    background: var(--bid-card);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    padding: 14px 16px 12px;
+    display: flex;
+    flex-direction: column;
+}
+.bcc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+.bcc-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.bcc-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--bid-text-dk);
+}
+.bcc-info {
+    font-size: 13px;
+    color: var(--bid-text-lt);
+    cursor: help;
+}
+.bcc-legend {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.bcc-leg-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10.5px;
+    color: var(--bid-text-md);
+}
+.bcc-leg-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.bcc-view-all {
+    font-size: 11px;
+    color: var(--bid-primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color .2s;
+}
+.bcc-view-all:hover {
+    color: var(--bid-primary-dk);
+    text-decoration: underline;
+}
+.bcc-footer {
+    margin-top: 6px;
+    text-align: right;
+}
+.bcc-empty {
+    text-align: center;
+    padding: 24px;
+    color: var(--bid-text-lt);
+    font-size: 12px;
+    font-style: italic;
+}
+
+/* ================================================================
+   ROW 2 — BID PIPELINE (DONUT) | MONTHLY TREND | BID VALUE ANALYSIS
+   ================================================================ */
+.bid-row-2 {
+    display: grid;
+    grid-template-columns: 30fr 44fr 26fr;
+    gap: var(--row-gap);
+    margin-bottom: var(--row-gap);
+    align-items: stretch;
+}
+
+/* ── Bid Pipeline (Donut Chart representing Statuses) ── */
+.bid-pipeline-card { min-height: 280px; }
+.pipeline-donut-row {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+}
+.pipeline-donut-wrap {
+    width: 100%;
+    min-height: 185px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pipeline-donut-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+    margin-top: 6px;
+    max-height: 85px;
+    overflow-y: auto;
+}
+.pdl-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    color: var(--bid-text-md);
+    cursor: pointer;
+    padding: 3px 6px;
+    border-radius: 5px;
+    transition: background .15s;
+}
+.pdl-item:hover { background: #EEF7FF; }
+.pdl-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.pdl-name {
+    flex: 1;
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.pdl-count {
+    font-weight: 700;
+    color: var(--bid-text-dk);
+    font-size: 11.5px;
+}
+.pdl-pct {
+    color: var(--bid-text-lt);
+    font-size: 10.5px;
+    min-width: 34px;
+    text-align: right;
+}
+
+/* ── Monthly Trend ── */
+.bid-trend-card { min-height: 280px; }
+
+/* ── Bid Value Analysis ── */
+.bid-value-card { min-height: 280px; }
+
+/* ================================================================
+   ROW 3 — BIDS BY CATEGORY | BIDS BY STATE / UT
+   Layout matches reference image exactly:
+   - Left: Bids by Category horizontal bars with counts
+   - Right: Bids by State / UT (Map + Vertical Legend in Middle + Ranked State List)
+   ================================================================ */
+.bid-row-3 {
+    display: grid;
+    grid-template-columns: 46fr 54fr;
+    gap: var(--row-gap);
+    margin-bottom: var(--row-gap);
+    align-items: stretch;
+}
+
+.bid-category-card { min-height: 295px; }
+
+/* ── Bids by State / UT (3-column layout inside card) ── */
+.bid-state-card { min-height: 295px; }
+.state-card-body {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 1;
+    min-height: 255px;
+}
+.scb-map-wrap {
+    flex: 1.1;
+    min-width: 170px;
+    max-width: 230px;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.india-map-svg {
+    width: 100%;
+    height: 245px;
+    max-height: 255px;
+    filter: drop-shadow(0 2px 6px rgba(21,101,192,.09));
+}
+.india-state-path {
+    fill: #CFD8DC;
+    stroke: #FFFFFF;
+    stroke-width: 1.2px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    cursor: pointer;
+    transition: fill .25s ease, stroke .2s, filter .2s;
+}
+.india-state-path:hover {
+    stroke: #0D47A1;
+    stroke-width: 2.2px;
+    filter: brightness(0.92);
+}
+
+/* Legend in middle, stacked vertically */
+.scb-legend-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--bid-text-md);
+    flex-shrink: 0;
+    padding: 0 4px;
+}
+.sml-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+.sml-dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 3px;
     flex-shrink: 0;
 }
 
-/* Status Donut Table */
-.status-dot-bullet {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 6px;
+/* Ranked State List on right */
+.scb-list-wrap {
+    flex: 1.3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 190px;
+    height: 100%;
+}
+.state-ranked-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 225px;
+    overflow-y: auto;
+}
+.srl-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 4px;
+    transition: background .15s;
+}
+.srl-item:hover { background: #EEF7FF; }
+.srl-name {
+    width: 95px;
+    color: var(--bid-text-dk);
+    font-size: 11.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+}
+.srl-bar-wrap {
+    flex: 1;
+    height: 11px;
+    background: transparent;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.srl-bar-fill {
+    height: 100%;
+    background: #42A5F5;
+    border-radius: 3px;
+    transition: width .4s ease;
+}
+.srl-count {
+    width: 20px;
+    text-align: right;
+    font-weight: 700;
+    color: var(--bid-text-dk);
+    font-size: 11.5px;
+}
+.scb-footer {
+    text-align: right;
+    margin-top: 6px;
+}
+.scb-view-all {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #1976D2;
+    text-decoration: none;
+}
+.scb-view-all:hover {
+    text-decoration: underline;
+}
+
+/* Tooltip on SVG hover */
+.state-map-tooltip {
+    position: fixed;
+    background: rgba(30,41,59,.92);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    pointer-events: none;
+    z-index: 9999;
+    box-shadow: 0 4px 12px rgba(0,0,0,.20);
+}
+
+/* ================================================================
+   ROW 4 — TOP OPPORTUNITIES (FULL-WIDTH 12-COLUMN TABLE)
+   Winning Categories removed as requested
+   ================================================================ */
+.bid-row-4 {
+    display: block;
+    margin-bottom: var(--row-gap);
+}
+
+.bid-bids-card { min-height: 270px; width: 100%; }
+.top-opp-table-wrap { overflow-x: auto; width: 100%; }
+.top-opp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11.5px;
+}
+.top-opp-table thead tr { background: #F3F6FE; }
+.top-opp-table th {
+    padding: 8px 9px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+    color: var(--bid-text-md);
+    border-bottom: 1.5px solid var(--bid-border);
+    white-space: nowrap;
+}
+.top-opp-table td {
+    padding: 7px 9px;
+    color: var(--bid-text-dk);
+    border-bottom: 1px solid var(--bid-border-lt);
     vertical-align: middle;
 }
-
-#table-overview-status-breakdown td {
-    padding-top: 4px;
-    padding-bottom: 4px;
-    font-size: 11px;
-}
-
-#table-overview-value-activity th,
-#table-overview-value-activity td {
-    padding: 3px 5px;
-    font-size: 10px;
-}
-
-/* Card titles */
-.card-title {
-    font-size: 13px !important;
-    font-weight: 700 !important;
-    color: #0f172a;
-}
-
-/* Chart Cards */
-#chart-overview-category,
-#chart-overview-state {
-    width: 100% !important;
-}
-
-/* Utility */
-.c-pointer {
+.top-opp-table tbody tr {
     cursor: pointer;
+    transition: background .15s;
+}
+.top-opp-table tbody tr:hover { background: #EEF7FF; }
+.opp-title {
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+}
+.opp-rank {
+    color: var(--bid-text-lt);
+    font-weight: 700;
+    font-size: 10.5px;
+}
+.opp-value {
+    font-weight: 700;
+    color: var(--bid-primary-dk);
+}
+
+/* Status badges */
+.bid-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.bid-status-badge::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+}
+.badge-participated { background: #E3F2FD; color: #1565C0; }
+.badge-won          { background: var(--bid-success-lt); color: var(--bid-success-dk); }
+.badge-cancelled    { background: var(--bid-danger-lt); color: #C62828; }
+.badge-evaluation   { background: var(--bid-warning-lt); color: #E65100; }
+.badge-discussion   { background: var(--bid-purple-lt); color: #6A1B9A; }
+.badge-identified   { background: #E0F7FA; color: #006064; }
+.badge-default      { background: #ECEFF1; color: #455A64; }
+
+.tbl-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 3px 9px;
+    border-radius: 5px;
+    font-size: 10.5px;
+    font-weight: 600;
+    background: #E3F2FD;
+    color: var(--bid-primary);
+    border: 1px solid var(--bid-accent-lt);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all .2s;
+}
+.tbl-action-btn:hover {
+    background: var(--bid-primary);
+    color: #fff;
+    border-color: var(--bid-primary);
+}
+
+.bid-winning-card { min-height: 270px; }
+
+/* ================================================================
+   DRILL-DOWN OVERLAY & PURPOSE-BUILT PANELS
+   ================================================================ */
+.dd-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(13,71,161,.28);
+    backdrop-filter: blur(3px);
+    z-index: 1040;
+    animation: ddFadeIn .2s ease;
+}
+@keyframes ddFadeIn { from{opacity:0} to{opacity:1} }
+
+.dd-panel {
+    position: fixed;
+    top: 0; right: 0;
+    width: min(800px, 96vw);
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 1050;
+    box-shadow: -6px 0 32px rgba(0,0,0,.18);
+    animation: ddSlideIn .25s cubic-bezier(.4,0,.2,1);
+}
+@keyframes ddSlideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to   { transform: translateX(0);    opacity: 1; }
+}
+.dd-panel-inner { padding: 26px; min-height: 100%; }
+
+.dd-panel-kpi,
+.dd-panel-blue   { background: linear-gradient(150deg, #1A237E 0%, #1565C0 100%); }
+.dd-panel-teal   { background: linear-gradient(150deg, #004D40 0%, #009688 100%); }
+.dd-panel-purple { background: linear-gradient(150deg, #311B92 0%, #7E57C2 100%); }
+.dd-panel-detail { background: #fff; }
+
+.dd-panel-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    gap: 10px;
+}
+.dd-panel-badge,
+.badge-kpi {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+.badge-kpi,
+.dd-badge-blue,
+.dd-badge-teal,
+.dd-badge-purple { background: rgba(255,255,255,.2); color: #fff; }
+.dd-badge-detail { background: #E3F2FD; color: var(--bid-primary); }
+
+.dd-panel-title {
+    font-size: 21px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+    line-height: 1.2;
+}
+.dd-panel-title-dark { color: var(--bid-text-dk); }
+.dd-panel-sub {
+    font-size: 11.5px;
+    color: rgba(255,255,255,.70);
+    margin: 3px 0 0;
+}
+
+.dd-close-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,.4);
+    background: rgba(255,255,255,.15);
+    color: #fff;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s;
+    flex-shrink: 0;
+}
+.dd-close-btn:hover {
+    background: rgba(255,255,255,.3);
+    border-color: #fff;
+}
+.dd-close-btn-dark {
+    border-color: var(--bid-border);
+    background: #F3F6FE;
+    color: var(--bid-text-dk);
+}
+.dd-close-btn-dark:hover {
+    background: var(--bid-primary);
+    color: #fff;
+    border-color: var(--bid-primary);
+}
+
+.dd-panel-kpi-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+}
+.dd-kpi {
+    background: rgba(255,255,255,.15);
+    border-radius: 9px;
+    padding: 11px 14px;
+    text-align: center;
+}
+.dd-kpi-val {
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+}
+.dd-kpi-lbl {
+    font-size: 10px;
+    color: rgba(255,255,255,.70);
+    margin-top: 3px;
+}
+
+.dd-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.dd-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 9px; }
+.dd-inner-card {
+    background: rgba(255,255,255,.12);
+    border-radius: 9px;
+    padding: 13px;
+    backdrop-filter: blur(4px);
+}
+.dd-inner-title {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: rgba(255,255,255,.85);
+    margin-bottom: 9px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+.dd-bid-count-badge {
+    background: rgba(255,255,255,.25);
+    color: #fff;
+    font-size: 9.5px;
+    padding: 1px 6px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+.mt-2 { margin-top: 9px !important; }
+
+.dd-bids-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+.dd-bid-item {
+    background: rgba(255,255,255,.10);
+    border-radius: 7px;
+    padding: 9px 13px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    cursor: pointer;
+    transition: background .15s;
+    border: 1px solid rgba(255,255,255,.10);
+}
+.dd-bid-item:hover {
+    background: rgba(255,255,255,.22);
+    border-color: rgba(255,255,255,.3);
+}
+.dd-bid-idx {
+    width: 22px;
+    font-size: 10.5px;
+    color: rgba(255,255,255,.5);
+    font-weight: 700;
+    flex-shrink: 0;
+}
+.dd-bid-info { flex: 1; min-width: 0; }
+.dd-bid-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.dd-bid-meta {
+    font-size: 10.5px;
+    color: rgba(255,255,255,.6);
+    margin-top: 2px;
+}
+.dd-bid-val {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: rgba(255,255,255,.9);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.dd-panel-detail .dd-inner-card  { background: #F3F6FE; }
+.dd-panel-detail .dd-inner-title { color: var(--bid-text-dk); }
+.dd-panel-detail .dd-bid-item    { background: #F3F6FE; border-color: var(--bid-border); }
+.dd-panel-detail .dd-bid-item:hover { background: #EEF7FF; }
+.dd-panel-detail .dd-bid-title   { color: var(--bid-text-dk); }
+.dd-panel-detail .dd-bid-meta    { color: var(--bid-text-md); }
+.dd-panel-detail .dd-bid-val     { color: var(--bid-primary-dk); }
+.dd-panel-detail .dd-bid-idx     { color: var(--bid-text-lt); }
+
+.bid-detail-content { padding: 6px 0; }
+.bdc-section { margin-bottom: 16px; }
+.bdc-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: var(--bid-primary);
+    border-bottom: 2px solid var(--bid-border-lt);
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+.bdc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.bdc-field-label {
+    font-size: 10px;
+    color: var(--bid-text-lt);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+    margin-bottom: 2px;
+}
+.bdc-field-val {
+    font-size: 13px;
+    color: var(--bid-text-dk);
+    font-weight: 500;
+    word-break: break-word;
+}
+.bdc-actions {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+.bdc-btn {
+    padding: 7px 16px;
+    border-radius: 7px;
+    font-size: 11.5px;
+    font-weight: 600;
+    border: 1.5px solid var(--bid-primary);
+    background: var(--bid-primary);
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all .2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+.bdc-btn:hover {
+    background: var(--bid-primary-dk);
+    border-color: var(--bid-primary-dk);
+    color: #fff;
+}
+.bdc-btn-outline { background: transparent; color: var(--bid-primary); }
+.bdc-btn-outline:hover { background: var(--bid-primary); color: #fff; }
+.bdc-btn-green { border-color: var(--bid-success); background: var(--bid-success); }
+.bdc-btn-green:hover { background: var(--bid-success-dk); border-color: var(--bid-success-dk); }
+
+/* ApexCharts tweaks */
+.apexcharts-tooltip      { font-size: 11.5px !important; }
+.apexcharts-legend-text  { font-size: 10.5px !important; }
+
+/* Scrollbars */
+.dd-bids-list::-webkit-scrollbar,
+.state-ranked-list::-webkit-scrollbar,
+.dd-panel::-webkit-scrollbar  { width: 4px; }
+.dd-bids-list::-webkit-scrollbar-thumb,
+.dd-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,.25); border-radius: 4px; }
+.state-ranked-list::-webkit-scrollbar-thumb { background: var(--bid-accent-lt); border-radius: 4px; }
+
+/* Responsive */
+@media (max-width: 1300px) {
+    .bid-row-2 { grid-template-columns: 1fr 1fr; }
+    .bid-row-2 .bid-donut-card { grid-column: 1 / -1; }
+    .bid-row-3 { grid-template-columns: 1fr 1fr; }
+    .bid-row-3 .bid-value-card { grid-column: 1 / -1; }
+}
+@media (max-width: 1024px) {
+    .bid-kpi-row { grid-template-columns: repeat(3, 1fr); }
+    .bid-row-4 { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+    .bid-intel-header { flex-direction: column; align-items: flex-start; }
+    .bih-center { width: 100%; }
+    .bid-kpi-row { grid-template-columns: 1fr 1fr; }
+    .bid-row-2, .bid-row-3, .bid-row-4 { grid-template-columns: 1fr; }
+    .dd-panel { width: 100vw; }
+    .state-map-layout { flex-direction: column; }
 }
