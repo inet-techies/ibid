@@ -731,7 +731,22 @@ public function AddBidData(){
 			if (empty($bidTenderId)) {
 				$validationErrors[] = 'Tender ID is required.';
 			}
+							// Check whether this Tender ID already exists
+				if (!empty($bidTenderId)) {
 
+					$this->db->where('TenderId', $bidTenderId);
+					$existingTender = $this->db->count_all_results('BidCreationDetails');
+
+					if ($existingTender > 0) {
+						$this->session->set_flashdata(
+							'err',
+							'Duplicate Tender ID! We already have a bid with this Tender ID.'
+						);
+
+						redirect($this->config->item('base_url').'bid/CreateBids');
+						return;
+					}
+				}
 			$nasPath = !empty($inputs['bidNASIDInput']) ? trim($inputs['bidNASIDInput']) : (!empty($inputs['attachedDocumentPath']) ? trim($inputs['attachedDocumentPath']) : '');
 			if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
 				$uploadDir = FCPATH . 'uploads/tender/';
@@ -784,10 +799,21 @@ public function AddBidData(){
 				redirect($this->config->item('base_url').'bid/CreateBids');
 				return;
 			}
+		$docTenderId = $this->bid_model->generateBidId(
+    $bidType,
+    $bidDepartment,
+    date('Y-m-d')
+);
 
+			if (!$docTenderId) {
+				$this->session->set_flashdata('err', 'Unable to generate Bid ID. Please try again.');
+				redirect($this->config->item('base_url').'bid/CreateBids');
+				return;
+			}
 			$Biddata = [
 	            'BidType'          => $bidType,
 	            'BidTitle'         => $bidTitle,
+				'DocTenderId' => $docTenderId,
 	            'BidDepartment'    => $bidDepartment,
 	            'State'            => $bidState,
 	            'CustomerName'     => $bidCustomerName,
@@ -1102,7 +1128,6 @@ public function updateBidStatus()
 		            $updateMain = [
 		                'TechnicalSelected' => 0,
 		                'Remarks'           => $remarks !== null ? trim($remarks) : '',
-		                'ActualDate'        => !empty($actualDate) ? $actualDate : NULL,
 		            ];
 
 		            $trackingData = [
@@ -1132,7 +1157,6 @@ public function updateBidStatus()
 		            $updateMain = [
 		                'LoaReceived' => 0,
 		                'Remarks'     => $remarks !== null ? trim($remarks) : '',
-		                'ActualDate'  => !empty($actualDate) ? $actualDate : NULL,
 		            ];
 
 		            $trackingData = [
@@ -1183,7 +1207,6 @@ public function updateBidStatus()
 		            $updateMain = [
 		                'BgSubmitted' => 0,
 		                'Remarks'     => $remarks !== null ? trim($remarks) : '',
-		                'ActualDate'  => !empty($actualDate) ? $actualDate : NULL,
 		            ];
 
 		            $trackingData = [
@@ -1234,7 +1257,6 @@ public function updateBidStatus()
 		            $updateMain = [
 		                'WoReceived' => 0,
 		                'Remarks'    => $remarks !== null ? trim($remarks) : '',
-		                'ActualDate' => !empty($actualDate) ? $actualDate : NULL,
 		            ];
 
 		            $trackingData = [
@@ -1285,7 +1307,6 @@ public function updateBidStatus()
 		            $updateMain = [
 		                'CompletionCertificateReceived' => 0,
 		                'Remarks'                       => $remarks !== null ? trim($remarks) : '',
-		                'ActualDate'                    => !empty($actualDate) ? $actualDate : NULL,
 		            ];
 
 		            $trackingData = [
@@ -1340,9 +1361,6 @@ public function updateBidStatus()
 		        $updateMain = [
 		            'BidStatus' => $newStatus,
 		            'Remarks'   => $remarks !== null ? trim($remarks) : '',
-		            'ActualDate'=> !empty($actualDate) ? $actualDate : NULL,
-		            'ApprovedByManagement' => !empty($approvedMgmt) ? (int)$approvedMgmt : 0,
-		            'ApprovedByWhom'       => !empty($approvedWhom) ? (int)$approvedWhom : NULL,
 		        ];
 		        if ($techSelectedVal !== null) {
 		            $updateMain['TechnicalSelected'] = $techSelectedVal;
@@ -1381,8 +1399,6 @@ public function updateBidStatus()
 		            'OldStatusId' => $oldStatus,
 		            'CurrentStatusId' => $newStatus,
 		            'ActualDate' => !empty($actualDate) ? $actualDate : NULL,
-		            'ApprovedByManagement' => !empty($approvedMgmt) ? (int)$approvedMgmt : 0,
-		            'ApprovedByWhom' => !empty($approvedWhom) ? (int)$approvedWhom : NULL,
 		            'Remarks' => $remarks !== null ? trim($remarks) : '',
 		            'UpdatedBy' => $Bid_Session['Bid'],
 		            'Ipaddress' => $ipAddress,

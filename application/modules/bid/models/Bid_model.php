@@ -714,19 +714,42 @@ function getBidDetailsData(){
     /**
      * Get status fields for a bid
      */
-    public function getBidStatusInfo($bcid)
-    {
-        return $this->db->select('BidStatus, LoaReceived, LoaDocumentPath, BgSubmitted, BgDocumentPath, WoReceived, WoDocumentPath, CompletionCertificateReceived, CompletionCertificateDocumentPath')
-                        ->where('Bcid', $bcid)
-                        ->get('BidCreationDetails')
-                        ->row();
-    }
-
+    // public function getBidStatusInfo($bcid)
+    // {
+    //     return $this->db->select('BidStatus, LoaReceived, LoaDocumentPath, BgSubmitted, BgDocumentPath, WoReceived, WoDocumentPath, CompletionCertificateReceived, CompletionCertificateDocumentPath')
+    //                     ->where('Bcid', $bcid)
+    //                     ->get('BidCreationDetails')
+    //                     ->row();
+    // }
+public function getBidStatusInfo($bcid)
+{
+    return $this->db
+        ->select('BidStatus, LoaReceived, BgSubmitted, WoReceived, CompletionCertificateReceived')
+        ->where('Bcid', $bcid)
+        ->get('BidCreationDetails')
+        ->row();
+}
     /**
      * Update Bid status and insert tracking in a database transaction
      */
     public function updateBidStatusAndTracking($bcid, $updateMain, $trackingData)
     {
+        $mainFields = array_flip($this->db->list_fields('BidCreationDetails'));
+        $trackingFields = array_flip($this->db->list_fields('BidStatusTracking'));
+
+        $unsupportedMainFields = array_diff(array_keys($updateMain), array_keys($mainFields));
+        if (!empty($unsupportedMainFields)) {
+            log_message('error', 'Skipped unsupported BidCreationDetails update fields: ' . implode(', ', $unsupportedMainFields));
+        }
+
+        $unsupportedTrackingFields = array_diff(array_keys($trackingData), array_keys($trackingFields));
+        if (!empty($unsupportedTrackingFields)) {
+            log_message('error', 'Skipped unsupported BidStatusTracking fields: ' . implode(', ', $unsupportedTrackingFields));
+        }
+
+        $updateMain = array_intersect_key($updateMain, $mainFields);
+        $trackingData = array_intersect_key($trackingData, $trackingFields);
+
         $this->db->trans_start();
         $this->db->where('Bcid', $bcid)->update('BidCreationDetails', $updateMain);
         $this->db->insert('BidStatusTracking', $trackingData);
@@ -800,7 +823,7 @@ function getBidDetailsData(){
         return $this->db->select('b.Bcid, b.BidType, b.BidTitle, b.BidDepartment, b.EstimatedValue, b.EmdValue, 
                                   b.PublishedDate, b.SubmissionDate, b.OpeningDate, b.SummaryKeywords, 
                                   b.TenderPortalUrl, b.TenderId, b.NASPath, b.Remarks, b.BidStatus, 
-                                  b.ActualDate, b.CreationTs,
+                                  b.CreationTs,
                                   s.DisplayName as CurrentStatus, s.StatusName, s.BadgeClass')
                         ->from('BidCreationDetails b')
                         ->join('BidStatusMaster s', 's.Sid = b.BidStatus', 'left')
@@ -813,10 +836,15 @@ function getBidDetailsData(){
      * Insert a record into BidNotificationLog
      *
      * @param array $logData
-     * @return int Insert ID
+     * @return int|false Insert ID, or false when the optional log table is unavailable
      */
     public function insertNotificationLog($logData)
     {
+        if (!$this->db->table_exists('BidNotificationLog')) {
+            log_message('error', 'BidNotificationLog table is unavailable; notification log was not recorded.');
+            return false;
+        }
+
         $this->db->insert('BidNotificationLog', $logData);
         return $this->db->insert_id();
     }
@@ -922,5 +950,111 @@ function getBidDetailsData(){
         return $this->db->get()->result_array();
     }
 
-} //Main Class
+//     public function generateBidId($bidType, $department, $date)
+// {
+//     $typeMap = [
+//         'OEM'     => 1,
+//         'Service' => 2
+//     ];
 
+//     if (!isset($typeMap[$bidType])) {
+//         return false;
+//     }
+
+//     $typeId = $typeMap[$bidType];
+
+//     // First three letters of department
+//     $departmentCode = strtoupper(substr(trim($department), 0, 3));
+
+//     // Day only (01 to 31)
+//     $dateCode = date('d', strtotime($date));
+
+//     $this->db->trans_begin();
+
+//     $row = $this->db->query(
+//         "SELECT auto_value FROM IncrementId
+//          WHERE type_id = ?
+//          FOR UPDATE",
+//         [$typeId]
+//     )->row();
+
+//     if (!$row) {
+//         $this->db->trans_rollback();
+//         return false;
+//     }
+
+//     $newCount = (int)$row->auto_value + 1;
+
+//     $this->db->where('type_id', $typeId);
+//     $this->db->update('IncrementId', [
+//         'auto_value' => (string)$newCount
+//     ]);
+
+//     $prefix = ($bidType === 'OEM') ? 'OEM' : 'SER';
+
+//     $bidId = $prefix . $departmentCode .
+//              $dateCode . sprintf('%03d', $newCount);
+
+//     if ($this->db->trans_status() === false) {
+//         $this->db->trans_rollback();
+//         return false;
+//     }
+
+//     $this->db->trans_commit();
+
+//     return $bidId;
+// }
+public function generateBidId($bidType, $department, $date)
+{
+    $typeMap = [
+        'OEM'     => 1,
+        'Service' => 2
+    ];
+
+    if (!isset($typeMap[$bidType])) {
+        return false;
+    }
+
+    $typeId = $typeMap[$bidType];
+
+    $departmentCode = strtoupper(substr(trim($department), 0, 3));
+
+    // Format: DDMMYY
+    $dateCode = date('dmy', strtotime($date));
+
+    $this->db->trans_begin();
+
+    $row = $this->db->query(
+        "SELECT auto_value FROM IncrementId
+         WHERE type_id = ?
+         FOR UPDATE",
+        [$typeId]
+    )->row();
+
+    if (!$row) {
+        $this->db->trans_rollback();
+        return false;
+    }
+
+    $newCount = (int)$row->auto_value + 1;
+
+    $this->db->where('type_id', $typeId);
+    $this->db->update('IncrementId', [
+        'auto_value' => (string)$newCount
+    ]);
+
+    $prefix = ($bidType === 'OEM') ? 'OEM' : 'SER';
+
+    $bidId = $prefix . $departmentCode .
+             $dateCode . sprintf('%02d', $newCount);
+
+    if ($this->db->trans_status() === false) {
+        $this->db->trans_rollback();
+        return false;
+    }
+
+    $this->db->trans_commit();
+
+    return $bidId;
+}
+} //Main Class
