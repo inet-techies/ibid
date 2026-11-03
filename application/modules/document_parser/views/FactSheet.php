@@ -287,7 +287,7 @@ if (empty($attentionAreas) && !empty($fs['OpportunityAssessmentJson'])) {
         </button>
     </div>
 </div>
-<script>
+<!-- <script>
 function downloadFactSheetAsPdf() {
     var printArea = document.getElementById('pdfPrintableArea') || document.querySelector('.pdf-factsheet-sheet');
     if (!printArea) {
@@ -333,6 +333,100 @@ function downloadFactSheetAsPdf() {
         script.onerror = function() {
             window.print();
         };
+        document.head.appendChild(script);
+    }
+}
+</script> -->
+
+<script>
+function downloadFactSheetAsPdf() {
+    var printArea = document.getElementById('pdfPrintableArea') ||
+                    document.querySelector('.pdf-factsheet-sheet');
+
+    if (!printArea) {
+        alert('Fact Sheet content is not available to download.');
+        return;
+    }
+
+    var filename = 'Tender_FactSheet.pdf';
+
+    function executeDownload() {
+        if (!window.html2pdf) {
+            window.print();
+            return;
+        }
+
+        // printArea.classList.add('pdf-export-mode');
+
+        var opt = {
+            margin: [8, 8, 18, 8],
+            filename: filename,
+            image: {
+                type: 'jpeg',
+                quality: 0.98
+            },
+            html2canvas: {
+                scale: 2,
+                useCORS: true,
+                logging: false
+            },
+            jsPDF: {
+                unit: 'mm',
+                format: 'a4',
+                orientation: 'portrait'
+            }
+        };
+
+        html2pdf()
+            .set(opt)
+            .from(printArea)
+            .toPdf()
+            .get('pdf')
+            .then(function(pdf) {
+
+                var totalPages = pdf.internal.getNumberOfPages();
+
+                for (var i = 1; i <= totalPages; i++) {
+                    pdf.setPage(i);
+
+                    pdf.setFontSize(9);
+
+                    var pageWidth = pdf.internal.pageSize.getWidth();
+                    var pageHeight = pdf.internal.pageSize.getHeight();
+
+                    pdf.text(
+                        'Page ' + i + ' of ' + totalPages,
+                        pageWidth / 2,
+                        pageHeight - 7,
+                        { align: 'center' }
+                    );
+                }
+
+            })
+            .save()
+            .then(function() {
+              
+            })
+            .catch(function(error) {
+                
+                console.error('PDF generation error:', error);
+                alert('Unable to generate Fact Sheet PDF.');
+            });
+    }
+
+    if (window.html2pdf) {
+        executeDownload();
+    } else {
+        var script = document.createElement('script');
+
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+
+        script.onload = executeDownload;
+
+        script.onerror = function() {
+            window.print();
+        };
+
         document.head.appendChild(script);
     }
 }

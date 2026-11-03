@@ -28,3 +28,18 @@ ERROR - 2026-11-02 13:18:20 --> 404 Page Not Found:
 =======
 >>>>>>> 8a113992fac83f2ea857c82890a1a315a40895f9
 >>>>>>> f3d337131f47352fb8a70e275a4266c640fc4d99
+ERROR - 2026-11-02 11:32:46 --> 404 Page Not Found: /index
+ERROR - 2026-11-02 12:39:52 --> 404 Page Not Found: /index
+ERROR - 2026-11-02 13:03:04 --> 404 Page Not Found: /index
+ERROR - 2026-11-02 13:03:08 --> 404 Page Not Found: /index
+ERROR - 2026-11-02 13:03:26 --> 404 Page Not Found: /index
+ERROR - 2026-11-02 17:50:45 --> 404 Page Not Found: 
+ERROR - 2026-11-02 13:27:14 --> 404 Page Not Found: /index
+ERROR - 2026-11-02 13:27:33 --> 404 Page Not Found: /index
+ERROR - 2026-11-02 13:27:39 --> 404 Page Not Found: /index
+ERROR - 2026-11-02 14:23:39 --> 404 Page Not Found: /index
+ERROR - 2026-11-02 18:53:52 --> 404 Page Not Found: 
+ERROR - 2026-11-02 14:25:04 --> 404 Page Not Found: /index
+ERROR - 2026-11-02 18:59:42 --> Query error: Unknown column 'LoaDocumentPath' in 'field list' - Invalid query: SELECT `BidStatus`, `LoaReceived`, `LoaDocumentPath`, `BgSubmitted`, `BgDocumentPath`, `WoReceived`, `WoDocumentPath`, `CompletionCertificateReceived`, `CompletionCertificateDocumentPath`
+FROM `BidCreationDetails`
+WHERE `Bcid` = '1'

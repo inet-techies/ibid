@@ -228,8 +228,8 @@ class Document_extractor
 
         if ($ext === 'pdf') {
             // â”€â”€ Strategy 1: Smalot PdfParser (Composer) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-            if (file_exists(FCPATH . 'vendor/autoload.php')) {
-                require_once FCPATH . 'vendor/autoload.php';
+            if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+                require_once __DIR__ . '/vendor/autoload.php';
             }
             if (class_exists('\Smalot\PdfParser\Parser')) {
                 try {
@@ -3263,10 +3263,10 @@ class Document_extractor
             }
 
             // Strategy 2: Smalot PdfParser
-            if (file_exists(FCPATH . 'vendor/autoload.php')) {
-                require_once FCPATH . 'vendor/autoload.php';
+            if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+                require_once __DIR__ . '/vendor/autoload.php';
             }
-            if (class_exists('\\Smalot\\PdfParser\\Parser')) {
+            if (class_exists('\Smalot\PdfParser\Parser')) {
                 try {
                     $parser = new \Smalot\PdfParser\Parser();
                     $pdf = $parser->parseFile($filePath);

@@ -12,7 +12,7 @@ class Timeline_model extends CI_Model {
   
     public function getTimeline($tfs_id) {
         $fs = $this->db->select('Tfsid, Bcid, TenderRefNo, TenderTitle, ImportantDates, TimelineJson, DocumentName')
-            ->from('tenderfactsheet')
+            ->from('TenderFactSheet')
             ->where('Tfsid', (int)$tfs_id)
             ->get()->row_array();
 
@@ -257,11 +257,11 @@ class Timeline_model extends CI_Model {
     }
 
     /**
-     * Save Timeline JSON blob on tenderfactsheet table if caching is needed
+     * Save Timeline JSON blob on TenderFactSheet table if caching is needed
      */
     public function saveTimelineJson($tfs_id, $timeline_array) {
         $json = json_encode($timeline_array, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
-        return $this->db->where('Tfsid', (int)$tfs_id)->update('tenderfactsheet', [
+        return $this->db->where('Tfsid', (int)$tfs_id)->update('TenderFactSheet', [
             'TimelineJson' => $json
         ]);
     }
@@ -359,12 +359,12 @@ class Timeline_model extends CI_Model {
     }
 
     /**
-     * Fetch pending reminders due for dispatch across all tenderfactsheet records (for cron runner)
+     * Fetch pending reminders due for dispatch across all TenderFactSheet records (for cron runner)
      */
     public function getPendingRemindersDue() {
         $now = date('Y-m-d H:i:s');
         $rows = $this->db->select('Tfsid, TenderRefNo, Department, TenderTitle, TimelineJson')
-            ->from('tenderfactsheet')
+            ->from('TenderFactSheet')
             ->where('TimelineJson IS NOT NULL')
             ->where('TimelineJson !=', '')
             ->get()->result_array();
