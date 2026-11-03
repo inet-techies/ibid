@@ -32,3 +32,15 @@ FROM `ProjectTable`
 ORDER BY `PTId` DESC
 ERROR - 2026-11-03 12:15:39 --> 404 Page Not Found: /index
 ERROR - 2026-11-03 13:20:49 --> 404 Page Not Found: /index
+ERROR - 2026-11-03 14:00:37 --> Severity: error --> Exception: syntax error, unexpected 'if' (T_IF), expecting function (T_FUNCTION) or const (T_CONST) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 932
+ERROR - 2026-11-03 14:00:42 --> Severity: error --> Exception: syntax error, unexpected 'if' (T_IF), expecting function (T_FUNCTION) or const (T_CONST) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 932
+ERROR - 2026-11-03 14:00:43 --> Severity: error --> Exception: syntax error, unexpected 'if' (T_IF), expecting function (T_FUNCTION) or const (T_CONST) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 932
+ERROR - 2026-11-03 14:00:44 --> Severity: error --> Exception: syntax error, unexpected 'if' (T_IF), expecting function (T_FUNCTION) or const (T_CONST) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 932
+ERROR - 2026-11-03 14:01:31 --> Severity: error --> Exception: syntax error, unexpected 'if' (T_IF), expecting function (T_FUNCTION) or const (T_CONST) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 932
+ERROR - 2026-11-03 14:01:41 --> Severity: error --> Exception: syntax error, unexpected 'if' (T_IF), expecting function (T_FUNCTION) or const (T_CONST) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 932
+ERROR - 2026-11-03 14:01:52 --> Severity: error --> Exception: syntax error, unexpected 'if' (T_IF), expecting function (T_FUNCTION) or const (T_CONST) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 932
+ERROR - 2026-11-03 14:02:03 --> Severity: error --> Exception: syntax error, unexpected 'if' (T_IF), expecting function (T_FUNCTION) or const (T_CONST) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 932
+ERROR - 2026-11-03 14:09:36 --> Severity: error --> Exception: syntax error, unexpected 'if' (T_IF), expecting function (T_FUNCTION) or const (T_CONST) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 932
+ERROR - 2026-11-03 14:09:37 --> Severity: error --> Exception: syntax error, unexpected 'if' (T_IF), expecting function (T_FUNCTION) or const (T_CONST) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 932
+ERROR - 2026-11-03 14:09:50 --> Severity: error --> Exception: syntax error, unexpected 'if' (T_IF), expecting function (T_FUNCTION) or const (T_CONST) D:\xampp\htdocs\ibid\application\modules\bid\controllers\Bid.php 932
+ERROR - 2026-11-03 14:10:07 --> 404 Page Not Found: /index

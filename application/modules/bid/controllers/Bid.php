@@ -942,6 +942,8 @@ private function status($statusKey)
         }
 
       
+        $currentUrl = strtolower(uri_string());
+        $data['currentUrlArray'] = $this->bid_model->getBreadcrumb($currentUrl);
         $data['BidData'] = $this->bid_model->getBidsByStatusId($status->Sid);
         $data['PageTitle'] = $status->DisplayName;
 
