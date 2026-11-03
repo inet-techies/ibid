@@ -27,3 +27,5 @@ ERROR - 2026-11-03 12:39:48 --> BidNotificationLog table is unavailable; notific
 ERROR - 2026-11-03 08:38:24 --> 404 Page Not Found: /index
 ERROR - 2026-11-03 09:53:55 --> 404 Page Not Found: /index
 >>>>>>> 733f4e3cbc39a724c8e9c0cb907d28c71ec2c9bf
+ERROR - 2026-11-03 15:37:07 --> Severity: Core Warning --> PHP Startup: Unable to load dynamic library 'zip' (tried: C:\xampp\php\ext\zip (The specified module could not be found.), C:\xampp\php\ext\php_zip.dll (The specified module could not be found.)) Unknown 0
+ERROR - 2026-11-03 18:26:06 --> Severity: Core Warning --> PHP Startup: Unable to load dynamic library 'zip' (tried: C:\xampp\php\ext\zip (The specified module could not be found.), C:\xampp\php\ext\php_zip.dll (The specified module could not be found.)) Unknown 0

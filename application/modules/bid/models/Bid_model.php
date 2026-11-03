@@ -452,12 +452,13 @@ function getBidDetailsData(){
         ];
     }
 
+    
     /**
      * Get all bids with status metadata for client-side instant date filtering
      */
     public function getAllBidsWithStatus()
     {
-        return $this->db->select('b.Bcid, b.BidTitle, b.BidType, b.BidDepartment, b.State, b.Category, b.EstimatedValue, b.EmdValue, b.PublishedDate, b.OpeningDate, b.SubmissionDate, b.CreationTs, b.BidStatus, s.DisplayName as StatusName, s.BadgeClass, s.IconClass')
+        return $this->db->select('b.*, s.DisplayName as StatusName, s.BadgeClass, s.IconClass, s.SortOrder')
                         ->from('BidCreationDetails b')
                         ->join('BidStatusMaster s', 's.Sid = b.BidStatus', 'left')
                         ->order_by('b.CreationTs', 'DESC')
@@ -531,6 +532,7 @@ function getBidDetailsData(){
         return $this->db->insert('BidLogin_Log', $data);
     }
 
+    
     /**
      * Get all active status master records ordered by SortOrder
      */
