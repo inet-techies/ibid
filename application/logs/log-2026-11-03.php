@@ -31,3 +31,4 @@ ERROR - 2026-11-03 15:15:05 --> Query error: Unknown column 'PTId' in 'order cla
 FROM `ProjectTable`
 ORDER BY `PTId` DESC
 ERROR - 2026-11-03 12:15:39 --> 404 Page Not Found: /index
+ERROR - 2026-11-03 13:20:49 --> 404 Page Not Found: /index
