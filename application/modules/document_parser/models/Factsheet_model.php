@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Factsheet_model extends CI_Model
 {
-    protected $table = 'tenderfactsheet';
+    protected $table = 'TenderFactSheet';
 
     public function __construct()
     {

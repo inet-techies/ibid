@@ -971,11 +971,6 @@ function downloadFactSheetAsPdf() {
 })();
 </script>
 
-<!-- ═════════════════════════════════════════════════════════════════════
-     TENDER TIMELINE INTELLIGENCE MODALS & SCRIPTS
-     ═════════════════════════════════════════════════════════════════════ -->
-
-<!-- 0. Dedicated Right-Side Tender Timeline Intelligence Modal (Matches project right-form) -->
 <div id="timelineModalOverlay" class="timeline-right-overlay" onclick="closeTimelineModal();"></div>
 
 <div id="timelineIntelligenceModal" class="timeline-right-panel right-form">

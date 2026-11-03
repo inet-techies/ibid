@@ -23,7 +23,7 @@ if (!empty($employee_det['Bid'])) {
 ?>
 <?php $theme_path = $this->config->item('theme_locations').$this->config->item('active_template'); ?>
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="zxx" class="app-font-family-system-ui">
 
 <head>
     <meta charset="utf-8" />
@@ -62,6 +62,12 @@ if (!empty($employee_det['Bid'])) {
     <link rel="stylesheet" href="<?=$theme_path?>/assets/css/dashboard.css?v=<?= time(); ?>">
 
     <style>
+        
+        /* System UI Font Default */
+        html, body, button, input, select, textarea, .form-control, .table, h1, h2, h3, h4, h5, h6 {
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+        }
+
         /* Always keep footer at the bottom of the viewport */
         html, body {
             height: 100%;
@@ -189,9 +195,8 @@ if (!empty($employee_det['Bid'])) {
 
                                                 <a class="nxl-link" href="<?= base_url($child['MenuUrl']); ?>">
 
-                                                    <?php if (!empty($child['IconClass'])): ?>
-                                                        <i class="<?= $child['IconClass']; ?> me-2"></i>
-                                                    <?php endif; ?>
+                                                    <?php $childIcon = !empty($child['IconClass']) ? str_replace('feather-calender', 'feather-calendar', $child['IconClass']) : 'feather-circle'; ?>
+                                                    <i class="<?= $childIcon; ?> me-2" aria-hidden="true"></i>
 
                                                     <?= $child['MenuName']; ?>
                                                 </a>
@@ -367,12 +372,7 @@ if (!empty($employee_det['Bid'])) {
             <!--! [End] Header Right !-->
         </div>
     </header>
-    <!--! ================================================================ !-->
-    <!--! [End] Header !-->
-    <!--! ================================================================ !-->
-    <!--! ================================================================ !-->
-    <!--! [Start] Main Content !-->
-    <!--! ================================================================ !-->
+
     <main class="nxl-container">
         <div class="nxl-content">
             <!-- [ page-header ] start -->
@@ -614,7 +614,7 @@ if (!empty($employee_det['Bid'])) {
                             <label class="py-2 fs-9 fw-bold text-dark text-uppercase text-spacing-1 border border-gray-2 w-100 h-100 c-pointer position-relative options-label" for="app-font-family-rubik">Rubik</label>
                         </div>
                         <div class="col-6 text-center single-option">
-                            <input type="radio" class="btn-check" id="app-font-family-inter" name="font-family" value="3" data-font-family="app-font-family-inter" checked />
+                            <input type="radio" class="btn-check" id="app-font-family-inter" name="font-family" value="3" data-font-family="app-font-family-inter" />
                             <label class="py-2 fs-9 fw-bold text-dark text-uppercase text-spacing-1 border border-gray-2 w-100 h-100 c-pointer position-relative options-label" for="app-font-family-inter">Inter</label>
                         </div>
                         <div class="col-6 text-center single-option">
@@ -642,7 +642,7 @@ if (!empty($employee_det['Bid'])) {
                             <label class="py-2 fs-9 fw-bold text-dark text-uppercase text-spacing-1 border border-gray-2 w-100 h-100 c-pointer position-relative options-label" for="app-font-family-raleway">Raleway</label>
                         </div>
                         <div class="col-6 text-center single-option">
-                            <input type="radio" class="btn-check" id="app-font-family-system-ui" name="font-family" value="11" data-font-family="app-font-family-system-ui" />
+                            <input type="radio" class="btn-check" id="app-font-family-system-ui" name="font-family" value="11" data-font-family="app-font-family-system-ui" checked />
                             <label class="py-2 fs-9 fw-bold text-dark text-uppercase text-spacing-1 border border-gray-2 w-100 h-100 c-pointer position-relative options-label" for="app-font-family-system-ui">System UI</label>
                         </div>
                         <div class="col-6 text-center single-option">
