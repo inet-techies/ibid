@@ -18,15 +18,19 @@
     /* ==============================================================
        1. DATA & STATE
        ============================================================== */
-    var RAW        = window.DASH_DATA || {};
-    var allBids    = RAW.allBids    || [];
-    var statuses   = RAW.statuses   || [];
-    var baseUrl    = RAW.baseUrl    || '';
+    var RAW         = window.DASH_DATA || {};
+    var allBids     = RAW.allBids      || [];
+    var statuses    = RAW.statuses     || [];
+    var states      = RAW.states       || [];
+    var departments = RAW.departments  || [];
+    var baseUrl     = RAW.baseUrl      || '';
 
     var FS = {
-        fy:        'ALL',
-        startDate: null,
-        endDate:   null
+        state:      'ALL',
+        department: 'ALL',
+        fy:         'ALL',
+        startDate:  null,
+        endDate:    null
     };
 
     var activeFilteredBids = [];
@@ -89,22 +93,66 @@
 
     function isParticipated(b) {
         var s = (b.StatusName || '').toLowerCase().trim();
-        return !/^(identified|pq identified|enquiry|new|draft)$/i.test(s) && s !== '' && s !== 'unknown';
+        var d = (b.DisplayName || '').toLowerCase().trim();
+        var sid = parseInt(b.BidStatus, 10);
+        if ([9, 21, 23, 25, 27, 29, 31, 17, 33, 35, 37, 13, 39].indexOf(sid) >= 0) return true;
+        if (/^(createbids|created|identified|pq identified|enquiry|new|draft|bidinactive|inactive|bidcancelled|cancelled|nlbids|not eligible bids)$/i.test(s) ||
+            /^(created|identified|draft|inactive|cancelled)$/i.test(d)) {
+            return false;
+        }
+        var all = s + ' ' + d;
+        return all.indexOf('part') >= 0 || all.indexOf('submit') >= 0 ||
+               all.indexOf('tech') >= 0 || all.indexOf('evaluat') >= 0 ||
+               all.indexOf('financ') >= 0 || all.indexOf('l1') >= 0 ||
+               all.indexOf('award') >= 0 || all.indexOf('won') >= 0 ||
+               all.indexOf('loa') >= 0 || all.indexOf('wo') >= 0;
     }
 
     function isWon(b) {
         var s = (b.StatusName || '').toLowerCase().trim();
-        if (s.indexOf('won') >= 0 || s.indexOf('award') >= 0 ||
-            s.indexOf('loa') >= 0 || s.indexOf('work order') >= 0 ||
-            s.indexOf('l1') >= 0) {
+        var d = (b.DisplayName || '').toLowerCase().trim();
+        var sid = parseInt(b.BidStatus, 10);
+        if ([13, 33, 37, 39].indexOf(sid) >= 0) return true;
+        if (parseInt(b.LoaReceived, 10) === 1 || parseInt(b.WoReceived, 10) === 1 || parseInt(b.CompletionCertificateReceived, 10) === 1) return true;
+        var all = s + ' ' + d;
+        if (all.indexOf('won') >= 0 || all.indexOf('award') >= 0 ||
+            all.indexOf('loa') >= 0 || all.indexOf('work order') >= 0 ||
+            all.indexOf('wo received') >= 0 ||
+            all.indexOf('completion') >= 0) {
             return true;
         }
         var raw = ((b.AwardCriteria || '') + ' ' + (b.BidTitle || '') + ' ' + (b.SummaryKeywords || '')).toLowerCase();
-        if (raw.indexOf('l1') >= 0 || raw.indexOf('won') >= 0 || raw.indexOf('lowest quote') >= 0) {
+        if (raw.indexOf('won') >= 0 || raw.indexOf('awarded') >= 0) {
             return true;
         }
-        // Match user's explicit request: this dataset / initial bid comes as won
-        if (b.Bcid == 1 || s === 'createbids' || s === 'created' || s === '') {
+        return false;
+    }
+
+    function isTechQualified(b) {
+        var s = (b.StatusName || '').toLowerCase().trim();
+        var d = (b.DisplayName || '').toLowerCase().trim();
+        var sid = parseInt(b.BidStatus, 10);
+        if ([29, 31, 17, 33, 35, 37, 13, 39].indexOf(sid) >= 0) return true;
+        var all = s + ' ' + d;
+        if (all.indexOf('technic') >= 0 || all.indexOf('financial') >= 0 ||
+            all.indexOf('l1') >= 0 || all.indexOf('award') >= 0 ||
+            all.indexOf('won') >= 0 || all.indexOf('loa') >= 0 ||
+            all.indexOf('wo') >= 0 || all.indexOf('completion') >= 0) {
+            return true;
+        }
+        return false;
+    }
+
+    function isFinEval(b) {
+        var s = (b.StatusName || '').toLowerCase().trim();
+        var d = (b.DisplayName || '').toLowerCase().trim();
+        var sid = parseInt(b.BidStatus, 10);
+        if ([31, 17, 33, 37, 13, 39].indexOf(sid) >= 0) return true;
+        var all = s + ' ' + d;
+        if (all.indexOf('financial') >= 0 || all.indexOf('opening') >= 0 ||
+            all.indexOf('l1') >= 0 || all.indexOf('award') >= 0 ||
+            all.indexOf('won') >= 0 || all.indexOf('loa') >= 0 ||
+            all.indexOf('wo') >= 0 || all.indexOf('completion') >= 0) {
             return true;
         }
         return false;
@@ -131,6 +179,64 @@
     var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
     /* ==============================================================
+       3.0 BUILD STATE & DEPARTMENT DROPDOWNS
+       ============================================================== */
+    function buildStateOptions() {
+        var stateSet = {};
+        if (Array.isArray(states)) {
+            states.forEach(function(s) {
+                if (s && String(s).trim()) stateSet[String(s).trim()] = true;
+            });
+        }
+        allBids.forEach(function(b) {
+            var s = (b.State || '').trim();
+            if (s && s !== 'Unknown') stateSet[s] = true;
+        });
+        var sortedStates = Object.keys(stateSet).sort(function(a, b) {
+            return a.localeCompare(b);
+        });
+        var sel = document.getElementById('filter-state');
+        if (!sel) return;
+        sel.innerHTML = '<option value="ALL">All States</option>';
+        sortedStates.forEach(function(st) {
+            var o = document.createElement('option');
+            o.value = st;
+            o.textContent = st;
+            sel.appendChild(o);
+        });
+        sel.value = 'ALL';
+        FS.state = 'ALL';
+    }
+
+    function buildDepartmentOptions() {
+        var deptSet = {};
+        if (Array.isArray(departments)) {
+            departments.forEach(function(d) {
+                if (d && String(d).trim()) deptSet[String(d).trim()] = true;
+            });
+        }
+        allBids.forEach(function(b) {
+            var d = (b.BidDepartment || '').trim();
+            if (d && d !== 'Unknown') deptSet[d] = true;
+        });
+        var sortedDepts = Object.keys(deptSet).sort(function(a, b) {
+            return a.localeCompare(b);
+        });
+        var sel = document.getElementById('filter-department');
+        if (!sel) return;
+        sel.innerHTML = '<option value="ALL">All Departments</option>';
+        sortedDepts.forEach(function(dept) {
+            var o = document.createElement('option');
+            o.value = dept;
+            var label = dept.charAt(0).toUpperCase() + dept.slice(1);
+            o.textContent = label;
+            sel.appendChild(o);
+        });
+        sel.value = 'ALL';
+        FS.department = 'ALL';
+    }
+
+    /* ==============================================================
        3. BUILD FINANCIAL YEAR DROPDOWN
        ============================================================== */
     function buildFYOptions() {
@@ -155,12 +261,24 @@
     }
 
     /* ==============================================================
-       4. APPLY FILTERS (FY & Date Range ONLY)
+       4. APPLY FILTERS (State, Date Range, Department, FY)
        ============================================================== */
     function applyFilters() {
         activeFilteredBids = allBids.filter(function(b) {
+            /* State Filter */
+            if (FS.state && FS.state !== 'ALL') {
+                var st = (b.State || '').trim().toLowerCase();
+                if (st !== FS.state.toLowerCase()) return false;
+            }
+
+            /* Department Filter */
+            if (FS.department && FS.department !== 'ALL') {
+                var dept = (b.BidDepartment || '').trim().toLowerCase();
+                if (dept !== FS.department.toLowerCase()) return false;
+            }
+
             /* FY Filter */
-            if (FS.fy !== 'ALL' && getBidFY(b) !== FS.fy) return false;
+            if (FS.fy && FS.fy !== 'ALL' && getBidFY(b) !== FS.fy) return false;
 
             /* Date Range Filter */
             if (FS.startDate || FS.endDate) {
@@ -183,17 +301,9 @@
     function resolveCategory(b) {
         var cat = (b.Category || '').trim();
         if (!cat || cat === '001' || /^\d+$/.test(cat) || cat.toLowerCase() === 'uncategorised' || cat.toLowerCase() === 'unknown') {
-            var kw = ((b.BidTitle || '') + ' ' + (b.TenderId || '') + ' ' + (b.SummaryKeywords || '')).toLowerCase();
-            if (kw.indexOf('cctv') >= 0 || kw.indexOf('camera') >= 0 || kw.indexOf('surveillance') >= 0) return 'CCTV';
-            if (kw.indexOf('elect') >= 0) return 'Election';
-            if (kw.indexOf('exam') >= 0) return 'Examination';
-            if (kw.indexOf('soft') >= 0) return 'Software';
-            if (kw.indexOf('drone') >= 0) return 'Drone';
-            if (kw.indexOf('rental') >= 0) return 'IT Rentals';
-            if (kw.indexOf('network') >= 0) return 'Networking';
-            return 'CCTV';
+            return 'General';
         }
-        return cat;
+        return cat.charAt(0).toUpperCase() + cat.slice(1);
     }
 
     /* ==============================================================
@@ -209,7 +319,7 @@
         var mVal   = new Array(12).fill(0);
 
         bids.forEach(function(b) {
-            var sn  = (b.StatusName || 'Unknown').trim();
+            var sn  = (b.DisplayName || b.StatusName || 'Created').trim();
             var val = parseFloat(b.EstimatedValue) || 0;
             var cat = resolveCategory(b);
             b.Category = cat;
@@ -283,7 +393,7 @@
         setText('kpi-participated', c.participated);
         setText('kpi-won',          c.won);
         setText('kpi-winrate',      c.winRate + '%');
-        setText('kpi-value',        formatCurrencySmart(c.wonValue > 0 ? c.wonValue : c.totalValue));
+        setText('kpi-value',        formatCurrencySmart(c.wonValue));
 
         renderWinRateGauge(c.winRate);
     }
@@ -309,7 +419,7 @@
     }
 
     /* ==============================================================
-       8. ROW 2 LEFT — BID PIPELINE (DONUT CHART OF WORKFLOW STATUSES)
+       8. ROW 2 LEFT — BID PIPELINE (STATUS DONUT CHART)
        ============================================================== */
     function updatePipelineDonut(c) {
         var chartEl  = document.getElementById('chart-pipeline-donut');
@@ -371,164 +481,126 @@
                 '<span class="pdl-name" title="' + escH(e.name) + '">' + escH(e.name) + '</span>' +
                 '<span class="pdl-count">' + e.count + '</span>' +
                 '<span class="pdl-pct">(' + pct + '%)</span>';
-            // No modal on status click
             legendEl.appendChild(div);
         });
     }
 
     /* ==============================================================
-       9. ROW 2 CENTER — MONTHLY BID TREND (Combo Chart)
+       9. ROW 2 CENTER — MONTHLY BID TREND (FUNNEL FORMAT)
        ============================================================== */
     function updateMonthlyTrend(c) {
         var el = document.getElementById('chart-monthly-trend');
         if (!el) return;
-        destroyChart('chart-monthly-trend');
 
-        var valCr = c.mVal.map(function(v){ return parseFloat(crore(v)); });
+        var total = activeFilteredBids.length;
+        var cIdentified = total;
+        var cParticipated = activeFilteredBids.filter(isParticipated).length;
+        var cTech = activeFilteredBids.filter(isTechQualified).length;
+        var cFin = activeFilteredBids.filter(isFinEval).length;
+        var cWon = activeFilteredBids.filter(isWon).length;
 
-        charts['chart-monthly-trend'] = new ApexCharts(el, {
-            chart: {
-                type:'line', height:220,
-                toolbar:{ show:false },
-                animations:{ enabled:true, easing:'easeinout', speed:600 }
-            },
-            series: [
-                { name:'Total Bids',       type:'bar',  data: c.mTotal },
-                { name:'Participated',     type:'line', data: c.mPart  },
-                { name:'Won',              type:'line', data: c.mWon   },
-                { name:'Bid Value (Cr)',   type:'line', data: valCr    }
-            ],
-            colors: ['#BBDEFB','#1565C0','#4CAF50','#FF9800'],
-            stroke: { width:[0,2.5,2.5,2], curve:'smooth', dashArray:[0,0,0,5] },
-            fill:   { opacity:[0.85,1,1,1] },
-            xaxis:  {
-                categories: MONTHS,
-                labels:{ style:{ fontSize:'10px', colors:'#94A3B8' } },
-                axisBorder:{ show:false }, axisTicks:{ show:false }
-            },
-            yaxis: [
-                { title:{ text:'Number of Bids', style:{ fontSize:'9.5px', color:'#94A3B8' } },
-                  labels:{ style:{ fontSize:'10px', colors:'#94A3B8' } }, min:0 },
-                { show:false }, { show:false },
-                { opposite:true,
-                  title:{ text:'Bid Value (Cr)', style:{ fontSize:'9.5px', color:'#94A3B8' } },
-                  labels:{ style:{ fontSize:'10px', colors:'#94A3B8' },
-                           formatter:function(v){ return '₹' + v; } }, min:0 }
-            ],
-            plotOptions: { bar:{ columnWidth:'50%', borderRadius:3 } },
-            dataLabels: { enabled:false },
-            legend:     { show:false },
-            grid:       { borderColor:'#EEF2FB', strokeDashArray:3 },
-            tooltip: {
-                shared:true, intersect:false,
-                y:{ formatter:function(v,o){ return o.seriesIndex===3 ? '₹'+v+' Cr' : v; } }
-            }
+        var p1 = total > 0 ? '100%' : '0%';
+        var p2 = total > 0 ? Math.round(cParticipated / total * 100) + '%' : '0%';
+        var p3 = total > 0 ? Math.round(cTech / total * 100) + '%' : '0%';
+        var p4 = total > 0 ? Math.round(cFin / total * 100) + '%' : '0%';
+        var p5 = total > 0 ? Math.round(cWon / total * 100) + '%' : '0%';
+
+        var stages = [
+            { key: 'identified',    cls: 'pf-stage-1', name: 'Identified',                  count: cIdentified,    pct: p1, bids: activeFilteredBids },
+            { key: 'participated',  cls: 'pf-stage-2', name: 'Participated',                count: cParticipated,  pct: p2, bids: activeFilteredBids.filter(isParticipated) },
+            { key: 'tech',          cls: 'pf-stage-3', name: 'Technically Qualified',        count: cTech,          pct: p3, bids: activeFilteredBids.filter(isTechQualified) },
+            { key: 'fin',           cls: 'pf-stage-4', name: 'Under Financial Evaluation',   count: cFin,           pct: p4, bids: activeFilteredBids.filter(isFinEval) },
+            { key: 'won',           cls: 'pf-stage-5', name: 'Won',                         count: cWon,           pct: p5, bids: activeFilteredBids.filter(isWon) }
+        ];
+
+        var html = '';
+        stages.forEach(function(st) {
+            html +=
+                '<div class="pf-stage" data-funnel-key="' + st.key + '" title="' + escH(st.name) + ': ' + st.count + ' (' + st.pct + ')">' +
+                    '<span class="pf-label">' + escH(st.name) + '</span>' +
+                    '<div class="pf-bar-cell">' +
+                        '<div class="pf-bar ' + st.cls + '">' + st.count + '</div>' +
+                    '</div>' +
+                    '<span class="pf-pct">' + st.pct + '</span>' +
+                '</div>';
         });
-        charts['chart-monthly-trend'].render();
+        el.innerHTML = html;
+
+        el.querySelectorAll('.pf-stage').forEach(function(row) {
+            row.addEventListener('click', function() {
+                var key = this.getAttribute('data-funnel-key');
+                var found = stages.find(function(s){ return s.key === key; });
+                if (found) {
+                    openFunnelDrillDown(found);
+                }
+            });
+        });
+    }
+
+    function openFunnelDrillDown(stage) {
+        var matched = stage.bids || [];
+        var totVal = matched.reduce(function(s,b){ return s + (parseFloat(b.EstimatedValue)||0); }, 0);
+        setText('ddk-title', stage.name + ' Stage');
+        setText('ddk-sub', matched.length + ' bids in ' + stage.name + ' stage');
+        setDDKKPIs(matched.length, 'Stage Bids', crStr(totVal), 'Total Value', stage.pct, 'Conversion');
+
+        var cMap = groupBy(matched, 'Category');
+        setText('ddk-chart1-title', 'Bids by Category');
+        renderDDHBar('ddk-chart1', sortMap(cMap).slice(0,8).map(function(e){return e.count;}), sortMap(cMap).slice(0,8).map(function(e){return e.name;}), '#2563EB');
+
+        var sMap = groupBy(matched, 'State');
+        setText('ddk-chart2-title', 'Bids by State');
+        renderDDHBar('ddk-chart2', sortMap(sMap).slice(0,8).map(function(e){return e.count;}), sortMap(sMap).slice(0,8).map(function(e){return e.name;}), '#10B981');
+
+        setText('ddk-bid-count', matched.length);
+        renderDDBidList('ddk-bids-list', matched);
+        openPanel('dd-kpi');
     }
 
     /* ==============================================================
-       11. ROW 3 LEFT — BIDS BY CATEGORY (Horizontal Bars matching reference)
+       11. ROW 3 LEFT — BIDS BY CATEGORY (Dynamic with Side Category Names)
        ============================================================== */
     function updateCategoryChart(c) {
         var el = document.getElementById('chart-category');
         if (!el) return;
         destroyChart('chart-category');
 
-        /* Standard categories matching reference image */
-        var DEFAULT_CATS = ['Election', 'Examination', 'Software', 'CCTV', 'IT Rentals', 'Networking', 'SITC - CCTV', 'AI', 'Drone', 'Videography'];
         var catCounts = {};
-        DEFAULT_CATS.forEach(function(k){ catCounts[k] = 0; });
-        Object.keys(c.catMap).forEach(function(k){
-            catCounts[k] = (catCounts[k] || 0) + c.catMap[k].count;
+        activeFilteredBids.forEach(function(b) {
+            var cat = resolveCategory(b);
+            catCounts[cat] = (catCounts[cat] || 0) + 1;
         });
 
-        /* Sort so categories with counts appear at top, keeping clean reference order */
-        var entries = Object.keys(catCounts).map(function(k){
+        var entries = Object.keys(catCounts).map(function(k) {
             return { name: k, count: catCounts[k] };
-        }).sort(function(a, b){
-            if (b.count !== a.count) return b.count - a.count;
-            return DEFAULT_CATS.indexOf(a.name) - DEFAULT_CATS.indexOf(b.name);
-        }).slice(0, 10);
-
-        var names  = entries.map(function(e){ return e.name; });
-        var counts = entries.map(function(e){ return e.count; });
-        var maxCount = Math.max.apply(null, counts);
-
-        /* Blue gradient shades matching reference image: top category deepest blue */
-        var BLUE_SCALE = [
-            '#1565C0', '#1976D2', '#1E88E5', '#2196F3', '#42A5F5',
-            '#64B5F6', '#90CAF9', '#90CAF9', '#BBDEFB', '#BBDEFB'
-        ];
-        var barColors = entries.map(function(e, i){ return BLUE_SCALE[i] || '#BBDEFB'; });
-
-        charts['chart-category'] = new ApexCharts(el, {
-            chart: {
-                type: 'bar',
-                height: 255,
-                toolbar: { show: false },
-                animations: { enabled: true, easing: 'easeinout', speed: 500 }
-            },
-            plotOptions: {
-                bar: {
-                    horizontal: true,
-                    barHeight: '56%',
-                    borderRadius: 3,
-                    distributed: true,
-                    dataLabels: {
-                        position: 'top'
-                    }
-                }
-            },
-            colors: barColors,
-            series: [{ name: 'Bids', data: counts }],
-            dataLabels: {
-                enabled: true,
-                textAnchor: 'start',
-                offsetX: 8,
-                style: {
-                    fontSize: '11px',
-                    fontFamily: 'Inter, system-ui, sans-serif',
-                    fontWeight: 700,
-                    colors: ['#1e293b']
-                },
-                formatter: function(val) {
-                    return val;
-                }
-            },
-            xaxis: {
-                categories: names,
-                labels: { show: false },
-                axisBorder: { show: false },
-                axisTicks: { show: false },
-                min: 0,
-                max: maxCount > 0 ? (maxCount < 5 ? maxCount + 1 : Math.ceil(maxCount * 1.15)) : 5
-            },
-            yaxis: {
-                labels: {
-                    style: {
-                        colors: '#334155',
-                        fontSize: '11.5px',
-                        fontFamily: 'Inter, system-ui, sans-serif',
-                        fontWeight: 600
-                    }
-                }
-            },
-            grid: {
-                show: false,
-                padding: { top: -10, bottom: -5, left: 10, right: 28 }
-            },
-            legend: { show: false },
-            tooltip: {
-                theme: 'light',
-                y: {
-                    formatter: function(val) {
-                        return val + ' Bids';
-                    }
-                }
-            }
+        }).sort(function(a, b) {
+            return b.count - a.count;
         });
-        charts['chart-category'].render();
+
+        if (entries.length === 0) {
+            el.innerHTML = '<div class="bcc-empty">No category data available</div>';
+            return;
+        }
+
+        var maxCount = entries[0].count || 1;
+        var BLUE_SCALE = ['#1565C0', '#1976D2', '#1E88E5', '#2196F3', '#42A5F5', '#64B5F6', '#90CAF9'];
+
+        el.innerHTML = '';
+        var list = document.createElement('div');
+        list.className = 'cat-ranked-list';
+
+        entries.forEach(function(e, i) {
+            var pct = Math.max(12, Math.round((e.count / maxCount) * 100));
+            var color = BLUE_SCALE[i % BLUE_SCALE.length];
+            var div = document.createElement('div');
+            div.className = 'crl-item';
+            div.innerHTML =
+                '<span class="crl-name" title="' + escH(e.name) + '">' + escH(e.name) + '</span>' +
+                '<div class="crl-bar-wrap"><div class="crl-bar-fill" style="width:' + pct + '%; background:' + color + '"></div></div>' +
+                '<span class="crl-count">' + e.count + '</span>';
+            list.appendChild(div);
+        });
+        el.appendChild(list);
     }
 
     /* ==============================================================
@@ -637,7 +709,7 @@
             yaxis: {
                 labels:{
                     style:{ fontSize:'9.5px', colors:'#94A3B8' },
-                    formatter:function(v){ return '₹' + v; }
+                    formatter:function(v){ var n = parseFloat(v); if(isNaN(n)) return '₹'+v; return '₹' + (Number.isInteger(n) ? n : n.toFixed(1)); }
                 }
             },
             stroke:      { curve:'smooth', width:2, colors:['#1565C0'] },
@@ -711,7 +783,7 @@
             matched = activeFilteredBids.slice();
             title   = 'Total Bids Analysis';
             sub     = matched.length + ' bids in current selection';
-            setDDKKPIs(c.total, crStr(c.totalValue), c.participated);
+            setDDKKPIs(c.total, 'Total Bids', crStr(c.totalValue), 'Total Value', c.participated, 'Participated');
             setText('ddk-chart1-title','Status Breakdown');
             var sMap = groupBy(matched, 'StatusName');
             renderDDHBar('ddk-chart1', sortMap(sMap).map(function(e){return e.count;}), sortMap(sMap).map(function(e){return e.name;}), '#1565C0');
@@ -723,7 +795,7 @@
             title   = 'Participated Bids Analysis';
             sub     = matched.length + ' participated bids';
             var pv  = matched.reduce(function(s,b){return s+(parseFloat(b.EstimatedValue)||0);},0);
-            setDDKKPIs(matched.length, crStr(pv), c.won);
+            setDDKKPIs(matched.length, 'Participated', crStr(pv), 'Participated Value', c.won, 'Won Bids');
             var cMap = groupBy(matched, 'Category');
             setText('ddk-chart1-title','By Category');
             renderDDHBar('ddk-chart1', sortMap(cMap).slice(0,8).map(function(e){return e.count;}), sortMap(cMap).slice(0,8).map(function(e){return e.name;}), '#7E57C2');
@@ -736,7 +808,7 @@
             title   = 'Won Bids Analysis';
             sub     = matched.length + ' won bids';
             var wv  = matched.reduce(function(s,b){return s+(parseFloat(b.EstimatedValue)||0);},0);
-            setDDKKPIs(matched.length, crStr(wv), c.winRate + '%');
+            setDDKKPIs(matched.length, 'Won Bids', crStr(wv), 'Won Value', c.winRate + '%', 'Win Rate');
             var cMapW = groupBy(matched, 'Category');
             setText('ddk-chart1-title','Winning Categories');
             renderDDHBar('ddk-chart1', sortMap(cMapW).map(function(e){return e.count;}), sortMap(cMapW).map(function(e){return e.name;}), '#4CAF50');
@@ -748,7 +820,7 @@
             matched = activeFilteredBids.slice();
             title   = 'Win Rate Analysis';
             sub     = 'Overall win rate: ' + c.winRate + '%';
-            setDDKKPIs(c.winRate + '%', c.won, c.total);
+            setDDKKPIs(c.winRate + '%', 'Win Rate', c.won, 'Won Bids', c.total, 'Total Bids');
             var wrMonthly = c.mTotal.map(function(t,i){ return t>0?Math.round(c.mWon[i]/t*100):0; });
             setText('ddk-chart1-title','Monthly Win Rate (%)');
             renderDDVBar('ddk-chart1', wrMonthly, MONTHS, '#4CAF50');
@@ -757,18 +829,26 @@
             renderDDHBar('ddk-chart2', sortMap(cMapWR).map(function(e){return e.count;}), sortMap(cMapWR).map(function(e){return e.name;}), '#4CAF50');
 
         } else {
-            matched = activeFilteredBids.slice();
-            title   = 'Bid Value Analysis';
-            sub     = 'Total portfolio: ' + crStr(c.totalValue);
-            var avg = matched.length > 0 ? c.totalValue / matched.length : 0;
-            setDDKKPIs(crStr(c.totalValue), crStr(avg), c.total);
-            var valCr = c.mVal.map(function(v){ return parseFloat(crore(v)); });
-            setText('ddk-chart1-title','Monthly Value (Cr)');
+            matched = activeFilteredBids.filter(isWon);
+            title   = 'Total Won Value Analysis';
+            sub     = 'Total won bids: ' + c.won + ' (' + crStr(c.wonValue) + ')';
+            var avg = c.won > 0 ? c.wonValue / c.won : 0;
+            setDDKKPIs(crStr(c.wonValue), 'Total Won Value', c.won, 'Won Bids', crStr(avg), 'Avg Won Value');
+            var valCr = c.mWon.map(function(w, i){
+                return parseFloat(crore(activeFilteredBids.filter(function(b){
+                    if (!isWon(b)) return false;
+                    var ds = b.PublishedDate || b.CreationTs;
+                    if (!ds) return false;
+                    var d = new Date(ds);
+                    return !isNaN(d) && d.getMonth() === i;
+                }).reduce(function(s, b){ return s + (parseFloat(b.EstimatedValue) || 0); }, 0)));
+            });
+            setText('ddk-chart1-title','Monthly Won Value (Cr)');
             renderDDVBar('ddk-chart1', valCr, MONTHS, '#FF9800');
             var cMapV = {};
             matched.forEach(function(b){ var cat=(b.Category||'Unknown').trim(); cMapV[cat]=(cMapV[cat]||0)+(parseFloat(b.EstimatedValue)||0); });
             var cEV = Object.keys(cMapV).map(function(k){ return{name:k,count:parseFloat(crore(cMapV[k]))}; }).sort(function(a,b){return b.count-a.count;}).slice(0,6);
-            setText('ddk-chart2-title','Value by Category (Cr)');
+            setText('ddk-chart2-title','Won Value by Category (Cr)');
             renderDDHBar('ddk-chart2', cEV.map(function(e){return e.count;}), cEV.map(function(e){return e.name;}), '#FF9800');
         }
 
@@ -779,38 +859,38 @@
         openPanel('dd-kpi');
     }
 
-    function setDDKKPIs(v1, v2, v3) {
+    function setDDKKPIs(v1, l1, v2, l2, v3, l3) {
         var row = document.getElementById('ddk-kpi-row');
         if (!row) return;
         row.innerHTML =
-            '<div class="dd-kpi"><div class="dd-kpi-val">' + v1 + '</div><div class="dd-kpi-lbl">Primary</div></div>' +
-            '<div class="dd-kpi"><div class="dd-kpi-val">' + v2 + '</div><div class="dd-kpi-lbl">Secondary</div></div>' +
-            '<div class="dd-kpi"><div class="dd-kpi-val">' + v3 + '</div><div class="dd-kpi-lbl">Tertiary</div></div>';
+            '<div class="dd-kpi"><div class="dd-kpi-val">' + v1 + '</div><div class="dd-kpi-lbl">' + (l1 || 'Primary') + '</div></div>' +
+            '<div class="dd-kpi"><div class="dd-kpi-val">' + v2 + '</div><div class="dd-kpi-lbl">' + (l2 || 'Secondary') + '</div></div>' +
+            '<div class="dd-kpi"><div class="dd-kpi-val">' + v3 + '</div><div class="dd-kpi-lbl">' + (l3 || 'Tertiary') + '</div></div>';
     }
 
     /* ==============================================================
-       21. SHARED DRILLDOWN HELPERS
+       21. SHARED DRILLDOWN HELPERS (Clean Light Theme)
        ============================================================== */
     function renderDDHBar(elId, data, categories, color) {
         var el = document.getElementById(elId);
         if (!el) return;
         destroyChart(elId);
-        if (!data.length) { el.innerHTML = '<div style="color:rgba(255,255,255,.4);font-size:11px;padding:10px;">No data</div>'; return; }
+        if (!data.length) { el.innerHTML = '<div style="color:#94A3B8;font-size:11px;padding:12px;text-align:center;">No data available</div>'; return; }
         charts[elId] = new ApexCharts(el, {
-            chart: { type:'bar', height:150, toolbar:{ show:false }, background:'transparent', animations:{ enabled:false } },
-            plotOptions: { bar:{ horizontal:true, borderRadius:3, barHeight:'70%', dataLabels:{ position:'center' } } },
-            series: [{ data: data }],
+            chart: { type:'bar', height:160, toolbar:{ show:false }, background:'transparent', animations:{ enabled:false } },
+            plotOptions: { bar:{ horizontal:true, borderRadius:4, barHeight:'65%', dataLabels:{ position:'center' } } },
+            series: [{ name:'Bids', data: data }],
             xaxis: {
                 categories: categories,
-                labels:{ style:{ fontSize:'9.5px', colors:'rgba(255,255,255,.7)' } },
+                labels:{ style:{ fontSize:'9.5px', colors:'#64748B' } },
                 axisBorder:{ show:false }, axisTicks:{ show:false }
             },
-            yaxis: { labels:{ style:{ fontSize:'9.5px', colors:'rgba(255,255,255,.8)' } } },
-            dataLabels: { enabled:true, style:{ fontSize:'9.5px', colors:['#fff'] } },
+            yaxis: { labels:{ style:{ fontSize:'9.5px', colors:'#64748B' } } },
+            dataLabels: { enabled:true, style:{ fontSize:'9.5px', colors:['#fff'], fontWeight:700 } },
             colors: [color],
-            grid:   { borderColor:'rgba(255,255,255,.1)' },
+            grid:   { borderColor:'#F1F5F9' },
             legend: { show:false },
-            tooltip:{ theme:'dark' }
+            tooltip:{ theme:'light' }
         });
         charts[elId].render();
     }
@@ -820,20 +900,20 @@
         if (!el) return;
         destroyChart(elId);
         charts[elId] = new ApexCharts(el, {
-            chart: { type:'bar', height:150, toolbar:{ show:false }, background:'transparent', animations:{ enabled:false } },
-            series: [{ data: data }],
+            chart: { type:'bar', height:160, toolbar:{ show:false }, background:'transparent', animations:{ enabled:false } },
+            series: [{ name:'Count', data: data }],
             xaxis: {
                 categories: cats,
-                labels:{ style:{ fontSize:'8.5px', colors:'rgba(255,255,255,.7)' } },
+                labels:{ style:{ fontSize:'8.5px', colors:'#64748B' } },
                 axisBorder:{ show:false }
             },
-            yaxis: { labels:{ style:{ fontSize:'8.5px', colors:'rgba(255,255,255,.7)' } } },
-            plotOptions: { bar:{ borderRadius:3, columnWidth:'60%' } },
+            yaxis: { labels:{ style:{ fontSize:'8.5px', colors:'#64748B' } } },
+            plotOptions: { bar:{ borderRadius:4, columnWidth:'55%' } },
             dataLabels: { enabled:false },
             colors: [color],
-            grid:   { borderColor:'rgba(255,255,255,.1)' },
+            grid:   { borderColor:'#F1F5F9' },
             legend: { show:false },
-            tooltip:{ theme:'dark' }
+            tooltip:{ theme:'light' }
         });
         charts[elId].render();
     }
@@ -842,17 +922,17 @@
         var el = document.getElementById(elId);
         if (!el) return;
         destroyChart(elId);
-        if (!data.length) { el.innerHTML = '<div style="color:rgba(255,255,255,.4);font-size:11px;padding:10px;">No data</div>'; return; }
+        if (!data.length) { el.innerHTML = '<div style="color:#94A3B8;font-size:11px;padding:12px;text-align:center;">No data available</div>'; return; }
         charts[elId] = new ApexCharts(el, {
-            chart: { type:'donut', height:150, background:'transparent', animations:{ enabled:false } },
+            chart: { type:'donut', height:160, background:'transparent', animations:{ enabled:false } },
             series: data, labels: labels,
             colors: colors,
-            plotOptions: { pie:{ donut:{ size:'55%' } } },
+            plotOptions: { pie:{ donut:{ size:'58%' } } },
             dataLabels: { enabled:true, style:{ fontSize:'9px', colors:['#fff'] },
                           formatter:function(v){ return Math.round(v)+'%'; } },
-            legend: { position:'bottom', fontSize:'9px', labels:{ colors:'rgba(255,255,255,.8)' } },
-            stroke: { width:1, colors:['rgba(255,255,255,.1)'] },
-            tooltip: { theme:'dark' }
+            legend: { position:'bottom', fontSize:'9.5px', labels:{ colors:'#64748B' } },
+            stroke: { width:1, colors:['#fff'] },
+            tooltip: { theme:'light' }
         });
         charts[elId].render();
     }
@@ -861,21 +941,23 @@
         var el = document.getElementById(elId);
         if (!el) return;
         if (!bids.length) {
-            el.innerHTML = '<div style="text-align:center;padding:18px;color:rgba(255,255,255,.5);font-size:11.5px;font-style:italic;">No matching bids</div>';
+            el.innerHTML = '<div style="text-align:center;padding:24px;color:#94A3B8;font-size:12px;font-style:italic;">No matching bids found</div>';
             return;
         }
         el.innerHTML = '';
         bids.slice(0, 50).forEach(function(b, i) {
             var div = document.createElement('div');
             div.className = 'dd-bid-item';
+            var cat = escH(b.Category || 'General');
+            var st  = escH(b.State || 'Unknown');
+            var sn  = escH(b.DisplayName || b.StatusName || 'Created');
             div.innerHTML =
                 '<span class="dd-bid-idx">' + (i+1) + '</span>' +
                 '<div class="dd-bid-info">' +
-                    '<div class="dd-bid-title">' + escH(b.BidTitle||'—') + '</div>' +
-                    '<div class="dd-bid-meta">' + escH(b.Category||'—') + ' · ' + escH(b.State||'—') + ' · ' + escH(b.StatusName||'—') + '</div>' +
+                    '<div class="dd-bid-title" title="' + escH(b.BidTitle||'—') + '">' + escH(b.BidTitle||'—') + '</div>' +
+                    '<div class="dd-bid-meta">' + cat + ' &bull; ' + st + ' &bull; <span class="dd-bid-status-pill">' + sn + '</span></div>' +
                 '</div>' +
                 '<span class="dd-bid-val">' + crStr(b.EstimatedValue) + '</span>';
-            // Clean list item
             el.appendChild(div);
         });
     }
@@ -933,6 +1015,24 @@
        ============================================================== */
     function bindEvents() {
 
+        /* State Filter */
+        var stateEl = document.getElementById('filter-state');
+        if (stateEl) {
+            stateEl.addEventListener('change', function() {
+                FS.state = this.value;
+                applyFilters();
+            });
+        }
+
+        /* Department Filter */
+        var deptEl = document.getElementById('filter-department');
+        if (deptEl) {
+            deptEl.addEventListener('change', function() {
+                FS.department = this.value;
+                applyFilters();
+            });
+        }
+
         /* Financial Year Filter */
         var fyEl = document.getElementById('filter-fy');
         if (fyEl) {
@@ -968,12 +1068,23 @@
         var hReset = document.getElementById('btn-reset-filters');
         if (hReset) {
             hReset.addEventListener('click', function() {
+                FS.state = 'ALL';
+                FS.department = 'ALL';
                 FS.fy = 'ALL';
                 FS.startDate = null;
                 FS.endDate = null;
+
+                var stateEl = document.getElementById('filter-state');
+                if (stateEl) stateEl.value = 'ALL';
+
+                var deptEl = document.getElementById('filter-department');
+                if (deptEl) deptEl.value = 'ALL';
+
                 if (fyEl) fyEl.value = 'ALL';
+
                 var drInput = document.getElementById('filter-daterange');
                 if (drInput) drInput.value = '';
+
                 applyFilters();
             });
         }
@@ -1056,6 +1167,8 @@
        24. INITIALIZATION
        ============================================================== */
     function init() {
+        buildStateOptions();
+        buildDepartmentOptions();
         buildFYOptions();
         bindEvents();
         applyFilters();

@@ -10,7 +10,7 @@ $fs = isset($factsheet) ? $factsheet : [];
 $isAjax = !empty($is_ajax);
 $theme_path = $this->config->item('theme_locations') . $this->config->item('active_template');
 
-// Robust deserialization helpers: Support JSON first, then legacy pipe-delimited strings
+
 if (!function_exists('parseSectionKV')) {
     function parseSectionKV($raw) {
         if (empty($raw)) return [];

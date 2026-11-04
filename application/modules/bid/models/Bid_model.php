@@ -480,6 +480,21 @@ function getBidDetailsData(){
     /**
      * Get distinct list of States/UTs for dashboard filters
      */
+        /**
+     * Get distinct list of Departments for dashboard filters
+     */
+    public function getDistinctDepartments()
+    {
+        $rows = $this->db->distinct()
+                         ->select('BidDepartment')
+                         ->where('BidDepartment IS NOT NULL', null, false)
+                         ->where("TRIM(BidDepartment) !=", '')
+                         ->order_by('BidDepartment', 'ASC')
+                         ->get('BidCreationDetails')
+                         ->result_array();
+        return array_values(array_unique(array_filter(array_map('trim', array_column($rows, 'BidDepartment')))));
+    }
+
     public function getDistinctStates()
     {
         $rows = $this->db->distinct()

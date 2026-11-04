@@ -134,6 +134,7 @@ public function dashboard(){
 			$data['statuses']  = $this->bid_model->getStatuses();
 			$data['categories']= $this->bid_model->getDistinctCategories();
 			$data['states']    = $this->bid_model->getDistinctStates();
+			$data['departments'] = $this->bid_model->getDistinctDepartments();
 			$data['startDate'] = $startDate;
 			$data['endDate']   = $endDate;
 
