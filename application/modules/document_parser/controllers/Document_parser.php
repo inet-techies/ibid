@@ -40,10 +40,7 @@ class Document_parser extends MX_Controller
         }
     }
 
-    /**
-     * Follows bid module session validation and base_url redirection
-     * Route: GET /document_parser
-     */
+   
     public function index()
     {
         $Bid_Session = $this->session->userdata('logged_in');
@@ -55,9 +52,7 @@ class Document_parser extends MX_Controller
         }
     }
 
-    /**
-     * Legacy widget alias - redirects to main bid module with session check
-     */
+    
     public function widget($config = [])
     {
         $Bid_Session = $this->session->userdata('logged_in');
@@ -69,9 +64,7 @@ class Document_parser extends MX_Controller
         }
     }
 
-    /**
-     * Styled Upload File Button
-     */
+  
     public function upload_button($config = [])
     {
         $Bid_Session = $this->session->userdata('logged_in');
@@ -93,9 +86,7 @@ class Document_parser extends MX_Controller
         }
     }
 
-    /**
-     * Alias for upload_button
-     */
+   
     public function button()
     {
         $Bid_Session = $this->session->userdata('logged_in');
@@ -107,9 +98,7 @@ class Document_parser extends MX_Controller
         }
     }
 
-    /**
-     * Legacy workbench alias - redirects to main bid module
-     */
+    
     public function workbench($config = [])
     {
         $Bid_Session = $this->session->userdata('logged_in');
@@ -121,10 +110,7 @@ class Document_parser extends MX_Controller
         }
     }
 
-    /**
-     * Main AJAX file upload & extraction endpoint
-     * Route: POST /document_parser/extract
-     */
+   
     public function extract()
     {
         @ini_set('display_errors', '0');
@@ -396,9 +382,7 @@ class Document_parser extends MX_Controller
         }
     }
 
-    /**
-     * Clean JSON response helper
-     */
+    
     private function _jsonResponse($payload)
     {
         while (ob_get_level() > 0) {

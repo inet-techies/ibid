@@ -146,9 +146,9 @@
     </div>
 
     <div class="right-form-body">
-               <!-- YOUR EXISTING FORM STARTS -->
+              
         <div id="userModalBody"></div>
-               <!-- YOUR FORM ENDS -->
+              
     </div>
 </div>
 

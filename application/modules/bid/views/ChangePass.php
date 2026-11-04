@@ -43,9 +43,7 @@
 
 </style>
 <body>
-    <!--! ================================================================ !-->
-    <!--! [Start] Main Content !-->
-    <!--! ================================================================ !-->
+    
     <main class="auth-cover-wrapper">
         <div class="auth-cover-content-inner">
             <div class="auth-cover-content-wrapper">
@@ -113,10 +111,7 @@
             </div> 
         </div> 
     </main> 
-    <!--! ================================================================ !-->
-    <!--! Footer Script !-->
-    <!--! ================================================================ !-->
-
+   
     <!--! BEGIN: Vendors JS !-->
     <script src="<?=$theme_path?>/assets/vendors/js/vendors.min.js"></script>
     <!-- vendors.min.js {always must need to be top} -->

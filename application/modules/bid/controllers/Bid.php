@@ -343,8 +343,7 @@ public function SendOtpVerify($Buid)
         // Log if needed, but do not break flow
     }
 
-    /* ================= LOAD OTP VERIFY PAGE ================= */
-
+   
     $this->template->set_master_template(
         '../../themes/'.$this->config->item("active_template").'/landing_template_login.php'
     ); 
