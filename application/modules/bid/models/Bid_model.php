@@ -70,7 +70,7 @@ class Bid_model extends CI_Model
 public function getBreadcrumb($url)
 {
     $child = $this->db
-        ->where('LOWER(MenuUrl)', strtolower($url))
+        ->where_in('LOWER(MenuUrl)', (strtolower($url) === 'bid/lbids' || strtolower($url) === 'bid/l1bids') ? ['bid/lbids', 'bid/l1bids'] : [strtolower($url)])
         ->get('BidMenus')
         ->row_array();
 
@@ -662,7 +662,8 @@ function getBidDetailsData(){
      */
     public function getStatusByName($statusKey)
     {
-        return $this->db->where('StatusName', $statusKey)
+        $lookup = ($statusKey === 'LBids' || $statusKey === 'L1Bids') ? ['LBids', 'L1Bids'] : [$statusKey];
+        return $this->db->where_in('StatusName', $lookup)
                         ->where('IsActive', 1)
                         ->get('BidStatusMaster')
                         ->row();
@@ -722,7 +723,7 @@ function getBidDetailsData(){
      */
     public function getManagementUsers()
     {
-        return $this->db->where('Status', 0)
+        return $this->db->where('Status', 1)
                         ->get('BidApproverdetails')
                         ->result();
     }

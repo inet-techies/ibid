@@ -125,19 +125,21 @@ class Php_semantic_fallback
         }
 
         // Amounts
-        if ($field === 'emd_value' || $field === 'tender_fee') {
-            $amtRes = Amount_extractor::parse($text);
-            if ($amtRes['numeric'] !== null) {
-                if (Amount_extractor::isPlausibleForField($amtRes['numeric'], $field)) {
-                    return [
-                        'value'      => (string)$amtRes['numeric'],
-                        'raw_value'  => $amtRes['formatted'],
-                        'confidence' => 76,
-                        'method'     => 'context_based',
-                        'page'       => $page,
-                        'evidence'   => 'Offline semantic window: ' . substr(trim(preg_replace('/\s+/', ' ', $text)), 0, 140)
-                    ];
-                }
+        if ($field === 'emd_value') {
+            $cands = Amount_extractor::extractEmdCandidates($text, [$page => $text]);
+            if (!empty($cands)) {
+                $c = $cands[0];
+                $c['confidence'] = 76;
+                $c['method'] = 'context_based';
+                return $c;
+            }
+        } elseif ($field === 'tender_fee') {
+            $cands = Amount_extractor::extractTenderFeeCandidates($text, [$page => $text]);
+            if (!empty($cands)) {
+                $c = $cands[0];
+                $c['confidence'] = 76;
+                $c['method'] = 'context_based';
+                return $c;
             }
         }
 

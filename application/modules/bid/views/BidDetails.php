@@ -7,6 +7,44 @@
       || (strtolower($this->uri->segment(2)) === 'technicalevaluated');
 ?>
 
+<style>
+/* Fixed width and scrollable container for Bid Title in customerList table */
+#customerList th.col-bid-title,
+#customerList td.col-bid-title {
+    width: 260px !important;
+    max-width: 260px !important;
+    min-width: 200px !important;
+    white-space: normal !important;
+}
+.bid-title-container {
+    width: 100%;
+    max-width: 260px;
+    max-height: 54px;
+    overflow-y: auto;
+    overflow-x: auto;
+    white-space: normal !important;
+    word-break: break-word;
+    line-height: 1.35;
+    font-size: 13px;
+    padding-right: 4px;
+    color: #1e293b;
+}
+.bid-title-container::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+.bid-title-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+.bid-title-container::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+.bid-title-container::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+</style>
+
 <!-- Permanently Visible Header Filters (Teleported to extreme right corner of breadcrumb row) -->
 <div id="page-filter-actions" style="display:none;">
     <div class="d-flex align-items-center gap-2 flex-wrap">
@@ -87,7 +125,7 @@
                                         <thead>
                                             <tr> 
                                                 <th data-orderable="false" class="text-center" style="width: 50px;">S.No</th>
-                                                <th>Bid Title</th>
+                                                <th class="col-bid-title">Bid Title</th>
                                                 <th>Bid Type</th>
                                                 <th>Department</th>
                                                 <th>Published Date</th> 
@@ -116,7 +154,11 @@
                                             ?>
                                                     <tr class="single-item">
                                                         <td class="text-center fw-bold"><?= $i; ?></td>
-                                                        <td><?= $val['BidTitle'] ?></td>
+                                                        <td class="col-bid-title">
+                                                            <div class="bid-title-container" title="<?= htmlspecialchars($val['BidTitle'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
+                                                                <?= htmlspecialchars($val['BidTitle'] ?? ''); ?>
+                                                            </div>
+                                                        </td>
                                                         <td>
                                                             <span class="badge <?= $badgeClass ?>">
                                                                 <?= ucfirst($val['BidType']) ?>
@@ -1087,7 +1129,12 @@ function executeSaveBidDetails() {
                             $viewBtn.data('bid', res.bid);
 
                             // Update visible cells in DOM (Title, Type, Dept, Published, Opening, Submission)
-                            $tr.find('td:eq(0)').text(res.bid.BidTitle);
+                            var $titleCell = $tr.find('.bid-title-container');
+                            if ($titleCell.length) {
+                                $titleCell.text(res.bid.BidTitle).attr('title', res.bid.BidTitle);
+                            } else {
+                                $tr.find('td.col-bid-title').html('<div class="bid-title-container" title="' + escapeHtml(res.bid.BidTitle) + '">' + escapeHtml(res.bid.BidTitle) + '</div>');
+                            }
                             if (res.bid.BidType) {
                                 $tr.find('td:eq(1)').html('<span class="badge bg-soft-primary text-primary">' + escapeHtml(res.bid.BidType) + '</span>');
                             }
@@ -1192,6 +1239,8 @@ $(document).on("click", ".update-bid", function (e) {
     // Reset Remarks and Date to empty for new status entry
     $('#addressInput').val('');
     $('#ActualDate').val('');
+    $('#ApprovedByManagement').val('0');
+    $('#ApprovedByWhom').val('');
 
     // Hide Technical Selected & Price Details initially
     $('#techSelectedGroup').hide();
@@ -1295,7 +1344,7 @@ $(document).on('change', '#bid_status', function(){
     }
 
     // Price Details ONLY appears if the "L1 Bids" option is selected
-    if (statusName === 'LBids' || statusText.toLowerCase().indexOf('l1') !== -1) {
+    if (statusName === 'LBids' || statusName === 'L1Bids' || statusText.toLowerCase().indexOf('l1') !== -1) {
         $('#priceDetailsGroup').show();
     } else {
         $('#priceDetailsGroup').hide();
@@ -1597,6 +1646,8 @@ $(document).on('click', '#clear', function (e) {
     e.preventDefault();
     clearModalValidation();
     $('#ActualDate').val('');
+    $('#ApprovedByManagement').val('0');
+    $('#ApprovedByWhom').val('');
     $('#TechnicalSelected').val('');
     $('#PriceDetails').val('');
     $('#LoaReceived').val('');
@@ -1840,7 +1891,9 @@ $(document).ready(function() {
     function updateSNo() {
         if (!table) return;
         var info = table.page.info();
+        if (!info || info.recordsDisplay === 0) return;
         $('#customerList tbody tr').each(function(idx) {
+            if ($(this).find('.dataTables_empty').length || $(this).hasClass('dataTables_empty') || $(this).find('td:first').hasClass('dataTables_empty')) return;
             $(this).find('td:first').text(info.start + idx + 1);
         });
     }

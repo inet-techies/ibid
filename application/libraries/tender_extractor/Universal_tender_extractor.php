@@ -91,6 +91,17 @@ class Universal_tender_extractor
         // Strategy 6: Context-based Extraction
         self::extractContextBased($normPageMap, $allCandidates);
 
+        // Strategy 7: Dedicated EMD & Tender Fee Financial Intelligence Extraction
+        $emdPageMap = !empty($pageMap) ? $pageMap : $normPageMap;
+        $emdCands = Amount_extractor::extractEmdCandidates($rawText, $emdPageMap);
+        foreach ($emdCands as $ec) {
+            $allCandidates['emd_value'][] = $ec;
+        }
+        $feeCands = Amount_extractor::extractTenderFeeCandidates($rawText, $emdPageMap);
+        foreach ($feeCands as $fc) {
+            $allCandidates['tender_fee'][] = $fc;
+        }
+
         // 3. Candidate Ranking & Strict Segregation
         $resolvedFields = [];
         $unresolvedFields = [];
@@ -184,6 +195,11 @@ class Universal_tender_extractor
             'evidence'   => $titleRes['source'],
             'warning'    => null
         ];
+
+        // 6b. Universal Tender Keywords Extraction
+        require_once __DIR__ . '/Keyword_extractor.php';
+        $kwRes = Keyword_extractor::extract($normText, $resolvedFields['tender_title']['value'] ?? '', !empty($pageMap) ? $pageMap : $normPageMap);
+        $resolvedFields['keywords_summary'] = $kwRes;
 
         // 7. Diagnostics & Date Audit Report
         $endTime = microtime(true);
@@ -625,13 +641,17 @@ class Universal_tender_extractor
             $amtRes = Amount_extractor::parse($rawVal);
             if ($amtRes['numeric'] !== null) {
                 if (Amount_extractor::isPlausibleForField($amtRes['numeric'], $field)) {
+                    $orig = !empty($amtRes['original_amount']) ? $amtRes['original_amount'] : $amtRes['formatted'];
                     $allCandidates[$field][] = [
-                        'value'      => (string)$amtRes['numeric'],
-                        'raw_value'  => $amtRes['formatted'],
-                        'confidence' => $confidence,
-                        'method'     => $method,
-                        'page'       => $pageNo,
-                        'evidence'   => $evidence
+                        'value'           => (string)$amtRes['numeric'],
+                        'raw_value'       => $orig,
+                        'original_amount' => $orig,
+                        'amount_in_words' => $amtRes['amount_in_words'],
+                        'source'          => "Page {$pageNo}, {$label}",
+                        'confidence'      => $confidence,
+                        'method'          => $method,
+                        'page'            => $pageNo,
+                        'evidence'        => $evidence
                     ];
                 }
             }
@@ -746,7 +766,14 @@ class Universal_tender_extractor
 
             // Commercials & General
             'emd_value'                     => $resolvedFields['emd_value']['value'] ?? '',
+            'emd'                           => $resolvedFields['emd_value']['value'] ?? '',
+            'emd_original'                  => $resolvedFields['emd_value']['original_amount'] ?? ($resolvedFields['emd_value']['raw_value'] ?? ''),
+            'emd_in_words'                  => $resolvedFields['emd_value']['amount_in_words'] ?? '',
+            'emd_source'                    => $resolvedFields['emd_value']['source'] ?? '',
             'tender_fee'                    => $resolvedFields['tender_fee']['value'] ?? '',
+            'tender_fee_original'           => $resolvedFields['tender_fee']['original_amount'] ?? ($resolvedFields['tender_fee']['raw_value'] ?? ''),
+            'tender_fee_in_words'           => $resolvedFields['tender_fee']['amount_in_words'] ?? '',
+            'tender_fee_source'             => $resolvedFields['tender_fee']['source'] ?? '',
             'portal'                        => $resolvedFields['tender_portal']['value'] ?? '',
             'scope'                         => $resolvedFields['scope_of_work']['value'] ?? '',
             'location'                      => $resolvedFields['work_location']['value'] ?? '',

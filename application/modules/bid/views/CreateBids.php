@@ -267,7 +267,7 @@
                  <!-- 1. Tender Publication -->
                  <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="startDate" class="fw-semibold">1. Tender Publication: <span class="text-danger">*</span></label>
+                        <label for="startDate" class="fw-semibold">Tender Publication: <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -284,7 +284,7 @@
                 <!-- 2. Document Sale Start -->
                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="documentSaleStartDate" class="fw-semibold">2. Document Sale / Download Start:</label>
+                        <label for="documentSaleStartDate" class="fw-semibold">Document Sale / Download Start:</label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -301,7 +301,7 @@
                 <!-- 3. Document Sale End -->
                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="documentSaleEndDate" class="fw-semibold">3. Document Sale / Download End:</label>
+                        <label for="documentSaleEndDate" class="fw-semibold">Document Sale / Download End:</label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -318,7 +318,7 @@
                 <!-- 4. Pre-bid Query Start -->
                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="prebidQueryStartDate" class="fw-semibold">4. Pre-Bid Clarification / Query Start:</label>
+                        <label for="prebidQueryStartDate" class="fw-semibold">Pre-Bid Clarification / Query Start:</label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -335,7 +335,7 @@
                 <!-- 5. Pre-bid Query End -->
                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="prebidQueryEndDate" class="fw-semibold">5. Pre-Bid Clarification / Query End:</label>
+                        <label for="prebidQueryEndDate" class="fw-semibold">Pre-Bid Clarification / Query End:</label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -352,7 +352,7 @@
                 <!-- 6. Pre-bid Meeting -->
                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="prebidMeetingDate" class="fw-semibold">6. Pre-Bid Meeting:</label>
+                        <label for="prebidMeetingDate" class="fw-semibold">Pre-Bid Meeting:</label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -369,7 +369,7 @@
                 <!-- 7. Pre-bid Response Deadline -->
                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="prebidResponseDate" class="fw-semibold">7. Pre-Bid Response / Clarification:</label>
+                        <label for="prebidResponseDate" class="fw-semibold">Pre-Bid Response / Clarification:</label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -386,7 +386,7 @@
                 <!-- 8. Bid Submission Start -->
                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="bidSubmissionStartDate" class="fw-semibold">8. Bid Submission Start:</label>
+                        <label for="bidSubmissionStartDate" class="fw-semibold">Bid Submission Start:</label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -403,7 +403,7 @@
                 <!-- 9. Bid Submission End -->
                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="dueDate" class="fw-semibold">9. Bid Submission End / Deadline: <span class="text-danger">*</span></label>
+                        <label for="dueDate" class="fw-semibold">Bid Submission End / Deadline: <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -420,7 +420,7 @@
                 <!-- 10. PQ Bid Opening -->
                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="pqBidOpeningDate" class="fw-semibold">10. Pre-Qualification (PQ) Bid Opening:</label>
+                        <label for="pqBidOpeningDate" class="fw-semibold">Pre-Qualification (PQ) Bid Opening:</label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -437,7 +437,7 @@
                 <!-- 11. Technical Bid Opening -->
                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="dateofBirth" class="fw-semibold">11. Technical Bid Opening Date: <span class="text-danger">*</span></label>
+                        <label for="dateofBirth" class="fw-semibold">Technical Bid Opening Date: <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -454,7 +454,7 @@
                 <!-- 12. Financial Bid Opening -->
                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="financialBidOpeningDate" class="fw-semibold">12. Financial / Commercial Bid Opening:</label>
+                        <label for="financialBidOpeningDate" class="fw-semibold">Financial / Commercial Bid Opening:</label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
@@ -682,8 +682,8 @@
     var el = document.getElementById(id);
     if (!el) return false;
 
-    // For Bid Title: do NOT overwrite if the user has already entered a title manually
-    if (id === 'bidTitleInput' && el.value && el.value.trim() !== '') {
+    // For Bid Title or Summary Keywords: do NOT overwrite if the user has already entered them manually
+    if ((id === 'bidTitleInput' || id === 'bidSummaryInput') && el.value && el.value.trim() !== '') {
       return false;
     }
 
@@ -696,7 +696,7 @@
 
     // Only mandatory fields show "manual entry required" if missing or confidence < 70
     // Optional schedule date fields do NOT show any warning badge if not found in document
-    var isMandatoryField = (id === 'startDate' || id === 'dueDate' || id === 'dateofBirth' || id === 'bidTenderIDInput' || id === 'bidTitleInput');
+    var isMandatoryField = (id === 'startDate' || id === 'dueDate' || id === 'dateofBirth' || id === 'bidTenderIDInput' || id === 'bidTitleInput' || id === 'bidSummaryInput');
 
     if (score < 70 || !val) {
       if (isMandatoryField) {
@@ -912,7 +912,7 @@
       var emdNum = emdVal.toString().replace(/,/g, '');
       if (!isNaN(emdNum) && emdNum !== '') {
         var ewE = document.getElementById('emdInWords');
-        if (ewE) ewE.innerHTML = convertNumberToWords(emdNum) + ' Only';
+        if (ewE) ewE.innerHTML = (emdData.amount_in_words || ai.emd_in_words || (convertNumberToWords(emdNum) + ' Only'));
       }
     }
 
@@ -1026,7 +1026,7 @@
 
     // ── Keywords for Summary ──
     var kwData = fields.keywords_summary || {};
-    var kw     = kwData.value || ai.keywords || '';
+    var kw     = kwData.value || ai.keywords || ai.keywords_summary || '';
     if (!kw && ai.highlights && ai.highlights.length) {
       var kwParts = [];
       ai.highlights.forEach(function(h) {
@@ -1036,7 +1036,7 @@
       });
       kw = kwParts.join(', ');
     }
-    var kwConf = kwData.confidence !== undefined ? kwData.confidence : (kw ? 80 : 0);
+    var kwConf = (kwData.confidence !== undefined && kwData.confidence > 0) ? kwData.confidence : (kw ? 90 : 0);
     if (kw && setVerifiedField('bidSummaryInput', kw, kwConf, false, 'Keywords')) {
       filled.push('Keywords');
     }

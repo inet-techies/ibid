@@ -1136,6 +1136,16 @@ $data['currentUrlArray'] =
         ]);
     }
 
+public function LBids()
+{
+    return $this->status('L1Bids');
+}
+
+public function L1Bids()
+{
+    return $this->status('L1Bids');
+}
+
 public function _remap($method, $params = [])
 {
     // Allow real methods like index, add, edit etc.
@@ -1284,7 +1294,7 @@ public function updateBidStatus()
 		            return;
 		        }
 
-		        if ($targetStatusName === 'LBids' && ($priceDetails === null || trim($priceDetails) === '')) {
+		        if (($targetStatusName === 'LBids' || $targetStatusName === 'L1Bids') && ($priceDetails === null || trim($priceDetails) === '')) {
 		            echo json_encode(['status'=>false,'message'=>'Please enter price details.']);
 		            return;
 		        }

@@ -22,3 +22,18 @@ ERROR - 2026-11-05 12:30:49 --> Severity: Notice --> Undefined variable: underPa
 ERROR - 2026-11-05 13:12:58 --> Severity: error --> Exception: syntax error, unexpected '!==' (T_IS_NOT_IDENTICAL) C:\xampp\htdocs\ibid\application\modules\document_parser\models\Factsheet_model.php 568
 ERROR - 2026-11-05 14:17:08 --> Severity: Core Warning --> PHP Startup: Unable to load dynamic library 'zip' (tried: C:\xampp\php\ext\zip (The specified module could not be found.), C:\xampp\php\ext\php_zip.dll (The specified module could not be found.)) Unknown 0
 >>>>>>> 5109d5dfea273708cbd91a3801673aa21ef06ea2
+ERROR - 2026-11-05 13:24:34 --> 404 Page Not Found: /index
+ERROR - 2026-11-05 18:03:05 --> 404 Page Not Found: 
+ERROR - 2026-11-05 18:04:56 --> 404 Page Not Found: 
+ERROR - 2026-11-05 18:06:27 --> 404 Page Not Found: 
+ERROR - 2026-11-05 18:06:45 --> 404 Page Not Found: 
+ERROR - 2026-11-05 18:07:22 --> 404 Page Not Found: 
+ERROR - 2026-11-05 18:08:33 --> 404 Page Not Found: 
+ERROR - 2026-11-05 18:10:07 --> 404 Page Not Found: 
+ERROR - 2026-11-05 18:11:23 --> 404 Page Not Found: 
+ERROR - 2026-11-05 18:11:31 --> 404 Page Not Found: 
+ERROR - 2026-11-05 18:14:14 --> 404 Page Not Found: 
+ERROR - 2026-11-05 18:14:35 --> 404 Page Not Found: 
+ERROR - 2026-11-05 18:14:57 --> 404 Page Not Found: 
+ERROR - 2026-11-05 18:16:25 --> Skipped unsupported BidStatusTracking fields: PriceDetails
+ERROR - 2026-11-05 18:16:29 --> BidNotificationLog table is unavailable; notification log was not recorded.

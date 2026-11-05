@@ -133,14 +133,17 @@ class Candidate_ranker
             $finalScore = min(99, max(10, $score));
 
             $scoredCandidates[] = [
-                'value'          => $validation['cleaned_value'],
-                'raw_value'      => $cand['raw_value'] ?? (string)$val,
-                'confidence'     => $finalScore,
-                'method'         => $method,
-                'page'           => $cand['page'] ?? null,
-                'label'          => $cand['label'] ?? '',
-                'evidence'       => $evidence,
-                'is_corrigendum' => false
+                'value'           => $validation['cleaned_value'],
+                'raw_value'       => $cand['raw_value'] ?? (string)$val,
+                'original_amount' => $cand['original_amount'] ?? ($cand['raw_value'] ?? (string)$val),
+                'amount_in_words' => $cand['amount_in_words'] ?? '',
+                'source'          => $cand['source'] ?? '',
+                'confidence'      => $finalScore,
+                'method'          => $method,
+                'page'            => $cand['page'] ?? null,
+                'label'           => $cand['label'] ?? '',
+                'evidence'        => $evidence,
+                'is_corrigendum'  => false
             ];
         }
 
@@ -162,13 +165,17 @@ class Candidate_ranker
         // Combined with exact label affinity and confidence so exact activity labels always outrank generic matches.
         usort($scoredCandidates, function($a, $b) use ($field) {
             $methodWeights = [
-                'schedule_table' => 100,
-                'table_based'    => 80,
-                'schedule_scan'  => 60,
-                'label_based'    => 40,
-                'layout_aware'   => 20,
-                'context_based'  => 10,
-                'php_semantic'   => 5
+                'section_heading'   => 120,
+                'table_column_grid' => 110,
+                'schedule_table'    => 100,
+                'table_based'       => 80,
+                'table_row'         => 80,
+                'schedule_scan'     => 60,
+                'label_based'       => 40,
+                'layout_aware'      => 20,
+                'context_sentence'  => 15,
+                'context_based'     => 10,
+                'php_semantic'      => 5
             ];
 
             $wA = $methodWeights[$a['method'] ?? ''] ?? 0;
@@ -197,9 +204,9 @@ class Candidate_ranker
         if (count($scoredCandidates) > 1) {
             $second = $scoredCandidates[1];
             if ($second['value'] !== $best['value'] && $second['confidence'] >= 75) {
-                if (($best['confidence'] - $second['confidence']) < 8) {
+                if (($best['confidence'] - $second['confidence']) < 10) {
                     $best['confidence'] = max(70, $best['confidence'] - 15);
-                    $warning = 'Multiple plausible values identified; verify against: ' . $second['raw_value'];
+                    $warning = 'Multiple conflicting values identified (' . $best['raw_value'] . ' vs ' . $second['raw_value'] . '); verify manually.';
                 }
             }
         }
@@ -234,14 +241,17 @@ class Candidate_ranker
         }
 
         return [
-            'value'      => $best['value'],
-            'raw_value'  => $best['raw_value'],
-            'confidence' => $best['confidence'],
-            'status'     => $status,
-            'method'     => $best['method'],
-            'page'       => $best['page'],
-            'evidence'   => $best['evidence'],
-            'warning'    => $warning
+            'value'           => $best['value'],
+            'raw_value'       => $best['raw_value'],
+            'original_amount' => $best['original_amount'] ?? $best['raw_value'],
+            'amount_in_words' => $best['amount_in_words'] ?? '',
+            'source'          => $best['source'] ?? '',
+            'confidence'      => $best['confidence'],
+            'status'          => $status,
+            'method'          => $best['method'],
+            'page'            => $best['page'],
+            'evidence'        => $best['evidence'],
+            'warning'         => $warning
         ];
     }
 
@@ -293,8 +303,20 @@ class Candidate_ranker
             if ($field === 'tender_fee' && $num > 500000) {
                 return ['valid' => false, 'cleaned_value' => null, 'bonus' => 0];
             }
+            if ($field === 'emd_value' && $num > 0 && $num < 500) {
+                return ['valid' => false, 'cleaned_value' => null, 'bonus' => 0];
+            }
+            $bonus = 5;
+            if (isset($cand['method'])) {
+                if ($cand['method'] === 'section_heading') $bonus += 15;
+                elseif ($cand['method'] === 'table_column_grid') $bonus += 12;
+                elseif ($cand['method'] === 'table_row') $bonus += 10;
+            }
+            if (!empty($cand['amount_in_words'])) {
+                $bonus += 10;
+            }
             $res['cleaned_value'] = (string)(int)round($num);
-            $res['bonus'] += 5;
+            $res['bonus'] += $bonus;
             return $res;
         }
 

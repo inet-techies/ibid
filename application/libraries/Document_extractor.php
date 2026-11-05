@@ -179,12 +179,23 @@ class Document_extractor
             }
             if (!empty($universal['fields']['emd_value']['value'])) {
                 $aiSummary['emd_value'] = $universal['fields']['emd_value']['value'];
+                $aiSummary['emd_original'] = $universal['fields']['emd_value']['original_amount'] ?? '';
+                $aiSummary['emd_in_words'] = $universal['fields']['emd_value']['amount_in_words'] ?? '';
+                $aiSummary['emd_source'] = $universal['fields']['emd_value']['source'] ?? '';
             }
             if (!empty($universal['fields']['tender_fee']['value'])) {
                 $aiSummary['tender_fee'] = $universal['fields']['tender_fee']['value'];
+                $aiSummary['tender_fee_original'] = $universal['fields']['tender_fee']['original_amount'] ?? '';
+                $aiSummary['tender_fee_in_words'] = $universal['fields']['tender_fee']['amount_in_words'] ?? '';
+                $aiSummary['tender_fee_source'] = $universal['fields']['tender_fee']['source'] ?? '';
             }
             if (!empty($universal['fields']['tender_portal']['value'])) {
                 $aiSummary['portal'] = $universal['fields']['tender_portal']['value'];
+            }
+            if (!empty($universal['fields']['keywords_summary']['value'])) {
+                $aiSummary['keywords'] = $universal['fields']['keywords_summary']['value'];
+                $aiSummary['keywords_summary'] = $universal['fields']['keywords_summary']['value'];
+                $aiSummary['keywords_list'] = $universal['fields']['keywords_summary']['list'] ?? [];
             }
         }
 

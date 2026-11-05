@@ -279,16 +279,18 @@ class Tender_dictionary
         'emd_value' => [
             'name'     => 'EMD Amount',
             'synonyms' => [
-                'EMD', 'EMD Amount', 'Earnest Money Deposit', 'Earnest Money', 'Bid Security',
-                'Bid Security Amount', 'Earnest Money Deposit (EMD)', 'EMD / Bid Security',
-                'Value of EMD', 'Amount of Bid Security', 'EMD in INR', 'EMD (Rs.)'
+                'Earnest Money Deposit', 'EMD', 'EMD Amount', 'Bid Security', 'Bid Security Deposit',
+                'Earnest Money', 'Refundable EMD', 'EMD (Refundable)', 'EMD / Bid Security',
+                'EMD/Bid Security', 'Value of EMD', 'Amount of Bid Security', 'EMD in INR', 'EMD (Rs.)',
+                'Required EMD', 'Required EMD Rs.'
             ],
             'label_patterns' => [
-                '/(?:Earnest\s+Money\s+Deposit(?:\s*\([^\)]*\))?|EMD\s+(?:Amount|Value|Required)?|Bid\s+Security(?:\s*Amount)?)\s*[:\t\- ]*(?:Rs\.?|INR|₹)?\s*([0-9,]+(?:\.\d{1,2})?(?:\s*(?:Lakhs?|Lacs?|Crores?|Cr|K))?|\bNil\b|\bExempted\b)/iu',
+                '/(?:Earnest\s+Money\s+Deposit(?:\s*\([^\)]*\))?|EMD\s+(?:Amount|Value|Required)?|Bid\s+Security(?:\s*(?:Deposit|Amount))?|Refundable\s+EMD)\s*[:\t\- ]*(?:Rs\.?|INR|₹|Rupees)?\s*([0-9,]+(?:\.\d{1,2})?(?:\s*(?:Lakhs?|Lacs?|Crores?|Cr|K))?|\bNil\b|\bExempted\b)/iu',
+                '/(?:An?\s+)?(?:EMD|Bid\s+Security|Earnest\s+Money(?:\s+Deposit)?)(?:[\/\s]+(?:Bid\s+Security|EMD))?\s+(?:of\s+|is\s+|amounting\s+to\s+)(?:Rs\.?|INR|₹|Rupees)\s*([0-9]{1,3}(?:,[0-9]{2,3})*(?:\.[0-9]{1,2})?|\d+(?:\.\d+)?\s*(?:Lakhs?|Lacs?|Crores?|Cr|K))\s*(?:\/-)?/iu',
                 '/(?:EMD|Bid\s+Security)\s*[:\t\- ]*([^\n\r,;]{1,60})/iu'
             ],
             'exclude_patterns' => [
-                '/(?:Performance|Security\s+Deposit|Turnover|Tender\s+Fee|Estimated\s+Cost)/i'
+                '/(?:Performance|Security\s+Deposit|Turnover|Tender\s+Fee|Cost\s+of\s+Tender|Estimated\s+Cost|Estimated\s+Value|Eligibility|Account\s+Number)/i'
             ]
         ],
 
@@ -297,10 +299,15 @@ class Tender_dictionary
             'synonyms' => [
                 'Tender Fee', 'Tender Document Fee', 'Cost of Tender Document', 'Tender Cost',
                 'Tender Document Cost', 'Document Fee', 'Bid Document Cost', 'Bid Document Price',
-                'Processing Fee', 'Tender Processing Fee', 'Tender Document Price', 'Tender Form Fee'
+                'Processing Fee', 'Tender Processing Fee', 'Tender Document Price', 'Tender Form Fee',
+                'Non-refundable Tender Fee'
             ],
             'label_patterns' => [
-                '/(?:Tender\s+(?:Document\s+)?Fee|Cost\s+of\s+Tender(?:\s+Document)?|Tender\s+(?:Document\s+)?Cost|Bid\s+(?:Document\s+)?(?:Fee|Price)|Tender\s+Processing\s+Fee|Processing\s+Fee)\s*[:\t\- ]*(?:Rs\.?|INR|₹)?\s*([0-9,]+(?:\.\d{1,2})?(?:\s*(?:Lakhs?|Lacs?|Crores?|Cr|K))?|\bNil\b|\bExempted\b|\bFree\b)/iu'
+                '/(?:Tender\s+(?:Document\s+)?Fee|Cost\s+of\s+Tender(?:\s+Document)?|Tender\s+(?:Document\s+)?Cost|Bid\s+(?:Document\s+)?(?:Fee|Price)|Tender\s+Processing\s+Fee|Processing\s+Fee|Non-refundable\s+Tender\s+Fee)\s*[:\t\- ]*(?:Rs\.?|INR|₹)?\s*([0-9,]+(?:\.\d{1,2})?(?:\s*(?:Lakhs?|Lacs?|Crores?|Cr|K))?|\bNil\b|\bExempted\b|\bFree\b)/iu',
+                '/(?:Tender\s+Fee|Cost\s+of\s+Tender(?:\s+Document)?)\s+of\s+(?:Rs\.?|INR|₹|Rupees)\s*([0-9,]+(?:\.\d{1,2})?(?:\s*(?:Lakhs?|Lacs?|Crores?|Cr|K))?)/iu'
+            ],
+            'exclude_patterns' => [
+                '/(?:EMD|Earnest\s+Money|Bid\s+Security)/i'
             ]
         ],
 

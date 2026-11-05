@@ -314,6 +314,29 @@ if (!empty($employee_det['Bid'])) {
                 transform: scale(1) translateX(0);
             }
         }
+        /* ── Sidebar Navigation Width Expansion (Prevent Menu Wrapping) ── */
+        @media (min-width: 1025px) {
+            html:not(.minimenu) .nxl-navigation,
+            body:not(.minimenu) .nxl-navigation {
+                width: 310px !important;
+            }
+            html:not(.minimenu) .nxl-navigation .navbar-wrapper,
+            body:not(.minimenu) .nxl-navigation .navbar-wrapper {
+                width: 310px !important;
+            }
+            html:not(.minimenu) .nxl-header,
+            body:not(.minimenu) .nxl-header {
+                left: 310px !important;
+            }
+            html:not(.minimenu) .nxl-container,
+            body:not(.minimenu) .nxl-container {
+                margin-left: 310px !important;
+            }
+        }
+        .nxl-navigation .nxl-navbar .nxl-submenu .nxl-item .nxl-link {
+            white-space: nowrap !important;
+            padding-right: 18px !important;
+        }
     </style>
 
     <!--! END: Custom CSS-->
