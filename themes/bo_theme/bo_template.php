@@ -52,14 +52,17 @@ if (!empty($employee_det['Bid'])) {
     <link rel="stylesheet" type="text/css" href="<?=$theme_path?>/assets/vendors/css/datepicker.min.css">
     <link rel="stylesheet" type="text/css" href="<?=$theme_path?>/assets/vendors/css/daterangepicker.min.css" />
     <link rel="stylesheet" type="text/css" href="<?=$theme_path?>/assets/vendors/css/dataTables.bs5.min.css" />
+    <link rel="stylesheet" type="text/css" href="<?=$theme_path?>/assets/vendors/css/buttons.bootstrap5.min.css" />
 
     <!--! END: Vendors CSS-->
     <!--! BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="<?=$theme_path?>/assets/css/theme.min.css" />
-    <link rel="stylesheet" href="<?=$theme_path?>/css/canvas-modal.css">
-    <link rel="stylesheet" href="<?=$theme_path?>/assets/css/oem.css">
-    <link rel="stylesheet" href="<?=$theme_path?>/assets/css/document.css">
+    <link rel="stylesheet" href="<?=$theme_path?>/css/canvas-modal.css?v=<?= time(); ?>">
+    <link rel="stylesheet" href="<?=$theme_path?>/assets/css/oem.css?v=<?= time(); ?>">
+    <link rel="stylesheet" href="<?=$theme_path?>/assets/css/document.css?v=<?= time(); ?>">
     <link rel="stylesheet" href="<?=$theme_path?>/assets/css/dashboard.css?v=<?= time(); ?>">
+    <!--! Core Vendors JS (jQuery, Bootstrap core) loaded in HEAD so view scripts have jQuery immediately !-->
+    <script src="<?=$theme_path?>/assets/vendors/js/vendors.min.js"></script>
 
     <style>
         
@@ -84,7 +87,121 @@ if (!empty($employee_det['Bid'])) {
             margin-top: auto !important;
         }
 
-        /* Tables: wrap no text (prevent cell text from breaking onto multiple lines) */
+        /* Right-Side Offcanvas Drawer Reset (Ensure zero overlap when closed) */
+        .right-form {
+            position: fixed !important;
+            top: 0 !important;
+            right: 0 !important;
+            height: 100vh !important;
+            background: #fff !important;
+            box-shadow: -4px 0 24px rgba(15, 23, 42, 0.2) !important;
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), visibility 0.3s ease !important;
+            z-index: 1065 !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+        .right-form:not(.open) {
+            transform: translateX(105%) !important;
+            right: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+        .right-form.open {
+            transform: translateX(0) !important;
+            right: 0 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+            display: flex !important;
+        }
+        #rightForm.right-form {
+            width: 720px !important;
+            max-width: 95vw !important;
+        }
+
+        /* Permanently Visible Header Filters (Proper vertical alignment & text centering) */
+        .header-filter-item {
+            display: inline-flex;
+            align-items: center;
+            position: relative;
+        }
+        .header-filter-item .form-select,
+        .header-filter-item .form-select-sm,
+        .header-filter-item select {
+            height: 38px !important;
+            min-height: 38px !important;
+            max-height: 38px !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            padding-left: 12px !important;
+            padding-right: 32px !important;
+            line-height: 36px !important;
+            font-size: 13px !important;
+            font-weight: 500 !important;
+            color: #283c50 !important;
+            border: 1px solid #dcdee4 !important;
+            border-radius: 6px !important;
+            background-color: #fff !important;
+            background-position: right 10px center !important;
+            background-size: 12px 10px !important;
+            vertical-align: middle !important;
+            box-sizing: border-box !important;
+        }
+        .header-filter-item .form-control,
+        .header-filter-item .form-control-sm,
+        .header-filter-item input {
+            height: 38px !important;
+            min-height: 38px !important;
+            max-height: 38px !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+            line-height: 36px !important;
+            font-size: 13px !important;
+            font-weight: 500 !important;
+            color: #283c50 !important;
+            border: 1px solid #dcdee4 !important;
+            background-color: #fff !important;
+            box-sizing: border-box !important;
+        }
+        .header-filter-item .input-group-text {
+            height: 38px !important;
+            min-height: 38px !important;
+            max-height: 38px !important;
+            padding: 0 10px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: 13px !important;
+            border: 1px solid #dcdee4 !important;
+            border-right: none !important;
+            border-radius: 6px 0 0 6px !important;
+            background-color: #fff !important;
+            box-sizing: border-box !important;
+        }
+        .header-filter-item .input-group .form-control,
+        .header-filter-item .input-group .form-control-sm,
+        .header-filter-item .input-group input {
+            border-left: none !important;
+            border-radius: 0 6px 6px 0 !important;
+        }
+        .header-filter-item .btn-icon {
+            width: 38px !important;
+            height: 38px !important;
+            min-width: 38px !important;
+            min-height: 38px !important;
+            padding: 0 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            color: #64748b !important;
+            background-color: #fff !important;
+            border: 1px solid #dcdee4 !important;
+            border-radius: 6px !important;
+            box-sizing: border-box !important;
+        }
+
+                /* Tables: wrap no text (prevent cell text from breaking onto multiple lines) */
         .table th,
         .table td,
         .table.text-nowrap th,
@@ -94,8 +211,108 @@ if (!empty($employee_det['Bid'])) {
         .wrap-no-text th,
         .wrap-no-text td,
         table.text-nowrap th,
-        table.text-nowrap td {
+                table.text-nowrap td {
             white-space: nowrap !important;
+        }
+
+        /* Scoped overrides for right-side drawer panels to prevent table overflow & horizontal shift */
+        .right-form {
+            overflow-x: hidden !important;
+        }
+        .right-form-body {
+            overflow-x: hidden !important;
+        }
+        .right-form table {
+            table-layout: fixed !important;
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+        .right-form .table-responsive {
+            overflow-x: hidden !important;
+            max-width: 100% !important;
+        }
+        .right-form .text-wrap,
+        .right-form td.text-wrap,
+        .right-form th.text-wrap,
+        .right-form td.col-remarks,
+        .right-form td.bid-detail-val {
+            white-space: normal !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+        }
+
+        /* Global Expand & Shrink Row Action Buttons */
+        .row-actions-group {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 6px !important;
+            vertical-align: middle !important;
+            white-space: nowrap !important;
+            position: relative !important;
+        }
+        .btn-row-actions-toggle {
+            width: 30px !important;
+            height: 30px !important;
+            min-width: 30px !important;
+            min-height: 30px !important;
+            max-width: 30px !important;
+            max-height: 30px !important;
+            border-radius: 8px !important;
+            background-color: #f8fafc !important;
+            border: 1px solid #cbd5e1 !important;
+            color: #3b82f6 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            padding: 0 !important;
+            line-height: 1 !important;
+            transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+            user-select: none !important;
+        }
+        .btn-row-actions-toggle:hover {
+            background-color: #eff6ff !important;
+            border-color: #3b82f6 !important;
+            color: #1d4ed8 !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2) !important;
+        }
+        .btn-row-actions-toggle.active {
+            background-color: #fee2e2 !important;
+            border-color: #ef4444 !important;
+            color: #dc2626 !important;
+            transform: rotate(45deg) !important;
+            box-shadow: 0 2px 5px rgba(239, 68, 68, 0.25) !important;
+        }
+        .btn-row-actions-toggle i {
+            font-size: 14px !important;
+            line-height: 1 !important;
+            pointer-events: none !important;
+            display: inline-block !important;
+            transition: transform 0.22s ease !important;
+        }
+        .row-actions-collapse {
+            display: none;
+            align-items: center !important;
+            gap: 6px !important;
+            vertical-align: middle !important;
+            white-space: nowrap !important;
+            animation: expandRowActions 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        .row-actions-collapse.show {
+            display: inline-flex !important;
+        }
+        @keyframes expandRowActions {
+            0% {
+                opacity: 0;
+                transform: scale(0.85) translateX(-8px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateX(0);
+            }
         }
     </style>
 
@@ -379,7 +596,7 @@ if (!empty($employee_det['Bid'])) {
             <div class="page-header">
                 <div class="page-header-left d-flex align-items-center">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Dashboard</h5>
+                        <h5 class="m-b-10"><?= !empty($PageTitle) ? htmlspecialchars($PageTitle) : (!empty($currentUrlArray['child']['MenuName']) ? htmlspecialchars($currentUrlArray['child']['MenuName']) : 'Dashboard'); ?></h5>
                     </div>
                           <ul class="breadcrumb <?= $isActive ? 'active' : ''; ?>">
 
@@ -422,6 +639,7 @@ if (!empty($employee_det['Bid'])) {
                 </div>
             </div>
             <!-- [ page-header ] end -->
+            <div id="page-header-collapse-target"></div>
             <!-- [ Main-Content ] Starts -->
            <div class="main-content">
               <?php echo $content;?>
@@ -714,10 +932,59 @@ if (!empty($employee_det['Bid'])) {
     <!--! Footer Script !-->
     <!--! ================================================================ !-->
    <!--! BEGIN: Vendors JS !-->
-    <script src="<?=$theme_path?>/assets/vendors/js/vendors.min.js"></script>
+    <!-- vendors.min.js loaded in HEAD -->
     <script src="<?=$theme_path?>/assets/vendors/js/bootstrap.min.js"></script>
     <script src="<?=$theme_path?>/assets/vendors/js/dataTables.min.js"></script>
     <script src="<?=$theme_path?>/assets/vendors/js/dataTables.bs5.min.js"></script>
+    <script src="<?=$theme_path?>/assets/vendors/js/jszip.min.js"></script>
+    <script src="<?=$theme_path?>/assets/vendors/js/dataTables.buttons.min.js"></script>
+    <script src="<?=$theme_path?>/assets/vendors/js/buttons.bootstrap5.min.js"></script>
+    <script src="<?=$theme_path?>/assets/vendors/js/buttons.html5.min.js"></script>
+    <script>
+    if (window.jQuery && $.fn.DataTable) {
+        $.extend(true, $.fn.dataTable.defaults, {
+            retrieve: true,
+            dom: '<"d-flex flex-wrap justify-content-between align-items-center gap-2 p-3 border-bottom"<"dt-buttons-wrapper d-flex align-items-center gap-2"B><"d-flex align-items-center gap-2 ms-auto"f>>rt<"d-flex flex-wrap justify-content-between align-items-center gap-2 p-3 border-top"lip>',
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    text: '<i class="feather-copy me-1"></i> Copy',
+                    className: 'btn btn-sm btn-light-brand',
+                    exportOptions: {
+                        columns: ':visible:not(.no-export):not(:last-child)',
+                        modifier: { search: 'applied', order: 'applied' }
+                    }
+                },
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="feather-file-text me-1"></i> CSV',
+                    className: 'btn btn-sm btn-light-brand',
+                    exportOptions: {
+                        columns: ':visible:not(.no-export):not(:last-child)',
+                        modifier: { search: 'applied', order: 'applied' }
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: '<i class="feather-download me-1"></i> Excel',
+                    className: 'btn btn-sm btn-light-brand',
+                    title: function() {
+                        var title = $('.page-header-title h5').text() || document.title || 'Export';
+                        return $.trim(title).replace(/\s+/g, '_');
+                    },
+                    exportOptions: {
+                        columns: ':visible:not(.no-export):not(:last-child)',
+                        modifier: { search: 'applied', order: 'applied' }
+                    }
+                }
+            ],
+            language: {
+                search: "",
+                searchPlaceholder: "Search records..."
+            }
+        });
+    }
+    </script>
    <!--  <script src="<?=$theme_path?>/assets/vendors/js/tagify.min.js"></script>
     <script src="<?=$theme_path?>/assets/vendors/js/tagify-data.min.js"></script> -->
     <script src="<?=$theme_path?>/assets/vendors/js/select2.min.js"></script>
@@ -740,6 +1007,133 @@ if (!empty($employee_det['Bid'])) {
     <!--! BEGIN: Theme Customizer  !-->
     <script src="<?=$theme_path?>/assets/js/theme-customizer-init.min.js"></script>
     <!--! END: Theme Customizer !-->
-</body>
+    <script>
+    $(document).ready(function() {
+        var $actions = $('#page-filter-actions');
+        if ($actions.length) {
+            $('.page-header-right-items-wrapper').append($actions.children().show());
+            $actions.remove();
+        }
+        var $collapse = $('#page-filter-collapse-content');
+        if ($collapse.length) {
+            $('#page-header-collapse-target').replaceWith($collapse.children());
+            $collapse.remove();
+        }
+    });
 
-</html>
+    // Global Expand & Shrink Row Action Handler
+    $(document).on('click', '.btn-row-actions-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var $btn = $(this);
+        var $group = $btn.closest('.row-actions-group');
+        var $collapse = $group.find('.row-actions-collapse');
+        var isExpanded = $collapse.is(':visible');
+
+        // Shrink any other open action groups across the page
+        $('.row-actions-collapse').not($collapse).hide().removeClass('show');
+        $('.btn-row-actions-toggle').not($btn).removeClass('active').attr('title', 'Actions');
+
+        if (isExpanded) {
+            // Shrink
+            $collapse.hide().removeClass('show');
+            $btn.removeClass('active').attr('title', 'Actions');
+        } else {
+            // Expand
+            $collapse.css('display', 'inline-flex').addClass('show');
+            $btn.addClass('active').attr('title', 'Close');
+        }
+    });
+
+    // Shrink open actions on click outside
+    $(document).on('click', function(e) {
+        if (!$(e.target).closest('.row-actions-group').length) {
+            $('.row-actions-collapse').hide().removeClass('show');
+            $('.btn-row-actions-toggle').removeClass('active').attr('title', 'Actions');
+        }
+    });
+
+    // Shrink open actions on Escape key
+    $(document).on('keydown', function(e) {
+        if (e.key === 'Escape' || e.keyCode === 27) {
+            $('.row-actions-collapse').hide().removeClass('show');
+            $('.btn-row-actions-toggle').removeClass('active').attr('title', 'Actions');
+        }
+    });
+
+    // Global helper: automatically transform standard .hstack action cells in tables across pages
+    function initGlobalRowActionCollapsibles(context) {
+        var $root = context ? $(context) : $(document);
+
+        $root.find('table').each(function() {
+            var $table = $(this);
+            if ($table.hasClass('bid-detail-table') || $table.hasClass('history-table') || $table.closest('#historyCollapseContainer').length) {
+                return;
+            }
+
+            var actionIdx = -1;
+            $table.find('thead th').each(function(idx) {
+                var txt = $(this).text().trim().toLowerCase();
+                if (txt === 'action' || txt === 'actions') {
+                    actionIdx = idx;
+                    return false;
+                }
+            });
+
+            $table.find('tbody tr').each(function() {
+                var $tr = $(this);
+                if ($tr.hasClass('no-row-actions') || $tr.find('.btn-row-actions-toggle').length > 0) {
+                    return;
+                }
+
+                var $container = $tr.find('td > .hstack, td .hstack');
+                if (!$container.length && actionIdx !== -1) {
+                    var $targetCell = $tr.find('td').eq(actionIdx);
+                    if ($targetCell.length && $targetCell.find('a, button, .avatar-text').length > 0) {
+                        $container = $targetCell;
+                    }
+                }
+
+                if (!$container || !$container.length || $container.hasClass('row-actions-initialized')) {
+                    return;
+                }
+
+                var $actionItems = $container.children('a, button, .avatar-text, .dropdown').not('.btn-row-actions-toggle');
+                if ($actionItems.length === 0) {
+                    return;
+                }
+
+                $container.removeClass('hstack').addClass('row-actions-initialized row-actions-group');
+
+                var $collapse = $('<div class="row-actions-collapse" style="display:none;"></div>');
+                $actionItems.appendTo($collapse);
+
+                var $btn = $(
+                    '<button type="button" class="btn-row-actions-toggle avatar-text avatar-md" title="Actions" aria-label="Toggle Actions">' +
+                        '<i class="feather-plus"></i>' +
+                    '</button>'
+                );
+
+                $container.prepend($btn).append($collapse);
+            });
+        });
+    }
+
+    $(document).ready(function() {
+        initGlobalRowActionCollapsibles();
+    });
+
+    $(document).on('draw.dt init.dt', function(e, settings) {
+        if (settings && settings.nTable) {
+            initGlobalRowActionCollapsibles($(settings.nTable));
+        } else {
+            initGlobalRowActionCollapsibles();
+        }
+    });
+
+    $(document).ajaxComplete(function() {
+        initGlobalRowActionCollapsibles();
+    });
+    </script>
+</body>

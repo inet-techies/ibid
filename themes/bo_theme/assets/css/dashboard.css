@@ -1155,3 +1155,207 @@ body,
     .dd-panel { width: 100vw; }
     .state-map-layout { flex-direction: column; }
 }
+
+
+/* ==============================================================
+   BO TEMPLATE INTEGRATED FILTERS & EXPORT BUTTONS
+   ============================================================== */
+.page-header .filter-btn {
+    cursor: pointer;
+    gap: 8px;
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 15px;
+    border-radius: 6px;
+    border: 1px solid #dcdee4;
+    background-color: #fff;
+    color: #283c50;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+.page-header .filter-btn:hover,
+.page-header .filter-btn[aria-expanded="true"] {
+    background-color: #eef2ff;
+    color: #3454d1;
+    border-color: #c7d2fe;
+}
+.page-header .filter-btn .badge {
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 10px;
+}
+.page-header-collapse {
+    border-bottom: 1px solid #e5e7eb;
+    background: #fff;
+}
+.page-header-collapse .accordion-body {
+    padding: 20px 30px;
+    background-color: #fff;
+}
+
+/* DataTables Buttons Styling */
+.dt-buttons-wrapper .dt-buttons {
+    display: inline-flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+.dt-buttons-wrapper .dt-button,
+.dt-buttons-wrapper .btn-light-brand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+    font-size: 12.5px;
+    font-weight: 500;
+    border-radius: 6px;
+    border: 1px solid #dcdee4;
+    background-color: #fff;
+    color: #283c50;
+    transition: all 0.2s ease;
+}
+.dt-buttons-wrapper .dt-button:hover,
+.dt-buttons-wrapper .btn-light-brand:hover {
+    background-color: #f8fafc;
+    color: #3454d1;
+    border-color: #cbd5e1;
+}
+
+
+/* ==============================================================
+   PERMANENTLY VISIBLE HEADER FILTERS (Proper padding & alignment)
+   ============================================================== */
+.page-header {
+    flex-wrap: wrap;
+    gap: 12px;
+    min-height: 65px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.page-header-left {
+    flex: 1 1 auto;
+    min-width: 220px;
+}
+.page-header-right {
+    flex: 0 1 auto;
+}
+.page-header-right-items-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.header-filter-item {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+}
+.header-filter-item .form-select,
+.header-filter-item .form-select-sm,
+.header-filter-item select {
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-left: 12px !important;
+    padding-right: 32px !important;
+    line-height: 36px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #283c50 !important;
+    border: 1px solid #dcdee4 !important;
+    border-radius: 6px !important;
+    background-color: #fff !important;
+    background-position: right 10px center !important;
+    background-size: 12px 10px !important;
+    vertical-align: middle !important;
+    box-sizing: border-box !important;
+}
+.header-filter-item .form-select:focus,
+.header-filter-item .form-select-sm:focus,
+.header-filter-item select:focus,
+.header-filter-item .form-control:focus,
+.header-filter-item .form-control-sm:focus,
+.header-filter-item input:focus {
+    border-color: #3454d1 !important;
+    box-shadow: 0 0 0 0.15rem rgba(52, 84, 209, 0.15) !important;
+    outline: 0 !important;
+}
+.header-filter-item .form-control,
+.header-filter-item .form-control-sm,
+.header-filter-item input {
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    line-height: 1.5 !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #283c50 !important;
+    border: 1px solid #dcdee4 !important;
+    background-color: #fff !important;
+    box-sizing: border-box !important;
+}
+.header-filter-item .input-group-text {
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    padding: 0 10px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 13px !important;
+    border: 1px solid #dcdee4 !important;
+    border-right: none !important;
+    border-radius: 6px 0 0 6px !important;
+    background-color: #fff !important;
+    box-sizing: border-box !important;
+}
+.header-filter-item .input-group .form-control,
+.header-filter-item .input-group .form-control-sm,
+.header-filter-item .input-group input {
+    border-left: none !important;
+    border-radius: 0 6px 6px 0 !important;
+}
+.header-filter-item .btn-icon {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #64748b !important;
+    background-color: #fff !important;
+    border: 1px solid #dcdee4 !important;
+    border-radius: 6px !important;
+    transition: all 0.2s ease !important;
+    box-sizing: border-box !important;
+}
+.header-filter-item .btn-icon:hover {
+    color: #3454d1 !important;
+    background-color: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+}
+
+@media (max-width: 991.98px) {
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+    }
+    .page-header-right {
+        margin-left: 0 !important;
+        width: 100%;
+    }
+    .page-header-right-items,
+    .page-header-right-items-wrapper {
+        width: 100%;
+        display: flex !important;
+    }
+}

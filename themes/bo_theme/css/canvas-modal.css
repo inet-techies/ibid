@@ -3,20 +3,31 @@
 .right-form {
     position: fixed;
     top: 0;
-    right: -500px;
-    width: 500px;
+    right: 0;
+    width: 600px;
+    max-width: 95vw;
     height: 100vh;
     background: #fff;
-    box-shadow: -3px 0 15px rgba(0,0,0,0.15);
-    transition: right 0.3s ease;
-    z-index: 1050;
-
+    box-shadow: -4px 0 24px rgba(15, 23, 42, 0.2);
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), visibility 0.3s ease;
+    z-index: 1065 !important;
     display: flex;
     flex-direction: column;
 }
 
+.right-form:not(.open) {
+    transform: translateX(105%) !important;
+    right: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
 .right-form.open {
-    right: 0;
+    transform: translateX(0) !important;
+    right: 0 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    display: flex !important;
 }
 
 /* Header */
@@ -38,6 +49,7 @@
     flex: 1;
     padding: 15px;
     overflow-y: auto;
+    overflow-x: hidden !important;
 }
 
 /* Close Button */
@@ -55,13 +67,14 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.4);
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(2px);
     display: none;
-    z-index: 1049;
+    z-index: 1055 !important;
 }
 
 #rightFormOverlay.show {
-    display: block;
+    display: block !important;
 }
 
 /* Optional: Smooth Scrollbar */

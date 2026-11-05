@@ -9,7 +9,44 @@
  
   <!-- [ Main Content ] start -->
  
-                <div class="row">
+                <!-- Permanently Visible Header Filters (Teleported to extreme right corner of breadcrumb row) -->
+<div id="page-filter-actions" style="display:none;">
+    <div class="d-flex align-items-center gap-2 flex-wrap">
+        <div class="header-filter-item">
+            <select id="user-filter-role" class="form-select form-select-sm" style="min-width: 130px;">
+                <option value="">All Roles</option>
+                <?php 
+                $roles = [];
+                if (!empty($UsersData)) {
+                    foreach ($UsersData as $u) {
+                        if (!empty($u['RoleName'])) {
+                            $rVal = trim($u['RoleName']);
+                            if (!in_array($rVal, $roles)) $roles[] = $rVal;
+                        }
+                    }
+                }
+                sort($roles);
+                foreach ($roles as $r): ?>
+                    <option value="<?= htmlspecialchars($r); ?>"><?= htmlspecialchars($r); ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="header-filter-item">
+            <select id="user-filter-status" class="form-select form-select-sm" style="min-width: 120px;">
+                <option value="">All Statuses</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+            </select>
+        </div>
+        <div class="header-filter-item">
+            <button type="button" class="btn btn-sm btn-icon btn-light-brand border" id="btn-reset-user-filters" title="Reset Filters" style="width: 34px; height: 34px; padding: 0; display: inline-flex; align-items: center; justify-content: center;">
+                <i class="feather-rotate-ccw"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
                     <div class="col-lg-12">
                         <div class="card stretch stretch-full">
                             <br/>
@@ -144,7 +181,7 @@
 
 <div id="rightFormOverlay"></div>
             <!-- [ Main Content ] end -->
-  <script src="<?=$theme_path?>/js/jquery-1.11.1.min.js"></script>
+  <!-- legacy jquery-1.11.1 removed to prevent multi-jquery collision -->
 
   
 <script>
@@ -216,5 +253,49 @@ $(document).on('click', '#closeAddForm', function () {
 $(document).on('click', '#rightFormOverlay', function () {
     $('#rightForm').removeClass('open');
     $('#rightFormOverlay').removeClass('show');
+});
+
+// DataTables filter integration for UserUpdate
+$(document).ready(function() {
+    var table = $('#customerList').DataTable({ retrieve: true });
+
+    $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+        if (settings.nTable.id !== 'customerList') return true;
+
+        var filterRole = ($('#user-filter-role').val() || '').toLowerCase().trim();
+        var filterStatus = ($('#user-filter-status').val() || '').toLowerCase().trim();
+
+        var rowRole = (data[4] || '').toLowerCase().trim();
+        var rowStatus = (data[5] || '').toLowerCase().trim();
+
+        if (filterRole && rowRole.indexOf(filterRole) === -1) return false;
+        if (filterStatus && rowStatus.indexOf(filterStatus) === -1) return false;
+
+        return true;
+    });
+
+    function updateUserFilterBadge() {
+        var count = 0;
+        if ($('#user-filter-role').val()) count++;
+        if ($('#user-filter-status').val()) count++;
+        var $badge = $('#user-filter-count');
+        if (count > 0) {
+            $badge.text(count).removeClass('d-none');
+        } else {
+            $badge.addClass('d-none');
+        }
+    }
+
+    $('#user-filter-role, #user-filter-status').on('change', function() {
+        table.draw();
+    });
+
+    $('#btn-reset-user-filters').on('click', function(e) {
+        e.preventDefault();
+        $('#user-filter-role').val('');
+        $('#user-filter-status').val('');
+        updateUserFilterBadge();
+        table.draw();
+    });
 });
 </script>

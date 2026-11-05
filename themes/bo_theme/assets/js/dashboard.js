@@ -27,7 +27,6 @@
 
     var FS = {
         state:      'ALL',
-        department: 'ALL',
         fy:         'ALL',
         startDate:  null,
         endDate:    null
@@ -236,6 +235,31 @@
         FS.department = 'ALL';
     }
 
+    function buildStatusOptions() {
+        var sel = document.getElementById('filter-status');
+        if (!sel) return;
+        sel.innerHTML = '<option value="ALL">All Statuses</option>';
+        var statusSet = {};
+        if (Array.isArray(statuses)) {
+            statuses.forEach(function(s) {
+                var name = (s.DisplayName || s.StatusName || '').trim();
+                if (name) statusSet[name] = true;
+            });
+        }
+        allBids.forEach(function(b) {
+            var name = (b.DisplayName || b.StatusName || '').trim();
+            if (name) statusSet[name] = true;
+        });
+        Object.keys(statusSet).sort().forEach(function(st) {
+            var o = document.createElement('option');
+            o.value = st;
+            o.textContent = st;
+            sel.appendChild(o);
+        });
+        sel.value = 'ALL';
+        FS.status = 'ALL';
+    }
+
     /* ==============================================================
        3. BUILD FINANCIAL YEAR DROPDOWN
        ============================================================== */
@@ -271,12 +295,6 @@
                 if (st !== FS.state.toLowerCase()) return false;
             }
 
-            /* Department Filter */
-            if (FS.department && FS.department !== 'ALL') {
-                var dept = (b.BidDepartment || '').trim().toLowerCase();
-                if (dept !== FS.department.toLowerCase()) return false;
-            }
-
             /* FY Filter */
             if (FS.fy && FS.fy !== 'ALL' && getBidFY(b) !== FS.fy) return false;
 
@@ -292,6 +310,18 @@
             return true;
         });
 
+        // Update active filter badge on filter button
+        var activeCount = 0;
+        if (FS.state && FS.state !== 'ALL') activeCount++;
+        if (FS.fy && FS.fy !== 'ALL') activeCount++;
+        if (FS.startDate || FS.endDate) activeCount++;
+        var $badge = $('#dashboard-filter-count');
+        if (activeCount > 0) {
+            $badge.text(activeCount).removeClass('d-none');
+        } else {
+            $badge.addClass('d-none');
+        }
+
         updateAllCharts();
     }
 
@@ -299,8 +329,11 @@
        4.1 RESOLVE CATEGORY HELPER
        ============================================================== */
     function resolveCategory(b) {
-        var cat = (b.Category || '').trim();
-        if (!cat || cat === '001' || /^\d+$/.test(cat) || cat.toLowerCase() === 'uncategorised' || cat.toLowerCase() === 'unknown') {
+        var cat = (b.CategoryName || b.Category || '').trim();
+        if (cat === '001' || cat === '1') {
+            return 'CCTV';
+        }
+        if (!cat || /^\d+$/.test(cat) || cat.toLowerCase() === 'uncategorised' || cat.toLowerCase() === 'unknown') {
             return 'General';
         }
         return cat.charAt(0).toUpperCase() + cat.slice(1);
@@ -1024,14 +1057,7 @@
             });
         }
 
-        /* Department Filter */
-        var deptEl = document.getElementById('filter-department');
-        if (deptEl) {
-            deptEl.addEventListener('change', function() {
-                FS.department = this.value;
-                applyFilters();
-            });
-        }
+
 
         /* Financial Year Filter */
         var fyEl = document.getElementById('filter-fy');
@@ -1069,7 +1095,6 @@
         if (hReset) {
             hReset.addEventListener('click', function() {
                 FS.state = 'ALL';
-                FS.department = 'ALL';
                 FS.fy = 'ALL';
                 FS.startDate = null;
                 FS.endDate = null;
@@ -1077,9 +1102,7 @@
                 var stateEl = document.getElementById('filter-state');
                 if (stateEl) stateEl.value = 'ALL';
 
-                var deptEl = document.getElementById('filter-department');
-                if (deptEl) deptEl.value = 'ALL';
-
+                var fyEl = document.getElementById('filter-fy');
                 if (fyEl) fyEl.value = 'ALL';
 
                 var drInput = document.getElementById('filter-daterange');
@@ -1167,8 +1190,10 @@
        24. INITIALIZATION
        ============================================================== */
     function init() {
+        if (!document.getElementById('kpi-total') && !document.querySelector('.bid-kpi-row')) {
+            return;
+        }
         buildStateOptions();
-        buildDepartmentOptions();
         buildFYOptions();
         bindEvents();
         applyFilters();
