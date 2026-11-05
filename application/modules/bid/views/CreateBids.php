@@ -75,6 +75,7 @@
                     <div>
                         <!-- Upload & Parse Button -->
                         <button type="button" id="btnUploadParseDoc"
+                            onclick="var fi=document.getElementById('docParseFileInput');if(fi){fi.value='';fi.click();}"
                             class="btn btn-primary shadow-sm fw-bold d-inline-flex align-items-center"
                             style="border-radius:8px;padding:9px 20px;background:linear-gradient(135deg,#4f46e5 0%,#3b82f6 100%);border:none;font-size:13.5px;box-shadow:0 4px 14px rgba(79,70,229,0.35);">
                             <i class="feather-upload-cloud me-2 mr-2" style="font-size:16px;"></i>
@@ -104,6 +105,7 @@
             <input type="hidden" id="attachedDocumentName" name="attachedDocumentName" value="">
             <input type="hidden" id="factSheetId" name="factSheetId" value="">
             <input type="hidden" id="factSheetUrl" name="factSheetUrl" value="">
+            <input type="hidden" id="Bcid" name="Bcid" value="<?= htmlspecialchars($editBid['Bcid'] ?? '') ?>">
             <div class="card-body general-info">
                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
@@ -262,44 +264,209 @@
                         <small class="text-primary fw-bold mt-1 d-block" id="emdInWords"></small>
                     </div>
                 </div><!---------Bid EMD----------->
+                 <!-- 1. Tender Publication -->
                  <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="bidPublishedDateInput" class="fw-semibold">Bid Published Date: <span class="text-danger">*</span></label>
+                        <label for="startDate" class="fw-semibold">1. Tender Publication: <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
-                            <div class="input-group-text"><i class="feather-calendar"></i></div>
-                            <input class="form-control" id="startDate" name="PublishedDate" placeholder="Select Date">
+                            <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
+                            <input type="date" class="form-control tender-schedule-date" id="startDate" name="PublishedDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
+                        </div>
+                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
+                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
+                            <input type="time" class="form-control form-control-sm" id="tenderPublicationTime" name="tenderPublicationTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
                         </div>
                     </div>
-                </div><!---------Bid Published Date----------->
-                 <div class="row mb-4 align-items-center">
-                    <div class="col-lg-4">
-                        <label for="bidSubmissionDateInput" class="fw-semibold">Bid Submission End Date: <span class="text-danger">*</span></label>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="feather-calendar"></i></div>
-                            <input class="form-control" id="dueDate" name="SubmissionDate" placeholder="Select Date">
-                        </div>
-                        <div id="subTimeHelper" class="mt-1" style="display:none;">
-                            <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1" style="font-size:12px;font-weight:600;">
-                                <i class="feather-clock me-1"></i> Submission Time: <span id="subTimeText"></span>
-                            </span>
-                        </div>
-                    </div>
-                </div><!---------Bid Submission Date----------->
+                </div><!---------1. Tender Publication----------->
+
+                <!-- 2. Document Sale Start -->
                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
-                        <label for="bidOpeningDateInput" class="fw-semibold">Bid Opening Date: <span class="text-danger">*</span></label>
+                        <label for="documentSaleStartDate" class="fw-semibold">2. Document Sale / Download Start:</label>
                     </div>
                     <div class="col-lg-8">
-                    <div class="input-group">
-                            <div class="input-group-text"><i class="feather-calendar"></i></div>
-                            <input class="form-control" id="dateofBirth" name="OpeningDate" placeholder="Select Date">
+                        <div class="input-group">
+                            <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
+                            <input type="date" class="form-control tender-schedule-date" id="documentSaleStartDate" name="documentSaleStartDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
                         </div>
-                     </div>
-                </div><!---------Bid Opening Date----------->
+                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
+                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
+                            <input type="time" class="form-control form-control-sm" id="documentSaleStartTime" name="documentSaleStartTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                        </div>
+                    </div>
+                </div><!---------2. Document Sale Start----------->
+
+                <!-- 3. Document Sale End -->
+                <div class="row mb-4 align-items-center">
+                    <div class="col-lg-4">
+                        <label for="documentSaleEndDate" class="fw-semibold">3. Document Sale / Download End:</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="input-group">
+                            <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
+                            <input type="date" class="form-control tender-schedule-date" id="documentSaleEndDate" name="documentSaleEndDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
+                        </div>
+                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
+                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
+                            <input type="time" class="form-control form-control-sm" id="documentSaleEndTime" name="documentSaleEndTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                        </div>
+                    </div>
+                </div><!---------3. Document Sale End----------->
+
+                <!-- 4. Pre-bid Query Start -->
+                <div class="row mb-4 align-items-center">
+                    <div class="col-lg-4">
+                        <label for="prebidQueryStartDate" class="fw-semibold">4. Pre-Bid Clarification / Query Start:</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="input-group">
+                            <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
+                            <input type="date" class="form-control tender-schedule-date" id="prebidQueryStartDate" name="prebidQueryStartDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
+                        </div>
+                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
+                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
+                            <input type="time" class="form-control form-control-sm" id="prebidQueryStartTime" name="prebidQueryStartTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                        </div>
+                    </div>
+                </div><!---------4. Pre-bid Query Start----------->
+
+                <!-- 5. Pre-bid Query End -->
+                <div class="row mb-4 align-items-center">
+                    <div class="col-lg-4">
+                        <label for="prebidQueryEndDate" class="fw-semibold">5. Pre-Bid Clarification / Query End:</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="input-group">
+                            <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
+                            <input type="date" class="form-control tender-schedule-date" id="prebidQueryEndDate" name="prebidQueryEndDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
+                        </div>
+                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
+                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
+                            <input type="time" class="form-control form-control-sm" id="prebidQueryEndTime" name="prebidQueryEndTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                        </div>
+                    </div>
+                </div><!---------5. Pre-bid Query End----------->
+
+                <!-- 6. Pre-bid Meeting -->
+                <div class="row mb-4 align-items-center">
+                    <div class="col-lg-4">
+                        <label for="prebidMeetingDate" class="fw-semibold">6. Pre-Bid Meeting:</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="input-group">
+                            <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
+                            <input type="date" class="form-control tender-schedule-date" id="prebidMeetingDate" name="prebidMeetingDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
+                        </div>
+                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
+                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
+                            <input type="time" class="form-control form-control-sm" id="prebidMeetingTime" name="prebidMeetingTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                        </div>
+                    </div>
+                </div><!---------6. Pre-bid Meeting----------->
+
+                <!-- 7. Pre-bid Response Deadline -->
+                <div class="row mb-4 align-items-center">
+                    <div class="col-lg-4">
+                        <label for="prebidResponseDate" class="fw-semibold">7. Pre-Bid Response / Clarification:</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="input-group">
+                            <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
+                            <input type="date" class="form-control tender-schedule-date" id="prebidResponseDate" name="prebidResponseDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
+                        </div>
+                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
+                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
+                            <input type="time" class="form-control form-control-sm" id="prebidResponseTime" name="prebidResponseTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                        </div>
+                    </div>
+                </div><!---------7. Pre-bid Response Deadline----------->
+
+                <!-- 8. Bid Submission Start -->
+                <div class="row mb-4 align-items-center">
+                    <div class="col-lg-4">
+                        <label for="bidSubmissionStartDate" class="fw-semibold">8. Bid Submission Start:</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="input-group">
+                            <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
+                            <input type="date" class="form-control tender-schedule-date" id="bidSubmissionStartDate" name="bidSubmissionStartDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
+                        </div>
+                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
+                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
+                            <input type="time" class="form-control form-control-sm" id="bidSubmissionStartTime" name="bidSubmissionStartTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                        </div>
+                    </div>
+                </div><!---------8. Bid Submission Start----------->
+
+                <!-- 9. Bid Submission End -->
+                <div class="row mb-4 align-items-center">
+                    <div class="col-lg-4">
+                        <label for="dueDate" class="fw-semibold">9. Bid Submission End / Deadline: <span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="input-group">
+                            <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
+                            <input type="date" class="form-control tender-schedule-date" id="dueDate" name="SubmissionDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
+                        </div>
+                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
+                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
+                            <input type="time" class="form-control form-control-sm" id="bidSubmissionEndTime" name="bidSubmissionEndTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                        </div>
+                    </div>
+                </div><!---------9. Bid Submission End----------->
+
+                <!-- 10. PQ Bid Opening -->
+                <div class="row mb-4 align-items-center">
+                    <div class="col-lg-4">
+                        <label for="pqBidOpeningDate" class="fw-semibold">10. Pre-Qualification (PQ) Bid Opening:</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="input-group">
+                            <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
+                            <input type="date" class="form-control tender-schedule-date" id="pqBidOpeningDate" name="pqBidOpeningDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
+                        </div>
+                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
+                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
+                            <input type="time" class="form-control form-control-sm" id="pqBidOpeningTime" name="pqBidOpeningTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                        </div>
+                    </div>
+                </div><!---------10. PQ Bid Opening----------->
+
+                <!-- 11. Technical Bid Opening -->
+                <div class="row mb-4 align-items-center">
+                    <div class="col-lg-4">
+                        <label for="dateofBirth" class="fw-semibold">11. Technical Bid Opening Date: <span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="input-group">
+                            <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
+                            <input type="date" class="form-control tender-schedule-date" id="dateofBirth" name="OpeningDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
+                        </div>
+                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
+                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
+                            <input type="time" class="form-control form-control-sm" id="technicalBidOpeningTime" name="technicalBidOpeningTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                        </div>
+                    </div>
+                </div><!---------11. Technical Bid Opening----------->
+
+                <!-- 12. Financial Bid Opening -->
+                <div class="row mb-4 align-items-center">
+                    <div class="col-lg-4">
+                        <label for="financialBidOpeningDate" class="fw-semibold">12. Financial / Commercial Bid Opening:</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="input-group">
+                            <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
+                            <input type="date" class="form-control tender-schedule-date" id="financialBidOpeningDate" name="financialBidOpeningDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
+                        </div>
+                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
+                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
+                            <input type="time" class="form-control form-control-sm" id="financialBidOpeningTime" name="financialBidOpeningTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                        </div>
+                    </div>
+                </div><!---------12. Financial Bid Opening----------->
 
                  <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
@@ -427,6 +594,154 @@
     return str.trim();
   }
 
+  // ── Helper: Format date as YYYY-MM-DD ──
+  function formatToIsoDate(raw) {
+    if (!raw) return '';
+    raw = raw.toString().trim();
+
+    // If already YYYY-MM-DD or starts with YYYY-MM-DD
+    var isoMatch = raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (isoMatch) return isoMatch[1] + '-' + isoMatch[2] + '-' + isoMatch[3];
+
+    // Strip time portions like " at 12:00", " 15:00:00", "T10:00:00"
+    var cleanDate = raw.replace(/\s+(?:at\s+)?\d{1,2}:\d{2}(?::\d{2})?(?:\s*(?:AM|PM|am|pm))?.*/i, '').trim();
+
+    // Check DD/MM/YYYY or DD-MM-YYYY or DD.MM.YYYY
+    var m = cleanDate.match(/^(\d{1,2})\s*[\.\/\-]\s*(\d{1,2})\s*[\.\/\-]\s*(\d{2,4})/);
+    if (m) {
+      var y = parseInt(m[3], 10);
+      if (y < 100) y += (y < 50 ? 2000 : 1900);
+      var mon = parseInt(m[2], 10);
+      var d = parseInt(m[1], 10);
+      return y + '-' + (mon < 10 ? '0' : '') + mon + '-' + (d < 10 ? '0' : '') + d;
+    }
+
+    // Check named months like "23 Oct 2026", "23 October 2026", "23-Oct-2026"
+    var namedMatch = cleanDate.match(/^(\d{1,2})[-\s/]+([a-zA-Z]{3,9})[-\s/]+(\d{2,4})/);
+    if (namedMatch) {
+      var months = {jan:1, feb:2, mar:3, apr:4, may:5, jun:6, jul:7, aug:8, sep:9, oct:10, nov:11, dec:12};
+      var mKey = namedMatch[2].substring(0, 3).toLowerCase();
+      if (months[mKey]) {
+        var dy = parseInt(namedMatch[1], 10);
+        var mn = months[mKey];
+        var yr = parseInt(namedMatch[3], 10);
+        if (yr < 100) yr += (yr < 50 ? 2000 : 1900);
+        return yr + '-' + (mn < 10 ? '0' : '') + mn + '-' + (dy < 10 ? '0' : '') + dy;
+      }
+    }
+
+    // Try standard JS Date parsing as last resort
+    var parsed = new Date(cleanDate);
+    if (!isNaN(parsed.getTime())) {
+      var yr = parsed.getFullYear();
+      var mn = parsed.getMonth() + 1;
+      var dy = parsed.getDate();
+      return yr + '-' + (mn < 10 ? '0' : '') + mn + '-' + (dy < 10 ? '0' : '') + dy;
+    }
+
+    return raw;
+  }
+
+  // ── Helper: Set verified input field value & attach confidence badge ──
+  function setTimeField(id, val) {
+    if (!val) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+    var raw = val.toString().trim();
+    // Normalize time to HH:MM 24-hour format required by HTML5 <input type="time">
+    var ampmMatch = raw.match(/^(\d{1,2}):(\d{2})\s*(AM|PM|am|pm)$/i);
+    var normalized = '';
+    if (ampmMatch) {
+      var h = parseInt(ampmMatch[1], 10);
+      var m = ampmMatch[2];
+      var p = ampmMatch[3].toUpperCase();
+      if (p === 'PM' && h < 12) h += 12;
+      if (p === 'AM' && h === 12) h = 0;
+      normalized = (h < 10 ? '0' : '') + h + ':' + m;
+    } else if (/^\d{1,2}:\d{2}(?::\d{2})?$/.test(raw)) {
+      var parts = raw.split(':');
+      var h = parseInt(parts[0], 10);
+      var m = parts[1];
+      normalized = (h < 10 ? '0' : '') + h + ':' + m;
+    } else if (/^\d{4}$/.test(raw)) {
+      normalized = raw.substring(0, 2) + ':' + raw.substring(2);
+    } else {
+      normalized = raw;
+    }
+    el.value = normalized;
+    el.dispatchEvent(new Event('input', {bubbles: true}));
+    el.dispatchEvent(new Event('change', {bubbles: true}));
+  }
+
+  function setVerifiedField(id, val, confidence, isDate, fieldLabel) {
+    // CRITICAL EXCLUSIONS: Department and Estimated Tender Value must NEVER be auto-populated
+    if (id === 'bidDepartmentInput' || id === 'bidEstimatedInput') {
+      return false;
+    }
+
+    var el = document.getElementById(id);
+    if (!el) return false;
+
+    // For Bid Title: do NOT overwrite if the user has already entered a title manually
+    if (id === 'bidTitleInput' && el.value && el.value.trim() !== '') {
+      return false;
+    }
+
+    // Remove any existing badge
+    var existingBadge = document.getElementById(id + '_confBadge');
+    if (existingBadge) existingBadge.remove();
+
+    var score = parseInt(confidence, 10);
+    if (isNaN(score)) score = 90;
+
+    // Only mandatory fields show "manual entry required" if missing or confidence < 70
+    // Optional schedule date fields do NOT show any warning badge if not found in document
+    var isMandatoryField = (id === 'startDate' || id === 'dueDate' || id === 'dateofBirth' || id === 'bidTenderIDInput' || id === 'bidTitleInput');
+
+    if (score < 70 || !val) {
+      if (isMandatoryField) {
+        var notFoundBadge = document.createElement('small');
+        notFoundBadge.id = id + '_confBadge';
+        notFoundBadge.className = 'text-muted ms-2 mt-1 d-block';
+        notFoundBadge.style.fontSize = '11px';
+        notFoundBadge.innerHTML = '<i class="feather-info me-1"></i>Not found in document &mdash; manual entry required';
+        if (el.parentNode && el.parentNode.parentNode) {
+          el.parentNode.parentNode.appendChild(notFoundBadge);
+        }
+      }
+      return false;
+    }
+
+    var finalVal = isDate ? formatToIsoDate(val) : val;
+    el.value = finalVal;
+    el.dispatchEvent(new Event('input', {bubbles: true}));
+    el.dispatchEvent(new Event('change', {bubbles: true}));
+
+    // Verify value was actually accepted by the HTML input
+    if (el.value !== finalVal && el.value === '') {
+      return false;
+    }
+
+    // Attach confidence badge
+    var badge = document.createElement('small');
+    badge.id = id + '_confBadge';
+    badge.className = 'ms-2 mt-1 d-block';
+    badge.style.fontSize = '11px';
+
+    if (score >= 90) {
+      badge.className += ' text-success fw-semibold';
+      badge.innerHTML = '<i class="feather-check-circle me-1"></i>Verified (' + score + '% confidence)';
+    } else {
+      badge.className += ' text-warning fw-semibold';
+      badge.innerHTML = '<i class="feather-alert-triangle me-1"></i>Review recommended (' + score + '% confidence)';
+    }
+    if (el.parentNode && el.parentNode.parentNode) {
+      el.parentNode.parentNode.appendChild(badge);
+    }
+
+    return true;
+  }
+
   function showStatus(show, fileName) {
     var bar = document.getElementById('docParseStatusBar');
     if (!bar) return;
@@ -437,15 +752,23 @@
     }
   }
 
-  function showSuccess(fields) {
+  function showSuccess(fields, resp) {
     document.getElementById('docParseSuccessAlert').style.display = 'block';
     document.getElementById('docParseErrorAlert').style.display = 'none';
     var irrAlert = document.getElementById('docParseIrrelevantAlert');
     if (irrAlert) irrAlert.style.display = 'none';
 
     var el = document.getElementById('docParseFilledFields');
-    if (el && fields && fields.length) {
-      el.textContent = 'Auto-filled: ' + fields.join(', ');
+    if (el) {
+      var msg = 'Auto-filled ' + fields.length + ' validated fields: ' + (fields.length ? fields.join(', ') : 'None') + '.';
+      if (resp && resp.diagnostics) {
+        var d = resp.diagnostics;
+        msg += ' (Universal Engine: ' + d.fields_found + ' verified, ' + d.fields_requiring_review + ' for review in ' + d.extraction_duration_ms + ' ms)';
+        if (d.corrigendum_detected) {
+          msg += ' [Corrigendum Document]';
+        }
+      }
+      el.textContent = msg;
     }
     // Smooth scroll to form
     var titleEl = document.getElementById('bidTitleInput');
@@ -498,7 +821,8 @@
 
 
   function autoFillForm(resp) {
-    var ai   = resp.ai_summary || {};
+    var fields = resp.fields || {};
+    var ai     = resp.ai_summary || {};
     var filled = [];
 
     // ── Tender Document Attachment ──
@@ -559,58 +883,151 @@
       }
     }
 
-    // ── Bid Title (The document's first line) ──
-    var title = resp.first_line || resp.bid_title || (ai && ai.first_line) || (ai && ai.bid_title) || '';
-    if (!title) {
-      title = ai.full_title || ai.title || ai.document_title || ai.short_title || '';
+    // ── CRITICAL ARCHITECTURAL RULE ──
+    // Department and Estimated Tender Value must NEVER be auto-populated.
+    // They remain 100% manual entry fields.
+
+    // ── Tender Title ──
+    var titleData = fields.tender_title || {};
+    var titleVal  = titleData.value || resp.bid_title || ai.bid_title || '';
+    var titleConf = titleData.confidence !== undefined ? titleData.confidence : (titleVal ? 85 : 0);
+    if (titleVal && setVerifiedField('bidTitleInput', titleVal, titleConf, false, 'Bid Title')) {
+      filled.push('Bid Title');
     }
-    if (title && setField('bidTitleInput', title)) filled.push('Bid Title');
 
+    // ── Tender Reference ID ──
+    var refData = fields.tender_reference || {};
+    var refVal  = refData.value || ai.ref_no || ai.ref_code || ai.tender_id || '';
+    var refConf = refData.confidence !== undefined ? refData.confidence : (refVal ? 95 : 0);
+    if (refVal && setVerifiedField('bidTenderIDInput', refVal, refConf, false, 'Tender ID')) {
+      filled.push('Tender ID');
+    }
 
-    var emdVal = (ai.emd_value || '').toString().trim();
-    if (emdVal && emdVal !== '0' && setField('bidEmdInput', emdVal)) {
+    // ── EMD Value ──
+    var emdData = fields.emd_value || {};
+    var emdVal  = emdData.value || (ai.emd_value || '').toString().trim();
+    var emdConf = emdData.confidence !== undefined ? emdData.confidence : (emdVal ? 95 : 0);
+    if (emdVal && emdVal !== '0' && setVerifiedField('bidEmdInput', emdVal, emdConf, false, 'EMD Value')) {
       filled.push('EMD Value');
-      var emdNum = emdVal.replace(/,/g, '');
+      var emdNum = emdVal.toString().replace(/,/g, '');
       if (!isNaN(emdNum) && emdNum !== '') {
         var ewE = document.getElementById('emdInWords');
         if (ewE) ewE.innerHTML = convertNumberToWords(emdNum) + ' Only';
       }
     }
 
-    
-    var pubDate = ai.published_date || '';
-    if (pubDate && setField('startDate', pubDate)) filled.push('Published Date');
+    // ── 12 TENDER ACTIVITY MILESTONES (Dates & Times) ──
 
-   
-    var subDate = ai.submission_date || '';
-    if (!subDate && ai.submission_deadline) {
-      subDate = ai.submission_deadline.indexOf(' at ') !== -1 ? ai.submission_deadline.split(' at ')[0].trim() : ai.submission_deadline;
+    // 1. Tender Publication
+    var pubData = fields.published_date || {};
+    var pubVal  = pubData.value || ai.tender_publication_date || ai.tenderPublicationDate || ai.published_date || '';
+    var pubConf = pubData.confidence !== undefined ? pubData.confidence : (pubVal ? 90 : 0);
+    if (pubVal && setVerifiedField('startDate', pubVal, pubConf, true, 'Tender Publication')) {
+      filled.push('Tender Publication Date');
     }
-    if (subDate && setField('dueDate', subDate)) filled.push('Submission End Date');
+    var pubTime = ai.tender_publication_time || ai.tenderPublicationTime || '';
+    if (pubTime) setTimeField('tenderPublicationTime', pubTime);
 
-    // Display submission time in helper badge if available
-    var subTime = ai.submission_time || '';
-    var subTimeHelper = document.getElementById('subTimeHelper');
-    var subTimeText = document.getElementById('subTimeText');
-    if (subTimeHelper && subTimeText) {
-      if (subTime) {
-        subTimeText.textContent = subTime;
-        subTimeHelper.style.display = 'block';
-        filled.push('Submission Time (' + subTime + ')');
-      } else {
-        subTimeHelper.style.display = 'none';
-      }
+    // 2. Document Sale Start
+    var dssVal = ai.document_sale_start_date || ai.documentSaleStartDate || '';
+    if (dssVal && setVerifiedField('documentSaleStartDate', dssVal, 85, true, 'Doc Sale Start')) {
+      filled.push('Document Sale Start');
     }
+    var dssTime = ai.document_sale_start_time || ai.documentSaleStartTime || '';
+    if (dssTime) setTimeField('documentSaleStartTime', dssTime);
 
-   
-    var opDate = ai.opening_date || '';
-    var cleanOpDate = (opDate.indexOf(' at ') !== -1) ? opDate.split(' at ')[0].trim() : opDate;
-    if (cleanOpDate && setField('dateofBirth', cleanOpDate)) filled.push('Opening Date');
+    // 3. Document Sale End
+    var dseVal = ai.document_sale_end_date || ai.documentSaleEndDate || '';
+    if (dseVal && setVerifiedField('documentSaleEndDate', dseVal, 85, true, 'Doc Sale End')) {
+      filled.push('Document Sale End');
+    }
+    var dseTime = ai.document_sale_end_time || ai.documentSaleEndTime || '';
+    if (dseTime) setTimeField('documentSaleEndTime', dseTime);
 
-   
-    var kw = ai.keywords || '';
+    // 4. Pre-bid Query Start
+    var pqsVal = ai.prebid_query_start_date || ai.prebidQueryStartDate || '';
+    if (pqsVal && setVerifiedField('prebidQueryStartDate', pqsVal, 85, true, 'Pre-bid Query Start')) {
+      filled.push('Pre-bid Query Start');
+    }
+    var pqsTime = ai.prebid_query_start_time || ai.prebidQueryStartTime || '';
+    if (pqsTime) setTimeField('prebidQueryStartTime', pqsTime);
+
+    // 5. Pre-bid Query End
+    var pqeVal = ai.prebid_query_end_date || ai.prebidQueryEndDate || '';
+    if (pqeVal && setVerifiedField('prebidQueryEndDate', pqeVal, 85, true, 'Pre-bid Query End')) {
+      filled.push('Pre-bid Query End');
+    }
+    var pqeTime = ai.prebid_query_end_time || ai.prebidQueryEndTime || '';
+    if (pqeTime) setTimeField('prebidQueryEndTime', pqeTime);
+
+    // 6. Pre-bid Meeting
+    var pbmVal = ai.prebid_meeting_date || ai.prebidMeetingDate || '';
+    if (pbmVal && setVerifiedField('prebidMeetingDate', pbmVal, 85, true, 'Pre-bid Meeting')) {
+      filled.push('Pre-bid Meeting');
+    }
+    var pbmTime = ai.prebid_meeting_time || ai.prebidMeetingTime || '';
+    if (pbmTime) setTimeField('prebidMeetingTime', pbmTime);
+
+    // 7. Pre-bid Response Deadline
+    var pbrVal = ai.prebid_response_date || ai.prebidResponseDate || '';
+    if (pbrVal && setVerifiedField('prebidResponseDate', pbrVal, 85, true, 'Pre-bid Response')) {
+      filled.push('Pre-bid Response Deadline');
+    }
+    var pbrTime = ai.prebid_response_time || ai.prebidResponseTime || '';
+    if (pbrTime) setTimeField('prebidResponseTime', pbrTime);
+
+    // 8. Bid Submission Start
+    var bssVal = ai.bid_submission_start_date || ai.bidSubmissionStartDate || '';
+    if (bssVal && setVerifiedField('bidSubmissionStartDate', bssVal, 85, true, 'Bid Submission Start')) {
+      filled.push('Bid Submission Start');
+    }
+    var bssTime = ai.bid_submission_start_time || ai.bidSubmissionStartTime || '';
+    if (bssTime) setTimeField('bidSubmissionStartTime', bssTime);
+
+    // 9. Bid Submission End / Deadline
+    var subData = fields.submission_date || {};
+    var subVal  = subData.value || ai.bid_submission_end_date || ai.bidSubmissionEndDate || ai.submission_date || '';
+    if (!subVal && ai.submission_deadline) {
+      subVal = ai.submission_deadline.indexOf(' at ') !== -1 ? ai.submission_deadline.split(' at ')[0].trim() : ai.submission_deadline;
+    }
+    var subConf = subData.confidence !== undefined ? subData.confidence : (subVal ? 95 : 0);
+    if (subVal && setVerifiedField('dueDate', subVal, subConf, true, 'Submission End Date')) {
+      filled.push('Submission End Date');
+    }
+    var subTime = ai.bid_submission_end_time || ai.bidSubmissionEndTime || ai.submission_time || '';
+    if (subTime) setTimeField('bidSubmissionEndTime', subTime);
+
+    // 10. PQ Bid Opening
+    var pqbVal = ai.pq_bid_opening_date || ai.pqBidOpeningDate || '';
+    if (pqbVal && setVerifiedField('pqBidOpeningDate', pqbVal, 85, true, 'PQ Bid Opening')) {
+      filled.push('PQ Bid Opening');
+    }
+    var pqbTime = ai.pq_bid_opening_time || ai.pqBidOpeningTime || '';
+    if (pqbTime) setTimeField('pqBidOpeningTime', pqbTime);
+
+    // 11. Technical Bid Opening
+    var opData = fields.technical_opening_date || {};
+    var opVal  = opData.value || ai.technical_bid_opening_date || ai.technicalBidOpeningDate || ai.opening_date || '';
+    if (opVal && opVal.indexOf(' at ') !== -1) opVal = opVal.split(' at ')[0].trim();
+    var opConf = opData.confidence !== undefined ? opData.confidence : (opVal ? 90 : 0);
+    if (opVal && setVerifiedField('dateofBirth', opVal, opConf, true, 'Technical Bid Opening')) {
+      filled.push('Technical Bid Opening');
+    }
+    var opTime = ai.technical_bid_opening_time || ai.technicalBidOpeningTime || ai.technical_opening_time || '';
+    if (opTime) setTimeField('technicalBidOpeningTime', opTime);
+
+    // 12. Financial Bid Opening
+    var fboVal = ai.financial_bid_opening_date || ai.financialBidOpeningDate || ai.financial_opening_date || '';
+    if (fboVal && setVerifiedField('financialBidOpeningDate', fboVal, 85, true, 'Financial Bid Opening')) {
+      filled.push('Financial Bid Opening');
+    }
+    var fboTime = ai.financial_bid_opening_time || ai.financialBidOpeningTime || ai.financial_opening_time || '';
+    if (fboTime) setTimeField('financialBidOpeningTime', fboTime);
+
+    // ── Keywords for Summary ──
+    var kwData = fields.keywords_summary || {};
+    var kw     = kwData.value || ai.keywords || '';
     if (!kw && ai.highlights && ai.highlights.length) {
-     
       var kwParts = [];
       ai.highlights.forEach(function(h) {
         var idx = h.indexOf(': ');
@@ -619,15 +1036,18 @@
       });
       kw = kwParts.join(', ');
     }
-    if (kw && setField('bidSummaryInput', kw)) filled.push('Keywords');
+    var kwConf = kwData.confidence !== undefined ? kwData.confidence : (kw ? 80 : 0);
+    if (kw && setVerifiedField('bidSummaryInput', kw, kwConf, false, 'Keywords')) {
+      filled.push('Keywords');
+    }
 
-    //  Tender Portal URL
-    var portal = ai.portal || ai.portal_or_mode || '';
-    if (portal && setField('bidTenderPortalInput', portal)) filled.push('Portal URL');
-
-    // Tender ID 
-    var refNo = ai.ref_no || ai.ref_code || ai.tender_id || '';
-    if (refNo && setField('bidTenderIDInput', refNo)) filled.push('Tender ID');
+    // ── Tender Portal URL ──
+    var portData = fields.tender_portal || {};
+    var portal   = portData.value || ai.portal || ai.portal_or_mode || '';
+    var portConf = portData.confidence !== undefined ? portData.confidence : (portal ? 90 : 0);
+    if (portal && setVerifiedField('bidTenderPortalInput', portal, portConf, false, 'Portal URL')) {
+      filled.push('Portal URL');
+    }
 
     return filled;
   }
@@ -701,7 +1121,7 @@
 
       if (resp && resp.status === 'success') {
         var filled = autoFillForm(resp);
-        showSuccess(filled);
+        showSuccess(filled, resp);
       } else {
         showError((resp && resp.message) ? resp.message : 'Parsing failed. Please try a different document.');
       }
@@ -718,23 +1138,142 @@
   }
 
   
-  document.addEventListener('DOMContentLoaded', function() {
+  function initDocParserEvents() {
     var btn       = document.getElementById('btnUploadParseDoc');
     var fileInput = document.getElementById('docParseFileInput');
 
-    if (btn && fileInput) {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
+    if (btn && fileInput && !btn._boundUpload) {
+      btn._boundUpload = true;
+      btn.onclick = function(e) {
+        if (e) e.preventDefault();
         fileInput.value = ''; // reset so same file triggers change
         fileInput.click();
-      });
+      };
 
-      fileInput.addEventListener('change', function() {
+      fileInput.onchange = function() {
         if (this.files && this.files.length > 0) {
           uploadAndParse(this.files[0]);
         }
-      });
+      };
     }
+  }
+
+  // ── Universal Date & Time Picker Enabler ──
+  function setupDateAndTimePickers() {
+    var dateIds = [
+      'startDate', 'dueDate', 'dateofBirth',
+      'documentSaleStartDate', 'documentSaleEndDate',
+      'prebidQueryStartDate', 'prebidQueryEndDate',
+      'prebidMeetingDate', 'prebidResponseDate',
+      'bidSubmissionStartDate', 'pqBidOpeningDate',
+      'financialBidOpeningDate'
+    ];
+
+    dateIds.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+
+      // Ensure HTML input type is explicitly 'date'
+      if (el.getAttribute('type') !== 'date') {
+        try { el.type = 'date'; } catch(e){}
+      }
+
+      // If vanillajs Datepicker attached itself to this native date input, destroy it
+      if (el.datepicker && typeof el.datepicker.destroy === 'function') {
+        try { el.datepicker.destroy(); } catch(err){}
+      }
+      el.classList.remove('datepicker-input');
+
+      el.style.cursor = 'pointer';
+
+      // Clicking anywhere on the date input opens the native picker
+      if (!el._hasPickerClick) {
+        el._hasPickerClick = true;
+        el.addEventListener('click', function(e) {
+          if (typeof this.showPicker === 'function') {
+            try { this.showPicker(); } catch(err) {}
+          }
+        });
+      }
+
+      // Clicking the calendar icon in the input-group opens the picker
+      var group = el.closest('.input-group');
+      if (group) {
+        var icon = group.querySelector('.date-picker-icon, .input-group-text');
+        if (icon && !icon._hasPickerClick) {
+          icon._hasPickerClick = true;
+          icon.style.cursor = 'pointer';
+          icon.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (typeof el.showPicker === 'function') {
+              try { el.showPicker(); } catch(err) { el.focus(); }
+            } else {
+              el.focus();
+            }
+          });
+        }
+      }
+    });
+
+    // Time inputs
+    var timeIds = [
+      'tenderPublicationTime', 'documentSaleStartTime', 'documentSaleEndTime',
+      'prebidQueryStartTime', 'prebidQueryEndTime', 'prebidMeetingTime',
+      'prebidResponseTime', 'bidSubmissionStartTime', 'bidSubmissionEndTime',
+      'pqBidOpeningTime', 'technicalBidOpeningTime', 'financialBidOpeningTime'
+    ];
+
+    timeIds.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+
+      el.style.cursor = 'pointer';
+
+      if (!el._hasTimeClick) {
+        el._hasTimeClick = true;
+        el.addEventListener('click', function() {
+          if (typeof this.showPicker === 'function') {
+            try { this.showPicker(); } catch(err) {}
+          }
+        });
+      }
+
+      var parent = el.closest('.time-group') || el.parentElement;
+      if (parent) {
+        var icon = parent.querySelector('.time-icon, .feather-clock');
+        if (icon && !icon._hasTimeClick) {
+          icon._hasTimeClick = true;
+          icon.style.cursor = 'pointer';
+          icon.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (typeof el.showPicker === 'function') {
+              try { el.showPicker(); } catch(err) { el.focus(); }
+            } else {
+              el.focus();
+            }
+          });
+        }
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      initDocParserEvents();
+      setupDateAndTimePickers();
+    });
+  } else {
+    initDocParserEvents();
+    setupDateAndTimePickers();
+  }
+
+  window.addEventListener('load', setupDateAndTimePickers);
+  setTimeout(setupDateAndTimePickers, 150);
+  setTimeout(setupDateAndTimePickers, 500);
+
+  document.addEventListener('DOMContentLoaded', function() {
+    initDocParserEvents();
+    setupDateAndTimePickers();
 
     // EMD words on manual input
     var emdEl = document.getElementById('bidEmdInput');
@@ -1143,6 +1682,28 @@
       syncPayload.append('startDate', document.getElementById('startDate') ? document.getElementById('startDate').value : '');
       syncPayload.append('dueDate', document.getElementById('dueDate') ? document.getElementById('dueDate').value : '');
       syncPayload.append('dateofBirth', document.getElementById('dateofBirth') ? document.getElementById('dateofBirth').value : '');
+      // Sync all 12 Tender Milestone Activities
+      syncPayload.append('tenderPublicationTime', document.getElementById('tenderPublicationTime') ? document.getElementById('tenderPublicationTime').value : '');
+      syncPayload.append('documentSaleStartDate', document.getElementById('documentSaleStartDate') ? document.getElementById('documentSaleStartDate').value : '');
+      syncPayload.append('documentSaleStartTime', document.getElementById('documentSaleStartTime') ? document.getElementById('documentSaleStartTime').value : '');
+      syncPayload.append('documentSaleEndDate', document.getElementById('documentSaleEndDate') ? document.getElementById('documentSaleEndDate').value : '');
+      syncPayload.append('documentSaleEndTime', document.getElementById('documentSaleEndTime') ? document.getElementById('documentSaleEndTime').value : '');
+      syncPayload.append('prebidQueryStartDate', document.getElementById('prebidQueryStartDate') ? document.getElementById('prebidQueryStartDate').value : '');
+      syncPayload.append('prebidQueryStartTime', document.getElementById('prebidQueryStartTime') ? document.getElementById('prebidQueryStartTime').value : '');
+      syncPayload.append('prebidQueryEndDate', document.getElementById('prebidQueryEndDate') ? document.getElementById('prebidQueryEndDate').value : '');
+      syncPayload.append('prebidQueryEndTime', document.getElementById('prebidQueryEndTime') ? document.getElementById('prebidQueryEndTime').value : '');
+      syncPayload.append('prebidMeetingDate', document.getElementById('prebidMeetingDate') ? document.getElementById('prebidMeetingDate').value : '');
+      syncPayload.append('prebidMeetingTime', document.getElementById('prebidMeetingTime') ? document.getElementById('prebidMeetingTime').value : '');
+      syncPayload.append('prebidResponseDate', document.getElementById('prebidResponseDate') ? document.getElementById('prebidResponseDate').value : '');
+      syncPayload.append('prebidResponseTime', document.getElementById('prebidResponseTime') ? document.getElementById('prebidResponseTime').value : '');
+      syncPayload.append('bidSubmissionStartDate', document.getElementById('bidSubmissionStartDate') ? document.getElementById('bidSubmissionStartDate').value : '');
+      syncPayload.append('bidSubmissionStartTime', document.getElementById('bidSubmissionStartTime') ? document.getElementById('bidSubmissionStartTime').value : '');
+      syncPayload.append('bidSubmissionEndTime', document.getElementById('bidSubmissionEndTime') ? document.getElementById('bidSubmissionEndTime').value : '');
+      syncPayload.append('pqBidOpeningDate', document.getElementById('pqBidOpeningDate') ? document.getElementById('pqBidOpeningDate').value : '');
+      syncPayload.append('pqBidOpeningTime', document.getElementById('pqBidOpeningTime') ? document.getElementById('pqBidOpeningTime').value : '');
+      syncPayload.append('technicalBidOpeningTime', document.getElementById('technicalBidOpeningTime') ? document.getElementById('technicalBidOpeningTime').value : '');
+      syncPayload.append('financialBidOpeningDate', document.getElementById('financialBidOpeningDate') ? document.getElementById('financialBidOpeningDate').value : '');
+      syncPayload.append('financialBidOpeningTime', document.getElementById('financialBidOpeningTime') ? document.getElementById('financialBidOpeningTime').value : '');
       syncPayload.append('bidSummary', document.getElementById('bidSummaryInput') ? document.getElementById('bidSummaryInput').value : '');
       syncPayload.append('bidTenderID', document.getElementById('bidTenderIDInput') ? document.getElementById('bidTenderIDInput').value : '');
 

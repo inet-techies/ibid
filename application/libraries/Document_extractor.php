@@ -147,12 +147,60 @@ class Document_extractor
         $modules       = $this->structureIntoModules($formattedText);
         $aiSummary     = $this->generateAiSummary($formattedText, $origName, $ext, $filePath);
 
-        $extractedTitle = !empty($aiSummary['title']) ? $aiSummary['title'] : (!empty($aiSummary['document_title']) ? $aiSummary['document_title'] : $origName);
+        // ── Universal Tender Document Extraction Engine ──
+        $pageMap = $this->extractPageMap($filePath);
+        require_once __DIR__ . '/tender_extractor/Universal_tender_extractor.php';
+        $universal = Universal_tender_extractor::extract($formattedText, $origName, $ext, $pageMap);
+
+        // Universal engine is the authoritative source for all 12 milestones, tender reference, EMD, portal, and fees
+        if (!empty($universal['ai_summary']) && is_array($universal['ai_summary'])) {
+            $milestoneKeys = [
+                'published_date', 'tender_publication_time', 'tenderPublicationDate', 'tenderPublicationTime', 'tender_publication_date', 'nit_issue_date',
+                'document_download_start_date', 'document_sale_start_date', 'document_sale_start_time', 'documentSaleStartDate', 'documentSaleStartTime',
+                'document_download_end_date', 'document_sale_end_date', 'document_sale_end_time', 'documentSaleEndDate', 'documentSaleEndTime',
+                'prebid_query_start_date', 'prebid_query_start_time', 'prebidQueryStartDate', 'prebidQueryStartTime',
+                'query_date', 'query_deadline', 'prebid_query_end_date', 'prebid_query_end_time', 'prebidQueryEndDate', 'prebidQueryEndTime',
+                'pre_bid_date', 'prebid_meeting_date', 'prebid_meeting_time', 'prebidMeetingDate', 'prebidMeetingTime',
+                'prebid_response_date', 'prebid_response_time', 'prebidResponseDate', 'prebidResponseTime',
+                'bid_submission_start_date', 'bid_submission_start_time', 'bidSubmissionStartDate', 'bidSubmissionStartTime',
+                'submission_date', 'submission_deadline', 'submission_time', 'bid_submission_end_date', 'bid_submission_end_time', 'bidSubmissionEndDate', 'bidSubmissionEndTime',
+                'pq_bid_opening_date', 'pq_bid_opening_time', 'pqBidOpeningDate', 'pqBidOpeningTime',
+                'opening_date', 'technical_opening_date', 'technical_opening_time', 'technicalBidOpeningDate', 'technicalBidOpeningTime',
+                'financial_opening_date', 'financial_opening_time', 'financialBidOpeningDate', 'financialBidOpeningTime',
+            ];
+            foreach ($milestoneKeys as $mK) {
+                $aiSummary[$mK] = $universal['ai_summary'][$mK] ?? '';
+            }
+
+            if (!empty($universal['fields']['tender_reference']['value'])) {
+                $aiSummary['ref_no']    = $universal['fields']['tender_reference']['value'];
+                $aiSummary['ref_code']  = $universal['fields']['tender_reference']['value'];
+                $aiSummary['tender_id'] = $universal['fields']['tender_reference']['value'];
+            }
+            if (!empty($universal['fields']['emd_value']['value'])) {
+                $aiSummary['emd_value'] = $universal['fields']['emd_value']['value'];
+            }
+            if (!empty($universal['fields']['tender_fee']['value'])) {
+                $aiSummary['tender_fee'] = $universal['fields']['tender_fee']['value'];
+            }
+            if (!empty($universal['fields']['tender_portal']['value'])) {
+                $aiSummary['portal'] = $universal['fields']['tender_portal']['value'];
+            }
+        }
+
+        $procurementTitle = '';
+        if (!empty($universal['fields']['tender_title']['value']) && ($universal['fields']['tender_title']['confidence'] ?? 0) >= 70) {
+            $procurementTitle = $universal['fields']['tender_title']['value'];
+        } elseif (!empty($aiSummary['bid_title'])) {
+            $procurementTitle = $aiSummary['bid_title'];
+        }
+
+        $extractedTitle = !empty($procurementTitle) ? $procurementTitle : (!empty($aiSummary['title']) ? $aiSummary['title'] : $origName);
         $classification = isset($aiSummary['classification']) ? $aiSummary['classification'] : 'unknown';
         $classificationStatus = isset($aiSummary['classification_status']) ? $aiSummary['classification_status'] : 'unclassified';
-        $titleSource = isset($aiSummary['title_source']) ? $aiSummary['title_source'] : 'normal_extraction';
+        $titleSource = !empty($procurementTitle) ? 'tender_title_extractor' : (isset($aiSummary['title_source']) ? $aiSummary['title_source'] : 'normal_extraction');
 
-        // Extract the document's first non-empty line for Bid Title
+        // Extract the document's first non-empty line strictly for diagnostics / metadata
         $firstLine = '';
         foreach (preg_split('/[\r\n]+/', $formattedText) as $l) {
             $l = trim($l);
@@ -165,7 +213,8 @@ class Document_extractor
             $firstLine = $extractedTitle;
         }
         $aiSummary['first_line'] = $firstLine;
-        $aiSummary['bid_title']  = $firstLine;
+        $aiSummary['bid_title']  = !empty($procurementTitle) ? $procurementTitle : '';
+        $aiSummary['title']      = $extractedTitle;
 
         // ── Validate Tender / RFP Relevance ──
         $relevance = $this->validateTenderRelevance($formattedText, $origName);
@@ -182,7 +231,7 @@ class Document_extractor
             'relevance_category'    => $relevance['category'],
             'relevance_reason'      => $relevance['reason'],
             'first_line'            => $firstLine,
-            'bid_title'             => $firstLine,
+            'bid_title'             => !empty($procurementTitle) ? $procurementTitle : '',
             'title'                 => $extractedTitle,
             'document_title'        => $extractedTitle,
             'title_source'          => $titleSource,
@@ -204,6 +253,9 @@ class Document_extractor
             'formatted_text'        => $formattedText,
             'modules'               => $modules,
             'ai_summary'            => $aiSummary,
+            'fields'                => $universal['fields'],
+            'diagnostics'           => $universal['diagnostics'],
+            'corrigendum'           => isset($universal['corrigendum']) ? $universal['corrigendum'] : null,
             'message'               => $relevance['is_relevant'] ? '' : $relevance['reason']
         ];
     }
@@ -2503,7 +2555,7 @@ class Document_extractor
      * @param array $aiSummary Existing AI summary attributes (optional)
      * @return array 12-section structured attribute payload for TenderFactSheet table
      */
-    public function extractFactSheet($cleanText, $origName = '', $aiSummary = [])
+    public function extractFactSheet($cleanText, $origName = '', $aiSummary = [], $fields = [])
     {
         // 1. Repair common PDF extraction ligatures (e.g. "Installa on" -> "Installation")
         $repairedText = $this->_repairFactSheetLigatures($cleanText);
@@ -2565,13 +2617,17 @@ class Document_extractor
         // EXCLUDED FIELD: Tender Type / Bid Type must NEVER be populated by PDF extraction
         $data['TenderType'] = '';
 
-        // Tender Reference No: Prioritize aiSummary
-        $data['TenderRefNo'] = !empty($aiSummary['ref_no']) ? $aiSummary['ref_no'] : $findInScope([
-            '/(?:Tender\s+Reference\s+No\.?|Tender\s+Ref\s*No\.?|RFP\s+No\.?|NIT\s+No\.?|Ref\s+No\.?)\s*[:\t\- ]*([A-Za-z0-9\/\-_:. ]{4,100})/iu'
-        ], $headerScope, '');
+        // Tender Reference No: Prioritize validated fields, then aiSummary
+        $data['TenderRefNo'] = !empty($fields['tender_reference']['value'])
+            ? $fields['tender_reference']['value']
+            : (!empty($aiSummary['ref_no']) ? $aiSummary['ref_no'] : $findInScope([
+                '/(?:Tender\s+Reference\s+No\.?|Tender\s+Ref\s*No\.?|RFP\s+No\.?|NIT\s+No\.?|Ref\s+No\.?)\s*[:\t\- ]*([A-Za-z0-9\/\-_:. ]{4,100})/iu'
+            ], $headerScope, ''));
 
         // Tender Date: Published / NIT date only (empty if not in document)
-        $data['TenderDate'] = !empty($aiSummary['published_date']) ? $aiSummary['published_date'] : '';
+        $data['TenderDate'] = !empty($fields['published_date']['value'])
+            ? $fields['published_date']['value']
+            : (!empty($aiSummary['published_date']) ? $aiSummary['published_date'] : '');
 
         // EXCLUDED FIELD: Estimated Tender Value & Project Value
         // If not stated clearly in the document, leave empty or display 'Not specified in document'

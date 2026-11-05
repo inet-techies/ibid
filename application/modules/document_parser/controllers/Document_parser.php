@@ -266,11 +266,12 @@ class Document_parser extends MX_Controller
                 $result['success'] = true;
                 $classification = isset($result['classification']) ? strtolower($result['classification']) : 'unknown';
 
-                $title = !empty($result['title']) ? $result['title'] : (!empty($result['ai_summary']['title']) ? $result['ai_summary']['title'] : $origName);
-                $result['title']          = $title;
-                $result['document_title'] = $title;
+                $title = !empty($result['fields']['tender_title']['value']) ? $result['fields']['tender_title']['value'] : (!empty($result['bid_title']) ? $result['bid_title'] : (!empty($result['ai_summary']['bid_title']) ? $result['ai_summary']['bid_title'] : ''));
+                $result['bid_title']      = $title;
+                $result['title']          = !empty($title) ? $title : $origName;
+                $result['document_title'] = !empty($title) ? $title : $origName;
 
-                // Document's first non-empty line for Bid Title
+                // Document's first non-empty line strictly for diagnostics / metadata
                 if (empty($result['first_line'])) {
                     $rawText = !empty($result['formatted_text']) ? $result['formatted_text'] : (!empty($result['extracted_text']) ? $result['extracted_text'] : '');
                     foreach (preg_split('/[\r\n]+/', $rawText) as $l) {
@@ -282,12 +283,12 @@ class Document_parser extends MX_Controller
                     }
                 }
                 if (empty($result['first_line'])) {
-                    $result['first_line'] = $title;
+                    $result['first_line'] = $origName;
                 }
-                $result['bid_title'] = $result['first_line'];
                 if (isset($result['ai_summary'])) {
                     $result['ai_summary']['first_line'] = $result['first_line'];
-                    $result['ai_summary']['bid_title']  = $result['first_line'];
+                    $result['ai_summary']['bid_title']  = $title;
+                    $result['ai_summary']['title']      = !empty($title) ? $title : $origName;
                 }
 
                 // Handle classification and save extracted .txt file
@@ -314,7 +315,8 @@ class Document_parser extends MX_Controller
                     $factSheetData = $this->document_extractor->extractFactSheet(
                         $textForFs,
                         $origName,
-                        isset($result['ai_summary']) ? $result['ai_summary'] : []
+                        isset($result['ai_summary']) ? $result['ai_summary'] : [],
+                        isset($result['fields']) ? $result['fields'] : []
                     );
                     $factSheetData['DocumentPath']         = $relPath;
                     $factSheetData['DocumentName']         = $origName;

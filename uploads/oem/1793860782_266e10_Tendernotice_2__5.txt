@@ -1,0 +1,1118 @@
+1
+
+         TRIPURA UNIVERSITY
+                  (A CENTRAL UNIVERSITY)
+
+                      Tender No:- No.F.TU/FIN/Wi-Fi/Vol-I/2025
+
+  E-TENDER Document for:
+Name of the Item: -   Design, Supply, Installation, Testing, Commissioning, Configuration, and
+                      Comprehensive Maintenance of an Enterprise-Grade Campus-Wide Wi-Fi
+                      Network, including all required Active and Passive Network Components,
+                      Controllers/Cloud Management, Network Security, Structured Cabling, Power
+                      Supply, Integration, Testing, Documentation, and Technical Support at Tripura
+                      University, Suryamaninagar.
+
+                                                                                          2
+
+                               TRIPURA UNIVERSITY
+                                  (A Central University)
+                                 Suryamaninagar – 799022
+                                       **************
+
+No.F.TU/FIN/Wi-Fi/Vol-I/2025                                              Date: 22-10-2026
+
+Name of Item:        Design, Supply, Installation, Testing, Commissioning, Configuration, and
+                     Comprehensive Maintenance of an Enterprise-Grade Campus-Wide Wi-Fi
+                     Network, including all required Active and Passive Network Components,
+                     Controllers/Cloud Management, Network Security, Structured Cabling, Power
+                     Supply, Integration, Testing, Documentation, and Technical Support at Tripura
+                     University, Suryamaninagar.
+
+SL
+No.    SECTION                     PARTICULARS                            PAGE No.
+
+ 1.   Section - I         List of Dates, Tender Details and                  3
+
+                      Eligibility Criteria General Instruction,
+ 2.    Section-II                                                            8
+                                Scop of the works Etc.
+
+ 2    Section-III           General Terms & Conditions                       10
+
+ 2.   Section – IV              Instruction to Bidder                        8
+
+                                                                 (Dr. Nirmalya Debnath)
+                                                            Drawing & Disbursing Officer (DDO)
+
+                          3
+
+    SECTION- I
+
+NOTICE INVITING TENDERS
+
+   LIST OF DATES
+
+                                                                                                      4
+
+                                       TRIPURA UNIVERSITY
+                                          (A Central University)
+                                         Suryamaninagar – 799022
+                                                 *********
+                                        NOTICE INVITING e-TENDER
+
+1. Tripura University invites e-Tenders from eligible and experienced System Integrators, Network
+   Infrastructure Companies, and OEM-authorized partners for the following work: “Design, Supply,
+   Installation, Testing, Commissioning, Configuration, and Comprehensive Maintenance of an
+   Enterprise-Grade Campus-Wide Wi-Fi Network, including all required Active and Passive Network
+   Components, Controllers/Cloud Management, Network Security, Structured Cabling, Power Supply,
+   Integration, Testing, Documentation, and Technical Support.” The detailed Tender Notice, technical
+   specifications, terms and conditions, and other relevant information are available on the official
+   website of Tripura University at www.tripurauniv.ac.inInterested bidders are required to submit their
+   bids and other necessary documents through the Government e-Procurement Portal at
+   https://eprocure.gov.in/eprocure/app
+                                         Technical Specification
+
+  S. No.   Minimum required Technical Features
+  1        All equipment’s should be 19" Rack mountable.
+  2        Access points should support Software defined controller and Zero touch provisioning
+  3        All access points should support Active PoE, MIMO, band steering, 2.4 GHz and 5 GHz
+           frequencies, Wi-Fi speeds of 1 Gbps or higher, and auto-roaming capabilities. Wi-Fi 6
+           support mandatory
+  4        Access points should be equipped to support VLANs, Quality of Service (QoS), RADIUS,
+           LDAP, and enterprise-level Wi-Fi authentication protocols.
+  5        Shall have internal HTTP proxy from day one.
+  6        Shall support deployment as a cluster with Active-Active or Active-Standby with stateful
+           failover.
+  7        Firewall/L3 Performance should be 30 Gbps or better
+  8        The solution should include web content filtering, anti-malware content filtering, and
+           reputation-based filtering to support over 3,000 users.
+  9        The solution should facilitate Wi-Fi user provisioning, registration, and self-service
+           password reset, as well as support or external identity integration. It should also offer
+           detailed reporting capabilities and optional integration with Billing system if needed.
+  10       The solution must support captive portal customization options. It should offer a
+           responsive design to ensure compatibility across devices. Additionally, it should facilitate
+           user redirection to specific landing pages or URLs after login, ensuring a seamless and
+           engaging user experience that aligns with the institution's identity.
+  11       The solution should support Active POE for all the devices
+  12       Gateway Anti-Virus/Anti-Malware throughput: 5 Gbps or better
+  13       Shall support unrestricted number of users / hosts without any additional license cost
+  14       Shall support SSL VPN for at least 1000 users without any additional license cost.
+  15       The proposed solution should support stateful inspection with user based one-to-one &
+           dynamic NAT, PAT.
+  16       Should support bandwidth management and provide detailed user reports.
+  17       The proposed solution should support user defined multi zone security architecture.
+  18       Support firewall policies based on user identity, IP address, MAC address, and source &
+           destination ports.
+  19       Shall support time based access policies
+  20       Shall support rule/policy/ACL based source & destination NAT
+  21       Shall provide NAT ALG support with H.323 and SIP traversal
+  22       Shall well-known dynamic routing such as OSPF , BGP along with multicast
+           routing/forwarding.
+
+                                                                                                5
+
+23   Shall be able to detect & block DoS/DDoS attacks
+24   Shall be capable of implementing IP based and MAC based ACLs/policies/filters.
+25   Shall have signature-based detection and protocol anomaly-based detection.
+26   Shall support creation of custom IPS signatures
+27   Shall support implementation of multiple IPS policies for different security zones. It shall
+     be possible to apply the security policies for different zones instead of a blanket policy at
+     the interface level.
+28   Shall support blocking/controlling of Instant messaging features like prevent file transfer.
+29   Shall support blocking/controlling of P2P applications, gaming applications, proxies, etc.
+30   Shall support web/URL filtering based on database, keywords, etc.
+31   Shall be able to filter / block websites/URLs with phishing or pharming links.
+32   It shall be possible to block/filter ActiveX & java applets
+33   Shall support exclusion lists based on regular expressions.
+34   Shall be able to block HTTP or HTTPS based anonymous proxy request available on the
+     internet.
+35   It shall be possible to configure a customized "access denied" message based on category
+     of URL/web page blocked.
+36   The proposed solution should support scanning for SMTP, POP3, IMAP, FTP,
+     HTTP,HTTPS, FTP over HTTP protocols
+37   Shall support automatic signature databases at regular intervals. Manual updating shall
+     also be a preferred option.
+38   It shall support IPSec VPN with Hub & spoke (site-to-site) as well as remote VPN (client to
+     Site)
+39   Shall support DES, 3DES, AES encryption with higher cipher suite such as ECDHE
+40   Shall support IPSec NAT Traversal
+41   The system should support federated user authentication
+42   DNS based filtering based on category and custom database
+43   HTTPS inspection and possible solutions to block HTTPS websites
+44   Support TLSV1.3 and HTTP/2 and HTTP/3
+45   Support of DNSSEC
+46   Shall support pre-shared as well as certificate-based authentication
+47   Should support wireguard protocol for site to site connectivity.
+48   Shall support LDAP, RADIUS and Microsoft AD for authentication.
+49   Any Additional licensing or subscription cost should be included for modules such as
+     VPN, IPSEC , Web filter database update, Av signature update etc. The proposed solution
+     will be subscribed for 3000 users
+50   Shall support 802.1Q VLANs
+51   Shall have capability for load balancing of at least 3 ISP links from day one.
+52   Shall support bandwidth management based on per user or group.
+53   Shall support DHCP relay, DHCP server/client, DNS/DDNS client.
+54   The proposed solution should provide option to set different level of priority for critical
+     application.
+55   Proposed solution should contain Directory services for user authentication. Should have
+     the capability to join university systems in the domain for seamless or SSO based user
+     authentication
+56   The solution must include all necessary licensing costs, such as Client Access Licenses
+     (CALs) or domain user licenses, required for adding university system (non-guest) in a
+     restricted domain environment. This should cover both wired and Wi-Fi networks for up to
+     1,000 systems.
+57   The solution should effectively manage password self-services.
+58   Security breaches, traffic and policy violations etc shall be logged and reporting can be
+     generated via included SIEM solution.
+59   The proposed solution should provide connection wise reports for user, source IP,
+     destination IP, source port, destination port or protocol.
+
+                                                                                                   6
+
+60      The proposed solution should support multiple syslog server for remote logging
+61      Should be integrated with cloud logging and reporting solutions
+62      Proposed solution should be integrated with syslog system for real-time monitoring of the
+        system
+63      The proposed solution should provide reports for all blocked attempts done by users/IP
+        address.
+64      The main firewall solution should support LACP, GREs, Bridges, LAGGs
+65      All component of the proposed solution should support virtual appliance-based
+        deployment without any additional license cost
+66      Addition to IPSEC or Open VPN, the solution should support wireguard light weight VPN
+        for better cloud connectivity
+67      The solution can be deployed as reverse proxy solution without any additional license. The
+        reverse proxy should be well capable of handling HTTP error, HTTP web application
+        firewall, L7 DDOS, REGEX based custom rule and integration with any third-party WAF
+        solution.
+68      Solution would be able to block Geo-Location based IPv4 and IPv6 with open ip reputation
+        database
+69      Basic firewall features such as stateful packet inspection, proxy, logging, wan load
+        balancing should be available even the system’s EOL
+70      Support for IPv6
+71      Support for dynamic dns should be available out of the box for all reputed cloud provider
+72      SNMP monitoring should be enabled from day one and the system should have the
+        capability to support SNMP monitoring platform
+73      Virtual IP, Load balancing with RR/Topology/least Connection, SSL offloading feature
+        should be available
+74      Firewall can be deployed in HA with active sync of user session and auto failover
+75      The proposed solution should be able to provide detailed reports about all mails passing
+        through the firewall
+76      It shall be possible to drill down to multiple reports
+77     It shall have capability to perform forensic analysis to help organizations reconstruct the
+       sequence of events that occurred at the time of security breach through logs and reports
+78     Shall support blocking/controlling of instant messaging features, covert channel
+       communications etc.
+79     Solutions should capable of providing unlimited 2 factor authenticator for VPN access It
+       should also support open authenticator apps.
+80     It shall have minimum 240 GB of Internal SSD OR M2 SATA Storage
+81     External SIEM solution or Separate logging or reporting server should be provided as
+       physical virtual or cloud/SAAS application. Also, should be capable of handling minimum
+       of 2TB of logs without any additional subscription or cost.
+82     There is a requirement to expand our existing network to the new campus, which must
+       have reviewed by the bidder during the EOI assessment. The required L2 switches and
+       related details are included in the price bid. Suppliers are expected to carry out the
+       necessary network expansion configurations without any additional cost or obligation
+       including any necessary
+83     Any OFC cable laying, splicing, electrical work, conduit installation, digging, necessary
+       civil work or related activities required for the existing or new campus shall be carried out
+       by the supplier at their own cost.
+ 2. The tenderers fulfilling the required criteria as mentioned may download the tender document from
+    the websitehttps://eprocure.gov.in/eprocure/app and submit online as per the schedule given
+    below. However, the tender documents can also be viewed in the website of the University
+    www.tripurauniv.ac.in
+     Date and time of tender publication in the websites         22-10-2026 at 12.00 Noon
+     Data and time of Pre-Bid Meeting                            12-11-2026 at. 3.00 PM
+     Date and time for closing of submission.                    17-11-2026 upto 10.30 AM
+     Date and time for opening of technical bid document.        18-11-2026 at 11.00 AM
+     Date and time for opening of financial bid.                 19-11-2026 at 10.00 AM
+
+                                                                                       7
+
+Important Note: Bidders are required to duly fill in and submit Annexures I to XIV, along
+with all requisite supporting documents, as specified in the tender document. The BOQ (Bill
+of Quantities) must also be duly completed and submitted along with the bid.
+
+Failure to submit any of the prescribed Annexures, supporting documents, or the duly filled
+BOQ shall render the bid liable for rejection and the bidder shall be disqualified from further
+consideration in the tender process.
+
+                                  SECTION- II
+
+     Eligibility Criteria, General Instruction,
+                 Scope of work Etc.
+
+                                                                                             8
+
+                                       ELIGIBILTY CRITERIA
+
+1. Eligibility of Bidders: Only those agencies that were shortlisted/preliminarily
+   selected by the Tripura University Committee following evaluation of the Expressions
+   of Interest (EOIs) submitted in response to EOI No. F.TU/FIN/WIFI/368/16 dated
+   03.09.2025 and EOI No. F.TU/FIN/WIFI/368/16 dated 10.07.2026 shall be eligible to
+   participate in this Tender.
+2. Registration: The bidder must have been duly registered under the Companies Act or any
+   other applicable law enacted by the Government of India or the concerned State
+   Government for a minimum period of 10 (ten) years as on the last date of submission of the
+   Bid/Proposal.
+3. Certificate of Eligibility: Only those agencies that have been preliminarily selected by
+   Tripura University and issued a Certificate of Eligibility shall be eligible to participate in the
+   tender process. The bidder shall mandatorily upload the Certificate of Eligibility along
+   with the tender submission. Failure to submit the Certificate of Eligibility shall
+   render the bid non-responsive and liable for summary rejection, without any further
+   consideration.
+4. Experience and Financial Capacity: The bidder shall meet the following eligibility
+   requirements:
+    a. The bidder must have successfully completed at least 2 (two) similar projects, each
+    involving the supply and installation of Wi-Fi, Firewall/UTM, and/or IT Electronic
+    Security Solutions, with a minimum project value of Rs. 45.00 Lakh (Rupees Forty-Five
+    Lakh only) in Government Departments/PSUs/Educational Institutions during the last 3
+    (three) financial years. Documentary evidence in support of the same shall be submitted
+    along with the Techno-Commercial Bid.
+    b. The bidder must have achieved a minimum average annual turnover of Rs.10.00 Crore
+     (Rupees Ten Crore only) during the last 3 (three) financial years, i.e., 2023-2024, 2024-
+     2025, and 2025-2026. The bidder shall submit duly audited financial
+     statements/balance sheets certified by a Chartered Accountant/Chartered Accountancy
+     Firm for the aforesaid financial years, along with the duly filled form.
+5. OEM Authorization: Wherever applicable, the bidder shall submit a specific authorization
+   letter/certificate from the respective Original Equipment Manufacturer (OEM) for all active
+   components proposed under the tender. The OEM authorization shall be submitted strictly
+   in the format prescribed in the tender document. Failure to comply with this requirement
+   shall render the bid incomplete and liable for summary rejection, and no further
+   communication or correspondence in this regard shall be entertained.
+6. Make in India Preference: Preference shall be accorded to products manufactured in
+   India to the maximum extent permissible, in accordance with the applicable Government of
+   India guidelines. Bidders claiming such preference shall comply with all applicable
+   eligibility criteria and requirements and submit the prescribed declaration and/or
+   supporting documentary evidence along with their tender submission.
+7. Business/Company Details: The bidder shall furnish complete details pertaining to its
+   business/company in all the prescribed formats provided in Annexure.
+8. OEM Product Technical Certification Training: The bidder shall arrange and complete
+   the required OEM product technical certification training after successful installation and
+   commissioning of the supplied systems, wherever applicable.
+9. Previous Experience: The bidder should have prior experience in executing projects for
+   minimum 3 years from the date of publishing the bid.
+
+10. ISO Certifications: The bidder should have valid ISO 9001:2015, ISO 27001:2022, ISO
+    14001:2015, ISO 45001:2018 certifications. All certifications must be verifiable through the
+    IAF-accredited certification verification website. i.e. https://www.iafcertsearch.org/. All
+
+                                                                                        9
+
+   SCOPE OF WORK:
+1. Supply, Installation, Configuration and Commissioning: The successful bidder shall
+   supply, install, configure, integrate, test, and commission a comprehensive Wi-Fi and Web
+   Security Solution for Tripura University to provide secure, reliable, controlled, and
+   uninterrupted internet access to students, faculty, staff, and other authorized users.
+2. Security and Access Control Features: The proposed solution shall provide, as
+   applicable, gateway-level content filtering, antivirus protection, anti-spam protection, web
+   filtering, application control, BYOD (Bring Your Own Device) security, user-based access
+   control, bandwidth management, and other necessary security and access-control features
+   for Wi-Fi users.
+3. Training: The successful bidder/solution provider shall provide free comprehensive
+   training to the University's designated personnel on the operation, administration,
+   configuration, monitoring, troubleshooting, maintenance, and management of the deployed
+   Wi-Fi and Web Security Solution. The training shall be conducted after successful
+   installation and commissioning of the system.
+   PRE-BID MEETING
+4. Pre-Bid Meeting: An online Pre-Bid Meeting shall be conducted exclusively for the agencies
+   that have been preliminarily selected by Tripura University pursuant to the earlier
+   Expression of Interest (EoI). The Pre-Bid Meeting shall be held on 12-11-2026 at 3:00 PM
+   through an online mode. The meeting link shall be provided by the Purchase Section in
+   due course and communicated to the eligible agencies through their registered e-mail
+   addresses. The purpose of the meeting shall be to address queries and provide necessary
+   clarifications, wherever applicable, regarding the Tender Document, technical
+   specifications, scope of work, and other tender-related matters. The meeting link shall be
+   communicated to the eligible/preliminarily selected agencies through their registered e-
+   mail addresses. Bidders are advised to raise all queries and seek necessary clarifications
+   during the Pre-Bid Meeting. No queries, requests for clarification, or representations
+   relating to the Tender Document shall be entertained after the conclusion of the Pre-Bid
+   Meeting.
+
+                            GENERAL INSTRUCTIONS TO BIDDERS
+
+1. Declaration Regarding Blacklisting: The bidder shall submit, along with the Techno-
+   Commercial Bid, a declaration on the bidder's letterhead confirming that the bidder has
+   not been blacklisted, debarred, or declared ineligible by any Central Government or
+   State Government Department, Public Sector Undertaking (PSU), Government Institution,
+   or Educational Institution in India as on the date of submission of the bid.
+2. Due Diligence by the Bidder: The bidder shall acquaint itself fully with the scope of work,
+   technical requirements, site conditions, applicable terms and conditions, and all other
+   circumstances that may affect the execution of the project. The bidder shall be deemed to
+   have satisfied itself regarding all such conditions before submitting its bid.
+3. Completeness and Responsiveness of Bid: The bidder shall ensure that the bid is
+   complete in all respects and is submitted in accordance with the requirements specified in
+   the Tender Document. Any incomplete bid, bid not conforming to the prescribed
+   requirements, or bid submitted without the required Covering Letter, declarations,
+   documents, or prescribed formats may be considered non-responsive and liable for
+   rejection.
+4. Compliance with Prescribed Formats: The bidder shall strictly adhere to all prescribed
+   formats, annexures, schedules, and forms specified in the Tender Document. No deviation
+
+                                                                                             10
+
+     from the prescribed format shall be permitted unless specifically allowed in the Tender
+     Document.
+5.   Clarification and Additional Information: No change, modification, or supplementary
+     information shall ordinarily be accepted after submission of the bid. However, Tripura
+     University reserves the right, at its discretion, to seek additional information, clarification,
+     or supporting documents from any bidder during the evaluation of the bid. Failure to
+     submit the information or clarification sought within the stipulated time, or submission of
+     incomplete or unsatisfactory information, may result in rejection of the bid.
+6.   Evaluation and Opening of Financial Bids: The bids shall be evaluated in accordance
+     with the eligibility and selection criteria specified in the Tender Document. The Financial
+     Bids of only those bidders who qualify the Techno-Commercial/Technical evaluation
+     shall be opened, in accordance with the terms of the Tender.
+7.   Right to Accept or Reject Bids: Tripura University reserves the right to accept or reject
+     any or all bids, in whole or in part, and to cancel the tender process at any stage, in
+     accordance with the applicable rules and without being required to assign any reason,
+     subject to applicable procurement regulations.
+8.   Verification of Information: Mere submission of information or documentary evidence by
+     a bidder shall not automatically establish compliance with any eligibility or technical
+     criterion. Tripura University reserves the right to verify, validate, and/or seek confirmation
+     of any information or document submitted by the bidder from the concerned authority,
+     organization, OEM, client, or any other relevant source.
+9.   Financial and Statutory Documents:
+     The bidder shall submit copies of the following documents along with the Techno-
+     Commercial Bid, as applicable:
+     a. PAN Certificate;
+     b. TAN Certificate;
+     c. Income Tax Return/Income Tax Certificate, as applicable;
+     d. Audited Balance Sheets and financial statements for the last three financial years, duly
+     certified by a Chartered Accountant/Chartered Accountancy Firm; and
+     e. GST registration certificate and relevant GST returns/compliance documents, including
+     GSTR-3B, as applicable.
+
+10. Complete Quotation: The bidder shall quote for all items specified in the Schedule of
+    Requirements. Partial quotation or omission of any item from the Schedule of
+    Requirements shall render the bid liable for rejection. No request for consideration of an
+    omitted item or subsequent inclusion of such item shall ordinarily be entertained.
+11. Technical Compliance Statement: The bidder shall submit a detailed Technical
+    Compliance Statement in the prescribed format given in Annexure. The bidder shall
+    clearly indicate compliance against each technical specification by mentioning “Complied”
+    or “Not Complied.” Any deviation, whether higher or lower than the specified requirement,
+    shall be clearly identified and explained with proper justification in the designated column.
+12. Technical Literature and Product Documentation: The bidder shall submit relevant and
+    complete technical literature/datasheets for all active and passive components offered
+    under the Tender. The technical literature submitted shall correspond to the exact make
+    and model offered and shall be available on the respective manufacturer's/OEM's official
+    public website. Failure to submit the required technical literature may render the bid non-
+    responsive and liable for rejection.
+13. Detailed Bill of Materials (BoM):The bidder shall submit a detailed unpriced Bill of
+    Materials (BoM) along with the Techno-Commercial Bid, clearly indicating the make,
+    model number, part number, description, and quantity of all active components offered.
+    The bidder shall provide complete and unambiguous details of the proposed
+    products/solutions. Incomplete, misleading, or insufficient product details may render the
+    bid liable for rejection.
+
+                                                                                          11
+
+14. Price Schedule: The bidder shall quote prices item-wise in the prescribed format given in
+    BOQ and shall also indicate the total system cost, inclusive of all applicable costs,
+    charges, duties, taxes, transportation, installation, configuration, commissioning, testing,
+    training, and other associated expenses, as applicable under the Tender.
+15. Destination:
+    All prices quoted shall be FOR Tripura University, Tripura, India, unless otherwise
+    specified in the Tender Document. The quoted prices shall include all costs necessary for
+    delivery of the items at the specified destination.
+16. Agreement and Warranty: The successful bidder/vendor shall be required to enter into a
+    formal agreement with Tripura University on non-judicial stamp paper of appropriate
+    value, as prescribed under the applicable laws and rules, prior to commencement of the
+    work, supply, or services. The agreement shall incorporate the applicable terms and
+    conditions of the Tender, including the scope of work, delivery and installation obligations,
+    warranty, support, and other contractual obligations of the successful bidder/vendor.
+
+                             12
+
+       SECTION- II
+
+General Terms & Conditions
+
+                                                                                    13
+
+                    GENERAL CONDITIONS OF THE CONTRACT
+
+A. STANDARDS
+The products, equipment, systems, and services supplied and provided under this
+Contract shall conform to the standards, specifications, technical requirements, and
+performance parameters of the Tender Document.
+
+B. DELIVERY PERIOD: The successful bidder shall complete the delivery of all Products
+within 8–12 weeks from the date of issuance of the formal Purchase Order by Tripura
+University.
+
+C. COMPLETION OF SUPPLY, INSTALLATION AND COMMISSIONING: The successful
+bidder shall complete the entire scope of work, including the supply, installation,
+configuration, integration, testing, and commissioning of all products and services,
+within ninety (90) days from the date of inspection and verification of the delivered
+products at the University site, unless otherwise specified in the Tender Document.
+
+In the event of any delay in completing the work within the stipulated period for reasons
+attributable to the successful bidder, liquidated damages (LD) shall be levied at the rate
+of 0.5% (half percent) of the total contract value for each week of delay or part thereof,
+subject to a maximum of 5% (five percent) of the total contract value.
+
+D. RATES AND PRICES: The rates quoted by the bidder shall be clearly indicated both
+in figures and in words and shall include all applicable costs and incidental charges,
+including packing, forwarding, freight, transportation, insurance, loading/unloading,
+delivery, installation, configuration, commissioning, and other charges, as applicable
+under the Contract. The successful bidder shall be selected on the basis of the lowest
+consolidated rate quoted against the Bill of Quantities (BOQ), subject to compliance
+with the prescribed technical specifications and other terms and conditions of the
+Tender Document.
+
+E. GST AND OTHER TAXES: The bidder shall clearly indicate the applicable rate and
+amount of GST and other statutory taxes/duties, as applicable, in the Price Bid. GST
+shall be payable as per the applicable statutory provisions and the terms of the
+Contract.
+
+F. PAYMENT TERMS
+Payment for the Products and Services shall be made in Indian Rupees (INR) in
+accordance with the applicable financial rules and regulations of Tripura University,
+subject to satisfactory fulfillment of the contractual obligations by the successful bidder,
+as specified below:
+1.Payment for Products and Services (excluding Manpower): Ninety percent (90%)
+of the total Contract Price, inclusive of applicable taxes, shall be paid upon successful
+completion of the project, including the supply, installation, configuration, testing,
+commissioning, and acceptance of the Products and Services by Tripura University,
+excluding manpower services. Such payment shall be subject to the submission and
+verification of all requisite documents, including the invoice, delivery challan,
+installation and commissioning certificate, acceptance certificate, and any other
+documents required under the applicable financial rules and regulations. The
+remaining ten percent (10%) of the Contract Price shall be retained by Tripura
+University as a security deposit
+
+                                                                                     14
+
+2. Payment for Manpower Services: Payment for manpower services shall be made in
+instalments at the end of every six (6) months of service for a total contractual period of
+three (3) years. No advance payment shall be made for manpower services. Each
+instalment shall be released subject to satisfactory performance of the manpower
+deployed and verification of the relevant service records, attendance records, and
+invoices by Tripura University.
+3. Security Deposit and Release: The ten percent (10%) amount retained by Tripura
+University as a security deposit shall be released to the successful bidder, subject to
+satisfactory performance and fulfilment of all contractual obligations, in accordance with
+the following schedule:
+a. Three percent (3%) of the total Contract Price shall be released upon
+satisfactory completion of two (2) years of the warranty/service period.
+b. The remaining seven percent (7%) of the total Contract Price shall be released
+upon satisfactory completion of the subsequent one (1) year and three (3) months
+of the warranty/service period, thereby completing a total warranty/service period
+of three (3) years and three (3) months.
+
+The release of the security deposit shall be subject to the satisfactory fulfilment of the
+contractual obligations and compliance with the applicable financial rules and
+regulations of Tripura University.
+
+G. CONSIGNEE: All stores, equipment, materials, and other Products supplied under
+the Contract shall be consigned and delivered to: Tripura University, Tripura (W),
+India.
+H. STORAGE OF DELIVERED MATERIALS: Tripura University shall provide a safe and
+secure storage facility at its campus for the materials delivered by the successful bidder,
+free of charge, until the materials are taken over by the authorized Stores/concerned
+department of the University.
+
+I. WARRANTY: The successful bidder shall provide comprehensive warranty and
+technical support for all equipment supplied under the Campus-Wide Wi-Fi Network
+Project at Tripura University for a period of three (3) years from the date of completion of
+the work. The warranty shall cover defects in materials and workmanship, equipment
+malfunction or failure, and all other issues covered under the Original Equipment
+Manufacturers (OEM) warranty terms.
+During the warranty period, if any equipment is found to be defective, damaged,
+malfunctioning, or rendered inoperative under normal operating conditions, the
+successful bidder shall, at no additional cost to the University, repair or replace the
+defective equipment with new, equivalent or superior equipment, as applicable, within a
+reasonable period specified by the University. The bidder shall also ensure timely
+resolution of all warranty-related issues and provide necessary technical assistance to
+maintain the uninterrupted and efficient operation of the Campus-Wide Wi-Fi Network
+throughout the warranty period.
+
+J. REJECTION OF BID/OFFER: Any bid that does not conform to the terms and
+conditions, eligibility requirements, technical specifications, prescribed make/model
+requirements, or submission procedures specified in the Tender Document shall be
+liable to be rejected as non-responsive.
+K. RIGHT OF ACCEPTANCE AND REJECTION: Tripura University reserves the right to
+accept or reject any or all bids, in whole or in part, and to cancel the tender process at
+any stage in accordance with applicable rules and regulations. The University shall not
+
+                                                                                    15
+
+be bound to accept the lowest-priced bid if the bidder does not meet the prescribed
+technical, commercial, quality, eligibility, or other requirements of the Tender.
+L. TENDER FEE
+A non-refundable Tender Fee of Rs. 2,000/- (Rupees Two Thousand only) shall be
+paid through RTGS/NEFT. A scanned copy of the payment proof shall be uploaded along
+with the tender documents.
+The bank details are as follows:
+   •       Name of Account: Tripura University Online Deposit Account
+   •       Type of Account: Savings Bank Account
+   •       Account Number: 44836399405
+   •       IFSC: SBIN0010495
+M. EARNEST MONEY DEPOSIT (EMD) Refundable
+An EMD/Bid Security of Rs. 5,00,000/- (Rupees Five Lakh only) shall be paid through
+RTGS/NEFT. A scanned copy of the payment proof shall be uploaded along with the
+tender documents.
+            The bank details are as follows:
+       •    Name of Account: Tripura University Online Deposit Account
+       •    Type of Account: Savings Bank Account
+       •    Account Number: 44836399405
+       •    IFSC: SBIN0010495
+N. EMD EXEMPTION FOR MSEs: Micro and Small Enterprises (MSEs) having valid
+Udyam Registration shall be eligible for exemption from payment of EMD/Bid Security
+and Tender Fee, wherever applicable, in accordance with the prevailing Government of
+India rules, orders, procurement policies, and prescribed conditions, subject to
+submission of valid documentary proof and fulfillment of the applicable requirements.
+O. FORFEITURE OF EMD: The EMD/Bid Security shall be liable to be forfeited in the
+event of:
+a. withdrawal of the bid during the validity period of the offer;
+b. refusal or failure to accept the Purchase Order/Contract when placed;
+c. failure to confirm acceptance of the Purchase Order within the stipulated period after
+placement of the order; or
+d. any unilateral revision, modification, or withdrawal of the bid by the bidder during the
+validity period of the offer.
+
+P. STATUTORY REGISTRATION: The bidder shall possess valid GST Registration,
+Trade License, PAN, and other statutory registrations/licenses, as applicable to the
+nature of the work and services covered under the Contract.
+
+Q. DEDICATED TECHNICAL SUPPORT: The successful bidder shall depute at least one
+dedicated technical support personnel at Tripura University on all working days from
+09:30 A.M. to 05:30 P.M. for the effective operation, maintenance, monitoring,
+troubleshooting, and support of the installed systems.
+The deployed technical personnel shall attend to routine and recurring
+maintenance/service requirements under the supervision of the authorized officer of
+Tripura University. In addition, 24×7 technical support shall be available for
+emergency network-related issues and critical service calls.
+
+                                                                                 16
+
+R. LOG BOOK: The successful bidder shall maintain a Log Book in the prescribed
+format for the maintenance/service activities carried out under the Contract. The Log
+Book shall record, at a minimum, the date of service/call, nature of complaint, action
+taken, equipment concerned, downtime, and details of the service personnel attending
+the complaint.
+
+S. SERVICE REPORT: A service report detailing the maintenance/service work carried
+out shall be submitted along with the relevant bill. The service report shall be duly
+verified and signed by the authorized officer/In-charge/Head of the concerned section of
+Tripura University.
+
+T. REPAIR OF EXISTING OUT-OF-WARRANTY EQUIPMENT: Payment for repair,
+replacement, or service of any existing network hardware/appliances that are outside
+warranty shall be made separately, wherever approved by Tripura University, only after
+satisfactory completion of the actual work/service and verification of the work
+performed.
+U. INCOME TAX DEDUCTION: Income Tax and other statutory deductions, wherever
+applicable, shall be deducted from the bills/payments of the successful bidder in
+accordance with the prevailing rules and statutory provisions.
+V. PENALTY FOR DELAY IN SERVICE: In the event that a service call is not attended
+to within 48 hours from the date and time of receipt of the complaint, a penalty at the
+rate of 1% per day shall be levied for each day of delay and shall be deducted from the
+Security Deposit/Security Money of the successful bidder.
+
+W. GOVERNING LAW AND JURISDICTION: The Contract shall be governed by and
+construed in accordance with the laws and applicable rules of the Government of
+India and the State of Tripura. Any dispute arising out of or in connection with the
+Contract shall be subject to the exclusive jurisdiction of the competent
+courts/forums at Agartala.
+
+                        17
+
+  SECTION- IV
+
+Instruction to Bidder
+
+18
+
+                                                                                               19
+
+Tripura University (A Central University), Suryamaninagar, Agartala, Tripura invites E-tenders for:
+“Subject: - Design, Supply, Installation, Testing, Commissioning, Configuration, and Comprehensive
+Maintenance of an Enterprise-Grade Campus-Wide Wi-Fi Network, including all required Active and
+Passive Network Components, Controllers/Cloud Management, Network Security, Structured Cabling,
+Power Supply, Integration, Testing, Documentation, and Technical Support at Tripura University” as
+per details given in the tender document uploaded onhttps://eprocure.gov.in/eprocure/app.
+
+The     offers,    in    the    prescribed    format,    shall   be    submitted      online    at
+https://eprocure.gov.in/eprocure/appas per the tender document. No tender will be accepted in hard
+copy, fax, e-mail or any other such means. The intending bidders must be registered with e-tender
+website https://eprocure.gov.in/eprocure/app.
+
+The tender document is also available on Tripura University (A Central University) website:
+https://www.tripurauniv.ac.in/ for reference and viewing only but not for submission. However, for
+the purpose of submission, the websitehttps://eprocure.gov.in/eprocure/appshould be referred to
+NIT (notice inviting tender).
+
+Instructions for Online Bid Submission:
+
+The bidders are required to submit soft copies of their bids electronically on the e-tender Portal, using
+valid Digital Signature Certificates. The instructions given below are meant to assist the bidders in
+registering on the e-tender Portal, prepare their bids in accordance with the requirements and
+submitting their bids online on the e-tender Portal.
+
+More information useful for submitting online bids on the e-tender Portal may be obtained at:
+https://eprocure.gov.in/eprocure/app.
+
+REGISTRATION
+
+Bidders are required to enroll on the e-Procurement Portal (https://eprocure.gov.in/eprocure/app.
+
+1. with clicking on the link “Online bidder Registration” on the e-tender Portal by paying the
+   requisite Registration fee through online banking.
+2. As part of the enrolment process, the bidders will be required to choose a unique user name and
+   assign a password for their accounts.
+3. Bidders are advised to register their valid email address and mobile number as part of the
+   registration process. These would be used for any communication with the bidder.
+4. Upon enrolment, the bidders will be required to register their valid Digital Signature Certificate
+   (Only Class III Certificates with signing + encryption key usage) issued by any Certifying
+   Authority recognized by CCA India (e.g.Sify/ TCS/ nCode/ eMudhra etc.), with their profile.
+5. Only one valid DSC should be registered by a bidder. Please note that the bidders are responsible to
+   ensure that they do not lend their DSC’s to others which may lead to misuse.
+6. Bidder then logs in to the site through the secured log-in by entering their user ID/password and
+   the password of the DSC/ e-token.
+7. The scanned copies of all original documents should be uploaded on portal.
+
+                                                                                     20
+
+                                             Technical Bid
+                                                                                     Annexure-I
+Sl. No.                      Particulars                         Details to be furnished
+01      Name of the Bidder/Firm/Company
+
+02     Registered Address
+03     Correspondence Address
+04     Name of Authorized Signatory
+05     Designation of Authorized Signatory
+06     OEM Authorization Certificate
+07     Contact Number
+
+08     E-mail Address
+09     Website, if any
+10     Legal Status of the Firm/Company
+11     Year of Establishment/Incorporation
+12     Registration No. and Date
+13     PAN No.
+14     TAN No.
+15     GST Registration No.
+16     Trade Licence/Other Registration No., if applicable
+17     Udyam Registration No., if applicable
+18     Name and Address of Banker
+19     Bank Account No.
+20     IFSC Code
+21     Certificate of Eligibility issued by Tripura University
+
+22     Certificate of Registration/Incorporation
+23     Minimum 10 years of registration
+24     Experience of minimum 2 similar projects
+25     Minimum value of each similar project: Rs. 45.00
+       Lakh
+26     Experience during the last 3 financial years
+       Average annual turnover of minimum Rs. 3.00 Crore
+       Financial statements for FY 2023-24
+27
+       Financial statements for FY 2024-25
+       Financial statements for FY 2025-26
+28     EMD (Refundable)
+       Amount ………………………….
+       Transaction No……………. Dt. ……………...
+       Name of the drawing Bank ……………………….
+29     Cost of Tender Document (Non-Refundable)
+       Amount ………………………….
+       Transaction No……………. Dt. ……………...
+       Name of the drawing Bank ……………………….
+
+      Name of Authorized Signatory: ____________________
+      Designation: ____________________
+      Signature: ____________________
+      Date: ____________________
+      Seal of Bidder: ____________________
+
+                                                                                         21
+
+                 ANNEXURE II – BIDER’S ANNUAL TURNOVER STATEMENT
+                     (To be filled and submitted in Bidder’s Letter head)
+
+  NAME OF THE TENDER:
+
+  TENDER REF NO AND DATE:
+
+  The Annual Turnover of M/s     for the past three financial years is as given below:
+                                                 Annual Turnover (Rs.) Supporting Document
+          SLNO    FINANCIALYEAR
+
+            1            2023-2024
+            2            2024-2025
+            3            2025-2026
+                               Total Turn Over
+                             Average Turn Over
+
+The bidder shall attach duly audited financial statements certified by a Chartered
+Accountant/Chartered Accountancy Firm.
+
+                                                                                        22
+
+                                                                                 ANNEXURE-III
+                                          EXPERIENCE DETAILS
+
+        The bidder shall provide details of similar projects successfully completed during the
+        last three financial years.
+
+Name    Name/Descriptio     Scop      Contract/Wor    Contrac   Date of     Completion
+of      n of Project        e of      k Order No. &   t Value   completio   Certificate/Documen
+Clien                       Work      Date            (Rs.)     n           t
+t
+
+Note: Documentary evidence such as Work Order, Purchase Order, Completion Certificate,
+Performance Certificate, or equivalent document shall be enclosed.
+
+        Name of Authorized Signatory: ____________________
+        Designation: ____________________
+        Signature: ____________________
+        Date: ____________________
+        Seal of Bidder: ____________________
+
+                                                                                      23
+
+                          OEM DETAILS AND AUTHORIZATION
+                      (To be filled by the OEM in their letter head)
+                                                                            ANNEXURE-IV
+
+Sl.   Component/Product      OEM       Make   Model    OEM Authorization    Page No
+No.                          Name                      Submitted (Yes/No)
+
+The bidder shall submit the prescribed OEM Authorization Certificate/Letter for all
+applicable active components in the format specified in the Tender Document.
+
+Name of Authorized Signatory: ____________________
+Designation: ____________________
+Signature: ____________________
+Date: ____________________
+Seal of Bidder: ____________________
+
+                                                                                      24
+
+                                                                               ANNEXURE-V
+
+                                    Declaration by Bidder
+To
+The Finance Officer,
+Tripura University
+Suryamaninagar,
+Tripura
+Ref: e-Tender No…………………………… dated………………..
+
+Sir,
+
+We hereby confirm that the above technical compliance statement is true and correct and
+that the products/solutions offered by us conform to the technical requirements specified in
+the Tender Document, except for deviations specifically identified and justified above.
+
+Name of Authorized Signatory: ____________________
+Designation: ____________________
+Signature: ____________________
+Date: ____________________
+Seal of Bidder: ____________________
+
+                                                                                           25
+
+                                                                                ANNEXURE-VI
+
+                                       UNPRICED BILL OF MATERIALS
+The bidder shall submit a detailed unpriced Bill of Materials (BoM) for all active and passive
+components offered.
+Sl. No.     Item          Make/OEM     Model     Part   Quantity   Warranty   Technical         Page
+            Description                No.       No.                          Literature    No
+
+Important: No prices shall be indicated in the Technical Bid/Unpriced BoM.
+
+          Name of Authorized Signatory: ____________________
+          Designation: ____________________
+          Signature: ____________________
+          Date: ____________________
+          Seal of Bidder: ____________________
+
+                                                                                     26
+
+            ANNEXURES TO BE ATTACHED ALONG WITH THE TECHNICAL BID
+
+                                ANNEXURE VII - BID FORM
+                     (To be filled and submitted in Bidder’s Letter head)
+
+Tender name & Ref No.:
+Bidder's Ref No & Date:
+To
+The Finance Officer TRIPURA UNIVERSITY
+
+Dear Sir,
+Having examined the conditions of the contract as specified in the Bid Documents and the
+specifications the receipt of which is hereby duly acknowledged, we undersigned offer to
+supply and deliver items and services for Campus Wi-Fi Network Service at Tripura
+University in conformity with the said conditions of contract and specifications for the sum
+of mentioned in the Price Bid, or such other sums as may be ascertained in accordance
+with the schedule of prices attached herewith and made part of this Bid.
+We undertake the implementation of the said project and deliver our services to commission
+the network within the stipulated given in the tender.
+We agree to abide by this Bid for a period of 30 days from the date fixed for Bid opening and
+it shall remain binding upon us and may be accepted at any time before the expiration of
+that period.
+Until a formal Purchase Order is prepared and executed this Bid together with your written
+acceptance thereof in your notification of award shall constitute a binding contract between
+us.
+Bid submitted by us is properly sealed and prepared so as to prevent any subsequent
+alteration and replacement.
+
+We understand that you are not bound to accept the lowest or any bid you may receive.
+
+Signature
+Company Seal Name in Block Letters of the Signatory
+Address:
+
+                                                                                          27
+
+                                                                                   Annexure-VIII
+                                        Technical Compliance Report
+      The bidder shall submit a point-by-point compliance statement against every technical
+      specification prescribed in Section-5 of the Tender Document.
+
+      To
+      The Finance Officer,
+      Tripura University,
+      Suryamaninagar
+Sl.   Tender        Offered       Mak   Model/Pa   Compli   Deviation/Rema   Technic    % of   Pag
+No    Technical     Specificati   e     rt No.     ed /     rks &            al         Mak    e
+.     Specificati   on                             Not      Justification    Literatu   e in   No
+      on                                           Compli                    re         Indi
+                                                   ed                                   a
+1
+2
+3
+4
+5
+6
+7
+
+      For and on behalf of the Bidder
+      Name of Firm/Agency/Company: ______________________________
+      Name of Authorized Signatory: ______________________________
+      Designation: ______________________________________________
+      Signature: _________________________________________________
+      Date: _____________________________________________________
+      Place: ____________________________________________________
+      Official Seal: ______________________________________________
+
+                                                                                                     28
+
+                                                                                          ANNEXURE IX
+                           MANUFACTURER’S AUTHORISATION FORM
+                    (To be filled and submitted in Manufacturer’s Letter head)
+
+To
+The Finance Officer
+TRIPURA UNIVERSITY
+
+Sub:         e Tender No…………………………………….                            for NEXT GENERATION WIFI and
+WEBSECURITY SOLUTIONS SYSTEM AT TRIPURA UNIVERSITY
+
+Dear Sir,
+
+We -------------------------------- who are established and reputable manufacturers of -------
+------------------------- having factories at --------------- do hereby authorize M/s. -----------
+--------------------- (name and address of bidder) to bid, negotiate and conclude the contract with
+you against tender as mentioned above for the items manufactured and marketed by us.
+We hereby extend our full guarantee and warranty as per the General Conditions of Tender for
+the products offered for supply against this invitation for bid by the above firm.
+Yours faithfully,
+
+For and on behalf of the Bidder
+Name of Firm/Agency/Company: ______________________________
+Name of Authorized Signatory: ______________________________
+Designation: ______________________________________________
+Signature: _________________________________________________
+Date: _____________________________________________________
+Place: ____________________________________________________
+Official Seal: ______________________________________________
+
+                                                                                     29
+
+                                                                               ANNEXURE-X
+                            NON-BLACKLISTING DECLARATION
+
+To
+The Finance Officer
+TRIPURA UNIVERSITY
+
+Ref Tender No…………………………………. date……………
+
+I/We,    ________________________________________,    having   our   registered    office  at
+________________________________________,   hereby     declare   and    certify   that    our
+firm/agency/company has not been blacklisted, debarred, suspended, or otherwise
+prohibited    from    participating   in   any     tender/procurement     process    by any
+Ministry/Department of the Government of India, any State Government, Union Territory
+Administration, Public Sector Undertaking, Autonomous Body, Statutory Authority, University,
+or any other Government/Government-funded organization as on the date of submission of this
+tender.
+I/We further declare that no order of blacklisting/debarment has been passed against our
+firm/agency/company by any competent authority which remains in force as on the date of
+submission of the bid.
+I/We undertake to inform Tripura University immediately, in writing, if any such order or
+proceeding is issued against our firm/agency/company during the tender process or during the
+period of execution of the contract, if awarded.
+I/We understand that if any information furnished in this declaration is found to be false,
+incorrect, or misleading at any stage, Tripura University shall have the right to reject our
+bid/cancel the contract, as applicable, and take appropriate action in accordance with the
+applicable rules and terms of the tender, without prejudice to any other rights or remedies
+available to the University.
+For and on behalf of the Bidder
+Name of Firm/Agency/Company: ______________________________
+Name of Authorized Signatory: ______________________________
+Designation: ______________________________________________
+Signature: _________________________________________________
+Date: _____________________________________________________
+Place: ____________________________________________________
+Official Seal: ______________________________________________
+
+                                                                                      30
+
+                                                                              ANNEXURE-XI
+
+                     IMPLEMENTATION AND PROJECT EXECUTION PLAN
+The bidder shall submit a brief implementation plan covering the following:
+
+To
+The Finance Officer,
+Tripura University
+Suryamaninagar
+
+Reference Tender No………………………………………….. dated…………………………………
+
+Sl. No.    Activity               Proposed                      Proposed Completion
+                                  Methodology/Details           Time
+01         Site Survey
+02         Supply of
+           Equipment
+03         Installation
+04         Configuration
+05         Integration
+06         Testing
+07         Commissioning
+08         User/Administrator
+           Training
+09         Documentation
+           and Handover
+
+The bidder shall ensure completion of the supply, installation, configuration, testing, and
+commissioning within the period prescribed in the Tender Document.
+
+For and on behalf of the Bidder
+Name of Firm/Agency/Company: ______________________________
+Name of Authorized Signatory: ______________________________
+Designation: ______________________________________________
+Signature: _________________________________________________
+Date: _____________________________________________________
+Place: ____________________________________________________
+Official Seal: ______________________________________________
+
+                                                                                     31
+
+                                                                             ANNEXURE-XII
+
+                          WARRANTY AND SUPPORT COMMITMENT
+To
+The Finance Officer,
+Tripura University
+Suryamaninagar
+
+Reference Tender No………………………………………….. dated…………………………………
+
+Sl No        Particular                                       Bidder's Commitment
+01           Warranty Period
+02.          Technical Support
+03.          On-site Support
+04.          Helpdesk/E-mail Support
+05.          Emergency Support                                24X7
+06.          Response Time for Service Call
+07.          Resolution/Restoration Time
+08.          Availability of Dedicated Technical Personnel
+09.          Preventive Maintenance
+10.          OEM Support
+
+The bidder shall comply with the warranty, service, support, and maintenance requirements
+specified in the Tender Document.
+
+For and on behalf of the Bidder
+Name of Firm/Agency/Company: ______________________________
+Name of Authorized Signatory: ______________________________
+Designation: ______________________________________________
+Signature: _________________________________________________
+Date: _____________________________________________________
+Place: ____________________________________________________
+Official Seal: ______________________________________________
+
+                                                                                         32
+
+                                                                                ANNEXURE-XIII
+
+                       DEDICATED TECHNICAL SUPPORT PERSONNEL
+
+To
+The Finance Officer,
+Tripura University
+Suryamaninagar
+
+Reference Tender No………………………………………….. dated…………………………………
+
+The bidder shall provide details of the technical personnel proposed to be deployed at Tripura
+University.
+Sl No       Name        Designation    Qualification   Certification   Experience    Contact
+                                                                                     No
+01
+
+The bidder shall provide details of the technical personnel proposed to be deployed at Tripura
+University.
+
+The successful bidder shall deploy at least one dedicated technical support personnel at the
+University on working days during the prescribed working hours and provide 24 × 7 emergency
+support as specified in the Tender.
+For and on behalf of the Bidder
+Name of Firm/Agency/Company: ______________________________
+Name of Authorized Signatory: ______________________________
+Designation: ______________________________________________
+Signature: _________________________________________________
+Date: _____________________________________________________
+Place: ____________________________________________________
+Official Seal: ______________________________________________
+
+                                                                                      33
+
+                                                                             ANNEXURE-XIV
+
+                                  BIDDER'S UNDERTAKING
+To
+The Finance Officer,
+Tripura University
+Suryamaninagar
+
+Reference Tender No………………………………………….. dated…………………………………
+
+I/We, the undersigned, certify that I/we have carefully examined and understood the complete
+Tender Document issued by Tripura University and that all information, documents,
+declarations, technical details, and supporting documents submitted as part of this Technical
+Bid are true, complete, and correct.
+I/We further undertake to comply with all the terms and conditions, technical specifications,
+scope of work, warranty, service, support, installation, commissioning, training, and other
+obligations specified in the Tender Document.
+We understand that any misrepresentation, omission, or submission of incorrect/false
+information may result in rejection of our bid and/or such other action as may be permissible
+under the applicable rules and terms of the Tender.
+For and on behalf of the Bidder
+Name of Firm/Company: ______________________________
+Name of Authorized Signatory: ______________________________
+Designation: ______________________________
+Signature: ______________________________
+Date: ______________________________
+Place: ______________________________
+Company Seal: ______________________________
+
+                                                            Digitally signed by NIRMALYA DEBNATH
+                                                            Date: 2026.10.22 10:54:04 IST
+                                                            Location: eProcure-EPROC

@@ -811,6 +811,27 @@ public function AddBidData(){
 	            'PublishedDate'    => date('Y-m-d', strtotime($publishedDate)),
 	            'SubmissionDate'   => date('Y-m-d', strtotime($submissionDate)),
 	            'OpeningDate'      => date('Y-m-d', strtotime($openingDate)),
+	            'tenderPublicationTime'   => !empty($inputs['tenderPublicationTime'])   ? trim($inputs['tenderPublicationTime'])   : null,
+	            'documentSaleStartDate'   => !empty($inputs['documentSaleStartDate'])   ? date('Y-m-d', strtotime($inputs['documentSaleStartDate'])) : null,
+	            'documentSaleStartTime'   => !empty($inputs['documentSaleStartTime'])   ? trim($inputs['documentSaleStartTime'])   : null,
+	            'documentSaleEndDate'     => !empty($inputs['documentSaleEndDate'])     ? date('Y-m-d', strtotime($inputs['documentSaleEndDate'])) : null,
+	            'documentSaleEndTime'     => !empty($inputs['documentSaleEndTime'])     ? trim($inputs['documentSaleEndTime'])     : null,
+	            'prebidQueryStartDate'    => !empty($inputs['prebidQueryStartDate'])    ? date('Y-m-d', strtotime($inputs['prebidQueryStartDate'])) : null,
+	            'prebidQueryStartTime'    => !empty($inputs['prebidQueryStartTime'])    ? trim($inputs['prebidQueryStartTime'])    : null,
+	            'prebidQueryEndDate'      => !empty($inputs['prebidQueryEndDate'])      ? date('Y-m-d', strtotime($inputs['prebidQueryEndDate'])) : null,
+	            'prebidQueryEndTime'      => !empty($inputs['prebidQueryEndTime'])      ? trim($inputs['prebidQueryEndTime'])      : null,
+	            'prebidMeetingDate'       => !empty($inputs['prebidMeetingDate'])       ? date('Y-m-d', strtotime($inputs['prebidMeetingDate'])) : null,
+	            'prebidMeetingTime'       => !empty($inputs['prebidMeetingTime'])       ? trim($inputs['prebidMeetingTime'])       : null,
+	            'prebidResponseDate'      => !empty($inputs['prebidResponseDate'])      ? date('Y-m-d', strtotime($inputs['prebidResponseDate'])) : null,
+	            'prebidResponseTime'      => !empty($inputs['prebidResponseTime'])      ? trim($inputs['prebidResponseTime'])      : null,
+	            'bidSubmissionStartDate'  => !empty($inputs['bidSubmissionStartDate'])  ? date('Y-m-d', strtotime($inputs['bidSubmissionStartDate'])) : null,
+	            'bidSubmissionStartTime'  => !empty($inputs['bidSubmissionStartTime'])  ? trim($inputs['bidSubmissionStartTime'])  : null,
+	            'bidSubmissionEndTime'    => !empty($inputs['bidSubmissionEndTime'])    ? trim($inputs['bidSubmissionEndTime'])    : null,
+	            'pqBidOpeningDate'        => !empty($inputs['pqBidOpeningDate'])        ? date('Y-m-d', strtotime($inputs['pqBidOpeningDate'])) : null,
+	            'pqBidOpeningTime'        => !empty($inputs['pqBidOpeningTime'])        ? trim($inputs['pqBidOpeningTime'])        : null,
+	            'technicalBidOpeningTime' => !empty($inputs['technicalBidOpeningTime']) ? trim($inputs['technicalBidOpeningTime']) : null,
+	            'financialBidOpeningDate' => !empty($inputs['financialBidOpeningDate']) ? date('Y-m-d', strtotime($inputs['financialBidOpeningDate'])) : null,
+	            'financialBidOpeningTime' => !empty($inputs['financialBidOpeningTime']) ? trim($inputs['financialBidOpeningTime']) : null,
 	            'SummaryKeywords'  => $bidSummary,
 	            'TenderPortalUrl'  => $bidTenderPortal,
 	            'TenderId'         => $bidTenderId,
@@ -818,7 +839,13 @@ public function AddBidData(){
 	            'Remarks'          => $bidRemarks,
 	            'BidStatus'        => 1
 	        ];
-			$id = $this->bid_model->insertBidCreationDetails($Biddata);
+			$editBcid = !empty($inputs['Bcid']) ? (int)$inputs['Bcid'] : 0;
+			if ($editBcid > 0) {
+				$this->db->where('Bcid', $editBcid)->update('BidCreationDetails', $Biddata);
+				$id = $editBcid;
+			} else {
+				$id = $this->bid_model->insertBidCreationDetails($Biddata);
+			}
 			if($id>0){
 				$status = $this->bid_model->getBidCreationRow($id);
 
