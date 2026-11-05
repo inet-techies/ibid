@@ -917,6 +917,198 @@ $data['currentUrlArray'] =
 			redirect($this->config->item('base_url')."bid/index");
 		}
 }
+    /**
+     * AJAX endpoint to fetch bid modal details, categories, last modified info, and edit history
+     */
+    public function getBidModalDetails()
+    {
+        $Bid_Session = $this->session->userdata('logged_in');
+        if (empty($Bid_Session)) {
+            echo json_encode(['status' => false, 'message' => 'Unauthorized session. Please log in again.']);
+            return;
+        }
+
+        $bcid = (int)$this->input->get_post('bcid');
+        if ($bcid <= 0) {
+            echo json_encode(['status' => false, 'message' => 'Invalid Bid ID.']);
+            return;
+        }
+
+        $bid = $this->bid_model->getBidDetailsRow($bcid);
+        if (empty($bid)) {
+            echo json_encode(['status' => false, 'message' => 'Bid record not found.']);
+            return;
+        }
+
+        $lastModified = $this->bid_model->getBidLastModifiedInfo($bcid);
+        $history      = $this->bid_model->getBidTrackingHistory($bcid);
+        $categories   = $this->bid_model->getActiveCategories();
+
+        echo json_encode([
+            'status'       => true,
+            'bid'          => $bid,
+            'lastModified' => $lastModified,
+            'history'      => $history,
+            'categories'   => $categories
+        ]);
+    }
+
+    /**
+     * AJAX endpoint to save edited bid details, record tracking in existing schema, and synchronize Fact Sheet
+     */
+    public function updateBidDetails()
+    {
+        $Bid_Session = $this->session->userdata('logged_in');
+        if (empty($Bid_Session)) {
+            echo json_encode(['status' => false, 'message' => 'Unauthorized action. Please log in again.']);
+            return;
+        }
+
+        $bcid = (int)$this->input->post('Bcid');
+        if ($bcid <= 0) {
+            echo json_encode(['status' => false, 'message' => 'Invalid Bid ID.']);
+            return;
+        }
+
+        $existing = $this->db->get_where('BidCreationDetails', ['Bcid' => $bcid])->row_array();
+        if (empty($existing)) {
+            echo json_encode(['status' => false, 'message' => 'Bid record not found.']);
+            return;
+        }
+
+        $title = trim((string)$this->input->post('BidTitle'));
+        if (empty($title)) {
+            echo json_encode(['status' => false, 'message' => 'Bid Title is required.']);
+            return;
+        }
+
+        $estValRaw = trim((string)$this->input->post('EstimatedValue'));
+        $estVal = null;
+        if ($estValRaw !== '') {
+            $cleanEst = str_replace([',', ' '], '', $estValRaw);
+            if (!is_numeric($cleanEst) || (float)$cleanEst < 0) {
+                echo json_encode(['status' => false, 'message' => 'Estimated Value must be a valid positive number.']);
+                return;
+            }
+            $estVal = number_format((float)$cleanEst, 2, '.', '');
+        }
+
+        $emdValRaw = trim((string)$this->input->post('EmdValue'));
+        $emdVal = null;
+        if ($emdValRaw !== '') {
+            $cleanEmd = str_replace([',', ' '], '', $emdValRaw);
+            if (!is_numeric($cleanEmd) || (float)$cleanEmd < 0) {
+                echo json_encode(['status' => false, 'message' => 'EMD Value must be a valid positive number.']);
+                return;
+            }
+            $emdVal = number_format((float)$cleanEmd, 2, '.', '');
+        }
+
+        $pubDate = trim((string)$this->input->post('PublishedDate'));
+        $subDate = trim((string)$this->input->post('SubmissionDate'));
+        $opDate  = trim((string)$this->input->post('OpeningDate'));
+
+        $updateData = [
+            'BidTitle'        => $title,
+            'BidDepartment'   => trim((string)$this->input->post('BidDepartment')),
+            'State'           => trim((string)$this->input->post('State')),
+            'CustomerName'    => trim((string)$this->input->post('CustomerName')),
+            'CustomerPhone'   => trim((string)$this->input->post('CustomerPhone')),
+            'CustomerAddress' => trim((string)$this->input->post('CustomerAddress')),
+            'Category'        => trim((string)$this->input->post('Category')),
+            'BidType'         => trim((string)$this->input->post('BidType')),
+            'EstimatedValue'  => $estVal !== null ? $estVal : $existing['EstimatedValue'],
+            'EmdValue'        => $emdVal !== null ? $emdVal : $existing['EmdValue'],
+            'PublishedDate'   => !empty($pubDate) ? $pubDate : null,
+            'SubmissionDate'  => !empty($subDate) ? $subDate : null,
+            'OpeningDate'     => !empty($opDate) ? $opDate : null,
+            'TenderPortalUrl' => trim((string)$this->input->post('TenderPortalUrl')),
+            'TenderId'        => trim((string)$this->input->post('TenderId')),
+            'Remarks'         => trim((string)$this->input->post('Remarks')),
+            'SummaryKeywords' => trim((string)$this->input->post('SummaryKeywords')),
+            'LastChangeTs'    => date('Y-m-d H:i:s')
+        ];
+
+        // Track human-readable change log for audit
+        $fieldLabels = [
+            'BidTitle'        => 'Bid Title',
+            'BidDepartment'   => 'Department',
+            'State'           => 'State',
+            'CustomerName'    => 'Customer Name',
+            'CustomerPhone'   => 'Customer Phone',
+            'CustomerAddress' => 'Customer Address',
+            'Category'        => 'Category',
+            'BidType'         => 'Bid Type',
+            'EstimatedValue'  => 'Estimated Value',
+            'EmdValue'        => 'EMD Value',
+            'PublishedDate'   => 'Published Date',
+            'SubmissionDate'  => 'Submission Date',
+            'OpeningDate'     => 'Opening Date',
+            'TenderPortalUrl' => 'Tender Portal',
+            'TenderId'        => 'Tender ID',
+            'Remarks'         => 'Remarks',
+            'SummaryKeywords' => 'Keywords'
+        ];
+
+        $changes = [];
+        foreach ($fieldLabels as $col => $lbl) {
+            $oldVal = trim((string)($existing[$col] ?? ''));
+            $newVal = trim((string)($updateData[$col] ?? ''));
+            if ($col === 'EstimatedValue' || $col === 'EmdValue') {
+                $oldNum = (float)str_replace([',', ' '], '', $oldVal);
+                $newNum = (float)str_replace([',', ' '], '', $newVal);
+                if (abs($oldNum - $newNum) > 0.001) {
+                    $changes[] = "{$lbl}: " . number_format($oldNum, 2) . " -> " . number_format($newNum, 2);
+                }
+            } else {
+                if ($oldVal !== $newVal) {
+                    $changes[] = "{$lbl} updated";
+                }
+            }
+        }
+
+        $logRemarks = !empty($changes) ? implode('; ', $changes) : 'Bid details reviewed and saved';
+
+        // Log tracking entry using existing BidStatusTracking schema
+        $userId = (int)($Bid_Session['Bid'] ?? 1);
+        $trackingData = [
+            'Bcid'              => $bcid,
+            'ActualDate'        => date('Y-m-d'),
+            'OldStatusId'       => $existing['BidStatus'],
+            'CurrentStatusId'   => $existing['BidStatus'],
+            'UpdatedBy'         => $userId,
+            'Remarks'           => substr($logRemarks, 0, 1000),
+            'Ipaddress'         => $this->input->ip_address(),
+            'UserAgent'         => substr($this->input->user_agent(), 0, 500),
+            'IsSystemGenerated' => 0,
+            'CreationTs'        => date('Y-m-d H:i:s')
+        ];
+
+        $success = $this->bid_model->updateBidDetailsAndTrack($bcid, $updateData, $trackingData);
+
+        if (!$success) {
+            echo json_encode(['status' => false, 'message' => 'Failed to save bid changes in database.']);
+            return;
+        }
+
+        // ── CRITICAL: Synchronize with Fact Sheet ──
+        $this->load->model('document_parser/Factsheet_model');
+        $this->Factsheet_model->generateOrSyncFactsheetForBid($bcid, $updateData);
+
+        // Fetch refreshed record
+        $updatedBid   = $this->bid_model->getBidDetailsRow($bcid);
+        $lastModified = $this->bid_model->getBidLastModifiedInfo($bcid);
+        $history      = $this->bid_model->getBidTrackingHistory($bcid);
+
+        echo json_encode([
+            'status'       => true,
+            'message'      => 'Bid Details saved successfully and synchronized with Fact Sheet!',
+            'bid'          => $updatedBid,
+            'lastModified' => $lastModified,
+            'history'      => $history
+        ]);
+    }
+
 public function _remap($method, $params = [])
 {
     // Allow real methods like index, add, edit etc.

@@ -7,6 +7,61 @@
       || (strtolower($this->uri->segment(2)) === 'technicalevaluated');
 ?>
 
+<!-- Permanently Visible Header Filters (Teleported to extreme right corner of breadcrumb row) -->
+<div id="page-filter-actions" style="display:none;">
+    <div class="d-flex align-items-center gap-2 flex-wrap">
+        <div class="header-filter-item">
+            <div class="input-group input-group-sm">
+                <span class="input-group-text bg-white border-end-0"><i class="feather-calendar text-muted"></i></span>
+                <input type="text" id="bid-filter-date" class="form-control form-control-sm border-start-0" placeholder="All Dates" readonly style="width: 175px; cursor: pointer; font-size: 12px; background: #fff;">
+            </div>
+        </div>
+        <div class="header-filter-item">
+            <select id="bid-filter-type" class="form-select form-select-sm" style="min-width: 130px;">
+                <option value="">All Bid Types</option>
+                <?php 
+                $types = [];
+                if (!empty($BidData)) {
+                    foreach ($BidData as $b) {
+                        if (!empty($b['BidType'])) {
+                            $tVal = trim($b['BidType']);
+                            if (!in_array($tVal, $types)) $types[] = $tVal;
+                        }
+                    }
+                }
+                sort($types);
+                foreach ($types as $t): ?>
+                    <option value="<?= htmlspecialchars($t); ?>"><?= ucfirst(htmlspecialchars($t)); ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="header-filter-item">
+            <select id="bid-filter-dept" class="form-select form-select-sm" style="min-width: 140px;">
+                <option value="">All Departments</option>
+                <?php 
+                $depts = [];
+                if (!empty($BidData)) {
+                    foreach ($BidData as $b) {
+                        if (!empty($b['BidDepartment'])) {
+                            $dVal = trim($b['BidDepartment']);
+                            if (!in_array($dVal, $depts)) $depts[] = $dVal;
+                        }
+                    }
+                }
+                sort($depts);
+                foreach ($depts as $d): ?>
+                    <option value="<?= htmlspecialchars($d); ?>"><?= htmlspecialchars($d); ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="header-filter-item">
+            <button type="button" class="btn btn-sm btn-icon btn-light-brand border" id="btn-reset-bid-filters" title="Reset Filters" style="width: 34px; height: 34px; padding: 0; display: inline-flex; align-items: center; justify-content: center;">
+                <i class="feather-rotate-ccw"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
 <div class="row">
                     <div class="col-lg-12">
                         <div class="card stretch stretch-full">
@@ -31,7 +86,7 @@
                                    <table class="table table-hover text-nowrap wrap-no-text" id="customerList">
                                         <thead>
                                             <tr> 
-                                                <th data-orderable="false" style="width: 40px;">#</th>
+                                                <th data-orderable="false" class="text-center" style="width: 50px;">S.No</th>
                                                 <th>Bid Title</th>
                                                 <th>Bid Type</th>
                                                 <th>Department</th>
@@ -60,7 +115,7 @@
                                                     }
                                             ?>
                                                     <tr class="single-item">
-                                                        <td><?= $i; ?></td>
+                                                        <td class="text-center fw-bold"><?= $i; ?></td>
                                                         <td><?= $val['BidTitle'] ?></td>
                                                         <td>
                                                             <span class="badge <?= $badgeClass ?>">
@@ -81,10 +136,14 @@
                                                         </td>
                                                         <td><?= (!empty($val['CreationTs']) && strtotime($val['CreationTs'])) ? date('d M Y, h:i A', strtotime($val['CreationTs'])) : '-' ?></td>
                                                         <td class="text-center">
-                                                            <div class="hstack gap-2 justify-content-center">
+                                                            <div class="row-actions-group justify-content-center">
+                                                                <button type="button" class="btn-row-actions-toggle avatar-text avatar-md" title="Actions" aria-label="Toggle Actions">
+                                                                    <i class="feather-plus"></i>
+                                                                </button>
+                                                                <div class="row-actions-collapse" style="display:none;">
                                                                 <a href="javascript:void(0)"
                                                                     class="avatar-text avatar-md openAddForm view-bid"
-                                                                    data-bid='<?= json_encode($val); ?>'
+                                                                    data-bid="<?= htmlspecialchars(json_encode($val), ENT_QUOTES, 'UTF-8'); ?>"
                                                                     title="View Bid Details">
                                                                     <i class="feather feather-eye"></i>
                                                                 </a>
@@ -124,6 +183,7 @@
                                                                     <i class="feather feather-edit-2"></i>
                                                                 </a>
                                                             </div>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                             <?php
@@ -140,15 +200,25 @@
                     </div>
                 </div>
  <div id="rightForm" class="right-form">
-    <div class="right-form-header">
-        <h5>Bid Details</h5>
-        <button type="button" class="close-btn" id="closeAddForm">&times;</button>
+    <div class="right-form-header" id="bidModalHeader">
+        <div class="d-flex justify-content-between align-items-center w-100">
+            <div class="d-flex align-items-center gap-2">
+                <i class="feather-file-text text-primary fs-18" id="bidModalHeaderIcon"></i>
+                <h5 class="mb-0 fw-bold fs-15 text-dark" id="bidModalHeaderTitle">Bid Details</h5>
+                <span id="bidModalHeaderBadge" style="display:none;" class="badge bg-soft-warning text-warning border border-warning" style="font-size: 11px;">Editing Mode</span>
+            </div>
+            <div class="d-flex align-items-center gap-2" id="bidModalHeaderActions">
+                <button type="button" class="btn btn-sm btn-primary d-inline-flex align-items-center py-1 px-3" id="btnEditBidDetails" title="Edit Bid Details">
+                    <i class="feather-edit-2 me-1 mr-1"></i> Edit
+                </button>
+                <button type="button" class="close-btn ms-2 ml-2" id="closeAddForm" title="Close Panel" style="font-size:24px;line-height:1;border:none;background:none;cursor:pointer;">&times;</button>
+            </div>
+        </div>
     </div>
 
-    <div class="right-form-body">
-              
+    <div class="right-form-body p-3" style="overflow-y:auto; overflow-x:hidden !important; flex:1; background:#f8fafc;">
+        <div id="bidAlertContainer"></div>
         <div id="userModalBody"></div>
-              
     </div>
 </div>
 
@@ -322,7 +392,7 @@
   
 </div>
             <!-- [ Main Content ] end -->
-  <script src="<?=$theme_path?>/js/jquery-1.11.1.min.js"></script>
+  <!-- legacy jquery-1.11.1 removed to prevent multi-jquery collision -->
 
   
 <script>
@@ -393,276 +463,712 @@ function formatBidDateTime(dateStr) {
     return day + ' ' + month + ' ' + year + ', ' + hours + ':' + minutes + ' ' + ampm;
 }
 
-$(document).on('click', '.view-bid', function () {
+// ── Bid Details Modal State & Interactive Edit Management ──
+var currentBidData = null;
+var currentBidLastModified = null;
+var currentBidHistory = [];
+var availableCategories = [];
+var isBidEditMode = false;
 
-    var bid = $(this).data('bid');
+function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function formatIsoDate(dateStr) {
+    if (!dateStr) return '';
+    var match = String(dateStr).match(/^(\d{4}-\d{2}-\d{2})/);
+    return match ? match[1] : '';
+}
+
+function cleanNum(val) {
+    if (val === null || val === undefined || val === '') return '';
+    var clean = String(val).replace(/[,\s]/g, '');
+    var num = parseFloat(clean);
+    return isNaN(num) ? '' : num.toFixed(2);
+}
+
+function renderBidReadOnlyView() {
+    var bid = currentBidData || {};
+    var lastMod = currentBidLastModified || { name: 'Not modified yet', ts: bid.CreationTs };
+    var history = currentBidHistory || [];
+
+    // Header updates
+    $('#bidModalHeaderTitle').text('Bid Details');
+    $('#bidModalHeaderIcon').attr('class', 'feather-file-text text-primary fs-18');
+    $('#bidModalHeaderBadge').hide();
+    $('#bidModalHeaderActions').html(`
+        <button type="button" class="btn btn-sm btn-primary d-inline-flex align-items-center py-1 px-3 shadow-sm" id="btnEditBidDetails" title="Edit Bid Details">
+            <i class="feather-edit-2 me-1 mr-1"></i> Edit
+        </button>
+        <button type="button" class="close-btn ms-2 ml-2" id="closeAddForm" title="Close Panel" style="font-size:24px;line-height:1;border:none;background:none;cursor:pointer;">&times;</button>
+    `);
+
+    // Category display name
+    var catDisplay = bid.CategoryName || bid.Category || '-';
 
     var html = `
-    <div class="card border-0 shadow-sm">
+    <!-- Read-Only Bid Information Table -->
+    <div class="card border-0 shadow-sm mb-3" style="border-radius:10px; overflow:hidden;">
         <div class="card-body p-0">
-
-            <table class="table table-bordered text-nowrap wrap-no-text mb-0">
+            <table class="table table-bordered mb-0 bid-detail-table" style="font-size:13px; table-layout:fixed; width:100%;">
+                <colgroup>
+                    <col style="width: 35%;">
+                    <col style="width: 65%;">
+                </colgroup>
                 <tbody>
-
                     <tr>
-                        <th width="40%">Bid Status</th>
+                        <th width="35%" class="bg-light text-muted">Bid Status</th>
                         <td>
                             ${
                                 bid.DisplayName 
-                                ? `<span class="badge ${bid.BadgeClass ?? 'bg-secondary'}">
-                                       ${bid.DisplayName}
-                                   </span>`
+                                ? `<span class="badge ${bid.BadgeClass ?? 'bg-secondary'}">${bid.DisplayName}</span>`
                                 : '-'
                             }
                         </td>
                     </tr>
                     <tr>
-                        <th width="40%">Tender ID</th>
-                        <td>${bid.TenderId ?? '-'}</td>
+                        <th class="bg-light text-muted">Tender ID</th>
+                        <td class="fw-semibold text-dark">${escapeHtml(bid.TenderId ?? '-')}</td>
                     </tr>
-
                     <tr>
-                        <th>Bid Title</th>
-                        <td>${bid.BidTitle ?? '-'}</td>
+                        <th class="bg-light text-muted">Bid Title</th>
+                        <td class="fw-bold text-dark text-wrap">${escapeHtml(bid.BidTitle ?? '-')}</td>
                     </tr>
-
                     <tr>
-                        <th>Department</th>
-                        <td>${bid.BidDepartment ?? '-'}</td>
+                        <th class="bg-light text-muted">Department</th>
+                        <td>${escapeHtml(bid.BidDepartment ?? '-')}</td>
                     </tr>
-
-                    ${(bid.State) ? `
                     <tr>
-                        <th>State</th>
-                        <td>${bid.State}</td>
-                    </tr>` : ''}
-
-                    ${(bid.CustomerName) ? `
-                    <tr>
-                        <th>Customer Name</th>
-                        <td>${bid.CustomerName}</td>
-                    </tr>` : ''}
-
-                    ${(bid.CustomerPhone) ? `
-                    <tr>
-                        <th>Customer Phone</th>
-                        <td>${bid.CustomerPhone}</td>
-                    </tr>` : ''}
-
-                    ${(bid.CustomerAddress) ? `
-                    <tr>
-                        <th>Customer Address</th>
-                        <td>${bid.CustomerAddress}</td>
-                    </tr>` : ''}
-
-                    ${(bid.Category) ? `
-                    <tr>
-                        <th>Category</th>
-                        <td>${bid.Category}</td>
-                    </tr>` : ''}
-
-                    <tr>
-                        <th>Bid Type</th>
-                        <td>${bid.BidType ?? '-'}</td>
+                        <th class="bg-light text-muted">State</th>
+                        <td>${escapeHtml(bid.State ?? '-')}</td>
                     </tr>
-
                     <tr>
-                        <th>Estimated Value</th>
-                        <td>₹ ${bid.EstimatedValue ?? '-'}</td>
+                        <th class="bg-light text-muted">Customer Name</th>
+                        <td>${escapeHtml(bid.CustomerName ?? '-')}</td>
                     </tr>
-
                     <tr>
-                        <th>EMD Value</th>
-                        <td>₹ ${bid.EmdValue ?? '-'}</td>
+                        <th class="bg-light text-muted">Customer Phone</th>
+                        <td>${escapeHtml(bid.CustomerPhone ?? '-')}</td>
                     </tr>
-
                     <tr>
-                        <th>Published Date</th>
-                        <td>${bid.PublishedDate ?? '-'}</td>
+                        <th class="bg-light text-muted">Customer Address</th>
+                        <td class="text-wrap">${escapeHtml(bid.CustomerAddress ?? '-')}</td>
                     </tr>
-
                     <tr>
-                        <th>Submission Date</th>
-                        <td>${bid.SubmissionDate ?? '-'}</td>
+                        <th class="bg-light text-muted">Category</th>
+                        <td><span class="badge bg-soft-info text-info border border-info">${escapeHtml(catDisplay)}</span></td>
                     </tr>
-
                     <tr>
-                        <th>Opening Date</th>
-                        <td>${bid.OpeningDate ?? '-'}</td>
+                        <th class="bg-light text-muted">Bid Type</th>
+                        <td><span class="badge bg-soft-primary text-primary">${escapeHtml(bid.BidType ?? '-')}</span></td>
                     </tr>
-
                     <tr>
-                        <th>Tender Portal</th>
+                        <th class="bg-light text-muted">Estimated Value</th>
+                        <td class="fw-bold text-success fs-14">₹ ${bid.EstimatedValue ? Number(bid.EstimatedValue).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '-'}</td>
+                    </tr>
+                    <tr>
+                        <th class="bg-light text-muted">EMD Value</th>
+                        <td class="fw-semibold text-dark">₹ ${bid.EmdValue ? Number(bid.EmdValue).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '-'}</td>
+                    </tr>
+                    <tr>
+                        <th class="bg-light text-muted">Published Date</th>
+                        <td>${escapeHtml(bid.PublishedDate ?? '-')}</td>
+                    </tr>
+                    <tr>
+                        <th class="bg-light text-muted">Submission Date</th>
+                        <td>${escapeHtml(bid.SubmissionDate ?? '-')}</td>
+                    </tr>
+                    <tr>
+                        <th class="bg-light text-muted">Opening Date</th>
+                        <td>${escapeHtml(bid.OpeningDate ?? '-')}</td>
+                    </tr>
+                    <tr>
+                        <th class="bg-light text-muted">Tender Portal</th>
                         <td>
                             ${bid.TenderPortalUrl 
-                                ? `<a href="${bid.TenderPortalUrl}" target="_blank">View Portal</a>` 
+                                ? `<a href="${escapeHtml(bid.TenderPortalUrl)}" target="_blank" class="text-primary text-decoration-underline d-inline-flex align-items-center gap-1"><i class="feather-external-link"></i> View Portal</a>` 
                                 : '-'
                             }
                         </td>
                     </tr>
-
                     <tr>
-                        <th>NAS Path</th>
-                        <td>${bid.NASPath ?? '-'}</td>
+                        <th class="bg-light text-muted">Summary Keywords</th>
+                        <td class="text-wrap">${escapeHtml(bid.SummaryKeywords ?? '-')}</td>
                     </tr>
-
                     <tr>
-                        <th>Remarks</th>
-                        <td>${bid.Remarks ?? '-'}</td>
+                        <th class="bg-light text-muted">Remarks</th>
+                        <td class="text-wrap">${escapeHtml(bid.Remarks ?? '-')}</td>
                     </tr>
-
                     ${(bid.TechnicalSelected !== null && bid.TechnicalSelected !== undefined && bid.TechnicalSelected !== '') ? `
                     <tr>
-                        <th>Technical Selected</th>
+                        <th class="bg-light text-muted">Technical Selected</th>
                         <td>
                             ${bid.TechnicalSelected == 1 
                                 ? '<span class="badge bg-success">Yes</span>' 
                                 : '<span class="badge bg-danger">No</span>'}
                         </td>
                     </tr>` : ''}
-
                     ${(bid.PriceDetails !== null && bid.PriceDetails !== undefined && bid.PriceDetails !== '') ? `
                     <tr>
-                        <th>Price Details</th>
-                        <td>${bid.PriceDetails}</td>
+                        <th class="bg-light text-muted">Price Details</th>
+                        <td>${escapeHtml(bid.PriceDetails)}</td>
                     </tr>` : ''}
-
                     ${(bid.LoaReceived !== null && bid.LoaReceived !== undefined && bid.LoaReceived !== '') ? `
                     <tr>
-                        <th>LOA Received</th>
+                        <th class="bg-light text-muted">LOA Received</th>
                         <td>
                             ${bid.LoaReceived == 1 
                                 ? '<span class="badge bg-success">Yes</span>' 
                                 : '<span class="badge bg-danger">No</span>'}
                         </td>
                     </tr>` : ''}
-
                     ${(bid.LoaDocumentPath) ? `
                     <tr>
-                        <th>LOA Document</th>
+                        <th class="bg-light text-muted">LOA Document</th>
                         <td>
-                            <a href="<?= base_url(); ?>${bid.LoaDocumentPath}" target="_blank" class="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1">
+                            <a href="<?= base_url(); ?>${escapeHtml(bid.LoaDocumentPath)}" target="_blank" class="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1 py-1 px-2">
                                 <i class="feather-file-text"></i> View LOA Document
                             </a>
                         </td>
                     </tr>` : ''}
-
                     ${(bid.BgSubmitted !== null && bid.BgSubmitted !== undefined && bid.BgSubmitted !== '') ? `
                     <tr>
-                        <th>BG Submitted</th>
+                        <th class="bg-light text-muted">BG Submitted</th>
                         <td>
                             ${bid.BgSubmitted == 1 
                                 ? '<span class="badge bg-success">Yes</span>' 
                                 : '<span class="badge bg-danger">No</span>'}
                         </td>
                     </tr>` : ''}
-
                     ${(bid.BgDocumentPath) ? `
                     <tr>
-                        <th>BG Document</th>
+                        <th class="bg-light text-muted">BG Document</th>
                         <td>
-                            <a href="<?= base_url(); ?>${bid.BgDocumentPath}" target="_blank" class="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1">
+                            <a href="<?= base_url(); ?>${escapeHtml(bid.BgDocumentPath)}" target="_blank" class="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1 py-1 px-2">
                                 <i class="feather-file-text"></i> View BG Document
                             </a>
                         </td>
                     </tr>` : ''}
-
                     ${(bid.WoReceived !== null && bid.WoReceived !== undefined && bid.WoReceived !== '') ? `
                     <tr>
-                        <th>WO Received</th>
+                        <th class="bg-light text-muted">WO Received</th>
                         <td>
                             ${bid.WoReceived == 1 
                                 ? '<span class="badge bg-success">Yes</span>' 
                                 : '<span class="badge bg-danger">No</span>'}
                         </td>
                     </tr>` : ''}
-
                     ${(bid.WoDocumentPath) ? `
                     <tr>
-                        <th>WO Document</th>
+                        <th class="bg-light text-muted">WO Document</th>
                         <td>
-                            <a href="<?= base_url(); ?>${bid.WoDocumentPath}" target="_blank" class="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1">
+                            <a href="<?= base_url(); ?>${escapeHtml(bid.WoDocumentPath)}" target="_blank" class="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1 py-1 px-2">
                                 <i class="feather-file-text"></i> View WO Document
                             </a>
                         </td>
                     </tr>` : ''}
-
                     ${(bid.CompletionCertificateReceived !== null && bid.CompletionCertificateReceived !== undefined && bid.CompletionCertificateReceived !== '') ? `
                     <tr>
-                        <th>Completion Certificate Received</th>
+                        <th class="bg-light text-muted">Completion Certificate</th>
                         <td>
                             ${bid.CompletionCertificateReceived == 1 
                                 ? '<span class="badge bg-success">Yes</span>' 
                                 : '<span class="badge bg-danger">No</span>'}
                         </td>
                     </tr>` : ''}
-
                     ${(bid.CompletionCertificateDocumentPath) ? `
                     <tr>
-                        <th>Completion Certificate Document</th>
+                        <th class="bg-light text-muted">Completion Document</th>
                         <td>
-                            <a href="<?= base_url(); ?>${bid.CompletionCertificateDocumentPath}" target="_blank" class="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1">
-                                <i class="feather-file-text"></i> View Completion Certificate
+                            <a href="<?= base_url(); ?>${escapeHtml(bid.CompletionCertificateDocumentPath)}" target="_blank" class="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1 py-1 px-2">
+                                <i class="feather-file-text"></i> View Certificate
                             </a>
                         </td>
                     </tr>` : ''}
-
-                    ${(bid.ActualDate) ? `
                     <tr>
-                        <th>Status Date</th>
-                        <td>${bid.ActualDate}</td>
-                    </tr>` : ''}
-
-                    ${(bid.CreationTs) ? `
-                    <tr>
-                        <th>Creation Date</th>
+                        <th class="bg-light text-muted">Creation Date</th>
                         <td>${formatBidDateTime(bid.CreationTs)}</td>
-                    </tr>` : ''}
-
-                    <tr>
-                        <th>Fact Sheet</th>
-                        <td>
-                            <button type="button" class="btn btn-sm text-white fw-bold d-inline-flex align-items-center py-1 px-3 view-factsheet" data-bcid="${bid.Bcid}" style="background:linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);border:none;border-radius:6px;box-shadow:0 2px 6px rgba(14,165,233,0.3);">
-                                <i class="feather-file-text me-1 mr-1"></i> View Fact Sheet
-                            </button>
-                        </td>
                     </tr>
-
-                    <tr>
-                        <th>Timeline Intelligence</th>
-                        <td>
-                            <button type="button" class="btn btn-sm text-white fw-bold d-inline-flex align-items-center py-1 px-3 view-timeline" data-bcid="${bid.Bcid}" style="background:linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);border:none;border-radius:6px;box-shadow:0 2px 6px rgba(99,102,241,0.3);">
-                                <i class="feather-clock me-1 mr-1"></i> View Timeline Intelligence
-                            </button>
-                        </td>
-                    </tr>
-
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <!-- ── Last Modified Information Card ── -->
+    <div class="card border bg-white shadow-sm mb-3" style="border-radius:10px;">
+        <div class="card-body py-2 px-3">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="avatar-text avatar-sm bg-soft-primary text-primary" style="border-radius:6px;width:32px;height:32px;">
+                        <i class="feather-user-check" style="font-size:15px;"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted text-uppercase" style="font-size:10px; font-weight:700; letter-spacing:0.5px;">Last Edited By</div>
+                        <div class="fw-bold text-dark fs-13" id="modalLastEditedBy">${escapeHtml(lastMod.name || 'Prasanna Kumari C')}</div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <div class="avatar-text avatar-sm bg-soft-success text-success" style="border-radius:6px;width:32px;height:32px;">
+                        <i class="feather-clock" style="font-size:15px;"></i>
+                    </div>
+                    <div>
+                        <div class="text-muted text-uppercase" style="font-size:10px; font-weight:700; letter-spacing:0.5px;">Last Edited Date &amp; Time</div>
+                        <div class="fw-bold text-dark fs-13" id="modalLastEditedTs">${formatBidDateTime(lastMod.ts || bid.LastChangeTs || bid.CreationTs)}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Edit History Section (Collapsible Table) ── -->
+    <div class="card border bg-white shadow-sm mb-3" style="border-radius:10px; overflow:hidden;">
+        <div class="card-header py-2 px-3 bg-white border-bottom d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-2">
+                <i class="feather-rotate-ccw text-info fs-16"></i>
+                <h6 class="mb-0 fw-bold fs-13 text-dark">Edit History</h6>
+                <span class="badge bg-soft-info text-info border border-info" style="font-size:11px;" id="historyCountBadge">${history.length} event${history.length === 1 ? '' : 's'}</span>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-secondary py-1 px-2 d-inline-flex align-items-center gap-1" id="btnToggleHistory" style="font-size:12px;">
+                <i class="feather-chevron-down" id="historyToggleIcon"></i> <span id="historyToggleText">View History</span>
+            </button>
+        </div>
+        <div id="historyCollapseContainer" style="display:none;" class="p-3">
+            ${
+                history && history.length > 0 ? `
+                <div class="table-responsive" style="overflow-x:hidden !important; width:100%;">
+                    <table class="table table-sm table-bordered mb-2 history-table" style="font-size:12px; table-layout:fixed; width:100%;">
+                        <colgroup>
+                            <col style="width: 145px;">
+                            <col style="width: 125px;">
+                            <col style="width: auto;">
+                            <col style="width: 85px;">
+                        </colgroup>
+                        <thead class="bg-light">
+                            <tr>
+                                <th style="white-space:nowrap; width:145px;">Date &amp; Time</th>
+                                <th style="white-space:nowrap; width:125px;">Edited By</th>
+                                <th style="white-space:nowrap;">Action / Remarks</th>
+                                <th class="text-center" style="white-space:nowrap; width:85px;">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${history.map(function(h) {
+                                return `
+                                <tr>
+                                    <td style="white-space:nowrap; vertical-align:middle; font-size:11.5px;">${formatBidDateTime(h.CreationTs)}</td>
+                                    <td class="fw-semibold text-dark" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; vertical-align:middle; font-size:11.5px;" title="${escapeHtml(h.UpdatedByName || 'User')}"><i class="feather-user me-1 text-muted"></i> ${escapeHtml(h.UpdatedByName || 'User')}</td>
+                                    <td class="col-remarks" style="white-space:normal !important; word-break:break-word; overflow-wrap:break-word; vertical-align:middle; font-size:11.5px; line-height:1.4;">${escapeHtml(h.Remarks || 'Status update logged')}</td>
+                                    <td class="text-center" style="white-space:nowrap; vertical-align:middle;">
+                                        <span class="badge ${h.BadgeClass || 'bg-secondary'}" style="font-size:11px;">
+                                            ${escapeHtml(h.StatusDisplayName || 'Updated')}
+                                        </span>
+                                    </td>
+                                </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+                ` : `
+                <div class="text-center py-3 text-muted" style="font-size:12px;">
+                    <i class="feather-inbox me-1"></i> No previous modification records logged yet.
+                </div>
+                `
+            }
 
         </div>
+    </div>
+
+    <!-- ── Fact Sheet & Timeline Action Buttons ── -->
+    <div class="d-flex align-items-center justify-content-end gap-2 pt-2">
+        <button type="button" class="btn btn-sm text-white fw-bold d-inline-flex align-items-center py-2 px-3 view-factsheet" data-bcid="${bid.Bcid}" style="background:linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);border:none;border-radius:6px;box-shadow:0 2px 6px rgba(14,165,233,0.3);">
+            <i class="feather-file-text me-1 mr-1"></i> View Fact Sheet
+        </button>
+        <button type="button" class="btn btn-sm text-white fw-bold d-inline-flex align-items-center py-2 px-3 view-timeline" data-bcid="${bid.Bcid}" style="background:linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);border:none;border-radius:6px;box-shadow:0 2px 6px rgba(99,102,241,0.3);">
+            <i class="feather-clock me-1 mr-1"></i> View Timeline Intelligence
+        </button>
     </div>
     `;
 
     $('#userModalBody').html(html);
+}
+
+function renderBidEditView() {
+    var bid = currentBidData || {};
+    var cats = availableCategories || [];
+
+    // Header updates
+    $('#bidModalHeaderTitle').text('Edit Bid Details');
+    $('#bidModalHeaderIcon').attr('class', 'feather-edit-2 text-warning fs-18');
+    $('#bidModalHeaderBadge').show();
+    $('#bidModalHeaderActions').html(`
+        <button type="button" class="btn btn-sm btn-light border d-inline-flex align-items-center py-1 px-2" id="btnCancelEditBid" title="Discard Changes">
+            <i class="feather-x me-1 mr-1"></i> Cancel
+        </button>
+        <button type="button" class="btn btn-sm btn-primary d-inline-flex align-items-center py-1 px-3 shadow-sm" id="btnSaveBidDetails" title="Save Changes">
+            <i class="feather-save me-1 mr-1"></i> Save Changes
+        </button>
+        <button type="button" class="close-btn ms-2 ml-2" id="closeAddForm" title="Close Panel" style="font-size:24px;line-height:1;border:none;background:none;cursor:pointer;">&times;</button>
+    `);
+
+    // Category options
+    var catOptions = '<option value="">Select Category</option>';
+    cats.forEach(function(c) {
+        var isSelected = (bid.Category == c.CId || bid.Category == c.CategoryList || bid.CategoryName == c.CategoryList) ? 'selected' : '';
+        catOptions += `<option value="${escapeHtml(c.CId)}" ${isSelected}>${escapeHtml(c.CategoryList)}</option>`;
+    });
+
+    // Bid types
+    var bidTypes = ['Service', 'Product', 'Turnkey', 'Works', 'Supply'];
+    var currentType = (bid.BidType || '').trim();
+    if (currentType && !bidTypes.includes(currentType)) {
+        bidTypes.push(currentType);
+    }
+    var typeOptions = '<option value="">Select Bid Type</option>';
+    bidTypes.forEach(function(t) {
+        var isSelected = (currentType.toLowerCase() === t.toLowerCase()) ? 'selected' : '';
+        typeOptions += `<option value="${escapeHtml(t)}" ${isSelected}>${escapeHtml(t)}</option>`;
+    });
+
+    var html = `
+    <form id="editBidForm" class="needs-validation" novalidate autocomplete="off">
+        <input type="hidden" name="Bcid" value="${escapeHtml(bid.Bcid)}">
+
+        <div class="card border-0 shadow-sm mb-3" style="border-radius:10px;">
+            <div class="card-header bg-white py-2 px-3 border-bottom d-flex justify-content-between align-items-center">
+                <span class="fw-bold fs-13 text-dark"><i class="feather-edit me-1 text-primary"></i> Edit Bid Parameters</span>
+                <span class="badge ${bid.BadgeClass || 'bg-secondary'}">${bid.DisplayName || 'Status'}</span>
+            </div>
+            <div class="card-body p-3">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold" style="font-size:12px;">Tender ID</label>
+                        <input type="text" class="form-control form-control-sm" name="TenderId" value="${escapeHtml(bid.TenderId || '')}" placeholder="Tender ID">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold" style="font-size:12px;">Bid Type</label>
+                        <select class="form-select form-select-sm" name="BidType">
+                            ${typeOptions}
+                        </select>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label fw-semibold" style="font-size:12px;">Bid Title <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control form-control-sm" name="BidTitle" value="${escapeHtml(bid.BidTitle || '')}" required placeholder="Enter Bid Title">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold" style="font-size:12px;">Department</label>
+                        <input type="text" class="form-control form-control-sm" name="BidDepartment" value="${escapeHtml(bid.BidDepartment || '')}" placeholder="Department">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold" style="font-size:12px;">State</label>
+                        <input type="text" class="form-control form-control-sm" name="State" value="${escapeHtml(bid.State || '')}" placeholder="State">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold" style="font-size:12px;">Customer Name</label>
+                        <input type="text" class="form-control form-control-sm" name="CustomerName" value="${escapeHtml(bid.CustomerName || '')}" placeholder="Customer Name">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold" style="font-size:12px;">Customer Phone</label>
+                        <input type="tel" class="form-control form-control-sm" name="CustomerPhone" value="${escapeHtml(bid.CustomerPhone || '')}" placeholder="Phone number">
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label fw-semibold" style="font-size:12px;">Customer Address</label>
+                        <textarea class="form-control form-control-sm" name="CustomerAddress" rows="2" placeholder="Customer address">${escapeHtml(bid.CustomerAddress || '')}</textarea>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold" style="font-size:12px;">Category</label>
+                        <select class="form-select form-select-sm" name="Category">
+                            ${catOptions}
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold" style="font-size:12px;">Estimated Value (₹) <span class="text-danger">*</span></label>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-white">₹</span>
+                            <input type="number" step="0.01" min="0" class="form-control form-control-sm" name="EstimatedValue" value="${cleanNum(bid.EstimatedValue)}" placeholder="0.00" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold" style="font-size:12px;">EMD Value (₹)</label>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-white">₹</span>
+                            <input type="number" step="0.01" min="0" class="form-control form-control-sm" name="EmdValue" value="${cleanNum(bid.EmdValue)}" placeholder="0.00">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold" style="font-size:12px;">Published Date</label>
+                        <input type="date" class="form-control form-control-sm" name="PublishedDate" value="${formatIsoDate(bid.PublishedDate)}">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold" style="font-size:12px;">Submission Date</label>
+                        <input type="date" class="form-control form-control-sm" name="SubmissionDate" value="${formatIsoDate(bid.SubmissionDate)}">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold" style="font-size:12px;">Opening Date</label>
+                        <input type="date" class="form-control form-control-sm" name="OpeningDate" value="${formatIsoDate(bid.OpeningDate)}">
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label fw-semibold" style="font-size:12px;">Tender Portal URL</label>
+                        <input type="url" class="form-control form-control-sm" name="TenderPortalUrl" value="${escapeHtml(bid.TenderPortalUrl || '')}" placeholder="https://...">
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label fw-semibold" style="font-size:12px;">Summary Keywords</label>
+                        <textarea class="form-control form-control-sm" name="SummaryKeywords" rows="2" placeholder="Keywords, comma separated">${escapeHtml(bid.SummaryKeywords || '')}</textarea>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label fw-semibold" style="font-size:12px;">Remarks</label>
+                        <textarea class="form-control form-control-sm" name="Remarks" rows="2" placeholder="Remarks">${escapeHtml(bid.Remarks || '')}</textarea>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+                    <button type="button" class="btn btn-sm btn-light border py-2 px-3" id="btnCancelEditBidBottom">
+                        <i class="feather-x me-1"></i> Cancel
+                    </button>
+                    <button type="submit" class="btn btn-sm btn-primary py-2 px-4 shadow-sm" id="btnSaveBidDetailsBottom">
+                        <i class="feather-save me-1"></i> Save Changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+    `;
+
+    $('#userModalBody').html(html);
+}
+
+function loadBidModalData(bcid) {
+    if (!bcid) return;
+    $.ajax({
+        url: "<?= base_url('bid/getBidModalDetails'); ?>",
+        type: "GET",
+        data: { bcid: bcid },
+        dataType: "json",
+        success: function(res) {
+            if (res && res.status) {
+                currentBidData         = res.bid || currentBidData;
+                currentBidLastModified = res.lastModified || currentBidLastModified;
+                currentBidHistory      = res.history || [];
+                availableCategories    = res.categories || [];
+                if (!isBidEditMode) {
+                    renderBidReadOnlyView();
+                }
+            }
+        }
+    });
+}
+
+// ── Open View Bid Details Drawer ──
+$(document).on('click', '.view-bid', function (e) {
+    if (e) e.preventDefault();
+    $('.right-form').removeClass('open');
+
+    var bid = $(this).data('bid');
+    if (typeof bid === 'string') {
+        try { bid = JSON.parse(bid); } catch(err) { bid = {}; }
+    }
+    currentBidData         = bid || {};
+    currentBidLastModified = { name: 'Prasanna Kumari C', ts: currentBidData.LastChangeTs || currentBidData.CreationTs };
+    currentBidHistory      = [];
+    isBidEditMode          = false;
+
+    $('#bidAlertContainer').empty();
+    renderBidReadOnlyView();
 
     $('#rightForm').addClass('open');
     $('#rightFormOverlay').addClass('show');
-});
-// CLOSE (button inside panel)
-$(document).on('click', '#closeAddForm', function () {
-    $('#rightForm').removeClass('open');
-    $('#rightFormOverlay').removeClass('show');
+
+    // Fetch fresh details, history and categories
+    if (currentBidData.Bcid) {
+        loadBidModalData(currentBidData.Bcid);
+    }
 });
 
-// CLOSE (click outside overlay)
-$(document).on('click', '#closeAddForm, .close-canvas, #rightFormOverlay', function () {
+// ── Enter Edit Mode ──
+$(document).on('click', '#btnEditBidDetails', function(e) {
+    e.preventDefault();
+    isBidEditMode = true;
+    $('#bidAlertContainer').empty();
+    renderBidEditView();
+});
+
+// ── Cancel Edit Mode ──
+$(document).on('click', '#btnCancelEditBid, #btnCancelEditBidBottom', function(e) {
+    e.preventDefault();
+    isBidEditMode = false;
+    $('#bidAlertContainer').empty();
+    renderBidReadOnlyView();
+});
+
+// ── Toggle History Accordion ──
+$(document).on('click', '#btnToggleHistory', function(e) {
+    e.preventDefault();
+    var $container = $('#historyCollapseContainer');
+    var $icon = $('#historyToggleIcon');
+    var $text = $('#historyToggleText');
+
+    if ($container.is(':visible')) {
+        $container.slideUp(200);
+        $icon.removeClass('feather-chevron-up').addClass('feather-chevron-down');
+        $text.text('View History');
+    } else {
+        $container.slideDown(200);
+        $icon.removeClass('feather-chevron-down').addClass('feather-chevron-up');
+        $text.text('Hide History');
+    }
+});
+
+// ── Save Bid Details (via Button or Form Submit) ──
+function executeSaveBidDetails() {
+    var $form = $('#editBidForm');
+    if (!$form.length) return;
+
+    var title = $.trim($form.find('input[name="BidTitle"]').val());
+    if (!title) {
+        $('#bidAlertContainer').html(`
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="feather-alert-circle me-2"></i> Bid Title is required.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        `);
+        $form.find('input[name="BidTitle"]').focus();
+        return;
+    }
+
+    var $saveBtns = $('#btnSaveBidDetails, #btnSaveBidDetailsBottom');
+    $saveBtns.prop('disabled', true).html('<span class="spinner-border spinner-border-sm me-1"></span> Saving...');
+
+    $.ajax({
+        url: "<?= base_url('bid/updateBidDetails'); ?>",
+        type: "POST",
+        data: $form.serialize(),
+        dataType: "json",
+        success: function(res) {
+            $saveBtns.prop('disabled', false).html('<i class="feather-save me-1"></i> Save Changes');
+            if (res && res.status) {
+                // Update in-memory state
+                currentBidData         = res.bid;
+                currentBidLastModified = res.lastModified;
+                currentBidHistory      = res.history;
+                isBidEditMode          = false;
+
+                // Update Table Row in DataTables to reflect changes immediately
+                if (window.bidCustomerDataTable || $.fn.DataTable.isDataTable('#customerList')) {
+                    var dt = $('#customerList').DataTable();
+                    $('#customerList tbody tr').each(function() {
+                        var $tr = $(this);
+                        var $viewBtn = $tr.find('.view-bid');
+                        var rowBid = $viewBtn.data('bid');
+                        if (typeof rowBid === 'string') {
+                            try { rowBid = JSON.parse(rowBid); } catch(e) {}
+                        }
+                        if (rowBid && String(rowBid.Bcid) === String(res.bid.Bcid)) {
+                            // Update anchor data-bid attribute
+                            $viewBtn.attr('data-bid', JSON.stringify(res.bid));
+                            $viewBtn.data('bid', res.bid);
+
+                            // Update visible cells in DOM (Title, Type, Dept, Published, Opening, Submission)
+                            $tr.find('td:eq(0)').text(res.bid.BidTitle);
+                            if (res.bid.BidType) {
+                                $tr.find('td:eq(1)').html('<span class="badge bg-soft-primary text-primary">' + escapeHtml(res.bid.BidType) + '</span>');
+                            }
+                            if (res.bid.BidDepartment) {
+                                $tr.find('td:eq(2)').text(res.bid.BidDepartment);
+                            }
+                            if (res.bid.PublishedDate) {
+                                $tr.find('td:eq(3)').text(res.bid.PublishedDate);
+                            }
+                            if (res.bid.OpeningDate) {
+                                $tr.find('td:eq(4)').text(res.bid.OpeningDate);
+                            }
+                            if (res.bid.SubmissionDate) {
+                                $tr.find('td:eq(5)').text(res.bid.SubmissionDate);
+                            }
+                        }
+                    });
+                }
+
+                // Render back in read-only mode
+                renderBidReadOnlyView();
+
+                // Display success banner
+                $('#bidAlertContainer').html(`
+                    <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm" role="alert" style="border-radius:8px;">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="feather-check-circle fs-16 text-success"></i>
+                            <div><strong>Success!</strong> ${escapeHtml(res.message)}</div>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                `);
+
+                // Auto-scroll modal body to top to see banner
+                $('.right-form-body').scrollTop(0);
+            } else {
+                $('#bidAlertContainer').html(`
+                    <div class="alert alert-danger alert-dismissible fade show border-0 shadow-sm" role="alert" style="border-radius:8px;">
+                        <i class="feather-alert-triangle me-2"></i> ${escapeHtml(res.message || 'Failed to update bid details.')}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                `);
+            }
+        },
+        error: function(xhr, status, err) {
+            $saveBtns.prop('disabled', false).html('<i class="feather-save me-1"></i> Save Changes');
+            $('#bidAlertContainer').html(`
+                <div class="alert alert-danger alert-dismissible fade show border-0 shadow-sm" role="alert" style="border-radius:8px;">
+                    <i class="feather-alert-triangle me-2"></i> Error connecting to server: ${escapeHtml(err || status)}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `);
+        }
+    });
+}
+
+$(document).on('click', '#btnSaveBidDetails', function(e) {
+    e.preventDefault();
+    executeSaveBidDetails();
+});
+
+$(document).on('submit', '#editBidForm', function(e) {
+    e.preventDefault();
+    executeSaveBidDetails();
+});
+// CLOSE (button inside panel, backdrop, or Escape key)
+$(document).on('click', '.close-btn, #closeAddForm, #closeFactSheetPanel, #closeTimelinePanel, .close-canvas, #rightFormOverlay', function () {
     $('.right-form').removeClass('open');
     $('#rightFormOverlay').removeClass('show');
 });
+$(document).on('keydown', function (e) {
+    if (e.key === 'Escape' || e.keyCode === 27) {
+        $('.right-form').removeClass('open');
+        $('#rightFormOverlay').removeClass('show');
+    }
+});
 var isTechEvaluatedMenu = <?= $isTechEvaluatedMenu ? 'true' : 'false'; ?>;
 
-$(document).on("click", ".update-bid", function () {
+$(document).on("click", ".update-bid", function (e) {
+    if (e) e.preventDefault();
+    $('.right-form').removeClass('open');
 
     if (typeof clearModalValidation === 'function') {
         clearModalValidation();
@@ -722,6 +1228,8 @@ $(document).on("click", ".update-bid", function () {
     $('#ccExistingDoc').hide().empty();
 
     $("#bid_status").html('<option>Loading...</option>');
+    $("#bidCanvas").addClass("open");
+    $("#rightFormOverlay").addClass("show");
 
     $.ajax({
         url: "<?= base_url('bid/getStatuses'); ?>",
@@ -1322,5 +1830,104 @@ function downloadFactSheetAsPdf() {
 $(document).on('click', '#btnDownloadFactSheetInModal', function (e) {
     e.preventDefault();
     downloadFactSheetAsPdf();
+});
+
+// DataTables filter integration for BidDetails
+$(document).ready(function() {
+    var table = $('#customerList').DataTable({ retrieve: true });
+
+    // Dynamic S.No sequence handler for sorting, searching and pagination
+    function updateSNo() {
+        if (!table) return;
+        var info = table.page.info();
+        $('#customerList tbody tr').each(function(idx) {
+            $(this).find('td:first').text(info.start + idx + 1);
+        });
+    }
+
+    table.on('draw.dt order.dt search.dt page.dt', function () {
+        updateSNo();
+    });
+
+    updateSNo();
+    var filterStart = null;
+    var filterEnd = null;
+
+    var dateInput = $('#bid-filter-date');
+    if (dateInput.length && $.fn.daterangepicker) {
+        dateInput.daterangepicker({
+            autoUpdateInput: false,
+            locale: { cancelLabel: 'Clear', format: 'YYYY-MM-DD' }
+        });
+        dateInput.on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+            filterStart = picker.startDate.startOf('day').toDate();
+            filterEnd = picker.endDate.endOf('day').toDate();
+            table.draw();
+        });
+        dateInput.on('cancel.daterangepicker', function() {
+            $(this).val('');
+            filterStart = null;
+            filterEnd = null;
+            table.draw();
+        });
+    }
+
+    $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+        if (settings.nTable.id !== 'customerList') return true;
+
+        var filterType = ($('#bid-filter-type').val() || '').toLowerCase().trim();
+        var filterDept = ($('#bid-filter-dept').val() || '').toLowerCase().trim();
+
+        var rowType = (data[2] || '').toLowerCase().trim();
+        var rowDept = (data[3] || '').toLowerCase().trim();
+
+        if (filterType && rowType.indexOf(filterType) === -1) return false;
+        if (filterDept && rowDept.indexOf(filterDept) === -1) return false;
+
+        if (filterStart || filterEnd) {
+            var subStr = (data[6] || '').trim();
+            var pubStr = (data[4] || '').trim();
+            var rowDate = null;
+            if (subStr && !isNaN(Date.parse(subStr))) {
+                rowDate = new Date(subStr);
+            } else if (pubStr && !isNaN(Date.parse(pubStr))) {
+                rowDate = new Date(pubStr);
+            }
+            if (rowDate) {
+                if (filterStart && rowDate < filterStart) return false;
+                if (filterEnd && rowDate > filterEnd) return false;
+            }
+        }
+        return true;
+    });
+
+    function updateBidFilterBadge() {
+        var count = 0;
+        if ($('#bid-filter-type').val()) count++;
+        if ($('#bid-filter-dept').val()) count++;
+        if ($('#bid-filter-date').val()) count++;
+        var $badge = $('#bid-filter-count');
+        if (count > 0) {
+            $badge.text(count).removeClass('d-none');
+        } else {
+            $badge.addClass('d-none');
+        }
+    }
+
+    $('#bid-filter-type, #bid-filter-dept').on('change', function() {
+        table.draw();
+    });
+
+    $('#btn-reset-bid-filters').on('click', function(e) {
+        e.preventDefault();
+        $('#bid-filter-type').val('');
+        $('#bid-filter-dept').val('');
+        $('#bid-filter-date').val('');
+        filterStart = null;
+        filterEnd = null;
+        updateBidFilterBadge();
+        table.draw();
+    });
 });
 </script>

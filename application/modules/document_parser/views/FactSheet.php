@@ -252,7 +252,7 @@ $secAssessments = !empty($fs['OpportunityAssessment']) ? parseSectionKV($fs['Opp
 $prebidNotes = isset($secAssessments['Pre-Bid Queries']) ? $secAssessments['Pre-Bid Queries'] : (!empty($fs['PrebidQueryNotes']) ? $fs['PrebidQueryNotes'] : '');
 $attentionAreas = [];
 foreach ($secAssessments as $k => $v) {
-    if (strpos($k, 'Key Attention Area') !== false || strpos($k, 'Assessment') !== false) {
+    if (strpos($k, 'Key Attention Area') !== false || strpos($k, 'Assessment') !== false || stripos($k, 'Remarks') !== false) {
         $attentionAreas[] = $v;
     }
 }

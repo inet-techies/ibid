@@ -454,9 +454,10 @@ function getBidDetailsData(){
      */
     public function getAllBidsWithStatus()
     {
-        return $this->db->select('b.*, s.DisplayName as StatusName, s.BadgeClass, s.IconClass, s.SortOrder')
+        return $this->db->select('b.*, s.DisplayName as StatusName, s.BadgeClass, s.IconClass, s.SortOrder, COALESCE(c.CategoryList, b.Category) as CategoryName')
                         ->from('BidCreationDetails b')
                         ->join('BidStatusMaster s', 's.Sid = b.BidStatus', 'left')
+                        ->join('category c', 'c.CId = CAST(b.Category AS UNSIGNED)', 'left')
                         ->order_by('b.CreationTs', 'DESC')
                         ->get()
                         ->result_array();
@@ -467,14 +468,16 @@ function getBidDetailsData(){
      */
     public function getDistinctCategories()
     {
-        $rows = $this->db->distinct()
-                         ->select('Category')
-                         ->where('Category IS NOT NULL', null, false)
-                         ->where("TRIM(Category) !=", '')
-                         ->order_by('Category', 'ASC')
-                         ->get('BidCreationDetails')
+        $rows = $this->db->select('COALESCE(c.CategoryList, b.Category) as CategoryName')
+                         ->from('BidCreationDetails b')
+                         ->join('category c', 'c.CId = CAST(b.Category AS UNSIGNED)', 'left')
+                         ->where('b.Category IS NOT NULL', null, false)
+                         ->where("TRIM(b.Category) !=", '')
+                         ->group_by('CategoryName')
+                         ->order_by('CategoryName', 'ASC')
+                         ->get()
                          ->result_array();
-        return array_values(array_unique(array_filter(array_map('trim', array_column($rows, 'Category')))));
+        return array_values(array_unique(array_filter(array_map('trim', array_column($rows, 'CategoryName')))));
     }
 
     /**
@@ -1064,4 +1067,92 @@ public function generateBidId($bidType, $department, $date)
 
     return $bidId;
 }
+    /**
+     * Get a single bid\'s full details with joined status and category names
+     */
+    public function getBidDetailsRow($bcid)
+    {
+        $this->db->select('bu.*');
+        $this->db->select('bsm.StatusName, bsm.DisplayName, bsm.BadgeClass');
+        $this->db->select('cat.CategoryList as CategoryName');
+        $this->db->from('BidCreationDetails bu');
+        $this->db->join('BidStatusMaster bsm', 'bsm.Sid = bu.BidStatus', 'left');
+        $this->db->join('category cat', 'cat.CId = bu.Category OR cat.CategoryList = bu.Category', 'left');
+        $this->db->where('bu.Bcid', (int)$bcid);
+        return $this->db->get()->row_array();
+    }
+
+    /**
+     * Get full modification and status tracking history for a bid
+     */
+    public function getBidTrackingHistory($bcid)
+    {
+        return $this->db
+            ->select('bst.*, bu.Name as UpdatedByName, bsm.DisplayName as StatusDisplayName, bsm.BadgeClass')
+            ->from('BidStatusTracking bst')
+            ->join('BidUsers bu', 'bu.Buid = bst.UpdatedBy', 'left')
+            ->join('BidStatusMaster bsm', 'bsm.Sid = bst.CurrentStatusId', 'left')
+            ->where('bst.Bcid', (int)$bcid)
+            ->order_by('bst.Bsid', 'DESC')
+            ->get()
+            ->result_array();
+    }
+
+    /**
+     * Get the last modified user name and timestamp for a bid
+     */
+    public function getBidLastModifiedInfo($bcid)
+    {
+        $row = $this->db
+            ->select('bst.CreationTs as ModifiedTs, bu.Name as ModifiedByName, bcd.CreationTs as BidCreationTs, bcd.LastChangeTs')
+            ->from('BidCreationDetails bcd')
+            ->join('BidStatusTracking bst', 'bst.Bcid = bcd.Bcid', 'left')
+            ->join('BidUsers bu', 'bu.Buid = bst.UpdatedBy', 'left')
+            ->where('bcd.Bcid', (int)$bcid)
+            ->order_by('bst.Bsid', 'DESC')
+            ->limit(1)
+            ->get()
+            ->row_array();
+
+        if ($row && !empty($row['ModifiedByName'])) {
+            return [
+                'name' => $row['ModifiedByName'],
+                'ts'   => !empty($row['ModifiedTs']) ? $row['ModifiedTs'] : $row['LastChangeTs']
+            ];
+        }
+
+        return [
+            'name' => 'Creator / System',
+            'ts'   => !empty($row['LastChangeTs']) ? $row['LastChangeTs'] : (!empty($row['BidCreationTs']) ? $row['BidCreationTs'] : null)
+        ];
+    }
+
+    /**
+     * Update BidCreationDetails and log tracking in existing BidStatusTracking
+     */
+    public function updateBidDetailsAndTrack($bcid, array $updateMain, array $trackingData)
+    {
+        $mainFields = array_flip($this->db->list_fields('BidCreationDetails'));
+        $trackingFields = array_flip($this->db->list_fields('BidStatusTracking'));
+
+        $updateMain = array_intersect_key($updateMain, $mainFields);
+        $trackingData = array_intersect_key($trackingData, $trackingFields);
+
+        $this->db->trans_start();
+        $this->db->where('Bcid', (int)$bcid)->update('BidCreationDetails', $updateMain);
+        if (!empty($trackingData)) {
+            $this->db->insert('BidStatusTracking', $trackingData);
+        }
+        $this->db->trans_complete();
+
+        return $this->db->trans_status();
+    }
+
+    /**
+     * Get active categories list for dropdown
+     */
+    public function getActiveCategories()
+    {
+        return $this->db->order_by('CategoryList', 'ASC')->get('category')->result_array();
+    }
 } //Main Class
