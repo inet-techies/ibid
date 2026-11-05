@@ -118,9 +118,7 @@ function getBidDetailsData(){
         return $query; 
 }
 
-    /**
-     * Get Current Dashboard data (Preserves original status cards, counts, percentages, and recent bids)
-     */
+  
     public function getCurrentDashboardData($startDate = null, $endDate = null)
     {
         // 1. Grouped counts by BidStatus with optional date filtering
@@ -186,9 +184,7 @@ function getBidDetailsData(){
         ];
     }
 
-    /**
-     * Get Overview Dashboard data (Real DB metrics, multi-panel layout, no Key Insights)
-     */
+    
     public function getOverviewDashboardData($startDate = null, $endDate = null)
     {
         // Date filter builder
@@ -484,6 +480,21 @@ function getBidDetailsData(){
     /**
      * Get distinct list of States/UTs for dashboard filters
      */
+        /**
+     * Get distinct list of Departments for dashboard filters
+     */
+    public function getDistinctDepartments()
+    {
+        $rows = $this->db->distinct()
+                         ->select('BidDepartment')
+                         ->where('BidDepartment IS NOT NULL', null, false)
+                         ->where("TRIM(BidDepartment) !=", '')
+                         ->order_by('BidDepartment', 'ASC')
+                         ->get('BidCreationDetails')
+                         ->result_array();
+        return array_values(array_unique(array_filter(array_map('trim', array_column($rows, 'BidDepartment')))));
+    }
+
     public function getDistinctStates()
     {
         $rows = $this->db->distinct()
@@ -930,13 +941,7 @@ public function getBidStatusInfo($bcid)
         return $this->db->get()->result_array();
     }
 
-    /**
-     * Get notification log history with bid metadata
-     *
-     * @param int|null $bcid
-     * @param int $limit
-     * @return array
-     */
+   
     public function getNotificationLogs($bcid = null, $limit = 50)
     {
         $this->db->select('nl.*, b.BidTitle, b.TenderId')
@@ -1021,7 +1026,7 @@ public function generateBidId($bidType, $department, $date)
 
     $departmentCode = strtoupper(substr(trim($department), 0, 3));
 
-    // Format: DDMMYY
+   
     $dateCode = date('dmy', strtotime($date));
 
     $this->db->trans_begin();

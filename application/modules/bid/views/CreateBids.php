@@ -397,61 +397,6 @@
 
 <div id="factSheetOverlay" class="right-form-overlay"></div>
 
-<style>
-/* Right-side Fact Sheet Slide-out Modal Panel */
-.factsheet-panel {
-    position: fixed;
-    top: 0;
-    right: -920px;
-    width: 880px !important;
-    max-width: 95vw !important;
-    height: 100vh;
-    background: #ffffff;
-    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.2);
-    transition: right 0.32s cubic-bezier(0.25, 0.8, 0.25, 1);
-    z-index: 1060;
-    display: flex;
-    flex-direction: column;
-}
-.factsheet-panel.open {
-    right: 0 !important;
-}
-.right-form-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(15, 23, 42, 0.55);
-    backdrop-filter: blur(2px);
-    display: none;
-    z-index: 1055;
-}
-.right-form-overlay.show {
-    display: block;
-}
-
-/* Form Validation Styling */
-.is-invalid {
-    border-color: #ef4444 !important;
-    background-color: #fef2f2 !important;
-}
-.input-group.has-validation-error .form-control {
-    border-color: #ef4444 !important;
-}
-.input-group.has-validation-error .input-group-text {
-    border-color: #ef4444 !important;
-    background-color: #fee2e2 !important;
-    color: #ef4444 !important;
-}
-.field-error-feedback {
-    color: #dc2626;
-    font-size: 11.5px;
-    font-weight: 500;
-    margin-top: 4px;
-    display: block;
-}
-</style>
 
 <script>
 (function() {

@@ -134,6 +134,7 @@ public function dashboard(){
 			$data['statuses']  = $this->bid_model->getStatuses();
 			$data['categories']= $this->bid_model->getDistinctCategories();
 			$data['states']    = $this->bid_model->getDistinctStates();
+			$data['departments'] = $this->bid_model->getDistinctDepartments();
 			$data['startDate'] = $startDate;
 			$data['endDate']   = $endDate;
 
@@ -343,8 +344,7 @@ public function SendOtpVerify($Buid)
         // Log if needed, but do not break flow
     }
 
-    /* ================= LOAD OTP VERIFY PAGE ================= */
-
+   
     $this->template->set_master_template(
         '../../themes/'.$this->config->item("active_template").'/landing_template_login.php'
     ); 
@@ -975,7 +975,8 @@ public function getStatuses()
 
 		        $currentSortOrder = $current->SortOrder;
 
-		        // 2️⃣ Get only forward stages
+		       
+				
 		        $statuses = $this->bid_model->getForwardStatuses($currentSortOrder);
 
 		    echo json_encode($statuses);

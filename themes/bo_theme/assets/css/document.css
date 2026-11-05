@@ -784,3 +784,82 @@
     background: #ffffff !important;
 }
 
+
+
+/* ── Bid Details & Create Bids Shared Styles ── */
+#customerList_wrapper {
+    padding: 1rem 1.25rem;
+}
+#customerList_wrapper .dataTables_length,
+#customerList_wrapper .dataTables_filter {
+    margin-bottom: 0.85rem;
+}
+#customerList_wrapper .dataTables_info,
+#customerList_wrapper .dataTables_paginate {
+    margin-top: 0.85rem;
+}
+#customerList_wrapper .dataTables_paginate ul.pagination {
+    margin-bottom: 0;
+    gap: 2px;
+}
+
+/* Right-side Slide-out Modal Panel */
+.factsheet-panel,
+.timeline-panel {
+    position: fixed;
+    top: 0;
+    right: -920px;
+    width: 880px !important;
+    max-width: 95vw !important;
+    height: 100vh;
+    background: #ffffff;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.2);
+    transition: right 0.32s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 1060;
+    display: flex;
+    flex-direction: column;
+}
+.factsheet-panel.open,
+.timeline-panel.open {
+    right: 0 !important;
+}
+.right-form-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(2px);
+    display: none;
+    z-index: 1055;
+}
+.right-form-overlay.show {
+    display: block;
+}
+
+/* Form Validation Styling */
+.is-invalid,
+#updateBidForm .is-invalid,
+#updateBidForm .is-invalid + .select2-container .select2-selection {
+    border-color: #ef4444 !important;
+    background-color: #fef2f2 !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
+}
+.input-group.has-validation-error .form-control {
+    border-color: #ef4444 !important;
+}
+.input-group.has-validation-error .input-group-text {
+    border-color: #ef4444 !important;
+    background-color: #fee2e2 !important;
+    color: #ef4444 !important;
+}
+.field-error-feedback,
+#updateBidForm .field-error-feedback {
+    color: #dc2626;
+    font-size: 11.5px;
+    font-weight: 500;
+    margin-top: 4px;
+    display: block;
+    line-height: 1.3;
+}

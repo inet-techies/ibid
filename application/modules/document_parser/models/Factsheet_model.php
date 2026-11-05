@@ -73,7 +73,7 @@ class Factsheet_model extends CI_Model
             return $decoded;
         }
 
-        // 2. Fallback: Legacy "Label: Value | Label: Value" pipe-delimited parser
+       
         $out = [];
         $segments = preg_split('/(?<!\\\\)\s*\|\s*/', $rawStr);
         foreach ($segments as $seg) {
@@ -92,12 +92,7 @@ class Factsheet_model extends CI_Model
         return $out;
     }
 
-    /**
-     * Serializes a list of items into safely encoded JSON array.
-     *
-     * @param array $items
-     * @return string JSON array representation
-     */
+  
     public static function serializeList(array $items)
     {
         $cleanItems = [];
@@ -114,13 +109,7 @@ class Factsheet_model extends CI_Model
         return json_encode(array_values($cleanItems), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
-    /**
-     * Deserializes a stored list column back into an indexed array of items.
-     * Decodes JSON array safely; falls back to legacy pipe-delimited parser if an old row is encountered.
-     *
-     * @param mixed $raw
-     * @return array
-     */
+   
     public static function deserializeList($raw)
     {
         if (empty($raw)) return [];
@@ -152,12 +141,7 @@ class Factsheet_model extends CI_Model
     }
 
 
-    /**
-     * Checks if a string is a valid JSON array or object.
-     *
-     * @param mixed $str
-     * @return bool
-     */
+    
     public static function isJsonString($str)
     {
         if (!is_string($str)) return false;
@@ -167,13 +151,7 @@ class Factsheet_model extends CI_Model
         return (json_last_error() === JSON_ERROR_NONE);
     }
 
-    /**
-     * Converts a structured or attribute-based payload into the 12 main section column format.
-     * Every section is safely encoded as JSON.
-     *
-     * @param array $data Fact Sheet attributes
-     * @return array Array with 12 section columns encoded as JSON
-     */
+   
     public function buildSectionPayload(array $data)
     {
         // 1. TenderOverview (JSON object)
@@ -421,14 +399,7 @@ class Factsheet_model extends CI_Model
         return $data;
     }
 
-    /**
-     * Inserts a new Fact Sheet record or updates an existing one when re-processed.
-     * Persists section-based JSON data in the 12 main section columns, avoiding
-     * individual column proliferation while maintaining core metadata and legacy indexing fields.
-     *
-     * @param array $data Fact Sheet attributes
-     * @return int|false The Fact Sheet ID (Tfsid)
-     */
+    
     public function saveFactSheet(array $data)
     {
         if (empty($data['DocumentPath']) && empty($data['DocumentName'])) {
@@ -513,22 +484,13 @@ class Factsheet_model extends CI_Model
         return $tfsid;
     }
 
-    /**
-     * Retrieves a Fact Sheet by its primary key Tfsid
-     */
+    
     public function getFactSheetById($id)
     {
         return $this->db->get_where($this->table, ['Tfsid' => (int)$id])->row_array();
     }
 
-    /**
-     * Generates or synchronizes a Fact Sheet record directly from a saved Bid (BidCreationDetails).
-     * Ensures that the Fact Sheet resembles and perfectly matches all details of the saved bid.
-     *
-     * @param int $bcid Bid creation ID
-     * @param array $bidData Optional bid data array (if already loaded)
-     * @return array|false The synchronized Fact Sheet record
-     */
+  
     public function generateOrSyncFactsheetForBid($bcid, array $bidData = [])
     {
         $bcid = (int)$bcid;
@@ -715,34 +677,24 @@ class Factsheet_model extends CI_Model
         }
     }
 
-    /**
-     * Retrieves a Fact Sheet associated with a Bid creation ID (Bcid)
-     * Automatically synchronizes with BidCreationDetails so Fact Sheet matches the bid.
-     */
+   
     public function getFactSheetByBcid($bcid)
     {
         return $this->generateOrSyncFactsheetForBid($bcid);
     }
 
-    /**
-     * Retrieves a Fact Sheet by relative document path
-     */
+  
     public function getFactSheetByDocPath($path)
     {
         return $this->db->order_by('Tfsid', 'DESC')->get_where($this->table, ['DocumentPath' => $path])->row_array();
     }
 
-    /**
-     * Links a Fact Sheet to a created Bid (Bcid)
-     */
+  
     public function linkFactSheetToBid($tfsid, $bcid)
     {
         return $this->db->where('Tfsid', (int)$tfsid)->update($this->table, ['Bcid' => (int)$bcid]);
     }
-    /**
-     * Persists evidence records for a Fact Sheet.
-     * Prevents duplicate evidence records on re-extraction.
-     */
+  
     public function saveEvidenceRecords($tfsid, array $evidenceRecords, $docPath = null, $docHash = null)
     {
         $tfsid = (int)$tfsid;
@@ -752,15 +704,7 @@ class Factsheet_model extends CI_Model
         return $this->db->where('Tfsid', $tfsid)->update($this->table, ['EvidenceJson' => $json]);
     }
 
-    /**
-     * Retrieves all evidence records for a Fact Sheet, indexed and grouped by field_key.
-     * Uses the EvidenceJson column stored directly in tenderfactsheet (No separate table needed).
-     * If no evidence records exist yet, generates and caches them in EvidenceJson on-the-fly.
-     *
-     * @param int $tfsid
-     * @param array|null $fs Optional already-loaded Fact Sheet record
-     * @return array [ 'by_field' => [ fieldKey => primaryEvidence ], 'all' => [ fieldKey => [ ...records ] ] ]
-     */
+ 
     public function getEvidenceByTfsid($tfsid, array $fs = null)
     {
         $tfsid = (int)$tfsid;
@@ -849,9 +793,7 @@ class Factsheet_model extends CI_Model
         return ['by_field' => $byField, 'all' => $all];
     }
 
-    /**
-     * Retrieves evidence records for a specific field in a Fact Sheet.
-     */
+  
     public function getEvidenceForField($tfsid, $fieldKey)
     {
         $evData = $this->getEvidenceByTfsid($tfsid);

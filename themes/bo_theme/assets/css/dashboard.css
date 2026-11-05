@@ -426,6 +426,57 @@ body,
 
 .bid-category-card { min-height: 295px; }
 
+/* Bids by Category Ranked List */
+.cat-ranked-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    padding: 10px 4px 6px 4px;
+    max-height: 235px;
+    overflow-y: auto;
+}
+.crl-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 3px 6px;
+    border-radius: 4px;
+    transition: background .15s ease;
+    cursor: default;
+}
+.crl-item:hover {
+    background: #EEF7FF;
+}
+.crl-name {
+    width: 105px;
+    min-width: 105px;
+    color: var(--bid-text-dk);
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.crl-bar-wrap {
+    flex: 1;
+    height: 13px;
+    background: #F1F5F9;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.crl-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width .4s ease;
+}
+.crl-count {
+    width: 24px;
+    text-align: right;
+    font-weight: 700;
+    color: var(--bid-text-dk);
+    font-size: 12px;
+}
+
 /* ── Bids by State / UT (3-column layout inside card) ── */
 .bid-state-card { min-height: 295px; }
 .state-card-body {
@@ -436,10 +487,10 @@ body,
     min-height: 255px;
 }
 .scb-map-wrap {
-    flex: 1.1;
-    min-width: 170px;
-    max-width: 230px;
-    margin-left: 20px;
+    flex: 1.15;
+    min-width: 175px;
+    max-width: 235px;
+    margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -693,70 +744,83 @@ body,
 .dd-panel {
     position: fixed;
     top: 0; right: 0;
-    width: min(800px, 96vw);
+    width: min(480px, 92vw);
     height: 100vh;
     overflow-y: auto;
     z-index: 1050;
-    box-shadow: -6px 0 32px rgba(0,0,0,.18);
+    background: #ffffff;
+    box-shadow: -8px 0 36px rgba(15, 23, 42, 0.16);
+    border-left: 1px solid #E2E8F0;
     animation: ddSlideIn .25s cubic-bezier(.4,0,.2,1);
+    display: flex;
+    flex-direction: column;
 }
 @keyframes ddSlideIn {
     from { transform: translateX(100%); opacity: 0; }
     to   { transform: translateX(0);    opacity: 1; }
 }
-.dd-panel-inner { padding: 26px; min-height: 100%; }
+.dd-panel-inner { padding: 22px; min-height: 100%; }
 
 .dd-panel-kpi,
-.dd-panel-blue   { background: linear-gradient(150deg, #1A237E 0%, #1565C0 100%); }
-.dd-panel-teal   { background: linear-gradient(150deg, #004D40 0%, #009688 100%); }
-.dd-panel-purple { background: linear-gradient(150deg, #311B92 0%, #7E57C2 100%); }
-.dd-panel-detail { background: #fff; }
+.dd-panel-blue,
+.dd-panel-teal,
+.dd-panel-purple,
+.dd-panel-detail {
+    background: #ffffff !important;
+}
 
+.dd-header,
 .dd-panel-header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 18px;
-    gap: 10px;
+    padding: 20px 22px 14px;
+    border-bottom: 1px solid #F1F5F9;
+    background: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
+.dd-badge,
 .dd-panel-badge,
 .badge-kpi {
     display: inline-block;
-    padding: 2px 10px;
-    border-radius: 20px;
-    font-size: 9.5px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 10px;
     font-weight: 700;
     letter-spacing: .5px;
     text-transform: uppercase;
-    margin-bottom: 5px;
+    background: #EEF2FF !important;
+    color: #4F46E5 !important;
+    border: 1px solid #C7D2FE;
+    margin-bottom: 6px;
 }
-.badge-kpi,
-.dd-badge-blue,
-.dd-badge-teal,
-.dd-badge-purple { background: rgba(255,255,255,.2); color: #fff; }
-.dd-badge-detail { background: #E3F2FD; color: var(--bid-primary); }
+.dd-badge-detail { background: #E0F2FE !important; color: #0284C7 !important; border-color: #BAE6FD; }
 
+.dd-title,
 .dd-panel-title {
-    font-size: 21px;
+    font-size: 19px;
     font-weight: 800;
-    color: #fff;
+    color: #0F172A !important;
     margin: 0;
-    line-height: 1.2;
+    line-height: 1.25;
 }
-.dd-panel-title-dark { color: var(--bid-text-dk); }
+.dd-panel-title-dark { color: #0F172A !important; }
+.dd-sub,
 .dd-panel-sub {
-    font-size: 11.5px;
-    color: rgba(255,255,255,.70);
+    font-size: 12px;
+    color: #64748B !important;
     margin: 3px 0 0;
 }
 
 .dd-close-btn {
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    border: 2px solid rgba(255,255,255,.4);
-    background: rgba(255,255,255,.15);
-    color: #fff;
+    border: 1px solid #E2E8F0;
+    background: #F8FAFC;
+    color: #64748B;
     font-size: 18px;
     line-height: 1;
     cursor: pointer;
@@ -767,130 +831,240 @@ body,
     flex-shrink: 0;
 }
 .dd-close-btn:hover {
-    background: rgba(255,255,255,.3);
-    border-color: #fff;
-}
-.dd-close-btn-dark {
-    border-color: var(--bid-border);
-    background: #F3F6FE;
-    color: var(--bid-text-dk);
-}
-.dd-close-btn-dark:hover {
-    background: var(--bid-primary);
-    color: #fff;
-    border-color: var(--bid-primary);
+    background: #F1F5F9;
+    color: #0F172A;
+    border-color: #CBD5E1;
 }
 
+.dd-body {
+    padding: 18px 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.dd-kpi-row,
 .dd-panel-kpi-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-bottom: 14px;
+    gap: 10px;
+    margin-bottom: 0;
 }
 .dd-kpi {
-    background: rgba(255,255,255,.15);
-    border-radius: 9px;
-    padding: 11px 14px;
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    padding: 12px 8px;
     text-align: center;
 }
 .dd-kpi-val {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 800;
-    color: #fff;
-    line-height: 1;
+    color: #0F172A !important;
+    line-height: 1.2;
 }
 .dd-kpi-lbl {
-    font-size: 10px;
-    color: rgba(255,255,255,.70);
-    margin-top: 3px;
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+    color: #64748B !important;
+    margin-top: 4px;
 }
 
-.dd-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
-.dd-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 9px; }
-.dd-inner-card {
-    background: rgba(255,255,255,.12);
-    border-radius: 9px;
-    padding: 13px;
-    backdrop-filter: blur(4px);
+.dd-charts-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
+.dd-chart-box,
+.dd-inner-card {
+    background: #ffffff !important;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    padding: 14px;
+    backdrop-filter: none;
+}
+.dd-box-title,
 .dd-inner-title {
     font-size: 11.5px;
     font-weight: 700;
-    color: rgba(255,255,255,.85);
-    margin-bottom: 9px;
-    display: flex;
-    align-items: center;
-    gap: 7px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: #1E293B !important;
+    margin-bottom: 8px;
 }
-.dd-bid-count-badge {
-    background: rgba(255,255,255,.25);
-    color: #fff;
-    font-size: 9.5px;
-    padding: 1px 6px;
-    border-radius: 10px;
-    font-weight: 600;
-}
-.mt-2 { margin-top: 9px !important; }
 
+.dd-bids-section {
+    background: #ffffff;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    padding: 14px;
+}
+.dd-section-hdr {
+    font-size: 12px;
+    font-weight: 700;
+    color: #0F172A;
+    margin-bottom: 10px;
+}
+.dd-bids-scroll,
 .dd-bids-list {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    max-height: 300px;
+    gap: 8px;
+    max-height: 320px;
     overflow-y: auto;
+    padding-right: 4px;
 }
 .dd-bid-item {
-    background: rgba(255,255,255,.10);
-    border-radius: 7px;
-    padding: 9px 13px;
     display: flex;
     align-items: center;
-    gap: 9px;
+    gap: 10px;
+    padding: 10px 12px;
+    background: #F8FAFC !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background .15s;
-    border: 1px solid rgba(255,255,255,.10);
+    transition: all .15s;
 }
 .dd-bid-item:hover {
-    background: rgba(255,255,255,.22);
-    border-color: rgba(255,255,255,.3);
+    background: #EFF6FF !important;
+    border-color: #BFDBFE !important;
 }
 .dd-bid-idx {
     width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    background: #EEF2FF;
+    color: #4F46E5;
     font-size: 10.5px;
-    color: rgba(255,255,255,.5);
     font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
 }
-.dd-bid-info { flex: 1; min-width: 0; }
+.dd-bid-info {
+    flex: 1;
+    min-width: 0;
+}
 .dd-bid-title {
     font-size: 12px;
     font-weight: 600;
-    color: #fff;
+    color: #0F172A !important;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 .dd-bid-meta {
     font-size: 10.5px;
-    color: rgba(255,255,255,.6);
+    color: #64748B !important;
     margin-top: 2px;
 }
+.dd-bid-status-pill {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: #E2E8F0;
+    color: #334155;
+    font-size: 9.5px;
+    font-weight: 600;
+}
 .dd-bid-val {
-    font-size: 11.5px;
+    font-size: 12px;
     font-weight: 700;
-    color: rgba(255,255,255,.9);
+    color: #2563EB !important;
     white-space: nowrap;
     flex-shrink: 0;
 }
 
-.dd-panel-detail .dd-inner-card  { background: #F3F6FE; }
-.dd-panel-detail .dd-inner-title { color: var(--bid-text-dk); }
-.dd-panel-detail .dd-bid-item    { background: #F3F6FE; border-color: var(--bid-border); }
-.dd-panel-detail .dd-bid-item:hover { background: #EEF7FF; }
-.dd-panel-detail .dd-bid-title   { color: var(--bid-text-dk); }
-.dd-panel-detail .dd-bid-meta    { color: var(--bid-text-md); }
-.dd-panel-detail .dd-bid-val     { color: var(--bid-primary-dk); }
-.dd-panel-detail .dd-bid-idx     { color: var(--bid-text-lt); }
+/* ================================================================
+   BID PIPELINE FUNNEL STYLES
+   ================================================================ */
+.pipeline-funnel-container {
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 220px;
+}
+.pf-stage {
+    display: grid;
+    grid-template-columns: 140px 1fr 48px;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    transition: transform 0.15s;
+}
+.pf-stage:last-child {
+    margin-bottom: 0;
+}
+.pf-stage:hover {
+    transform: translateX(2px);
+}
+.pf-label {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #1E293B;
+    line-height: 1.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.pf-bar-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.pf-bar {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 12px;
+    transition: all 0.2s;
+    user-select: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.pf-stage:hover .pf-bar {
+    filter: brightness(1.12);
+}
+.pf-stage-1 {
+    width: 100%;
+    background: #2563EB;
+    clip-path: polygon(0 0, 100% 0, 91% 100%, 9% 100%);
+}
+.pf-stage-2 {
+    width: 82%;
+    background: #38BDF8;
+    clip-path: polygon(0 0, 100% 0, 89% 100%, 11% 100%);
+}
+.pf-stage-3 {
+    width: 65%;
+    background: #14B8A6;
+    clip-path: polygon(0 0, 100% 0, 86% 100%, 14% 100%);
+}
+.pf-stage-4 {
+    width: 48%;
+    background: #F59E0B;
+    clip-path: polygon(0 0, 100% 0, 82% 100%, 18% 100%);
+}
+.pf-stage-5 {
+    width: 32%;
+    background: #10B981;
+    clip-path: polygon(0 0, 100% 0, 94% 100%, 6% 100%);
+    border-radius: 0 0 3px 3px;
+}
+.pf-pct {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #475569;
+    text-align: right;
+}
 
 .bid-detail-content { padding: 6px 0; }
 .bdc-section { margin-bottom: 16px; }

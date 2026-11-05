@@ -7,23 +7,6 @@
       || (strtolower($this->uri->segment(2)) === 'technicalevaluated');
 ?>
 
-  <style>
-#customerList_wrapper {
-    padding: 1rem 1.25rem;
-}
-#customerList_wrapper .dataTables_length,
-#customerList_wrapper .dataTables_filter {
-    margin-bottom: 0.85rem;
-}
-#customerList_wrapper .dataTables_info,
-#customerList_wrapper .dataTables_paginate {
-    margin-top: 0.85rem;
-}
-#customerList_wrapper .dataTables_paginate ul.pagination {
-    margin-bottom: 0;
-    gap: 2px;
-}
-</style>
 <div class="row">
                     <div class="col-lg-12">
                         <div class="card stretch stretch-full">
@@ -163,9 +146,9 @@
     </div>
 
     <div class="right-form-body">
-               <!-- YOUR EXISTING FORM STARTS -->
+              
         <div id="userModalBody"></div>
-               <!-- YOUR FORM ENDS -->
+              
     </div>
 </div>
 
@@ -215,43 +198,6 @@
     </div>
 </div>
 
-<style>
-.factsheet-panel,
-.timeline-panel {
-    position: fixed;
-    top: 0;
-    right: -920px;
-    width: 880px !important;
-    max-width: 95vw !important;
-    height: 100vh;
-    background: #ffffff;
-    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.2);
-    transition: right 0.32s cubic-bezier(0.25, 0.8, 0.25, 1);
-    z-index: 1060;
-    display: flex;
-    flex-direction: column;
-}
-.factsheet-panel.open,
-.timeline-panel.open {
-    right: 0 !important;
-}
-
-/* Update Bid Modal Validation Styles */
-#updateBidForm .is-invalid,
-#updateBidForm .is-invalid + .select2-container .select2-selection {
-    border-color: #ef4444 !important;
-    background-color: #fef2f2 !important;
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
-}
-#updateBidForm .field-error-feedback {
-    color: #dc2626;
-    font-size: 11.5px;
-    font-weight: 500;
-    margin-top: 4px;
-    display: block;
-    line-height: 1.3;
-}
-</style>
 
 <!-- Right Side Update Panel -->
 <div class="right-form" id="bidCanvas">
