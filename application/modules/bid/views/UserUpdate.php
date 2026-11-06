@@ -7,7 +7,14 @@
   }
 ?>
  
-  <!-- [ Main Content ] start -->
+  <style>
+/* Decrease width of View User Details side modal */
+#rightForm.right-form {
+    width: 380px !important;
+    max-width: 90vw !important;
+}
+</style>
+<!-- [ Main Content ] start -->
  
                 <!-- Permanently Visible Header Filters (Teleported to extreme right corner of breadcrumb row) -->
 <div id="page-filter-actions" style="display:none;">
@@ -166,7 +173,7 @@
                         
                     </div>
                 </div>
- <div id="rightForm" class="right-form">
+ <div id="rightForm" class="right-form" style="width: 380px !important; max-width: 90vw !important;">
     <div class="right-form-header">
         <h5>View User Details</h5>
         <button type="button" class="close-btn" id="closeAddForm">&times;</button>

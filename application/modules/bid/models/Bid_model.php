@@ -470,7 +470,7 @@ function getBidDetailsData(){
     {
         $rows = $this->db->select('COALESCE(c.CategoryList, b.Category) as CategoryName')
                          ->from('BidCreationDetails b')
-                         ->join('category c', 'c.CId = CAST(b.Category AS UNSIGNED)', 'left')
+                         ->join('Category c', 'c.CId = CAST(b.Category AS UNSIGNED)', 'left')
                          ->where('b.Category IS NOT NULL', null, false)
                          ->where("TRIM(b.Category) !=", '')
                          ->group_by('CategoryName')
@@ -822,7 +822,7 @@ public function getBidStatusInfo($bcid)
      */
     public function updateTenderFactsheet($tfsid, $data)
     {
-        return $this->db->where('Tfsid', (int)$tfsid)->update('tenderfactsheet', $data);
+        return $this->db->where('Tfsid', (int)$tfsid)->update('TenderFactSheet', $data);
     }
 
     /* =========================================================================
@@ -1154,6 +1154,6 @@ public function generateBidId($bidType, $department, $date)
      */
     public function getActiveCategories()
     {
-        return $this->db->order_by('CategoryList', 'ASC')->get('category')->result_array();
+        return $this->db->order_by('CategoryList', 'ASC')->get('Category')->result_array();
     }
 } //Main Class

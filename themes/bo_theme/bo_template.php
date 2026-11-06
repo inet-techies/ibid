@@ -392,29 +392,73 @@ if (!empty($employee_det['Bid'])) {
                 </ul> -->
 
                  <?php if (!empty($menuTree)): ?>
+                    <?php
+                    $rawUri = uri_string();
+                    $normCurrentUrl = strtolower(trim($rawUri, '/'));
+
+                    // URL aliases and variations
+                    $urlAliases = [
+                        'bid/lbids' => 'bid/l1bids',
+                        'bid/l1bids' => 'bid/lbids',
+                        'bid/createtender' => 'bid/createbids',
+                        'bid/createbid' => 'bid/createbids'
+                    ];
+
+                    // Specific sub-actions that map to "Bid Details" under Bids
+                    $bidSubActions = [
+                        'bid/timeline', 'bid/factsheet', 'bid/view_tender_document',
+                        'bid/bid_preview', 'bid/getbidmodaldetails', 'bid/updatebiddetails'
+                    ];
+
+                    $effectiveUrl = $normCurrentUrl;
+                    foreach ($bidSubActions as $sub) {
+                        if ($normCurrentUrl === $sub || strpos($normCurrentUrl . '/', $sub . '/') === 0) {
+                            $effectiveUrl = 'bid/biddetails';
+                            break;
+                        }
+                    }
+                    ?>
                     <ul class="nxl-navbar">
 
                  <?php foreach ($menuTree as $parent): ?>
 
                             <?php
                             $isActiveParent = false;
+                            $activeChildUrl = null;
+                            $pUrl = strtolower(trim($parent['MenuUrl'] ?? '', '/'));
 
                             if (!empty($parent['children'])) {
                                 foreach ($parent['children'] as $child) {
-                                    if ($current_url == $child['MenuUrl']) {
+                                    $cUrl = strtolower(trim($child['MenuUrl'] ?? '', '/'));
+                                    if (empty($cUrl) || $cUrl === '#') continue;
+
+                                    if ($effectiveUrl === $cUrl) {
                                         $isActiveParent = true;
+                                        $activeChildUrl = $cUrl;
+                                        break;
+                                    }
+                                    if (isset($urlAliases[$effectiveUrl]) && $urlAliases[$effectiveUrl] === $cUrl) {
+                                        $isActiveParent = true;
+                                        $activeChildUrl = $cUrl;
+                                        break;
+                                    }
+                                    if (strpos($effectiveUrl . '/', $cUrl . '/') === 0) {
+                                        $isActiveParent = true;
+                                        $activeChildUrl = $cUrl;
                                         break;
                                     }
                                 }
                             } else {
-                                $isActiveParent = ($current_url == $parent['MenuUrl']);
+                                if (!empty($pUrl) && $pUrl !== '#') {
+                                    $isActiveParent = ($effectiveUrl === $pUrl || strpos($effectiveUrl . '/', $pUrl . '/') === 0);
+                                }
                             }
                             ?>
 
                             <?php if (!empty($parent['children'])): ?>
 
                                 <!-- Parent With Children -->
-                                <li class="nxl-item nxl-hasmenu <?= $isActiveParent ? 'active' : ''; ?>">
+                                <li class="nxl-item nxl-hasmenu <?= $isActiveParent ? 'active nxl-trigger' : ''; ?>" data-menu-id="<?= $parent['Bmid']; ?>" data-menu-name="<?= htmlspecialchars($parent['MenuName']); ?>">
 
                                     <a href="javascript:void(0);" class="nxl-link">
                                         <span class="nxl-micon">
@@ -431,7 +475,22 @@ if (!empty($employee_det['Bid'])) {
                                     <ul class="nxl-submenu" style="<?= $isActiveParent ? 'display:block;' : 'display:none;'; ?>">
 
                                         <?php foreach ($parent['children'] as $child): ?>
-                                            <li class="nxl-item <?= ($current_url == $child['MenuUrl']) ? 'active' : ''; ?>">
+                                            <?php
+                                            $childUrl = strtolower(trim($child['MenuUrl'] ?? '', '/'));
+                                            $isChildActive = false;
+                                            if (!empty($childUrl) && $childUrl !== '#') {
+                                                if ($effectiveUrl === $childUrl) {
+                                                    $isChildActive = true;
+                                                } elseif (isset($urlAliases[$effectiveUrl]) && $urlAliases[$effectiveUrl] === $childUrl) {
+                                                    $isChildActive = true;
+                                                } elseif ($activeChildUrl === $childUrl) {
+                                                    $isChildActive = true;
+                                                } elseif (strpos($effectiveUrl . '/', $childUrl . '/') === 0) {
+                                                    $isChildActive = true;
+                                                }
+                                            }
+                                            ?>
+                                            <li class="nxl-item <?= $isChildActive ? 'active' : ''; ?>">
 
                                                 <a class="nxl-link" href="<?= base_url($child['MenuUrl']); ?>">
 
@@ -450,7 +509,7 @@ if (!empty($employee_det['Bid'])) {
                             <?php else: ?>
 
                                 <!-- Parent Without Children -->
-                                <li class="nxl-item <?= $isActiveParent ? 'active' : ''; ?>">
+                                <li class="nxl-item <?= $isActiveParent ? 'active' : ''; ?>" data-menu-id="<?= $parent['Bmid']; ?>" data-menu-name="<?= htmlspecialchars($parent['MenuName']); ?>">
 
                                     <a class="nxl-link" href="<?= base_url($parent['MenuUrl']); ?>">
 
@@ -1158,5 +1217,11 @@ if (!empty($employee_det['Bid'])) {
     $(document).ajaxComplete(function() {
         initGlobalRowActionCollapsibles();
     });
+    </script>
+
+    <script>
+    try {
+        sessionStorage.removeItem('nxl_open_menu');
+    } catch(e) {}
     </script>
 </body>

@@ -119,14 +119,14 @@
                         </select>
                     </div>
                 </div><!---------Bid Type----------->
-                 <div class="row mb-4 align-items-center">
-                    <div class="col-lg-4">
+                 <div class="row mb-4 align-items-start">
+                    <div class="col-lg-4 pt-2">
                         <label for="bidTitleInput" class="fw-semibold">Bid Title: <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
-                            <div class="input-group-text"><i class="feather-mail"></i></div>
-                            <input type="text" class="form-control" id="bidTitleInput" name="bidTitleInput" placeholder="Enter Bid Title">
+                            <div class="input-group-text"><i class="feather-file-text"></i></div>
+                            <textarea class="form-control" id="bidTitleInput" name="bidTitleInput" rows="3" placeholder="Enter Bid Title"></textarea>
                         </div>
                     </div>
                 </div><!---------Bid Title----------->
@@ -264,7 +264,7 @@
                         <small class="text-primary fw-bold mt-1 d-block" id="emdInWords"></small>
                     </div>
                 </div><!---------Bid EMD----------->
-                 <!-- 1. Tender Publication -->
+                                  <!-- 1. Tender Publication -->
                  <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
                         <label for="startDate" class="fw-semibold">Tender Publication: <span class="text-danger">*</span></label>
@@ -272,198 +272,162 @@
                     <div class="col-lg-8">
                         <div class="input-group">
                             <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
-                            <input type="date" class="form-control tender-schedule-date" id="startDate" name="PublishedDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
-                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
-                            <input type="time" class="form-control form-control-sm" id="tenderPublicationTime" name="tenderPublicationTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                            <input type="datetime-local" class="form-control tender-schedule-datetime" id="startDate" name="PublishedDate" data-time-target="tenderPublicationTime" style="cursor:pointer;" step="60">
+                            <input type="hidden" id="tenderPublicationTime" name="tenderPublicationTime" value="">
                         </div>
                     </div>
                 </div><!---------1. Tender Publication----------->
 
-                <!-- 2. Document Sale Start -->
-                <div class="row mb-4 align-items-center">
+                 <!-- 2. Document Sale Start -->
+                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
                         <label for="documentSaleStartDate" class="fw-semibold">Document Sale / Download Start:</label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
                             <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
-                            <input type="date" class="form-control tender-schedule-date" id="documentSaleStartDate" name="documentSaleStartDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
-                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
-                            <input type="time" class="form-control form-control-sm" id="documentSaleStartTime" name="documentSaleStartTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                            <input type="datetime-local" class="form-control tender-schedule-datetime" id="documentSaleStartDate" name="documentSaleStartDate" data-time-target="documentSaleStartTime" style="cursor:pointer;" step="60">
+                            <input type="hidden" id="documentSaleStartTime" name="documentSaleStartTime" value="">
                         </div>
                     </div>
                 </div><!---------2. Document Sale Start----------->
 
-                <!-- 3. Document Sale End -->
-                <div class="row mb-4 align-items-center">
+                 <!-- 3. Document Sale End -->
+                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
                         <label for="documentSaleEndDate" class="fw-semibold">Document Sale / Download End:</label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
                             <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
-                            <input type="date" class="form-control tender-schedule-date" id="documentSaleEndDate" name="documentSaleEndDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
-                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
-                            <input type="time" class="form-control form-control-sm" id="documentSaleEndTime" name="documentSaleEndTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                            <input type="datetime-local" class="form-control tender-schedule-datetime" id="documentSaleEndDate" name="documentSaleEndDate" data-time-target="documentSaleEndTime" style="cursor:pointer;" step="60">
+                            <input type="hidden" id="documentSaleEndTime" name="documentSaleEndTime" value="">
                         </div>
                     </div>
                 </div><!---------3. Document Sale End----------->
 
-                <!-- 4. Pre-bid Query Start -->
-                <div class="row mb-4 align-items-center">
+                 <!-- 4. Pre-bid Query Start -->
+                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
                         <label for="prebidQueryStartDate" class="fw-semibold">Pre-Bid Clarification / Query Start:</label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
                             <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
-                            <input type="date" class="form-control tender-schedule-date" id="prebidQueryStartDate" name="prebidQueryStartDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
-                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
-                            <input type="time" class="form-control form-control-sm" id="prebidQueryStartTime" name="prebidQueryStartTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                            <input type="datetime-local" class="form-control tender-schedule-datetime" id="prebidQueryStartDate" name="prebidQueryStartDate" data-time-target="prebidQueryStartTime" style="cursor:pointer;" step="60">
+                            <input type="hidden" id="prebidQueryStartTime" name="prebidQueryStartTime" value="">
                         </div>
                     </div>
                 </div><!---------4. Pre-bid Query Start----------->
 
-                <!-- 5. Pre-bid Query End -->
-                <div class="row mb-4 align-items-center">
+                 <!-- 5. Pre-bid Query End -->
+                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
                         <label for="prebidQueryEndDate" class="fw-semibold">Pre-Bid Clarification / Query End:</label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
                             <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
-                            <input type="date" class="form-control tender-schedule-date" id="prebidQueryEndDate" name="prebidQueryEndDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
-                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
-                            <input type="time" class="form-control form-control-sm" id="prebidQueryEndTime" name="prebidQueryEndTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                            <input type="datetime-local" class="form-control tender-schedule-datetime" id="prebidQueryEndDate" name="prebidQueryEndDate" data-time-target="prebidQueryEndTime" style="cursor:pointer;" step="60">
+                            <input type="hidden" id="prebidQueryEndTime" name="prebidQueryEndTime" value="">
                         </div>
                     </div>
                 </div><!---------5. Pre-bid Query End----------->
 
-                <!-- 6. Pre-bid Meeting -->
-                <div class="row mb-4 align-items-center">
+                 <!-- 6. Pre-bid Meeting -->
+                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
                         <label for="prebidMeetingDate" class="fw-semibold">Pre-Bid Meeting:</label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
                             <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
-                            <input type="date" class="form-control tender-schedule-date" id="prebidMeetingDate" name="prebidMeetingDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
-                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
-                            <input type="time" class="form-control form-control-sm" id="prebidMeetingTime" name="prebidMeetingTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                            <input type="datetime-local" class="form-control tender-schedule-datetime" id="prebidMeetingDate" name="prebidMeetingDate" data-time-target="prebidMeetingTime" style="cursor:pointer;" step="60">
+                            <input type="hidden" id="prebidMeetingTime" name="prebidMeetingTime" value="">
                         </div>
                     </div>
                 </div><!---------6. Pre-bid Meeting----------->
 
-                <!-- 7. Pre-bid Response Deadline -->
-                <div class="row mb-4 align-items-center">
+                 <!-- 7. Pre-bid Response Deadline -->
+                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
                         <label for="prebidResponseDate" class="fw-semibold">Pre-Bid Response / Clarification:</label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
                             <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
-                            <input type="date" class="form-control tender-schedule-date" id="prebidResponseDate" name="prebidResponseDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
-                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
-                            <input type="time" class="form-control form-control-sm" id="prebidResponseTime" name="prebidResponseTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                            <input type="datetime-local" class="form-control tender-schedule-datetime" id="prebidResponseDate" name="prebidResponseDate" data-time-target="prebidResponseTime" style="cursor:pointer;" step="60">
+                            <input type="hidden" id="prebidResponseTime" name="prebidResponseTime" value="">
                         </div>
                     </div>
                 </div><!---------7. Pre-bid Response Deadline----------->
 
-                <!-- 8. Bid Submission Start -->
-                <div class="row mb-4 align-items-center">
+                 <!-- 8. Bid Submission Start -->
+                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
                         <label for="bidSubmissionStartDate" class="fw-semibold">Bid Submission Start:</label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
                             <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
-                            <input type="date" class="form-control tender-schedule-date" id="bidSubmissionStartDate" name="bidSubmissionStartDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
-                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
-                            <input type="time" class="form-control form-control-sm" id="bidSubmissionStartTime" name="bidSubmissionStartTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                            <input type="datetime-local" class="form-control tender-schedule-datetime" id="bidSubmissionStartDate" name="bidSubmissionStartDate" data-time-target="bidSubmissionStartTime" style="cursor:pointer;" step="60">
+                            <input type="hidden" id="bidSubmissionStartTime" name="bidSubmissionStartTime" value="">
                         </div>
                     </div>
                 </div><!---------8. Bid Submission Start----------->
 
-                <!-- 9. Bid Submission End -->
-                <div class="row mb-4 align-items-center">
+                 <!-- 9. Bid Submission End -->
+                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
                         <label for="dueDate" class="fw-semibold">Bid Submission End / Deadline: <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
                             <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
-                            <input type="date" class="form-control tender-schedule-date" id="dueDate" name="SubmissionDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
-                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
-                            <input type="time" class="form-control form-control-sm" id="bidSubmissionEndTime" name="bidSubmissionEndTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                            <input type="datetime-local" class="form-control tender-schedule-datetime" id="dueDate" name="SubmissionDate" data-time-target="bidSubmissionEndTime" style="cursor:pointer;" step="60">
+                            <input type="hidden" id="bidSubmissionEndTime" name="bidSubmissionEndTime" value="">
                         </div>
                     </div>
                 </div><!---------9. Bid Submission End----------->
 
-                <!-- 10. PQ Bid Opening -->
-                <div class="row mb-4 align-items-center">
+                 <!-- 10. PQ Bid Opening -->
+                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
                         <label for="pqBidOpeningDate" class="fw-semibold">Pre-Qualification (PQ) Bid Opening:</label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
                             <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
-                            <input type="date" class="form-control tender-schedule-date" id="pqBidOpeningDate" name="pqBidOpeningDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
-                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
-                            <input type="time" class="form-control form-control-sm" id="pqBidOpeningTime" name="pqBidOpeningTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                            <input type="datetime-local" class="form-control tender-schedule-datetime" id="pqBidOpeningDate" name="pqBidOpeningDate" data-time-target="pqBidOpeningTime" style="cursor:pointer;" step="60">
+                            <input type="hidden" id="pqBidOpeningTime" name="pqBidOpeningTime" value="">
                         </div>
                     </div>
                 </div><!---------10. PQ Bid Opening----------->
 
-                <!-- 11. Technical Bid Opening -->
-                <div class="row mb-4 align-items-center">
+                 <!-- 11. Technical Bid Opening -->
+                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
                         <label for="dateofBirth" class="fw-semibold">Technical Bid Opening Date: <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
                             <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
-                            <input type="date" class="form-control tender-schedule-date" id="dateofBirth" name="OpeningDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
-                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
-                            <input type="time" class="form-control form-control-sm" id="technicalBidOpeningTime" name="technicalBidOpeningTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                            <input type="datetime-local" class="form-control tender-schedule-datetime" id="dateofBirth" name="OpeningDate" data-time-target="technicalBidOpeningTime" style="cursor:pointer;" step="60">
+                            <input type="hidden" id="technicalBidOpeningTime" name="technicalBidOpeningTime" value="">
                         </div>
                     </div>
                 </div><!---------11. Technical Bid Opening----------->
 
-                <!-- 12. Financial Bid Opening -->
-                <div class="row mb-4 align-items-center">
+                 <!-- 12. Financial Bid Opening -->
+                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-4">
                         <label for="financialBidOpeningDate" class="fw-semibold">Financial / Commercial Bid Opening:</label>
                     </div>
                     <div class="col-lg-8">
                         <div class="input-group">
                             <div class="input-group-text date-picker-icon" style="cursor:pointer;"><i class="feather-calendar"></i></div>
-                            <input type="date" class="form-control tender-schedule-date" id="financialBidOpeningDate" name="financialBidOpeningDate" placeholder="YYYY-MM-DD" style="cursor:pointer;">
-                        </div>
-                        <div class="d-flex align-items-center gap-2 mt-2 time-group">
-                            <span class="text-muted fw-semibold small d-inline-flex align-items-center time-icon" style="font-size:12px;cursor:pointer;"><i class="feather-clock text-secondary me-1"></i>Time:</span>
-                            <input type="time" class="form-control form-control-sm" id="financialBidOpeningTime" name="financialBidOpeningTime" style="max-width:160px;height:32px;font-size:12.5px;cursor:pointer;" placeholder="HH:MM">
+                            <input type="datetime-local" class="form-control tender-schedule-datetime" id="financialBidOpeningDate" name="financialBidOpeningDate" data-time-target="financialBidOpeningTime" style="cursor:pointer;" step="60">
+                            <input type="hidden" id="financialBidOpeningTime" name="financialBidOpeningTime" value="">
                         </div>
                     </div>
                 </div><!---------12. Financial Bid Opening----------->
@@ -642,38 +606,76 @@
     return raw;
   }
 
-  // ── Helper: Set verified input field value & attach confidence badge ──
-  function setTimeField(id, val) {
-    if (!val) return;
-    var el = document.getElementById(id);
-    if (!el) return;
-    var raw = val.toString().trim();
-    // Normalize time to HH:MM 24-hour format required by HTML5 <input type="time">
+  // ── Helper: Normalize time string to HH:MM format ──
+  function normalizeTimeToHHMM(raw) {
+    if (!raw) return '';
+    raw = raw.toString().trim();
     var ampmMatch = raw.match(/^(\d{1,2}):(\d{2})\s*(AM|PM|am|pm)$/i);
-    var normalized = '';
     if (ampmMatch) {
       var h = parseInt(ampmMatch[1], 10);
       var m = ampmMatch[2];
       var p = ampmMatch[3].toUpperCase();
       if (p === 'PM' && h < 12) h += 12;
       if (p === 'AM' && h === 12) h = 0;
-      normalized = (h < 10 ? '0' : '') + h + ':' + m;
-    } else if (/^\d{1,2}:\d{2}(?::\d{2})?$/.test(raw)) {
+      return (h < 10 ? '0' : '') + h + ':' + m;
+    }
+    if (/^\d{1,2}:\d{2}(?::\d{2})?$/.test(raw)) {
       var parts = raw.split(':');
       var h = parseInt(parts[0], 10);
       var m = parts[1];
-      normalized = (h < 10 ? '0' : '') + h + ':' + m;
-    } else if (/^\d{4}$/.test(raw)) {
-      normalized = raw.substring(0, 2) + ':' + raw.substring(2);
-    } else {
-      normalized = raw;
+      return (h < 10 ? '0' : '') + h + ':' + m;
     }
-    el.value = normalized;
-    el.dispatchEvent(new Event('input', {bubbles: true}));
-    el.dispatchEvent(new Event('change', {bubbles: true}));
+    if (/^\d{4}$/.test(raw)) {
+      return raw.substring(0, 2) + ':' + raw.substring(2);
+    }
+    return '';
   }
 
-  function setVerifiedField(id, val, confidence, isDate, fieldLabel) {
+  // ── Helper: Format combined Date and Time as ISO YYYY-MM-DDTHH:MM ──
+  function formatToIsoDateTime(dateVal, timeVal) {
+    if (!dateVal) return '';
+    var rawStr = dateVal.toString().trim();
+    var isoDate = formatToIsoDate(rawStr);
+    if (!isoDate || isoDate.length < 10) return '';
+
+    var time = normalizeTimeToHHMM(timeVal);
+    if (!time) {
+      // Check if date string itself contained time
+      var m = rawStr.match(/(?:at\s+|T|\s+)(\d{1,2}:\d{2}(?::\d{2})?(?:\s*(?:AM|PM|am|pm))?)/i);
+      if (m) {
+        time = normalizeTimeToHHMM(m[1]);
+      }
+    }
+    if (!time) {
+      time = '10:00'; // Default 10:00 AM standard for tender deadlines
+    }
+    return isoDate + 'T' + time;
+  }
+
+  // ── Helper: Set hidden time field value & keep parent datetime in sync ──
+  function setTimeField(id, val) {
+    if (!val) return;
+    var el = document.getElementById(id);
+    if (el) {
+      var normalized = normalizeTimeToHHMM(val);
+      el.value = normalized;
+      el.dispatchEvent(new Event('input', {bubbles: true}));
+      el.dispatchEvent(new Event('change', {bubbles: true}));
+    }
+
+    // Also update parent datetime-local field's time portion if populated
+    var dtEl = document.querySelector('input.tender-schedule-datetime[data-time-target="' + id + '"]');
+    if (dtEl && dtEl.value) {
+      var curDate = dtEl.value.split('T')[0];
+      if (curDate) {
+        dtEl.value = curDate + 'T' + (normalizeTimeToHHMM(val) || '10:00');
+        dtEl.dispatchEvent(new Event('input', {bubbles: true}));
+        dtEl.dispatchEvent(new Event('change', {bubbles: true}));
+      }
+    }
+  }
+
+  function setVerifiedField(id, val, confidence, isDate, fieldLabel, timeVal) {
     // CRITICAL EXCLUSIONS: Department and Estimated Tender Value must NEVER be auto-populated
     if (id === 'bidDepartmentInput' || id === 'bidEstimatedInput') {
       return false;
@@ -695,7 +697,6 @@
     if (isNaN(score)) score = 90;
 
     // Only mandatory fields show "manual entry required" if missing or confidence < 70
-    // Optional schedule date fields do NOT show any warning badge if not found in document
     var isMandatoryField = (id === 'startDate' || id === 'dueDate' || id === 'dateofBirth' || id === 'bidTenderIDInput' || id === 'bidTitleInput' || id === 'bidSummaryInput');
 
     if (score < 70 || !val) {
@@ -712,14 +713,23 @@
       return false;
     }
 
-    var finalVal = isDate ? formatToIsoDate(val) : val;
+    var finalVal = isDate ? formatToIsoDateTime(val, timeVal) : val;
     el.value = finalVal;
     el.dispatchEvent(new Event('input', {bubbles: true}));
     el.dispatchEvent(new Event('change', {bubbles: true}));
 
-    // Verify value was actually accepted by the HTML input
+    // Verify value was accepted
     if (el.value !== finalVal && el.value === '') {
       return false;
+    }
+
+    // Sync hidden time target
+    var timeTargetId = el.getAttribute('data-time-target');
+    if (timeTargetId && finalVal.indexOf('T') !== -1) {
+      var tEl = document.getElementById(timeTargetId);
+      if (tEl) {
+        tEl.value = finalVal.split('T')[1].substring(0, 5);
+      }
     }
 
     // Attach confidence badge
@@ -919,109 +929,109 @@
     // ── 12 TENDER ACTIVITY MILESTONES (Dates & Times) ──
 
     // 1. Tender Publication
+    var pubTime = ai.tender_publication_time || ai.tenderPublicationTime || '';
     var pubData = fields.published_date || {};
     var pubVal  = pubData.value || ai.tender_publication_date || ai.tenderPublicationDate || ai.published_date || '';
     var pubConf = pubData.confidence !== undefined ? pubData.confidence : (pubVal ? 90 : 0);
-    if (pubVal && setVerifiedField('startDate', pubVal, pubConf, true, 'Tender Publication')) {
+    if (pubVal && setVerifiedField('startDate', pubVal, pubConf, true, 'Tender Publication', pubTime)) {
       filled.push('Tender Publication Date');
     }
-    var pubTime = ai.tender_publication_time || ai.tenderPublicationTime || '';
     if (pubTime) setTimeField('tenderPublicationTime', pubTime);
 
     // 2. Document Sale Start
+    var dssTime = ai.document_sale_start_time || ai.documentSaleStartTime || '';
     var dssVal = ai.document_sale_start_date || ai.documentSaleStartDate || '';
-    if (dssVal && setVerifiedField('documentSaleStartDate', dssVal, 85, true, 'Doc Sale Start')) {
+    if (dssVal && setVerifiedField('documentSaleStartDate', dssVal, 85, true, 'Doc Sale Start', dssTime)) {
       filled.push('Document Sale Start');
     }
-    var dssTime = ai.document_sale_start_time || ai.documentSaleStartTime || '';
     if (dssTime) setTimeField('documentSaleStartTime', dssTime);
 
     // 3. Document Sale End
+    var dseTime = ai.document_sale_end_time || ai.documentSaleEndTime || '';
     var dseVal = ai.document_sale_end_date || ai.documentSaleEndDate || '';
-    if (dseVal && setVerifiedField('documentSaleEndDate', dseVal, 85, true, 'Doc Sale End')) {
+    if (dseVal && setVerifiedField('documentSaleEndDate', dseVal, 85, true, 'Doc Sale End', dseTime)) {
       filled.push('Document Sale End');
     }
-    var dseTime = ai.document_sale_end_time || ai.documentSaleEndTime || '';
     if (dseTime) setTimeField('documentSaleEndTime', dseTime);
 
     // 4. Pre-bid Query Start
+    var pqsTime = ai.prebid_query_start_time || ai.prebidQueryStartTime || '';
     var pqsVal = ai.prebid_query_start_date || ai.prebidQueryStartDate || '';
-    if (pqsVal && setVerifiedField('prebidQueryStartDate', pqsVal, 85, true, 'Pre-bid Query Start')) {
+    if (pqsVal && setVerifiedField('prebidQueryStartDate', pqsVal, 85, true, 'Pre-bid Query Start', pqsTime)) {
       filled.push('Pre-bid Query Start');
     }
-    var pqsTime = ai.prebid_query_start_time || ai.prebidQueryStartTime || '';
     if (pqsTime) setTimeField('prebidQueryStartTime', pqsTime);
 
     // 5. Pre-bid Query End
+    var pqeTime = ai.prebid_query_end_time || ai.prebidQueryEndTime || '';
     var pqeVal = ai.prebid_query_end_date || ai.prebidQueryEndDate || '';
-    if (pqeVal && setVerifiedField('prebidQueryEndDate', pqeVal, 85, true, 'Pre-bid Query End')) {
+    if (pqeVal && setVerifiedField('prebidQueryEndDate', pqeVal, 85, true, 'Pre-bid Query End', pqeTime)) {
       filled.push('Pre-bid Query End');
     }
-    var pqeTime = ai.prebid_query_end_time || ai.prebidQueryEndTime || '';
     if (pqeTime) setTimeField('prebidQueryEndTime', pqeTime);
 
     // 6. Pre-bid Meeting
+    var pbmTime = ai.prebid_meeting_time || ai.prebidMeetingTime || '';
     var pbmVal = ai.prebid_meeting_date || ai.prebidMeetingDate || '';
-    if (pbmVal && setVerifiedField('prebidMeetingDate', pbmVal, 85, true, 'Pre-bid Meeting')) {
+    if (pbmVal && setVerifiedField('prebidMeetingDate', pbmVal, 85, true, 'Pre-bid Meeting', pbmTime)) {
       filled.push('Pre-bid Meeting');
     }
-    var pbmTime = ai.prebid_meeting_time || ai.prebidMeetingTime || '';
     if (pbmTime) setTimeField('prebidMeetingTime', pbmTime);
 
     // 7. Pre-bid Response Deadline
+    var pbrTime = ai.prebid_response_time || ai.prebidResponseTime || '';
     var pbrVal = ai.prebid_response_date || ai.prebidResponseDate || '';
-    if (pbrVal && setVerifiedField('prebidResponseDate', pbrVal, 85, true, 'Pre-bid Response')) {
+    if (pbrVal && setVerifiedField('prebidResponseDate', pbrVal, 85, true, 'Pre-bid Response', pbrTime)) {
       filled.push('Pre-bid Response Deadline');
     }
-    var pbrTime = ai.prebid_response_time || ai.prebidResponseTime || '';
     if (pbrTime) setTimeField('prebidResponseTime', pbrTime);
 
     // 8. Bid Submission Start
+    var bssTime = ai.bid_submission_start_time || ai.bidSubmissionStartTime || '';
     var bssVal = ai.bid_submission_start_date || ai.bidSubmissionStartDate || '';
-    if (bssVal && setVerifiedField('bidSubmissionStartDate', bssVal, 85, true, 'Bid Submission Start')) {
+    if (bssVal && setVerifiedField('bidSubmissionStartDate', bssVal, 85, true, 'Bid Submission Start', bssTime)) {
       filled.push('Bid Submission Start');
     }
-    var bssTime = ai.bid_submission_start_time || ai.bidSubmissionStartTime || '';
     if (bssTime) setTimeField('bidSubmissionStartTime', bssTime);
 
     // 9. Bid Submission End / Deadline
+    var subTime = ai.bid_submission_end_time || ai.bidSubmissionEndTime || ai.submission_time || '';
     var subData = fields.submission_date || {};
     var subVal  = subData.value || ai.bid_submission_end_date || ai.bidSubmissionEndDate || ai.submission_date || '';
     if (!subVal && ai.submission_deadline) {
       subVal = ai.submission_deadline.indexOf(' at ') !== -1 ? ai.submission_deadline.split(' at ')[0].trim() : ai.submission_deadline;
     }
     var subConf = subData.confidence !== undefined ? subData.confidence : (subVal ? 95 : 0);
-    if (subVal && setVerifiedField('dueDate', subVal, subConf, true, 'Submission End Date')) {
+    if (subVal && setVerifiedField('dueDate', subVal, subConf, true, 'Submission End Date', subTime)) {
       filled.push('Submission End Date');
     }
-    var subTime = ai.bid_submission_end_time || ai.bidSubmissionEndTime || ai.submission_time || '';
     if (subTime) setTimeField('bidSubmissionEndTime', subTime);
 
     // 10. PQ Bid Opening
+    var pqbTime = ai.pq_bid_opening_time || ai.pqBidOpeningTime || '';
     var pqbVal = ai.pq_bid_opening_date || ai.pqBidOpeningDate || '';
-    if (pqbVal && setVerifiedField('pqBidOpeningDate', pqbVal, 85, true, 'PQ Bid Opening')) {
+    if (pqbVal && setVerifiedField('pqBidOpeningDate', pqbVal, 85, true, 'PQ Bid Opening', pqbTime)) {
       filled.push('PQ Bid Opening');
     }
-    var pqbTime = ai.pq_bid_opening_time || ai.pqBidOpeningTime || '';
     if (pqbTime) setTimeField('pqBidOpeningTime', pqbTime);
 
     // 11. Technical Bid Opening
+    var opTime = ai.technical_bid_opening_time || ai.technicalBidOpeningTime || ai.technical_opening_time || '';
     var opData = fields.technical_opening_date || {};
     var opVal  = opData.value || ai.technical_bid_opening_date || ai.technicalBidOpeningDate || ai.opening_date || '';
     if (opVal && opVal.indexOf(' at ') !== -1) opVal = opVal.split(' at ')[0].trim();
     var opConf = opData.confidence !== undefined ? opData.confidence : (opVal ? 90 : 0);
-    if (opVal && setVerifiedField('dateofBirth', opVal, opConf, true, 'Technical Bid Opening')) {
+    if (opVal && setVerifiedField('dateofBirth', opVal, opConf, true, 'Technical Bid Opening', opTime)) {
       filled.push('Technical Bid Opening');
     }
-    var opTime = ai.technical_bid_opening_time || ai.technicalBidOpeningTime || ai.technical_opening_time || '';
     if (opTime) setTimeField('technicalBidOpeningTime', opTime);
 
     // 12. Financial Bid Opening
+    var fboTime = ai.financial_bid_opening_time || ai.financialBidOpeningTime || ai.financial_opening_time || '';
     var fboVal = ai.financial_bid_opening_date || ai.financialBidOpeningDate || ai.financial_opening_date || '';
-    if (fboVal && setVerifiedField('financialBidOpeningDate', fboVal, 85, true, 'Financial Bid Opening')) {
+    if (fboVal && setVerifiedField('financialBidOpeningDate', fboVal, 85, true, 'Financial Bid Opening', fboTime)) {
       filled.push('Financial Bid Opening');
     }
-    var fboTime = ai.financial_bid_opening_time || ai.financialBidOpeningTime || ai.financial_opening_time || '';
     if (fboTime) setTimeField('financialBidOpeningTime', fboTime);
 
     // ── Keywords for Summary ──
@@ -1173,12 +1183,12 @@
       var el = document.getElementById(id);
       if (!el) return;
 
-      // Ensure HTML input type is explicitly 'date'
-      if (el.getAttribute('type') !== 'date') {
-        try { el.type = 'date'; } catch(e){}
+      // Ensure HTML input type is explicitly 'datetime-local'
+      if (el.getAttribute('type') !== 'datetime-local') {
+        try { el.type = 'datetime-local'; } catch(e){}
       }
 
-      // If vanillajs Datepicker attached itself to this native date input, destroy it
+      // If vanillajs Datepicker attached itself to this input, destroy it
       if (el.datepicker && typeof el.datepicker.destroy === 'function') {
         try { el.datepicker.destroy(); } catch(err){}
       }
@@ -1186,7 +1196,7 @@
 
       el.style.cursor = 'pointer';
 
-      // Clicking anywhere on the date input opens the native picker
+      // Clicking anywhere on the datetime-local input opens the native picker
       if (!el._hasPickerClick) {
         el._hasPickerClick = true;
         el.addEventListener('click', function(e) {
@@ -1194,6 +1204,19 @@
             try { this.showPicker(); } catch(err) {}
           }
         });
+
+        // Sync hidden time target whenever user changes datetime-local
+        var syncTimeTarget = function() {
+          var timeTargetId = el.getAttribute('data-time-target');
+          if (timeTargetId) {
+            var tEl = document.getElementById(timeTargetId);
+            if (tEl) {
+              tEl.value = (el.value && el.value.indexOf('T') !== -1) ? el.value.split('T')[1].substring(0, 5) : '';
+            }
+          }
+        };
+        el.addEventListener('input', syncTimeTarget);
+        el.addEventListener('change', syncTimeTarget);
       }
 
       // Clicking the calendar icon in the input-group opens the picker
@@ -1202,47 +1225,6 @@
         var icon = group.querySelector('.date-picker-icon, .input-group-text');
         if (icon && !icon._hasPickerClick) {
           icon._hasPickerClick = true;
-          icon.style.cursor = 'pointer';
-          icon.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (typeof el.showPicker === 'function') {
-              try { el.showPicker(); } catch(err) { el.focus(); }
-            } else {
-              el.focus();
-            }
-          });
-        }
-      }
-    });
-
-    // Time inputs
-    var timeIds = [
-      'tenderPublicationTime', 'documentSaleStartTime', 'documentSaleEndTime',
-      'prebidQueryStartTime', 'prebidQueryEndTime', 'prebidMeetingTime',
-      'prebidResponseTime', 'bidSubmissionStartTime', 'bidSubmissionEndTime',
-      'pqBidOpeningTime', 'technicalBidOpeningTime', 'financialBidOpeningTime'
-    ];
-
-    timeIds.forEach(function(id) {
-      var el = document.getElementById(id);
-      if (!el) return;
-
-      el.style.cursor = 'pointer';
-
-      if (!el._hasTimeClick) {
-        el._hasTimeClick = true;
-        el.addEventListener('click', function() {
-          if (typeof this.showPicker === 'function') {
-            try { this.showPicker(); } catch(err) {}
-          }
-        });
-      }
-
-      var parent = el.closest('.time-group') || el.parentElement;
-      if (parent) {
-        var icon = parent.querySelector('.time-icon, .feather-clock');
-        if (icon && !icon._hasTimeClick) {
-          icon._hasTimeClick = true;
           icon.style.cursor = 'pointer';
           icon.addEventListener('click', function(e) {
             e.preventDefault();
