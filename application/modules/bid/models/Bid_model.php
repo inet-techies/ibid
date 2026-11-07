@@ -457,7 +457,7 @@ function getBidDetailsData(){
         return $this->db->select('b.*, s.DisplayName as StatusName, s.BadgeClass, s.IconClass, s.SortOrder, COALESCE(c.CategoryList, b.Category) as CategoryName')
                         ->from('BidCreationDetails b')
                         ->join('BidStatusMaster s', 's.Sid = b.BidStatus', 'left')
-                        ->join('category c', 'c.CId = CAST(b.Category AS UNSIGNED)', 'left')
+                        ->join('Category c', 'c.CId = CAST(b.Category AS UNSIGNED)', 'left')
                         ->order_by('b.CreationTs', 'DESC')
                         ->get()
                         ->result_array();
@@ -1078,7 +1078,7 @@ public function generateBidId($bidType, $department, $date)
         $this->db->select('cat.CategoryList as CategoryName');
         $this->db->from('BidCreationDetails bu');
         $this->db->join('BidStatusMaster bsm', 'bsm.Sid = bu.BidStatus', 'left');
-        $this->db->join('category cat', 'cat.CId = bu.Category OR cat.CategoryList = bu.Category', 'left');
+        $this->db->join('Category cat', 'cat.CId = bu.Category OR cat.CategoryList = bu.Category', 'left');
         $this->db->where('bu.Bcid', (int)$bcid);
         return $this->db->get()->row_array();
     }
