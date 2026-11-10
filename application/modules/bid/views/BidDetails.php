@@ -192,11 +192,7 @@
                                                         </td>
                                                         <td><?= (!empty($val['CreationTs']) && strtotime($val['CreationTs'])) ? date('d M Y, h:i A', strtotime($val['CreationTs'])) : '-' ?></td>
                                                         <td class="text-center">
-                                                            <div class="row-actions-group justify-content-center">
-                                                                <button type="button" class="btn-row-actions-toggle avatar-text avatar-md" title="Actions" aria-label="Toggle Actions">
-                                                                    <i class="feather-plus"></i>
-                                                                </button>
-                                                                <div class="row-actions-collapse" style="display:none;">
+                                                            <div class="hstack gap-2 justify-content-center">
                                                                 <a href="javascript:void(0)"
                                                                     class="avatar-text avatar-md openAddForm view-bid"
                                                                     data-bid="<?= htmlspecialchars(json_encode($val), ENT_QUOTES, 'UTF-8'); ?>"
@@ -238,7 +234,6 @@
                                                                     title="Update Bid Status">
                                                                     <i class="feather feather-edit-2"></i>
                                                                 </a>
-                                                            </div>
                                                             </div>
                                                         </td>
                                                     </tr>
