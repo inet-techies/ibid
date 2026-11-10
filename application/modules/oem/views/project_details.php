@@ -117,13 +117,13 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                             <tr>
                                 <td class="text-muted ps-0">Published Date:</td>
                                 <td class="text-dark">
-                                    <?= !empty($project['RfbPublishedDate']) ? date('d M Y', strtotime($project['RfbPublishedDate'])) : '-'; ?>
+                                    <?= !empty($project['RfbPublishedDate']) ? date('d-m-Y', strtotime($project['RfbPublishedDate'])) : '-'; ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-muted ps-0">Submission Date:</td>
                                 <td class="fw-semibold text-dark">
-                                    <?= !empty($project['RfbSubmissionDate']) ? date('d M Y', strtotime($project['RfbSubmissionDate'])) : '-'; ?>
+                                    <?= !empty($project['RfbSubmissionDate']) ? date('d-m-Y', strtotime($project['RfbSubmissionDate'])) : '-'; ?>
                                 </td>
                             </tr>
                         </table>

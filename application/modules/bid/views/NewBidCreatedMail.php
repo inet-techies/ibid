@@ -206,7 +206,7 @@
             <td class="label">Published Date</td>
             <td class="value">
                 <?= (!empty($bid['PublishedDate']) && strtotime($bid['PublishedDate']))
-                    ? date('d-M-Y', strtotime($bid['PublishedDate']))
+                    ? date('d-m-Y', strtotime($bid['PublishedDate']))
                     : '-'; ?>
             </td>
         </tr>
@@ -215,7 +215,7 @@
             <td class="label">Submission / Close Date</td>
             <td class="value">
                 <?= (!empty($bid['SubmissionDate']) && strtotime($bid['SubmissionDate']))
-                    ? date('d-M-Y', strtotime($bid['SubmissionDate']))
+                    ? date('d-m-Y', strtotime($bid['SubmissionDate']))
                     : '-'; ?>
             </td>
         </tr>
@@ -224,7 +224,7 @@
             <td class="label">Opening Date</td>
             <td class="value">
                 <?= (!empty($bid['OpeningDate']) && strtotime($bid['OpeningDate']))
-                    ? date('d-M-Y', strtotime($bid['OpeningDate']))
+                    ? date('d-m-Y', strtotime($bid['OpeningDate']))
                     : '-'; ?>
             </td>
         </tr>
@@ -278,21 +278,21 @@
         <div>
             <strong>Published Date:</strong>
             <?= (!empty($bid['PublishedDate']) && strtotime($bid['PublishedDate']))
-                ? date('d-M-Y', strtotime($bid['PublishedDate']))
+                ? date('d-m-Y', strtotime($bid['PublishedDate']))
                 : '-'; ?>
         </div>
 
         <div>
             <strong>Submission / Close Date:</strong>
             <?= (!empty($bid['SubmissionDate']) && strtotime($bid['SubmissionDate']))
-                ? date('d-M-Y', strtotime($bid['SubmissionDate']))
+                ? date('d-m-Y', strtotime($bid['SubmissionDate']))
                 : '-'; ?>
         </div>
 
         <div>
             <strong>Opening Date:</strong>
             <?= (!empty($bid['OpeningDate']) && strtotime($bid['OpeningDate']))
-                ? date('d-M-Y', strtotime($bid['OpeningDate']))
+                ? date('d-m-Y', strtotime($bid['OpeningDate']))
                 : '-'; ?>
         </div>
 

@@ -90,6 +90,28 @@ if (!function_exists('safeVal')) {
     }
 }
 
+if (!function_exists('formatFactSheetDate')) {
+    function formatFactSheetDate($val) {
+        $str = trim((string)$val);
+        if ($str === '' || $str === '0000-00-00') return '';
+        // Convert YYYY-MM-DD (or YYYY/MM/DD) to dd-mm-yyyy (handles optional T time separator too)
+        $str = preg_replace('/(?<![0-9])(\d{4})[-\/](\d{2})[-\/](\d{2})(?![0-9])/', '$3-$2-$1', $str);
+        // Convert DD/MM/YYYY or DD.MM.YYYY to dd-mm-yyyy
+        $str = preg_replace_callback('/(?<![0-9])(\d{1,2})[\/.](\d{1,2})[\/.](\d{4})(?![0-9])/', function($m) {
+            return str_pad($m[1], 2, '0', STR_PAD_LEFT) . '-' . str_pad($m[2], 2, '0', STR_PAD_LEFT) . '-' . $m[3];
+        }, $str);
+        // Convert "22 Oct 2026" / "22 October 2026" when used as a standalone date (optional time)
+        if (preg_match('/^(\d{1,2}\s+[A-Za-z]{3,9}\s+\d{4})(?:[\s,]+(.+))?$/', $str, $dm)) {
+            $ts = strtotime($dm[1]);
+            if ($ts) {
+                $str = date('d-m-Y', $ts) . (!empty($dm[2]) ? ' ' . trim($dm[2]) : '');
+            }
+        }
+        $str = preg_replace('/(\d{2}-\d{2}-\d{4})T(\d{2}:\d{2})/', '$1 $2', $str);
+        return $str;
+    }
+}
+
 
 // ── Evidence Data for Traceable Verification ──
 $evidenceData = ['by_field' => [], 'all' => []];
@@ -470,7 +492,7 @@ function downloadFactSheetAsPdf() {
                 </tr>
                 <tr>
                     <td>Tender Date</td>
-                    <td><?= safeVal($tDate) ?> <?= $renderEvidenceBadge("Tender Date") ?></td>
+                    <td><?= safeVal(formatFactSheetDate($tDate)) ?> <?= $renderEvidenceBadge("Tender Date") ?></td>
                 </tr>
                 <tr>
                     <td>Project Value</td>
@@ -505,21 +527,21 @@ function downloadFactSheetAsPdf() {
                     <?php foreach ($secDates as $act => $dt): ?>
                         <tr>
                             <td><?= htmlspecialchars($act) ?></td>
-                            <td><?= htmlspecialchars($dt) ?> <?= $renderEvidenceBadge($act) ?></td>
+                            <td><?= htmlspecialchars(formatFactSheetDate($dt)) ?> <?= $renderEvidenceBadge($act) ?></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr>
                         <td>Tender Published</td>
-                        <td><?= safeVal(!empty($fs['TenderPublishedDate']) ? $fs['TenderPublishedDate'] : null) ?> <?= $renderEvidenceBadge("Tender Date") ?></td>
+                        <td><?= safeVal(!empty($fs['TenderPublishedDate']) ? formatFactSheetDate($fs['TenderPublishedDate']) : null) ?> <?= $renderEvidenceBadge("Tender Date") ?></td>
                     </tr>
                     <tr>
                         <td>Bid Submission Deadline</td>
-                        <td><?= safeVal(!empty($fs['BidSubmissionDeadline']) ? $fs['BidSubmissionDeadline'] : null) ?> <?= $renderEvidenceBadge("Bid Submission") ?></td>
+                        <td><?= safeVal(!empty($fs['BidSubmissionDeadline']) ? formatFactSheetDate($fs['BidSubmissionDeadline']) : null) ?> <?= $renderEvidenceBadge("Bid Submission") ?></td>
                     </tr>
                     <tr>
                         <td>Technical Bid Opening</td>
-                        <td><?= safeVal(!empty($fs['TechnicalBidOpening']) ? $fs['TechnicalBidOpening'] : null) ?> <?= $renderEvidenceBadge("Technical Bid Opening") ?></td>
+                        <td><?= safeVal(!empty($fs['TechnicalBidOpening']) ? formatFactSheetDate($fs['TechnicalBidOpening']) : null) ?> <?= $renderEvidenceBadge("Technical Bid Opening") ?></td>
                     </tr>
                 <?php endif; ?>
             </tbody>

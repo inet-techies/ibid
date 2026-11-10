@@ -202,17 +202,17 @@
 
             <tr>
                 <td class="label" style="padding: 8px 12px; border: 1px solid #d1d5db; font-weight: 600; color: #374151; background-color: #f9fafb;">Published Date</td>
-                <td class="value" style="padding: 8px 12px; border: 1px solid #d1d5db; color: #111827;"><?= (!empty($bid['PublishedDate']) && strtotime($bid['PublishedDate'])) ? date('d-M-Y', strtotime($bid['PublishedDate'])) : '-'; ?></td>
+                <td class="value" style="padding: 8px 12px; border: 1px solid #d1d5db; color: #111827;"><?= (!empty($bid['PublishedDate']) && strtotime($bid['PublishedDate'])) ? date('d-m-Y', strtotime($bid['PublishedDate'])) : '-'; ?></td>
             </tr>
 
             <tr>
                 <td class="label" style="padding: 8px 12px; border: 1px solid #d1d5db; font-weight: 600; color: #374151; background-color: #f9fafb;">Submission Deadline</td>
-                <td class="value" style="padding: 8px 12px; border: 1px solid #d1d5db; color: #111827;"><?= (!empty($bid['SubmissionDate']) && strtotime($bid['SubmissionDate'])) ? date('d-M-Y', strtotime($bid['SubmissionDate'])) : '-'; ?></td>
+                <td class="value" style="padding: 8px 12px; border: 1px solid #d1d5db; color: #111827;"><?= (!empty($bid['SubmissionDate']) && strtotime($bid['SubmissionDate'])) ? date('d-m-Y', strtotime($bid['SubmissionDate'])) : '-'; ?></td>
             </tr>
 
             <tr>
                 <td class="label" style="padding: 8px 12px; border: 1px solid #d1d5db; font-weight: 600; color: #374151; background-color: #f9fafb;">Bid Opening Date</td>
-                <td class="value" style="padding: 8px 12px; border: 1px solid #d1d5db; color: #111827;"><?= (!empty($bid['OpeningDate']) && strtotime($bid['OpeningDate'])) ? date('d-M-Y', strtotime($bid['OpeningDate'])) : '-'; ?></td>
+                <td class="value" style="padding: 8px 12px; border: 1px solid #d1d5db; color: #111827;"><?= (!empty($bid['OpeningDate']) && strtotime($bid['OpeningDate'])) ? date('d-m-Y', strtotime($bid['OpeningDate'])) : '-'; ?></td>
             </tr>
 
             <tr>
@@ -238,7 +238,7 @@
             <?php if (!empty($bid['ActualDate']) && strtotime($bid['ActualDate'])): ?>
             <tr>
                 <td class="label" style="padding: 8px 12px; border: 1px solid #d1d5db; font-weight: 600; color: #374151; background-color: #f9fafb;">Action Date</td>
-                <td class="value" style="padding: 8px 12px; border: 1px solid #d1d5db; color: #111827;"><?= date('d-M-Y', strtotime($bid['ActualDate'])); ?></td>
+                <td class="value" style="padding: 8px 12px; border: 1px solid #d1d5db; color: #111827;"><?= date('d-m-Y', strtotime($bid['ActualDate'])); ?></td>
             </tr>
             <?php endif; ?>
         </tbody>
@@ -272,7 +272,7 @@
     </p>
 
     <p class="timeline-deadline" style="margin: 10px 0 14px 0; font-size: 14px; font-weight: 700; color: #111827;">
-        Submission Deadline: <?= (!empty($bid['SubmissionDate']) && strtotime($bid['SubmissionDate'])) ? date('d-M-Y', strtotime($bid['SubmissionDate'])) : '-'; ?>
+        Submission Deadline: <?= (!empty($bid['SubmissionDate']) && strtotime($bid['SubmissionDate'])) ? date('d-m-Y', strtotime($bid['SubmissionDate'])) : '-'; ?>
     </p>
 
     <p class="timeline-note" style="margin: 0 0 10px 0; font-size: 14px; color: #374151; line-height: 1.6;">

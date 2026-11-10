@@ -1031,50 +1031,116 @@ $data['currentUrlArray'] =
             $emdVal = number_format((float)$cleanEmd, 2, '.', '');
         }
 
-        $pubDate = trim((string)$this->input->post('PublishedDate'));
-        $subDate = trim((string)$this->input->post('SubmissionDate'));
-        $opDate  = trim((string)$this->input->post('OpeningDate'));
+        $normalizeDatePost = function ($key) {
+            $val = trim((string)$this->input->post($key));
+            if ($val === '' || $val === '0000-00-00') return null;
+            if (preg_match('/^(\d{2})-(\d{2})-(\d{4})/', $val, $m)) {
+                return $m[3] . '-' . $m[2] . '-' . $m[1];
+            }
+            $ts = strtotime($val);
+            return $ts ? date('Y-m-d', $ts) : null;
+        };
+
+        $normalizeTimePost = function ($key, $linkedDateKey = null) {
+            $val = trim((string)$this->input->post($key));
+            if ($val === '') {
+                if ($linkedDateKey) {
+                    $dVal = trim((string)$this->input->post($linkedDateKey));
+                    if ($dVal !== '' && strpos($dVal, 'T') !== false && strtotime($dVal)) {
+                        return date('H:i', strtotime($dVal));
+                    }
+                }
+                return null;
+            }
+            if (preg_match('/^(\d{1,2}):(\d{2})/', $val, $m)) {
+                return str_pad($m[1], 2, '0', STR_PAD_LEFT) . ':' . $m[2];
+            }
+            $ts = strtotime($val);
+            return $ts ? date('H:i', $ts) : $val;
+        };
 
         $updateData = [
-            'BidTitle'        => $title,
-            'BidDepartment'   => trim((string)$this->input->post('BidDepartment')),
-            'State'           => trim((string)$this->input->post('State')),
-            'CustomerName'    => trim((string)$this->input->post('CustomerName')),
-            'CustomerPhone'   => trim((string)$this->input->post('CustomerPhone')),
-            'CustomerAddress' => trim((string)$this->input->post('CustomerAddress')),
-            'Category'        => trim((string)$this->input->post('Category')),
-            'BidType'         => trim((string)$this->input->post('BidType')),
-            'EstimatedValue'  => $estVal !== null ? $estVal : $existing['EstimatedValue'],
-            'EmdValue'        => $emdVal !== null ? $emdVal : $existing['EmdValue'],
-            'PublishedDate'   => !empty($pubDate) ? $pubDate : null,
-            'SubmissionDate'  => !empty($subDate) ? $subDate : null,
-            'OpeningDate'     => !empty($opDate) ? $opDate : null,
-            'TenderPortalUrl' => trim((string)$this->input->post('TenderPortalUrl')),
-            'TenderId'        => trim((string)$this->input->post('TenderId')),
-            'Remarks'         => trim((string)$this->input->post('Remarks')),
-            'SummaryKeywords' => trim((string)$this->input->post('SummaryKeywords')),
-            'LastChangeTs'    => date('Y-m-d H:i:s')
+            'BidTitle'                => $title,
+            'BidDepartment'           => trim((string)$this->input->post('BidDepartment')),
+            'State'                   => trim((string)$this->input->post('State')),
+            'CustomerName'            => trim((string)$this->input->post('CustomerName')),
+            'CustomerPhone'           => trim((string)$this->input->post('CustomerPhone')),
+            'CustomerAddress'         => trim((string)$this->input->post('CustomerAddress')),
+            'Category'                => trim((string)$this->input->post('Category')),
+            'BidType'                 => trim((string)$this->input->post('BidType')),
+            'EstimatedValue'          => $estVal !== null ? $estVal : $existing['EstimatedValue'],
+            'EmdValue'                => $emdVal !== null ? $emdVal : $existing['EmdValue'],
+            'PublishedDate'           => $normalizeDatePost('PublishedDate'),
+            'tenderPublicationTime'   => $normalizeTimePost('tenderPublicationTime', 'PublishedDate'),
+            'documentSaleStartDate'   => $normalizeDatePost('documentSaleStartDate'),
+            'documentSaleStartTime'   => $normalizeTimePost('documentSaleStartTime', 'documentSaleStartDate'),
+            'documentSaleEndDate'     => $normalizeDatePost('documentSaleEndDate'),
+            'documentSaleEndTime'     => $normalizeTimePost('documentSaleEndTime', 'documentSaleEndDate'),
+            'prebidQueryStartDate'    => $normalizeDatePost('prebidQueryStartDate'),
+            'prebidQueryStartTime'    => $normalizeTimePost('prebidQueryStartTime', 'prebidQueryStartDate'),
+            'prebidQueryEndDate'      => $normalizeDatePost('prebidQueryEndDate'),
+            'prebidQueryEndTime'      => $normalizeTimePost('prebidQueryEndTime', 'prebidQueryEndDate'),
+            'prebidMeetingDate'       => $normalizeDatePost('prebidMeetingDate'),
+            'prebidMeetingTime'       => $normalizeTimePost('prebidMeetingTime', 'prebidMeetingDate'),
+            'prebidResponseDate'      => $normalizeDatePost('prebidResponseDate'),
+            'prebidResponseTime'      => $normalizeTimePost('prebidResponseTime', 'prebidResponseDate'),
+            'bidSubmissionStartDate'  => $normalizeDatePost('bidSubmissionStartDate'),
+            'bidSubmissionStartTime'  => $normalizeTimePost('bidSubmissionStartTime', 'bidSubmissionStartDate'),
+            'SubmissionDate'          => $normalizeDatePost('SubmissionDate'),
+            'bidSubmissionEndTime'    => $normalizeTimePost('bidSubmissionEndTime', 'SubmissionDate'),
+            'pqBidOpeningDate'        => $normalizeDatePost('pqBidOpeningDate'),
+            'pqBidOpeningTime'        => $normalizeTimePost('pqBidOpeningTime', 'pqBidOpeningDate'),
+            'OpeningDate'             => $normalizeDatePost('OpeningDate'),
+            'technicalBidOpeningTime' => $normalizeTimePost('technicalBidOpeningTime', 'OpeningDate'),
+            'financialBidOpeningDate' => $normalizeDatePost('financialBidOpeningDate'),
+            'financialBidOpeningTime' => $normalizeTimePost('financialBidOpeningTime', 'financialBidOpeningDate'),
+            'TenderPortalUrl'         => trim((string)$this->input->post('TenderPortalUrl')),
+            'TenderId'                => trim((string)$this->input->post('TenderId')),
+            'Remarks'                 => trim((string)$this->input->post('Remarks')),
+            'SummaryKeywords'         => trim((string)$this->input->post('SummaryKeywords')),
+            'LastChangeTs'            => date('Y-m-d H:i:s')
         ];
 
         // Track human-readable change log for audit
         $fieldLabels = [
-            'BidTitle'        => 'Bid Title',
-            'BidDepartment'   => 'Department',
-            'State'           => 'State',
-            'CustomerName'    => 'Customer Name',
-            'CustomerPhone'   => 'Customer Phone',
-            'CustomerAddress' => 'Customer Address',
-            'Category'        => 'Category',
-            'BidType'         => 'Bid Type',
-            'EstimatedValue'  => 'Estimated Value',
-            'EmdValue'        => 'EMD Value',
-            'PublishedDate'   => 'Published Date',
-            'SubmissionDate'  => 'Submission Date',
-            'OpeningDate'     => 'Opening Date',
-            'TenderPortalUrl' => 'Tender Portal',
-            'TenderId'        => 'Tender ID',
-            'Remarks'         => 'Remarks',
-            'SummaryKeywords' => 'Keywords'
+            'BidTitle'                => 'Bid Title',
+            'BidDepartment'           => 'Department',
+            'State'                   => 'State',
+            'CustomerName'            => 'Customer Name',
+            'CustomerPhone'           => 'Customer Phone',
+            'CustomerAddress'         => 'Customer Address',
+            'Category'                => 'Category',
+            'BidType'                 => 'Bid Type',
+            'EstimatedValue'          => 'Estimated Value',
+            'EmdValue'                => 'EMD Value',
+            'PublishedDate'           => 'Published Date',
+            'tenderPublicationTime'   => 'Published Time',
+            'documentSaleStartDate'   => 'Document Sale Start Date',
+            'documentSaleStartTime'   => 'Document Sale Start Time',
+            'documentSaleEndDate'     => 'Document Sale End Date',
+            'documentSaleEndTime'     => 'Document Sale End Time',
+            'prebidQueryStartDate'    => 'Pre-Bid Query Start Date',
+            'prebidQueryStartTime'    => 'Pre-Bid Query Start Time',
+            'prebidQueryEndDate'      => 'Pre-Bid Query End Date',
+            'prebidQueryEndTime'      => 'Pre-Bid Query End Time',
+            'prebidMeetingDate'       => 'Pre-Bid Meeting Date',
+            'prebidMeetingTime'       => 'Pre-Bid Meeting Time',
+            'prebidResponseDate'      => 'Pre-Bid Response Date',
+            'prebidResponseTime'      => 'Pre-Bid Response Time',
+            'bidSubmissionStartDate'  => 'Bid Submission Start Date',
+            'bidSubmissionStartTime'  => 'Bid Submission Start Time',
+            'SubmissionDate'          => 'Submission Date',
+            'bidSubmissionEndTime'    => 'Submission End Time',
+            'pqBidOpeningDate'        => 'PQ Bid Opening Date',
+            'pqBidOpeningTime'        => 'PQ Bid Opening Time',
+            'OpeningDate'             => 'Opening Date',
+            'technicalBidOpeningTime' => 'Opening Time',
+            'financialBidOpeningDate' => 'Financial Bid Opening Date',
+            'financialBidOpeningTime' => 'Financial Bid Opening Time',
+            'TenderPortalUrl'         => 'Tender Portal',
+            'TenderId'                => 'Tender ID',
+            'Remarks'                 => 'Remarks',
+            'SummaryKeywords'         => 'Keywords'
         ];
 
         $changes = [];

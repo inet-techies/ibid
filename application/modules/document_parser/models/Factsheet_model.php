@@ -573,50 +573,40 @@ class Factsheet_model extends CI_Model
         if ($pubDate !== '') {
             $pubTime = isset($bid['tenderPublicationTime']) && trim((string)$bid['tenderPublicationTime']) !== '' ? ' ' . trim((string)$bid['tenderPublicationTime']) : '';
             $dates['Tender Published'] = $pubDate . $pubTime;
+        } elseif (array_key_exists('PublishedDate', $bid)) {
+            unset($dates['Tender Published']);
         }
-        if (!empty($bid['documentSaleStartDate'])) {
-            $t = !empty($bid['documentSaleStartTime']) ? ' ' . trim((string)$bid['documentSaleStartTime']) : '';
-            $dates['Document Sale Start'] = trim((string)$bid['documentSaleStartDate']) . $t;
-        }
-        if (!empty($bid['documentSaleEndDate'])) {
-            $t = !empty($bid['documentSaleEndTime']) ? ' ' . trim((string)$bid['documentSaleEndTime']) : '';
-            $dates['Document Sale End'] = trim((string)$bid['documentSaleEndDate']) . $t;
-        }
-        if (!empty($bid['prebidQueryStartDate'])) {
-            $t = !empty($bid['prebidQueryStartTime']) ? ' ' . trim((string)$bid['prebidQueryStartTime']) : '';
-            $dates['Pre-bid Query Start'] = trim((string)$bid['prebidQueryStartDate']) . $t;
-        }
-        if (!empty($bid['prebidQueryEndDate'])) {
-            $t = !empty($bid['prebidQueryEndTime']) ? ' ' . trim((string)$bid['prebidQueryEndTime']) : '';
-            $dates['Pre-bid Query End'] = trim((string)$bid['prebidQueryEndDate']) . $t;
-        }
-        if (!empty($bid['prebidMeetingDate'])) {
-            $t = !empty($bid['prebidMeetingTime']) ? ' ' . trim((string)$bid['prebidMeetingTime']) : '';
-            $dates['Pre-bid Meeting'] = trim((string)$bid['prebidMeetingDate']) . $t;
-        }
-        if (!empty($bid['prebidResponseDate'])) {
-            $t = !empty($bid['prebidResponseTime']) ? ' ' . trim((string)$bid['prebidResponseTime']) : '';
-            $dates['Pre-bid Response Deadline'] = trim((string)$bid['prebidResponseDate']) . $t;
-        }
-        if (!empty($bid['bidSubmissionStartDate'])) {
-            $t = !empty($bid['bidSubmissionStartTime']) ? ' ' . trim((string)$bid['bidSubmissionStartTime']) : '';
-            $dates['Bid Submission Start'] = trim((string)$bid['bidSubmissionStartDate']) . $t;
+        $optionalDateMap = [
+            ['Document Sale Start', 'documentSaleStartDate', 'documentSaleStartTime'],
+            ['Document Sale End', 'documentSaleEndDate', 'documentSaleEndTime'],
+            ['Pre-bid Query Start', 'prebidQueryStartDate', 'prebidQueryStartTime'],
+            ['Pre-bid Query End', 'prebidQueryEndDate', 'prebidQueryEndTime'],
+            ['Pre-bid Meeting', 'prebidMeetingDate', 'prebidMeetingTime'],
+            ['Pre-bid Response Deadline', 'prebidResponseDate', 'prebidResponseTime'],
+            ['Bid Submission Start', 'bidSubmissionStartDate', 'bidSubmissionStartTime'],
+            ['PQ Bid Opening', 'pqBidOpeningDate', 'pqBidOpeningTime'],
+            ['Financial Bid Opening', 'financialBidOpeningDate', 'financialBidOpeningTime']
+        ];
+        foreach ($optionalDateMap as $odm) {
+            list($labelKey, $dKey, $tKey) = $odm;
+            if (!empty($bid[$dKey])) {
+                $t = !empty($bid[$tKey]) ? ' ' . trim((string)$bid[$tKey]) : '';
+                $dates[$labelKey] = trim((string)$bid[$dKey]) . $t;
+            } elseif (array_key_exists($dKey, $bid)) {
+                unset($dates[$labelKey]);
+            }
         }
         if ($subDate !== '') {
             $subTime = isset($bid['bidSubmissionEndTime']) && trim((string)$bid['bidSubmissionEndTime']) !== '' ? ' ' . trim((string)$bid['bidSubmissionEndTime']) : '';
             $dates['Bid Submission Deadline'] = $subDate . $subTime;
-        }
-        if (!empty($bid['pqBidOpeningDate'])) {
-            $t = !empty($bid['pqBidOpeningTime']) ? ' ' . trim((string)$bid['pqBidOpeningTime']) : '';
-            $dates['PQ Bid Opening'] = trim((string)$bid['pqBidOpeningDate']) . $t;
+        } elseif (array_key_exists('SubmissionDate', $bid)) {
+            unset($dates['Bid Submission Deadline']);
         }
         if ($opDate !== '') {
             $opTime = isset($bid['technicalBidOpeningTime']) && trim((string)$bid['technicalBidOpeningTime']) !== '' ? ' ' . trim((string)$bid['technicalBidOpeningTime']) : '';
             $dates['Technical Bid Opening'] = $opDate . $opTime;
-        }
-        if (!empty($bid['financialBidOpeningDate'])) {
-            $t = !empty($bid['financialBidOpeningTime']) ? ' ' . trim((string)$bid['financialBidOpeningTime']) : '';
-            $dates['Financial Bid Opening'] = trim((string)$bid['financialBidOpeningDate']) . $t;
+        } elseif (array_key_exists('OpeningDate', $bid)) {
+            unset($dates['Technical Bid Opening']);
         }
 
         // ── Section 3: TenderValue ──

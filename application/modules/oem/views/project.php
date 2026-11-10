@@ -267,7 +267,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                                                 </td>
                                                 <td>
                                                     <span class="text-muted fs-12">
-                                                        <?= !empty($pro['RfbSubmissionDate']) ? date('d M Y', strtotime($pro['RfbSubmissionDate'])) : '-'; ?>
+                                                        <?= !empty($pro['RfbSubmissionDate']) ? date('d-m-Y', strtotime($pro['RfbSubmissionDate'])) : '-'; ?>
                                                     </span>
                                                 </td>
                                                 <td>

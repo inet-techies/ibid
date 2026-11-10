@@ -132,12 +132,26 @@
                                                 <th>Opening Date</th> 
                                                 <th>Submission Date</th> 
                                                 <th>Bid Status</th>
-                                                <th>Creation Date</th>
+                                                <th>Created On</th>
                                                 <th class="text-center" data-orderable="false" style="width: 140px;">Actions</th>
                                             </tr>
                                         </thead>
                                          <tbody>
                                         <?php
+                                            $formatBidColDateTime = function ($dateVal, $timeVal = '') {
+                                                $dateStr = trim((string)($dateVal ?? ''));
+                                                $timeStr = trim((string)($timeVal ?? ''));
+                                                $hasDate = ($dateStr !== '' && $dateStr !== '0000-00-00' && strtotime($dateStr));
+                                                if (!$hasDate) {
+                                                    return '-';
+                                                }
+                                                $formattedDate = date('d-m-Y', strtotime($dateStr));
+                                                if ($timeStr !== '' && strtotime($timeStr) !== false) {
+                                                    return $formattedDate . ', ' . date('h:i A', strtotime($timeStr));
+                                                }
+                                                return $formattedDate;
+                                            };
+
                                             if (isset($BidData) && !empty($BidData)) {
                                                 $i = 1;
                                                 foreach ($BidData as $val) {
@@ -165,9 +179,9 @@
                                                             </span>
                                                         </td>
                                                         <td><?= $val['BidDepartment'] ?></td>
-                                                        <td><?= $val['PublishedDate'] ?></td>
-                                                        <td><?= $val['OpeningDate'] ?></td>
-                                                        <td><?= $val['SubmissionDate'] ?></td>
+                                                        <td data-order="<?= htmlspecialchars(trim(($val['PublishedDate'] ?? '') . ' ' . ($val['tenderPublicationTime'] ?? '')), ENT_QUOTES, 'UTF-8') ?>"><?= $formatBidColDateTime($val['PublishedDate'] ?? '', $val['tenderPublicationTime'] ?? '') ?></td>
+                                                        <td data-order="<?= htmlspecialchars(trim(($val['OpeningDate'] ?? '') . ' ' . ($val['technicalBidOpeningTime'] ?? '')), ENT_QUOTES, 'UTF-8') ?>"><?= $formatBidColDateTime($val['OpeningDate'] ?? '', $val['technicalBidOpeningTime'] ?? '') ?></td>
+                                                        <td data-order="<?= htmlspecialchars(trim(($val['SubmissionDate'] ?? '') . ' ' . ($val['bidSubmissionEndTime'] ?? '')), ENT_QUOTES, 'UTF-8') ?>"><?= $formatBidColDateTime($val['SubmissionDate'] ?? '', $val['bidSubmissionEndTime'] ?? '') ?></td>
                                                         <td>
                                                             <?php
                                                             $statusBadge = !empty($val['BadgeClass']) ? $val['BadgeClass'] : 'bg-secondary';
@@ -528,6 +542,61 @@ function formatIsoDate(dateStr) {
     return match ? match[1] : '';
 }
 
+function formatIsoTime(timeStr) {
+    if (timeStr === null || timeStr === undefined) return '';
+    var t = String(timeStr).trim();
+    if (!t) return '';
+    var m = t.match(/^(\d{1,2}):(\d{2})(?::(\d{2}))?(?:\s*(AM|PM))?$/i);
+    if (m) {
+        var hh = parseInt(m[1], 10);
+        var mm = m[2];
+        var ampm = m[4] ? m[4].toUpperCase() : '';
+        if (ampm === 'PM' && hh < 12) hh += 12;
+        if (ampm === 'AM' && hh === 12) hh = 0;
+        return ('0' + hh).slice(-2) + ':' + mm;
+    }
+    return '';
+}
+
+function formatDisplayDate(dateStr) {
+    if (!dateStr || dateStr === '0000-00-00') return '-';
+    var matchIso = String(dateStr).match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (matchIso) return matchIso[3] + '-' + matchIso[2] + '-' + matchIso[1];
+    var matchDmy = String(dateStr).match(/^(\d{2})-(\d{2})-(\d{4})/);
+    if (matchDmy) return matchDmy[1] + '-' + matchDmy[2] + '-' + matchDmy[3];
+    var d = new Date(String(dateStr).replace(/-/g, '/'));
+    if (isNaN(d.getTime())) return String(dateStr);
+    return ('0' + d.getDate()).slice(-2) + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + d.getFullYear();
+}
+
+function formatDisplayTime(timeStr) {
+    if (timeStr === null || timeStr === undefined) return '';
+    var t = String(timeStr).trim();
+    if (!t) return '';
+    var m = t.match(/^(\d{1,2}):(\d{2})(?::(\d{2}))?(?:\s*(AM|PM))?$/i);
+    if (m) {
+        var hh = parseInt(m[1], 10);
+        var mm = m[2];
+        var ampm = m[4] ? m[4].toUpperCase() : (hh >= 12 ? 'PM' : 'AM');
+        if (!m[4]) {
+            hh = hh % 12;
+            hh = hh ? hh : 12;
+        }
+        return ('0' + hh).slice(-2) + ':' + mm + ' ' + ampm;
+    }
+    return t;
+}
+
+function formatDisplayDateTime(dateStr, timeStr) {
+    var hasDate = dateStr && dateStr !== '0000-00-00' && String(dateStr).trim() !== '';
+    var dPart = hasDate ? formatDisplayDate(dateStr) : '';
+    var tPart = formatDisplayTime(timeStr);
+    if (dPart && dPart !== '-' && tPart) return dPart + ', ' + tPart;
+    if (dPart && dPart !== '-') return dPart;
+    if (tPart) return tPart;
+    return '';
+}
+
 function cleanNum(val) {
     if (val === null || val === undefined || val === '') return '';
     var clean = String(val).replace(/[,\s]/g, '');
@@ -553,6 +622,31 @@ function renderBidReadOnlyView() {
 
     // Category display name
     var catDisplay = bid.CategoryName || bid.Category || '-';
+
+    // All tender schedule date & time fields (shown only if not null/empty)
+    var scheduleFields = [
+        { label: 'Published Date', dateKey: 'PublishedDate', timeKey: 'tenderPublicationTime' },
+        { label: 'Document Sale / Download Start', dateKey: 'documentSaleStartDate', timeKey: 'documentSaleStartTime' },
+        { label: 'Document Sale / Download End', dateKey: 'documentSaleEndDate', timeKey: 'documentSaleEndTime' },
+        { label: 'Pre-Bid Query Start', dateKey: 'prebidQueryStartDate', timeKey: 'prebidQueryStartTime' },
+        { label: 'Pre-Bid Query End', dateKey: 'prebidQueryEndDate', timeKey: 'prebidQueryEndTime' },
+        { label: 'Pre-Bid Meeting', dateKey: 'prebidMeetingDate', timeKey: 'prebidMeetingTime' },
+        { label: 'Pre-Bid Response', dateKey: 'prebidResponseDate', timeKey: 'prebidResponseTime' },
+        { label: 'Bid Submission Start', dateKey: 'bidSubmissionStartDate', timeKey: 'bidSubmissionStartTime' },
+        { label: 'Submission Date', dateKey: 'SubmissionDate', timeKey: 'bidSubmissionEndTime' },
+        { label: 'PQ Bid Opening', dateKey: 'pqBidOpeningDate', timeKey: 'pqBidOpeningTime' },
+        { label: 'Opening Date', dateKey: 'OpeningDate', timeKey: 'technicalBidOpeningTime' },
+        { label: 'Financial Bid Opening', dateKey: 'financialBidOpeningDate', timeKey: 'financialBidOpeningTime' }
+    ];
+    var scheduleRowsHtml = scheduleFields.map(function(f) {
+        var val = formatDisplayDateTime(bid[f.dateKey], bid[f.timeKey]);
+        if (!val) return '';
+        return `
+                    <tr>
+                        <th class="bg-light text-muted">${escapeHtml(f.label)}</th>
+                        <td>${escapeHtml(val)}</td>
+                    </tr>`;
+    }).join('');
 
     var html = `
     <!-- Read-Only Bid Information Table -->
@@ -618,18 +712,7 @@ function renderBidReadOnlyView() {
                         <th class="bg-light text-muted">EMD Value</th>
                         <td class="fw-semibold text-dark">₹ ${bid.EmdValue ? Number(bid.EmdValue).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '-'}</td>
                     </tr>
-                    <tr>
-                        <th class="bg-light text-muted">Published Date</th>
-                        <td>${escapeHtml(bid.PublishedDate ?? '-')}</td>
-                    </tr>
-                    <tr>
-                        <th class="bg-light text-muted">Submission Date</th>
-                        <td>${escapeHtml(bid.SubmissionDate ?? '-')}</td>
-                    </tr>
-                    <tr>
-                        <th class="bg-light text-muted">Opening Date</th>
-                        <td>${escapeHtml(bid.OpeningDate ?? '-')}</td>
-                    </tr>
+                    ${scheduleRowsHtml}
                     <tr>
                         <th class="bg-light text-muted">Tender Portal</th>
                         <td>
@@ -878,6 +961,31 @@ function renderBidEditView() {
         typeOptions += `<option value="${escapeHtml(t)}" ${isSelected}>${escapeHtml(t)}</option>`;
     });
 
+    var editScheduleFields = [
+        { label: 'Published Date', dateKey: 'PublishedDate', timeKey: 'tenderPublicationTime' },
+        { label: 'Document Sale / Download Start', dateKey: 'documentSaleStartDate', timeKey: 'documentSaleStartTime' },
+        { label: 'Document Sale / Download End', dateKey: 'documentSaleEndDate', timeKey: 'documentSaleEndTime' },
+        { label: 'Pre-Bid Query Start', dateKey: 'prebidQueryStartDate', timeKey: 'prebidQueryStartTime' },
+        { label: 'Pre-Bid Query End', dateKey: 'prebidQueryEndDate', timeKey: 'prebidQueryEndTime' },
+        { label: 'Pre-Bid Meeting', dateKey: 'prebidMeetingDate', timeKey: 'prebidMeetingTime' },
+        { label: 'Pre-Bid Response', dateKey: 'prebidResponseDate', timeKey: 'prebidResponseTime' },
+        { label: 'Bid Submission Start', dateKey: 'bidSubmissionStartDate', timeKey: 'bidSubmissionStartTime' },
+        { label: 'Submission Date (End)', dateKey: 'SubmissionDate', timeKey: 'bidSubmissionEndTime' },
+        { label: 'PQ Bid Opening', dateKey: 'pqBidOpeningDate', timeKey: 'pqBidOpeningTime' },
+        { label: 'Opening Date (Technical)', dateKey: 'OpeningDate', timeKey: 'technicalBidOpeningTime' },
+        { label: 'Financial Bid Opening', dateKey: 'financialBidOpeningDate', timeKey: 'financialBidOpeningTime' }
+    ];
+    var editScheduleHtml = editScheduleFields.map(function(f) {
+        return `
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold" style="font-size:12px;">${escapeHtml(f.label)}</label>
+                        <div class="input-group input-group-sm">
+                            <input type="date" class="form-control form-control-sm" name="${f.dateKey}" value="${formatIsoDate(bid[f.dateKey])}">
+                            <input type="time" class="form-control form-control-sm" name="${f.timeKey}" value="${formatIsoTime(bid[f.timeKey])}" style="max-width:115px;">
+                        </div>
+                    </div>`;
+    }).join('');
+
     var html = `
     <form id="editBidForm" class="needs-validation" novalidate autocomplete="off">
         <input type="hidden" name="Bcid" value="${escapeHtml(bid.Bcid)}">
@@ -951,20 +1059,7 @@ function renderBidEditView() {
                         </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold" style="font-size:12px;">Published Date</label>
-                        <input type="date" class="form-control form-control-sm" name="PublishedDate" value="${formatIsoDate(bid.PublishedDate)}">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold" style="font-size:12px;">Submission Date</label>
-                        <input type="date" class="form-control form-control-sm" name="SubmissionDate" value="${formatIsoDate(bid.SubmissionDate)}">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold" style="font-size:12px;">Opening Date</label>
-                        <input type="date" class="form-control form-control-sm" name="OpeningDate" value="${formatIsoDate(bid.OpeningDate)}">
-                    </div>
+                    ${editScheduleHtml}
 
                     <div class="col-12">
                         <label class="form-label fw-semibold" style="font-size:12px;">Tender Portal URL</label>
@@ -1135,23 +1230,36 @@ function executeSaveBidDetails() {
                             } else {
                                 $tr.find('td.col-bid-title').html('<div class="bid-title-container" title="' + escapeHtml(res.bid.BidTitle) + '">' + escapeHtml(res.bid.BidTitle) + '</div>');
                             }
+                            dt.cell($tr.find('td:eq(1)')).invalidate();
+
                             if (res.bid.BidType) {
-                                $tr.find('td:eq(1)').html('<span class="badge bg-soft-primary text-primary">' + escapeHtml(res.bid.BidType) + '</span>');
+                                var typeLower = String(res.bid.BidType).toLowerCase().trim();
+                                var typeBadge = (typeLower === 'oem') ? 'bg-danger text-white' : ((typeLower === 'service') ? 'bg-primary text-white' : 'bg-secondary text-white');
+                                $tr.find('td:eq(2)').html('<span class="badge ' + typeBadge + '">' + escapeHtml(res.bid.BidType) + '</span>');
+                                dt.cell($tr.find('td:eq(2)')).invalidate();
                             }
-                            if (res.bid.BidDepartment) {
-                                $tr.find('td:eq(2)').text(res.bid.BidDepartment);
+                            if (res.bid.BidDepartment !== undefined) {
+                                $tr.find('td:eq(3)').text(res.bid.BidDepartment || '');
+                                dt.cell($tr.find('td:eq(3)')).invalidate();
                             }
-                            if (res.bid.PublishedDate) {
-                                $tr.find('td:eq(3)').text(res.bid.PublishedDate);
-                            }
-                            if (res.bid.OpeningDate) {
-                                $tr.find('td:eq(4)').text(res.bid.OpeningDate);
-                            }
-                            if (res.bid.SubmissionDate) {
-                                $tr.find('td:eq(5)').text(res.bid.SubmissionDate);
-                            }
+
+                            var pubTd = $tr.find('td:eq(4)');
+                            pubTd.attr('data-order', ((res.bid.PublishedDate || '') + ' ' + (res.bid.tenderPublicationTime || '')).trim());
+                            pubTd.text(formatDisplayDateTime(res.bid.PublishedDate, res.bid.tenderPublicationTime) || '-');
+                            dt.cell(pubTd).invalidate();
+
+                            var opTd = $tr.find('td:eq(5)');
+                            opTd.attr('data-order', ((res.bid.OpeningDate || '') + ' ' + (res.bid.technicalBidOpeningTime || '')).trim());
+                            opTd.text(formatDisplayDateTime(res.bid.OpeningDate, res.bid.technicalBidOpeningTime) || '-');
+                            dt.cell(opTd).invalidate();
+
+                            var subTd = $tr.find('td:eq(6)');
+                            subTd.attr('data-order', ((res.bid.SubmissionDate || '') + ' ' + (res.bid.bidSubmissionEndTime || '')).trim());
+                            subTd.text(formatDisplayDateTime(res.bid.SubmissionDate, res.bid.bidSubmissionEndTime) || '-');
+                            dt.cell(subTd).invalidate();
                         }
                     });
+                    dt.draw(false);
                 }
 
                 // Render back in read-only mode
@@ -1910,10 +2018,10 @@ $(document).ready(function() {
     if (dateInput.length && $.fn.daterangepicker) {
         dateInput.daterangepicker({
             autoUpdateInput: false,
-            locale: { cancelLabel: 'Clear', format: 'YYYY-MM-DD' }
+            locale: { cancelLabel: 'Clear', format: 'DD-MM-YYYY' }
         });
         dateInput.on('apply.daterangepicker', function(ev, picker) {
-            $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+            $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
             filterStart = picker.startDate.startOf('day').toDate();
             filterEnd = picker.endDate.endOf('day').toDate();
             table.draw();
@@ -1941,12 +2049,16 @@ $(document).ready(function() {
         if (filterStart || filterEnd) {
             var subStr = (data[6] || '').trim();
             var pubStr = (data[4] || '').trim();
-            var rowDate = null;
-            if (subStr && !isNaN(Date.parse(subStr))) {
-                rowDate = new Date(subStr);
-            } else if (pubStr && !isNaN(Date.parse(pubStr))) {
-                rowDate = new Date(pubStr);
-            }
+            var parseFilterDate = function(str) {
+                if (!str || str === '-') return null;
+                var mDmy = str.match(/^(\d{2})-(\d{2})-(\d{4})/);
+                if (mDmy) return new Date(parseInt(mDmy[3], 10), parseInt(mDmy[2], 10) - 1, parseInt(mDmy[1], 10));
+                var mYmd = str.match(/^(\d{4})-(\d{2})-(\d{2})/);
+                if (mYmd) return new Date(parseInt(mYmd[1], 10), parseInt(mYmd[2], 10) - 1, parseInt(mYmd[3], 10));
+                var ts = Date.parse(str);
+                return isNaN(ts) ? null : new Date(ts);
+            };
+            var rowDate = parseFilterDate(subStr) || parseFilterDate(pubStr);
             if (rowDate) {
                 if (filterStart && rowDate < filterStart) return false;
                 if (filterEnd && rowDate > filterEnd) return false;

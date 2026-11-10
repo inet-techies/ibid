@@ -75,9 +75,11 @@
 
     function fmtDate(s) {
         if (!s) return '—';
+        var m = String(s).match(/^(\d{4})-(\d{2})-(\d{2})/);
+        if (m) return m[3] + '-' + m[2] + '-' + m[1];
         var d = new Date(s);
         if (isNaN(d)) return String(s);
-        return d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
+        return ('0' + d.getDate()).slice(-2) + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + d.getFullYear();
     }
 
     function getBidFY(b) {
@@ -1073,11 +1075,11 @@
         if (drEl.length && $.fn.daterangepicker) {
             drEl.daterangepicker({
                 autoUpdateInput: false,
-                locale: { cancelLabel:'Clear', format:'DD MMM YYYY' },
+                locale: { cancelLabel:'Clear', format:'DD-MM-YYYY' },
                 opens:'left'
             });
             drEl.on('apply.daterangepicker', function(ev, picker) {
-                $(this).val(picker.startDate.format('DD MMM YYYY') + ' - ' + picker.endDate.format('DD MMM YYYY'));
+                $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY'));
                 FS.startDate = picker.startDate.toDate();
                 FS.endDate   = picker.endDate.toDate();
                 applyFilters();

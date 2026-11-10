@@ -17,11 +17,11 @@ $status = htmlspecialchars($currentStatus ?? ($bid['CurrentStatus'] ?? 'Active')
 $sender = htmlspecialchars($senderName ?? 'Bid Management Team', ENT_QUOTES, 'UTF-8');
 
 $openingDate = (!empty($bid['OpeningDate']) && strtotime($bid['OpeningDate']))
-    ? date('d-M-Y', strtotime($bid['OpeningDate']))
+    ? date('d-m-Y', strtotime($bid['OpeningDate']))
     : '-';
 
 $submissionDate = (!empty($bid['SubmissionDate']) && strtotime($bid['SubmissionDate']))
-    ? date('d-M-Y', strtotime($bid['SubmissionDate']))
+    ? date('d-m-Y', strtotime($bid['SubmissionDate']))
     : '-';
 
 $estimatedValue = !empty($bid['EstimatedValue'])
