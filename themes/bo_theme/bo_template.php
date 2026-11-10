@@ -241,79 +241,6 @@ if (!empty($employee_det['Bid'])) {
             overflow-wrap: break-word !important;
         }
 
-        /* Global Expand & Shrink Row Action Buttons */
-        .row-actions-group {
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            gap: 6px !important;
-            vertical-align: middle !important;
-            white-space: nowrap !important;
-            position: relative !important;
-        }
-        .btn-row-actions-toggle {
-            width: 30px !important;
-            height: 30px !important;
-            min-width: 30px !important;
-            min-height: 30px !important;
-            max-width: 30px !important;
-            max-height: 30px !important;
-            border-radius: 8px !important;
-            background-color: #f8fafc !important;
-            border: 1px solid #cbd5e1 !important;
-            color: #3b82f6 !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            cursor: pointer !important;
-            padding: 0 !important;
-            line-height: 1 !important;
-            transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
-            user-select: none !important;
-        }
-        .btn-row-actions-toggle:hover {
-            background-color: #eff6ff !important;
-            border-color: #3b82f6 !important;
-            color: #1d4ed8 !important;
-            transform: scale(1.08) !important;
-            box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2) !important;
-        }
-        .btn-row-actions-toggle.active {
-            background-color: #fee2e2 !important;
-            border-color: #ef4444 !important;
-            color: #dc2626 !important;
-            transform: rotate(45deg) !important;
-            box-shadow: 0 2px 5px rgba(239, 68, 68, 0.25) !important;
-        }
-        .btn-row-actions-toggle i {
-            font-size: 14px !important;
-            line-height: 1 !important;
-            pointer-events: none !important;
-            display: inline-block !important;
-            transition: transform 0.22s ease !important;
-        }
-        .row-actions-collapse {
-            display: none;
-            align-items: center !important;
-            gap: 6px !important;
-            vertical-align: middle !important;
-            white-space: nowrap !important;
-            animation: expandRowActions 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        .row-actions-collapse.show {
-            display: inline-flex !important;
-        }
-        @keyframes expandRowActions {
-            0% {
-                opacity: 0;
-                transform: scale(0.85) translateX(-8px);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) translateX(0);
-            }
-        }
         /* ── Sidebar Navigation Width Expansion (Prevent Menu Wrapping) ── */
         @media (min-width: 1025px) {
             html:not(.minimenu) .nxl-navigation,
@@ -1022,50 +949,97 @@ if (!empty($employee_det['Bid'])) {
     <script src="<?=$theme_path?>/assets/vendors/js/dataTables.buttons.min.js"></script>
     <script src="<?=$theme_path?>/assets/vendors/js/buttons.bootstrap5.min.js"></script>
     <script src="<?=$theme_path?>/assets/vendors/js/buttons.html5.min.js"></script>
+    <!--! Centralised DataTable Export Buttons Configuration & Initialization in BO Template !-->
     <script>
-    if (window.jQuery && $.fn.DataTable) {
+    (function($) {
+        'use strict';
+        if (!window.jQuery || !$.fn.DataTable) {
+            return;
+        }
+
+        // Centralised column filter: excludes columns marked with .no-export, hidden columns,
+        // and Action/Actions columns from Copy, CSV, and Excel exports.
+        var exportColumnFilter = function(idx, data, node) {
+            var $cell = $(node);
+            if ($cell.hasClass('no-export')) return false;
+            if (!$cell.is(':visible')) return false;
+            var headerText = $.trim($cell.text()).toLowerCase();
+            if (headerText === 'action' || headerText === 'actions') return false;
+            return true;
+        };
+
+        // Common button configurations
+        var defaultButtons = [
+            {
+                extend: 'copyHtml5',
+                text: '<i class="feather-copy me-1"></i> Copy',
+                className: 'btn btn-sm btn-light-brand',
+                exportOptions: {
+                    columns: exportColumnFilter,
+                    modifier: { search: 'applied', order: 'applied' }
+                }
+            },
+            {
+                extend: 'csvHtml5',
+                text: '<i class="feather-file-text me-1"></i> CSV',
+                className: 'btn btn-sm btn-light-brand',
+                exportOptions: {
+                    columns: exportColumnFilter,
+                    modifier: { search: 'applied', order: 'applied' }
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                text: '<i class="feather-download me-1"></i> Excel',
+                className: 'btn btn-sm btn-light-brand',
+                title: function() {
+                    var title = $('.page-header-title h5').text() || document.title || 'Export';
+                    return $.trim(title).replace(/\s+/g, '_');
+                },
+                exportOptions: {
+                    columns: exportColumnFilter,
+                    modifier: { search: 'applied', order: 'applied' }
+                }
+            }
+        ];
+
+        // Safely preserve PDF export if pdfMake dependency is available
+        if (window.pdfMake || ($.fn.dataTable.Buttons && $.fn.dataTable.Buttons.pdfMake)) {
+            defaultButtons.push({
+                extend: 'pdfHtml5',
+                text: '<i class="feather-file me-1"></i> PDF',
+                className: 'btn btn-sm btn-light-brand',
+                exportOptions: {
+                    columns: exportColumnFilter,
+                    modifier: { search: 'applied', order: 'applied' }
+                }
+            });
+        }
+
+        // Safely preserve Print if print button extension is available
+        if ($.fn.dataTable.ext && $.fn.dataTable.ext.buttons && $.fn.dataTable.ext.buttons.print) {
+            defaultButtons.push({
+                extend: 'print',
+                text: '<i class="feather-printer me-1"></i> Print',
+                className: 'btn btn-sm btn-light-brand',
+                exportOptions: {
+                    columns: exportColumnFilter,
+                    modifier: { search: 'applied', order: 'applied' }
+                }
+            });
+        }
+
+        // Centralised DataTable defaults for all BO pages
         $.extend(true, $.fn.dataTable.defaults, {
             retrieve: true,
             dom: '<"d-flex flex-wrap justify-content-between align-items-center gap-2 p-3 border-bottom"<"dt-buttons-wrapper d-flex align-items-center gap-2"B><"d-flex align-items-center gap-2 ms-auto"f>>rt<"d-flex flex-wrap justify-content-between align-items-center gap-2 p-3 border-top"lip>',
-            buttons: [
-                {
-                    extend: 'copyHtml5',
-                    text: '<i class="feather-copy me-1"></i> Copy',
-                    className: 'btn btn-sm btn-light-brand',
-                    exportOptions: {
-                        columns: ':visible:not(.no-export):not(:last-child)',
-                        modifier: { search: 'applied', order: 'applied' }
-                    }
-                },
-                {
-                    extend: 'csvHtml5',
-                    text: '<i class="feather-file-text me-1"></i> CSV',
-                    className: 'btn btn-sm btn-light-brand',
-                    exportOptions: {
-                        columns: ':visible:not(.no-export):not(:last-child)',
-                        modifier: { search: 'applied', order: 'applied' }
-                    }
-                },
-                {
-                    extend: 'excelHtml5',
-                    text: '<i class="feather-download me-1"></i> Excel',
-                    className: 'btn btn-sm btn-light-brand',
-                    title: function() {
-                        var title = $('.page-header-title h5').text() || document.title || 'Export';
-                        return $.trim(title).replace(/\s+/g, '_');
-                    },
-                    exportOptions: {
-                        columns: ':visible:not(.no-export):not(:last-child)',
-                        modifier: { search: 'applied', order: 'applied' }
-                    }
-                }
-            ],
+            buttons: defaultButtons,
             language: {
                 search: "",
                 searchPlaceholder: "Search records..."
             }
         });
-    }
+    })(jQuery);
     </script>
    <!--  <script src="<?=$theme_path?>/assets/vendors/js/tagify.min.js"></script>
     <script src="<?=$theme_path?>/assets/vendors/js/tagify-data.min.js"></script> -->
@@ -1101,121 +1075,6 @@ if (!empty($employee_det['Bid'])) {
             $('#page-header-collapse-target').replaceWith($collapse.children());
             $collapse.remove();
         }
-    });
-
-    // Global Expand & Shrink Row Action Handler
-    $(document).on('click', '.btn-row-actions-toggle', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        var $btn = $(this);
-        var $group = $btn.closest('.row-actions-group');
-        var $collapse = $group.find('.row-actions-collapse');
-        var isExpanded = $collapse.is(':visible');
-
-        // Shrink any other open action groups across the page
-        $('.row-actions-collapse').not($collapse).hide().removeClass('show');
-        $('.btn-row-actions-toggle').not($btn).removeClass('active').attr('title', 'Actions');
-
-        if (isExpanded) {
-            // Shrink
-            $collapse.hide().removeClass('show');
-            $btn.removeClass('active').attr('title', 'Actions');
-        } else {
-            // Expand
-            $collapse.css('display', 'inline-flex').addClass('show');
-            $btn.addClass('active').attr('title', 'Close');
-        }
-    });
-
-    // Shrink open actions on click outside
-    $(document).on('click', function(e) {
-        if (!$(e.target).closest('.row-actions-group').length) {
-            $('.row-actions-collapse').hide().removeClass('show');
-            $('.btn-row-actions-toggle').removeClass('active').attr('title', 'Actions');
-        }
-    });
-
-    // Shrink open actions on Escape key
-    $(document).on('keydown', function(e) {
-        if (e.key === 'Escape' || e.keyCode === 27) {
-            $('.row-actions-collapse').hide().removeClass('show');
-            $('.btn-row-actions-toggle').removeClass('active').attr('title', 'Actions');
-        }
-    });
-
-    // Global helper: automatically transform standard .hstack action cells in tables across pages
-    function initGlobalRowActionCollapsibles(context) {
-        var $root = context ? $(context) : $(document);
-
-        $root.find('table').each(function() {
-            var $table = $(this);
-            if ($table.hasClass('bid-detail-table') || $table.hasClass('history-table') || $table.closest('#historyCollapseContainer').length) {
-                return;
-            }
-
-            var actionIdx = -1;
-            $table.find('thead th').each(function(idx) {
-                var txt = $(this).text().trim().toLowerCase();
-                if (txt === 'action' || txt === 'actions') {
-                    actionIdx = idx;
-                    return false;
-                }
-            });
-
-            $table.find('tbody tr').each(function() {
-                var $tr = $(this);
-                if ($tr.hasClass('no-row-actions') || $tr.find('.btn-row-actions-toggle').length > 0) {
-                    return;
-                }
-
-                var $container = $tr.find('td > .hstack, td .hstack');
-                if (!$container.length && actionIdx !== -1) {
-                    var $targetCell = $tr.find('td').eq(actionIdx);
-                    if ($targetCell.length && $targetCell.find('a, button, .avatar-text').length > 0) {
-                        $container = $targetCell;
-                    }
-                }
-
-                if (!$container || !$container.length || $container.hasClass('row-actions-initialized')) {
-                    return;
-                }
-
-                var $actionItems = $container.children('a, button, .avatar-text, .dropdown').not('.btn-row-actions-toggle');
-                if ($actionItems.length === 0) {
-                    return;
-                }
-
-                $container.removeClass('hstack').addClass('row-actions-initialized row-actions-group');
-
-                var $collapse = $('<div class="row-actions-collapse" style="display:none;"></div>');
-                $actionItems.appendTo($collapse);
-
-                var $btn = $(
-                    '<button type="button" class="btn-row-actions-toggle avatar-text avatar-md" title="Actions" aria-label="Toggle Actions">' +
-                        '<i class="feather-plus"></i>' +
-                    '</button>'
-                );
-
-                $container.prepend($btn).append($collapse);
-            });
-        });
-    }
-
-    $(document).ready(function() {
-        initGlobalRowActionCollapsibles();
-    });
-
-    $(document).on('draw.dt init.dt', function(e, settings) {
-        if (settings && settings.nTable) {
-            initGlobalRowActionCollapsibles($(settings.nTable));
-        } else {
-            initGlobalRowActionCollapsibles();
-        }
-    });
-
-    $(document).ajaxComplete(function() {
-        initGlobalRowActionCollapsibles();
     });
     </script>
 

@@ -1,12 +1,12 @@
 <?php
 /**
  * Bid Intelligence Dashboard
- * Layout matches reference image exactly:
+ * Layout matches reference image:
  * - Header: Minimal & clean with Financial Year & Date Range filters.
- * - Row 1: 5 Clean KPI Cards (Total Bids, Participated Bids, Won Bids, Win Rate, Total Bid Value).
+ * - Row 1: 5 Clean KPI Cards (Total Bids, Participated Bids, Participated Bids Total Value, Won Bids (with Win Rate %), Total Won Value).
  * - Row 2: Bid Pipeline (Donut Chart representing statuses) | Monthly Bid Trend | Bid Value Analysis.
  * - Row 3: Bids by Category (Horizontal bars with count on right) | Bids by State / UT (India Map + Legend in middle + Ranked State List).
- * - Row 4: Top Opportunities (Full-width 12-column table, Winning Categories removed).
+ * - Row 4: Top Opportunities (Full-width 12-column table).
  */
 
 // Normalize Category if empty, numeric or '001'
@@ -52,6 +52,7 @@ window.DASH_DATA = {
     baseUrl    : <?= $jsBaseUrl ?>
 };
 </script>
+
 
 <!-- ================================================================
      HEADER — Minimal & Clean (Financial Year + Date Range only)
@@ -115,12 +116,26 @@ window.DASH_DATA = {
         </div>
     </div>
 
-    <!-- 3. Won Bids -->
+    <!-- 3. Participated Bids Total Value (NEW) -->
+    <div class="bid-kpi-card bkc-border-teal" data-kpi="participated-value">
+        <div class="bkc-top">
+            <div class="bkc-body">
+                <div class="bkc-label">Participated Bids Total Value</div>
+                <div class="bkc-value bkc-value-sm" id="kpi-participated-value">₹ 0 Cr</div>
+            </div>
+            <div class="bkc-icon bkc-icon-teal">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="4" x2="18" y2="4"/><line x1="6" y1="9" x2="18" y2="9"/><path d="M6 14h4a4 4 0 0 0 0-8"/><path d="M6 14l7 7"/></svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Won Bids (with Win Rate) -->
     <div class="bid-kpi-card bkc-border-green" data-kpi="won">
         <div class="bkc-top">
             <div class="bkc-body">
                 <div class="bkc-label">Won Bids</div>
                 <div class="bkc-value" id="kpi-won">0</div>
+                <div class="bkc-subtext">Win Rate: <span id="kpi-winrate">0%</span></div>
             </div>
             <div class="bkc-icon bkc-icon-green">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
@@ -128,18 +143,7 @@ window.DASH_DATA = {
         </div>
     </div>
 
-    <!-- 4. Win Rate -->
-    <div class="bid-kpi-card bkc-border-teal" data-kpi="winrate">
-        <div class="bkc-top">
-            <div class="bkc-body">
-                <div class="bkc-label">Win Rate</div>
-                <div class="bkc-value" id="kpi-winrate">0%</div>
-            </div>
-            <div id="chart-winrate" class="bkc-gauge"></div>
-        </div>
-    </div>
-
-    <!-- 5. Total Bid Value -->
+    <!-- 5. Total Won Value -->
     <div class="bid-kpi-card bkc-border-orange" data-kpi="value">
         <div class="bkc-top">
             <div class="bkc-body">

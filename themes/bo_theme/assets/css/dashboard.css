@@ -250,8 +250,21 @@ body,
 }
 .bkc-icon-blue   { background: #E3F2FD; color: var(--bid-primary); }
 .bkc-icon-purple { background: var(--bid-purple-lt); color: var(--bid-purple); }
+.bkc-icon-teal   { background: var(--bid-teal-lt); color: var(--bid-teal); }
 .bkc-icon-green  { background: var(--bid-success-lt); color: var(--bid-success-dk); }
 .bkc-icon-orange { background: var(--bid-orange-lt); color: var(--bid-orange); }
+
+.bkc-subtext {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--bid-text-md);
+    margin-top: 4px;
+    line-height: 1.2;
+}
+.bkc-subtext span {
+    font-weight: 700;
+    color: var(--bid-success-dk);
+}
 
 .bkc-gauge { width: 56px; height: 56px; flex-shrink: 0; }
 

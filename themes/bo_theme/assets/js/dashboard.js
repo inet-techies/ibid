@@ -344,7 +344,7 @@
        ============================================================== */
     function compute(bids) {
         var total = bids.length;
-        var participated = 0, won = 0, totalValue = 0, wonValue = 0;
+        var participated = 0, won = 0, totalValue = 0, participatedValue = 0, wonValue = 0;
         var statusMap = {}, catMap = {}, stateMap = {};
         var mTotal = new Array(12).fill(0);
         var mPart  = new Array(12).fill(0);
@@ -361,8 +361,8 @@
             totalValue += val;
             var part = isParticipated(b);
             var win  = isWon(b);
-            if (part) participated++;
-            if (win) { won++; wonValue += val; }
+            if (part) { participated++; participatedValue += val; }
+            if (win)  { won++; wonValue += val; }
 
             /* Status */
             if (!statusMap[sn]) statusMap[sn] = { count:0, value:0, bids:[] };
@@ -397,6 +397,7 @@
         return {
             total: total, participated: participated, won: won,
             totalValue: totalValue,
+            participatedValue: participatedValue,
             wonValue: wonValue,
             winRate: wr,
             statusMap: statusMap, catMap: catMap, stateMap: stateMap,
@@ -422,11 +423,12 @@
        7. ROW 1 — 5 CLEAN KPI CARDS (No percentages, No sparklines)
        ============================================================== */
     function updateKPIs(c) {
-        setText('kpi-total',        c.total);
-        setText('kpi-participated', c.participated);
-        setText('kpi-won',          c.won);
-        setText('kpi-winrate',      c.winRate + '%');
-        setText('kpi-value',        formatCurrencySmart(c.wonValue));
+        setText('kpi-total',              c.total);
+        setText('kpi-participated',       c.participated);
+        setText('kpi-participated-value', formatCurrencySmart(c.participatedValue));
+        setText('kpi-won',                c.won);
+        setText('kpi-winrate',            c.winRate + '%');
+        setText('kpi-value',              formatCurrencySmart(c.wonValue));
 
         renderWinRateGauge(c.winRate);
     }
@@ -823,12 +825,12 @@
             setText('ddk-chart2-title','Monthly Trend');
             renderDDVBar('ddk-chart2', c.mTotal, MONTHS, '#42A5F5');
 
-        } else if (kpiType === 'participated') {
+        } else if (kpiType === 'participated' || kpiType === 'participated-value') {
             matched = activeFilteredBids.filter(isParticipated);
-            title   = 'Participated Bids Analysis';
-            sub     = matched.length + ' participated bids';
             var pv  = matched.reduce(function(s,b){return s+(parseFloat(b.EstimatedValue)||0);},0);
-            setDDKKPIs(matched.length, 'Participated', crStr(pv), 'Participated Value', c.won, 'Won Bids');
+            title   = kpiType === 'participated-value' ? 'Participated Bids Total Value Analysis' : 'Participated Bids Analysis';
+            sub     = matched.length + ' participated bids (' + crStr(pv) + ')';
+            setDDKKPIs(crStr(pv), 'Participated Value', matched.length, 'Participated Bids', c.won, 'Won Bids');
             var cMap = groupBy(matched, 'Category');
             setText('ddk-chart1-title','By Category');
             renderDDHBar('ddk-chart1', sortMap(cMap).slice(0,8).map(function(e){return e.count;}), sortMap(cMap).slice(0,8).map(function(e){return e.name;}), '#7E57C2');
