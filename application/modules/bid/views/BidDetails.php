@@ -28,6 +28,12 @@
     font-size: 13px;
     padding-right: 4px;
     color: #1e293b;
+    cursor: pointer;
+    transition: color 0.15s ease;
+}
+.bid-title-container:hover {
+    color: #2563eb;
+    text-decoration: underline;
 }
 .bid-title-container::-webkit-scrollbar {
     width: 4px;
@@ -319,6 +325,27 @@
     </div>
 </div>
 
+
+<!-- Small Centered Modal for Full Bid Title -->
+<div class="modal fade" id="bidTitleModal" tabindex="-1" aria-labelledby="bidTitleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 12px; overflow: hidden;">
+            <div class="modal-header bg-light py-2 px-3 border-bottom">
+                <h6 class="modal-title fw-bold text-dark d-flex align-items-center mb-0" id="bidTitleModalLabel">
+                    <i class="feather-file-text text-primary me-2"></i> Bid Title
+                </h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-3">
+                <div id="bidTitleModalMeta" class="mb-2" style="display: none;"></div>
+                <div id="bidTitleModalText" class="text-dark fw-semibold" style="font-size: 14px; line-height: 1.6; white-space: pre-wrap; word-break: break-word;"></div>
+            </div>
+            <div class="modal-footer bg-light py-2 px-3 border-top">
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Right Side Update Panel -->
 <div class="right-form" id="bidCanvas">
@@ -2088,6 +2115,41 @@ $(document).ready(function() {
         filterEnd = null;
         updateBidFilterBadge();
         table.draw();
+    });
+
+    // Click Bid Title in table to view full title clearly in a small modal
+    $(document).on('click', '#customerList .bid-title-container', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var fullTitle = $(this).text().trim() || $(this).attr('title') || '-';
+        var $tr = $(this).closest('tr');
+        var rowBid = $tr.find('.view-bid').data('bid');
+        if (typeof rowBid === 'string') {
+            try { rowBid = JSON.parse(rowBid); } catch (err) { rowBid = null; }
+        }
+
+        var $meta = $('#bidTitleModalMeta');
+        if (rowBid && rowBid.TenderId) {
+            $meta.html('<span class="badge bg-soft-primary text-primary border border-primary" style="font-size:11px;">Tender ID: ' + escapeHtml(rowBid.TenderId) + '</span>').show();
+        } else {
+            $meta.empty().hide();
+        }
+
+        $('#bidTitleModalText').text(fullTitle);
+
+        var modalEl = document.getElementById('bidTitleModal');
+        if (modalEl) {
+            if (modalEl.parentNode !== document.body) {
+                document.body.appendChild(modalEl);
+            }
+            if (window.bootstrap && bootstrap.Modal) {
+                var modalInstance = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+                modalInstance.show();
+            } else if (typeof $(modalEl).modal === 'function') {
+                $(modalEl).modal('show');
+            }
+        }
     });
 });
 </script>
