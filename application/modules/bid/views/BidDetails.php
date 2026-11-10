@@ -381,6 +381,7 @@
                     <div class="mb-4" id="priceDetailsGroup" style="display:none;">
                         <label class="form-label">Price Details <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="PriceDetails" name="PriceDetails" placeholder="Enter Price Details">
+                        <small class="text-primary fw-bold mt-1 d-block" id="updatePriceInWords"></small>
                     </div>
                     <div class="mb-4" id="loaReceivedGroup" style="display:none;">
                         <label class="form-label">LOA Received <span class="text-danger">*</span></label>
@@ -645,6 +646,11 @@ function renderBidReadOnlyView() {
     // Category display name
     var catDisplay = bid.CategoryName || bid.Category || '-';
 
+    // Amount in words helpers for View Modal
+    var estWords = (typeof window.convertAmountToWords === 'function') ? window.convertAmountToWords(bid.EstimatedValue, true) : '';
+    var emdWords = (typeof window.convertAmountToWords === 'function') ? window.convertAmountToWords(bid.EmdValue, true) : '';
+    var priceWords = (typeof window.convertAmountToWords === 'function') ? window.convertAmountToWords(bid.PriceDetails, false) : '';
+
     // All tender schedule date & time fields (shown only if not null/empty)
     var scheduleFields = [
         { label: 'Published Date', dateKey: 'PublishedDate', timeKey: 'tenderPublicationTime' },
@@ -728,11 +734,17 @@ function renderBidReadOnlyView() {
                     </tr>
                     <tr>
                         <th class="bg-light text-muted">Estimated Value</th>
-                        <td class="fw-bold text-success fs-14">₹ ${bid.EstimatedValue ? Number(bid.EstimatedValue).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '-'}</td>
+                        <td class="fw-bold text-success fs-14">
+                            ₹ ${bid.EstimatedValue ? Number(bid.EstimatedValue).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '-'}
+                            ${estWords ? `<div class="text-muted fw-medium" style="font-size:11.5px;margin-top:2px;">(${escapeHtml(estWords)})</div>` : ''}
+                        </td>
                     </tr>
                     <tr>
                         <th class="bg-light text-muted">EMD Value</th>
-                        <td class="fw-semibold text-dark">₹ ${bid.EmdValue ? Number(bid.EmdValue).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '-'}</td>
+                        <td class="fw-semibold text-dark">
+                            ₹ ${bid.EmdValue !== null && bid.EmdValue !== undefined && bid.EmdValue !== '' ? Number(bid.EmdValue).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '-'}
+                            ${emdWords ? `<div class="text-muted fw-medium" style="font-size:11.5px;margin-top:2px;">(${escapeHtml(emdWords)})</div>` : ''}
+                        </td>
                     </tr>
                     ${scheduleRowsHtml}
                     <tr>
@@ -764,7 +776,10 @@ function renderBidReadOnlyView() {
                     ${(bid.PriceDetails !== null && bid.PriceDetails !== undefined && bid.PriceDetails !== '') ? `
                     <tr>
                         <th class="bg-light text-muted">Price Details</th>
-                        <td>${escapeHtml(bid.PriceDetails)}</td>
+                        <td>
+                            ${escapeHtml(bid.PriceDetails)}
+                            ${priceWords ? `<div class="text-muted fw-medium" style="font-size:11.5px;margin-top:2px;">(${escapeHtml(priceWords)})</div>` : ''}
+                        </td>
                     </tr>` : ''}
                     ${(bid.LoaReceived !== null && bid.LoaReceived !== undefined && bid.LoaReceived !== '') ? `
                     <tr>
@@ -1071,6 +1086,7 @@ function renderBidEditView() {
                             <span class="input-group-text bg-white">₹</span>
                             <input type="number" step="0.01" min="0" class="form-control form-control-sm" name="EstimatedValue" value="${cleanNum(bid.EstimatedValue)}" placeholder="0.00" required>
                         </div>
+                        <small class="text-danger fw-bold mt-1 d-block" id="editEstimatedInWords">${escapeHtml((typeof window.convertAmountToWords === 'function') ? window.convertAmountToWords(bid.EstimatedValue, true) : '')}</small>
                     </div>
 
                     <div class="col-md-6">
@@ -1079,6 +1095,7 @@ function renderBidEditView() {
                             <span class="input-group-text bg-white">₹</span>
                             <input type="number" step="0.01" min="0" class="form-control form-control-sm" name="EmdValue" value="${cleanNum(bid.EmdValue)}" placeholder="0.00">
                         </div>
+                        <small class="text-primary fw-bold mt-1 d-block" id="editEmdInWords">${escapeHtml((typeof window.convertAmountToWords === 'function') ? window.convertAmountToWords(bid.EmdValue, true) : '')}</small>
                     </div>
 
                     ${editScheduleHtml}
@@ -2115,6 +2132,20 @@ $(document).ready(function() {
         filterEnd = null;
         updateBidFilterBadge();
         table.draw();
+    });
+
+    // Live Amount-in-Words updates in Edit Bid Details modal & Update Bid Status panel
+    $(document).on('input', '#editBidForm input[name="EstimatedValue"]', function () {
+        var words = (typeof window.convertAmountToWords === 'function') ? window.convertAmountToWords($(this).val(), true) : '';
+        $('#editEstimatedInWords').text(words);
+    });
+    $(document).on('input', '#editBidForm input[name="EmdValue"]', function () {
+        var words = (typeof window.convertAmountToWords === 'function') ? window.convertAmountToWords($(this).val(), true) : '';
+        $('#editEmdInWords').text(words);
+    });
+    $(document).on('input change', '#PriceDetails', function () {
+        var words = (typeof window.convertAmountToWords === 'function') ? window.convertAmountToWords($(this).val(), false) : '';
+        $('#updatePriceInWords').text(words);
     });
 
     // Click Bid Title in table to view full title clearly in a small modal

@@ -90,6 +90,70 @@ if (!function_exists('safeVal')) {
     }
 }
 
+if (!function_exists('convert_integer_to_indian_words')) {
+    function convert_integer_to_indian_words($number) {
+        $numStr = ltrim(preg_replace('/[^0-9]/', '', (string)$number), '0');
+        if ($numStr === '') return 'Zero';
+        $ones = [0=>'',1=>'One',2=>'Two',3=>'Three',4=>'Four',5=>'Five',6=>'Six',7=>'Seven',8=>'Eight',9=>'Nine',10=>'Ten',11=>'Eleven',12=>'Twelve',13=>'Thirteen',14=>'Fourteen',15=>'Fifteen',16=>'Sixteen',17=>'Seventeen',18=>'Eighteen',19=>'Nineteen'];
+        $tens = [2=>'Twenty',3=>'Thirty',4=>'Forty',5=>'Fifty',6=>'Sixty',7=>'Seventy',8=>'Eighty',9=>'Ninety'];
+        $twoDigits = function($n) use ($ones, $tens) {
+            $n = (int)$n;
+            if ($n === 0) return '';
+            if ($n < 20) return $ones[$n];
+            $t = (int)floor($n / 10);
+            $u = $n % 10;
+            return trim($tens[$t] . ($u > 0 ? ' ' . $ones[$u] : ''));
+        };
+        $parts = [];
+        if (strlen($numStr) > 7) {
+            $crorePart = ltrim(substr($numStr, 0, strlen($numStr) - 7), '0');
+            if ($crorePart !== '') $parts[] = convert_integer_to_indian_words($crorePart) . ' Crore';
+            $numStr = substr($numStr, -7);
+        }
+        $padded = str_pad($numStr, 7, '0', STR_PAD_LEFT);
+        $lakh = (int)substr($padded, 0, 2);
+        $thousand = (int)substr($padded, 2, 2);
+        $hundred = (int)substr($padded, 4, 1);
+        $rest = (int)substr($padded, 5, 2);
+        if ($lakh > 0) $parts[] = $twoDigits($lakh) . ' Lakh';
+        if ($thousand > 0) $parts[] = $twoDigits($thousand) . ' Thousand';
+        if ($hundred > 0) $parts[] = $ones[$hundred] . ' Hundred';
+        if ($rest > 0) $parts[] = (!empty($parts) ? 'and ' : '') . $twoDigits($rest);
+        return trim(implode(' ', $parts));
+    }
+}
+if (!function_exists('amount_to_indian_words')) {
+    function amount_to_indian_words($rawValue, $allowZero = false) {
+        if ($rawValue === null || $rawValue === '') return '';
+        $str = trim((string)$rawValue);
+        if ($str === '' || preg_match('/(%|lakh|lac|crore|cr\b|thousand|hundred|only|day|month|year|exempt|free|not\s+specified|na\b)/i', $str)) return '';
+        if (!preg_match('/^(?:₹|&#8377;|Rs\.?|INR)?\s*([\d,]+(?:\.\d{1,2})?)\s*(?:\/-)?$/iu', $str, $m)) return '';
+        $numClean = str_replace(',', '', $m[1]);
+        if (!is_numeric($numClean)) return '';
+        $floatVal = (float)$numClean;
+        if ($floatVal < 0 || (!$allowZero && $floatVal == 0.0)) return '';
+        list($rupeesStr, $paiseStr) = explode('.', number_format($floatVal, 2, '.', ''));
+        $rupeeWords = convert_integer_to_indian_words($rupeesStr);
+        $paiseInt = (int)$paiseStr;
+        if ($paiseInt > 0) return trim($rupeeWords . ' and ' . convert_integer_to_indian_words($paiseInt) . ' Paise Only');
+        return trim($rupeeWords . ' Only');
+    }
+}
+
+if (!function_exists('formatFactSheetAmount')) {
+    function formatFactSheetAmount($val, $fallback = 'Not specified in document') {
+        $html = safeVal($val, $fallback);
+        $trimmed = trim((string)$val);
+        if ($trimmed !== '' && function_exists('amount_to_indian_words')) {
+            $words = amount_to_indian_words($trimmed, false);
+            if ($words !== '') {
+                $html .= '<div class="text-muted" style="font-size:11px;font-weight:500;margin-top:2px;">(' . htmlspecialchars($words) . ')</div>';
+            }
+        }
+        return $html;
+    }
+}
+
 if (!function_exists('formatFactSheetDate')) {
     function formatFactSheetDate($val) {
         $str = trim((string)$val);
@@ -304,9 +368,9 @@ if (empty($attentionAreas) && !empty($fs['OpportunityAssessmentJson'])) {
         <?php endif; ?>
     </div>
     <div class="d-flex align-items-center gap-2">
-        <button type="button" class="btn btn-sm btn-success d-inline-flex align-items-center gap-1" onclick="downloadFactSheetAsPdf();">
+        <!-- <button type="button" class="btn btn-sm btn-success d-inline-flex align-items-center gap-1" onclick="downloadFactSheetAsPdf();">
             <i class="feather-download"></i> Download Fact Sheet
-        </button>
+        </button> -->
     </div>
 </div>
 <!-- <script>
@@ -496,7 +560,7 @@ function downloadFactSheetAsPdf() {
                 </tr>
                 <tr>
                     <td>Project Value</td>
-                    <td><?= safeVal($projVal) ?></td>
+                    <td><?= formatFactSheetAmount($projVal) ?></td>
                 </tr>
                 <tr>
                     <td>Contract Type</td>
@@ -560,15 +624,15 @@ function downloadFactSheetAsPdf() {
             <tbody>
                 <tr>
                     <td>Tender Fee</td>
-                    <td><?= safeVal($tenderFee) ?> <?= $renderEvidenceBadge("Tender Fee") ?></td>
+                    <td><?= formatFactSheetAmount($tenderFee) ?> <?= $renderEvidenceBadge("Tender Fee") ?></td>
                 </tr>
                 <tr>
                     <td>EMD</td>
-                    <td><?= safeVal($emdVal) ?> <?= $renderEvidenceBadge("EMD") ?></td>
+                    <td><?= formatFactSheetAmount($emdVal) ?> <?= $renderEvidenceBadge("EMD") ?></td>
                 </tr>
                 <tr>
                     <td>Performance Bank Guarantee</td>
-                    <td><?= safeVal($pbgSummary) ?> <?= $renderEvidenceBadge("Performance Bank Guarantee") ?></td>
+                    <td><?= formatFactSheetAmount($pbgSummary) ?> <?= $renderEvidenceBadge("Performance Bank Guarantee") ?></td>
                 </tr>
                 <tr>
                     <td>Bid Validity</td>
@@ -577,7 +641,7 @@ function downloadFactSheetAsPdf() {
                 <?php if (!empty($estVal) && $estVal !== 'Not specified in document'): ?>
                 <tr>
                     <td>Estimated Value</td>
-                    <td><?= htmlspecialchars($estVal) ?></td>
+                    <td><?= formatFactSheetAmount($estVal) ?></td>
                 </tr>
                 <?php endif; ?>
             </tbody>
@@ -677,7 +741,7 @@ function downloadFactSheetAsPdf() {
             <tbody>
                 <tr>
                     <td>Amount</td>
-                    <td><?= safeVal($pbgAmt, 'Not specified in document') ?></td>
+                    <td><?= formatFactSheetAmount($pbgAmt, 'Not specified in document') ?></td>
                 </tr>
                 <tr>
                     <td>Validity</td>

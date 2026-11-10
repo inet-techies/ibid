@@ -543,19 +543,10 @@
   }
 
   function convertNumberToWords(num) {
-    var a = ['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten',
-             'Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
-    var b = ['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
-    if ((num = num.toString()).length > 9) return 'Overflow';
-    var n = ('000000000' + num).substr(-9).match(/.{1,2}/g);
-    var str = '';
-    var crore = parseInt(n[0]), lakh = parseInt(n[1]), thousand = parseInt(n[2]), hundred = parseInt(n[3]), last = parseInt(n[4]);
-    if (crore)    str += (crore    < 20 ? a[crore]    : b[Math.floor(crore/10)]    + ' ' + a[crore%10])    + ' Crore ';
-    if (lakh)     str += (lakh     < 20 ? a[lakh]     : b[Math.floor(lakh/10)]     + ' ' + a[lakh%10])     + ' Lakh ';
-    if (thousand) str += (thousand < 20 ? a[thousand] : b[Math.floor(thousand/10)] + ' ' + a[thousand%10]) + ' Thousand ';
-    if (hundred)  str += (hundred  < 20 ? a[hundred]  : b[Math.floor(hundred/10)]  + ' ' + a[hundred%10])  + ' Hundred ';
-    if (last)     str += (str !== '' ? 'and ' : '') + (last < 20 ? a[last] : b[Math.floor(last/10)] + ' ' + a[last%10]);
-    return str.trim();
+    if (typeof window.convertAmountToWords === 'function') {
+      return window.convertAmountToWords(num, true).replace(/\s+Only$/i, '');
+    }
+    return '';
   }
 
   // ── Helper: Format date as YYYY-MM-DD ──

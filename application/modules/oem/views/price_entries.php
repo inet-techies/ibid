@@ -233,6 +233,7 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                 <span class="input-group-text fw-bold text-primary">₹</span>
                 <input type="number" step="0.01" min="0" class="form-control fw-bold text-dark" id="modal_new_price" required />
             </div>
+            <small class="text-primary fw-bold mt-1 d-block" id="modalNewPriceInWords"></small>
         </div>
         <div class="mb-3">
             <label class="form-label fw-semibold">Reason for Price Change <span class="text-danger">*</span></label>
@@ -339,7 +340,10 @@ document.addEventListener("DOMContentLoaded", function() {
                         <td><span class="badge bg-light text-dark border">${item.CategoryList || '-'}</span></td>
                         <td class="fw-semibold text-dark">${item.ProductList || '-'}</td>
                         <td class="fw-semibold text-dark">${item.OemName || '-'}</td>
-                        <td><span class="fw-bold text-primary fs-14">₹ ${formattedPrice}</span></td>
+                        <td>
+                            <span class="fw-bold text-primary fs-14">₹ ${formattedPrice}</span>
+                            ${(typeof window.convertAmountToWords === 'function' && window.convertAmountToWords(item.Price, false)) ? `<small class="d-block text-muted fw-normal" style="font-size:11px;white-space:normal;">(${window.convertAmountToWords(item.Price, false)})</small>` : ''}
+                        </td>
                         <td><span class="badge bg-light text-dark border">${item.Unit || 'Nos'}</span></td>
                         <td class="text-muted fs-13">${item.ChangeReason || '-'}</td>
                         <td class="text-muted fs-12">${dateStr}</td>
@@ -496,8 +500,12 @@ document.addEventListener("DOMContentLoaded", function() {
             $('#modal_price_sno').val(btn.attr('data-sno') || '');
             $('#modal_product_oem').val(btn.attr('data-info') || '');
             $('#modal_new_price').val(btn.attr('data-price') || '');
+            $('#modalNewPriceInWords').text((typeof window.convertAmountToWords === 'function') ? window.convertAmountToWords(btn.attr('data-price') || '', true) : '');
             $('#modal_change_reason').val(btn.attr('data-reason') || '');
             openModal('editPriceModal');
+        });
+        $(document).on('input', '#modal_new_price', function() {
+            $('#modalNewPriceInWords').text((typeof window.convertAmountToWords === 'function') ? window.convertAmountToWords($(this).val(), true) : '');
         });
 
         $('#savePriceUpdateBtn').on('click', function() {

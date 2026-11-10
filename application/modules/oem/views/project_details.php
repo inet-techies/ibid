@@ -1,5 +1,54 @@
 <?php $employee_det = $this->session->userdata('logged_in');
 if (empty($employee_det)) { redirect(base_url('bid/index')); }
+if (!function_exists('convert_integer_to_indian_words')) {
+    function convert_integer_to_indian_words($number) {
+        $numStr = ltrim(preg_replace('/[^0-9]/', '', (string)$number), '0');
+        if ($numStr === '') return 'Zero';
+        $ones = [0=>'',1=>'One',2=>'Two',3=>'Three',4=>'Four',5=>'Five',6=>'Six',7=>'Seven',8=>'Eight',9=>'Nine',10=>'Ten',11=>'Eleven',12=>'Twelve',13=>'Thirteen',14=>'Fourteen',15=>'Fifteen',16=>'Sixteen',17=>'Seventeen',18=>'Eighteen',19=>'Nineteen'];
+        $tens = [2=>'Twenty',3=>'Thirty',4=>'Forty',5=>'Fifty',6=>'Sixty',7=>'Seventy',8=>'Eighty',9=>'Ninety'];
+        $twoDigits = function($n) use ($ones, $tens) {
+            $n = (int)$n;
+            if ($n === 0) return '';
+            if ($n < 20) return $ones[$n];
+            $t = (int)floor($n / 10);
+            $u = $n % 10;
+            return trim($tens[$t] . ($u > 0 ? ' ' . $ones[$u] : ''));
+        };
+        $parts = [];
+        if (strlen($numStr) > 7) {
+            $crorePart = ltrim(substr($numStr, 0, strlen($numStr) - 7), '0');
+            if ($crorePart !== '') $parts[] = convert_integer_to_indian_words($crorePart) . ' Crore';
+            $numStr = substr($numStr, -7);
+        }
+        $padded = str_pad($numStr, 7, '0', STR_PAD_LEFT);
+        $lakh = (int)substr($padded, 0, 2);
+        $thousand = (int)substr($padded, 2, 2);
+        $hundred = (int)substr($padded, 4, 1);
+        $rest = (int)substr($padded, 5, 2);
+        if ($lakh > 0) $parts[] = $twoDigits($lakh) . ' Lakh';
+        if ($thousand > 0) $parts[] = $twoDigits($thousand) . ' Thousand';
+        if ($hundred > 0) $parts[] = $ones[$hundred] . ' Hundred';
+        if ($rest > 0) $parts[] = (!empty($parts) ? 'and ' : '') . $twoDigits($rest);
+        return trim(implode(' ', $parts));
+    }
+}
+if (!function_exists('amount_to_indian_words')) {
+    function amount_to_indian_words($rawValue, $allowZero = false) {
+        if ($rawValue === null || $rawValue === '') return '';
+        $str = trim((string)$rawValue);
+        if ($str === '' || preg_match('/(%|lakh|lac|crore|cr\b|thousand|hundred|only|day|month|year|exempt|free|not\s+specified|na\b)/i', $str)) return '';
+        if (!preg_match('/^(?:₹|&#8377;|Rs\.?|INR)?\s*([\d,]+(?:\.\d{1,2})?)\s*(?:\/-)?$/iu', $str, $m)) return '';
+        $numClean = str_replace(',', '', $m[1]);
+        if (!is_numeric($numClean)) return '';
+        $floatVal = (float)$numClean;
+        if ($floatVal < 0 || (!$allowZero && $floatVal == 0.0)) return '';
+        list($rupeesStr, $paiseStr) = explode('.', number_format($floatVal, 2, '.', ''));
+        $rupeeWords = convert_integer_to_indian_words($rupeesStr);
+        $paiseInt = (int)$paiseStr;
+        if ($paiseInt > 0) return trim($rupeeWords . ' and ' . convert_integer_to_indian_words($paiseInt) . ' Paise Only');
+        return trim($rupeeWords . ' Only');
+    }
+}
 ?>
 
 <div class="row">
@@ -231,6 +280,9 @@ if (empty($employee_det)) { redirect(base_url('bid/index')); }
                                             <span class="fw-bold text-primary fs-14">
                                                 ₹ <?= number_format((float)($quote['Price'] ?? 0), 2); ?>
                                             </span>
+                                            <?php $pWords = amount_to_indian_words($quote['Price'] ?? '', false); if ($pWords !== ''): ?>
+                                                <small class="d-block text-muted fw-normal" style="font-size:11px;white-space:normal;">(<?= htmlspecialchars($pWords, ENT_QUOTES, 'UTF-8'); ?>)</small>
+                                            <?php endif; ?>
                                         </td>
                                         <td><span class="badge bg-light text-dark border"><?= htmlspecialchars($quote['Unit'] ?? 'Nos'); ?></span></td>
                                         <td class="text-muted fs-13">

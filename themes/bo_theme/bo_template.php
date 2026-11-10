@@ -63,6 +63,59 @@ if (!empty($employee_det['Bid'])) {
     <link rel="stylesheet" href="<?=$theme_path?>/assets/css/dashboard.css?v=<?= time(); ?>">
     <!--! Core Vendors JS (jQuery, Bootstrap core) loaded in HEAD so view scripts have jQuery immediately !-->
     <script src="<?=$theme_path?>/assets/vendors/js/vendors.min.js"></script>
+    <script>
+    window.convertIntegerToIndianWords = function(intStr) {
+        var clean = String(intStr || '').replace(/[^0-9]/g, '').replace(/^0+/, '');
+        if (!clean) return 'Zero';
+        var ones = ['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten',
+                    'Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
+        var tens = ['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
+        var twoDigits = function(n) {
+            n = parseInt(n, 10) || 0;
+            if (!n) return '';
+            return n < 20 ? ones[n] : tens[Math.floor(n / 10)] + (n % 10 ? ' ' + ones[n % 10] : '');
+        };
+        var parts = [];
+        if (clean.length > 7) {
+            var crorePart = clean.slice(0, clean.length - 7).replace(/^0+/, '');
+            if (crorePart) {
+                parts.push(window.convertIntegerToIndianWords(crorePart) + ' Crore');
+            }
+            clean = clean.slice(-7);
+        }
+        var padded = ('0000000' + clean).slice(-7);
+        var lakh     = parseInt(padded.slice(0, 2), 10);
+        var thousand = parseInt(padded.slice(2, 4), 10);
+        var hundred  = parseInt(padded.slice(4, 5), 10);
+        var rest     = parseInt(padded.slice(5, 7), 10);
+        if (lakh)     parts.push(twoDigits(lakh) + ' Lakh');
+        if (thousand) parts.push(twoDigits(thousand) + ' Thousand');
+        if (hundred)  parts.push(ones[hundred] + ' Hundred');
+        if (rest)     parts.push((parts.length ? 'and ' : '') + twoDigits(rest));
+        return parts.join(' ').trim();
+    };
+
+    window.convertAmountToWords = function(rawValue, allowZero) {
+        if (rawValue === null || rawValue === undefined || rawValue === '') return '';
+        var str = String(rawValue).trim();
+        if (!str) return '';
+        if (/(%|lakh|lac|crore|cr\b|thousand|hundred|only|day|month|year|exempt|free|not\s+specified|na\b)/i.test(str)) {
+            return '';
+        }
+        var m = str.match(/^(?:₹|Rs\.?|INR)?\s*([\d,]+(?:\.\d{1,2})?)\s*(?:\/-)?$/i);
+        if (!m) return '';
+        var numStr = m[1].replace(/,/g, '');
+        var numVal = parseFloat(numStr);
+        if (isNaN(numVal) || numVal < 0 || (!allowZero && numVal === 0)) return '';
+        var parts = numVal.toFixed(2).split('.');
+        var rupeeWords = window.convertIntegerToIndianWords(parts[0]);
+        var paiseInt = parseInt(parts[1], 10);
+        if (paiseInt > 0) {
+            return rupeeWords + ' and ' + window.convertIntegerToIndianWords(paiseInt) + ' Paise Only';
+        }
+        return rupeeWords + ' Only';
+    };
+    </script>
 
     <style>
         
