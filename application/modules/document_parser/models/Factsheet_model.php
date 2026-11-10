@@ -565,8 +565,8 @@ class Factsheet_model extends CI_Model
         if ($bidType !== '' && $bidType !== '0') $overview['Tender Type'] = $bidType;
         if ($pubDate !== '')  $overview['Tender Date'] = $pubDate;
         if ($estVal !== '')   $overview['Project Value'] = $estVal;
-        if (empty($overview['Contract Type'])) $overview['Contract Type'] = 'Rate Contract / Supply';
-        if (empty($overview['Bid System']))    $overview['Bid System'] = 'Two Bid System';
+        if (empty($overview['Contract Type'])) $overview['Contract Type'] = !empty($fs['ContractType']) ? $fs['ContractType'] : 'Not specified in document';
+        if (empty($overview['Bid System']))    $overview['Bid System'] = !empty($fs['BidSystem']) ? $fs['BidSystem'] : 'Not specified in document';
 
         // ── Section 2: ImportantDates (Sync all 12 standard milestones) ──
         $dates = !empty($fs['ImportantDates']) ? self::deserializeKeyValue($fs['ImportantDates']) : [];

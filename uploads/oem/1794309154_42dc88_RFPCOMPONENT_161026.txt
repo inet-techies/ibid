@@ -1,0 +1,2547 @@
+Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ Police Telecom Headquarters, M.P.
+ Bhadbhada Road, BHOPAL- 462003
+ (Fax No. 0755-2443674, E-mail: ssp_radio@mppolice.gov.in)
+
+ e-tender
+ For
+Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ (Tender No. PDM/PUR/CCTV-41/CCTV Component/D- 17939 /2026, Dated: 16/10/2026)
+
+S.N. Activity of Tender Date Day Time
+ 1 Documents Publish/download/Sale Start Date 17/10/2026 Saturday 1700 Hrs
+ 2 Pre-Bid Queries Submission Start Date 17/10/2026 Saturday 1730 Hrs
+ 3 Pre-Bid Queries Submission End Date 21/10/2026 Wednesday 1830 Hrs
+ 4 Pre-Bid Meeting Date 23/10/2026 Friday 1200 Hrs
+ 5 Pre-Bid Queries Response Submission Date 28/10/2026 Wednesday 1800 Hrs
+ 6 Bid Submission Start Date 29/10/2026 Thursday 1830 Hrs
+ 7 Bid Submission End Date 10/11/2026 Tuesday 1500 HRs. 8 Opening of PQ Bid 11/11/2026 Wednesday 1510 Hrs
+
+ Through- S.S.P. (Radio)
+ Police Telecom Headquarters, M.P.
+ Bhadbhada Road, Bhopal-462003
+ Phone & Fax: 0755- 2443674
+ E-mail: ssp_radio@mppolice.gov.in
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ POLICE TELECOMMUNICATION HEADQUARTER,
+ Madhya Pradesh, Bhopal
+ E-mail: ssp_radio@mppolice.gov.in office Phone No. 0755-2443674,
+No. PDM/PUR/CCTV-41/CCTV Component/D- 17939 /2026, Dated: 16/10/2026
+ -: Notice Inviting e-tender: -
+ e-Tenders are invited by the Senior Superintendent of Police (Radio) MP Bhopal on
+behalf of DGP MP Bhopal for the following items: -
+
+ Sr. Name of item Required EMD Rs. Tender Fee
+ No. Rs. 1 Supply of CCTV Infrastructure
+ Components for SAFE CITY Rs. 39 Lakhs Rs. 20,000/-
+ Project
+
+ 1. Cost of Tender documents is Rs. 20,000 /- (Tender fee) (Rupees Twenty Thousand only)
+ which is non-refundable and cannot be exempted in any condition. Must be paid online at the
+ time of filling e Tender.
+ 2. The EMD amount will have to be deposited online through the website
+ https://www.mptenders.gov.in.
+ 3. Tender documents can also be download from the website of MP Police
+ (www.mppolice.gov.in).
+ 4. The Tender Should be submitted online on website https://www.mptenders.gov.in and within
+ scheduled date and time.
+ 5. Schedule Date & Time:
+
+S.N. Activity of Tender Date Day Time
+ 1 Documents Publish/download/Sale Start Date 17/10/2026 Saturday 1700 Hrs
+ 2 Pre-Bid Queries Submission Start Date 17/10/2026 Saturday 1730 Hrs
+ 3 Pre-Bid Queries Submission End Date 21/10/2026 Wednesday 1830 Hrs
+ 4 Pre-Bid Meeting Date 23/10/2026 Friday 1200 Hrs
+ 5 Pre-Bid Queries Response Submission Date 28/10/2026 Wednesday 1800 Hrs
+ 6 Bid Submission Start Date 29/10/2026 Thursday 1830 Hrs
+ 7 Bid Submission End Date 10/11/2026 Tuesday 1500 HRs. 8 Opening of PQ Bid 11/11/2026 Wednesday 1510 Hrs
+
+ Sd/-
+ (Samir Saurabh)
+ (IPS)
+ Senior Superintendent of police (Radio)
+ M.P. Bhopal
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ SECTION 1: INVITATION FOR PROPOSAL
+1.1. PROPOSAL
+ The Madhya Pradesh Police Telecommunication Department intends to procure
+ various Information Technology (IT) and Surveillance Infrastructure
+ components/equipment for the replacement and modernization of existing systems
+ deployed under the Safe City Project implemented across 65 cities in the State of
+ Madhya Pradesh.
+
+ The objective of this procurement is to ensure the continued reliability, operational
+ efficiency, and technological upgradation of the Surveillance and communication
+ infrastructure supporting public safety, law enforcement, and smart policing initiatives.
+ The selected bidder shall be responsible for the supply, delivery, and associated
+ services for the specified equipment in accordance with the requirements of this RFP.
+
+ The equipment shall be delivered to the Police Telecommunication Headquarters
+ Store and/or any other location(s) within the State of Madhya Pradesh as designated
+ by the Purchaser from time to time.
+
+Core Deliverables and Responsibilities
+
+ i. Supply the items as per BOQ and as the technical specifications and quantities
+ specified by MP Police Telecommunication.
+ ii. Ensure that all supplied equipment is new, genuine, unused, and sourced from
+ authorized manufacturers or distributors.
+ iii. Deliver the material MP Police telecommunication HQ, Bhopal warehouses, or other
+ locations specified by MP Police Telecommunication across Madhya Pradesh.
+ iv. Provide manufacturer warranty certificates, product datasheets, and relevant
+ documentation for all supplied items.
+ v. Ensure compliance with applicable quality standards, technical specifications, and
+ regulatory requirements.
+ vi. Replace any defective, damaged, or non-compliant equipment supplied during the
+ warranty period, as per contract terms.
+vii. Submit delivery challans, invoices, warranty documents, and other required supply-
+ related records for acceptance and payment Processing.
+viii. Coordinate with designated officials of MP Police Telecommunication for order
+ execution, delivery scheduling, and material acceptance.
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+DEFINITIONS
+
+In this document, unless otherwise mentioned or expressed clearly, the terms used in this Tender
+document/RFP would have meaning as given below:
+
+1. “Availability" shall mean the time for which the services and facilities are available for conducting
+ operations from the equipment installed by the Vendor.
+2. “Bidder” The Firm/Company who buys the Tender document, signs and submits the Tender
+ document and Bids for the contract and / or awarded the Contract to implement Tender for “Supply
+ of CCTV Infrastructure Components for SAFE CITY Project” as the reference may indicate; it shall
+ also include associates, licensee, collaborator, and agents.
+3. “Committee” means Committee constituted by M.P. Police in relation to this Process by whatever
+ name and includes Police Telecom. Technical Committee and Central Purchase Committee and
+ any other committee, as appointed by the Component Authority, for the purpose of Processing this
+ Tender and Supplies Test & Acceptance Committee.
+4. “Competent Authority” means the Special Director General of Police Telecom, Madhya Pradesh,
+ Bhopal or any officer notified by him.
+5. "Contract" or „Agreement‟ means the Agreement entered into between the M.P Police and the
+ "Vendor" as recorded in the Contract form signed by the SSP (R) M.P and the " Vendor " including all
+ attachments and Appendices/ Annexures thereto, the Tender and all Annexures thereto and the
+ agreed terms as set out in the proposal, all documents incorporated by reference therein and
+ amendments and modifications to the above from time to time.
+6. “Day” for the purpose of penalty, or downtime means cumulative four hours of zero feed received
+ from a camera from 00:00 hrs. to the 00:00 hrs. the next day.
+7. "Effective Date" means the date on which the Contract is signed and executed by the M.P Police
+ and successful bidder.
+8. “On Site “ means the District‟s Police telecommunication Head Quarter.
+9. e-tender: means electronically bid submission on the website https:
+10. “Land Border Management”:
+ The Land Border Management (LBM) restrictions under Rule 144(xi) are not attracted merely
+ because the supplied equipment is manufactured by an entity from a land-bordering country.
+ Where procurement is undertaken from an Indian incorporated bidder that is neither beneficially
+ owned nor controlled by such an entity, and where requisite declarations are furnished, the State‟s
+ procurement cannot be faulted solely on account of the foreign origin of the OEM as is evident from
+ the order No.F.7/10/2021-PPD (1) dated 23/02/23, Ministry of Finance, Government of India
+ An Indian incorporated entity qualifies as a bidder for this RFP if:
+  Registered in India
+  Filing Indian tax returns Capable to furnish DPL / import licences in its own name at the time of
+ Acceptance Test of the goods ordered
+  has no beneficial ownership or control of the bidder by entities of the countries covered in LBM
+ nor
+ a) subsidiary of the manufacturers of the goods being procured,
+ b) having foreign shareholding crossing beneficial ownership thresholds of the LBM clause,
+ c) contractually controlled (pricing, exclusivity, veto rights, board control),
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ d) act as a “front” or captive distributor of the goods being procured.
+11. “MSME” means an entity registered as such in the field for which a proposal is being submitted by
+ the bidder.
+12. “Penalty” means the financial deduction/Liability imposed for breaking the law, rule, SLA or
+ contract, timelines. At places in this document „pro rata deductions‟ may also be referred as
+ “penalty‟ as the context may refer to.
+13. “Purchaser‟ or „Madhya Pradesh Police (MPP)' or „Department Purchaser' means MP Police”.
+ Senior Superintendent of Police (Radio) [SSP(R)], Telecom Headquarters, Bhadbhada Road
+ Bhopal shall be authorized person to act on behalf of M.P police in reference to this RFP.
+14. “performance Bank Guarantee (PBG)” means Unconditional and Irrevocable Bank Guarantee from
+ a Nationalized Bank or State Bank of India or other public sector banks valid till completion of exit
+ management being approved by MPP (This time period comprises of warranty period) from the
+ date of signing of Contract between the parties.
+15. “Resources” means the Bidder‟s Personnel deputed to this project.
+16. “Tender Fee” is the cost of a complete blank Tender form with all detail Information about the Tender
+ like technical specifications of each item, all terms and conditions of Tender, all Performa/forms,
+ draft Agreement & Bank guarantee format etc.
+17. The Supply of CCTV Hardware Items (hereinafter referred to interchangeably as the “Equipment”
+ or the “Items” or the “Goods” or the “System” or the “Solution” includes:- “Supply of CCTV
+ Hardware Articles at MP Police Telecommunication Headquarter” with all required hardware as
+ per the scope of Work and Technical Specifications specified in this RFP, for use in this system, by
+ M. P. Police.
+18. “Vendor / supplier”: means the Bidder who has been declared the Successful Bidder (Bidder) and
+ has been offered to enter into the Agreement with “the Purchaser” and who has entered into the
+ Agreement to execute the work/ provide goods and services within the scope of this Tender.
+19. “Service Level” / “Service Level Agreement” means the minimum level of the service adherence
+ which the bidder has agreed to provide and is a part of contract.
+
+1.2. OBJECTIVE
+
+ The Madhya Pradesh Police Telecommunication Department invites bids for the
+ procurement of IT and Surveillance Infrastructure equipment to replace end-of-life and
+ obsolete components deployed under the Safe City Project across 65 cities in Madhya
+ Pradesh. The procurement aims to strengthen and sustain the operational effectiveness of
+ the existing Surveillance ecosystem. The successful bidder shall supply and deliver the
+ required equipment to the Police Telecommunication Headquarters Store and/or other
+ locations designated by the Purchaser.
+
+ 1. This RFP invites eligible bidders to participate in the procurement process for Supply of CCTV
+ hardware items at MP Police telecommunication, in accordance with the Scope of Work and
+ Technical Specifications detailed in this document.
+
+ 2. The requirement is for items (minimum technical requirements) mentioned in this RFP.
+ Bidders must quote for complete quantities of items/services mentioned in the schedule of
+ requirement. Bidders should quote for all the items/services mentioned to satisfy functional
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ and technical requirements of project as mentioned in this RFP. Bids with partial response are
+ liable to be rejected summarily.
+
+ 3. While a detailed Bill of Quantities (BoQ) has been provided, the Bidder shall be solely
+ responsible for ensuring full compliance with all functional and technical requirements
+ prescribed in this RFP.
+
+ 4. Tenders with price variation clauses or with vague terms are liable to be ignored and rejected
+ summarily. Incomplete tenders are liable to be rejected.
+
+ 5. The quoted products/Items/Spares/Service for the project should not be End of Life (EOL) for
+ Five years from the date of bid submission.
+
+1.3. TENTATIVE BID SCHEDULE
+
+ Tender Schedule Date & Time is as per NIT. Bid proposals will be opened at Police Telecom
+ Headquarters, Bhadbhada Road, Bhopal. The bidders or their authorized representatives may
+ remain present if they so desire.
+
+ Note: The SSP (Radio) or MP police shall not be responsible for any delay, non-receipt or
+ non-delivery of the proposals.
+ 1. The committee(s) reserve all rights to open the online bids and examine its contents or ask
+ for clarifications or ask for revised proposals and the decision of the committee shall be
+ final and binding.
+
+ 2. The competent authority reserves all rights to reject any or all offers without assigning any
+ reason whatsoever.
+
+ 3. The representatives (employee, manager, owner, partner, and director) of the bidders
+ participating in the Tender meetings including technical evaluation committee meetings etc.
+ must carry authorization letters from the bidder concerned.
+
+1.4. VALIDITY OF THE Tender BID
+
+ Offer should be kept open for acceptance for a period of six months from the date of
+ submission of Tender Bid. A bid valid for a shorter period may be rejected by the purchaser as
+ non-responsive. Any increase in rates within this period will not be entertained and will result in
+ forfeiture of EMD And/or Security Deposit. In the absence of express indication from
+ Tenderers, it should be deemed that they are willing to keep their offer open for acceptance for
+ a further period of six months as stipulated above. During the period the purchaser will have
+ right to demand additional quantity up to 25% of the quantity mentioned in NIT.
+
+1.5. PRE-QUALIFICATION (PQ)/ ELIGIBILITY Criterion
+ [See check list and fill the same completely, please refer t
+â€¢ Format -1]
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+1.6. Pre-Bid QUERIES AND MEETINGS
+1. The Pre-Bid queries with proof of Tender purchase document must be sent at e-mail: -
+ ssp_radio@mppolice.gov.in
+2. The Pre-Bid queries must be sent in excel only.
+3. Only those Pre-Bid queries will accept that submitted with in the period as shown in NIT.
+4. The Pre-Bid queries reply may be given via video conference (VC) by the Department.
+5. The queries must be sent on an excel sheet as per the format specified below:
+ RFP
+ Name Sub- Clarification
+ Sr.No. Page Section Details Query
+ of Firm Section required/Suggestion
+ No.
+
+6. A Pre-Bid Meeting shall be held at Police Telecom Headquarters, Bhadbhada Road, Bhopal
+ (M.P.) on the date specified in the Notice Inviting Tender (NIT). Bidders may also attend the
+ meeting through online mode. The online meeting link shall be provided to all bidders who submit
+ a request for the same.
+7. The Pre-Bid meeting will be held via video conference on the scheduled date/time as per NIT with
+ a link to be sent via email. The names of two representatives of the firms participating in the Pre-Bid meeting should be sent via email to ssp_radio@mppolice.gov.in in the following format:
+ 8. SN NAME DESIGNATION EMAIL ADDRESS MOB.
+ 1 NO.
+
+ Note: Bidders who wish to participate in the Pre-Bid Meeting through video conferencing (VC) are
+ requested to send an email to ssp_radio@mppolice.gov.in for meeting link.
+
+1.7. Ownership and Warranty Clause
+ All items/materials/equipment supplied under this contract shall be invoiced, delivered, and
+ registered in the name of SSP (R), Bhopal RHQ. The manufacturer‟s warranty, extended
+ warranty (if applicable), and all related support services shall also be issued and maintained in
+ the name of SSP (R), Bhopal RHQ. The successful bidder shall ensure that all warranty
+ certificates, product registrations, licenses, and support entitlements clearly mention SSP (R),
+ Bhopal RHQ as the end user/beneficiary. Any costs associated with warranty registration or
+ transfer shall be borne by the supplier.
+
+SECTION 2: INSTRUCTIONS TO BIDDERS
+2.1 PROCEDURE FOR SUBMISSION OF PROPOSALS
+
+ 1. The bidder is to fill up online e-tender on website (https://www.mptenders.gov.in) up to
+ prescribed date and time with Tender fees.
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+2. EMD should be deposited online through https://www.mptenders.gov.in or offline through
+ BG/FDR No bid will be considered, unless and until each page of the bid documents is duly
+ signed in original by the authorized signatory. Prices should not be indicated in the Pre-
+ Qualification or Technical Bid. It will lead to rejection of bid. All the columns of the quotation
+ form shall be duly, properly and exhaustively filled in. The rates and units shall not be
+ overwritten. Rates shall be both in the figures and words.
+3. Financial Bids determined to be substantially responsive will be checked by the evaluation
+ committee for any errors. If there is a discrepancy between the quoted rate in figures and the
+ quoted rate in words, the rate in words will take precedence. Arithmetic errors will be rectified
+ on the following basis: -
+ a. If there is a discrepancy between the unit rate and the total cost that is obtained by
+ multiplying the unit rate and quantity, the unit rate multiplied by quantity shall prevail and
+ the total cost will be corrected unless in the opinion of the evaluation committee there is an
+ obvious misplacement of the decimal point in the unit rate, in which case the total cost as
+ quoted will govern and the unit rate corrected.
+ b. If there is a discrepancy between the total bid amount and the sum of the individual cost
+ components, the sum of the individual components shall prevail, and the total bid amount
+ shall be corrected.
+ c. The offer price shall be all‑inclusive, covering all taxes, duties, local levies, transportation,
+ loading, unloading, and any other applicable charges.
+ d. The successful bidder shall provide a clear breakup of the GST and the basic price in the
+ invoice/bill.
+ e. In case of any variation in GST rates, it shall be the bidder‟s responsibility to apply and
+ submit the correct rates within the quoted price. No additional amount shall be payable by
+ the Department.
+ f. The bidder must take all necessary precautions while submitting the financial bid to avoid
+ any ambiguity.
+ g. In case of any difference in interpretation of applicable GST rates, the opinion/decision of
+ the GST Commissioner shall be final and binding.
+ h. It shall be presumed that the bidder has understood the requirements and has quoted
+ prices inclusive of the correct GST rates.
+4. The amount stated in the Form of Financial Bid will be adjusted by the evaluation committee in
+ accordance with the above-mentioned point for the correction of errors and, shall be
+ considered as binding upon the bidder. If the bidder does not accept the corrected amount of
+ bid, its bid will be rejected, and the EMD shall be forfeited. Any omission in filling the columns
+ of “units” and “rate” or pertaining to the Taxes/levies, service tax as applicable etc., shall
+ deemed to be treated as inclusive in the rates quoted. All corrections must be duly signed by
+ the Bidder.
+5. All the bid papers must be signed before uploading bids online. The information submitted
+ must be definitive and specific. Vague terms, incomplete information, counteroffers, and
+ „uncalled for‟ correspondence shall not be entertained. The authorized signatory of the Bidder
+ must sign each page and at the last page it must be clearly indicated that all the terms and
+ conditions mentioned herein are acceptable to the Bidder unconditionally.
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ 6. Bidder is required to submit the complete proposal along with annexure & brochures etc. The
+ proposal has to be signed in order by the authorized representative of the Bidder. The
+ proposal shall be exactly according to the presented formats given in the Tender documents
+ (RFP). All columns of the prescribed formats should be filled, and all questions in the Tender
+ document must be answered. Any additional information should be enclosed separately and
+ referred to false in the relevant column in the proposal formats. Modifications / rewording of
+ formats shall not be acceptable. No column should be marked as “NIL” or “Zero”, “0” etc.
+ Where no price is proposed to be charged for any item or its parts required to be supplied, it
+ should be clearly mentioned in so many words.
+ 7. The Bidder is expected to examine carefully all instructions, forms, terms and specifications in
+ the Tender document. Failure to furnish all information required in the Tender document or
+ submission of a proposal not substantially responsive to the Tender document in every
+ respect will be at the Bidders‟ risk and shall result in rejection of the proposal.
+ 8. If the Bidder fails to commence the work necessary to remedy such defect or any damage to
+ the system caused by such defect within a reasonable time period, the Department may
+ following notice to the Bidder, proceed to do such work or contract a third party or parties to
+ do such work, and the reasonable costs in caused by the Department in connection with such
+ work shall be paid to the Department by the Bidder or may be deducted by the Department
+ from any amount due to the Bidder.
+ 9. If the material submitted and displayed by the bidder is equivalent to or has better capabilities
+ and fulfills the required functional requirements, then, after assessing the bidder‟s claims, the
+ material may be evaluated on its merits without insisting on the specific terminology and
+ wording prescribed in the material‟s specifications.
+ 10. The bidder shall have a functional office with technical support staff in Bhopal (Madhya
+ Pradesh) on the date of bid submission, supported by address proof (rent
+ agreement/ownership document/GST registration), contact details and an escalation matrix.
+ Bidders without a local office shall establish one in Bhopal within one month of issue of the
+ Letter of Award (LOA) and submit proof to the purchaser, failing which it shall be treated as a
+ breach of contract. The local office shall provide installation, commissioning and warranty
+ support for all supplied items, including the Vide
+â€¢ Wall and UPS, throughout the warranty
+ period.
+
+2.2 EARNEST MONEY DEPOSIT
+ I. A sum of fixed amount (EMD) mentioned in the NIT against the items should be deposited
+ as online through https://www.mptenders.gov.in or offline through BG/FDR.
+ II. The Earnest money will not be refunded on any account whatsoever till the tenders are
+ finalized and in the event of any firm backing out from their offer, the earnest money is liable to
+ be forfeited.
+ III. No interest shall be claimed on EMDs. Tenders received without or with inadequate EMD shall
+ be liable to rejected.
+ IV. Only Bidder shall be liable to deposit EMD and security deposit.
+ V. Exemption from Earnest Money Deposit (EMD) shall be granted t
+â€¢ MSME units registered in
+ the State of Madhya Pradesh, in accordance with Rule 14.1 of the Revised Store Purchase
+ and Service Procurement
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+2.3 performance GUARANTEE
+ I. The successful bidder shall deposit 3% of the total cost as a performance Guarantee upon
+ issuance of the supply order following acceptance of the e-tender. The guarantee shall be in
+ the form of a Bank Guarantee and shall remain valid for an additional period of two months
+ beyond the prescribed warranty period. The Bank Guarantee shall be executed on non-
+ judicial stamp paper in accordance with Article 13 of the Indian Stamp Act, 1899, bearing
+ stamp duty of 0.25% of the total value of the Bank Guarantee, subject to a maximum of
+ ₹25,000/-.
+ II. Bank Guarantee issued by following banks would be accepted. SBI or its subsidiaries, any
+ Indian Nationalized Bank/Scheduled Bank, Export Import Bank of India, a foreign bank
+ (issued by a branch outside India) with counter guarantee from SBI or its subsidiaries or any
+ Indian Nationalized Bank.
+III. The performance Guarantee shall be as per the format-11.
+IV. The performance Guarantee shall be payable to the Purchaser as compensation for any loss
+ resulting from the Bidder‟s failure to complete its obligations under the contract.
+2.4 PRICE BIDS AND RANKING OF FINANCIAL BIDS
+ A. Successful bidder will have to mention the basic price and tax amount separately at the
+ submission of the bill.
+ B. In case of any tax related dispute relating t
+â€¢ GST the decision of GST Department will be final
+ and binding, on the Bidder.
+ C. After opening the financial bids, a Reverse Auction shall be conducted for a specified period,
+ taking the lowest (L-1) bid received as the base/reference price. The successful bidders shall
+ be eligible to participate in the Reverse Auction. The lowest rate obtained after completion of
+ the Reverse Auction shall be considered as the final rate.
+ D. The successful bidder will be decided on the Lowest Quoted Price Value (L1) which shall be
+ on all-inclusive basis i.e., including all taxes, duties, local leaves, transportation, loading-
+ unloading charges, packing, forwarding, freight & insurance etc. i.e., total cost t
+â€¢ MP Police.
+2.5 DOCUMENTS COMPRISING THE BIDS
+ The bids prepared by the bidders according to the procedure mentioned at clause no. should
+ comprise of the following:
+ A. Pre-Qualification Bid Documents
+ Sr. Type of the documents Required
+ No. Format
+ 1 Eligibility conditions Format 1
+ 2 Letter of proposal submission Format 2
+ 3 Financial status form/general information about the bidder Format 3
+ 4 performance statement (experience) Format 4
+ 5 Undertaking certificate Format 8
+ 6 Undertaking on office premises (on firm/ company letter head) Format 12
+ 7 Force majeure Format 13
+ 8 Declaration Format 15
+ 9 Land Border Sharing Declaration Format 16
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ B. Technical Bid document
+
+ Sr. No. Contents Required
+ Format
+ 1 Technical qualifications Format 5
+ 2 Technical proposal compliance statement Format 6
+ 3 No deviations from Tender document conditions Format 7
+ 4 Bill of Quantity Format 9
+ 5 Technical Personnel statement Format 14
+ OEM / MANUFACTURERS AUTHORIZATION Format 17
+
+ CERTIFICATE/ compliance sheet
+
+ C. FINANCIAL Bid Documents
+
+ Financial Bid with price in INR must be submitted in prescribed formats as online BOQ.
+
+ 2.6 PROCEDURE FOR FINALIZATION OF BIDS
+
+ I. Firstly, the pre-qualification bid shall be opened. At the time of opening of bid the authorized
+ representative may remain present. Committee may ask the candidate for any additional
+ document/ information if required, to form its opinion as qualification of the bidder. If the
+ committee is not satisfied, it may reject the bid.
+ II. The technical bid of only bidders qualifying in pre-qualification stage shall be opened.
+III. The tenderer must present technical demonstration of Proposed CCTV Cameras and Vide
+â€¢ Wall
+ at Police Telecom Headquarters, Bhadbhada Road, Bhopal. Without technical demonstration,
+ Tender shall not be considered.
+IV. As part of Technical evaluation of Bids, the Bidders shall arrange demonstration of their quoted
+ CCTV Cameras and Vide
+â€¢ Wall to show that they fully conform to this Tender. (TEC will intimate
+ tentative date of Demo) The bidders will be intimated the exact date and time slot for them to
+ carry out such demonstration. The bidders are advised to make all necessary arrangements for
+ the live demonstration of their quoted product with full functionality well in advance as they will be
+ required to adhere to the time schedule given to them soon after bid opening / technical bid
+ evaluation.
+V. The information submitted by the bidders will be systematically tabulated and compared against
+ the specifications provided in the Tender document. This process will determine whether the
+ product offered by each bidder complies with the purchaser‟s technical requirements as outlined
+ in the Tender specifications.
+VI. The committee would be entitled to call for any further information, document, undertaking and
+ may also interview the authorized representative of the bidder in order to satisfy itself about the
+ eligibility of the bidder, technical specifications, trust worthiness of the product, at any stage of
+ the Tender process. The committee would be within its right to get any enquiry, secret or open
+ conducted for the purpose. The information, documents submitted, and undertaking given by the
+ bidder or its authorized representative to the committee should be deemed to be the part of the
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ “technical bid” of the bidder. The decision of the committee on technical suitability of the offer
+ shall be final.
+VII. Out of all the bidders, committee shall sort out the eligible/qualified bidder whose
+ product/solution satisfies the technical specifications as given in Section 4 (4.2) of this document
+ and is overall acceptable to purchaser being satisfied with bidder‟s capacity to full fill the supplied
+ terms within stipulated time.
+VIII. Financial bids of only qualified Tenderers shall be opened. Rest bids shall not be considered,
+ and such short-listed bidders will be intimated about the date and time accordingly. At the time of
+ the opening of Financial Bids, authorized representatives may remain present. It shall not be
+ obligatory to accept only the lowest financial bid.
+ IX. The Purchaser reserves the right to reject any or all bids at any stage without assigning any
+ reason or incurring any obligation towards the bidders. The essence is that only such bid that in
+ the opinion of competent Authority is most suitable for MP Police shall be selected.
+ X. Bidders must understand that concerned committee and the competent authority may opt for any
+ bid for the reason given for such preference. Technical qualification does not mean that all bids
+ stand at equal footing in terms of quality, reliability, use worthiness, ease of handling, recurring
+ maintenance and operation cost, down time / up time expected life/service period after expiry of
+ warranty period or often claimed life period etc. These may be among some of considerations on
+ the basis of which concerned committee may recommend any item to be procured and
+ competent authority may accept such item. While making such decisions, the committee(s) may
+ rely on or call for user feedback from M.P. Police employees or from any other Police
+ organization or other user who is/has used the offered item in this past.
+
+ 2.7 PRICE BIDS AND RANKING OF FINANCIAL BIDS
+
+ A. Successful bidder will have to mention the basic price and tax amount separately at the
+ submission of the bill.
+ B. In case of any tax related dispute relating t
+â€¢ GST the decision of GST Department will be final
+ and binding, on the Bidder.
+ C. The successful bidder will be decided on the Lowest Quoted Price Value (L1) which shall be
+ on all-inclusive basis i.e., including all taxes, duties, local leaves, transportation, loading
+ unloading charges, packing, forwarding, freight & insurance etc. i.e., total cost t
+â€¢ MP Police.
+ D. Quoted prices shall be on all-inclusive basis i.e., including all taxes, duties, local leaves,
+ transportation, loading-unloading charges, packing, forwarding, freight & insurance etc.
+ E. Statutory variation in the rate of GST, taking place between the date of award of contract and
+ the original / refixed delivery period or service period, shall be to the purchaser‟s account. For
+ claiming any change in price due to such Statutory variation, the successful bidder shall have
+ to lodge claim before the purchaser providing documentary evidence of change in rate of GST
+ taking place after the date of award of contract and the date of supply within the
+ original/refixed delivery period. Purchasers shall issue necessary amendments in the contract
+ to enable generation of supplementary invoices or revised invoice as the case may be.
+ F. No increase in price on account of statutory increase in the rate of GST taking place during
+ the period of delivery period extension with liquidated Damages shall be admissible.
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ Nevertheless, the purchaser shall be entitled to the benefit of any decrease in price on
+ account of reduction in GST taking place during extended delivery period.
+ G. The invoice shall be generated by the successful bidder which may inter-alia include the
+ following confirmations from the successful bidder: -
+ i. Certified that the Goods and Services Tax (GST) charged on this Bill is not more than
+ what is payable under the provision of the relevant Act, or the Rules made there under.
+ ii. Certified that the goods and services on which GST has been charged have not been
+ exempted under the GST Act or the rules made there under and the charges on account
+ of GST on these goods are correct under the provisions of that Act or the Rules made
+ there under.
+ iii. Certified that the Seller is registered with above indicated GSTIN as dealer in the State
+ where in their Billing address is located for the purpose of GST.
+ iv. The proper GST invoice as per requirements of GST rules shall be submitted by the
+ successful bidder to the buyer /consignee directly along with the Goods / Services as
+ and when deliveries are made to the consignee.
+ v. In case the bidder has quoted the taxes wrongly, MP Police will not be responsible to
+ pay any extra tax amount to the bidder, and the bidder will have to bear the cost of tax
+ difference.
+
+2.8 ETHICAL CONDUCTS OF THE BIDDERS
+
+ I. The bidder or its representative shall not make any cartel or group influence the bidding
+ process or the price to the disadvantage of the Government.
+ II. The bidder or its representative shall not enter into uncalled for correspondence with
+ competent Authority or any of his subordinate or Consultant or any agency as authorized by
+ the Competent Authority with respect to this Tender.
+ III. Where the bidder requires any information with respect to this Tender, it or its authorized
+ representative shall interact with SSP (Radio) only during office hours either in person or on
+ his official phones or through the email. Bidders or their staff / agents / employees are strictly
+ prohibited from interacting with any M.P. Police Telecom staff, subordinate t
+â€¢ SSP (Radio) on
+ any matter whatsoever. Such unethical behavior shall lead to automatic disqualification of bid.
+IV. Where the bidder is not satisfied with any decision of the SSP (Radio), or any of the
+ committee, it has liberty of representing its case before competent Authority or his nominee.
+ But indulging in anonymous or pseudonymous petitions etc. shall be taken to be unethical
+ practice.
+ V. Bidders must appreciate that only most suitable Tender can be accepted and hence all the
+ tenders cannot be accepted, so losing out the bid is also one of the business propositions well
+ known to the bidder well in advance. Therefore, any indiscreet conduct post disqualification
+ would be treated to be an unethical behavior.
+VI. Bidders must also appreciate that purchaser Department is fully conversant with its
+ requirements and is entitled to define its requirements.
+VII. Any canvassing in favor of or against any bid or for inclusion or deletion, substitution of any
+ point in the RFP under its own name or in the name of any other entity or anonymous or
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ pseudonymous before any authority not approved in the RFP or before multiple authorities or
+ persistent pestering on any term or condition in the RFP may be taken to be unethical practice.
+VIII. N
+â€¢ OEM, its representatives, employees, agents, channel partners, stockiest, or whatever
+ name it may be designated shall indulge into cartelization, preferential treatment to one or
+ more bidder as against others, or any kind unethical practice with respect to this project
+
+SECTION 3: TERMS AND CONDITIONS
+3.1. DELIVERY PERIOD
+
+ The successful bidder shall supply and deliver all required items within a period of Forty five
+ (45) days from the date of issuing of the work order. The Agreement shall be signed within 15
+ days of getting a Purchase/Work Order. Delay may lead to the imposition of non-liquidated
+ damages not in the nature of penalty, as authorized by M.P. Police GOP- 151 /2022. The
+ delivery period might be required to be guaranteed and should not be subject to vague
+ limitation such as “conditions beyond our Command”, “subject to availability of transport” etc.
+
+3.2. STANDARD OF performance
+ The Bidder shall carry out the supply order/services and carry out its obligations under the
+ Agreement with due diligence, efficiency, economy, and techniques. The Bidder shall also
+ adhere to professional, engineering and consulting standards recognised by international
+ professional bodies and shall observe sound management, technical and engineering
+ practices. The Bidder shall apply appropriate advanced technology and safe and effective
+ equipment, machinery, material, and methods. The Bidder shall always act in respect of any
+ matter relating to this Agreement, as faithful advisors to the Competent Authority and shall
+ always support and safeguard the legitimate interests of the purchaser.
+
+3.3. RIGHT TO VARY QUANTITIES
+ 1. The Competent Authority reserves the right to vary the quantity of the items during the entire
+ contract period based on actual requirements, without any change in the agreed unit price,
+ specifications, terms, and conditions of the Contract.
+ 2. The Authority further reserves the right to increase or decrease the quantity of equipment
+ during the bidding process or at the time of contract signing.
+ 3. The quantities stated in the RFP are not fixed and may be revised based on operational
+ requirements.
+ 4. If the Department decides to add additional camera infrastructure components beyond those
+ specified in the RFP, the Department shall pay the location-wise cost based on the prices
+ quoted by the Bidder in this Tender. These prices remain valid for all project locations
+ throughout the contract period.
+ 5. All quantities are tentative and may vary; payment shall be made based on actual supply at
+ the quoted rates provided in the financial bid.
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+3.4. LIQUIDATED DAMAGES FOR DELAY IN THE SUPPLY:
+
+ 1. In the event the Bidder fails to submit the required guarantees, documentation, or supply the
+ solution/equipment as per the schedule specified in this RFP, MP Police shall have the
+ discretion to withhold any payments until all contractual obligations are fulfilled. MP Police
+ may levy liquidated damages by deducting the applicable amount from the EMD/Security
+ Deposit or any other payable amount at the rate of 0.5% of the Contract Price per week of
+ delay, or part thereof, for the first two (2) weeks. For delays beyond two (2) weeks, liquidated
+ damages shall be charged at 1% of the Contract Price per week.
+
+ If the delay exceeds six (6) weeks, the Department shall have the right to terminate the
+ contract or get the short or deficient equipment replaced, the cost of which shall be borne by
+ the successful bidder. The Bidder may request an extension of the implementation period with
+ valid justification, and the Department may grant such an extension at its sole discretion.
+
+3.5. PACKAGING
+
+ The Bidders shall supply the material in proper packaging at designated site unless otherwise
+ indicated to ensure protection from any damage during transfer from Bidder‟s place to place of
+ installation etc. These goods would be distributed after checking tests and such other
+ procedures after such interval as may be decided by the Competent Authority in M.P. State.
+ Hence the packaging material must be re-usable. The packaging material shall not be
+ returned to the Bidder.
+
+3.6. PENALTY CLAUSE
+
+ If the supply of the material is not completed in the stipulated time as prescribed in this
+ document, it shall be the right of the Police Department:
+
+ a. To purchase else-where, without notice to the Tenderers on Tenderer‟s account and at the
+ Tenderer‟s risk, the items not delivered or others of a similar description (where offers exactly
+ complying with the particulars are not in opinion of the competent authority readily procurable,
+ such opinion being final) without cancelling the contract in respect of the consignment not yet
+ due for delivery,
+ and / or
+ b. To cancel the contract or portion thereof and if so desired to purchase the items at the risk
+ and cost of the Tenderer,
+ and/or
+ c. To forfeit the Earnest Money Deposit and/or Security Deposit to the extent of the loss incurred
+ by the Government.
+
+ d. To replace the deficient, faulty or short equipment/material, the cost of which shall be borne by
+ the successful bidder.
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ In the event of action being taken under (a), (b) and (c) above, the Tenderer shall be liable for
+ any loss, which the Government may sustain on that account, but the Tenderer shall not be
+ entitled to any gain on purchase made against default.
+
+ 1. Penalty may be deducted from any amount payable to vendor or it may be directed to deposit
+ the penalty amount separately or may be deducted from security / performance bank guaranty
+ / deposit.
+ 2. During the warranty, if the Bidder fails to attend to or rectify the issue within one (1) week from
+ the date of notice issued by the Department, the Department shall have the right to undertake
+ the necessary repair or replacement on its own. All costs incurred by the Department for such
+ repairs or replacement shall be fully borne by the Bidder and may be recovered from the
+ Bidder‟s bills, performance security, or any other dues payable.
+ 3. The Purchaser shall have the authority to impose an additional penalty of the total contract
+ value in cases of delay, undelivered or partially delivered materials as per Project Timeline.
+ The Earnest Money Deposit (EMD) may also be forfeited in the event of late deliveries. The
+ Purchaser‟s decision regarding the quantum of penalty to be levied shall be final and binding.
+ 4. During the warranty period, if the repair/replacement etc. of Cameras, UPS, Switches etc. is
+ not carried out within 07 days from the date of receipt of the notice/information, a penalty
+ shall be imposed as per the following, calculated from the 10% annual amount payable:
+
+ S.No. Item Name Penalty
+ 1. All types of cameras, 1 KVA UPS ₹200 per day per unit after 07 days
+ from the date of notice.
+ 2. Network Edge managed L2 switch ₹500 per day per unit after 07 days
+ from the date of notice.
+ 3. Vide
+â€¢ Wall, 40 KVA, 20 KVA, 10 KVA ₹1000 per day per unit after 07 days
+ Online UPS from the date of notice.
+
+3.7. ACCEPTANCE TESTING AND INSPECTION
+
+ I. The system hardware and other equipment, supplies etc. will be tested by the Final
+ Acceptance & Test Committee as per Acceptance Test Procedure (ATP) as formulated and
+ approved by the Competent Authority or his nominee.
+
+ II. Department reserves the rights to pre-dispatch inspection at the site of Bidder‟s manufacturing
+ premises as well as Material inspection and acceptance testing which shall be limited to
+ verification of quantity, make, model, specifications, physical condition and warranty
+ documentation at the consignee location. Department also reserves the right to inspect the
+ documents regarding procurement of parts/kits of the items being supplied which Bidder
+ acknowledges are not manufactured in its own plant and purchases from outside or
+ outsources from any third party.
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+3.8. PAYMENT TERMS
+
+ Payment plan shall be as laid down below. No payment shall accrue until the performance
+ guarantee has been furnished and all the equipment / goods / Services are supplied as per
+ terms mentioned below. The Selected vendor/Successful Bidder shall be responsible to invest
+ in the project, to supply Items, for a term of three years.
+
+ Payment Milestones
+
+ The successful bidder shall make a payment request after the end of each milestone
+ period with the following supporting documents:
+
+ I. Final Acceptance certificate (for first payment only) issued by the MPP/the Purchaser.
+
+ Milestone Payment
+ Payment will be released after supply of all the items and
+ equipment except Vide
+â€¢ Wall at RHQ Bhopal & check 60 % of the total contract value.
+ test of material.
+ Payment will be released after supply, Installation,
+ Commissioning and Go- Live after Final Acceptance Test 10 % of the total contract value.
+ of Vide
+â€¢ Wall and UPS at required sites
+ Payment will be released only after satisfactory 10% Per Year of the total
+ completion of the 01 year warranty period. contract value.
+ Will be released only after satisfactory completion of the 10% Per Year of the total
+ 02 year warranty period. contract value.
+ Will be released only after satisfactory completion of the 10% Per Year of the total
+ 03 year warranty period. contract value.
+
+3.9. PROJECT TIMELINE
+
+ S. Timeline (D = Date of Purchase/Work
+ Item
+ N
+â€¢ Order)
+ Supply of IT equipment (supply only,
+ 1. D + 45 Days
+ excluding Vide
+â€¢ Wall and UPS)
+ Supply of Vide
+â€¢ Wall and UPS at
+ 2. D + 45 Days
+ required sites
+ Installation, Commissioning and Go-
+ D + 75 Days (i.e., within 30 days of
+ 3. Live of Vide
+â€¢ Wall and UPS at required
+ delivery at site)
+ sites
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+  All the bill Payments will be processed after satisfactory completion of the task/s as per the
+ given timelines, as per terms and conditions mentioned in the various sections of the RFP.
+  In any exceptional circumstances, service provider may request timeline extension to the
+ competent authority with proper justification, and competent authority may grant approval at its
+ own discretion.
+
+3.10. TERMINATION
+
+ 1. The Competent Authority may, without prejudice to any remedy for breach of contract, by
+ written notice of default sent to the Tenderer, terminate the agreement in whole or in part if:
+ a) The Tenderer fails to perform any or all of the obligations within the time period(s)
+ specified in the agreement or any extension thereof granted by the Competent Authority.
+ b) The quality of the delivery is not up to the satisfaction of the Competent Authority.
+ c) The Tenderer fails to perform any other obligation under the agreement.
+ d) The Tenderer fails to perform any other obligation, which the Competent Authority feels
+ necessary for the best interest of the Purchaser.
+ 2. The Competent Authority may at any time terminate the contract by giving written notice to the
+ Tenderer without compensation to the Tenderer, if the Tenderer becomes bankrupt or
+ otherwise insolvent, provided that such termination will not prejudice or affect any right of
+ action or remedy, which has occurred thereafter to the Competent Authority.
+ 3. In case of termination of contract as mentioned above all Bank Guarantee furnished by
+ Tenderer shall stand forfeited.
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+3.11. SUSPENSION
+
+ i. The Competent Authority may by a written notice of suspension to the Bidder, suspend all
+ payments to the Bidder if the Bidder fails to perform any of its obligations (including the
+ carrying out of the tasks) provided that such notice of suspension:
+
+ a. Shall specify the nature of the failure and
+ b. Shall direct the Bidder to remedy such failure within a specified period from
+ the date of receipt of such notice of suspension by the Bidder.
+
+ ii. In the event of the successful bidder's failure to supply the equipment as per the Contract, or
+ failure to meet warranty obligations, including repair, replacement, or maintenance of
+ defective equipment within the prescribed timelines, the Competent Authority may issue a
+ written notice and suspend payments due under the Contract. If the bidder fails to rectify the
+ deficiency within the stipulated period, the Purchaser may procure the required equipment or
+ services from an alternate source at the bidder's risk and cost, without terminating the
+ Contract, and recover the resultant costs from the bidder.
+
+3.12. CONFIDENTIALITY
+
+ The Bidder, their partners, suppliers, associates and their personnel shall not, at any time
+ either during implementation or after completion of the project and further during operation
+ and maintenance of the project, collect, compile, record, store, copy, forward or disclose in
+ any manner any proprietary or confidential or personal information relating to the services,
+ Agreement, the M. P. Police‟s official data or information / data being recorded into the
+ systems without the prior consent and authority of the Competent Authority. Bidder and its
+ personnel shall not disclose any information stored in the servers of the system to any person
+ on any ground except with the express permission of competent authority unless it is legally
+ required as per direction of court of competent jurisdiction. For any breach of confidentially the
+ Bidder organization and its office bearers, collectively and individually, shall be responsible
+ under all civil and criminal law in addition to the personal liability of the person indulging in
+ such misconduct.
+
+3.13. PROPERTY AND RISK
+
+ 1. All goods and work must pass the Acceptance Test, and the Competent Authority shall be
+ entitled to reject all or any work or property or good, which do not conform completely in
+ every respect to the specifications mentioned in the RFP.
+ 2. If by the nature of the goods or property, any defect therein or any failure to conform as
+ aforesaid does not or would not become apparent (despite the carrying out the examination
+ and or required test) until after use, Competent Authority may reject the same even after a
+ reasonable period of their use.
+ 3. Any property or work rejected must at the instruction of Competent Authority be replaced or
+ re-performed as the case may be, by the Bidder at his expense. Alternatively, Competent
+ Authority may elect to cancel the contract both in respect of the goods and /or the work in
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ question and of the whole of the undelivered balance (if any) of the goods and/or the
+ remainder of the work (if any) covered under this contract. All rejected goods will be taken
+ back by Bidder at his own expense.
+ 4. The goods/equipment/items while being provided to, MP Police must be in the name of MP
+ Police and must not be mortgaged, hypothecated to or under any kind of charge to any bank,
+ financial institution or any third party.
+
+3.14. ARBITRATION; COURT OF COMPETENT JURISDICTION
+ In the event of any dispute, the Director General of Police, Madhya Pradesh, or any Officer
+ designated by him, shall be the sole arbitrator. The decision of the Director General of Police
+ shall be binding on both the parties, i.e., the tenderer and the Department. All legal disputes
+ are subject to the jurisdiction of Bhopal courts only.
+
+3.15. AGREEMENT
+
+ 1. The successful bidder shall execute an agreement on non-judicial stamp paper. The stamp
+ duty payable on the agreement may be 0.1% of the contract value. If the contract value is up
+ to ₹50 lakh, the applicable stamp duty shall be ₹500/- or such other amount as may be
+ prescribed under the applicable law. The agreement shall be duly executed within 15 days
+ from the date of receipt of the intimation of acceptance of the Tender. If the agreement is not
+ executed within the stipulated period, the purchase order may be cancelled. All expenses
+ incurred in executing the agreement and paying the stamp duty shall be borne by the bidder.
+ The bidder shall provide one copy of the duly executed and stamped agreement, free of cost,
+ to the Senior Superintendent of Police (Radio), on behalf of the Director General of Police,
+ Madhya Pradesh. The second copy shall be without non-judicial stamp paper. The Agreement
+ shall be executed strictly in the format (Proforma) provided by MP Police, and no deviations or
+ alterations to the prescribed format shall be permitted.
+ 2. Till such an Agreement is signed, there is no liability for Police Telecom HQ, MP Bhopal and
+ the Competent Authority.
+ 3. The Madhya Pradesh Police reserve the right to cancel or scrap the Tender, in whole or in
+ part, at any time before or after the execution of the Agreement, without assigning any reason.
+ In such an event, MP Police shall not be liable for any loss, cost, or consequential damages
+ incurred by the Bidder
+ 4. Security deposit will have to be submitted along with the Agreement signing.
+ 5. On submission of security deposit and signing of the agreement, the timeline for completion of
+ tasks under the RFP shall commence forthwith.
+
+3.16. LAW AND JURISDICTION
+
+ All legal disputes are subject to the jurisdiction of Bhopal courts only.
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+SECTION 4: SCOPE OF WORK AND TECHNICAL SPECIFICATIONS
+
+4.1 Scope of Work
+
+The Madhya Pradesh Police Telecommunication Department intends to procure IT and Surveillance
+Infrastructure equipment for replacement and upgradation of systems deployed under the Safe City
+Project across 65 cities in Madhya Pradesh. The selected bidder shall be responsible for the supply,
+delivery, and warranty support of the specified equipment in accordance with the requirements of this
+RFP. The equipment shall be delivered to the Police Telecommunication Headquarters Store and/or
+other locations designated by the Purchaser. The procurement aims to ensure the continued
+reliability, operational efficiency, and modernization of the State's Surveillance and communication
+infrastructure.
+
+The selected bidder (hereinafter referred to as the "Supplier") shall be responsible for the execution of
+the following activities:
+
+4.1.1 Supply of Equipment
+
+Supply all items specified in the BOQ in accordance with the technical specifications, quantity
+requirements, and conditions stipulated in this RFP. Ensure that all equipment supplied is brand new,
+unused, genuine, free from manufacturing defects, and sourced through authorized channels. Ensure
+that the supplied equipment conforms to the latest applicable industry standards, statutory
+requirements, and specifications prescribed in this RFP.
+
+4.1.2 Packing, Transportation and Delivery
+
+Undertake complete responsibility for packing, transportation, transit insurance, loading, unloading,
+and safe delivery of the equipment to the designated delivery locations specified by the Purchaser.
+Ensure that all items are adequately packed to prevent damage, deterioration, or loss during transit
+and storage. Deliver all equipment within the timelines specified in the
+RFP and Purchase Order.
+
+4.1.3 Inspection and Acceptance
+
+The Purchaser reserves the right to inspect and verify the supplied equipment for compliance with the
+technical specifications and contractual requirements. Any item found to be defective, damaged, short
+supplied, or not conforming to the prescribed specifications shall be replaced by the Supplier at its
+own cost within the time stipulated by the Purchaser. Final acceptance of the supplied equipment
+shall be subject to satisfactory verification by the Purchaser or its authorized representatives.
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+4.1.4 Documentation
+
+The Supplier shall furnish the following documents along with the supplied equipment, wherever
+applicable:
+
+  Manufacturer's Product Datasheets and Technical Literature
+  Authorization Certificates from OEMs
+  Warranty Certificates
+  Compliance and Test Certificates
+  Delivery Challans, Invoices, and Packing Lists
+  Any other document required by the Purchaser for verification and acceptance of
+ goods.
+
+4.1.5 Warranty and After-Sales Support
+
+The Supplier shall provide comprehensive warranty support for all supplied equipment for the period
+specified in this RFP. During the warranty period, the Supplier shall replace any defective, failed, or
+non-performing equipment at no additional cost to the Purchaser.
+
+4.1.6 Compliance with Statutory and Contractual requirements
+
+The Supplier shall comply with all applicable laws, rules, regulations, standards, and guidelines
+governing the manufacture, supply, transportation, and delivery of the equipment.
+The Supplier shall adhere to all terms and conditions, technical specifications, quality requirements,
+and contractual obligations contained in this RFP and the resultant contract.
+
+4.1.7 Comprehensive Responsibility
+
+The scope of work shall include all activities incidental and ancillary to the successful procurement,
+supply, transportation, delivery, inspection, acceptance, documentation, warranty support, and
+fulfilment of contractual obligations relating to the equipment specified in the BOQ, whether expressly
+mentioned herein or otherwise required for the satisfactory completion of the contract.
+
+4.1.8 Installation and commissioning of Vide
+â€¢ Wall and UPS (exclude 1 Kva)
+
+The bidder shall also undertake the supply, installation, testing and commissioning of the Vide
+â€¢ Walls
+and UPS at different sites including all associated hardware, software, accessories, mounting
+arrangements, cabling and integration components as part of the scope of work defined under this
+RFP. List of sites will be provided separately. The video wall shall be delivered in a fully functional
+and operational condition.
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ 4.2 TECHNICAL SPECIFICATIONS
+
+ 4.2.1 Dome Camera
+
+# Parameter Specifications
+1 Resolution 2560x1440 or better
+2 Image Sensor Minimum 1/2.8" CMOS sensor
+3. IR internal IR
+4. Lens Motorized Lens (2.8-12mm)
+5. Day/Night functionality Required
+ Vide
+â€¢ Compression
+6. H.265 or better
+ (Minimum)
+7. Frame Rate Min. 25fps
+8. Minimum Illumination (Color) 1 lux
+9. ICR Required
+10 Edge Storage It should have 256GB Surveillance Grade SD card
+11. Gain Less than 25 dB
+12 Audi
+â€¢ Support External MIC & Speaker.
+ IPv4/IPv6; HTTP; TCP/IP; UDP; RTP; RTSP; SMTP; FTP;
+13. Network
+ SFTP; DHCP; DNS; DDNS; NTP; ICMP;
+14 Network Ethernet RJ-45 (10/100Base-T)
+15 SDK and API Support
+16 Power Source PoE
+ Operation Temperature
+17 0 ºC to 50 ºC
+ Range
+ IP55
+18 Weatherproof Standard (Certificate/supporting documents should be attached with
+ technical bid documents
+ ONVIF Profile S, T or higher
+19 ONVIF Support
+ (Certificate should be attached with technical bid documents)
+ CE
+20 Certifications
+ (Certificate should be attached with technical bid documents)
+21 Warranty 03 Years Onsite Warranty
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ 4.2.2 Fixed IP Camera along with housing
+
+S.N. Parameter Specifications
+ 1 Resolution 2560x1440 or better
+ 2 Image Sensor Minimum 1/2.8 CMOS sensor
+ 3 IR internal IR
+ 4 Lens Motorized Lens (2.8-12mm)
+ 5 Day/Night functionality Required
+ 6 Vide
+â€¢ Compression (Minimum) H.265 or better
+ 7 Frame Rate Min. 25fps
+ 8 Minimum Illumination (Colour) 1 lux
+ 9 ICR Required
+ It should have 256GB Surveillance Grade SD
+ 10 Edge Storage
+ card
+ 11 Gain Less than 25 dB
+ 12 Audi
+â€¢ Support external MIC & Speaker.
+ IPv4/IPv6; HTTP; TCP/IP; UDP; RTP; RTSP;
+ 13 Network SMTP; FTP; SFTP; DHCP; DNS; DDNS; NTP;
+ ICMP;
+ 14 Network Ethernet RJ-45 (10/100Base-T)
+ 15 SDK and API Support
+ 16 Power Source PoE
+ 17 Operation Temperature Range 0 ºC to 50 ºC
+ IP55
+ 18 Weatherproof Standard (Certificate/supporting documents should be
+ attached with technical bid documents
+
+ ONVIF Profile S, T or higher
+ 19 ONVIF Support (Certificate should be attached with technical bid
+ documents)
+ CE
+ 20 Certifications (Certificate should be attached with technical bid
+ documents)
+
+21 Warranty 03 Years Onsite Warranty
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ 4.2.3 PTZ camera
+S.N. Parameter Specifications
+ 1 Resolution 2560×1440 or better
+ 2 Image sensor 1 / 2.8” or better CMOS Progressive Scan
+ 3 RAM 512 MB
+ 4 Zoom 30x optical zoom or better
+ Min illumination/ light
+ 5 0.01 lux
+ sensitivity (Colour)
+ 6 Wide Dynamic Range 120dB
+ 7 Backlight Compensation ON/OFF
+ 8 IRIS Control DC / Automatic
+ 9 Focus Automatic / Manual
+ 10 Automatic Gain Control Yes
+ 11 Frame Rate Min. 25 FPS
+ 12 Housing Aluminium Housing
+ Video
+ Automatic, Colour, Mon
+â€¢ Should automatically switch
+ 13 Day and Night functionality
+ to night vision by sensing illumination level
+ 14 Vide
+â€¢ Resolution HD 4 MP (2560×1440) or better
+ Individually configurable 02 video streams (H.264,15 Vide
+â€¢ Streams
+ MJPEG);
+ 16 Electronic Image Stabilization Required
+ PTZ Function
+ 17 PAN TILT Range 360° continuous pan & Minimum 90° tilt range
+ 18 Pre-sets Minimum 10 Pre-set Points
+ Compression
+ 19 MJPEG Required
+ 20 H.265 Required
+ Audio
+ 21 Audio support Required
+ 22 Audi
+â€¢ Compression Yes
+ 23 Input / Output Yes
+ Network & Interface
+ 24 Interface RJ-45 for 10/100 base-T Ethernet
+ TCP/IP, HTTP, DHCP, UDP, DNS, SMTP, RTP,
+ 25 Network Protocols support
+ RTSP, SNMP protocols
+ 26 Compliance ONVIF Profile S or higher
+ General
+ 27 Operational temperature °C 0°C to 50 °C
+ 28 IP rating IP67
+ 29 Power PoE
+ CE
+ 30 Certifications (Certificate should be attached with technical bid
+ documents)
+ 31 Local Storage in SD card 256 GB
+ 32 Warranty 03 Years Onsite Warranty
+ Note: Bidder has to ensure “Bird Scare” to fix at the top of camera housing to avoid birds away
+from the camera.
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+4.2.4 Network Edge managed L2 switch
+
+Sl.
+ specification Description Compliance
+No.
+ 1 Type Managed Outdoor Industrial grade switch
+ Minimum 8 100/1000/TX PoE/PoE+, 2 x 1G fiber
+ 2 Total Ports
+ SFP ports for Uplink
+ Ethernet port should support 3KV LAN surge
+ 3 Ethernet Port Protection protection for extreme outdoor environments to
+ ensure uninterrupted reliability of PoE systems.
+ IPV4, IPV6, Support 802.1Q VLAN, DHCP support,
+ IGMP, SNMP Management, IEEE 1588
+ 4 Protocols PTPv2/SNTP Redundancy Protocols STP, RSTP,
+ MSTP, Turbo chain/Turb
+â€¢ Ring v1/v2, Link
+ Aggregation, EtherNet/IP, Modbus/TCP
+ Support port security: Lock port Support 802.1x
+ (Port based network access control), TACACS,
+ 5 Access Control
+ RADIUS
+ Support for MAC filtering
+ Power budget of 240 Watt for total PDs (e.g.,
+ 6 PoE Power per port connected cameras) consumption, Minimum 30
+ watt per port as per IEEE 802.at standard
+ 7 Enclosure Rating Switch should be IP30 rated
+ 8 Operating Temperature -10 to 60 °C
+ 9 Multicast support IGMP Snooping V1, V2, V3
+ Switch needs to have RS-232/USB/RJ45 console
+ port for management via a console terminal or PC
+10 Management
+ Web GUI NTP
+ Syslog for log capturing SNMP V1, V2, V3
+ NEMA TS-2,
+ UL 508 or UL/CSA 61010-2-201, EN 50121-4
+11 Standards/Approval
+ ESD: IEC 61000-4-2
+ Surge: IEC 61000-4-5
+ Should be more than 5,00,000hrs (OEM Should
+12 MTBF
+ submit Test Report)
+ Input Voltage: 48 VDC, Redundant dual inputs
+13 Power Requirement Overload Current Protection: Supported
+ Reverse Polarity Protection: Supported
+14 Warranty 03 Years Onsite Warranty
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+4.2.4 ANPR Camera
+
+1 Minimum IP Camera specification
+A At least 2 MP, IP Box Camera, with 1/3-inch CMOS sensor
+ 5mm to 50 mm or 8mm to 60 mm or 8 to 50 mm Vari-focal megapixel, IR
+B
+ corrected Lens
+ Dual Stream support: MJPEG stream and H264 independently configurable.
+C
+ MJPEG Stream must be available in 2 MP resolution
+D Simultaneous Streaming of both H264 and MJPEG streams
+E At least 3 concurrent access t
+â€¢ Camera
+F MJPEG on RTSP/HTTP and H.264 in RTSP protocol
+G ONVIF Profile S Compliant
+H Camera Housing: Min. IP67 or better and IK10 rated
+I Onsite Warranty - 03 Years
+
+4.2.5 ONLINE UPS 40 KVA
+S.No. Parameter Minimum specification
+ 1 UPS Type Online Double Conversion UPS
+ 2 Capacity 40 kVA / 40 kW
+ 3 Input Phase 3 Phases + Neutral + Earth
+ 4 Output Phase 3 Phase + Neutral + Earth
+ 5 Nominal Input Voltage 380/400/415V AC
+ 6 Input Voltage Range 320-470 VAC
+ 7 Input Frequency 50 Hz ±10%
+ 8 Input Power Factor ≥ 0.90 at full load
+ 9 Output Voltage 380/400/415 VAC selectable
+ 10 Output Frequency 50 Hz ±0.1%
+ 11 Output Voltage Regulation ±1%
+ 12 Output Power Factor ≥ 0.90
+ ≤ 2% (Linear Load),
+ 13 Output THD
+ ≤ 6% (Non-linear Load)
+ 14 Efficiency ≥ 90%
+ 15 Overload Capacity 110 % for 60 min, 125% for 10 min, 150% for 1 min
+ 16 Transfer Time ≤ 30 ms
+ 17 Battery Bank Voltage Suitable DC Bus Voltage as per OEM Design
+ 18 Battery Backup Minimum 60 Minutes at Full Load
+ 19 Charger Capacity Suitable for battery bank supplied
+ 20 Bypass Required
+ Short Circuit, Overload, Battery Deep Discharge, Reverse
+ 21 Protection
+ Polarity
+ 22 Display Required
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+S.No. Parameter Minimum specification
+
+ Input/Output Voltage, Current, Frequency, Load %, Battery
+ 23 Monitoring Parameters
+ Status
+ 24 Interface RS-232, USB
+ 25 Network Management SNMP
+ 26 Alarm Battery Low, Mains Failure, Overload, Fault
+ 27 Standards IEC 62040-1 & 62040-2
+ In addition t
+â€¢ BIS registration, a CE or UL certification is
+ 28 Certification required. (Compliant certificate should be attached with the
+ technical bid documents.)
+ 29 Operating Temperature 0°C to 40°C
+ 30 Relative Humidity Up to 95% non-condensing
+ 31 Warranty 03 Years Onsite Warranty
+
+4.2.6 ONLINE UPS 20 KVA
+
+ # Parameter Minimum specification
+ 1 UPS Type Online Double Conversion UPS
+ 2 Capacity 20 kVA / 20 kW
+ 3 Input Phase 3 Phases + Neutral + Earth
+ 4 Output Phase 3 Phase + Neutral + Earth
+ 5 Nominal Input Voltage 380/400/415V AC
+ 6 Input Voltage Range 320-470 VAC
+ 7 Input Frequency 50 Hz ±10%
+ 8 Input Power Factor ≥ 0.90 at full load
+ 9 Output Voltage 380/400/415 VAC selectable
+ 10 Output Frequency 50 Hz ±0.1%
+ 11 Output Voltage Regulation ±1%
+ 12 Output Power Factor ≥ 0.90
+ 13 Output THD ≤ 2% (Linear Load),
+ ≤ 6% (Non-linear Load)
+ 14 Efficiency ≥ 90%
+ 110 % for 60 min, 125% for 10 min, 150% for
+ 15 Overload Capacity
+ 1 min
+ 16 Transfer Time ≤ 30 ms
+ 17 Battery Bank Voltage Suitable DC Bus Voltage as per OEM Design
+ 18 Battery Backup Minimum 60 Minutes at Full Load
+ 19 Charger Capacity Suitable for battery bank supplied
+ 20 Bypass Required
+ Short Circuit, Overload, Battery Deep
+ 21 Protection
+ Discharge, Reverse Polarity
+ 22 Display Required
+ 23 Monitoring Parameters Input/Output Voltage, Current, Frequency,
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ Load %, Battery Status
+ 24 Interface RS-232, USB
+ 25 Network Management SNMP
+ 26 Alarm Battery Low, Mains Failure, Overload, Fault
+ 27 Standards IEC 62040-1 & 62040-2
+ In addition t
+â€¢ BIS registration, a CE or UL
+ certification is required. (Compliant certificate
+ 28 Certification
+ should be attached with the technical bid
+ documents.)
+ 29 Operating Temperature 0°C to 40°C
+ 30 Relative Humidity Up to 95% non-condensing
+ 31 Warranty 03 years onsite warranty
+
+ 4.2.7 ONLINE UPS - 10 KVA
+
+S.No. Parameter Minimum specification
+1 UPS Type Online Double Conversion UPS
+2 Capacity 10 kVA / 10 kW
+3 Input Phase 3 Phases + Neutral + Earth
+4 Output Phase 3 Phase + Neutral + Earth
+5 Nominal Input Voltage 380/400/415V AC
+6 Input Voltage Range 320-470 VAC
+7 Input Frequency 50 Hz ±10%
+8 Input Power Factor ≥ 0.90 at full load
+9 Output Voltage 380/400/415 VAC selectable
+10 Output Frequency 50 Hz ±0.1%
+11 Output Voltage Regulation ±1%
+12 Output Power Factor ≥ 0.90
+ ≤ 2% (Linear Load),
+13 Output THD
+ ≤ 6% (Non-linear Load)
+14 Efficiency ≥ 90%
+ 110 % for 60 min, 125% for 10 min, 150%
+15 Overload Capacity
+ for 1 min
+16 Transfer Time ≤ 30 ms
+ Suitable DC Bus Voltage as per OEM
+17 Battery Bank Voltage
+ Design
+18 Battery Backup Minimum 60 Minutes at Full Load
+19 Charger Capacity Suitable for battery bank supplied
+20 Bypass Required
+ Short Circuit, Overload, Battery Deep
+21 Protection
+ Discharge, Reverse Polarity
+22 Display Required
+ Input/output Voltage, Current, Frequency,
+23 Monitoring Parameters
+ Load %, Battery Status
+24 Interface RS-232, USB
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+25 Network Management SNMP
+26 Alarm Battery Low, Mains Failure, Overload, Fault
+27 Standards IEC 62040-1 & 62040-2
+ In addition t
+â€¢ BIS registration, a CE or UL
+ certification is required. (Compliant
+28 Certification
+ certificate should be attached with the
+ technical bid documents.)
+29 Operating Temperature 0°C to 40°C
+30 Relative Humidity Up to 95% non-condensing
+31 Warranty 3 years onsite warranty
+
+ 4.2.8 UPS 1 KVA
+ S.No. Parameter specification
+ 1 UPS Type Online Double conversion
+Inverter AC Input
+ 2 Rating 1 KVA
+ 3 Voltage 170-270V
+ 4 Frequency 50Hz ± 3Hz
+ 5 Phase Single Phase
+DC Voltage
+ 6 System Voltage 24V/36V/48V
+ 7 Charging Current As Per Proposed Solution
+Protection
+ 8 Over Charging
+ 9 Deep Discharging
+Inverter
+ 10 Inverter Capacity 1 KVA
+ 11 Technology IGBT / MOSFET
+ 12 Output Voltage 230V Single Phase
+ 13 Voltage Regulation ± 2%
+ 14 Frequency 50Hz ±0.5Hz
+ 15 Waveform Sine Wave
+
+ 16 Harmonic Distortion Less than 3% (N
+â€¢ Load t
+â€¢ Full Load)
+
+ 17 Inverter Efficiency ≥88%
+ 18 Power Factor ≥0.8
+
+ 19 Overload 150% for 30sec/ 125% for 60 sec
+
+ 20 Backup Time Minimum 1 Hours
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ S.No. Parameter specification
+ In addition t
+â€¢ BIS registration, a CE or UL
+ certification is required. (Compliant certificate
+ 21 Certification
+ should be attached with the technical bid
+ documents.)
+ 22 Warranty 3 Years on Site Warranty
+
+ 4.2.9 Vide
+â€¢ Wall
+S.N. Parameter specification
+ 1 Screen size 80-inch diagonal (±5%)
+ 2 Screen resolution 1920x1080 (FHD) or better
+ 3 Aspect ratio 16:9
+ 4 Design Modular
+ 5 Pixel pitch ≤ 1.3 mm
+ 6 Environment Indoor
+ 7 Display technology LED
+ 8 Pixel configuration SMD 3 in 1
+ 9 Brightness 500 kits or more
+ 10 Contrast ratio 4000:1 or better
+ 11 Viewing angle (horizontal & vertical) (160° & 140°) or better
+ 12 Inbuilt connectivity ports in Screen 3xHDMI, 2xUSB, control port, Audio out
+ 13 LED life span 1,00,000 HRs. 14 Input Voltage & power requirement 220V, 50hz. Single power cable connectivity,
+ standby mode for power saving.
+ 15 Power consumption ≤800 watt/sq mtr.
+ 16 maintenance Front
+ 17 Unit cast material Aluminum
+ 18 Interconnectivity cables & fans No interconnectivity cables & no fans behind the
+ panels.
+ 19 Operating temperature & humidity 0 to 40 ºC & 10 to 90%RH
+ 20 Speakers Built in suitable speakers with inside LED screens
+ or external speakers can be provided.
+ 21 Wall mount kit Required
+ 22 IP rating IP20 or better
+ 23 Smart features HDMI, CEC, Picture in picture, picture by picture,
+ inbuilt operating system, Processor and memory,
+ Inbuilt digital signage feature, wireless screen
+ sharing.
+ 24 Certification BIS/CE
+ 25 Onsite warranty 3 Year
+ 26 Videowall Display, Controller and Must be from same OEM.
+ Software
+Note: Suitable UPS with all protections should be provided by the bidder to operate Videowall.
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ 4/2/10 Videowall Controller
+
+S.N. Parameter specification
+ 1 CPU intel Core i7 13th generation or equivalent or
+ higher
+2 RAM Minimum16GB upgradable up to 64GB
+3 Hard Disk Minimum 512GB SSD and Expandable
+4 Network Interface 1 GbE
+5 Wireless Connectivity Wi-Fi 6 or better
+6 Inputs Minimum 2xHDMI /DP /SDI/DVI, RS 232
+7 Output Minimum 2xDP/DVI/HDMI, RS 232
+8 USB Minimum 2 x USB 3.0 Type, 2 x USB 2.0 Type
+9 Resolution 4K or better
+10 Operating System Window 11 pro, 64 bits
+11 Protocols supported H.264, MPEG2/4, MxPEG, MJPEG or better
+12 From Factor (Chassis) 4U Rack
+13 Power supply 220V AC ± 10%, 50Hz, Redundant power supply
+14 Operating temperature 0 to 40 °C
+15 Humidity 10 - 75% or better
+16 Noise level ≤ 50dB
+17 Operation 24x7
+18 Cooling Required
+19 Graphic card Required (Should be compatible with proposed
+ solution)
+20 Monitor size ≥ 23 inches
+21 Panel technology IPS with antiglare display
+22 Monitor resolution(pixel) 1920x1080 or better
+23 Certification BIS/CE
+24 Onsite Warranty 3 years
+25 Videowall Display, Controller and Must be from same OEM.
+ Software
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ SECTION 5. TENTATIVE BOQ
+
+ Unit Rate price
+ (Including Total
+ # Items Name Quantity applicable Tax) Cost
+ Fixed IP Camera along with housing,
+ illuminator and other accessories as 1000
+ 1 required
+ PTZ Camera, illuminator and other
+
+ 2 accessories as required
+ 3 Network Edge managed L2 switch 450
+ Video wall with controller 1 set 80"
+
+ 4 (inches)+/- 5% screens for CCR
+ ANPR Cameras with 5-50mm Lens
+
+ 5 ANPR Licenses
+ 6 Dome camera for CCR 50
+ 7 40 KVA Online UPS 10
+ 8 20 KVA Online UPS 32
+ 9 10 KVA Online UPS 1
+ UPS for Field equipment 1 KVA with
+
+ 10 Batteries
+
+ District wise distribution at RHQ
+ Internal
+ Fixed Video 40 20 10 1
+ PTZ L2 ANPR CCTV
+S.no. Zone Distt. IP wall with KVA KVA KVA KVA
+ camera switch camera box/dome
+ camera controller UPS UPS UPS UPS
+ camera
+
+ 1 Bhopal 86 31 46 2 0 0 0 0 0 172
+
+ 2 Sehore 13 9 14 2 0 3 0 2 0 23
+
+ 3 Rajgarh 0 1 5 0 0 0 0 1 0 18
+
+ 4 Vidisha 25 9 10 1 8 2 0 1 0 35
+ Bhopal
+ 5 N_Puram 25 6 10 0 8 2 0 1 0 29
+
+ 6 Betul 16 5 19 1 0 2 0 2 0 21
+
+ 7 Raisen 16 7 10 0 4 0 0 2 0 23
+
+ 8 Harda 7 2 3 1 5 0 0 1 0 5
+
+ 9 Jabalpur 50 12 19 1 0 0 1 0 0 12
+
+10 Katni 0 1 5 1 0 2 1 0 0 31
+
+11 Chhindwara 0 0 0 0 0 0 0 0 0 0
+ Jabalpur
+12 Seoni 13 3 0 0 0 0 0 0 0 12
+
+13 Narsinghpur 7 2 0 0 1 0 0 0 0 5
+
+14 Balaghat 30 6 10 0 8 2 0 0 0 23
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ District wise distribution at RHQ
+ Internal
+ Fixed Video 40 20 10 1
+ PTZ L2 ANPR CCTV
+S.no. Zone Distt. IP wall with KVA KVA KVA KVA
+ camera switch camera box/dome
+ camera controller UPS UPS UPS UPS
+ camera
+
+15 Mandla 8 3 6 0 4 2 0 0 0 7
+
+16 Dindori 13 6 4 0 5 2 0 0 0 6
+
+17 Sagar 44 10 14 2 10 0 1 1 0 32
+
+18 Damoh 8 1 3 0 3 0 0 0 0 5
+
+19 Chhaterpur 7 6 10 0 8 0 0 2 0 12
+
+20 Panna 0 0 0 0 0 0 0 0 0 0
+
+21 Tikamgarh 7 6 2 0 8 0 0 0 0 12
+
+22 Niwari 4 3 2 0 0 0 0 0 0 6
+
+23 Pandurna 0 0 0 0 0 0 0 0 0 0
+
+24 Gwalior 62 31 32 1 0 2 1 0 0 12
+
+25 Guna 16 6 10 0 1 0 0 1 0 12
+
+26 Shivpuri 19 6 14 0 4 0 0 1 0 23
+ Ashok
+27 Gwalior Nagar 19 3 6 0 5 0 0 1 0 6
+
+28 Morena 13 5 8 1 1 0 0 1 0 12
+
+29 Bhind 7 3 5 1 0 0 0 2 0 7
+
+30 Datia 31 6 10 0 29 3 0 1 0 12
+
+31 Seopur 5 2 2 0 2 0 0 0 1 4
+
+32 Indore 19 13 14 0 4 0 0 0 0 23
+
+33 Khandwa 31 16 6 2 0 2 2 0 0 23
+
+34 Dhar 72 17 43 0 28 3 0 3 0 64
+ Indore
+35 Jabalpur 7 6 5 1 8 2 0 2 0 12
+
+36 Katni 13 4 10 1 4 2 0 0 0 8
+
+37 Burhanpur 31 13 14 0 4 2 0 0 0 18
+
+38 Dewas 13 3 0 1 0 0 1 0 0 18
+
+39 Ujjain 62 19 25 1 0 0 1 0 0 78
+
+40 Sajapur 25 10 19 1 0 2 0 2 0 23
+ Ujjain
+41 Ratlam 31 13 10 1 0 3 0 2 0 23
+
+42 Mandour 35 6 11 1 18 3 0 0 0 12
+
+43 Nimach 25 6 4 1 16 3 0 0 0 6
+
+44 Rewa Singrauli 13 6 10 1 0 3 0 1 0 18
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ District wise distribution at RHQ
+ Internal
+ Fixed Video 40 20 10 1
+ PTZ L2 ANPR CCTV
+S.no. Zone Distt. IP wall with KVA KVA KVA KVA
+ camera switch camera box/dome
+ camera controller UPS UPS UPS UPS
+ camera
+
+45 Rewa 19 6 0 0 0 0 0 1 0 23
+
+46 Satna 4 3 0 0 0 0 0 0 0 12
+
+47 Maihar 10 3 0 1 0 2 0 1 0 6
+
+48 Shahdol 13 8 0 0 4 1 0 0 0 12
+
+49 Umaria 16 3 0 0 0 0 0 0 0 12
+
+50 Anupppur 10 4 0 1 0 0 0 0 0 7
+ SCMRC,
+51 Bhopal 0 0 0 0 0 0 2 0 0 0
+
+ Total 1000 350 450 27 200 50 10 32 1 975
+
+ SECTION 6: WARRANTY OBLIGATIONS
+ 1. The successful bidder shall provide comprehensive warranty for all supplied items as specified in
+ the technical specifications or, where not specified, for a minimum period of Three (03) years from
+ the date of acceptance of the materials by the Purchaser.
+
+ 2. The warranty shall cover all manufacturing defects, material defects, workmanship defects,
+ premature failures, and performance deficiencies arising under normal operating conditions.
+
+ 3. During the warranty period, the bidder shall, at no additional cost to the Purchaser, repair or
+ replace defective equipment, components, accessories, or spares with new or equivalent items of
+ the same or higher specifications.
+
+ 4. The Purchaser shall notify the bidder regarding any defective item through e-mail, letter, or any
+ other written mode of communication. Upon receipt of such notification, the bidder shall
+ acknowledge the complaint within three (3) working days.
+
+ 5. The bidder shall ensure repair or replacement of the defective item within ten days (10) calendar
+ days from the date of reporting of the fault. If the item cannot be repaired within the stipulated
+ period, it shall be replaced with an equivalent or higher specification item.
+
+ 6. All transportation, freight, loading, unloading, packing, insurance, collection, and re-delivery costs
+ associated with warranty repair or replacement shall be borne by the bidder.
+
+ 7. The warranty obligation of the bidder shall be limited to repair or replacement of defective supplied
+ items only. Installation, re-installation, commissioning, integration, configuration, testing, operation,
+ maintenance, and network-related activities shall not be the responsibility of the bidder under this
+ contract, unless specifically covered under a separate purchase order.
+
+ 8. Any item replaced under warranty shall carry the balance warranty of the original equipment or an
+ additional three (3) months from the date of replacement, whichever is later.
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+9. The bidder shall provide contact details of its authorized service centre, support partner, or nodal
+ service representative for warranty claim coordination within the State of Madhya Pradesh.
+
+10. Failure to fulfil warranty obligations within the stipulated timelines may result in recovery of
+ replacement cost from the performance Security/performance Bank Guarantee or any other dues
+ payable to the bidder.
+
+ Note:- The bidder shall ensure that all components supplied and deployed under the project are
+ certified, secure, interoperable, and compliant with applicable STQC standards and Government
+ policies, regulations, and technical specifications.
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ SECTION 7: BID PROPOSAL FORMS
+I. FORMAT 01: ELIGIBILITY CONDITIONS
+ (To be enclosed with the “Pre-qualification Bid” on the letterhead of the bidder as given below)
+ S. Basic Remarks Page
+ Type of the documents No.
+ No. Requirement (Description)
+ Bid
+ Bid proposal sheet duly filled in, signed
+ 1. Participation Format 2
+ and complete in all respects.
+ Undertaking
+
+ The Bidder must be a company registered
+ under Companies Act, 1956 or 2013 or
+ Format 2
+ Society registered under relevant Society
+ Attach: Copy of
+ 2. Legal Entity Act or a Trust registered under the
+ Registration
+ relevant Trust Act or any appropriate
+ Certificate
+ entity under Indian law as on March 31st
+ 2026.
+
+ Format 3
+ The bidder must have an average
+ annual turnover of not less than Rs 9 Cr. Attach: CA
+ 3. Turnover during last three financial years. The certificate must be
+ bidder must submit copy of Charted
+ Accountant (with UDIN no.) on letter head
+ mentioning UDIN
+ no.
+ Experience in supply of CCTV / Supporting
+ Similar Surveillance / networking / IT hardware Purchase Orders
+ 4 during last 3 years to any Central or State
+ Experience must be submitted
+ Government/state PSUs.
+ as proof.
+ The Bidder should not be Self-Declaration by
+ blacklisted/debarred by any Central or bidder authorised
+ 5 Blacklisting State Government/state PSUs for signatory on
+ providing similar services as on date of letterhead.
+ bid submission.
+ The bidder has to furnish the following: Format 3
+ (i) (i) Valid GST Registration/ Certificate
+ Statutory Tax Attach certificates:
+
+ Compliance (ii) Permanent Account Number (PAN) GST certificate, TIN
+ issued by Income Tax Department. No., PAN Card
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ S. Basic Remarks Page
+ Type of the documents No.
+No. Requirement (Description)
+
+7 Land Border Land Border Management Undertaking Format 16
+
+ * All the forms included in the RFP shall be submitted by the bidder along with the Technical Proposal.
+
+ Date: --------------------------------
+ Place: ---------------------------------------
+ Signed: ------------------------------------
+ Name: ------------------------------------
+ In the capacity of: ------------------------------------
+ For and on behalf of:------------------------------------
+
+ Note: All the documents submitted by the Bidder should be clearly numbered; corresponding
+ index should contain the page number of relevant documents attached.
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+II. FORMAT 02: LETTER OF PROPOSAL SUBMISSION
+ (To be enclosed with Pre-Qualification Bid)
+ [On the letterhead of Bidder]
+
+ To,
+
+ Senior Superintendent of Police (Radio)
+ Police Telecom Head Quarters
+ Bhadbhada Road, Bhopal - 462003
+ Madhya Pradesh
+ Fax No. 0755- 2443674
+
+ Subject:
+
+ Dear Sir,
+ We, the undersigned, offer t
+â€¢ Supply of CCTV Infrastructure Components for SAFE CITY Project in
+ accordance with your Request for Proposal Number [xxx], dated [xx/xx/xxxx].
+
+ We have uploaded our proposal online as per schedule and We are hereby submitting our
+ Proposal, which includes the following:
+ 1. Part 1: Earnest Money Deposit
+ 2. Part 2: Pre-Qualification checklist
+ 3. Part 3: Technical Proposal
+ 4. Part 4: Financial Proposal as a separate Part
+
+ We hereby declare our consent to following conditions:
+ 1. We hereby declare that all the information and statements made in this Proposal are true
+ and accept that any misinterpretation contained in it may lead to our disqualification.
+ 2. Our Proposal is binding upon us and subject to the modifications resulting from our
+ discussions with the competent authority at Madhya Pradesh Police and subject to their
+ approval.
+ 3. I/ We shall make available to the Authority any additional information it may find necessary
+ or require supplementing or authenticating the Bid.
+ 4. I/ We acknowledge the right of the Authority to reject our Bid without assigning any reason
+ or otherwise and hereby waive, to the fullest extent permitted by applicable law, our right
+ to challenge the same on any account whatsoever.
+ 5. I/ We certify that in the last three years, we have neither failed to perform on any contract,
+ as evidenced by imposition of a penalty by an arbitral or judicial authority or a judicial
+ pronouncement or arbitration award, nor been expelled from any project or contract by any
+ public authority nor have had any contract terminated by any public authority for breach on
+ our part.
+ 6. I/ We declare that:
+ a) I/ We have examined and have no reservations to the Bidding Documents, issued by the
+ Authority; and
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ b) I/ We do not have any conflict of interest in accordance with Clauses mentioned in RFP
+ document; and
+ c) I/ We have not directly or indirectly or through an agent engaged or indulged in any corrupt
+ practice, fraudulent practice, coercive practice, undesirable practice or restrictive practice,
+ as defined in RFP document, in respect of any Tender or request for proposal issued by or
+ any agreement entered into with the Authority or any Government of Central or State; and
+ d) the undertakings given by us along with the application in response to the RFP for the
+ Project were true and correct as on the date of making the application and are also true
+ and correct as on the Bid Due Date and I/we shall continue to abide by them.
+ 7. I/ We understand that you may cancel the Bidding Process at any time and that you are
+ neither bound to accept any Bid that you may receive nor to invite the Bidders t
+â€¢ Bid for
+ the Project, without incurring any liability to the Bidders, in accordance with the RFP
+ document.
+ 8. I/We certify that the proposal submitted by us and in case of award of contract, we
+ have/will comply with all the norms/policies/rules/ regulations of Government of India
+ applicable with respect to equipment/ software / network/ connectivity/ project execution.
+ 9. I/ We certify that we satisfy(s) the Turnover, Net Worth and experience criteria and meet(s)
+ the requirements as specified in the RFP document.
+10. I/we certify that << COMPANY NAME>> is not blacklisted/debarred by any Central or
+ State Government/state PSUs for providing similar services in last three yeaRs. 11. I/ We certify that in regard to matters other than security and integrity of the country, we or
+ any of our Associates have not been convicted by a Court of Law or indicted or adverse
+ orders passed by a regulatory authority which could cast a doubt on our ability to
+ undertake the Project or which relates to a grave offence that outrages the moral sense of
+ the community.
+12. I/ We further certify that in regard to matters relating to security and integrity of the country,
+ we or any of our Associates have not been charge-sheeted by any agency of the
+ Government or convicted by a Court of Law.
+13. I/ We further certify that no investigation by a regulatory authority is pending either against
+ us or against our Associates or against our CEO or any of our directors/ managers/
+ employees.
+14. I/ We undertake that in case due to any change in facts or circumstances during the
+ Bidding Process, we are attracted by the provisions of disqualification in terms of the
+ guidelines referred to above, we shall intimate the Authority of the same immediately.
+15. I/ We understand that The Bidder must be a company registered under Companies Act,
+ 1956 or 2013 or the partnership firm registered under the Partnership Act-1932, or Society
+ registered under relevant Society Act, or a Trust registered under the relevant Trust Act or
+ any appropriate entity under Indian law with existence in business from last Three years
+ as on March 31st, 2026 - (Registration certificate attached)
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ Details of Bidder
+ a. Registered/Incorporation date:
+ ……………………………………………………………………………….
+ b. Registration/Incorporation Number:
+ ……………………………………………………………………….
+ c. Registered/Incorporation Address:
+ ………………………………………………………………………….
+16. I/ We hereby irrevocably waive any right or remedy which we may have at any stage at
+ law or howsoever otherwise arising to challenge or question any decision taken by the
+ Authority in connection with the selection of the Bidder, or in connection with the Bidding
+ Process itself, in respect of the above-mentioned Project and the terms and
+ implementation thereof.
+17. I/ We are willing to offer a Bid Security/Bank Guarantee of equivalent to 3 % of project
+ value as quoted in Commercial proposal in case the authority awards us project.
+18. The EMD in the form of a Demand Draft / Bank Draft / BG is attached with following
+ details:
+ a. Name of the issuing Bank:
+ b. Address of Issuing Branch:
+ c. Amount: Rs….……. …..
+ d. Date: ……/……/……….
+19. I/ We agree and understand that the Bid is subject to the provisions of the Bidding
+ Documents. In no case, I/we shall have any claim or right of whatsoever nature if the
+ Project is not awarded to me/us or our Bid is not opened or rejected.
+20. I/ We agree and undertake to abide by all the terms and conditions of the RFP document.
+21. I/We agree and undertake to be severally liable for all the obligations of the bidder/LMOC
+ under the terms & Conditions of this RFP/Concession Agreement till\ occurrence of
+ Financial Close in accordance with the Agreement.
+22. We understand you are not bound to accept any Proposal you receive.
+23. Price and Validity: All the prices including the commercial offer mentioned in our proposal
+ are in accordance with the terms as specified in the proposal documents. We do hereby
+ confirm that our proposal includes all taxes, duties, charges FOR destination etc. We
+ agree to abide by this Bid for a period of 180 days from the date fixed for Bid submission
+ and it shall remain binding upon us and may be accepted at any time before the expiration
+ of that period. This Bid together with your written acceptance thereof and your notification
+ of award shall constitute a binding Contract between us. The price offer is open for a
+ period of further six months from the date of execution of Agreement. During the period
+ the M. P. Police will have right to demand additional quantity.
+24. Deviations: We declare that all the services shall be performed strictly in accordance with
+ technical specifications and other conditions of the Tender documents as mentioned in the
+ Technical Compliance Statement (FORMAT-6) and N
+â€¢ Deviations from Tender document
+ Conditions (FORMAT-07). Further we agree that additional conditions, if any, found in the
+ proposal documents, shall not be given effect to. We also agree that while during proposal
+ evaluation on deviations etc., the representatives of the bidder offer any better or higher or
+ latest make model of the equipment or software or services and if the same is agrees to by
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+ the technical committee, the bidder shall abide by that and provide the same at no extra
+ cost to the Purchaser.
+25. Time Schedule: We further declare that we have the capacity and will start and complete
+ various tasks as per schedule.
+26. Qualifying Data: We confirm having submitted qualifying data as required by you in your
+ Tender document. In case you require any further information/documentary proof in this
+ regard before evaluation of our proposal, we agree to furnish the same.
+27. We assure the purchaser that we have sufficient funds of our own and financial
+ arrangements to execute the project smoothly and are not dependent on any post award
+ arrangement with any bank or financial institution. I / We further declare our intent to seek
+ finance for this project from the bank (name of the bank or financial institution). The
+ consent letter of bank / financial institution is attached with this bid.
+ (Name of the bank / financial institution, branch, contact details for verification)
+28. The proposal submitted by us is properly sealed and prepared so as to prevent any
+ subsequent alteration and replacement.
+
+ Product Name Product/equipment/services
+ a) …………………… ……………………………….
+ b) …………………… ……………………………….
+ c) …………………… ……………………………….
+
+29. I/We hereby undertake that in case the project is awarded to us, at the time of completion
+ of the engagement, we shall successfully carry out the exit management and transition to
+ MPP, or any authority appointed by MPP. I/We further undertake to complete the following
+ as part of the Exit Management and Transition:
+ a. Transition of project artifacts and assets: I/We undertake to complete the updating of all
+ project documents and other artifacts and handover the same to the purchaser before
+ transition;
+ b. Handing over of Use rids and Passwords: I/We undertake to handover the User IDs and
+ passwords user for accessing all the Servers, Applications and the Database and Network
+ Administrator Users under this project.
+ c. I/We undertake to design Standard Operating Procedures to manage system (Including
+ application and IT systems), document the same and train purchaser‟s personnel on the
+ same.
+ d. I/We also understand that the Exit Management and Transition will be considered
+ complete on the basis of approval from Department.
+30. We understand that you are not bound to accept the lowest or any proposal you may
+ receive. The undersigned is competent and duly authorized by the Bidder company/entity
+ to sign this document. We further agree to adhere to ethical standard set by you in this
+ document and all such other instructions on the issue by the Government of India and
+ Government of M.P.
+31. I/We shall undertake to provide training t
+â€¢ MP Police Personnel as per the requirement
+ proposed in the RFP
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+I hereby further confirm that irrespective of any arrangement between the Bidder of this Bid
+and its suppliers, the undersigned entity shall bear full and single point responsibility and
+answerability towards this Bid and the purchaser. Undersigned shall ensure that tasks under
+this Bid do not suffer on any account including any probable dispute between it and its
+supplier and service personnel.
+
+Yours sincerely,
+Date: ------------------------------------
+Place: ------------------------------------
+Signed: ------------------------------------
+Name: ------------------------------------
+Address and contact numbers
+In the capacity of: ------------------------------------
+For and on behalf of: ------------------------------------
+
+Signature of authorized signatories
+1.
+2.
+
+Note: -
+ a) In case any signatory is a foreign national, or NRI, also mention passport number and
+ other details.
+ b) Where any signatory is a director or designated partner or person in similar capacity,
+ also mention DIN number as issued by Registrar of Companies in India.
+ c) Where signatory is not Director etc., the justification for such authorization along with
+ board resolution, should also be attached.
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+III. FORMAT 03: FINANCIAL STATUS FORM/GENERAL INFORMATION ABOUT THE
+ BIDDER
+ (To be filled up by the Bidder)
+ (On firm/ company letter head)
+ (To be enclosed with Pre-Qualification Bid)
+
+ Details of the Bidder (Company)
+ 1. Name of the bidder
+ 2. Address of the Bidder
+ 3. Status of the Company (Public Ltd/ Pvt. Ltd)
+ Details of Incorporation of the Company Date:
+ 4.
+ Ref.
+ Details of Commencement of Business Date:
+ 5.
+ Ref.
+ 6. GST registration no.
+ 7. Permanent Account Number (PAN)
+ Name & Designation of the contact person to
+ 8. whom all references shall be made regarding this
+ Tender
+ 9. Telephone No. (with STD Code)
+ 10. E-Mail of the contact person:
+ 11. Fax No. (with STD Code)
+ 12. Website
+ Whether Bidder has any office /other
+ 13. establishment is in M.P. If so detailed address of
+ the same and the activity carried on there.
+ Quality certification available with the bidder. Such
+ certificate must be valid at the time of opening of
+ 14. the Bid. Whether such certificate is relevant to the
+ proposed job in the scope of this Bid? Attach self-
+ attested copies
+ Financial Details (as per audited Balance Sheets)
+ 15.
+ (Rs. in Cr)
+ 16. Year 2023-24 2024-25 2025-26
+ 17. Turn Over
+
+ Date: ------------------------------------
+ Place: ------------------------------------
+ Signed: ------------------------------------
+ Name: ------------------------------------
+ In the capacity of: ------------------------------------
+ For and on behalf of: ------------------------------------
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+IV. FORMAT 04: performance STATEMENT (EXPERIENCE)
+ (Must be enclosed with the “Pre-qualification Bid” as given below)
+ [On the letterhead of Bidder]
+
+ S. Financial Name & Description Purchase Value of Period of performance
+ No. Year address, of the work / Order No. contract/ execution certificate
+ Telephone supply order & Date Purchase from
+ no and fax issued by Order customer
+ no of Purchaser (page
+ purchaser numbers)
+ to whom
+ similar
+ service/
+ supplies
+ were made
+ Starting End
+ 1 2 3 4 5 6 7 8
+ 1 2023-24
+ 2 2024-25
+ 3 2025-26
+
+ As of this date, the information furnished in all parts of this form is accurate and true to the
+ best of my knowledge. I have no objection in getting this information verified by the SSP
+ (Radio) M.P. in any covert or open manner, as the latter may deem fit.
+
+ Date: ------------------------------------
+ Place: ------------------------------------
+ Signed: ------------------------------------
+ Name: ------------------------------------
+ In the capacity of: ------------------------------------
+ For and on behalf of: ------------------------------------
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+V. FORMAT 05: TECHNICAL QUALIFICATIONS: ON THE LETTERHEAD OF
+ BIDDER
+ (Must be enclosed with the “Technical Bid” as given below)
+ T.Q. COMPLIANCE SHEET
+
+ S. Remarks Page no.
+ Section Type of the document Yes
+ No. (Description) /Flag No.
+ Letter of authorization in respect of As per Standard
+ Section the person authorised by bidder t
+â€¢ Format (on the letter
+
+ I remain present and interact with head of Bidder)
+ the SSP (Radio), M. P., Bhopal.
+ Certificate / affidavit regarding non- As per Standard
+ violation / infringement of any Format (on the letter
+ Indian or Foreign Trademark, head of Bidder)
+ Section
+ 2 Patent, Registered Design or other
+ II
+ Intellectual Property Rights.
+ Non-Malicious code certificate is to
+ be attached
+ Technical solution: The bidder must
+ submit a write up on understanding
+ of the Project. This technical
+ proposal should address all the
+ areas/ sections as specified by the
+ RFP and should contain a detailed
+ description of how the Bidder will
+ provide the required services
+ outlined in this RFP. It should
+ articulate in detail, as to how the
+ Bidder‟s Technical Solution meets
+ Section the requirements specified in the
+
+ III RFP. The technical proposal must
+ not contain any pricing information.
+ In submitting additional information,
+ please mark it as “Supplementary”
+ to the required response. If the
+ Bidder wishes to propose additional
+ services (or enhanced levels of
+ services) beyond the scope of this
+ RFP, the proposal must include a
+ description of such services as a
+ separate and distinct attachment to
+ the proposal.
+ Section Brand name, make, model and
+ 4 Format 09
+ IV technical specification of all the
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+S. Remarks Page no.
+ Section Type of the document Yes
+No. (Description) /Flag No.
+ equipment and accessories quoted
+ for this project as per BOQ in same
+ order.
+ Technical Compliance Statement
+ Section showing adherence to the
+5 Format 06
+ V specifications of the Tender
+ document requirement.
+ Section N
+â€¢ Deviations from the technical
+6 Format 07
+ VI specifications
+
+ Date: ------------------------------------
+ Place: ------------------------------------
+ Signed: ------------------------------------
+ Name: ------------------------------------
+ In the capacity of: ------------------------------------
+ For and on behalf of: ------------------------------------
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+VI. FORMAT 06: TECHNICAL PROPOSAL COMPLIANCE STATEMENT
+ (Must be enclosed with the “Technical Bid” as given below)
+ [On the letterhead of Bidder]
+
+ The Technical Proposal should address the following:
+  Overview of the proposed solution that meets the requirements specified in the RFP.
+  Technical Compliance
+  Standard and Quality Assurance
+  Data Sheet of all components
+
+ Detailed Compliance statement for each parameter given in the RFP under clause
+ no. 4.2 (4.2.1 to 4/2/10) is to be provided by Bidder
+
+ Technical Compliance Statement
+ Failure to provide compliance statement will lead Bid being summarily rejected.
+
+ S.NO DESCRIPTION Compliance Remark
+
+ 1.
+
+ 2.
+
+ Date: ------------------------------------
+ Place: ------------------------------------
+ Signed: ------------------------------------
+ Name: ------------------------------------
+ In the capacity of: ------------------------------------
+ For and on behalf of: ------------------------------------
+
+ Supply of CCTV Infrastructure Components for SAFE CITY Project
+
+VII. FORMAT 07: NO DEVIATIONS FROM Tender document CONDITIONS
+ (Must be enclosed with the “Technical Bid” as given below)
+ [On the letterhead of Bidder]
+
+ I/We hereby undertake that we have not taken any deviation from Tender
+ clauses together with other references as enumerated in the above referred NIT. We
+ hereby confirm our unqualified acceptance of all terms & conditions, unqualified
+ compliance with technical specification and acceptance to reverse auctioning process.
+ We confirm to have submitted offer in accordance with Tender instructions and as per
+ aforesaid references.
+
+ Thank you,
+
+ Date: ---------------------------------
+ Place: ---------------------------------------
+ Signed: ------------------------------------
+ Name: ---------------------------------------
+ In the capacity of: ------------------------------------
+ For and on behalf of: ---------------------------------------
+
+ Supply of CCTV Infrastructure Components for PS CCTV Project
+
+VIII. FORMAT 08: UNDERTAKING CERTIFICATE
+ (Must be enclosed with the “Pre-Qualification Bid” as given below)
+ [On the letterhead of Bidder]
+
+ I……………………………S/
+â€¢ Shri………………………………………………………….
+ Resident of ……………………………………………………………………………………
+ Being Managing Director / Proprietor / Partner / office bearer (name of designation
+ of) M/S …….…………………………………………………………whose GST Registration
+ No. is ………….…………………………………
+ Income Tax PAN No. is …………....…………… ……………………………………..
+ Hereby give consent t
+â€¢ The Police Telecom Headquarters, Bhadbhada Road Bhopal to
+ deduct from our Bills whatever amount is payable by us on account of the necessary tax
+ dues.
+
+ Date: ---------------------------------
+ Place: ---------------------------------------
+ Signed:------------------------------------
+ Name: ---------------------------------------
+ In the capacity of:-----------------------------------
+ For and on behalf of:------------------------------------
+
+ Supply of CCTV Infrastructure Components for PS CCTV Project
+
+IX. FORMAT 09: BILL OF QUANTITY
+ (Must be enclosed with the “Technical Bid” as given below)
+ The below mentioned is the indicative quantity of hardware/software to be installed.
+
+ S. Name of Equipment / Item Make, Model No. & Year of Compliance Page no. in Catalogue Remark
+ No. as proposed for project and Manufacturing (Yes /no) technical page no
+ that will be supplied
+ 1.
+ 2.
+ 3.
+ 4.
+ 5.
+ 6.
+ 7.
+ 8/9/10.
+ 11/12/13.
+
+ 14.
+
+ 15.
+
+ 16.
+
+ Date: ---------------------------------
+ Place: ---------------------------------------
+ Signed:------------------------------------
+ Name: ---------------------------------------
+ In the capacity of: ------------------------------------
+ For and on behalf of:------------------------------------
+
+ Supply of CCTV Infrastructure Components for PS CCTV Project
+
+X. FORMAT 10: FINANCIAL BID
+
+ As per BOQ given online at Tender site.
+ Note: - L1, will be decided on with tax prices.
+
+XI. FORMAT 11: PERFORMA OF BANK GUARANTEE
+ (TO BE SUBMITTED BY SUCCESSFUL BIDDER)
+ To,
+ Senior Superintendent of Police (Radio)
+ Police Telecom. Head Quarters, M.P., Bhopal
+ Madhya Pradesh Police, Govt. of M.P.
+ Place ---------------------------------------------------------
+ Bank Guarantee No.: ---------------------------------------------------------------
+ Amount of bank Guarantee No.: Rs. ----------------- (Rupees ----------------- Only)
+ Bank Guarantee valid from: ---------------------------------------------------------------
+ Last Date for Lodgment of Claim: ---------------------------------------------------------
+
+ This Deed of Guarantee executed by the -------------------------- Bank having Registered
+ Office at -- and local office at --- (hereinafter called “the Bank”) in favor of Sr. Supt. of
+ Police (Radio) Police Telecom. H.Q., M.P., Bhopal for and on behalf of Govt. of M.P.
+ (hereinafter called “M.P. Police”) for an amount not exceeding Rs. -----------/- (Rupees ---
+ -------------------Only) at the request of M/s ------------------------- having their
+ Registered/Head office at - and M/S -- having its office at -----------------------------------------
+ --- (hereinafter called the Guarantor). -------------------- and M/s ------------------- are
+ partners in the work order in respect of which this Bank guarantee is being submitted as
+ security to complete the work and provide the services within stipulated time.
+ The bank does hereby undertake to pay the M.P. Police an amount not exceeding Rs. ---
+ -------/- (Rupees -----------------------------Only) by reason of breach of Agreement, "Term
+ and Conditions” as stated in Tender document, and commitment under the scope of
+ Work Order.
+ The Bank do hereby guarantee and undertake to pay the M.P. Police immediately on
+ demand, without any reservation(s), protest, demur and without reference to the
+ guarantor the amount of Rs. ------ (Rupees ------------------------ Only).
+ Any such demand made by the M.P. Police shall be conclusive and binding on the bank
+ irrespective of any dispute(s) or difference(s) raised by the Guarantor.
+ The bank undertakes to pay to the M.P. Police any money so demanded notwithstanding
+ any dispute or disputes raised by the Guarantor and their partners in any suit or
+ proceeding pending before any Court or Tribunal relating thereto, Banks liability under
+ this guarantee being absolute and unequivocal.
+ The payment made by the bank under this bond shall be a valid discharge of liability for
+ payment there under and the Guarantor and their partners shall have no claim against
+ the bank making such payment.
+
+ Supply of CCTV Infrastructure Components for PS CCTV Project
+
+This Guarantee will not be discharged due to the change in the constitution of the Bank
+or Guarantor and their partners.
+This guarantee shall be irrevocable and shall remain valid up to --------------- (date) --------
+------. The guarantee shall be extended further at the discretion of the Bank for such
+period as required under the instructions of the Guarantor i.e. ---, on whose behalf this
+guarantee is furnished.
+The bank agrees that the amount hereby guaranteed shall be due and payable to the
+M.P. Police on the bank being served a notice requiring payment of the amount and
+such notice shall be deemed to have been served on the Bank by actual delivery.
+To give full effect to the provisions of this guarantee the bank hereby waives all rights
+inconsistent with the above provisions and which the bank might otherwise as a
+guarantor be entitled to claim and enforce.
+We, --------------------- Bank may renew the Bank Guarantee at our discretion provided the
+request for renewal is made by the Guarantor before the expiry of the Bank Guarantee
+with the mutual consent of the Bank or Guarantor. We, -------------- Bank, lastly undertake
+not to revoke this guarantee during its currency except with the previous consent of the
+M.P. Police in writing and the guarantee shall be continuous and irrevocable guarantee
+up to a sum of Rs. ----------/- (Rupees Only) ----------------(amount)--------------.
+Notwithstanding anything stated hereinbefore:
+Our liability under this guarantee is restricted t
+â€¢ Rs. ---------- /- (Rupees --------------------
+Only).
+The guarantee shall remain in force till ------------------ (date) ---------------------- and
+The Bank is liable to pay the guaranteed amount or any part thereof under this Bank
+Guarantee only if the M.P. Police serve upon the Bank a written claim or demand on or
+before --- (date) ---.
+Please note that this Bank Guarantee automatically stand cancelled notwithstanding the
+fact that the original bank guarantee may not be returned to us by you.
+Witness:
+ 1. Signature
+ Manager/ Authorized Signatory
+ 2. Full Name (in Block Letters)
+ Designation & Signature I.D. No
+ Bank & Branch Address with Branch
+Submitted by:
+-(Signature)
+-(Signature)
+Accepted by -------------------------
+For M.P. Police
+
+Sr. Supt. of Police (Radio)
+Police Telecom. HQ, M.P., BHOPAL
+
+ Supply of CCTV Infrastructure Components for PS CCTV Project
+
+XII. FORMAT 12: UNDERTAKING ON OFFICE PREMISES
+ (ON FIRM/ COMPANY LETTERHEAD)
+ (Must be enclosed with the “Pre-Qualification Bid” as given below)
+
+ This is to certify that << COMPANY NAME>> has an office in the Bhopal. Relevant
+ address proof is enclosed.
+ OR
+ In case after the evaluation process against RFP No.[xxx] dated [xx/xx/2026], We are
+ appointed as successful bidder, we hereby undertake to establish an office in Bhopal
+ within 30 days of signing of agreement.
+
+ Authorized Signatory
+ Date: ---------------------------------
+ Place: ---------------------------------------
+ Signed:------------------------------------
+ Name: ---------------------------------------
+ In the capacity of: ------------------------------------
+ For and on behalf of:------------------------------------
+
+ Supply of CCTV Infrastructure Components for PS CCTV Project
+
+XIII. FORMAT 13: FORCE MAJEURE
+ (On the Letterhead of the Participant bidder firm/ Company)
+ (To be enclosed with PQ bid)
+
+ Force Majeure
+
+ 1. Force Majeure means an event beyond the Command of the supplier and not involving the
+ supplier‟s fault of negligence, and which is not foreseeable. Such events may include, but are
+ not restricted to, acts of the purchaser either in its sovereign or contractual capacity, wars or
+ revolutions, hostility, acts of public enemy, civil commotion, pandemic, sabotage, earthquake,
+ fires, floods, explosions, epidemics/pandemic, quarantine restrictions, strikes, lockouts, and
+ freight embargoes.
+ 2. If there is delay in performance or other failures by the supplier to perform its obligation under
+ its contract due to event of a Force Majeure, the supplier shall not be held responsible for such
+ delays/failures.
+ 3. If a Force Majeure situation arises, the supplier shall promptly notify the purchaser in writing
+ of such conditions and the cause thereof within 21 (Twenty-one) days of occurrence of such
+ event. Unless otherwise directed by the purchaser in writing, the supplier shall continue to fulfil
+ its obligation under the contract as far as reasonably practical and shall seek all reasonable
+ alternative means for performance not prevented by the Force Majeure event.
+ 4. There may be a Force Majeure situation affecting the purchase organization only. In such
+ situation the purchase organization is to take up with the supplier on similar lines as above for
+ further necessary action.
+ 5. Clause can be enforced only if the purchaser Department accepts the case of
+ nonperformance as beyond the Command of supplier.
+
+ Place: ……………………
+
+ Date: …………………….
+
+ Signature...................................
+
+ Name & Seal .............................
+ of the Tenderer (Supplier)
+
+ Supply of CCTV Infrastructure Components for PS CCTV Project
+
+XIV. FORMAT 14: TECHNICAL PERSONNEL STATEMENT
+
+ (Must be enclosed with Technical Bid)
+
+ Detailed information of Authorized service support details for warranty claims
+ in Madhya Pradesh. They are provided by Tenderer.
+
+ Sr.No. Company Items Details Contact No. Full address of Authorized
+ Name service support details
+
+ Date: ---------------------------------
+
+ Place: ---------------------------------------
+
+ Seal &signed: ---------------------------------------
+
+ Name: ---------------------------------------
+
+ Designation:------------------------------------
+
+ For and on behalf of:------------------------------------
+
+ Supply of CCTV Infrastructure Components for PS CCTV Project
+
+XV. FORMAT 15: DECLARATION
+
+ (Must be enclosed with the “Pre-Qualification Bid”)
+
+ 1. I, (Name of M.D./ Proprietor of firm) ……………………… son of………………………of
+ M/s (Name of firm and full Address) ……… have read all the terms and conditions of the
+ Tender given above. These are acceptable to me.
+ 2. Earnest Money deposited online vide Reference/Receipt No.
+ ________Dated____________of Rs……………………………. (In words)
+ …………………………………in favor of Sr. Supt. Of Police (Radio), Madhya Pradesh,
+ Bhopal-462003 payable at Bhopal, is enclosed herewith.
+ 3. I, (Name of M.D./ Proprietor of firm) …………………………………. son of M/s (Name of
+ firm and full Address) ………………………………………. certified that we are registered
+ and experienced firm for this work and truly manufacturing / trading since
+ ……………(date).
+ 4. We also certified that we are not blacklisted/debarred by any Central or State
+ Government/state PSUs for providing similar services Since Last Three Years defined by
+ Madhya Pradesh Police of this RFP.
+ 5. Each page of Tender documents is duly signed with seal by us.
+ 6. We undertake to adhere to the ethical commitment as required in this Tender mandated
+ by the law.
+ 7. We undertake to adhere that quoted product Make under this bid are not from a country
+ which shares a land border with India or of if from such a country, quoted product/OEM
+ have been registered with competent authority.
+
+ Place: ……………………
+ Date: …………………….
+ Signature: ……………………………….
+
+ ………………………………
+ Name & Seal of the Tenderer (Supplier)
+
+ Supply of CCTV Infrastructure Components for PS CCTV Project
+
+XVI. FORMAT 16 : LAND BORDER SHARING DECLARATION
+
+ (Must be enclosed with the “Pre-Qualification Bid”)
+
+ UNDERTAKING
+
+ We hereby declare that we have read and understood the provisions of Rule 144(xi) of the
+ General Financial Rules, 2017, as amended from time to time, regarding restrictions on bidders
+ from countries sharing a land border with India.
+
+ We further declare that:
+
+ a) we are not from a country sharing a land border with India; or
+ b) we are from a country sharing a land border with India and are duly registered with the
+ Competent Authority as required under Rule 144(xi), and a valid registration certificate
+ is enclosed.
+
+ We also declare that this restriction applies to us and to our beneficial owners,
+ subcontractors, suppliers, and any other entities associated with the bid, as applicable (strike
+ out if not applicable).
+
+ OR
+
+ The above restriction is not applicable. For the avoidance of doubt, mere manufacture of goods
+ in a country sharing a land border with India, without participation, control, or beneficial
+ ownership in the bid, does not attract Rule 144(xi). (strike out if not applicable)
+
+ We further declare that we are a company wholly owned and controlled by individuals who are
+ Indian citizens, and that no person or entity from a country sharing a land border with India has
+ any direct or indirect ownership, control, or beneficial interest in the Company (strike out if not
+ applicable).
+
+ We understand that any false declaration shall render us liable to rejection of the bid,
+ termination of contract, and other actions as per law.
+
+ Signature,
+ Name,
+ Designation:
+ Date: ………….
+
+ Supply of CCTV Infrastructure Components for PS CCTV Project
+
+XVII. FORMAT 17: OEM / MANUFACTURERS AUTHORIZATION
+ CERTIFICATE/ COMPLIANCE SHEET
+ (Must be enclosed with the “Technical Bid” as given below)
+
+ (On the letterhead of OEM carrying address, contact numbers, TIN number with sign
+ and seal of authorized signatory)
+
+ It is certified that M/s________________________________________________ are
+ our authorized distributors / resellers/ agents/ (mention the status) and they have been
+ authorized to quote and sell Items/equipment/Software with Accessories as quoted in
+ table below and is manufactured / developed proposed/to be supplied in case LMOC is
+ awarded this bid for MP Police in response t
+â€¢ RFP No.xxxxx/ dated xx/xx/2026. We
+ will provide to them all necessary support for installation, commissioning, customization,
+ warranty, spares and effective after sale services with following details:
+ 1. We are willing t
+â€¢ Supply hardware/software as proposed under in compliance to
+ the technical/functional requirement under this RFP.
+ 2. That we have gone through the RFP document and confirm that the
+ Hardware/software quoted in table below meets and complies the technical &
+ functional requirements of the bid.
+ 3. That we are assured and ready to supply hardware/Software after assessing the
+ timelines as mentioned in this RFP.
+ 4. We assure that we have manufacturing/development capacity to honor time and
+ cost commitments under this RFP.
+ 5. I/we certify that we << COMPANY NAME >>are not blacklisted by Government
+ of Madhya Pradesh and any other state Government or any of its agencies for
+ any reasons whatsoever and not blacklisted by Central / any other State
+ Government or its agencies as on the date of submission defined by Madhya
+ Pradesh Police of this RFP.
+ 6. We assure to provide necessary support (Support within 24 hours of raising a
+ request) in case MP Police desires so.
+ 7. We have read and understood the RFP and agree to the same. We undertake to
+ abide by the ethical conduct stipulations also.
+ 8. We will provide support w.r.t spares, updates, software upgrades, security
+ patches, fixes, bug fixes for 5 Years to bidder/ Technology partner/purchaser.
+ 9. We are registered entity in India and have direct presence in India for more than
+ Three years as on bid submission date.
+ 10. We have a self-owned service and support center in India for last Three years as
+ on bid submission date .
+ 11. We have option of supporting customers directly if needed & the support
+ information including delivery against defectives or status of case will be
+ available through web portals. (A certificate from OEM to provide support for the
+ products with Technical-qualification bid)
+ 12. We have ISO 9001:2008 / ISO 20000/ ISO 27001 certification.
+ 13. The quoted products/Items/Spares/Service for the project will not be End of Life
+ (EOL) for 5 Years from the date of bid submission.
+
+ Supply of CCTV Infrastructure Components for PS CCTV Project
+
+ 14. Our product/s quoted under this RFP have minimum 3 years warranty from the
+ date of procurement.
+ 15. The details of hardware/Software quoted/ that will also be supplied in case of bid
+ is awarded t
+â€¢ M/s…………………… are mentioned as follows:
+
+ OEM
+ OEM
+ Certificate of
+ Certificate of
+ Compliance t
+â€¢ Non-Malicious Non-
+ compliance of
+ Hardware/ Functional/ Code (if Malicious
+ Hardware/Soft
+ Sr Software/ specification Required) for Code
+ Make/ ware as
+ . services Quantity Page Software as Certificate(if
+ Model proposed/to
+ N proposed proposed Number/ proposed/t
+â€¢ Applicable)
+ Number be supplied
+ o. to be Clause be supplied (Enclosed
+ under this
+ supplied Number in under this on Page
+ RFP
+ this RFP RFP Number)
+ (Enclosed on
+ (Enclosed on
+ Page Number)
+ Page Number)
+
+Date: ------------------------------------
+Place: ------------------------------------
+Signed:------------------------------------
+Name:------------------------------------
+In the capacity of: ------------------------------------
+For and on behalf of:------------------------------------

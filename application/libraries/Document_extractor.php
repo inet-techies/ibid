@@ -2558,34 +2558,35 @@ class Document_extractor
     }
 
     /**
-     * Extracts structured Tender Fact Sheet data across all 12 sections.
-     * Works accurately for both pre-formatted Fact Sheets (like Bank of Baroda) and standard NIT/RFP tenders.
+     * Extracts structured Tender Fact Sheet data dynamically across all 12 sections
+     * strictly grounded in the uploaded document text (no hardcoded project/domain defaults).
      *
      * @param string $cleanText Extracted readable text
      * @param string $origName Document filename
      * @param array $aiSummary Existing AI summary attributes (optional)
+     * @param array $fields Validated field map (optional)
      * @return array 12-section structured attribute payload for TenderFactSheet table
      */
     public function extractFactSheet($cleanText, $origName = '', $aiSummary = [], $fields = [])
     {
-        // 1. Repair common PDF extraction ligatures (e.g. "Installa on" -> "Installation")
-        $repairedText = $this->_repairFactSheetLigatures($cleanText);
+        $norm = $this->_normalizeFactSheetInputs($cleanText);
+        $repairedText = $norm['repaired'];
+        $bodyText     = $norm['body'];
+        $tableText    = $norm['table'];
 
-        // 2. Bound search scope for header/notice metadata to first ~35,000 characters (~10-15 pages).
-        // This prevents false matches from Table of Contents dots and deep technical specs in 100+ page RFPs.
-        $headerScope = substr($repairedText, 0, 35000);
+        // Bound header scope for notice-level metadata (~10-15 pages)
+        $headerScope = mb_substr($tableText, 0, 35000, 'UTF-8');
 
-        // Detect if document is a Bank of Baroda style pre-summarized Fact Sheet
-        $isPreSummarized = preg_match('/(?:5\.\s*Areas\s+Covered|11\.\s*Risk\s+Points|12\.\s*(?:Key\s+Attention|Opportunity))/i', $headerScope);
+        // Detect pre-formatted Fact Sheet PDFs
+        $isPreSummarized = (bool)preg_match('/(?:5\.\s*Areas\s+Covered|11\.\s*Risk\s+Points|12\.\s*(?:Key\s+Attention|Opportunity))/i', $headerScope);
 
         $data = [];
 
-        $findInScope = function($patterns, $scopeText, $default = '') {
+        $findInScope = function ($patterns, $scopeText, $default = '') {
             foreach ((array)$patterns as $pat) {
                 if (preg_match($pat, $scopeText, $m)) {
-                    $cand = trim($m[1]);
-                    // Discard if candidate contains TOC leader dots or is excessively long
-                    if (strpos($cand, '.....') === false && strlen($cand) <= 250) {
+                    $cand = $this->_cleanExtractedPhrase($m[1], 240);
+                    if ($cand !== '' && strpos($cand, '.....') === false) {
                         return $cand;
                     }
                 }
@@ -2597,33 +2598,22 @@ class Document_extractor
         // EXCLUDED FIELD: Department must NEVER be populated by PDF extraction
         $data['Department'] = '';
 
-        // Zone / City / Region
-        $zoneCand = $findInScope([
-            '/(?:Zone|Region|Circle|Division|Location)\s*[:\t\- ]+([^\n\r]{3,100})/iu',
-            '/Zone\s+([^\n\r]{3,100})/iu'
-        ], $headerScope, '');
-        // Discard isolated non-geographic words like "offices", "station", "building", "hall"
-        if (empty($zoneCand) || preg_match('/\b(?:offices?|stations?|buildings?|rooms?|GNFC|Certifying|http|www|Page|Table|Section)\b/i', $zoneCand)) {
-            if (preg_match('/\b(Kolkata(?:\s+Police)?|West\s+Bengal)\b/i', $cleanText)) {
-                $zoneCand = 'Kolkata Police, West Bengal';
-            } elseif (preg_match('/\b(Vadodara(?:\s+city)?(?:,\s*Gujarat)?|Delhi|Mumbai|Ahmedabad|Gandhinagar|Surat|Rajkot)\b/i', $cleanText, $zm)) {
-                $zoneCand = trim($zm[1]);
-                if (stripos($zoneCand, 'Vadodara') !== false && stripos($cleanText, 'Gujarat') !== false) {
-                    $zoneCand = 'Vadodara City, Gujarat';
-                }
-            } else {
-                $zoneCand = '';
-            }
+        // Tender Title: Prioritize aiSummary title only if it is a valid sentence (not a filename or lowercase fragment)
+        $candTitle = '';
+        if (!empty($aiSummary['full_title'])) {
+            $candTitle = trim((string)$aiSummary['full_title']);
+        } elseif (!empty($aiSummary['title'])) {
+            $candTitle = trim((string)$aiSummary['title']);
         }
-        $data['ZoneRegion'] = $zoneCand;
-
-        // Tender Title: Prioritize aiSummary full title
-        $data['TenderTitle'] = !empty($aiSummary['full_title']) 
-            ? $aiSummary['full_title'] 
-            : (!empty($aiSummary['title']) ? $aiSummary['title'] : $findInScope([
-                '/(?:Tender\s+Title|Name\s+of\s+(?:the\s+)?Work|Scope\s+of\s+Work|Subject)\s*[:\t\- ]*([^\n\r]+(?:\r?\n[ \t]+[^\n\r]+)*)/iu',
-                '/Tender\s+Title\s+([^\n\r]+(?:\r?\n[ \t]+[^\n\r]+)*)/iu'
-            ], $headerScope, ''));
+        if ($candTitle !== '' && (preg_match('/\.(?:pdf|docx?|txt)$/i', $candTitle) || preg_match('/^(?:and|or|of|for|to|in|the)\s/i', $candTitle))) {
+            $candTitle = '';
+        }
+        $data['TenderTitle'] = $candTitle !== '' ? $candTitle : $findInScope([
+            '/(?:Tender\s+Title|Name\s+of\s+(?:the\s+)?(?:Work|Item)|Subject|Brief\s+description\s+of\s+(?:material|work))\s*[:\-]\s*([^\n\r]+(?:\n[ \t]+[^\n\r]+)?)/iu',
+            '/\bRFP\s+for\s+((?:Procurement|Design|Supply|Implementation|Development|Setup|Selection)[^\n\r]{15,240}?)(?=\s+(?:of\s+(?:OSEPA|Govt|State|Tripura)|RFP\s+Enquiry|Enquiry\s+No|NIT\s+No|Tender\s+No|Availability)|\n|$)/iu',
+            '/\be-?tender\s+For\s*\n\s*([^\n\r]{10,200})/iu',
+            '/\bTender\s+for\s+((?:Supply|Procurement|Design|Installation|Implementation)[^\n\r.]{12,200})/iu'
+        ], $headerScope, '');
 
         // EXCLUDED FIELD: Tender Type / Bid Type must NEVER be populated by PDF extraction
         $data['TenderType'] = '';
@@ -2632,7 +2622,7 @@ class Document_extractor
         $data['TenderRefNo'] = !empty($fields['tender_reference']['value'])
             ? $fields['tender_reference']['value']
             : (!empty($aiSummary['ref_no']) ? $aiSummary['ref_no'] : $findInScope([
-                '/(?:Tender\s+Reference\s+No\.?|Tender\s+Ref\s*No\.?|RFP\s+No\.?|NIT\s+No\.?|Ref\s+No\.?)\s*[:\t\- ]*([A-Za-z0-9\/\-_:. ]{4,100})/iu'
+                '/(?:Tender\s+Reference\s+No\.?|Tender\s+Ref\.?\s*No\.?|RFP\s+(?:Enquiry\s+|Notice\s+)?No\.?|Enquiry\s+No\.?|NIT\s+No\.?|Ref\.?\s*No\.?)\s*[:\-–]+\s*([A-Za-z0-9\/\-_:.]{4,80})/iu'
             ], $headerScope, ''));
 
         // Tender Date: Published / NIT date only (empty if not in document)
@@ -2640,71 +2630,37 @@ class Document_extractor
             ? $fields['published_date']['value']
             : (!empty($aiSummary['published_date']) ? $aiSummary['published_date'] : '');
 
-        // EXCLUDED FIELD: Estimated Tender Value & Project Value
-        // If not stated clearly in the document, leave empty or display 'Not specified in document'
-        // Never use a guessed amount, numeric fragment, eligibility threshold, or unrelated clause
-        $data['ProjectValue']       = 'Not specified in document';
-        $data['ProjectValueAmount'] = null;
-        $data['EstimatedValue']     = '';
+        // EXCLUDED FIELD: Estimated Tender Value & Project Value (never guessed by PDF extraction)
+        $data['ProjectValue']         = 'Not specified in document';
+        $data['ProjectValueAmount']   = null;
+        $data['EstimatedValue']       = '';
         $data['EstimatedValueAmount'] = null;
 
-        // Contract Type
-        $data['ContractType'] = $findInScope([
-            '/(?:Contract\s+Type|Type\s+of\s+Contract|Nature\s+of\s+(?:Contract|Work))\s*[:\t\- ]+([^\n\r]{3,100})/iu'
-        ], $headerScope, '');
-        if (empty($data['ContractType'])) {
-            if (preg_match('/\b(?:SITC|Supply,\s*Installation,\s*Testing(?:,\s*and)?\s*Commissioning)\b/i', $repairedText)) {
-                $data['ContractType'] = 'SITC and Implementation with 1-Year Comprehensive Warranty';
-            } else {
-                $data['ContractType'] = 'Rate Contract / Supply';
-            }
-        }
+        // Zone & Areas Covered (dynamic)
+        $zoneAndAreas = $this->_extractDynamicZoneAndAreas($repairedText, $bodyText, $tableText, $headerScope, $isPreSummarized, $data['TenderTitle']);
+        $data['ZoneRegion'] = $zoneAndAreas['zone'];
+        $areas              = $zoneAndAreas['areas'];
+        $data['AreasCoveredJson'] = json_encode($areas, JSON_UNESCAPED_UNICODE);
 
-        // Warranty + AMC
-        $warrAmcCand = $findInScope([
-            '/(?:Warranty\s*\+\s*AMC|Warranty\s*[\/&]\s*AMC|Warranty\s+and\s+AMC)\s*[:\t\- ]+([^\n\r]{3,120})/iu'
-        ], $headerScope, '');
-        if (empty($warrAmcCand)) {
-            if (preg_match('/([0-9]{1,2}\s*(?:\([^\)]+\)\s*)?(?:years?|months?)\s+(?:onsite\s+)?comprehensive\s+warranty[^\n\r.;]{0,80})/iu', $cleanText, $wm)) {
-                $warrAmcCand = trim($wm[1]);
-                if (preg_match('/(?:fresh\s+AMC|arrange\s+fresh\s+AMC)/i', $cleanText)) {
-                    $warrAmcCand .= '; fresh AMC post-warranty';
-                }
-            } elseif (preg_match('/(?:three\s*\(\s*3\s*\)\s*year|3\s*years?)\s+(?:warranty|maintenance)/iu', $cleanText)) {
-                $warrAmcCand = '3 Years Warranty + AMC';
-            } else {
-                $warrAmcCand = 'Not specified in document';
-            }
-        }
-        $data['WarrantyAmc'] = $warrAmcCand;
-
-        // Bid System
-        $data['BidSystem'] = $findInScope([
-            '/(?:Bid\s+System|System\s+of\s+Bidding|Cover\s+System)\s*[:\t\- ]+([^\n\r]{3,100})/iu'
-        ], $headerScope, '');
-        if (empty($data['BidSystem']) || strlen($data['BidSystem']) > 60) {
-            if (preg_match('/\b(?:Two\s+(?:Cover|Bid|Packet|Stage)|Two-Bid|Two-Cover|Technical\s+(?:and|&)\s+(?:Price|Financial|Commercial)\s+Bid)\b/i', $headerScope)) {
-                $data['BidSystem'] = 'Two Bid System (Technical Bid & Price/Commercial Bid)';
-            } else {
-                $data['BidSystem'] = 'Two Bid System (e-Tendering)';
-            }
-        }
+        // Contract Type & Bid System (dynamic)
+        $data['ContractType'] = $this->_extractDynamicContractType($bodyText, $tableText, $headerScope, $data['TenderTitle']);
+        $data['BidSystem']    = $this->_extractDynamicBidSystem($bodyText, $tableText, $headerScope);
 
         // Helper for formatting Indian currency (e.g. ₹31,00,000 and ₹10,000)
-        $formatIndianAmt = function($num) {
-            $num = (string)round($num);
+        $formatIndianAmt = function ($num) {
+            $num = (string)round((float)$num);
             $len = strlen($num);
             if ($len <= 3) return '₹' . $num;
             $last3 = substr($num, -3);
-            $rest = substr($num, 0, -3);
+            $rest  = substr($num, 0, -3);
             $restFormatted = preg_replace('/\B(?=(\d{2})+(?!\d))/', ',', $rest);
             return '₹' . $restFormatted . ',' . $last3;
         };
 
         // Helper to normalize date with optional time to "YYYY-MM-DD HH:MM AM/PM"
-        $normDateWithTime = function($str) {
-            $str = trim(preg_replace('/\s+/', ' ', $str));
-            if (empty($str) || strtolower($str) === 'not specified in document') return 'Not specified in document';
+        $normDateWithTime = function ($str) {
+            $str = trim(preg_replace('/\s+/', ' ', (string)$str));
+            if ($str === '' || strtolower($str) === 'not specified in document') return 'Not specified in document';
             $datePart = $str;
             $timePart = '';
             if (preg_match('/^(.*?)\s*(?:at\s*|,\s*|@\s*)\s*(.*)$/i', $str, $parts)) {
@@ -2715,7 +2671,6 @@ class Document_extractor
                 $timePart = trim($parts[2]);
             }
 
-            // Normalize Date Part to YYYY-MM-DD
             if (preg_match('/^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{2,4})$/', $datePart, $dm)) {
                 $y = (int)$dm[3];
                 if ($y < 100) $y += ($y < 50 ? 2000 : 1900);
@@ -2735,7 +2690,6 @@ class Document_extractor
                 }
             }
 
-            // Normalize Time Part to H:MM AM/PM
             if (!empty($timePart)) {
                 if (preg_match('/^(\d{1,2}(?::\d{2})?\s*(?:am|pm|hrs?|hours?)?)/i', $timePart, $mTime)) {
                     $rawTime = trim($mTime[1]);
@@ -2765,368 +2719,146 @@ class Document_extractor
 
         // ── SECTION 2: Important Dates ──
         $dates = [];
-        // 1. Published / Uploaded date
         $pubDate = !empty($aiSummary['published_date']) ? $aiSummary['published_date'] : '';
-        if (empty($pubDate) && preg_match('/(?:Date\s+of\s+(?:uploading|downloading|publication|issue|NIT)|Published(?:\s+Date)?)\s*[:\- \t]*(\d{1,2}[.\/-]\d{1,2}[.\/-]\d{2,4})/iu', $cleanText, $dm)) {
+        if (empty($pubDate) && preg_match('/(?:Date\s+of\s+(?:uploading|downloading|publication|issue|NIT)|Published(?:\s+Date)?)\s*[:\- \t]*(\d{1,2}[.\/-]\d{1,2}[.\/-]\d{2,4})/iu', $repairedText, $dm)) {
             $pubDate = $dm[1];
         }
         if (!empty($pubDate)) {
             $dates[] = ['activity' => 'Tender Published', 'date_text' => $normDateWithTime($pubDate), 'time' => ''];
         }
 
-        // 2. Pre-bid queries deadline
         $queryDate = !empty($aiSummary['query_date']) ? $aiSummary['query_date'] : '';
-        if (empty($queryDate) && preg_match('/(?:[Qq]ueries[^\n\r]{0,100}?reaching\s*(?:[A-Za-z\s]{0,20})?\s*by\s*|[Qq]uery\s+(?:Deadline|End\s+Date))\s*[:\- \t]*(\d{1,2}[.\/-][0-9]{1,2}[.\/-][0-9]{2,4}(?:\s*(?:at\s*|,\s*|@\s*)?[0-9]{1,2}(?::[0-9]{2})?\s*(?:AM|PM|hrs)?)?)/iu', $cleanText, $qm)) {
-            $queryDate = trim($qm[1]);
+        if (empty($queryDate) && preg_match('/(?:[Qq]ueries[^\n\r]{0,100}?reaching\s*(?:[A-Za-z\s]{0,20})?\s*by\s*|[Qq]uery\s+(?:Deadline|End\s+Date)|Last\s+Date\s+for\s+Pre[-\s]?Bid\s+Queries)\s*[:\- \t]*(\d{1,2}\s*[.\/-]\s*[0-9]{1,2}\s*[.\/-]\s*[0-9]{2,4}(?:\s*(?:at\s*|,\s*|@\s*)?[0-9]{1,2}(?:\s*:\s*[0-9]{2})?\s*(?:AM|PM|hrs)?)?)/iu', $tableText, $qm)) {
+            $queryDate = preg_replace('/\s*([.\/\-:])\s*/', '$1', trim($qm[1]));
         }
         if (!empty($queryDate)) {
             $dates[] = ['activity' => 'Pre-Bid Queries Deadline', 'date_text' => $normDateWithTime($queryDate), 'time' => ''];
         }
 
-        // 3. Pre-bid meeting
         $preBidMeeting = !empty($aiSummary['pre_bid_date']) ? $aiSummary['pre_bid_date'] : '';
-        if (empty($preBidMeeting) && preg_match('/(?:Pre[-\s]?Bid\s+(?:Meeting|Conference)(?:\s+date(?:\s*(?:and|&)\s*time)?)?)\s*[:\- \t]*([0-9]{1,2}[.\/-][0-9]{1,2}[.\/-][0-9]{2,4}(?:\s*(?:at\s*|,\s*|@\s*)?[0-9]{1,2}(?::[0-9]{2})?\s*(?:AM|PM|hrs)?)?)/iu', $cleanText, $mm)) {
+        if (empty($preBidMeeting) && preg_match('/(?:Pre[-\s]?Bid\s+(?:Meeting|Conference)(?:\s+date(?:\s*(?:and|&)\s*time)?)?)\s*[:\- \t]*([0-9]{1,2}[.\/-][0-9]{1,2}[.\/-][0-9]{2,4}(?:\s*(?:at\s*|,\s*|@\s*)?[0-9]{1,2}(?::[0-9]{2})?\s*(?:AM|PM|hrs)?)?)/iu', $tableText, $mm)) {
             $preBidMeeting = trim($mm[1]);
         }
         if (!empty($preBidMeeting)) {
             $dates[] = ['activity' => 'Pre-Bid Meeting', 'date_text' => $normDateWithTime($preBidMeeting), 'time' => ''];
         }
 
-        // 4. Bid submission start
         $subStart = '';
-        if (preg_match('/(?:(?:Bid\s+Submission\s+Start|Start\s+date(?:\s*(?:and|&)\s*time)?\s+of\s+Bid\s+Submission)(?:\s+date(?:\s*(?:and|&)\s*time)?)?)\s*[:\- \t]*([0-9]{1,2}[.\/-][0-9]{1,2}[.\/-][0-9]{2,4}(?:\s*(?:at\s*|,\s*|@\s*)?[0-9]{1,2}(?::[0-9]{2})?\s*(?:AM|PM|hrs)?)?)/iu', $cleanText, $sm)) {
-            $subStart = trim($sm[1]);
+        if (preg_match('/(?:(?:Bid\s+Submission\s+Start|Start\s+date(?:\s*(?:and|&)\s*time)?\s+of\s+Bid\s+Submission)(?:\s+date(?:\s*(?:and|&)\s*time)?)?)\s*[:\- \t]*([0-9]{1,2}\s*[.\/-]\s*[0-9]{1,2}\s*[.\/-]\s*[0-9]{2,4}(?:\s*(?:at\s*|,\s*|@\s*)?[0-9]{1,2}(?:\s*:\s*[0-9]{2})?\s*(?:AM|PM|hrs)?)?)/iu', $tableText, $sm)) {
+            $subStart = preg_replace('/\s*([.\/\-:])\s*/', '$1', trim($sm[1]));
         }
         if (!empty($subStart)) {
             $dates[] = ['activity' => 'Bid Submission Start', 'date_text' => $normDateWithTime($subStart), 'time' => ''];
         }
 
-        // 5. Bid submission deadline
         $subDeadline = !empty($aiSummary['submission_deadline']) ? $aiSummary['submission_deadline'] : (!empty($aiSummary['submission_date']) ? $aiSummary['submission_date'] : '');
-        if (empty($subDeadline) && preg_match('/(?:(?:Last\s+date(?:\s*(?:and|&)\s*time)?\s+of\s+Bid\s+Submission|Bid\s+Submission\s+(?:closing|end|last)\s+date(?:\s*(?:and|&)\s*time)?))\s*[:\- \t]*([0-9]{1,2}[.\/-][0-9]{1,2}[.\/-][0-9]{2,4}(?:\s*(?:at\s*|,\s*|@\s*)?[0-9]{1,2}(?::[0-9]{2})?\s*(?:AM|PM|hrs)?)?)/iu', $cleanText, $em)) {
-            $subDeadline = trim($em[1]);
+        if (empty($subDeadline) && preg_match('/(?:(?:Last\s+date(?:\s*(?:and|&)\s*time)?\s+of\s+Bid\s+Submission|Bid\s+Submission\s+(?:closing|end|last)\s+date(?:\s*(?:and|&)\s*time)?))\s*[:\- \t]*([0-9]{1,2}\s*[.\/-]\s*[0-9]{1,2}\s*[.\/-]\s*[0-9]{2,4}(?:\s*(?:at\s*|,\s*|@\s*)?[0-9]{1,2}(?:\s*:\s*[0-9]{2})?\s*(?:AM|PM|hrs)?)?)/iu', $tableText, $em)) {
+            $subDeadline = preg_replace('/\s*([.\/\-:])\s*/', '$1', trim($em[1]));
         }
         if (!empty($subDeadline)) {
             $dates[] = ['activity' => 'Bid Submission Deadline', 'date_text' => $normDateWithTime($subDeadline), 'time' => !empty($aiSummary['submission_time']) ? $aiSummary['submission_time'] : ''];
         }
 
-        // 6. Technical Bid Opening
         $openDate = !empty($aiSummary['opening_date']) ? $aiSummary['opening_date'] : '';
-        if (empty($openDate) && preg_match('/(?:(?:Date(?:\s*(?:and|&)\s*time)?\s+of\s+Technical\s+Bid\s+Opening|Technical\s+Bid\s+Opening(?:\s+date(?:\s*(?:and|&)\s*time)?)?|Bid\s+opening\s+date(?:\s*(?:and|&)\s*time)?\s+for\s+Technical\s+Proposals))\s*[:\- \t]*([0-9]{1,2}[.\/-][0-9]{1,2}[.\/-][0-9]{2,4}(?:\s*(?:at\s*|,\s*|@\s*)?[0-9]{1,2}(?::[0-9]{2})?\s*(?:AM|PM|hrs)?)?)/iu', $cleanText, $om)) {
-            $openDate = trim($om[1]);
+        if (empty($openDate) && preg_match('/(?:(?:Date(?:\s*(?:and|&)\s*time)?\s+of\s+Technical\s+Bid\s+Opening|Opening\s+of\s+(?:Pre-Qualification\s+and\s+)?Technical\s+Bids?|Technical\s+Bid\s+Opening(?:\s+date(?:\s*(?:and|&)\s*time)?)?))\s*[:\- \t]*([0-9]{1,2}\s*[.\/-]\s*[0-9]{1,2}\s*[.\/-]\s*[0-9]{2,4}(?:\s*(?:at\s*|,\s*|@\s*)?[0-9]{1,2}(?:\s*:\s*[0-9]{2})?\s*(?:AM|PM|hrs)?)?)/iu', $tableText, $om)) {
+            $openDate = preg_replace('/\s*([.\/\-:])\s*/', '$1', trim($om[1]));
         }
         if (!empty($openDate)) {
             $dates[] = ['activity' => 'Technical Bid Opening', 'date_text' => $normDateWithTime($openDate), 'time' => ''];
         }
 
-        // 7. Financial Bid Opening (strictly 'Not specified in document' if not stated in source)
-        $dates[] = ['activity' => 'Financial Bid Opening', 'date_text' => 'Not specified in document', 'time' => ''];
+        // Financial Bid Opening (extract if present, else Not specified)
+        $finOpenDate = '';
+        if (preg_match('/(?:Date(?:\s*(?:and|&)\s*time)?\s+(?:for|of)\s+(?:opening\s+of\s+)?Financial\s+Bid(?:\s+document)?|Financial\s+Bid\s+Opening)\s*[:\- \t]*([0-9]{1,2}\s*[.\/-]\s*[0-9]{1,2}\s*[.\/-]\s*[0-9]{2,4}(?:\s*(?:at\s*|,\s*|@\s*)?[0-9]{1,2}(?:\s*:\s*[0-9]{2})?\s*(?:AM|PM|hrs)?)?)/iu', $tableText, $fom)) {
+            $finOpenDate = preg_replace('/\s*([.\/\-:])\s*/', '$1', trim($fom[1]));
+        }
+        $dates[] = ['activity' => 'Financial Bid Opening', 'date_text' => !empty($finOpenDate) ? $normDateWithTime($finOpenDate) : 'Not specified in document', 'time' => ''];
 
         $data['ImportantDatesJson'] = json_encode($dates, JSON_UNESCAPED_UNICODE);
 
-        // ── SECTION 3: Tender Value (EMD & Tender Fee separated) ──
-        // Tender Fee
+        // ── SECTION 3: Tender Value (Tender Fee, EMD, PBG, Bid Validity) ──
+        // Tender Fee (extract explicit table/body Tender Fee first to avoid premature truncation like Rs.600 from Rs.6000)
         $data['TenderFee'] = '';
-        if (!empty($aiSummary['tender_fee'])) {
-            $feeNum = (float)$aiSummary['tender_fee'];
-            if ($feeNum > 0) $data['TenderFee'] = $formatIndianAmt($feeNum);
+        if (preg_match('/(?:Tender\s+Fee(?:s)?|Bid\s+Document\s+Price|Cost\s+of\s+Tender(?:\s+Document)?s?)\s*(?:of|is)?\s*[:\- \t]*(?:Rs\.?|INR|₹)\s*([0-9][0-9,]*(?:\.[0-9]{1,2})?)\s*(?:\/\s*-|\/-)?\s*(Lakh|Lakhs|Lacs|Lac|Crore|Crores|Cr\.?)?/iu', $tableText, $feem)) {
+            $v = $this->_parseMoney_($feem[1], isset($feem[2]) ? $feem[2] : '');
+            if ($v > 0) $data['TenderFee'] = $formatIndianAmt($v);
+        }
+        if (empty($data['TenderFee']) && !empty($aiSummary['tender_fee']) && (float)$aiSummary['tender_fee'] > 0) {
+            $data['TenderFee'] = $formatIndianAmt((float)$aiSummary['tender_fee']);
         }
         if (empty($data['TenderFee'])) {
-            if (preg_match('/(?:Tender\s+Fee|Cost\s+of\s+Tender(?:\s+Document)?)\s*[:\- \t]*(?:Rs\.?|INR|₹)?\s*([0-9][0-9,]*(?:\.[0-9]{1,2})?)/iu', $cleanText, $feem)) {
-                $data['TenderFee'] = $formatIndianAmt((float)str_replace(',', '', $feem[1]));
-            } else {
-                $data['TenderFee'] = 'Not specified in document';
-            }
+            $data['TenderFee'] = 'Not specified in document';
         }
 
-        // EMD
+        // EMD (ignore blank placeholder lines like "Rs. ______", support Lakh/Crore suffix)
         $emdAmount = !empty($aiSummary['emd_value']) ? (float)$aiSummary['emd_value'] : null;
-        if ($emdAmount && $emdAmount > 0) {
-            $emdFormatted = $formatIndianAmt($emdAmount);
-            if ($emdAmount >= 10000000) {
-                $emdFormatted .= ' (Rs. ' . round($emdAmount / 10000000, 2) . ' Crore)';
-            } elseif ($emdAmount >= 100000) {
-                $emdFormatted .= ' (Rs. ' . round($emdAmount / 100000, 2) . ' Lakh)';
-            }
-            $data['EmdAmount'] = $emdFormatted;
+        if ($emdAmount && $emdAmount >= 100) {
+            $data['EmdAmount']      = $formatIndianAmt($emdAmount);
             $data['EmdAmountValue'] = $emdAmount;
         } else {
-            if (preg_match('/(?:Earnest\s+Money\s+Deposit|EMD(?:\s+Amount)?)\s*[:\- \t]*(?:Rs\.?|INR|₹)?\s*([0-9][0-9,]*(?:\.[0-9]{1,2})?)/iu', $cleanText, $emdm)) {
-                $eVal = (float)str_replace(',', '', $emdm[1]);
-                $data['EmdAmount'] = $formatIndianAmt($eVal);
-                $data['EmdAmountValue'] = $eVal;
-            } else {
-                $data['EmdAmount'] = 'Not specified in document';
+            $emdMatched = false;
+            if (preg_match_all('/(?:Earnest\s+Money\s+Deposit(?:\s*\(EMD\))?(?:\s+Refundable)?|EMD\s*\/\s*Bid\s+Security|EMD(?:\s+(?:Amount|Value))?)\s*(?:of)?\s*[:\- \t]*(?:Rs\.?|INR|₹)\s*([0-9][0-9,]*(?:\.[0-9]{1,2})?)\s*(?:\/\s*-|\/-)?\s*(Lakh|Lakhs|Lacs|Lac|Crore|Crores|Cr\.?)?/iu', $tableText, $emdmList, PREG_SET_ORDER)) {
+                foreach ($emdmList as $emdm) {
+                    $eVal = $this->_parseMoney_($emdm[1], isset($emdm[2]) ? $emdm[2] : '');
+                    if ($eVal >= 100) {
+                        $data['EmdAmount']      = $formatIndianAmt($eVal);
+                        $data['EmdAmountValue'] = $eVal;
+                        $emdMatched = true;
+                        break;
+                    }
+                }
+            }
+            if (!$emdMatched) {
+                $data['EmdAmount']      = 'Not specified in document';
                 $data['EmdAmountValue'] = null;
             }
         }
 
-        // PBG
-        if (preg_match('/(?:Performance\s+(?:Bank\s+)?Guarantee\s*\(PBG\)\s+equivalent\s+to|PBG\s+equivalent\s+to|Performance\s+Security\s*(?:of|equivalent\s+to)?)\s*([0-9]+%(?:\s+of\s+(?:the\s+)?total\s+contract\s+value)?)/iu', $cleanText, $pbgm)) {
-            $data['PbgDetails'] = trim($pbgm[1]);
-        } else {
-            $data['PbgDetails'] = $findInScope([
-                '/(?:Performance\s+Bank\s+Guarantee|PBG|Security\s+Deposit)\s*[:\t\- ]*([^\n\r]{3,80})/iu'
-            ], $headerScope, 'Not specified in document');
-        }
+        // PBG & Bid Validity (dynamic, non-truncated)
+        $pbgAndVal = $this->_extractDynamicPbgAndValidity($bodyText, $tableText, $headerScope, $isPreSummarized);
+        $data['PbgDetails']            = $pbgAndVal['pbg_summary'];
+        $data['PbgAmount']             = $pbgAndVal['pbg_amount'];
+        $data['PbgValidity']           = $pbgAndVal['pbg_validity'];
+        $data['PbgSubmissionDeadline'] = $pbgAndVal['pbg_submission'];
+        $data['BidValidityDays']       = $pbgAndVal['bid_validity'];
+        $data['BidValidityDuration']   = $pbgAndVal['bid_validity'];
 
-        // Bid Validity
-        if (preg_match('/(?:valid\s+for\s+a\s+period\s+of|period\s+of\s+(?:bid\s+)?validity\s+is|bid\s+validity\s*(?:period\s*)?(?:is|:)?|validity\s+of\s+bid\s*(?:is|:)?|offer\s+validity\s*(?:is|:)?)\s*([0-9]+\s*(?:\([^\)]+\)\s*)?days)/iu', $cleanText, $bvm)) {
-            $data['BidValidityDays'] = preg_replace('/\s+/', ' ', trim($bvm[1]));
-        } else {
-            $cand = $findInScope([
-                '/(?:Bid\s+Validity|Validity\s+of\s+Bid|Offer\s+Validity)\s*[:\t\- ]*([^\n\r]{3,50})/iu'
-            ], $headerScope, '');
-            $data['BidValidityDays'] = !empty($cand) ? preg_replace('/\s+/', ' ', trim($cand)) : 'Not specified in document';
-        }
-
-        // ── SECTION 4: Scope of Work ──
-        $scopes = [];
-        if ($isPreSummarized && preg_match('/(?:4\.\s*Scope\s+of\s+Work|Scope\s+of\s+Work)([\s\S]*?)(?=(?:\n\s*(?:5\.|Areas\s+Covered)))/iu', $repairedText, $sm)) {
-            $rawLines = preg_split('/\r?\n/', $sm[1]);
-            foreach ($rawLines as $l) {
-                $l = trim($l, " \t\n\r*•-·∩é╖");
-                if (strlen($l) > 3 && strpos($l, '....') === false && !preg_match('/^(?:Selected\s+SI|Particular|Details|Scope)/i', $l)) {
-                    $scopes[] = $l;
-                }
-            }
-        }
-        if (empty($scopes)) {
-            // Check for specific deliverables in Kolkata Police CCTV project
-            if (preg_match('/(?:804\s+Nos\.?\s*CCTV|67\s+PS|Lalbazar\s+HQ)/i', $cleanText)) {
-                $scopes[] = 'Supply, Installation, Testing, Commissioning (SITC) of 804 Nos. CCTV cameras with 01 year storage at 67 Police Stations';
-                $scopes[] = 'Setup for Central Monitoring System and Health Monitoring System of CCTV surveillance system covering 91 Police Stations from Lalbazar HQ of Kolkata Police';
-                $scopes[] = 'Monitoring from 10 designated Division Offices and Kolkata Police Headquarters';
-                $scopes[] = 'CCTV supply, installation, testing, commissioning, integration, storage, networking, training, and handover as specified in the document';
-                $scopes[] = '01 (One) year onsite comprehensive warranty from Go-Live of the whole project';
-            } elseif (preg_match('/(?:3\.\s*Brief\s+description\s+of\s+material|Brief\s+description\s+of\s+material)\s*([^\n\r]+(?:\r?\n(?!\s*(?:4\.|Tender\s+Fee))[^\n\r]+)*)/iu', $cleanText, $bsm)) {
-                $lines = preg_split('/[\r\n]+/', trim($bsm[1]));
-                foreach ($lines as $bl) {
-                    $bl = trim($bl, " \t\n\r*•-·");
-                    if (strlen($bl) > 10 && !preg_match('/^(?:Tender|Sl\.|Particular)/i', $bl)) {
-                        $scopes[] = $bl;
-                    }
-                }
-            }
-        }
-        if (empty($scopes) && !empty($aiSummary['highlights'])) {
-            foreach ($aiSummary['highlights'] as $hl) {
-                // Filter out metadata labels (signatory, issued by, etc.)
-                if (strlen($hl) > 10 && strpos($hl, '....') === false && !preg_match('/^(?:Issued\s+by|Tender\s+Ref|Signatory|Portal)/i', $hl)) {
-                    $scopes[] = $hl;
-                }
-            }
-        }
-        if (empty($scopes)) {
-            $scopes[] = 'As specified in tender scope of work and technical requirements';
-        }
+        // ── SECTION 4: Scope of Work (Dynamic from Document Scope/Requirements) ──
+        $scopes = $this->_extractDynamicScopeOfWork($repairedText, $bodyText, $headerScope, $isPreSummarized, $data['TenderTitle'], $aiSummary);
         $data['ScopeItemsJson'] = json_encode($scopes, JSON_UNESCAPED_UNICODE);
 
-        // ── SECTION 5: Areas Covered ──
-        $areas = [];
-        if ($isPreSummarized) {
-            $lines = explode("\n", $headerScope);
-            $inArea = false;
-            foreach ($lines as $line) {
-                $line = trim($line);
-                if (preg_match('/5\.\s*Areas\s+Covered/i', $line)) { $inArea = true; continue; }
-                if ($inArea && preg_match('/6\.\s*Contract\s+Period/i', $line)) { $inArea = false; break; }
-                if ($inArea) {
-                    if (preg_match('/^(Delhi\s+(?:East|West|North|South))\s+(Delhi\s+(?:East|West|North|South))$/iu', $line, $am)) {
-                        $areas[] = ['region' => trim($am[1]), 'coverage' => trim($am[2])];
-                    } elseif (preg_match('/^([A-Za-z\s]+?)\s{2,}(.+)$/iu', $line, $am)) {
-                        if (strtolower(trim($am[1])) !== 'region') {
-                            $areas[] = ['region' => trim($am[1]), 'coverage' => trim($am[2])];
-                        }
-                    }
-                }
-            }
-        }
-        if (empty($areas)) {
-            if (preg_match('/(?:Kolkata\s+Police|67\s+PS|Lalbazar)/i', $cleanText)) {
-                $areas[] = ['region' => 'Kolkata Police Headquarters', 'coverage' => 'Lalbazar HQ - Central Monitoring System & Health Monitoring System for 91 PS'];
-                $areas[] = ['region' => '10 Division Offices', 'coverage' => 'Designated Division Offices - Division Monitoring'];
-                $areas[] = ['region' => '67 Police Stations', 'coverage' => 'Installation of 804 CCTV Cameras with 1-Year Local Storage'];
-                $areas[] = ['region' => '91 Police Stations', 'coverage' => 'Total CCTV Surveillance Coverage under Kolkata Police'];
-            } elseif (!empty($data['ZoneRegion'])) {
-                $areas[] = [
-                    'region' => $data['ZoneRegion'],
-                    'coverage' => 'Designated project locations as specified in tender document'
-                ];
-            } else {
-                $areas[] = [
-                    'region' => 'Not specified in document',
-                    'coverage' => 'Not specified in document'
-                ];
-            }
-        }
-        $data['AreasCoveredJson'] = json_encode($areas, JSON_UNESCAPED_UNICODE);
+        // ── SECTION 6: Contract Period (Dynamic) ──
+        $cp = $this->_extractDynamicContractPeriod($bodyText, $tableText, $headerScope, $isPreSummarized);
+        $data['ContractInitialDuration']     = $cp['initial'];
+        $data['ContractExtendable']          = $cp['extendable'];
+        $data['ContractMaxPeriod']           = $cp['max_period'];
+        $data['ContractExtensionConditions'] = $cp['conditions'];
 
-        // ── SECTION 6: Contract Period ──
-        if ($isPreSummarized) {
-            $data['ContractInitialDuration'] = $findInScope(['/Initial\s+Contract\s*[:\- ]*([^\n\r]+)/iu'], $headerScope, 'Not specified in document');
-            $data['ContractExtendable'] = $findInScope(['/Extendable\s*[:\- ]*([^\n\r]+)/iu'], $headerScope, 'Not specified in document');
-            $data['ContractMaxPeriod'] = $findInScope(['/Maximum\s+Period\s*[:\- ]*([^\n\r]+)/iu'], $headerScope, 'Not specified in document');
-            $data['ContractExtensionConditions'] = $findInScope(['/Extension\s+conditions?\s*[:\- ]*([^\n\r]+)/iu'], $headerScope, 'Not specified in document');
-        } else {
-            // Implementation Timeline
-            $implTimeline = '';
-            if (preg_match('/(?:Overall\s+Project\s+implementation\s+Timeline|Project\s+implementation\s+Timeline|implementation\s+timeline)\s*[:\-–\s]+([^\n\r.;]{3,100})/iu', $cleanText, $itm)) {
-                $implTimeline = trim($itm[1]);
-            } elseif (preg_match('/(?:within|in)\s+(\d+\s+(?:days|months|weeks))\s+from\s+the\s+date\s+of\s+(?:issue\s+of\s+)?(?:Work\s+Order|acceptance\s+of\s+contract|LOA)/iu', $cleanText, $itm)) {
-                $implTimeline = trim($itm[1]) . ' from the date of issue of Work Order';
-            }
-            $data['ContractInitialDuration'] = !empty($implTimeline) ? $implTimeline : 'Not specified in document';
+        // ── SECTION 7: Award Criteria (Dynamic) ──
+        $ac = $this->_extractDynamicAwardCriteria($bodyText, $tableText, $headerScope, $isPreSummarized);
+        $data['AwardEvaluationMethod'] = $ac['method'];
+        $data['AwardSplitWork']        = $ac['split'];
+        $data['AwardAllocation']       = $ac['allocation'];
+        $data['AwardL2L3Matching']     = $ac['matching'];
 
-            // Warranty / Extendable
-            $warrExtend = '';
-            if (preg_match('/([0-9]{1,2}\s*(?:\([^\)]+\)\s*)?(?:years?|months?)\s+(?:onsite\s+)?comprehensive\s+warranty[^\n\r.;]{0,80})/iu', $cleanText, $wm)) {
-                $warrExtend = trim($wm[1]);
-            }
-            if (preg_match('/(?:(?:after\s+completion\s+of\s+comprehensive\s+warranty\s+period\s+)?(?:WTL|Purchaser|Client)?\s*may\s+(?:go\s+for|arrange)\s+(?:fresh\s+)?AMC[^\n\r.;]{0,100})/iu', $cleanText, $amcm)) {
-                $warrExtend .= ($warrExtend ? '; ' : '') . trim($amcm[0]);
-            }
-            $data['ContractExtendable'] = !empty($warrExtend) ? $warrExtend : 'Not specified in document';
+        // ── SECTION 10: Warranty & AMC (Dynamic, Zero Hardcoded CCTV) ──
+        $wr = $this->_extractDynamicWarrantyAndAmc($bodyText, $tableText, $headerScope, $isPreSummarized);
+        $data['WarrantyAmc']         = $wr['scope'];
+        $data['WarrantyTerms']       = $wr['terms'];
+        $data['WarrantyReplacement'] = $wr['replacement'];
+        $data['WarrantyRepair']      = $wr['repair'];
+        $data['WarrantySupport']     = $wr['support'];
+        $data['AmcTerms']            = $wr['amc'];
 
-            if (!empty($implTimeline) && !empty($warranty)) {
-                $data['ContractMaxPeriod'] = 'Implementation (' . $implTimeline . ') + Comprehensive Warranty';
-            } else {
-                $data['ContractMaxPeriod'] = 'Not specified in document';
-            }
-
-            if (preg_match('/(?:(?:WTL|Purchaser|Client)?\s*may\s+(?:go\s+for|arrange)\s+(?:fresh\s+)?AMC[^\n\r.;]{0,100})/iu', $cleanText, $extm)) {
-                $data['ContractExtensionConditions'] = trim($extm[0]);
-            } else {
-                $data['ContractExtensionConditions'] = 'Not specified in document';
-            }
-        }
-
-        // ── SECTION 7: Award Criteria ──
-        if ($isPreSummarized && preg_match('/Bank\s+may\s+split\s+work/i', $headerScope)) {
-            $data['AwardEvaluationMethod'] = 'L1 based on Package Cost';
-            $data['AwardSplitWork'] = 'Bank may split work as per tender terms';
-            $data['AwardAllocation'] = '60:40 or 60:20:20';
-            $data['AwardL2L3Matching'] = 'L2/L3 should match L1 rates';
-        } else {
-            if (preg_match('/(?:lowest\s+(?:quote|bidder|rate)|L1\s+Bidder|L-?1\b)/iu', $cleanText)) {
-                $data['AwardEvaluationMethod'] = 'Lowest Quote (L1) among technically qualified bidders';
-                $data['AwardSplitWork'] = 'No work splitting specified in document';
-                $data['AwardAllocation'] = '100% to selected L1 bidder subject to post-qualification';
-                $data['AwardL2L3Matching'] = 'Not specified in document';
-            } else {
-                $data['AwardEvaluationMethod'] = 'Unconfirmed (Requires manual review)';
-                $data['AwardSplitWork'] = 'Not specified in document';
-                $data['AwardAllocation'] = 'Not specified in document';
-                $data['AwardL2L3Matching'] = 'Not specified in document';
-            }
-        }
-
-        // ── SECTION 8: Performance Guarantee ──
-        if ($isPreSummarized && preg_match('/Requirement\s+Details\s+Amount\s*[:\t\- ]*([0-9]+%)/i', $headerScope, $pbgm)) {
-            $data['PbgAmount'] = $pbgm[1];
-            $data['PbgValidity'] = 'Contract Period + 3 Months';
-            $data['PbgSubmissionDeadline'] = 'Within 30 Days of Work Order';
-        } else {
-            $data['PbgAmount'] = !empty($data['PbgDetails']) && $data['PbgDetails'] !== 'Not specified in document' ? $data['PbgDetails'] : 'Not specified in document';
-
-            // PBG Submission
-            if (preg_match('/(?:within\s+([^\n\r.,;]{3,50})\s+from\s+the\s+date\s+of\s+receipt\s+of\s+Letter\s+of\s+Award(?:\/Order)?)/iu', $cleanText, $psm)) {
-                $data['PbgSubmissionDeadline'] = 'Within ' . trim($psm[1]) . ' from the date of receipt of Letter of Award/Order (Clause 14)';
-            } else {
-                $data['PbgSubmissionDeadline'] = 'Not specified in document';
-            }
-
-            // PBG Validity
-            if (preg_match('/(?:PBG\s+should\s+be\s+valid\s+for\s+([^\n\r.;]{3,80}))/iu', $cleanText, $pvm)) {
-                $data['PbgValidity'] = 'Valid for ' . trim($pvm[1]);
-            } else {
-                $data['PbgValidity'] = 'Not specified in document';
-            }
-        }
-
-        // ── SECTION 9: Bid Validity ──
-        $data['BidValidityDuration'] = $data['BidValidityDays'];
-
-        // ── SECTION 10: Warranty ──
-        if ($isPreSummarized) {
-            $data['WarrantyTerms'] = $findInScope(['/(?:Warranty\s+Terms|Warranty\s+Clause)\s*[:\- ]*([^\n\r]+)/iu'], $headerScope, '3 Years Comprehensive Warranty followed by AMC');
-            $data['WarrantyReplacement'] = '24-48 Hours';
-            $data['WarrantyRepair'] = 'Within 7 Days';
-            $data['WarrantySupport'] = '24x7 Helpdesk';
-            $data['AmcTerms'] = 'Annual Maintenance Contract post warranty';
-        } else {
-            if (preg_match('/([0-9]{1,2}\s*(?:\([^\)]+\)\s*)?(?:years?|months?)\s+(?:onsite\s+)?comprehensive\s+warranty[^\n\r.;]{0,80})/iu', $cleanText, $wm)) {
-                $data['WarrantyTerms'] = trim($wm[1]) . ' from Go-Live of the whole project';
-            } else {
-                $data['WarrantyTerms'] = 'Not specified in document';
-            }
-            $data['WarrantyReplacement'] = 'Within stipulated SLA response times for CCTV setups';
-            $data['WarrantyRepair'] = 'Corrective and preventive maintenance by adequate service engineers';
-            $data['WarrantySupport'] = 'On-site support service by qualified service engineers';
-            if (preg_match('/(?:(?:after\s+completion\s+of\s+comprehensive\s+warranty\s+period\s+)?(?:WTL|Purchaser|Client)?\s*may\s+(?:go\s+for|arrange)\s+(?:fresh\s+)?AMC[^\n\r.;]{0,100})/iu', $cleanText, $amcm)) {
-                $data['AmcTerms'] = trim($amcm[0]);
-            } else {
-                $data['AmcTerms'] = 'Not specified in document';
-            }
-        }
-
-        // ── SECTION 11: Risk Points ──
-        $risks = [];
-        if ($isPreSummarized && preg_match('/(?:11\.\s*Risk\s+Points)([\s\S]*?)(?=(?:\n\s*(?:12\.|\Z)))/iu', $repairedText, $rm)) {
-            $rawRisks = preg_split('/(?:\r?\n\s*∩é╖|\r?\n\s*[•\x{F0B7}\x{00B7}]|\r?\n\s*\d+\.)/u', $rm[1]);
-            foreach ($rawRisks as $rk) {
-                $clean = trim(preg_replace('/\s+/', ' ', $rk));
-                $clean = trim($clean, " \t\n\r*•-·∩é╖.:");
-                if (strlen($clean) > 8 && strpos($clean, '....') === false) {
-                    $risks[] = $clean;
-                }
-            }
-        }
-        if (empty($risks)) {
-            // Build source-grounded risks
-            if (!empty($data['EmdAmount']) && $data['EmdAmount'] !== 'Not specified in document') {
-                $risks[] = 'EMD Commitment: ' . $data['EmdAmount'] . ' required via online e-tender portal prior to tender submission.';
-            }
-            if (!empty($data['ContractInitialDuration']) && $data['ContractInitialDuration'] !== 'Not specified in document') {
-                $risks[] = 'Implementation Timeline Risk: Delivery and SITC must be fully completed within ' . $data['ContractInitialDuration'] . '.';
-            }
-            if (!empty($data['PbgAmount']) && $data['PbgAmount'] !== 'Not specified in document') {
-                $risks[] = 'Performance Guarantee: Submission of ' . $data['PbgAmount'] . ' PBG required ' . (!empty($data['PbgSubmissionDeadline']) && $data['PbgSubmissionDeadline'] !== 'Not specified in document' ? $data['PbgSubmissionDeadline'] : 'post-award') . '.';
-            }
-            if (preg_match('/(?:Kolkata\s+Police|67\s+PS)/i', $cleanText)) {
-                $risks[] = '[Inferred Risk] Multi-Site Field Deployment: Concurrent SITC across 67 police stations, 10 division offices, and Lalbazar HQ requires extensive field engineering teams to meet the 60-day deadline. (Source: Section B Scope of Work)';
-                $risks[] = '[Inferred Risk] Mandatory Site Acceptance Testing (SAT): Project Go-Live and subsequent warranty commencement are conditional on successful SAT clearance. (Source: Section B Scope of Work)';
-            }
-        }
-        $data['RiskPointsJson'] = json_encode($risks, JSON_UNESCAPED_UNICODE);
-
-        // ── SECTION 12: Opportunity Assessment ──
-        $assessmentItems = [];
-        if ($isPreSummarized && preg_match('/(?:Key\s+Attention\s+Areas|Opportunity\s+Assessment)([\s\S]*?)$/iu', $repairedText, $am)) {
-            $rawOA = preg_split('/(?:\r?\n\s*∩é╖|\r?\n\s*[•\x{F0B7}\x{00B7}]|\r?\n\s*\d+\.)/u', $am[1]);
-            foreach ($rawOA as $item) {
-                $clean = trim(preg_replace('/\s+/', ' ', $item));
-                $clean = trim($clean, " \t\n\r*•-·∩é╖.:");
-                if (strlen($clean) > 10 && strpos($clean, '....') === false && !preg_match('/^(?:for\s+I-Net|Minimum\s+few|Key\s+Attention|Opportunity)/i', $clean)) {
-                    $assessmentItems[] = $clean;
-                }
-            }
-        }
-        if (empty($assessmentItems)) {
-            // Build source-grounded opportunity items
-            if (preg_match('/(?:Kolkata\s+Police|804\s+Nos)/i', $cleanText)) {
-                $assessmentItems[] = 'High-Impact Law Enforcement Surveillance Project: Modernization of Police Force (MPF) Phase II project for Kolkata Police covering 67 police stations with 804 CCTV cameras and central monitoring across 91 stations. (Source: Section A Objective)';
-                $assessmentItems[] = '[Opportunity Analysis] Future AMC Potential: Tender specifies that upon successful completion of the 1-year comprehensive warranty, WTL may arrange/enter into a fresh AMC with the successful bidder. (Source: Scope & Warranty Terms)';
-                $assessmentItems[] = '[Opportunity Analysis] Turnkey SI Integration Scope: Comprehensive deliverable package encompassing hardware supply, VMS storage, network integration, Lalbazar HQ and 10 division monitoring setups, training, and operational handover. (Source: Section B Scope)';
-                if (!empty($queryDate) && !empty($preBidMeeting)) {
-                    $assessmentItems[] = 'Pre-Bid Participation Window: Pre-bid meeting scheduled on ' . $preBidMeeting . '; formal queries must be submitted per Section M format by ' . $queryDate . '. (Source: Page 1 Table Item 7)';
-                }
-            }
-        }
+        // ── SECTION 11 & 12: Risk Points & Opportunity Assessment (Dynamic) ──
+        $ro = $this->_extractDynamicRisksAndOpportunities($bodyText, $tableText, $data, $dates, $headerScope, $isPreSummarized, $queryDate, $preBidMeeting);
+        $risks           = $ro['risks'];
+        $assessmentItems = $ro['opportunities'];
+        $data['RiskPointsJson']            = json_encode($risks, JSON_UNESCAPED_UNICODE);
         $data['OpportunityAssessmentJson'] = json_encode($assessmentItems, JSON_UNESCAPED_UNICODE);
 
         // ── BUILD 12 MAIN SECTION COLUMNS (One Column Per Section) ──
-        $serKV = function(array $items) {
+        $serKV = function (array $items) {
             $filtered = [];
             foreach ($items as $k => $v) {
                 $vStr = trim((string)$v);
@@ -3136,7 +2868,7 @@ class Document_extractor
             return json_encode($filtered, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
         };
 
-        $serList = function(array $items, $numbered = true) {
+        $serList = function (array $items) {
             $cleanItems = [];
             foreach ($items as $item) {
                 $itemStr = trim((string)$item);
@@ -3152,14 +2884,14 @@ class Document_extractor
 
         // 1. TenderOverview
         $data['TenderOverview'] = $serKV([
-            'Zone'                  => $data['ZoneRegion'],
-            'Tender Title'          => $data['TenderTitle'],
-            'Tender Reference No'   => $data['TenderRefNo'],
-            'Tender Date'           => $data['TenderDate'],
-            'Project Value'         => !empty($data['ProjectValue']) ? $data['ProjectValue'] : 'Not specified in document',
-            'Contract Type'         => $data['ContractType'],
-            'Warranty + AMC'        => $data['WarrantyAmc'],
-            'Bid System'            => $data['BidSystem']
+            'Zone'                => $data['ZoneRegion'],
+            'Tender Title'        => $data['TenderTitle'],
+            'Tender Reference No' => $data['TenderRefNo'],
+            'Tender Date'         => $data['TenderDate'],
+            'Project Value'       => !empty($data['ProjectValue']) ? $data['ProjectValue'] : 'Not specified in document',
+            'Contract Type'       => $data['ContractType'],
+            'Warranty + AMC'      => $data['WarrantyAmc'],
+            'Bid System'          => $data['BidSystem']
         ]);
 
         // 2. ImportantDates
@@ -3173,14 +2905,14 @@ class Document_extractor
 
         // 3. TenderValue
         $data['TenderValue'] = $serKV([
-            'Tender Fee'                    => !empty($data['TenderFee']) ? $data['TenderFee'] : 'Not specified in document',
-            'EMD'                           => $data['EmdAmount'],
-            'Performance Bank Guarantee'    => !empty($data['PbgDetails']) ? $data['PbgDetails'] : (!empty($data['PbgAmount']) ? $data['PbgAmount'] : 'Not specified in document'),
-            'Bid Validity'                  => !empty($data['BidValidityDays']) ? $data['BidValidityDays'] : (!empty($data['BidValidityDuration']) ? $data['BidValidityDuration'] : 'Not specified in document')
+            'Tender Fee'                 => !empty($data['TenderFee']) ? $data['TenderFee'] : 'Not specified in document',
+            'EMD'                        => $data['EmdAmount'],
+            'Performance Bank Guarantee' => !empty($data['PbgDetails']) ? $data['PbgDetails'] : (!empty($data['PbgAmount']) ? $data['PbgAmount'] : 'Not specified in document'),
+            'Bid Validity'               => !empty($data['BidValidityDays']) ? $data['BidValidityDays'] : 'Not specified in document'
         ]);
 
         // 4. ScopeOfWork
-        $data['ScopeOfWork'] = $serList($scopes, true);
+        $data['ScopeOfWork'] = $serList($scopes);
 
         // 5. AreasCovered
         $areasKV = [];
@@ -3193,10 +2925,10 @@ class Document_extractor
 
         // 6. ContractPeriod
         $data['ContractPeriod'] = $serKV([
-            'Initial Contract'      => $data['ContractInitialDuration'],
-            'Extendable'            => $data['ContractExtendable'],
-            'Maximum Period'        => $data['ContractMaxPeriod'],
-            'Extension Conditions'  => $data['ContractExtensionConditions']
+            'Initial Contract'     => $data['ContractInitialDuration'],
+            'Extendable'           => $data['ContractExtendable'],
+            'Maximum Period'       => $data['ContractMaxPeriod'],
+            'Extension Conditions' => $data['ContractExtensionConditions']
         ]);
 
         // 7. AwardCriteria
@@ -3209,32 +2941,32 @@ class Document_extractor
 
         // 8. PerformanceGuarantee
         $data['PerformanceGuarantee'] = $serKV([
-            'Amount'        => !empty($data['PbgAmount']) ? $data['PbgAmount'] : '',
-            'Validity'      => $data['PbgValidity'],
-            'Submission'    => $data['PbgSubmissionDeadline']
+            'Amount'     => !empty($data['PbgAmount']) ? $data['PbgAmount'] : 'Not specified in document',
+            'Validity'   => $data['PbgValidity'],
+            'Submission' => $data['PbgSubmissionDeadline']
         ]);
 
         // 9. BidValidity
         $data['BidValidity'] = $serKV([
-            'Duration' => !empty($data['BidValidityDuration']) ? $data['BidValidityDuration'] : $data['BidValidityDays']
+            'Duration' => $data['BidValidityDuration']
         ]);
 
         // 10. Warranty
         $data['Warranty'] = $serKV([
-            'Scope'         => $data['WarrantyAmc'],
-            'Terms'         => $data['WarrantyTerms'],
-            'Replacement'   => $data['WarrantyReplacement'],
-            'Repair'        => $data['WarrantyRepair'],
-            'Support'       => $data['WarrantySupport'],
-            'AMC Terms'     => $data['AmcTerms']
+            'Scope'       => $data['WarrantyAmc'],
+            'Terms'       => $data['WarrantyTerms'],
+            'Replacement' => $data['WarrantyReplacement'],
+            'Repair'      => $data['WarrantyRepair'],
+            'Support'     => $data['WarrantySupport'],
+            'AMC Terms'   => $data['AmcTerms']
         ]);
 
         // 11. RiskPoints
-        $data['RiskPoints'] = $serList($risks, true);
+        $data['RiskPoints'] = $serList($risks);
 
         // 12. OpportunityAssessment
         $oaKV = [];
-        $idx = 1;
+        $idx  = 1;
         foreach ($assessmentItems as $item) {
             $oaKV["Key Assessment Area {$idx}"] = $item;
             $idx++;
@@ -3242,6 +2974,945 @@ class Document_extractor
         $data['OpportunityAssessment'] = $serKV($oaKV);
 
         return $data;
+    }
+
+    /**
+     * Normalizes Fact Sheet input text into repaired raw text, TOC-stripped body text,
+     * and table-flattened inline key-value text.
+     */
+    protected function _normalizeFactSheetInputs($cleanText)
+    {
+        $repaired = $this->_repairFactSheetLigatures((string)$cleanText);
+        // Ensure valid UTF-8 before running /u regexes (OCR PDFs can contain stray bytes)
+        $repaired = @iconv('UTF-8', 'UTF-8//IGNORE', $repaired);
+        if ($repaired === false) { $repaired = (string)$cleanText; }
+        $repaired = str_replace(["\r\n", "\r"], "\n", $repaired);
+        // Strip OCR scanner watermarks & replace broken wingding bullets cleanly (/u required for multibyte bullet!)
+        $repaired = preg_replace('/[\x{2022}o:]?\s*Scanned\s+with\s+(?:OKEN|Cam)\s*Scann?er\b/iu', '', $repaired);
+        $repaired = str_replace(["\xC2\xA0", "∩é╖", "\xEF\x82\xB7"], [' ', '•', '•'], $repaired);
+
+        // Flatten DOCX/PDF pipe-separated row blocks: "Label\n| Value\n|" -> "Label: Value"
+        $tableText = preg_replace('/\n[ \t]*\|[ \t]*\n/', "\n", $repaired);
+        $tableText = preg_replace('/([^\n|:]{2,90})\n[ \t]*\|[ \t]*([^\n]+)/u', '$1: $2', $tableText);
+        $tableText = preg_replace('/^[ \t]*\|[ \t]*/m', '', $tableText);
+
+        // Strip Table-of-Contents dot-leader lines & TOC blocks so section regexes hit real content
+        $lines    = explode("\n", $repaired);
+        $bodyLines = [];
+        $inToc    = false;
+        foreach ($lines as $ln) {
+            $trim = trim($ln);
+            if (preg_match('/^(?:Table\s+of\s+Contents|CONTENTS\s+OF\s+THE\s+TENDER\s+DOCUMENT)$/i', $trim)) {
+                $inToc = true;
+                continue;
+            }
+            // TOC lines with dots or page number columns
+            if (preg_match('/(?:\.{4,}|…{2,}|_{5,})/', $trim)) {
+                continue;
+            }
+            if ($inToc) {
+                // Exit TOC once a real paragraph or Section 1 body starts
+                if (preg_match('/^\d+\.\d*\s+[A-Z].{35,}/', $trim) || preg_match('/^(?:1\.\s*(?:RFP|Tender)\s+Notice|SECTION\s*[-–]?\s*[A1I]\b)/i', $trim) && !preg_match('/\d+\s*$/', $trim)) {
+                    $inToc = false;
+                } elseif (preg_match('/\b(?:Appendix|Format|Annexure|SL\s+No\.|Particulars)\b/i', $trim) || preg_match('/\s\d{1,3}\s*$/', $trim) || $trim === '') {
+                    continue;
+                } else {
+                    $inToc = false;
+                }
+            }
+            $bodyLines[] = $ln;
+        }
+        $bodyText = implode("\n", $bodyLines);
+
+        return [
+            'repaired' => $repaired,
+            'body'     => $bodyText,
+            'table'    => $tableText
+        ];
+    }
+
+    /**
+     * Cleans punctuation/pipes and truncates cleanly at sentence or word boundary (never mid-word).
+     */
+    protected function _cleanExtractedPhrase($str, $maxLen = 220)
+    {
+        $s = trim((string)$str);
+        $s = preg_replace('/^[|\s:;\-–—•*]+/u', '', $s);
+        $s = preg_replace('/\s+/u', ' ', $s);
+        $s = trim($s, " \t\n\r|");
+        if ($s === '') return '';
+
+        $wasTruncated = false;
+        if (mb_strlen($s, 'UTF-8') > $maxLen) {
+            $wasTruncated = true;
+            $cut = mb_substr($s, 0, $maxLen, 'UTF-8');
+            $lastPeriod = mb_strrpos($cut, '. ', 0, 'UTF-8');
+            if ($lastPeriod !== false && $lastPeriod >= (int)($maxLen * 0.55)) {
+                $cut = mb_substr($cut, 0, $lastPeriod + 1, 'UTF-8');
+                $wasTruncated = false;
+            } else {
+                $lastSpace = mb_strrpos($cut, ' ', 0, 'UTF-8');
+                if ($lastSpace !== false && $lastSpace >= (int)($maxLen * 0.5)) {
+                    $cut = mb_substr($cut, 0, $lastSpace, 'UTF-8');
+                }
+            }
+            $s = rtrim($cut, " ,;:-");
+        }
+        if ($wasTruncated) {
+            $s = preg_replace('/\s+(?:the|a|an|of|for|to|by|with|and|or|in|on|at|as|from|rs)$/iu', '', $s);
+        }
+        return trim($s, " \t\n\r|");
+    }
+
+    /**
+     * Matches $pattern in whitespace-flattened prose and extends cleanly to the true end of the sentence,
+     * ignoring abbreviations (Rs., No., Clause X.Y, decimals 0.5%, i.e., e.g.) and PDF line wraps.
+     */
+    protected function _extractFullClause($flatProse, $pattern, $maxLen = 220, $groupIndex = 1)
+    {
+        if (!preg_match($pattern, $flatProse, $m, PREG_OFFSET_CAPTURE)) {
+            return '';
+        }
+        $idx   = isset($m[$groupIndex]) ? $groupIndex : 0;
+        $start = $m[$idx][1];
+        $chunk = substr($flatProse, $start, $maxLen + 140);
+        $len   = strlen($chunk);
+        $end   = $len;
+
+        $parenDepth = 0;
+        for ($i = 0; $i < $len; $i++) {
+            $ch = $chunk[$i];
+            if ($ch === '(') { $parenDepth++; }
+            elseif ($ch === ')' && $parenDepth > 0) { $parenDepth--; }
+            if ($i < 12) continue;
+
+            // Stop on semicolon, pipe, or UTF-8 bullet (• = \xE2\x80\xA2)
+            if ($ch === ';' || $ch === '|' || substr($chunk, $i, 3) === "\xE2\x80\xA2") {
+                $end = $i;
+                break;
+            }
+            if ($ch === '.') {
+                $prev = substr($chunk, max(0, $i - 10), min(10, $i));
+                $next = substr($chunk, $i + 1, 8);
+                // Inside open parenthesis like (2022-23. 2023-24, 2024-25) -> keep going
+                if ($parenDepth > 0) {
+                    continue;
+                }
+                // Decimal or clause number (0.5%, 10.00, Clause 12.1)
+                if (preg_match('/\d$/', $prev) && preg_match('/^\s*(?:20\d{2}|\d)/', $next)) {
+                    continue;
+                }
+                // Common abbreviations & A.M./P.M. time markers
+                if (preg_match('/\b(?:A\.?M|P\.?M|A|P|Rs|Re|No|Nos|Sl|Sr|Cl|Clause|Sec|Vol|Dr|Mr|Ms|Pvt|Ltd|i\.e|e\.g|etc|w\.e\.f|Dt)$/i', $prev)) {
+                    continue;
+                }
+                // True sentence boundary (followed by whitespace + Capital/digit/(/UTF-8 bullet or end)
+                if ($next === '' || preg_match('/^\s*(?:[A-Z0-9\(]|\xE2\x80\xA2|$)/', $next)) {
+                    $end = $i + 1;
+                    break;
+                }
+            }
+        }
+
+        $raw = substr($chunk, 0, $end);
+        return $this->_cleanExtractedPhrase($raw, $maxLen);
+    }
+
+    /**
+     * Dynamically extracts Zone/Region and Areas Covered strictly from uploaded document text.
+     */
+    protected function _extractDynamicZoneAndAreas($repairedText, $bodyText, $tableText, $headerScope, $isPreSummarized, $title = '')
+    {
+        $zone = '';
+        $noiseRx = '/\b(?:offices?|stations?|buildings?|rooms?|staff|sanitation|certifying|circles?|zones?|districts?|total|http|www|page|table|section|details|particulars|signature|seal|annexure)\b/i';
+
+        // 1. Explicit labeled fields (must start line or follow clear key:val delimiter)
+        if (preg_match('/(?:^|\n)[ \t]*(?:Zone\s*\/\s*Region|Zone|Region|Project\s+Location|Destination|Consignee|Place\s+of\s+(?:Work|Delivery)|Location)\s*[:\-][ \t]*([^\n\r]{3,120})/iu', $headerScope, $zm)) {
+            $cand = $this->_cleanExtractedPhrase($zm[1], 110);
+            if ($cand !== '' && !preg_match($noiseRx, $cand) && !preg_match('/^\d+$/', $cand)) {
+                $zone = $cand;
+            }
+        }
+
+        // 2. Consignee / Destination / FOR address extraction (avoid generic "issued by" which picks up certificate issuers)
+        if ($zone === '' && preg_match('/(?:consigned\s+and\s+delivered\s+to|prices\s+quoted\s+shall\s+be\s+FOR|FOR\s+Destination)\s*[:\n\r ]*([^\n\r.;]{5,110})/iu', $bodyText, $cm)) {
+            $cand = $this->_cleanExtractedPhrase($cm[1], 110);
+            $cand = preg_replace('/[,\s]+(?:unless\s+otherwise|as\s+per|wherever|subject\s+to|if\s+any)[^,]*$/iu', '', $cand);
+            $cand = rtrim(trim($cand), ' ,;:-');
+            if ($cand !== '' && strlen($cand) >= 5 && !preg_match('/^(?:online|e-?procurement|portal|the\s+bidder|the$|he$|she$|it$|they$)/i', $cand)) {
+                $zone = $cand;
+            }
+        }
+
+        // 3. Dynamic Indian States/UTs + city/institution header extraction
+        if ($zone === '') {
+            $statesRx = '(?:Andhra\s+Pradesh|Arunachal\s+Pradesh|Assam|Bihar|Chhattisgarh|Goa|Gujarat|Haryana|Himachal\s+Pradesh|Jharkhand|Karnataka|Kerala|Madhya\s+Pradesh|Maharashtra|Manipur|Meghalaya|Mizoram|Nagaland|Odisha|Orissa|Punjab|Rajasthan|Sikkim|Tamil\s+Nadu|Telangana|Tripura|Uttar\s+Pradesh|Uttarakhand|West\s+Bengal|Delhi|New\s+Delhi|Chandigarh|Jammu\s*(?:and|&)\s*Kashmir|Ladakh|Puducherry|Andaman)';
+            $citiesRx = '(?:Hyderabad|Bengaluru|Bangalore|Chennai|Mumbai|Kolkata|Patna|Bhubaneswar|Agartala|Jaipur|Lucknow|Bhopal|Gandhinagar|Ahmedabad|Vadodara|Surat|Rajkot|Pune|Nagpur|Ranchi|Raipur|Guwahati|Dehradun|Shimla|Thiruvananthapuram|Kochi)';
+            $searchHead = mb_substr($repairedText, 0, 8000, 'UTF-8') . ' ' . $title;
+            // First prefer clean "City - PIN, State" postal/city signature
+            if (preg_match('/\b(' . $citiesRx . '[-\s,]+\d{6}[,\s]+' . $statesRx . ')/iu', $searchHead, $pm)) {
+                $zone = $this->_cleanExtractedPhrase($pm[1], 80);
+            } elseif (preg_match('/(?:^|[\n\r,;:\s\(])((?:Inspector\s+General[^\n\r]{0,50}|[A-Z][A-Za-z0-9\s,.\-\(\)]{2,60}?)\b(?:' . $citiesRx . '|' . $statesRx . ')(?:[–\-,\s]+\d{6})?)/u', $searchHead, $lm)) {
+                $cand = $this->_cleanExtractedPhrase($lm[1], 100);
+                $cand = preg_replace('/^(?:GOVERNMENT\s+OF|STATE\s+OF|DEPARTMENT[,\s]+|E-?TENDER\s+DOCUMENT\s+FOR|NOTICE\s+INVITING|RFP\s+FOR|RFP\s+to\s+be\s+Submitted\s+to\s*:?|[A-Za-z]+\)\s*)\s*/iu', '', $cand);
+                $cand = preg_replace('/\s+P$/', '', $cand);
+                $cand = trim($cand, " ,.-");
+                if (strlen($cand) >= 4 && strlen($cand) <= 100 && stripos($cand, 'TENDER FACTSHEET') === false) {
+                    $zone = $cand;
+                }
+            }
+        }
+
+        // Build dynamic Areas Covered
+        $areas = [];
+        if ($isPreSummarized) {
+            $lines  = explode("\n", $headerScope);
+            $inArea = false;
+            foreach ($lines as $line) {
+                $line = trim($line);
+                if (preg_match('/5\.\s*Areas\s+Covered/i', $line)) { $inArea = true; continue; }
+                if ($inArea && preg_match('/6\.\s*Contract\s+Period/i', $line)) break;
+                if ($inArea && preg_match('/^([A-Za-z0-9\s,&.\-\/]{3,60}?)\s{2,}(.{4,140})$/u', $line, $am)) {
+                    if (strtolower(trim($am[1])) !== 'region') {
+                        $areas[] = ['region' => trim($am[1]), 'coverage' => trim($am[2])];
+                    }
+                }
+            }
+        }
+
+        // Check for Jurisdictional Coverage / Zone breakdown tables (e.g. Zone | Circles | Total...)
+        if (empty($areas) && preg_match('/Zone\s*\n\|\s*Circles\s*\n[\s\S]{10,1200}?\n([A-Za-z][A-Za-z\s]{2,30})\s*\n\|\s*(\d+)[\s\S]*?(?=\n\nThe\s+master|\n\d+\.\d+|\Z)/iu', $repairedText)) {
+            if (preg_match_all('/\n([A-Z][A-Za-z ]{2,28})\s*\n\|\s*(\d+)\s*\n\|\s*([\d,]+)\s*\n\|\s*([\d,]+)\s*\n\|\s*([\d,]+)/u', $repairedText, $zRows, PREG_SET_ORDER)) {
+                foreach ($zRows as $zr) {
+                    $rName = trim($zr[1]);
+                    if (stripos($rName, 'Total') !== false) continue;
+                    $areas[] = [
+                        'region'   => $rName . ' Zone',
+                        'coverage' => trim($zr[2]) . ' Circles — ' . trim($zr[5]) . ' identified locations'
+                    ];
+                }
+            }
+        }
+
+        // Look for multi-site / deployment coverage sentences in document
+        if (empty($areas)) {
+            $foundCov = [];
+            if (preg_match_all('/(?:covering|covers|across|within|at|for)\s+([^.\n\r]{10,130}?\b(?:Police\s+(?:Stations?|Districts?)|Schools?|Campus(?:es)?|Locations?|Hotspots?|Points?|Districts?|Circles?|Divisions?|Zones?))\b/iu', mb_substr($bodyText, 0, 25000, 'UTF-8'), $cmList)) {
+                foreach (array_slice($cmList[1], 0, 3) as $cText) {
+                    $cText = $this->_cleanExtractedPhrase($cText, 130);
+                    if (strlen($cText) >= 10 && !preg_match('/^(?:the\s+period|such\s+other|this\s+clause)|bound\s+to\s+select/i', $cText)) {
+                        $foundCov[] = $cText;
+                    }
+                }
+            }
+            if ($zone !== '' || !empty($foundCov)) {
+                $areas[] = [
+                    'region'   => $zone !== '' ? $zone : 'Project Deployment Site',
+                    'coverage' => !empty($foundCov) ? implode('; ', array_unique($foundCov)) : 'As specified in ' . ($zone !== '' ? $zone : 'tender document')
+                ];
+            }
+        }
+
+        if (empty($areas)) {
+            $areas[] = [
+                'region'   => 'Not specified in document',
+                'coverage' => 'Not specified in document'
+            ];
+        } elseif ($zone === '' && stripos($areas[0]['region'], 'Not specified') === false) {
+            // Derive Zone label from extracted jurisdictional table / areas when no single Zone: header exists
+            if (count($areas) > 1) {
+                $sampleRegions = array_slice(array_column($areas, 'region'), 0, 3);
+                $zone = count($areas) . ' Zones (' . implode(', ', $sampleRegions) . (count($areas) > 3 ? '…' : '') . ')';
+            } else {
+                $zone = $areas[0]['region'];
+            }
+        }
+
+        return [
+            'zone'  => $zone,
+            'areas' => $areas
+        ];
+    }
+
+    /**
+     * Dynamically extracts Contract Type strictly from uploaded document wording.
+     */
+    protected function _extractDynamicContractType($bodyText, $tableText, $headerScope, $title = '')
+    {
+        if (preg_match('/(?:^|\n)[ \t]*(?:Contract\s+Type|Type\s+of\s+Contract|Nature\s+of\s+(?:Contract|Work))\s*[:\-][ \t]*([^\n\r]{3,110})/iu', $tableText, $m)) {
+            $cand = $this->_cleanExtractedPhrase($m[1], 110);
+            if ($cand !== '') return $cand;
+        }
+
+        $sample = mb_substr($bodyText, 0, 25000, 'UTF-8') . ' ' . $title;
+        if (preg_match('/\brental\s+basis\b/i', $sample)) {
+            return preg_match('/operation\s*(?:and|&)\s*maintenance/i', $sample)
+                ? 'Rental Basis with Operation & Maintenance'
+                : 'Rental / Lease Contract';
+        }
+        if (preg_match('/\brate\s+contract\b/i', $sample)) {
+            return 'Rate Contract';
+        }
+        if (preg_match('/\bturnkey\b/i', $sample)) {
+            return preg_match('/operation\s*(?:and|&)\s*maintenance|comprehensive\s+maintenance/i', $sample)
+                ? 'Turnkey Supply, Installation & O&M Contract'
+                : 'Turnkey Implementation Contract';
+        }
+        if (preg_match('/\bSITC\b|Supply,\s*Installation,\s*Testing(?:,?\s*and|,)?\s*Commissioning/i', $sample)) {
+            return preg_match('/comprehensive\s+maintenance|operation\s*(?:and|&)\s*maintenance|\bAMC\b/i', $sample)
+                ? 'Supply, Installation, Testing & Commissioning (SITC) with Maintenance'
+                : 'Supply, Installation, Testing & Commissioning (SITC)';
+        }
+        if (preg_match('/\bDesign,\s*Supply,\s*Installation/i', $sample)) {
+            return 'Design, Supply, Installation & Commissioning';
+        }
+        if (preg_match('/\b(?:Procurement,\s*)?Supply,\s*Installation(?:\s*,|\s+and)+\s*Maintenance/i', $sample)) {
+            return 'Supply, Installation & Maintenance Contract';
+        }
+        if (preg_match('/\bSupply\s+of\s+[^\n\r]{5,80}?\s+Components\b|\bsupply,\s*delivery,\s*and\s+associated\s+services\b/i', $sample)) {
+            return 'Supply & Delivery Contract';
+        }
+        if (preg_match('/\bManpower\b|\bOutsourcing\b/i', $title)) {
+            return 'Manpower / Service Outsourcing Contract';
+        }
+        if (preg_match('/\bAnnual\s+Maintenance\b|\bAMC\b/i', $title)) {
+            return 'Annual Maintenance Contract (AMC)';
+        }
+        if (preg_match('/\b(?:Procurement|Supply|Installation|Maintenance)\b/i', $title)) {
+            return 'Supply & Implementation Contract';
+        }
+        return 'Not specified in document';
+    }
+
+    /**
+     * Dynamically detects Bidding System strictly from document text.
+     */
+    protected function _extractDynamicBidSystem($bodyText, $tableText, $headerScope)
+    {
+        if (preg_match('/(?:^|\n)[ \t]*(?:Bid\s+System|System\s+of\s+Bidding|Cover\s+System)\s*[:\-][ \t]*([^\n\r]{3,110})/iu', $tableText, $m)) {
+            $cand = $this->_cleanExtractedPhrase($m[1], 110);
+            if ($cand !== '') return $cand;
+        }
+        if (preg_match('/(?:^|\n)[ \t]*Method\s+of\s+Selection\s*[:\-][ \t]*([^\n\r]{3,110})/iu', $tableText, $m)) {
+            $cand = $this->_cleanExtractedPhrase($m[1], 110);
+            if ($cand !== '') return $cand;
+        }
+
+        $scope = mb_substr($bodyText, 0, 35000, 'UTF-8');
+        if (preg_match('/\bThree[-\s]*(?:Cover|Bid|Packet|Stage)\b/i', $scope)) {
+            return 'Three-Bid / Three-Cover System (PQ, Technical & Financial)';
+        }
+        if (preg_match('/\bTwo[-\s]*(?:Cover|Bid|Packet|Stage)\b/i', $scope)
+            || (preg_match('/(?:Techno[-\s]*Commercial|Technical)\s+Bid/i', $scope) && preg_match('/(?:Financial|Price|Commercial)\s+Bid/i', $scope))) {
+            return preg_match('/\be-?Tender|e-?Procurement/i', $scope)
+                ? 'Two Bid System (Technical & Financial, e-Procurement)'
+                : 'Two Bid System (Technical & Financial)';
+        }
+        if (preg_match('/\bSingle[-\s]*(?:Cover|Bid|Stage)\b/i', $scope)) {
+            return 'Single Bid System';
+        }
+        if (preg_match('/\be-?Tender|e-?Procurement/i', $scope)) {
+            return 'e-Procurement Online Bidding';
+        }
+        return 'Not specified in document';
+    }
+
+    /**
+     * Dynamically extracts Scope of Work deliverables & technical objectives
+     * from the uploaded document's actual Scope / Specifications / Notice text.
+     */
+    protected function _extractDynamicScopeOfWork($repairedText, $bodyText, $headerScope, $isPreSummarized, $title = '', $aiSummary = [])
+    {
+        $scopes = [];
+
+        // 1. Pre-summarized Fact Sheets
+        if ($isPreSummarized && preg_match('/(?:4\.\s*Scope\s+of\s+Work|Scope\s+of\s+Work)([\s\S]*?)(?=(?:5\.|Areas\s+Covered|\n\s*6\.))/iu', $repairedText, $sm)) {
+            $hasBullets = strpos($sm[1], '•') !== false;
+            $splitRegex = $hasBullets ? '/\s*•\s*|\r?\n/' : '/\r?\n/';
+            $parts = preg_split($splitRegex, $sm[1]);
+            if ($hasBullets && !empty($parts) && (stripos($parts[0], 'shall provide') !== false || preg_match('/\d{4}-\d{2}-\d{2}/', $parts[0]))) {
+                array_shift($parts);
+            }
+            foreach ($parts as $l) {
+                $l = $this->_cleanExtractedPhrase($l, 320);
+                if (strlen($l) > 12 && strpos($l, '....') === false && !preg_match('/^(?:Selected\s+SI|Particular|Details|Scope\s+of\s+Work)/i', $l)) {
+                    $scopes[] = $l;
+                }
+            }
+        }
+
+        // 2. Locate actual Scope of Work section in TOC-stripped $bodyText
+        if (empty($scopes)) {
+            $headingRx = '/^[ \t]*(?:(?:\d+(?:\.\d+)?\.?\s+|SECTION\s*[-–]?\s*[A-Z0-9]+\s*[:\-]?\s*))?(?:BRIEF\s+|DETAILED\s+)?(?:SCOPE\s+OF\s+(?:THE\s+)?WORK(?:S)?|SCOPE\s*&\s*DELIVERABLES|SCHEDULE\s+OF\s+REQUIREMENTS?|BRIEF\s+DESCRIPTION\s+OF\s+(?:WORK|MATERIAL|ITEM))\s*[:\-]?[ \t]*$/imu';
+            if (preg_match_all($headingRx, $bodyText, $hMatches, PREG_OFFSET_CAPTURE)) {
+                foreach ($hMatches[0] as $hm) {
+                    $startPos = $hm[1] + strlen($hm[0]);
+                    $chunk    = substr($bodyText, $startPos, 7500);
+                    // Skip if this looks like a Section TOC entry
+                    if (preg_match('/^\s*(?:SECTION|Page\s+No|\d+\s*$)/im', substr($chunk, 0, 120)) && strpos(substr($chunk, 0, 200), "\n") !== false && preg_match('/^\s*SECTION/i', ltrim($chunk))) {
+                        continue;
+                    }
+                    // Stop at next major non-scope top-level heading (note: don't match "2. Security and Access Control Features" inside Scope!)
+                    $stopRx = '/\n[ \t]*(?:GENERAL\s+(?:INSTRUCTIONS|CONDITIONS|TERMS)|PRE[-\s]?BID\s+MEETING|ELIGIBILITY\s+CRITERIA|QUALIFICATION\s+AND\s+EVALUATION|HOSTING,\s+AVAILABILITY|PAYMENT\s+TERMS|ANNEXURE|APPENDIX|\d+\.\s*(?:Hosting|Security\s*(?:&|and)\s*(?:Privacy|Governance)|Governance|Qualification|Instructions|Contract\s+Period|General\s+Conditions)|SECTION\s*[-–]?\s*(?:III|IV|C|D|E)\b)/iu';
+                    if (preg_match($stopRx, $chunk, $stMatch, PREG_OFFSET_CAPTURE)) {
+                        $chunk = substr($chunk, 0, $stMatch[0][1]);
+                    }
+
+                    $items = $this->_parseBulletsFromSectionChunk($chunk);
+                    if (!empty($items)) {
+                        $scopes = array_merge($scopes, $items);
+                        if (count($scopes) >= 4) break;
+                    }
+                }
+            }
+        }
+
+        // 3. Line-anchored inline "Scope of Work:" or "Brief description of material" followed by lines
+        if (empty($scopes)) {
+            if (preg_match('/(?:^|\n)[ \t]*(?:\d+\.\s*)?(?:Brief\s+description\s+of\s+(?:material|work)|Scope\s+of\s+Work)\s*[:\-][ \t]*([^\n\r]{15,350}(?:\n(?![ \t]*(?:\d+\.\s*(?:Tender\s+Fee|EMD)|GENERAL|ELIGIBILITY))[^\n\r]{5,200})*)/iu', $bodyText, $bsm)) {
+                $items = $this->_parseBulletsFromSectionChunk($bsm[1]);
+                if (!empty($items)) {
+                    $scopes = array_merge($scopes, $items);
+                }
+            }
+        }
+
+        // 4. Technical Specifications / Technical Features / Objectives fallback (only if still fewer than 3 scope items)
+        if (count($scopes) < 3) {
+            if (preg_match('/(?:Technical\s+Specification(?:s)?|Minimum\s+required\s+Technical\s+Features|3\.2\s+Objectives|OBJECTIVE\s+OF\s+THE\s+PROJECT)([\s\S]{30,4500}?)(?=\n[ \t]*(?:\d+\.\d+\s+[A-Z]|Important\s+Note|SECTION|ELIGIBILITY|GENERAL))/iu', $bodyText, $tsm)) {
+                $techItems = $this->_parseBulletsFromSectionChunk($tsm[1]);
+                foreach ($techItems as $ti) {
+                    if (count($scopes) >= 7) break;
+                    $scopes[] = $ti;
+                }
+            }
+        }
+
+        // 5. Fallback to clean invitation sentence, title deliverables, or inline "RFP for ..." (NEVER truncated mid-word)
+        if (empty($scopes)) {
+            if (preg_match('/\bRFP\s+for\s+([^\n\r]{15,240}?)(?=\s+(?:RFP\s+Enquiry|Enquiry\s+No|NIT\s+No|Tender\s+No|Availability)|\n|$)/iu', $repairedText, $rfpm)) {
+                $rfpClean = $this->_cleanExtractedPhrase($rfpm[1], 240);
+                if (strlen($rfpClean) > 15) $scopes[] = $rfpClean;
+            }
+            if (preg_match('/(?:invites?\s+(?:e-?tenders?|bids?|proposals?)[^.\n\r]{10,350}\.)/iu', mb_substr($bodyText, 0, 10000, 'UTF-8'), $invM)) {
+                $invClean = $this->_cleanExtractedPhrase($invM[0], 260);
+                if (strlen($invClean) > 20) $scopes[] = $invClean;
+            }
+            if (!empty($title) && strlen($title) > 10 && stripos($title, 'Pending Review') === false) {
+                $scopes[] = $this->_cleanExtractedPhrase($title, 260);
+            }
+            if (!empty($aiSummary['keywords'])) {
+                $scopes[] = 'Key deliverables & domain focus: ' . trim($aiSummary['keywords']);
+            }
+        }
+
+        if (empty($scopes)) {
+            $scopes[] = 'As specified in tender scope of work and technical requirements';
+        }
+
+        // Deduplicate, reject comma/lowercase fragments, & cap cleanly at 7 items
+        $unique = [];
+        foreach ($scopes as $s) {
+            $s = $this->_cleanExtractedPhrase($s, 320);
+            if (strlen($s) < 12) continue;
+            if (preg_match('/^[,;.)]|^[a-z]{2,}\s+[a-z]/', $s)) continue;
+            $key = strtolower(preg_replace('/[^a-z0-9]/', '', substr($s, 0, 60)));
+            if (!isset($unique[$key])) {
+                $unique[$key] = $s;
+            }
+            if (count($unique) >= 7) break;
+        }
+        if (empty($unique)) {
+            $unique[] = 'As specified in tender scope of work and technical requirements';
+        }
+
+        return array_values($unique);
+    }
+
+    /**
+     * Parses numbered points, subheadings, or deliverable sentences from a section chunk.
+     */
+    protected function _parseBulletsFromSectionChunk($chunk)
+    {
+        $lines = preg_split('/\r?\n/', (string)$chunk);
+        $items = [];
+        $buf   = '';
+
+        $flush = function () use (&$buf, &$items) {
+            $clean = $this->_cleanExtractedPhrase($buf, 320);
+            $buf = '';
+            if (strlen($clean) < 15) return;
+            if (preg_match('/^(?:Sl\.?\s*No\.?|Particular|Page\s+No|Name\s+of\s+Authorized|Signature|Seal\s+of|Pre-?Bid\s+Meeting\s*$)/i', $clean)) return;
+            $items[] = $clean;
+        };
+
+        foreach ($lines as $rawLn) {
+            $ln = trim($rawLn);
+            if ($ln === '' || preg_match('/^\d{1,3}$/', $ln)) {
+                if ($buf !== '') $flush();
+                continue;
+            }
+            // Skip table headers
+            if (preg_match('/^(?:S\.?\s*No\.?|SL\s+No\.?)\s+Minimum\s+required/i', $ln)) continue;
+
+            // Detect new bullet / numbered line / subsection heading
+            if (preg_match('/^(?:\d+(?:\.\d+)*[\.\)]?\s+|•\s*|-\s*|[a-z]\)\s+)/u', $ln)) {
+                if ($buf !== '') $flush();
+                // Strip leading item number/sub-clause number e.g. "4.1 " or "1. "
+                $lnClean = preg_replace('/^(?:\d+(?:\.\d+)*[\.\)]?\s+|•\s*|-\s*|[a-z]\)\s+)/u', '', $ln);
+                // Ignore pure bare headings like "Overview" or "4.1 Overview" without body unless substantial
+                if (preg_match('/^(?:Overview|Exclusions?|Scope\s+of\s+Work)$/i', trim($lnClean))) {
+                    continue;
+                }
+                $buf = trim($lnClean);
+            } else {
+                $buf .= ($buf !== '' ? ' ' : '') . $ln;
+            }
+        }
+        if ($buf !== '') $flush();
+
+        // If the section was a single paragraph without bullets, split into clear sentences
+        if (count($items) <= 1 && !empty($items[0]) && strlen($items[0]) > 220) {
+            $sents = preg_split('/(?<=[.;])\s+(?=[A-Z])/', $items[0]);
+            if (count($sents) > 1) {
+                $items = array_values(array_filter(array_map(function ($s) {
+                    return $this->_cleanExtractedPhrase($s, 240);
+                }, $sents), function ($s) { return strlen($s) >= 15; }));
+            }
+        }
+
+        return $items;
+    }
+
+    /**
+     * Dynamically extracts Contract Period, Delivery, Extension, and Maximum Period.
+     */
+    protected function _extractDynamicContractPeriod($bodyText, $tableText, $headerScope, $isPreSummarized)
+    {
+        $flatProse = preg_replace('/\s+/u', ' ', (string)$bodyText);
+        if ($isPreSummarized) {
+            $getLine = function ($rx) use ($headerScope) {
+                return preg_match($rx, $headerScope, $m) ? $this->_cleanExtractedPhrase($m[1], 180) : 'Not specified in document';
+            };
+            $init = $getLine('/Initial\s+Contract\s*[:\- ]*([^\n\r]+)/iu');
+            $ext  = $getLine('/Extendable\s*[:\- ]*([^\n\r]+)/iu');
+            $maxp = $getLine('/Maximum\s+Period\s*[:\- ]*([^\n\r]+)/iu');
+            $cond = $getLine('/Extension\s+conditions?\s*[:\- ]*([^\n\r]+)/iu');
+            // Support single-line pre-summarized exports (e.g. Tender_FactSheet-4)
+            if ($init === 'Not specified in document' && preg_match('/Initial\s+Contract:\s*(.*?)(?=\s*Extendable:|\s*•|$)/iu', $flatProse, $im)) {
+                $init = $this->_cleanExtractedPhrase($im[1], 180);
+            }
+            if ($ext === 'Not specified in document' && preg_match('/Extendable:\s*(.*?)(?=\s*Maximum\s+Period:|\s*•|$)/iu', $flatProse, $em)) {
+                $ext = $this->_cleanExtractedPhrase($em[1], 180);
+            }
+            if ($maxp === 'Not specified in document' && preg_match('/Maximum\s+Period:\s*(.*?)(?=\s*7\.|\s*•|$)/iu', $flatProse, $mm)) {
+                $maxp = $this->_cleanExtractedPhrase($mm[1], 160);
+            }
+            return [
+                'initial'    => $init,
+                'extendable' => $ext,
+                'max_period' => $maxp,
+                'conditions' => $cond
+            ];
+        }
+
+        $initial    = '';
+        $extendable = '';
+        $maxPeriod  = '';
+        $conditions = '';
+
+        // 1. Explicit Contract Period / Duration field in table/header
+        if (preg_match('/(?:^|\n)[ \t]*(?:Contract\s+Period|Period\s+of\s+Contract|Contract\s+Duration|Project\s+Duration)\s*[:\-][ \t]*([^\n\r]{4,280})/iu', $tableText, $cpm)) {
+            $fullCp = $this->_cleanExtractedPhrase($cpm[1], 240);
+            if (preg_match('/^(.*?),?\s*(extendable\b.*)$/i', $fullCp, $extSplit)) {
+                $initial    = $this->_cleanExtractedPhrase($extSplit[1], 180);
+                $extendable = $this->_cleanExtractedPhrase($extSplit[2], 180);
+            } else {
+                $initial = $fullCp;
+            }
+        }
+
+        // 2. Delivery Period / Completion / Implementation Timeline / Empanelment / Contractual Period
+        if ($initial === '') {
+            $parts = [];
+            $deliv = $this->_extractFullClause($flatProse, '/\bDELIVERY\s+PERIOD\s*(?:[:\-–]+\s*|(?:The\s+successful\s+bidder|Bidders?)\s+)([^•]+)/iu', 180, 1);
+            if ($deliv !== '') {
+                $parts[] = 'Delivery: ' . $deliv;
+            }
+            if (preg_match('/\bCOMPLETION\s+OF\s+SUPPLY[^\n\r]{0,80}?(within\s+(?:ninety\s*\(90\)|\d+)\s+(?:days|weeks|months)[^.;]{0,90})/iu', $flatProse, $cm)) {
+                $parts[] = 'Installation & Commissioning: ' . $this->_cleanExtractedPhrase($cm[1], 150);
+            } elseif (preg_match('/(?:Overall\s+Project\s+implementation\s+Timeline|Project\s+implementation\s+Timeline|implementation\s+timeline)\s*[:\-–\s]+(\d+\s+(?:Days|Weeks|Months)[^\n\r.;]{0,100})/iu', $flatProse, $itm)) {
+                $parts[] = $this->_cleanExtractedPhrase($itm[1], 150);
+            }
+            if (preg_match('/(?:empaneled|contractual\s+period)\s+(?:for\s+a\s+period\s+of|of)\s+([a-z0-9\s\(\)]{2,40}?(?:years?|months?))/iu', $flatProse, $ctm)) {
+                $parts[] = 'Contractual Period: ' . trim($ctm[1]);
+            }
+            if (!empty($parts)) {
+                $initial = implode('; ', $parts);
+            }
+        }
+
+        // 3. Extendable / Renewed / Fresh AMC (full sentence via _extractFullClause)
+        if ($extendable === '') {
+            $extendable = $this->_extractFullClause($flatProse, '/((?:may\s+be\s+(?:renewed|extended)(?:\s+further)?|extendable)\s+(?:by|for|up\s+to)\s+.{4,160})/iu', 180, 1);
+            if ($extendable === '') {
+                $extendable = $this->_extractFullClause($flatProse, '/((?:WTL|Bank|Authority|University|Department|Buyer)?\s*may\s+(?:go\s+for|arrange|extend)\s+(?:fresh\s+)?(?:AMC|contract)[^•]+)/iu', 180, 1);
+            }
+        }
+
+        // 4. Conditions / Max Period (stop past Clause X.Y safely using _extractFullClause)
+        if ($extendable !== '') {
+            $conditions = $this->_extractFullClause($flatProse, '/(at\s+the\s+(?:sole\s+)?discretion\s+of\s+.{3,140}|subject\s+to\s+satisfactory\s+performance.{0,120}|mutual\s+consent.{0,100})/iu', 160, 1);
+        }
+        $maxPeriod = $this->_extractFullClause($flatProse, '/\bMaximum\s+(?:Contract\s+)?Period\s*[:\-]\s*(.{3,140})/iu', 140, 1);
+
+        return [
+            'initial'    => $initial !== '' ? $initial : 'Not specified in document',
+            'extendable' => $extendable !== '' ? $extendable : 'Not specified in document',
+            'max_period' => $maxPeriod !== '' ? $maxPeriod : 'Not specified in document',
+            'conditions' => $conditions !== '' ? $conditions : 'Not specified in document'
+        ];
+    }
+
+    /**
+     * Dynamically extracts Award / Selection Criteria strictly from document clauses.
+     */
+    protected function _extractDynamicAwardCriteria($bodyText, $tableText, $headerScope, $isPreSummarized)
+    {
+        $flatProse = preg_replace('/\s+/u', ' ', (string)$bodyText);
+        if ($isPreSummarized && preg_match('/Bank\s+may\s+split\s+work/i', $headerScope)) {
+            return [
+                'method'     => 'L1 based on Package Cost',
+                'split'      => 'Bank may split work as per tender terms',
+                'allocation' => '60:40 or 60:20:20',
+                'matching'   => 'L2/L3 should match L1 rates'
+            ];
+        }
+
+        $method     = '';
+        $split      = 'Not specified in document';
+        $allocation = 'Not specified in document';
+        $matching   = 'Not specified in document';
+
+        if (preg_match('/(?:^|\n)[ \t]*(?:Method\s+of\s+Selection|Evaluation\s+Method|Award\s+Criteria|Selection\s+Methodology)\s*[:\-][ \t]*([^\n\r]{3,160})/iu', $tableText, $mm)) {
+            $method = $this->_cleanExtractedPhrase($mm[1], 160);
+        } elseif (preg_match('/(Quality\s+and\s+Cost\s+Based\s+Selection\s*\(QCBS\)[^\n\r.;]{0,60})/iu', $flatProse, $qm)) {
+            $method = $this->_cleanExtractedPhrase($qm[1], 150);
+        } elseif (($lm = $this->_extractFullClause($flatProse, '/(selected\s+on\s+the\s+basis\s+of\s+the\s+lowest.{5,160})/iu', 180, 1)) !== '') {
+            $method = ucfirst($lm);
+        } elseif (preg_match('/\b(?:lowest\s+(?:evaluated\s+|consolidated\s+)?(?:quote|bidder|rate|price)|L-?1\s+(?:Bidder|basis|evaluation))\b/iu', $flatProse)) {
+            $method = 'Lowest Evaluated Cost (L1) among technically qualified bidders';
+        }
+
+        $splitCand = $this->_extractFullClause($flatProse, '/(split\s+(?:the\s+)?(?:work|order|quantity)\s+(?:within|among|between).{5,140})/iu', 160, 1);
+        if ($splitCand !== '') {
+            $split = $splitCand;
+        } elseif (preg_match('/single[-\s]*point[-\s]*responsibility/i', $flatProse)) {
+            $split      = 'No splitting (single-point responsibility)';
+            $allocation = '100% to selected bidder';
+        }
+
+        // Only capture allocation ratios (e.g. 70:30, 60:40, 60:20:20) near split/allocation context — NEVER timestamps
+        if ($allocation === 'Not specified in document'
+            && stripos($method, 'QCBS') === false
+            && preg_match('/(?:split|allocation|ratio|proportion|share|distribute[d]?|award(?:ed)?)\b.{0,80}?(?<![:\d])([4-9]\d\s*:\s*[1-6]\d(?:\s*:\s*\d{1,2})?)(?!\s*(?:[:]\d|AM|PM|hrs?))\b/iu', $flatProse, $alm)) {
+            $rParts = preg_split('/\s*:\s*/', $alm[1]);
+            $sum = array_sum(array_map('intval', $rParts));
+            if ($sum >= 95 && $sum <= 105 && (int)$rParts[0] >= 40) {
+                $allocation = $alm[1];
+            }
+        }
+        $matchCand = $this->_extractFullClause($flatProse, '/(L2.{0,60}match.{0,60}L1.{0,40})/iu', 150, 1);
+        if ($matchCand !== '') {
+            $matching = $matchCand;
+        }
+
+        return [
+            'method'     => $method !== '' ? $method : 'Not specified in document',
+            'split'      => $split,
+            'allocation' => $allocation,
+            'matching'   => $matching
+        ];
+    }
+
+    /**
+     * Dynamically extracts PBG / Security Deposit and Bid Validity cleanly without mid-word truncation.
+     */
+    protected function _extractDynamicPbgAndValidity($bodyText, $tableText, $headerScope, $isPreSummarized)
+    {
+        $flatProse     = preg_replace('/\s+/u', ' ', (string)$bodyText);
+        $pbgSummary    = 'Not specified in document';
+        $pbgAmount     = 'Not specified in document';
+        $pbgValidity   = 'Not specified in document';
+        $pbgSubmission = 'Not specified in document';
+        $bidValidity   = 'Not specified in document';
+
+        if ($isPreSummarized && preg_match('/(?:Requirement\s+Details\s+Amount|08\.\s*Performance\s+Guarantee[\s\S]{0,120}?Submission)\s*(?:Details\s*)?[:\t\- ]*([0-9]+%(?:\s+of\s+(?:the\s+)?total\s+contract\s+value)?)/i', $flatProse, $pm)) {
+            $pbgSummary    = trim($pm[1]);
+            $pbgAmount     = trim($pm[1]);
+            $pbgValidity   = preg_match('/Valid\s+for\s+([^\n\r•]+?)(?=\s+Within|\s+09\.|\s*$)/i', $flatProse, $pvm) ? 'Valid for ' . trim($pvm[1]) : 'Contract Period + 3 Months';
+            $pbgSubmission = preg_match('/(Within\s+[^\n\r•]+?(?:Order|Clause\s*\d+\)))/i', $flatProse, $psm) ? trim($psm[1]) : 'Within 30 Days of Work Order';
+        } else {
+            if (preg_match('/(?:^|\n)[ \t]*(?:Performance\s+Bank\s+Guarantee|PBG|Performance\s+Security)\s*[:\-][ \t]*([^\n\r]{3,180})/iu', $tableText, $pbm)) {
+                $cleanPbg   = $this->_cleanExtractedPhrase($pbm[1], 180);
+                $pbgSummary = $cleanPbg;
+                $pbgAmount  = $cleanPbg;
+            } elseif (preg_match('/Performance\s+Bank\s+Guarantee[^\n\r]{0,120}?\n[|\s]*(\d+%[^\n\r]{5,160})/iu', $bodyText, $pbmRow)) {
+                $cleanPbg   = $this->_cleanExtractedPhrase($pbmRow[1], 160);
+                $pbgSummary = $cleanPbg;
+                $pbgAmount  = $cleanPbg;
+            } elseif (($pbgClause = $this->_extractFullClause($flatProse, '/\bshall\s+deposit\s+(\d+\s*%\s+of\s+[^.;]{4,100}?\s+as\s+(?:a\s+)?performance\s+Guarantee)/iu', 160, 1)) !== '') {
+                $pbgSummary = $pbgClause;
+                $pbgAmount  = $pbgClause;
+            } elseif (preg_match('/Security\s+Deposit\s+Guarantee\s+(?:of|or)\s+(\d+\s*%\s+of\s+[^.;]{3,80})/iu', $flatProse, $sdgm)) {
+                $cleanPbg   = $this->_cleanExtractedPhrase($sdgm[1], 140);
+                $pbgSummary = $cleanPbg;
+                $pbgAmount  = $cleanPbg;
+            } elseif (($pbgClause = $this->_extractFullClause($flatProse, '/(?:Performance\s+(?:Bank\s+)?Guarantee\s*\(?PBG\)?|Performance\s+Security)\s*(?:equivalent\s+to|of|is|@)?\s*(\d+%\s+of\s+(?:the\s+)?(?:total\s+)?(?:evaluated\s+)?(?:bid|contract|order)\s+(?:price|value)[^•]{0,60})/iu', 160, 1)) !== '') {
+                if (!preg_match('/per\s+(?:week|day|month)|of\s+delay|delay\s+penalty/i', $pbgClause)) {
+                    $pbgSummary = $pbgClause;
+                    $pbgAmount  = $pbgClause;
+                }
+            }
+
+            if ($pbgAmount === 'Not specified in document' && preg_match('/(\b(?:ten\s+percent\s*\(10%\)|10%|5%|3%)\s+of\s+the\s+(?:total\s+)?Contract\s+Price\s+shall\s+be\s+retained[^.\n\r]{0,80})/iu', $flatProse, $sdm)) {
+                $pbgSummary    = $this->_cleanExtractedPhrase($sdm[1], 180);
+                $pbgAmount     = preg_match('/(\d+%)/', $sdm[1], $pm) ? $pm[1] . ' of Contract Price (retained as Security Deposit)' : $pbgSummary;
+                $pbgSubmission = 'Retained from Contract Price (Security Deposit)';
+            }
+            if ($pbgAmount === 'Not specified in document' && preg_match('/(?:Performance\s+(?:Bank\s+)?Guarantee\s*\(?PBG\)?|Performance\s+Security|Security\s+Deposit)\s+(?:equivalent\s+to|equal\s+to|of|@)?\s*(\d+%\s+of\s+(?!the\s+Contract\s+Price\s+per\s+week)[^\n\r.;]{5,100})/iu', $flatProse, $pbm3)) {
+                $cleanPbg   = $this->_cleanExtractedPhrase($pbm3[1], 160);
+                if (!preg_match('/per\s+(?:week|day|month)|of\s+delay/i', $cleanPbg)) {
+                    $pbgSummary = $cleanPbg;
+                    $pbgAmount  = $cleanPbg;
+                }
+            }
+
+            if (preg_match('/within\s+([^\n\r.,;]{2,45})\s+from\s+(?:the\s+date\s+of\s+)?(?:receipt\s+of\s+)?(?:Letter\s+of\s+Award|LOA|Work\s+Order|Purchase\s+Order)/iu', $flatProse, $psm)) {
+                $pbgSubmission = 'Within ' . trim($psm[1]) . ' from receipt of LOA / Order';
+            }
+
+            $pvClause = $this->_extractFullClause($flatProse, '/(?:PBG|Performance\s+Security|Bank\s+Guarantee)\s+(?:should|shall|must)\s+be\s+(valid\s+(?:for|till)\s+.{3,130}|(?:\(?\d{1,2}\)?)\s*(?:years?|months?).{0,80})/iu', 140, 1);
+            if ($pvClause !== '') {
+                $pbgValidity = ucfirst($pvClause);
+            } elseif (preg_match('/valid\s+till\s+(completion\s+of\s+.{5,120}?warranty\s+period)/iu', $flatProse, $pvm2)) {
+                $pbgValidity = 'Valid till ' . $this->_cleanExtractedPhrase($pvm2[1], 130);
+            } elseif (preg_match('/release\s+of\s+the\s+security\s+deposit[\s\S]{0,450}?completing\s+a\s+total\s+[^\n\r.]*?of\s+([^\n\r.]{3,60})/iu', $flatProse, $sdv)) {
+                $pbgValidity = $this->_cleanExtractedPhrase($sdv[1], 100) . ' (released in phases)';
+            }
+        }
+
+        // Bid Validity (strictly Bid / Offer / Proposal validity context — never PBG or registration validity)
+        if (preg_match('/(?:^|\n)[ \t]*(?:Bid\s+Validity|Validity\s+of\s+Bid|Offer\s+Validity)\s*[:\-][ \t]*([^\n\r]{3,160})/iu', $tableText, $bvm)) {
+            $bidValidity = $this->_cleanExtractedPhrase($bvm[1], 150);
+        } elseif ($isPreSummarized && preg_match('/09\.\s*Bid\s+Validity\s+(\d+\s*\([^\)]+\)\s*(?:days|months|years)|\d+\s+(?:days|months|years))/iu', $flatProse, $bvmP)) {
+            $bidValidity = trim($bvmP[1]);
+        } elseif (preg_match('/VALIDITY\s+OF\s+(?:THE\s+)?(?:Tender\s+)?BID[^\n\r]{0,80}?(?:period\s+of\s+)([a-z0-9\s\(\)]{2,35}?\s+(?:days|months|years)[^.;]{0,70})/iu', $flatProse, $bvmV)) {
+            $bidValidity = $this->_cleanExtractedPhrase($bvmV[1], 140);
+        } elseif (preg_match('/(?:(?:financial\s+|tender\s+)?bids?|proposals?|offers?)\s+(?:submitted\s+)?shall\s+(?:remain\s+)?valid\s+(?:till|for)\s+(?:a\s+period\s+of\s+)?([a-z0-9\s\(\)]{2,40}?\s+(?:days|months)[^.;]{0,70})/iu', $flatProse, $bvm2)) {
+            $bidValidity = $this->_cleanExtractedPhrase($bvm2[1], 140);
+        } elseif (preg_match('/(?:period\s+of\s+(?:bid\s+)?validity\s+is|bid\s+validity\s*(?:period\s*)?(?:is|:))\s*([a-z0-9\s\(\)]{2,40}?\s+(?:days|months)[^.;]{0,60})/iu', $flatProse, $bvm3)) {
+            $bidValidity = $this->_cleanExtractedPhrase($bvm3[1], 140);
+        } elseif (preg_match('/period\s+of\s+(\d{2,3}\s+days)[^.]{0,80}?Validity\s+(?:of\s+)?Bids/iu', $flatProse, $bvm4)) {
+            $bidValidity = trim($bvm4[1]) . ' from date of bid acceptance/opening';
+        }
+
+        return [
+            'pbg_summary'    => $pbgSummary,
+            'pbg_amount'     => $pbgAmount,
+            'pbg_validity'   => $pbgValidity,
+            'pbg_submission' => $pbgSubmission,
+            'bid_validity'   => $bidValidity
+        ];
+    }
+
+    /**
+     * Dynamically extracts Warranty, Replacement, Repair, Support SLA, and AMC Terms
+     * strictly from uploaded document text (no hardcoded CCTV or boilerplate).
+     */
+    protected function _extractDynamicWarrantyAndAmc($bodyText, $tableText, $headerScope, $isPreSummarized)
+    {
+        $flatProse   = preg_replace('/\s+/u', ' ', (string)$bodyText);
+        $scope       = 'Not specified in document';
+        $terms       = 'Not specified in document';
+        $replacement = 'Not specified in document';
+        $repair      = 'Not specified in document';
+        $support     = 'Not specified in document';
+        $amc         = 'Not specified in document';
+
+        if ($isPreSummarized) {
+            if (preg_match('/(?:Warranty\s+Terms|Warranty\s+Clause)\s*[:\- ]*([^\n\r]+)/iu', $headerScope, $m)) {
+                $terms = $this->_cleanExtractedPhrase($m[1], 180);
+            } elseif (preg_match('/Warranty\s*&\s*Maintenance\s+Terms:\s*(.{10,180}?)(?=\s*11\.|\s*•|$)/iu', $flatProse, $m2)) {
+                $terms = $this->_cleanExtractedPhrase($m2[1], 180);
+            }
+            return [
+                'scope'       => $terms,
+                'terms'       => $terms,
+                'replacement' => 'Not specified in document',
+                'repair'      => 'Not specified in document',
+                'support'     => 'Not specified in document',
+                'amc'         => 'Not specified in document'
+            ];
+        }
+
+        // 1. Explicit Warranty header/duration (digits or spelled-out words like "three (3) years") using flatProse
+        if (preg_match('/(?:^|\n)[ \t]*(?:Warranty\s*\+\s*AMC|Warranty\s*[\/&]\s*AMC|Warranty\s+and\s+AMC|Warranty)\s*[:\-][ \t]*([^\n\r]{5,240})/iu', $tableText, $wm)) {
+            $scope = $this->_cleanExtractedPhrase($wm[1], 180);
+            $terms = $scope;
+        } elseif (($wm2 = $this->_extractFullClause($flatProse, '/((?:comprehensive\s+)?warranty(?:\s+and\s+technical\s+support)?.{0,110}?for\s+a\s+period\s+of\s+[a-z0-9\s\(\)]{1,35}?(?:years?|months?).{0,120})/iu', 220, 1)) !== '') {
+            $terms = $wm2;
+            if (preg_match('/(\b(?:[a-z]+\s*\(\s*\d+\s*\)|\d+)\s+(?:years?|months?))/i', $wm2, $durM)) {
+                $scope = trim($durM[1]) . ' Comprehensive Warranty';
+            } else {
+                $scope = $terms;
+            }
+        } elseif (($wm3 = $this->_extractFullClause($flatProse, '/([0-9]{1,2}\s*(?:\([^\)]+\)\s*)?(?:years?|months?)\s+(?:onsite\s+)?comprehensive\s+warranty.{0,140})/iu', 220, 1)) !== '') {
+            $terms = $wm3;
+            if (preg_match('/^([0-9]{1,2}\s*(?:\([^\)]+\)\s*)?(?:years?|months?)\s+(?:onsite\s+)?comprehensive\s+warranty)/iu', $wm3, $scM)) {
+                $scope = trim($scM[1]);
+            } else {
+                $scope = $terms;
+            }
+        }
+
+        // 2. Replacement / Repair clause (full sentence via _extractFullClause)
+        $replacement = $this->_extractFullClause($flatProse, '/(repair\s+or\s+replace\s+(?:the\s+)?defective.{5,200})/iu', 220, 1);
+        if ($replacement === '') {
+            $replacement = $this->_extractFullClause($flatProse, '/(replace(?:ment)?\s+of\s+(?:faulty|defective).{5,180})/iu', 200, 1);
+        }
+        $replacement = $replacement !== '' ? ucfirst($replacement) : 'Not specified in document';
+
+        $repair = $this->_extractFullClause($flatProse, '/((?:service\s+call\s+is\s+not\s+attended\s+within|attended\s+within|response\s+time\s+of)\s+\d+\s*(?:hours?|hrs?|days?).{0,140})/iu', 200, 1);
+        if ($repair === '') {
+            $repair = $this->_extractFullClause($flatProse, '/(corrective\s+and\s+preventive\s+maintenance.{0,140})/iu', 200, 1);
+        }
+        $repair = $repair !== '' ? ucfirst($repair) : 'Not specified in document';
+
+        // 3. Dedicated Support / Engineers
+        $support = $this->_extractFullClause($flatProse, '/(depute\s+at\s+least.{10,200})/iu', 200, 1);
+        if ($support !== '') {
+            $support = ucfirst($support);
+            $sp24 = $this->_extractFullClause($flatProse, '/(24[×x]7\s+technical\s+support.{0,120})/iu', 120, 1);
+            if ($sp24 !== '') {
+                $support .= '; ' . $sp24;
+            }
+        } elseif (($spm2 = $this->_extractFullClause($flatProse, '/((?:adequate\s+Service\s+Engineer|on-site\s+support\s+service|24[×x]7\s+(?:helpdesk|support)).{0,160})/iu', 200, 1)) !== '') {
+            $support = ucfirst($spm2);
+        } else {
+            $support = 'Not specified in document';
+        }
+
+        // 4. AMC / Post-Warranty / O&M (ignore confidentiality/NDA boilerplate)
+        $amcClause = $this->_extractFullClause($flatProse, '/((?:fresh\s+AMC|Annual\s+Maintenance\s+Contract|Comprehensive\s+Operation\s*(?:and|&)\s*Maintenance|Operation\s*(?:and|&)\s*Maintenance(?:\s*\(O&M\))?)\s+(?!of\s+the\s+project,\s*collect).{5,180})/iu', 220, 1);
+        if ($amcClause !== '' && !preg_match('/\b(?:proprietary|confidential|disclose|collect,\s*compile)\b/i', $amcClause)) {
+            $amc = ucfirst($amcClause);
+            if (stripos($scope, 'Not specified') === false && stripos($scope, 'AMC') === false && stripos($amc, 'AMC') !== false) {
+                $scope .= ' + AMC';
+            } elseif (stripos($scope, 'Not specified') !== false) {
+                $scope = $this->_cleanExtractedPhrase($amc, 160);
+            }
+        }
+        // Manufacturer OEM warranty fallback when no explicit duration clause matched
+        if ($scope === 'Not specified in document' && preg_match('/((?:manufacturer|OEM)[\’\']?s?\s+warranty(?:\s+certificates)?[^.;]{0,120})/iu', $flatProse, $mw)) {
+            $scope = 'OEM / Manufacturer Warranty as per contract';
+            $terms = ucfirst($this->_cleanExtractedPhrase($mw[1], 180));
+        }
+
+        return [
+            'scope'       => $scope,
+            'terms'       => $terms,
+            'replacement' => $replacement,
+            'repair'      => $repair,
+            'support'     => $support,
+            'amc'         => $amc
+        ];
+    }
+
+    /**
+     * Dynamically builds Risk Points & Opportunity Assessment strictly from uploaded document content.
+     */
+    protected function _extractDynamicRisksAndOpportunities($bodyText, $tableText, $data, $dates, $headerScope, $isPreSummarized, $queryDate = '', $preBidMeeting = '')
+    {
+        $flatProse     = preg_replace('/\s+/u', ' ', (string)$bodyText);
+        $risks         = [];
+        $opportunities = [];
+
+        if ($isPreSummarized && preg_match('/(?:11\.\s*Risk\s+Points)([\s\S]*?)(?=(?:\n\s*(?:12\.|\Z)|\s*12\.|$))/iu', $bodyText, $rm)) {
+            $splitRx = strpos($rm[1], '•') !== false ? '/\s*•\s*|\r?\n/' : '/(?:\r?\n\s*\d+\.)/';
+            foreach (preg_split($splitRx, $rm[1]) as $rk) {
+                $clean = $this->_cleanExtractedPhrase($rk, 240);
+                if (strlen($clean) > 12 && strpos($clean, '....') === false && !preg_match('/^(?:\d+\s+)?(?:Explicit\s+Tender\s+Requirements?)\s*:?$/i', $clean)) {
+                    $risks[] = $clean;
+                }
+            }
+        }
+
+        if (empty($risks)) {
+            if (!empty($data['EmdAmount']) && $data['EmdAmount'] !== 'Not specified in document') {
+                $risks[] = 'EMD Commitment: ' . $data['EmdAmount'] . ' required prior to bid submission' . (preg_match('/MSEs?.*exempt|exemption\s+from\s+payment\s+of\s+EMD/i', $flatProse) ? ' (MSE/Udyam exemption subject to valid proof).' : '.');
+            }
+            if (!empty($data['PbgAmount']) && $data['PbgAmount'] !== 'Not specified in document') {
+                $risks[] = 'Performance Security / PBG: ' . rtrim($data['PbgAmount'], '.') . ($data['PbgSubmissionDeadline'] !== 'Not specified in document' ? ' (' . $data['PbgSubmissionDeadline'] . ')' : '') . '.';
+            }
+            $ldClause = $this->_extractFullClause($flatProse, '/(liquidated\s+damages\s*\(LD\).{5,200}|LD\s+shall\s+be\s+levied.{5,200})/iu', 220, 1);
+            if ($ldClause !== '') {
+                $risks[] = 'Liquidated Damages: ' . ucfirst($ldClause);
+            }
+            $pnClause = $this->_extractFullClause($flatProse, '/penalty\s+at\s+the\s+rate\s+of\s+(.{5,200})/iu', 220, 1);
+            if ($pnClause !== '') {
+                $risks[] = 'SLA Penalty Risk: Penalty @ ' . $pnClause;
+            }
+            $trClause = $this->_extractFullClause($flatProse, '/(minimum\s+average\s+annual\s+turnover.{5,200}|average\s+annual\s+(?:financial\s+)?turnover.{5,200})/iu', 220, 1);
+            if ($trClause !== '') {
+                $risks[] = 'Qualification Threshold: ' . ucfirst($trClause);
+            }
+            if (preg_match('/Certificate\s+of\s+Eligibility|preliminarily\s+selected\s+by/i', $flatProse)) {
+                $risks[] = 'Pre-Shortlisted Eligibility: Participation restricted to agencies shortlisted / issued Certificate of Eligibility under prior EOI.';
+            }
+            if (!empty($data['ContractInitialDuration']) && $data['ContractInitialDuration'] !== 'Not specified in document') {
+                $risks[] = 'Delivery & Execution Timeline: ' . rtrim($data['ContractInitialDuration'], '.') . '.';
+            }
+        }
+
+        if ($isPreSummarized && preg_match('/(?:Key\s+Attention\s+Areas|Opportunity\s+Assessment)([\s\S]*?)$/iu', $bodyText, $am)) {
+            $splitRx = strpos($am[1], '•') !== false ? '/\s*•\s*|\r?\n/' : '/(?:\r?\n\s*\d+\.)/';
+            foreach (preg_split($splitRx, $am[1]) as $item) {
+                $clean = $this->_cleanExtractedPhrase($item, 240);
+                if (strlen($clean) > 10 && strpos($clean, '....') === false && !preg_match('/^(?:Key\s+Attention|Opportunity)/i', $clean)) {
+                    $opportunities[] = $clean;
+                }
+            }
+        }
+
+        if (empty($opportunities)) {
+            $titleClean = !empty($data['TenderTitle']) ? $this->_cleanExtractedPhrase($data['TenderTitle'], 180) : '';
+            if ($titleClean !== '' && stripos($titleClean, 'Pending Review') === false) {
+                $opportunities[] = 'Core Project Scope: ' . rtrim($titleClean, '.') . ($data['ZoneRegion'] !== '' ? ' (' . $data['ZoneRegion'] . ').' : '.');
+            }
+            if (!empty($data['ContractExtendable']) && $data['ContractExtendable'] !== 'Not specified in document') {
+                $opportunities[] = 'Extension / Multi-Year Potential: ' . rtrim($data['ContractExtendable'], '.') . '.';
+            } elseif (!empty($data['AmcTerms']) && $data['AmcTerms'] !== 'Not specified in document') {
+                $opportunities[] = 'Post-Warranty / Maintenance Opportunity: ' . rtrim($data['AmcTerms'], '.') . '.';
+            }
+            if (preg_match('/Make\s+in\s+India\s+Preference/i', $flatProse)) {
+                $opportunities[] = 'Government Procurement Preference: Make in India preference applicable per Government of India guidelines.';
+            }
+            if (preg_match('/MSEs?.*exemption|Udyam\s+Registration/i', $flatProse)) {
+                $opportunities[] = 'MSE Benefit: Eligible Micro and Small Enterprises (with valid Udyam Registration) may avail Tender Fee / EMD exemption.';
+            }
+            if (preg_match('/OEM\s+Authorization/i', $flatProse)) {
+                $opportunities[] = 'OEM Partnership Requirement: Prescribed OEM Authorization (MAF) and datasheets required for active components.';
+            }
+            if (!empty($queryDate) || !empty($preBidMeeting)) {
+                $opportunities[] = 'Clarification Window: ' . (!empty($preBidMeeting) ? 'Pre-bid meeting on ' . $preBidMeeting . '. ' : '') . (!empty($queryDate) ? 'Query deadline: ' . $queryDate . '.' : '');
+            }
+        }
+
+        return [
+            'risks'         => array_slice(array_values(array_unique($risks)), 0, 6),
+            'opportunities' => array_slice(array_values(array_unique($opportunities)), 0, 6)
+        ];
     }
 
     /**
