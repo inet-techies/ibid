@@ -888,31 +888,31 @@ function renderBidReadOnlyView() {
         <div id="historyCollapseContainer" style="display:none;" class="p-3">
             ${
                 history && history.length > 0 ? `
-                <div class="table-responsive" style="overflow-x:hidden !important; width:100%;">
-                    <table class="table table-sm table-bordered mb-2 history-table" style="font-size:12px; table-layout:fixed; width:100%;">
+                <div class="table-responsive history-table-responsive" style="overflow-x:auto !important; width:100%; max-height:380px; overflow-y:auto; border-radius:6px; border:1px solid #e2e8f0;">
+                    <table class="table table-sm table-bordered mb-0 history-table" style="font-size:12px; width:100%; min-width:560px; margin-bottom:0;">
                         <colgroup>
-                            <col style="width: 145px;">
-                            <col style="width: 125px;">
+                            <col style="width: 140px;">
+                            <col style="width: 150px;">
                             <col style="width: auto;">
-                            <col style="width: 85px;">
+                            <col style="width: 100px;">
                         </colgroup>
-                        <thead class="bg-light">
+                        <thead class="bg-light" style="position:sticky; top:0; z-index:2; background:#f8fafc;">
                             <tr>
-                                <th style="white-space:nowrap; width:145px;">Date &amp; Time</th>
-                                <th style="white-space:nowrap; width:125px;">Edited By</th>
-                                <th style="white-space:nowrap;">Action / Remarks</th>
-                                <th class="text-center" style="white-space:nowrap; width:85px;">Status</th>
+                                <th style="white-space:nowrap; width:140px; background:#f8fafc; font-weight:700;">Date &amp; Time</th>
+                                <th style="white-space:nowrap; width:150px; background:#f8fafc; font-weight:700;">Edited By</th>
+                                <th style="white-space:nowrap; background:#f8fafc; font-weight:700;">Action / Remarks</th>
+                                <th class="text-center" style="white-space:nowrap; width:100px; background:#f8fafc; font-weight:700;">Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             ${history.map(function(h) {
                                 return `
                                 <tr>
-                                    <td style="white-space:nowrap; vertical-align:middle; font-size:11.5px;">${formatBidDateTime(h.CreationTs)}</td>
-                                    <td class="fw-semibold text-dark" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; vertical-align:middle; font-size:11.5px;" title="${escapeHtml(h.UpdatedByName || 'User')}"><i class="feather-user me-1 text-muted"></i> ${escapeHtml(h.UpdatedByName || 'User')}</td>
-                                    <td class="col-remarks" style="white-space:normal !important; word-break:break-word; overflow-wrap:break-word; vertical-align:middle; font-size:11.5px; line-height:1.4;">${escapeHtml(h.Remarks || 'Status update logged')}</td>
-                                    <td class="text-center" style="white-space:nowrap; vertical-align:middle;">
-                                        <span class="badge ${h.BadgeClass || 'bg-secondary'}" style="font-size:11px;">
+                                    <td style="white-space:nowrap; vertical-align:middle; font-size:11.5px; padding:6px 8px;">${formatBidDateTime(h.CreationTs)}</td>
+                                    <td class="fw-semibold text-dark" style="white-space:normal; vertical-align:middle; font-size:11.5px; padding:6px 8px; word-break:break-word;" title="${escapeHtml(h.UpdatedByName || 'User')}"><i class="feather-user me-1 text-muted"></i> ${escapeHtml(h.UpdatedByName || 'User')}</td>
+                                    <td class="col-remarks" style="white-space:normal !important; word-break:break-word; overflow-wrap:anywhere; vertical-align:middle; font-size:11.5px; line-height:1.45; padding:6px 8px;">${escapeHtml(h.Remarks || 'Status update logged')}</td>
+                                    <td class="text-center" style="white-space:nowrap; vertical-align:middle; padding:6px 8px;">
+                                        <span class="badge ${h.BadgeClass || 'bg-secondary'}" style="font-size:11px; font-weight:600; padding:4px 8px;">
                                             ${escapeHtml(h.StatusDisplayName || 'Updated')}
                                         </span>
                                     </td>

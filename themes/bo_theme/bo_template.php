@@ -222,14 +222,37 @@ if (!empty($employee_det['Bid'])) {
         .right-form-body {
             overflow-x: hidden !important;
         }
-        .right-form table {
+        .right-form table:not(.history-table) {
             table-layout: fixed !important;
             width: 100% !important;
             max-width: 100% !important;
         }
-        .right-form .table-responsive {
+        .right-form table.history-table {
+            table-layout: auto !important;
+            width: 100% !important;
+            max-width: none !important;
+        }
+        .right-form .table-responsive:not(.history-table-responsive) {
             overflow-x: hidden !important;
             max-width: 100% !important;
+        }
+        .right-form .history-table-responsive {
+            overflow-x: auto !important;
+            max-width: 100% !important;
+        }
+        .right-form .history-table-responsive::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .right-form .history-table-responsive::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .right-form .history-table-responsive::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .right-form .history-table-responsive::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
         }
         .right-form .text-wrap,
         .right-form td.text-wrap,
