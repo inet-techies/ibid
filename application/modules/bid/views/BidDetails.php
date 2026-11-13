@@ -8,7 +8,7 @@
 ?>
 
 <style>
-/* Fixed width and scrollable container for Bid Title in customerList table */
+/* Fixed width and inline more/less toggle container for Bid Title in customerList table */
 #customerList th.col-bid-title,
 #customerList td.col-bid-title {
     width: 260px !important;
@@ -19,35 +19,24 @@
 .bid-title-container {
     width: 100%;
     max-width: 260px;
-    max-height: 54px;
-    overflow-y: auto;
-    overflow-x: auto;
     white-space: normal !important;
     word-break: break-word;
-    line-height: 1.35;
+    line-height: 1.4;
     font-size: 13px;
-    padding-right: 4px;
     color: #1e293b;
-    cursor: pointer;
-    transition: color 0.15s ease;
 }
-.bid-title-container:hover {
+.bid-title-toggle {
+    display: inline-block;
     color: #2563eb;
+    font-weight: 600;
+    font-size: 12px;
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.bid-title-toggle:hover {
+    color: #1d4ed8;
     text-decoration: underline;
-}
-.bid-title-container::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
-}
-.bid-title-container::-webkit-scrollbar-track {
-    background: transparent;
-}
-.bid-title-container::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 4px;
-}
-.bid-title-container::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
 }
 </style>
 
@@ -131,8 +120,8 @@
                                         <thead>
                                             <tr> 
                                                 <th data-orderable="false" class="text-center" style="width: 50px;">S.No</th>
-                                                <th class="col-bid-title">Bid Title</th>
                                                 <th>Bid Type</th>
+                                                <th class="col-bid-title">Bid Title</th>
                                                 <th>Department</th>
                                                 <th>Published Date</th> 
                                                 <th>Opening Date</th> 
@@ -158,6 +147,28 @@
                                                 return $formattedDate;
                                             };
 
+                                            $renderBidTitleCell = function ($rawTitle, $maxLen = 95) {
+                                                $full = trim((string)($rawTitle ?? ''));
+                                                if ($full === '') {
+                                                    return '<div class="bid-title-container"><span class="bid-title-text">-</span></div>';
+                                                }
+                                                $escFull = htmlspecialchars($full, ENT_QUOTES, 'UTF-8');
+                                                if (mb_strlen($full, 'UTF-8') <= $maxLen) {
+                                                    return '<div class="bid-title-container" data-full-title="' . $escFull . '" title="' . $escFull . '"><span class="bid-title-text">' . $escFull . '</span></div>';
+                                                }
+                                                $cut = mb_substr($full, 0, $maxLen, 'UTF-8');
+                                                $lastSpace = mb_strrpos($cut, ' ', 0, 'UTF-8');
+                                                if ($lastSpace !== false && $lastSpace >= (int)($maxLen * 0.55)) {
+                                                    $cut = mb_substr($cut, 0, $lastSpace, 'UTF-8');
+                                                }
+                                                $short = rtrim($cut, " ,;:-") . '...';
+                                                $escShort = htmlspecialchars($short, ENT_QUOTES, 'UTF-8');
+                                                return '<div class="bid-title-container" data-full-title="' . $escFull . '" data-short-title="' . $escShort . '" title="' . $escFull . '">'
+                                                    . '<span class="bid-title-text">' . $escShort . '</span> '
+                                                    . '<a href="javascript:void(0);" class="bid-title-toggle" data-expanded="0">more</a>'
+                                                    . '</div>';
+                                            };
+
                                             if (isset($BidData) && !empty($BidData)) {
                                                 $i = 1;
                                                 foreach ($BidData as $val) {
@@ -174,15 +185,13 @@
                                             ?>
                                                     <tr class="single-item">
                                                         <td class="text-center fw-bold"><?= $i; ?></td>
-                                                        <td class="col-bid-title">
-                                                            <div class="bid-title-container" title="<?= htmlspecialchars($val['BidTitle'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
-                                                                <?= htmlspecialchars($val['BidTitle'] ?? ''); ?>
-                                                            </div>
-                                                        </td>
                                                         <td>
                                                             <span class="badge <?= $badgeClass ?>">
                                                                 <?= ucfirst($val['BidType']) ?>
                                                             </span>
+                                                        </td>
+                                                        <td class="col-bid-title" data-search="<?= htmlspecialchars($val['BidTitle'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
+                                                            <?= $renderBidTitleCell($val['BidTitle'] ?? ''); ?>
                                                         </td>
                                                         <td><?= $val['BidDepartment'] ?></td>
                                                         <td data-order="<?= htmlspecialchars(trim(($val['PublishedDate'] ?? '') . ' ' . ($val['tenderPublicationTime'] ?? '')), ENT_QUOTES, 'UTF-8') ?>"><?= $formatBidColDateTime($val['PublishedDate'] ?? '', $val['tenderPublicationTime'] ?? '') ?></td>
@@ -196,7 +205,7 @@
                                                                 <?= $val['DisplayName'] ?>
                                                             </span>
                                                         </td>
-                                                        <td><?= (!empty($val['CreationTs']) && strtotime($val['CreationTs'])) ? date('d M Y, h:i A', strtotime($val['CreationTs'])) : '-' ?></td>
+                                                        <td data-order="<?= htmlspecialchars($val['CreationTs'] ?? '', ENT_QUOTES, 'UTF-8') ?>"><?= (!empty($val['CreationTs']) && strtotime($val['CreationTs'])) ? date('d-m-Y, h:i A', strtotime($val['CreationTs'])) : '-' ?></td>
                                                         <td class="text-center">
                                                             <div class="hstack gap-2 justify-content-center">
                                                                 <a href="javascript:void(0)"
@@ -325,27 +334,6 @@
     </div>
 </div>
 
-
-<!-- Small Centered Modal for Full Bid Title -->
-<div class="modal fade" id="bidTitleModal" tabindex="-1" aria-labelledby="bidTitleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-md">
-        <div class="modal-content border-0 shadow-lg" style="border-radius: 12px; overflow: hidden;">
-            <div class="modal-header bg-light py-2 px-3 border-bottom">
-                <h6 class="modal-title fw-bold text-dark d-flex align-items-center mb-0" id="bidTitleModalLabel">
-                    <i class="feather-file-text text-primary me-2"></i> Bid Title
-                </h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-3">
-                <div id="bidTitleModalMeta" class="mb-2" style="display: none;"></div>
-                <div id="bidTitleModalText" class="text-dark fw-semibold" style="font-size: 14px; line-height: 1.6; white-space: pre-wrap; word-break: break-word;"></div>
-            </div>
-            <div class="modal-footer bg-light py-2 px-3 border-top">
-                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Right Side Update Panel -->
 <div class="right-form" id="bidCanvas">
@@ -557,6 +545,29 @@ function escapeHtml(str) {
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
+}
+
+function buildBidTitleCellHtml(rawTitle, maxLen) {
+    maxLen = maxLen || 95;
+    var full = (rawTitle === null || rawTitle === undefined) ? '' : String(rawTitle).trim();
+    if (!full) {
+        return '<div class="bid-title-container"><span class="bid-title-text">-</span></div>';
+    }
+    var escFull = escapeHtml(full);
+    if (full.length <= maxLen) {
+        return '<div class="bid-title-container" data-full-title="' + escFull + '" title="' + escFull + '"><span class="bid-title-text">' + escFull + '</span></div>';
+    }
+    var cut = full.slice(0, maxLen);
+    var lastSpace = cut.lastIndexOf(' ');
+    if (lastSpace >= Math.floor(maxLen * 0.55)) {
+        cut = cut.slice(0, lastSpace);
+    }
+    var shortTitle = cut.replace(/[\s,;:\-]+$/, '') + '...';
+    var escShort = escapeHtml(shortTitle);
+    return '<div class="bid-title-container" data-full-title="' + escFull + '" data-short-title="' + escShort + '" title="' + escFull + '">'
+        + '<span class="bid-title-text">' + escShort + '</span> '
+        + '<a href="javascript:void(0);" class="bid-title-toggle" data-expanded="0">more</a>'
+        + '</div>';
 }
 
 function formatIsoDate(dateStr) {
@@ -1262,21 +1273,18 @@ function executeSaveBidDetails() {
                             $viewBtn.attr('data-bid', JSON.stringify(res.bid));
                             $viewBtn.data('bid', res.bid);
 
-                            // Update visible cells in DOM (Title, Type, Dept, Published, Opening, Submission)
-                            var $titleCell = $tr.find('.bid-title-container');
-                            if ($titleCell.length) {
-                                $titleCell.text(res.bid.BidTitle).attr('title', res.bid.BidTitle);
-                            } else {
-                                $tr.find('td.col-bid-title').html('<div class="bid-title-container" title="' + escapeHtml(res.bid.BidTitle) + '">' + escapeHtml(res.bid.BidTitle) + '</div>');
-                            }
-                            dt.cell($tr.find('td:eq(1)')).invalidate();
-
+                            // Update visible cells in DOM (Type at 1, Title at 2, Dept at 3, Published at 4, Opening at 5, Submission at 6)
                             if (res.bid.BidType) {
                                 var typeLower = String(res.bid.BidType).toLowerCase().trim();
                                 var typeBadge = (typeLower === 'oem') ? 'bg-danger text-white' : ((typeLower === 'service') ? 'bg-primary text-white' : 'bg-secondary text-white');
-                                $tr.find('td:eq(2)').html('<span class="badge ' + typeBadge + '">' + escapeHtml(res.bid.BidType) + '</span>');
-                                dt.cell($tr.find('td:eq(2)')).invalidate();
+                                $tr.find('td:eq(1)').html('<span class="badge ' + typeBadge + '">' + escapeHtml(res.bid.BidType) + '</span>');
+                                dt.cell($tr.find('td:eq(1)')).invalidate();
                             }
+
+                            var titleTd = $tr.find('td.col-bid-title');
+                            titleTd.attr('data-search', res.bid.BidTitle || '');
+                            titleTd.html(buildBidTitleCellHtml(res.bid.BidTitle));
+                            dt.cell($tr.find('td:eq(2)')).invalidate();
                             if (res.bid.BidDepartment !== undefined) {
                                 $tr.find('td:eq(3)').text(res.bid.BidDepartment || '');
                                 dt.cell($tr.find('td:eq(3)')).invalidate();
@@ -2079,7 +2087,7 @@ $(document).ready(function() {
         var filterType = ($('#bid-filter-type').val() || '').toLowerCase().trim();
         var filterDept = ($('#bid-filter-dept').val() || '').toLowerCase().trim();
 
-        var rowType = (data[2] || '').toLowerCase().trim();
+        var rowType = (data[1] || '').toLowerCase().trim();
         var rowDept = (data[3] || '').toLowerCase().trim();
 
         if (filterType && rowType.indexOf(filterType) === -1) return false;
@@ -2148,38 +2156,23 @@ $(document).ready(function() {
         $('#updatePriceInWords').text(words);
     });
 
-    // Click Bid Title in table to view full title clearly in a small modal
-    $(document).on('click', '#customerList .bid-title-container', function (e) {
+    // Toggle inline more/less for long Bid Titles in table
+    $(document).on('click', '#customerList .bid-title-toggle', function (e) {
         e.preventDefault();
         e.stopPropagation();
 
-        var fullTitle = $(this).text().trim() || $(this).attr('title') || '-';
-        var $tr = $(this).closest('tr');
-        var rowBid = $tr.find('.view-bid').data('bid');
-        if (typeof rowBid === 'string') {
-            try { rowBid = JSON.parse(rowBid); } catch (err) { rowBid = null; }
-        }
+        var $toggle = $(this);
+        var $wrap = $toggle.closest('.bid-title-container');
+        var expanded = $toggle.attr('data-expanded') === '1';
+        var fullText = $wrap.attr('data-full-title') || '';
+        var shortText = $wrap.attr('data-short-title') || '';
 
-        var $meta = $('#bidTitleModalMeta');
-        if (rowBid && rowBid.TenderId) {
-            $meta.html('<span class="badge bg-soft-primary text-primary border border-primary" style="font-size:11px;">Tender ID: ' + escapeHtml(rowBid.TenderId) + '</span>').show();
+        if (expanded) {
+            $wrap.find('.bid-title-text').text(shortText);
+            $toggle.text('more').attr('data-expanded', '0');
         } else {
-            $meta.empty().hide();
-        }
-
-        $('#bidTitleModalText').text(fullTitle);
-
-        var modalEl = document.getElementById('bidTitleModal');
-        if (modalEl) {
-            if (modalEl.parentNode !== document.body) {
-                document.body.appendChild(modalEl);
-            }
-            if (window.bootstrap && bootstrap.Modal) {
-                var modalInstance = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
-                modalInstance.show();
-            } else if (typeof $(modalEl).modal === 'function') {
-                $(modalEl).modal('show');
-            }
+            $wrap.find('.bid-title-text').text(fullText);
+            $toggle.text('less').attr('data-expanded', '1');
         }
     });
 });

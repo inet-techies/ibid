@@ -41,7 +41,7 @@ class InetMailer
 		$mail->isSMTP();                                      // Set mailer to use SMTP
 		$mail->Host = 'smtp.office365.com';  // Specify main and backup SMTP servers
 		$mail->SMTPAuth = true;                               // Enable SMTP authentication
-		$mail->Username = 'inet@inetcsc.com';  //karunakaran@inetcsc.com                // SMTP username
+		$mail->Username = 'info@inetcsc.com';  //karunakaran@inetcsc.com                // SMTP username
 		$mail->Password = 'Acb@786@123'; //Empty@123 /***before2021-05-20****/   //Wun59371                        // SMTP password
 		$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 		$mail->Port = 587;                                    // TCP port to connect to

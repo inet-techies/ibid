@@ -51,6 +51,7 @@ class Bid extends MX_Controller
 	public function index()
 	{
 	 	$this->load->model('bid/bid_model');
+		$this->session->unset_userdata('pending_otp_login');
 		
 		$this->template->set_master_template('../../themes/'.$this->config->item("active_template").'/landing_template_login.php');
 		$this->template->write_view('content', 'bid/index');
@@ -60,56 +61,283 @@ class Bid extends MX_Controller
 
 	public function CheckLogin()
 	{
+		$inps = $this->input->post();
+		$username = isset($inps['EmailId']) ? trim((string)$inps['EmailId']) : '';
+		$yourpassword = isset($inps['EmailPass']) ? (string)$inps['EmailPass'] : '';
 
-		   $inps = $this->input->post();
-		   $username = $inps['EmailId'];
-		   $yourpassword = $inps['EmailPass'];
-		     //echo "<pre>HELLO"; print_r($yourpassword);  exit;
-		   // echo "<pre>HELLO"; print_r(md5($yourpassword)); 
-		  if($username!="")
-			{ 
+		if ($username === '' || $yourpassword === '') {
+			$this->session->set_flashdata('err', 'Please enter both Email and Password.');
+			redirect($this->config->item('base_url').'bid/index');
+			return;
+		}
 
-			$Buquery = $this->bid_model->getLoginUser($username, $yourpassword);
-				
-				if(!empty($Buquery)){
- 
+		$Buquery = $this->bid_model->getLoginUser($username, $yourpassword);
 
-					$sess_array = array('Bid'=>$Buquery[0]['Buid'],'BName'=>$Buquery[0]['Name'],'BEmail'=>$Buquery[0]['Email'],'RoleId'=>$Buquery[0]['Brid']);
-                    //echo "<pre>HELLO"; print_r($sess_array);
-                    $this->session->set_userdata('logged_in',$sess_array);
-                    $Bid_Data = $this->session->userdata('logged_in');
-                    //echo"<pre>sess";print_r($employee_det);
-                    $data['Logdescription'] = "User ".$Bid_Data['Bid']." Logged in Successfully on ".date("Y M d H i s");
-                   $ip_address = $this->input->ip_address();
-                    $data['Buid'] = $Bid_Data['Bid'];
-                    $data['UserRole'] = $Bid_Data['RoleId'];
-                    $data['Ipaddress'] = $ip_address;
-                    // $data['location'] = $Bid_Data['work_loc'];
-                    $curr_time=time();
-                    $login_time = date("Y-m-d H:i:s",$curr_time);
-                    //echo"<pre> Login Time";print_r($login_time);
-                    $data['LogInTime'] = $login_time;
-                    $data['LogOutTime'] ='';
-                     // exit;
-                     $data['Status'] ='1';
-                     $this->bid_model->insertLoginLog($data);
-                   
-                     redirect($this->config->item('base_url').'bid/dashboard');
- 
-                 } else {
+		if (!empty($Buquery)) {
+			// Clear any previous authenticated session until OTP is verified
+			$this->session->unset_userdata('logged_in');
 
-                 	$this->session->set_flashdata('err', 'Invalid Login Credentials..!');
-	   			    redirect($this->config->item('base_url').'bid/index');
+			$userRow = $Buquery[0];
+			$otpResult = $this->_issueAndSendOtp($userRow, 'login');
 
+			$this->session->set_userdata('pending_otp_login', [
+				'Buid'    => (int)$userRow['Buid'],
+				'Name'    => $userRow['Name'],
+				'Email'   => $userRow['Email'],
+				'Brid'    => $userRow['Brid'],
+				'sent_at' => time(),
+			]);
 
-                 }
-				
+			$masked = $this->_maskEmail($userRow['Email']);
+			if (!empty($otpResult['mail_sent'])) {
+				$this->session->set_flashdata('yes', 'A 6-digit login OTP has been sent to ' . $masked . '.');
+			} else {
+				$this->session->set_flashdata('err', 'Could not deliver OTP email right now. Please click Resend or contact support.');
 			}
-		  	$this->template->set_master_template('../../themes/'.$this->config->item("active_template").'/landing_template_login.php');
-			$this->template->write_view('content', 'bid/index');
-			$this->template->render();
-		  
-		   }
+
+			redirect($this->config->item('base_url').'bid/verifyLoginOtp');
+			return;
+		} else {
+			$this->session->set_flashdata('err', 'Invalid Login Credentials..!');
+			redirect($this->config->item('base_url').'bid/index');
+			return;
+		}
+	}
+
+	/**
+	 * Render 2FA OTP verification screen for pending login session
+	 */
+	public function verifyLoginOtp()
+	{
+		if (!empty($this->session->userdata('logged_in'))) {
+			redirect($this->config->item('base_url').'bid/dashboard');
+			return;
+		}
+
+		$pending = $this->session->userdata('pending_otp_login');
+		if (empty($pending) || empty($pending['Buid'])) {
+			$this->session->set_flashdata('err', 'Your login session has expired. Please sign in again.');
+			redirect($this->config->item('base_url').'bid/index');
+			return;
+		}
+
+		$elapsed = time() - (int)($pending['sent_at'] ?? 0);
+		$data['maskedEmail'] = $this->_maskEmail($pending['Email'] ?? '');
+		$data['resendWait']  = ($elapsed < 60) ? (60 - $elapsed) : 0;
+
+		$this->template->set_master_template('../../themes/'.$this->config->item('active_template').'/landing_template_login.php');
+		$this->template->write_view('content', 'bid/VerifyLoginOtp', $data);
+		$this->template->render();
+	}
+
+	/**
+	 * AJAX endpoint to verify Login OTP and establish authenticated session
+	 */
+	public function verifyLoginOtpAjax()
+	{
+		if (!headers_sent()) {
+			header('Content-Type: application/json');
+		}
+
+		$pending = $this->session->userdata('pending_otp_login');
+		if (empty($pending) || empty($pending['Buid'])) {
+			echo json_encode([
+				'status'         => false,
+				'expiredSession' => true,
+				'message'        => 'Login session expired. Redirecting to login...',
+				'redirect'       => base_url('bid/index')
+			]);
+			return;
+		}
+
+		$buid = (int)$pending['Buid'];
+		$enteredOtp = preg_replace('/\D/', '', (string)$this->input->post('otp'));
+		$user = $this->bid_model->getBidUserRow($buid);
+
+		if (!$user || (int)$user->Status !== 1) {
+			$this->session->unset_userdata('pending_otp_login');
+			echo json_encode([
+				'status'         => false,
+				'expiredSession' => true,
+				'message'        => 'Account unavailable. Please sign in again.',
+				'redirect'       => base_url('bid/index')
+			]);
+			return;
+		}
+
+		if ((int)$user->OTPAttempts >= 5) {
+			echo json_encode([
+				'status'  => false,
+				'locked'  => true,
+				'message' => 'Maximum OTP attempts reached. Please click Resend to receive a new code.'
+			]);
+			return;
+		}
+
+		if (empty($user->OTPExpiry) || strtotime($user->OTPExpiry) < time()) {
+			echo json_encode([
+				'status'  => false,
+				'message' => 'OTP has expired. Please click Resend to receive a new code.'
+			]);
+			return;
+		}
+
+		if (strlen($enteredOtp) !== 6 || empty($user->OTPHash) || !password_verify($enteredOtp, $user->OTPHash)) {
+			$this->bid_model->incrementOtpAttempts($buid);
+			$remaining = max(0, 5 - ((int)$user->OTPAttempts + 1));
+			echo json_encode([
+				'status'  => false,
+				'message' => $remaining > 0
+					? "Invalid OTP. {$remaining} attempt(s) remaining."
+					: 'Invalid OTP. Maximum attempts reached; please request a new code.'
+			]);
+			return;
+		}
+
+		// Clear OTP fields in DB once verified
+		$this->bid_model->updateBidUser($buid, [
+			'OTPHash'     => NULL,
+			'OTPExpiry'   => NULL,
+			'OTPAttempts' => 0
+		]);
+
+		// Promote pending session to authenticated session
+		$this->session->unset_userdata('pending_otp_login');
+		if (method_exists($this->session, 'sess_regenerate')) {
+			@$this->session->sess_regenerate(FALSE);
+		}
+
+		$sess_array = [
+			'Bid'    => $user->Buid,
+			'BName'  => $user->Name,
+			'BEmail' => $user->Email,
+			'RoleId' => $user->Brid,
+		];
+		$this->session->set_userdata('logged_in', $sess_array);
+
+		$loginTime = date('Y-m-d H:i:s');
+		$logData = [
+			'Logdescription' => 'User ' . $user->Buid . ' Logged in with OTP on ' . date('Y M d H i s'),
+			'Buid'           => $user->Buid,
+			'UserRole'       => $user->Brid,
+			'Ipaddress'      => $this->input->ip_address(),
+			'LogInTime'      => $loginTime,
+			'LogOutTime'     => '',
+			'Status'         => '1',
+		];
+		$this->bid_model->insertLoginLog($logData);
+
+		echo json_encode([
+			'status'   => true,
+			'message'  => 'OTP verified successfully! Redirecting...',
+			'redirect' => base_url('bid/dashboard')
+		]);
+	}
+
+	/**
+	 * AJAX endpoint to resend Login OTP with 60-second cooldown
+	 */
+	public function resendLoginOtp()
+	{
+		if (!headers_sent()) {
+			header('Content-Type: application/json');
+		}
+
+		$pending = $this->session->userdata('pending_otp_login');
+		if (empty($pending) || empty($pending['Buid'])) {
+			echo json_encode(['status' => false, 'msg' => 'Login session expired. Please sign in again.']);
+			return;
+		}
+
+		$elapsed = time() - (int)($pending['sent_at'] ?? 0);
+		if ($elapsed < 60) {
+			$wait = 60 - $elapsed;
+			echo json_encode(['status' => false, 'wait' => $wait, 'msg' => "Please wait {$wait}s before requesting another OTP."]);
+			return;
+		}
+
+		$userRows = $this->bid_model->getUserById((int)$pending['Buid']);
+		if (empty($userRows)) {
+			echo json_encode(['status' => false, 'msg' => 'User account not found.']);
+			return;
+		}
+
+		$otpResult = $this->_issueAndSendOtp($userRows[0], 'login');
+		$pending['sent_at'] = time();
+		$this->session->set_userdata('pending_otp_login', $pending);
+
+		if (!empty($otpResult['mail_sent'])) {
+			echo json_encode(['status' => true, 'msg' => 'A fresh 6-digit OTP has been sent to ' . $this->_maskEmail($userRows[0]['Email']) . '.']);
+		} else {
+			echo json_encode(['status' => false, 'msg' => 'Failed to send OTP email. Please check mail server settings.']);
+		}
+	}
+
+	/**
+	 * Generate, store, and email a 6-digit OTP for login or account verification
+	 */
+	private function _issueAndSendOtp(array $userRow, $purpose = 'login')
+	{
+		$buid = (int)$userRow['Buid'];
+		$otp  = random_int(100000, 999999);
+
+		$this->bid_model->updateBidUser($buid, [
+			'OTPHash'     => password_hash((string)$otp, PASSWORD_DEFAULT),
+			'OTPExpiry'   => date('Y-m-d H:i:s', strtotime('+10 minutes')),
+			'OTPAttempts' => 0
+		]);
+
+		$mailData = [
+			'otp'           => $otp,
+			'name'          => $userRow['Name'] ?? 'User',
+			'expiryMinutes' => 10,
+			'ipAddress'     => $this->input->ip_address(),
+			'RegMail'       => [$userRow],
+		];
+
+		$mailSent = false;
+		$mailError = null;
+		try {
+			require_once(APPPATH . 'libraries/InetMailer.php');
+			$objs = new InetMailer();
+			$mail = $objs->load();
+
+			$mail->setFrom('info@inetcsc.com', 'I-NET CSC');
+			$mail->addAddress(trim((string)$userRow['Email']));
+			$mail->isHTML(true);
+
+			if ($purpose === 'login') {
+				$mail->Subject = 'Login Verification OTP - Bid Management';
+				$mail->Body    = $this->load->view('bid/LoginOTPMail', $mailData, TRUE);
+			} else {
+				$mail->addCC('prasannakumari@inetcsc.com');
+				$mail->Subject = 'Employee Verification OTP - Bid Management';
+				if (file_exists(FCPATH . 'images/inet_logo.png')) {
+					$mail->AddEmbeddedImage(FCPATH . 'images/inet_logo.png', 'I-NET');
+				}
+				$mail->Body = $this->load->view('bid/EmployeeOTPMail', $mailData, TRUE);
+			}
+
+			$mailSent = (bool)$mail->send();
+		} catch (\Exception $e) {
+			$mailError = $e->getMessage();
+			log_message('error', 'OTP mail send failed for Buid ' . $buid . ': ' . $mailError);
+		}
+
+		return ['mail_sent' => $mailSent, 'mail_error' => $mailError];
+	}
+
+	/**
+	 * Mask email address for display on OTP screen (e.g. pr***@inetcsc.com)
+	 */
+	private function _maskEmail($email)
+	{
+		$email = trim((string)$email);
+		if (strpos($email, '@') === false) return '***';
+		list($local, $domain) = explode('@', $email, 2);
+		$visible = substr($local, 0, min(2, strlen($local)));
+		return $visible . str_repeat('*', max(3, strlen($local) - strlen($visible))) . '@' . $domain;
+	}
 	
 public function dashboard(){
 
@@ -1834,6 +2062,7 @@ public  function logout()
 				$this->bid_model->insertLoginLog($data);
 
 				$this->session->unset_userdata('logged_in');
+				$this->session->unset_userdata('pending_otp_login');
 				redirect($this->config->item('base_url').'bid/index');
 			} else {
 				redirect($this->config->item('base_url').'bid/index');
