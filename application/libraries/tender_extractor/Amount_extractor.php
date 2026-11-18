@@ -246,8 +246,8 @@ class Amount_extractor
                     $secOffset = $sm[1];
                     $secBlock = substr($pText, $secOffset, 700);
 
-                    // Skip if primarily forfeiture or exemption clause without amount definition
-                    if (preg_match('/^(?:[A-Z]\.\s+)?(?:FORFEITURE|EXEMPTION)/i', $secTitle)) {
+                    // Skip if primarily forfeiture or exemption clause without amount definition or format/proforma
+                    if (preg_match('/(?:FORFEITURE|EXEMPTION|\bFORMAT\b|\bPROFORMA\b|\bANNEXURE\b|\bTEMPLATE\b|\bDRAFT\b|\bAFFIDAVIT\b)/i', $secTitle)) {
                         continue;
                     }
 
@@ -283,8 +283,11 @@ class Amount_extractor
                     $rowLabel = trim($tm[1]);
                     $rowVal = trim($tm[2]);
 
-                    // Exclude if label indicates deadline, fee, account, etc.
-                    if (preg_match('/(?:Date|Time|Fee|Cost|Schedule|Account|Exemption|Forfeiture)/i', $rowLabel)) {
+                    // Exclude if label indicates deadline, fee, account, or template formats
+                    if (preg_match('/(?:Date|Time|Fee|Cost|Schedule|Account|Exemption|Forfeiture|\bFORMAT\b|\bPROFORMA\b|\bANNEXURE\b|\bTEMPLATE\b|\bDRAFT\b|\bAFFIDAVIT\b)/i', $rowLabel)) {
+                        continue;
+                    }
+                    if (preg_match('/(?:stamp\s+paper|non-judicial)/i', $rowVal)) {
                         continue;
                     }
 
@@ -301,6 +304,45 @@ class Amount_extractor
                             'page'            => $pNo,
                             'method'          => 'table_row'
                         ];
+                    }
+                }
+            }
+
+            // ── Strategy B2: Multiline Wrapped Table Row (Amount on line immediately preceding or succeeding EMD label) ──
+            $lines = explode("\n", $pText);
+            $lineCount = count($lines);
+            for ($li = 0; $li < $lineCount; $li++) {
+                $curLine = trim($lines[$li]);
+                if (preg_match('/^(?:(?:[0-9]+[.\)]\s*)?([^\r\n|:]*?(?:' . $emdKeywords . ')[^\r\n|:]*?))\s*$/iu', $curLine, $lm)) {
+                    $rowLabel = trim($lm[1]);
+                    if (preg_match('/(?:Date|Time|Fee|Cost|Schedule|Account|Exemption|Forfeiture|\bFORMAT\b|\bPROFORMA\b|\bANNEXURE\b|\bTEMPLATE\b|\bDRAFT\b|\bAFFIDAVIT\b)/i', $rowLabel)) {
+                        continue;
+                    }
+                    $candidatesAround = [];
+                    if ($li > 0) $candidatesAround[] = trim($lines[$li - 1]);
+                    if ($li + 1 < $lineCount) $candidatesAround[] = trim($lines[$li + 1]);
+
+                    foreach ($candidatesAround as $nearbyLine) {
+                        if (preg_match('/(?:stamp\s+paper|non-judicial)/i', $nearbyLine)) {
+                            continue;
+                        }
+                        if (preg_match('/(?:Rs\.?|INR|₹)\s*([0-9]{1,3}(?:,[0-9]{2,3})*(?:\.[0-9]{1,2})?|\d+(?:\.\d+)?\s*(?:Lakhs?|Lacs?|Crores?|Cr))/iu', $nearbyLine, $amNearby)) {
+                            $parsed = self::parse($amNearby[0]);
+                            if ($parsed['numeric'] !== null && $parsed['numeric'] >= 500) {
+                                $candidates[] = [
+                                    'value'           => (string)$parsed['numeric'],
+                                    'raw_value'       => $parsed['original_amount'] ?: $parsed['formatted'],
+                                    'original_amount' => $parsed['original_amount'] ?: $parsed['formatted'],
+                                    'amount_in_words' => $parsed['amount_in_words'],
+                                    'source'          => "Page {$pNo}, {$rowLabel}",
+                                    'evidence'        => "{$rowLabel}: {$nearbyLine}",
+                                    'confidence'      => 97,
+                                    'page'            => $pNo,
+                                    'method'          => 'table_row_wrapped'
+                                ];
+                                break;
+                            }
+                        }
                     }
                 }
             }

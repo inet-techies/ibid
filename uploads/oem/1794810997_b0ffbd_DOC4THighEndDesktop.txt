@@ -1,0 +1,1441 @@
+NATIONAL INSTITUTE OF TECHNOLOGY KARNATAKA, SURATHKAL
+                                                                                                                DOC - 4
+                                           POST-SRINIVASNAGAR, MANGALURU – 575 025
+                      Phone: (0824) 2474000                          Fax: (0824) 2474033
+                      Email: info@nitk.ac.in                         Website: http://www.nitk.ac.in
+
+       NATIONAL INSTITUTE OF TECHNOLOGY KARNATAKA, SURATHKAL
+                              POST-SRINIVASNAGAR, MANGALURU – 575 025 (D K)
+                                  DEPARTMENT OF MECHANICAL ENGINEERING
+         Phone: (0824) 2474000.                                      Fax:(0824) 2474033
+         E- mail: info@nitk.ac.in                                    Website: http://www.nitk.ac.in
+
+                                       TENDER DOCUMENT
+Tender Notification No: NITK/DPD/OH35-MECH/2024-25/A9-4                                                Date: 04/03/2025
+                                                High End Desktop
+Name of Goods
+
+The estimated amount put to Tender              ₹ 47,25,000.00 (Including GST) (Refer Section 1B,37)
+                                                Rs. 94,500.00
+EMD Amount (2% of estimated amount)
+
+Time for Supply of item                         One month
+
+Date, Time& Venue of Pre-Bid Conference         (Refer Section 1 B, Clause No. 35) - N/A
+
+Bid Document Download Start Date                05/03/2025
+
+                                                05/03/2025
+Clarification Start Date
+
+Clarification End Date                          13/03/2025
+
+Online Bid Submission Start Date                05/03/2025
+
+Online Bid Submission End Date                  13/03/2025
+
+Address for Submission of Tender                https://eprocure.gov.in/
+
+Date of opening technical bid                   14/03/2025
+
+Contact Details of Buyer                        Dr. Arun Kumar Shettigar, 9731652895
+
+Purchase officer Name and Contact (Related to   Superintendent (purchase)
+purchase inquiry)                               Phone: +91-824-2473014,3114 Email: supdt-purchase@nitk.edu.in
+
+                                                                                                          Page 1 of 41
+
+   NITK/DPD/OH35-MECH/2024-25/A9-4                                                           Date: 04/03/2025
+
+                                      NOTICE INVITING e-TENDER (e-NIT)
+
+  The National Institute of Technology Karnataka, Surathkal (in short – NITK, Surathkal) is an Institute of
+National Importance under Ministry of Education, Govt of India imparting Technical Education and engaged in
+Research Activities.
+
+    Online Tenders(https://eprocure.gov.in/) are invited for the following items in two cover systems(i.e.,
+Technical bid and financial bid) subject to the following terms and conditions, from the reputed manufacturers or
+itsauthorizeddealers so as to reach this office on or before scheduled date and time. The tender (Technical bid)
+will be opened online on the due date as mentioned. Bidders can verify their bid status through the online portal
+https://eprocure.gov.in/. The financial bid of only such bidders whose technical bid is accepted shall be opened on
+the same day or later pre-informed date.
+
+                                                        High End Desktop
+Name of Goods
+
+                                                        ₹ 47,25,000.00(Including GST) (Refer Section 1B,37)
+Estimated Cost
+                                                        Rs. 94,500.00
+EMD Amount (2% of estimated amount)
+
+Time for completion of Supply after                     One month
+Placing Purchase Order
+                                                        (Refer Section 1 B, Clause No. 35)
+Date, Time & Venue of Pre-Bid Conference
+
+Bid Document Download Start Date                        05/03/2025
+
+Clarification Start Date                                05/03/2025
+
+Clarification End Date                                  13/03/2025
+
+Online Bid Submission Start Date                        05/03/2025
+
+Online Bid Submission End Date                          13/03/2025
+
+                                                        https://eprocure.gov.in/
+Address for Submission of Tender
+
+Date of opening technical bid                           14/03/2025
+
+                                                        Dr. Arun Kumar Shettigar, 9731652895
+Contact Details of Buyer
+
+                                                                                         Sd/-
+                                                                                        HOD
+                                                                                   Seal & Signature
+
+                                                                                                      Page 2 of 41
+
+                               SECTION 1 A: Instructions for Online Bid Submission
+  The bidders are required to submit soft copies of their bids electronically on the CPP Portal, using valid Digital
+Signature Certificates. The instructions given below are meant to assist the bidders in registering on the CPP Portal,
+prepare their bids in accordance with the requirements and submit their bids online on the CPP Portal.
+
+More information useful for submitting               online    bids   on    the    CPP     Portal    may    be    obtained
+at:https://eprocure.gov.in/eprocure/app.
+
+REGISTRATION
+
+1) Bidders are required to enroll on the e-Procurement module of the Central Public Procurement Portal (URL:
+https://eprocure.gov.in/eprocure/app) by clicking on the link “Online bidder Enrollment” on the CPP Portal which is
+free of charge.
+
+2) As part of the enrolment process, the bidders will be required to choose a unique username and assign a password
+for their accounts.
+
+3) Bidders are advised to register their valid email addresses and mobile numbers as part of the registration process.
+These would be used for any communication from the CPP Portal.
+
+4) Upon enrolment, the bidders will be required to register their valid Digital Signature Certificate (Class II or Class III
+Certificates with signing key usage) issued by any Certifying Authority recognized by CCA India (e.g.Sify / nCode /
+eMudhra, etc.), with their profile.
+
+5) Only one valid DSC should be registered by a bidder. Please note that the bidders are responsible to ensure that
+they do not lend their DSC’s to others which may lead to misuse.
+
+6) Bidder then logs in to the site through the secured log-in by entering their user ID/password and the password of the
+DSC / e-Token.
+
+SEARCHING FOR TENDER DOCUMENTS
+
+1) There is various search options built-in in the CPP Portal, to facilitate bidders to search active tenders by several
+parameters. These parameters could include Tender ID, Organization Name, Location, Date, Value, etc. There is also
+an option of advanced search for tenders, wherein the bidders may combine a number of search parameters such as
+Organization Name, Form of Contract, Location, Date, Other keywords, etc. to search for a tender published on the
+CPP Portal.
+
+2) Once the bidders have selected the tenders they are interested in, they may download the required
+documents/tender schedules. These tenders can be moved to the respective ‘My Tenders’ folder. This would enable
+the CPP Portal to intimate the bidders through SMS / email in case there is any corrigendum issued to the tender
+document.
+
+3) The bidder should make a note of the unique Tender ID assigned to each tender, in case they want to obtain any
+clarification/help from the Helpdesk.
+
+                                                                                                             Page 3 of 41
+
+PREPARATION OF BIDS
+
+1) Bidder should take into account any corrigendum published on the tender document before submitting their bids.
+
+2) Please go through the tender advertisement and the tender document carefully to understand the documents
+required to be submitted as part of the bid. Please note the number of covers in which the bid documents have to be
+submitted, the number of documents - including the names and content of each of the documents that need to be
+submitted. Any deviations from these may lead to the rejection of the bid.
+
+3) Bidder, in advance, should get ready the bid documents to be submitted as indicated in the tender
+document/schedule and generally, they can be in PDF / XLS / RAR / DWF/JPG formats. Bid documents may be
+scanned with 100 dpi with the black and white option which helps in reducing the size of the scanned document.
+
+4) To avoid the time and effort required in uploading the same set of standard documents which are required to be
+submitted as a part of every bid, a provision of uploading such standard documents (e.g. PAN card copy, annual
+reports, auditor certificates, etc.) has been provided to the bidders. Bidders can use the “My Space” or ‘’Other
+Important Documents’’ area available to them to upload such documents. These documents may be directly submitted
+from the “My Space” area while submitting a bid, and need not be uploaded again and again. This will lead to a
+reduction in the time required for the bid submission process.
+
+Note: My Documents space is only a repository given to the Bidders to ease the uploading process. If Bidder
+has uploaded his Documents in the My Documents space, this does not automatically ensure these
+Documents being part of the Technical Bid.
+
+SUBMISSION OF BIDS
+
+1. Bidder should log into the site well in advance for bid submission so that they can upload the bid in time i.e. on or
+before the bid submission time. Bidder will be responsible for any delay due to other issues.
+
+2. The bidder has to digitally sign and upload the required bid documents one by one as indicated in the tender
+document.
+
+3. Bidder has to select the payment option as “online” to pay the tender fee / EMDas applicable and enter details of the
+instrument.
+
+4. Bidders are requested to note that they should necessarily submit their financial bids in the format provided and no
+other format is acceptable. If the price bid has been given as a standard BoQ format with the tender document, then
+the same is to be downloaded and to be filled by all the bidders. Bidders are required to download the BoQ file, open it
+and complete the white-colored (unprotected) cells with their respective financial quotes and other details (such as the
+name of the bidder). No other cells should be changed. Once the details have been completed, the bidder should save
+it and submit it online, without changing the filename. If the BoQ file is found to be modified by the bidder, the bid will
+be rejected.
+
+5. The server time (which is displayed on the bidders’ dashboard) will be considered as the standard time for
+referencing the deadlines for submission of the bids by the bidders, the opening of bids, etc. The bidders should follow
+this time during bid submission.
+
+                                                                                                            Page 4 of 41
+
+6. All the documents being submitted by the bidders would be encrypted using PKI encryption techniques to ensure
+the secrecy of the data. The data entered cannot be viewed by unauthorized persons until the time of bid opening. The
+confidentiality of the bids is maintained using the secured Socket Layer 128-bit encryption technology. Data storage
+encryption of sensitive fields is done. Any bid document that is uploaded to the server is subjected to symmetric
+encryption using a system-generated symmetric key. Further, this key is subjected to asymmetric encryption using
+buyers/bid openers' public keys. Overall, the uploaded tender documents become readable only after the tender
+opening by the authorized bid openers.
+
+7. The uploaded tender documents become readable only after the tender opening by the authorized bid openers.
+
+8. Upon the successful and timely submission of bids (i.e. after Clicking “Freeze Bid Submission” in the portal), the
+portal will give a successful bid submission message & a bid summary will be displayed with the bid no. and the date &
+time of submission of the bid with all other relevant details.
+
+9. The bid summary has to be printed and kept as an acknowledgment of the submission of the bid. This
+acknowledgment may be used as an entry pass for any bid opening meetings.
+
+10.The off-line tender shall not be accepted and no request in this regard shall be entertained whatsoever.
+
+11. All entries in the tender should be entered in online Technical & Commercial Formats without any ambiguity.
+
+12. Any order resulting from this e-tender shall be governed by the terms and conditions mentioned therein.
+
+13. No deviation from the technical and commercial terms & conditions are allowed.
+
+14. The tender inviting authority has the right to cancel this e-tender or extend the due date of receipt of the bid(s).
+
+ASSISTANCE TO BIDDERS
+
+1) Any queries relating to the tender document and the terms and conditions contained therein should be addressed to
+the Tender Inviting Authority for a tender or the relevant contact person indicated in the tender.
+
+2) Any queries relating to the process of online bid submission or queries relating to CPP Portal, in general, may be
+directed to the 24x7 CPP Portal Helpdesk.
+
+                                                                                                             Page 5 of 41
+
+SECTION 1B: INSTRUCTION TO BIDDER (ITB)
+  1. The bid should be submitted in two coversSystem-Technical Bid and Financial Bid through
+     https://eprocure.gov.in/
+  2. Technical Bid: Documents related to the Technical Bid should be submitted in PDF format through the
+     E-Tendering portal https://eprocure.gov.in/.
+  3. The Technical Bid should contain the following documents:
+      a) Compliance statement of specifications as per Annexure - ‘A’.
+      b) License certificate for manufacture /supply of the item &Factory license
+       c) Agreements/Purchase Orders/Completion certificates if any, for similar items fromother Universities,
+          Institutes, and Government Department/Undertakings/Public sectors the details of such supplies for
+          the preceding three years should be given together with the prices eventually or finally paid with
+          contact details of persons as per Annexure – ‘B’.
+      d) List of Owner/partners of the firm and their contact numbers (Bidder Information)
+      e) Declaration of abandoned or suspended any awarded service & Blacklist Certificate. Annexure ‘C’
+      f) Integrity Pact (for procurements above Rs1.0 Crore (Rs10.0Million). Annexure ‘D’
+      g) Copy of GST certificate & PAN No.
+      h) Catalog of the Product with detailed product specifications.
+       i) Undertaking that the successful BIDDER agrees to give a Performance Security amounting to 3%of
+          the purchase order value in favor of “The Director, NITK Surathkal”.
+       j) A copy of the Balance sheet, Profit & Loss A/c., Trade or Manufacturing A/c for the last 3 years should
+          be enclosed and the turnover must be 30% of the estimated cost.
+       k) Duly filled in the checklist should be submitted along with the Technical Bid.
+       l) The contract form given in Section 5 needs to be submitted.
+      m) EMD must be in the form of Bank Guarantee Annexure-J (Fixed Deposit Receipt/Insurance surety
+         bonds/DD/e-Payment mode (through Credit/Debit cards/Net Banking). It will be valid for 180 days from
+         the date of opening of the tender. In case of EMD payment made through E-Payment, UTR Number
+         with details should be uploaded. The firm registered with MSME/NSIC as per MSME procurement
+         policy order 2012 will be exempted from submission of EMD. Intended parties will have to give proof of
+         registration along with their tender. EMD of the unsuccessful bidders shall be refunded without any
+         interest at the earliest after finalization of the purchase of the concerned item.
+
+          i) The EMD will be returned to the BIDDERs(s) whose offer is not accepted by NITK within one
+          month from the date of the placing of the purchase order(s) on the selected BIDDER(s). In the case of
+          the BIDDER(s) whose offer is accepted the EMD will be returned on submission of Performance
+          Security in the form of Bank Guarantee (BG). However, if the return of EMD is delayed for any reason,
+          no interest/penalty shall be payable to the Bidders.
+
+                                                                                                           Page 6 of 41
+
+                ii) The successful BIDDER, on the award of contract/order, must send the contract/order acceptance
+                in writing, within 15 days of award of contract/order failing which the EMD will be forfeited.
+
+                iii) The EMD shall be forfeited in case a successful BIDDER fails to furnish the Performance Security.
+
+                iv) Bidder should prepare the EMD as per the instructions specified in the tender document. The
+                original EMD should be posted/couriered/given in person to the concerned official, latest by the last
+                date of bid submission as specified in the tender documents. The details of the BG/DD/FD/any other
+                accepted instrument, physically sent, should tally with the details available in the scanned copy and
+                the data entered during bid submission time. Otherwise, the uploaded bid will be rejected.
+
+           n) The bidder needs to comply with restrictions under rule No 144 (xi) of GFR (General Financial Rules)
+               2017and the clause pertaining to Public Procurement Division Order (Public Procurement no 1,2 &amp;
+               3 vide ref. F.No.6/18/2019-PPD dated 23.07.2020 and 24.07.2020 of Dept of Expenditure (DOE),
+               Ministry of Finance). In this Connection Bidder has to submit Self Certification (as per Annexure G or
+               H), depending on the status of the bidder.
+           o) The bidder needs to submit a Self-certification in line with Make in India, Public Procurement Order
+               No. P-45021/2/2017-BE-II dt. 15.06.2017, P 45021/2/2017-PP (BE-II) dated 28.05.2018, P-
+               45021/2/2017-PP (BE-II) dated 29.05.2019 and P45021/2/2017- PP (BE – II) dated 16.09.2020 of
+               DPIIT, Ministry of Commerce & Industry. The Bidder who will not meet this criterion will be rejected
+               in the technical bid. The Self-certification should be provided as per Annexure I.
+4. Financial bid: The bidders should submit their financial bid as per the formatgiven in Section 4(A standard BoQ
+     format has been provided with the tender document in the form of an Excel sheet) of the Notice Inviting Tender in
+     the online bid through the e-Tendering portal https://eprocure.gov.in/.After evaluation of technical bid, the
+     technically successful biddershall be intimated to witness the opening of their financial bid along with the date,
+     time andvenue through e-mail.The financial bid of only those bidders will be opened who are declared
+     “Technically Successful or Technically Responsive”.
+5. Bid Evaluation:
+     On the due date, the Technical bids will be opened and referred to the Purchase Committee which is duly
+     constituted by the Director, NITK. The committee will go through the technical aspects of the tender and
+     recommend shortlisted firms. The recommendation of the committee is final and binding on all the parties. The
+     committee may visit the manufacturing site to assess the capabilities to manufacture the tendered items as per
+     the specifications. In case of any remarks/default noted, the Company will be debarred from competing for bids in
+     our esteemed Institute for a period of one year from the date of occurrence of such breach.
+
+6.    Quoting of Price(s):
+
+                                                                                                         Page 7 of 41
+
+a. The Indian bidder should quote firm prices in the Indian rupee only unless otherwise specified elsewhere in this
+    tender. Prices quoted in any other currency shall not be considered.
+
+7.   The Bid will be accepted only from the manufacturers (OEM) or its authorized supplier.
+8.   The Institute reserves the right to visit the factory before or after the issue of supply order to satisfy
+     itself regarding the quality of production. In case of any remarks /default noted, the Company will be
+     debarred from competing for bids in our esteemed Institute for a period of one year from the date of occurrence
+     of such breach.
+9.   The item to be used is strictly according to the specification and subject to test by the
+     Institute/concerned authorities. It must be delivered and installed in good working condition.
+10. The incomplete or conditional tender will be rejected.
+11. The Institute reserves the right to cancel at any time after acceptance of the tender with a notice. The Supplier
+     shall have no claim to any payment of compensation or otherwise whatsoever, on account of any profit or
+     advantage which might have derived from the execution of the supply.
+12. Performance Security: The successful bidder shall deposit performance security of 3% of the quoted price in
+     the form of Bank Guarantee (ANNEXURE -F)/Demand Draft/Fixed Deposit Receipt of any scheduled bank
+     drawn in favour of The Director, NITK Surathkal, Mangaluru payable at Mangaluru. In case the bidder fails to
+     deposit the said Performance Security within the stipulated period, including the extended period if any, the
+     Earnest Money Deposited by the bidder shall be forfeited automatically without any notice. Please note the
+     following points:
+     a)   Successful bidder should submit performance Security asprescribed abovetothepurchase
+          Section,NITK Surathkal, on or before 30 days from the date of issue of order acknowledgment.
+     b)   Performance Security shall be for the due and faithful performance of the contract and shall remain binding,
+          notwithstanding such variations, alterations for extensions of time as may be made, given, conceded, or
+          agreed to between the successful bidder and the purchaser under the terms and conditions of acceptance
+          to tender.
+     c)   The successful bidder is entirely responsible for the due performance of the contract in all respects
+          according to the terms and conditions of the tender.
+     d)   The validity of the Performance Security must cover the warranty period plus two months.
+13. The validity of bids: The rate quoted should be valid for a minimum of 180 days. No claim for escalation of the
+     rate will be considered after opening the Tender. The bid validity date will start from the last date of bid
+     submission (Including date corrigendum)
+
+                                                                                                        Page 8 of 41
+
+14. Warranty/Guarantee & On-site skill support: On-site comprehensive warranty will be effective from the date
+    of successful installation and commissioning. The OEMs/Authorized Distributors and Dealers must attach a
+    certificate of sales and service facilities, escalation support for on-call service or station engineer, etc.
+15. Clarification of Tender Document: Through pre-bid Conference (Under Section 1, clause No. 35).
+16. Amendment of Tender document: At any time beforethe last date for receipt of bids, Institute may for any
+    reason, whether at its initiative or in response to a clarification requested by a prospective bidder, modify the
+    Tender document by an amendment. Further, Institute may at its discretion extend the last date for the receipt of
+    bids.
+17. The bids shall be written in the English language and any information printed in another language shall be
+    accompanied by an English translation, in which case for the purpose of the interpretation of the bid, the English
+    translation shall govern.
+18. The Institute reserves the right of accepting any bid other than the lowest or even rejecting all the bids. The
+    decision of the Purchase Committee is final in all matters of tender and purchase.
+
+19. Cancellation of Tender: Notwithstanding anything specified in this tender document, NITK Surathkal in its
+    sole discretion, unconditionally and without having to assign any reasons, reserves the rights:
+            a) To accept OR reject the lowest tender or any other tender or all the tenders.
+            b) To accept any tender in full or in part.
+            c) To reject the tender offer not conforming to the terms of the tender.
+            d) To give purchase preference to Public Sector undertakings when applicable as per Govt. Policy/
+                Guidelines.
+20. Delivery Period: The Delivery Period/Time shall be deemed to be the essence of the Contract and delivery
+    must be completed not later than such date(s). If the Supplier does not perform its obligations within the Delivery
+    Period/Date mentioned in the Contract, the same would constitute the breach of the Contract and the Institute
+    shall have the right to cancel or withdraw the Contract for the unsupplied portion after the expiry of the original
+    or extended delivery date or period stipulated in the Contract. Such cancellation of the contract on account of
+    non -performance by the Supplier would entitle the Buyer to forfeit the EMD/Performance Security besides other
+    actions such as debarment from the Institute as per GFR 2017.
+21. Liquidated Damages: Timely delivery is the essence of the contract and hence if the Supplier fails to deliver
+    Goods within the original/extended delivery period(s) specified in the contract, the Institute will be entitled to
+    deduct/recover the Liquidated Damages for the delay, unless covered under Force Majeure conditions
+    aforesaid, @ 1% per week or part of the week of the delayed period as pre-estimated damages not
+    exceeding 5% of the contract value without any controversy/dispute of any sort whatsoever.
+                                                                                                              Page 9 of 41
+
+22. Terms of Payment:
+          a. Payment within 30 days from the date of delivery,installation andacceptance certificate of concerned
+               Department/Section/Purchase Section.
+          b. Payment shall be made by Cheque or such other mode/electronic fund transfer offered by the Bank.
+               NITK, Surathkal will not pay advance payment to the party. Any request for Advance payment will be
+               rejected summarily. In case if it is necessary, the advance payment will be paid strictly against Bank
+               Guarantee only.
+          c. Payment will be made by Standard Payment terms and conditions of NITK, Surathkal as per tender
+               document only. Any request for a change in payment terms and conditions will not be accepted.
+          d. If the above conditions are not acceptable then tender will be rejected.
+23. Bidders are advised to inspect and examine the site and its surroundings and satisfy themselves before
+    submitting their bid as to the nature of the installation site, the means of access to the site and in general shall
+    themselves obtain all necessary information as to risks, contingencies and other circumstances which may
+    influence or affect their tender. A bidder shall be deemed to have full knowledge of the site whether he inspects
+    it or not and no extra charges consequent on any misunderstanding or otherwise shall be allowed. Submission
+    of a bid by a bidder implies that he has read this notice and all other contract documents and has made himself
+    aware of the scope and specifications of the installation to be done and local conditions and other factors having
+    a bearing on the execution of the bid.
+24. If there are varying or conflicting provisions made in any one document forming part of the contract, the
+    Accepting Authority shall be the deciding authority with regard to the intention of the document and his decision
+    shall be final and binding on the bidder.
+25. The rate quoted by the bidder shall be firm throughout the contract period and there shall be no revision of
+    the rates for any reasons whatsoever. It should be clearly understood that any claim for changes will not be
+    entertained in any case once the bids are opened.
+26. One bid per bidder: Each bidder shall submit only one bid either by himself or by representing a firm.
+27. Cost of bid: The bidder shall bear all costs associated with the preparation and submission of his bid. The
+    Institute in no case shall be responsible or liable for those costs.
+28. The bidder shall not make or cause any alteration, erasure, or obliteration to the text of the tender document.
+29. The Institute will declare a bidder ineligible, either indefinitely or for a specified period of time, at the sole
+    discretion of the Institute, for the award of contract/ participating in any other tender, if at any time the Institute
+    determines that he has furnished false information/ engaged in corrupt or fraudulent practices.
+30. If any overpayment is detected as a result of the post-payment audit, it shall be recovered by the Institute from
+    the Supplier out of his Performance Security.
+                                                                                                          Page 10 of 41
+
+31. Determination of successful bidder: The technically qualified bidder whose offer is evaluated as the lowest
+    total bid shall be the successful bidder subject to its meeting the statutory requirements.
+32. Price variation: The rate quoted by the bidder shall be firm throughout the contract period. No price variation
+    clause applies to this contract.
+33. CANVASSING:
+          a) Canvassing in connection with tenders is strictly prohibited and the Tenders submitted by the
+              Tenderers who resort to canvassing shall be liable to rejection.
+          b) Subject to the provisions concerning clarification of Bids, no Bidder shall contact the purchase
+              committee on any matter relating to its bid from the time of the bid opening up to the time that the
+              contract is awarded.
+          c) Any effort by the Bidder or Bidder’s representative however described to influence the purchase
+              committee in any way concerning scrutiny, consideration, evaluation of the Bid(s) or decision
+              concerning award of contract shall entail rejection of Bid and action against the bidder as deemed fit.
+          d) The purchase committee will deal with the Bidder on a Principal basis, without involvement in any
+              manner in India or abroad of any agent or consultant or associate or another person howsoever
+              described.
+34. Legal Matter: All Domestic and International disputes are subject to Mangaluru Jurisdiction only.
+35. Pre-Bid Conference:
+
+            a) All prospective bidders are requested to kindly submit their queries through E-mail to
+               & cc to_____________ so as to reach the buyer, on or before 4.00p.m. on
+               dd/mm/yyyy
+
+            b) A Pre-bid Conference shall be held as indicated in Invitation to Bid. All prospective bidders are
+               requested to kindly attend the Pre-bid Conference. In order to facilitate NITK for the proper conduct
+               of the Pre-bid Conference, all prospective bidders are requested to kindly submit their queries
+               through E-mail tothe indicated mail address (with Tender No. and Date) so as to reach the Buyer as
+               indicated in Invitation to Bid.
+
+            c) NITK shall answer the queries during the pre-bid conference, which would become a part of the
+               proceedings of the Pre-bid Conference. These proceedings will, in turn, become a part of
+               clarifications/amendments to the bidding documents and would become binding on all the
+               prospective bidders. These proceedings would also be hosted on the NITK website www.nitk.ac.in
+               for the benefit of all prospective bidders. Before formulating and submitting their bids, all prospective
+               bidders are advised to surf through the NITK website after the Pre-bid Conference, in order to
+               enable them to take cognizance of the changes made in the bidding document.
+
+            d) Any Statement made at the pre-bid conference shall not modify the terms of the bidding documents
+               unless such statement is made part of clarification in the proceeding of the Pre-Bid Conference
+
+                                                                                                        Page 11 of 41
+
+              e) Only queries formally submitted in advance, will be answered in the pre-bid conference and will
+                 become part of the Corrigendum/Amendment.
+
+ 36. Relaxation for startups, MSEs, Make in India will be as per GOI norms.
+
+ 37. Estimated price put up in tender is inclusive of all.
+
+ 38. Abnormally quoted low bid will be liable for rejection as per the OM No.F.12/17/2019-PPD of Department
+     of Expenditure, Ministry of Finance dated 6th February 2020.
+
+eREVERSE(FORWARD) AUCTION INSTRUCTIONS FOR BIDDERS
+
+   1. Tender Cum Auction is a combination of Tender Followed by Auction (Reverse/Forward Auction). It is also
+        called as eRA. 2.0
+   2. In eRA, Tendering process will be followed as per the instructions given in NIT/Tender Documents.
+        Subsequently, Reverse (or Forward) Auction as the case may be, will be conducted amongst techno–
+        commercially qualified / approved bidders after Opening of Financial/Price Bids’ online. The Reverse (or
+        Forward) Auction will be normally initiated after Opening of Price Bids. There will be no participation fees for
+        Auction.
+   3. Only such bidders - who have been found techno-commercially qualified as per requirements of the tender will
+        be permitted to participate in the Reverse (Forward) Auction.
+   4. After opening of the price (financial) bids and System displays L1 (or H1) price based on either over all basis
+        or item wise/lot basis automatically. Using this system provided price, which would be auction start price (can
+        be changed, if required), procuring entity will create Reverse (Forward) Auction and publish the same.
+   5. The Techno-commercially qualified bidders will receive Auction information through SMS & email. The
+        participating bidders get an opportunity to revise their prices (reduce in case of Reverse Auction and increase
+        in case of Forward Auction). It allows bidders multiple opportunities to offer a price.
+   6.   Procedure in submission of bids by the bidders during Reverse/Forward auction online.
+        6.1 Bidders shall login using their login ID & Password and then using DSC.
+        6.2 Click on My Auctions button given in left side of page, to view Action details for which Techno-
+            Commercially qualified.
+        6.3 For participating in Live Auction,
+                   •   Click on Live Auction Button.
+                   •   Click on View button to participate in interested Auction.
+                   •   There is List of qualified Lots in which Bidder can participate against selected Auction. Click on
+                       Hammer Icon to participate in the respective lot.
+                                                                                                         Page 12 of 41
+
+           •   On clicking Hammer Icon, system will show Start price, Decremental (or incremental) price and
+               Current price against lot. Current Price is appears as Blank in case no bidder has offered price.
+           •   Enter your Price in ‘My Auction Price’ in multiples of decremental (incremental) value up to above
+               (below) Max Seal % value, and then sign it digitally by clicking on Sign Icon and Click on submit
+               button.
+           •   System will show your Latest Value / Price Quoted and system will also show Least Amount/ Rate
+               which any Bidder would have quoted.
+7. Terms and conditions for Reverse (Forward)Auction are as follows:
+   7.1 Reverse (Forward) Auction will be initiated after opening of price bids. The schedule of Reverse (Forward)
+       Auction shall be intimated to the bidders by the system through their registered email and SMS to mobile
+       number.
+   7.2 Only those bidders whose price bid has been opened by the Tender Inviting Authority shall be eligible to
+       participate in Reverse (Forward) process. However, in case of in Reverse Auction process, the H1 bidder
+       whose quote is highest during tender will not be allowed to participate as per H1 elimination policy.
+       Similarly, in case of in Forward Auction process, the L1 bidder whose quote is lowest during tender will not
+       be allowed to participate as per elimination policy.
+   7.3 Bidders are advised to read the ‘Reverse (Forward) Auction terms and conditions’ details of Reverse
+       (Forward) Auction event carefully, before auction event.
+   7.4 Reverse (Forward) Auction can be held in two ways as indicated in the tender either on the Total overall
+       cost of items/works or on Item wise/ Lot wise.
+   7.5 The ‘Starting price’ i.e., Start price and bid decrement (increment) price for Reverse (Forward) Auction will
+       be decided by the Tender Inviting Authority.
+   7.6 Bidders shall be able to view the following on their screen along with the necessary fields during Online
+       Reverse Auction:
+       7.6.1   Current Bid Price in the Auction.
+       7.6.2   Start Price.
+       7.6.3   Decrement (or Increment) value.
+   7.7 The bidding direction in case of Reverse Auction is downward and for Forward Auction is upward.
+   7.8 In case of Reverse Auction, in order to displace a standing lowest bid and to become “L1”, a bidder can
+       offer a minimum bid decrement or in multiples of decremental value up to above Max Seal %. For ex:
+       Current Price: - Rs. 49,000 Decrement value: - Rs. 1000 System Defined Maximum Seal %: - 50, in this
+       case a bidder can quote minimum decrement amount as Rs 49,000-1000= Rs. 48,000 and maximum
+       decrement amount is 49000-24500- 1000=23500=24000*. In case of Forward Auction, in order to displace
+                                                                                           Page 13 of 41
+
+      a standing highest bid and to become “H1”, a bidder can offer a minimum bid increment or in multiples of
+      incremental value up to or below Max Seal %. For ex: Current price: - Rs. 49,000 Incremental values: - Rs.
+      1000 System Defined Maximum Seal %: - 50, in this case a bidder can quoteminimum increment amount
+      as        Rs    49,000+1000=      Rs.      50,000      and      maximum        increment      amount     as
+      49000+24500+1000=74500=74000*. This continues as an iterative process.
+ 7.9 The system will not disclose the name of the L1 (H1) bidder, number of bids and names of the bidders on
+      the portal to anybody prior to the completion of Reverse/Forward auction process.
+7.10 There shall be no communication between the Tender inviting Authority and bidders and among bidders.
+7.11 Bidders only see the lowest (highest) bid during Reverse (Forward) auction. At no point of time will any
+      bidder see the name of other bidders or the prices of bidders other than the lowest bid.
+7.12 After the completion of the online reverse(forward) auction, all bidders who have participated in Reverse
+      (Forward) will see the L1(H1) price in Auction and further processing will be done by Tender Inviting
+      Authority.
+7.13 In case of no participation by techno-commercially qualified bidders in Reverse (Forward) Auction, the
+      Tender price bids received during tender will be processed.
+7.14 In case of auction on total value of items/works, the successful bidder may be required to submit a letter
+      for price confirmation and rates of individual items/works within stipulated number of days after completion
+      of Reverse (Forward) Auction event, besides sending the same by registered post / courier to the tender
+      inviting authority.
+7.15 Any variation between the final bid value during RA and that in the confirmatory letter forwarded will be
+      advised to re-work and submit.
+7.16 Server time shall be the basis of Start Time and Closing time for bidding and shall be binding for all.
+7.17 All electronic bids submitted during the reverse(forward) auction process shall be legally binding on the
+      bidder.
+7.18 The chronologically last bid submitted by the bidder till the end of the auction will be considered as the
+      valid price bid offered by the bidder and acceptance of the same by Tender Inviting Authority will form a
+      binding contract between Tender Inviting Authority and the bidder for entering into a contract.
+7.19 The last successful bid price quoted by bidder will be considered as valid price at any point of time during
+      Auction.
+7.20 If a bidder does not submit bid in the Reverse/forward Auction, the price quoted by them in the price bid
+      shall be considered as the valid price of that bidder. The status of the bidder (L1, L2 etc) shall be
+      evaluated considering either the bid price submitted in Reverse/Forward Auction or the price quoted in the
+      price bid, whichever is lower.
+                                                                                                   Page 14 of 41
+
+  7.21 In case of disruption of service at the service provider’s end while the Reverse (Forward)Auction is live
+        due to any technical snag or otherwise attributable to the system failure at the server end, Tender Inviting
+        Authority in consultation with Application Administrator may decide to extend auction if required as per
+        system malfunction procedure displayed in the home page of the website. In this case, the status quo of
+        Auction will be maintained prior to failure and process would continue from that point onwards.
+8. Post auction procedure: The Tender Inviting Authority will proceed with the Lowest (Highest) Bid in the
+    Reverse (Forward) Auction for further processing.
+9. Schedule for Reverse Auction: The Reverse (Forward) Auction schedule will be intimated later on through e-
+    mail and SMS after opening the price bid.
+10. Auction extension time: If a bidder places a bid in the last {5} minutes of closing of the Reverse Auction and if
+    that bid gets accepted, then the auction’s duration shall get extended automatically for another {10} minutes,
+    for the entire auction from the time that bid comes in. Please note that the auto-extension will take place only if
+    a bid comes in those last {5} minutes and if that bid gets accepted as the lowest bid. If the bid does not get
+    accepted as the lowest bid, the auto-extension will not take place even if that bid might have come in the last
+    {5} minutes. In case, there is no bid in the last {5} minutes of closing of Reverse Auction, the auction shall get
+    closed automatically without any extension. However, bidders are advised not to wait till the last minute or last
+    few seconds to enter their bid during the auto-extension period to avoid complications related with internet
+    connectivity, network problems, system crash down, power failure, etc. The above process will continue till 10
+    times extension is given during Reverse Auction. All bidders, regardless of their previous position, can submit
+    their bid during the extension period also.
+11. Bidding currency and unit of measurement: Bidding will be conducted in Indian Rupees as indicated in the
+    tender.
+12. Validity of bids: Price shall be valid for a period of defined number of months from the date of reverse auction.
+    These shall not be subjected to any change whatsoever.
+13. Bidders’ bid will be taken as an offer to execute the work (or to award supply of the item) as per enquiry no.
+    {.................…} dt. {........…}. Bids once made by the bidder, cannot be cancelled/ withdrawn and bidder shall
+    be bound to execute as mentioned above at bidder’s final bid price. Should bidder back out and not execute
+    the contract as per the rates quoted, action shall be initiated as per the tender terms and conditions.
+14. The Tender Inviting Authority decision on award of contract shall be final and binding on all the Bidders.
+15. The Tender Inviting Authority reserves the right to extend, reschedule or cancel the Reverse Auction process
+    at any time, before ordering, without assigning any reason, with intimation to bidders.
+16. The Tender Inviting Authority reserves the right to suspend or pause the reverse auction, if required. In such
+    cases, as per discretion of Tender Inviting Authority, auction may be reopened.
+                                                                                                       Page 15 of 41
+
+ 17. The Tender Inviting Authority shall not have any liability to bidders for any interruption or delay in access to the
+     site irrespective of the cause. In such cases, the decision of Tender Inviting Authority shall be binding on the
+     bidders.
+ 18. Failure of power or loss of connectivity at the premises of bidders during the Reverse (Forward) auction cannot
+     be the cause for not participating in the reverse (forward) auction. On account of this, the time for the auction
+     cannot be extended and the organisation is not responsible for such eventualities.
+ 19. Other terms and conditions shall be as per tender.
+ 20. Bidder shall not divulge Bids or any other exclusive details of the organisation to any other party. If the Bidder
+     or any of its representatives are found to be involved in Price manipulation/ cartel formation of any kind,
+     directly or indirectly by communicating with other bidders, action will be taken against such bidders as per
+     banning procedure of the organisation.
+ 21. Tender price bid (s) means the price bid (s) received during tendering for the items/work/services.
+ 22. Auction closing price bid means the lowest (highest) online price bid received after the completion of Reverse
+     (Forward) Auction.
+ 23. All entries in the tender should be entered in online Technical & Commercial Formats without any ambiguity.
+ 24. Any order resulting from this e-tender shall be governed by the terms and conditions mentioned therein.
+ 25. No deviation to the technical and commercial terms & conditions are allowed.
+ 26. The tender inviting authority has the right to cancel this e-tender or extend the due date of receipt of the bid(s).
+ 27. The buyer reserves the right to increase or decrease the quantity to be ordered up to 25 percent of bid
+     quantity at the time of placement of contract. The purchaser also reserves the right to increase the ordered
+     quantity by up to 25% of the contracted quantity during the currency of the contract at the contracted rates.
+     Bidders are bound to accept the orders accordingly.
+
+**Disclaimer** Bidders are advised to exercise caution and not respond to any unknown calls, emails, or embedded links
+requesting payment for participating in the tender or for any other purpose. Please note that NITKSurathkal never asks for
+any tender fee for participation in tenders or bids.
+
+                                                                                                            Page 16 of 41
+
+                                       SECTION 2: CONDITIONS OF CONTRACT.
+
+1. The supplier should quote the rate for Door Delivery (FOR).
+
+2. The Rate should be quoted in INR only.
+
+3. The item should be landed at NITK Surathkal and this responsibility is with the bidder.
+
+4. No custom duty exemption certificate will be provided from the institute.
+
+5. The rate quoted should be on a per-unit basis. Taxes and other charges should be quoted separately, considering
+   exemptions, if any.
+
+6. The rate quoted should be inclusive of Testing, Commissioning and Installation of Equipment and Training.
+
+7. Payment: No advance payment will be made. Payment will be made only after the supply and installation of the
+   item in good and satisfactory condition and receipt of performance security by the supplier.
+
+8. Guarantee and Warranty period should be specified for the complete period conforming to Section 3 of this tender
+   document.
+
+9. The period required for the supply and installation of Equipment should be specified conforming to Section 3 of this
+   tender document.
+
+10. In case of dispute, the matter will be subject to Mangaluru Jurisdiction only.
+
+.
+
+                                                                                                       Page 17 of 41
+
+           SECTION 3: SCHEDULE OF REQUIREMENTS, SPECIFICATIONS AND ALLIED DETAILS
+                   [To be filled up by the Department / Center of NITK, Surathkal]
+
+Item(s) Name to be Procured                     : High End Desktop
+
+Type (Equipment/Software/Furniture/Others)      : Equipment
+
+Brief Specifications of the Item(s)             : As Per Annexure ‘L’
+(Attach Additional Sheet if necessary)
+
+Quantity                                        :35
+
+Any other details/requirement                   : Nil
+
+Warranty Period (in months)                     : 5 years
+
+Delivery Schedule expected
+after the release of a Purchase order
+(in Weeks)                                      :4 weeks
+
+Performance Security to be given
+by Successful Bidder after release of           : 3% of Purchase Order
+Purchase Order
+
+                                                                             Page 18 of 41
+
+                                                               SECTION 4 - PRICE BID
+                                                  [To be used by the bidder for submission of the bid]
+
+Tender Inviting Authority:
+
+Name of Work/Goods/Services:
+
+Contract No:
+
+Name of the Bidder/ Bidding Firm / Company :
+
+                                            PRICE SCHEDULE
+(This BOQ template must not be modified/replaced by the bidder and the same should be uploaded after filling the relevant columns, else the bidder is liable
+to be rejected for this tender. Bidders are allowed to enter the Bidder Name and Values only )
+
+             Number          TEXT #        NUMBER #      NUMBER # NUMBER              NUMBER      NUMBER            NUMBER #       TEXT #
+                                           Quantity      BASIC                        GST rate in                   TOTAL
+                                                         RATE        in               %                             AMOUNT
+                                                         Figures To                               GST               with           TOTAL
+                             Item
+             Sr. No.                                     be entered COST                          Amount            Taxes          AMOUNT
+                             Description
+                                                         by        the                                              Rs. P          In Words
+                                                         Bidder in
+                                                         Rs. P
+             1
+             2
+             Total in Figures
+
+             Quoted Rate in Words
+
+                                                                                                                                              Page 19 of 41
+
+SECTION 5: CONTRACT FORM
+[To be provided by the bidder in the business letterhead]
+
+1.       (Name of the Supplier’s Firm) hereby abide to deliver by the delivery schedule mentioned in section 3 tender
+         document for supply of the items if the purchase order is awarded.
+
+2.       The item will be supplied conforming to the specifications stated in the tender document without any defects
+         and deviations.
+
+3.       Warranty will be given for the period mentioned in the tender document and service will be rendered to the
+         satisfaction of NITK, Surathkal during this period.
+
+Signature of the Bidder : _________________________________________
+
+Name and Designation : __________________________________________
+
+Business Address         : ___________________________________________
+
+                          ___________________________________________
+
+Place:                                                                            Seal of the Bidder’s Firm
+Date:
+
+                                                                                                      Page 20 of 41
+
+                                           Compliance Statement of Specifications                                    Annexure–‘A’
+
+                                                                                                          Deviations if any to be
+         Nameofspecification/Part/Accessories Specifications of the quoted Model / Compliance   Whether
+Sl.No.                                                                                                    indicated in unambiguous
+         of tender inquiry                    Item                                 YES or NO
+                                                                                                          terms
+
+(Add more rows if required)
+
+Signature and Seal of the Bidder
+
+                                                                                                                      Page 21 of 41
+
+                                                                                                              ANNEXURE – ‘B’
+Previous Supply Orders Executed
+
+Name of the firm: __________________________
+
+                                               Remarks indicating
+Order                                          reasons for late                            Contact person along with telephone, mobile
+placed by                                      delivery, if any and    Has             the number, fax, andE-mail address
+                           Specified Actual
+[Full      Order No. Order                     justification for the   equipment been (other         Universities,   Institutes,  and
+                           Delivery Delivery
+address of and Date  Value                     price difference of     installed           GovernmentDepartment/Undertakings/Public
+                           Date      Date
+the                                            their supply order      satisfactorily?     sectors)
+purchaser]                                     and those quoted to
+                                               us
+
+(Add more rows if required)
+
+Signature                     and                Seal                        of                       the                      Bidder
+
+                                                                                                                        Page 22 of 41
+
+                                                                                               ANNEXURE – ‘C’
+
+                                              FORMAT OF DECLARATION
+                                            (To be submitted on Letterhead)
+
+I/We Mr./Ms.________________, S/o/ of Mr. _______ aged about _________ years, resident of _______________ ,
+working as ---------(designation) for ------------------- (name and address of the bidding agency).
+
+I solemnly affirm and the state as under:
+
+    1. That I am working as ------- /proprietor of the ------ (name of the firm) and authorized to sign this declaration.
+
+    2. That the firm M/s---- (complete address of the firm) has not abandoned or suspended any contract work of
+       any organization/ department so far/ during the previous five financial years.
+
+    3. That the firm M/s---- (complete address of the firm) has not been blacklisted/ debarred for competing in
+       tenders by any organization/ department so far/ during the previous five financial years.
+
+    4. I solemnly confirm that the facts stated above are true and nothing has been concealed.
+
+                                                                     Seal and Signature of Bidder
+
+                                                                                                           Page 23 of 41
+
+                                                                                               Annexure-‘D’
+
+INTEGRITY PACT AGREEMENT
+(To be signed by the bidder/same signatory authorized to sign the relevant contact)
+
+This Integrity Agreement is made at Surathkal on this ………… day of ….……….….20 …….
+
+BETWEEN
+
+National Institute of Technology Karnataka, Surathkal, an Institute of National Importance (under NIT Act -2007)
+represented through The Registrar, NITK, Surathkal (hereinafter referred as the ‘Buyer, which expression shall
+unless repugnant to the meaning or context hereof include its successors and permitted assigns)
+
+AND
+……………………………………………………………………………………………………………………………
+(Name and Address of the Individual/Firm/Company)
+Through ……………………………………………………………... (Hereinafter referred to as the “Bidder/Contractor” and
+which expression shall unless repugnant to the meaning or context hereof include its succession and permitted
+assigns)
+
+Preamble
+
+WHEREAS NITK Surathkal has floated the Tender (Hereinafter referred to as “Tender/Bid”) and intends to award,
+underlaid down organizational procedure, contract for “Equipment”
+
+[Hereinafter referred to as the “Contract”).
+
+AND WHEREAS the Principal/Owner values full compliance with all relevant laws of the land, rules, regulations,
+economic use of resources and fairness/transparency in its relation with its Bidder(s) and Contractor(s).
+
+AND WHEREAS to meet the purpose aforesaid both the parties have agreed to enter into this Integrity Agreement
+(hereinafter referred to as “Integrity Pact” or “Pact”), the terms and conditions of which shall also be read as
+integral part and parcel of the Tender/Bid documents and Contract between the parties.
+
+NOW, THEREFORE, in consideration of mutual covenants contained in this Pact, the parties hereby agree as follows
+and this witness as under:
+
+Seal and Signature of the bidder                               Registrar, for NITK Surathkal
+
+                                                                                                 Page 24 of 41
+
+Article 1: Commitment of NITK Surathkal
+
+i.     NITK Surathkal commits to take all measures necessary to prevent corruption and to observe the following
+       principles:
+
+       (a)     No employee of NITK Surathkal, personally or through any of his/her family members, will in
+               connection with the Tender, or the execution of the Contract, demand, take a promise for or accept,
+               for self or third person, any material or immaterial benefit which the person is not legally entitled to.
+
+       (b)     NITK Surathkal will, during the Tender process, treat all Bidder(s) with equity and reason. NITK
+               Surathkal will, in particular, before and during the Tender process, provide to all Bidder(s) the same
+               information and will not provide to any Bidder(s) confidential/additional information through which the
+               Bidder(s) could obtain an advantage in relation to the Tender process or the Contract execution.
+
+       (c)     NITK Surathkal shall endeavor to exclude from the Tender process any person, whose conduct in the
+               past has been of biased nature.
+
+ii.    If NITK Surathkal obtains information on the conduct of any of its employees which is a criminal offense
+       under the Indian Penal code (IPC)/Prevention of Corruption Act, 1988 (PC Act) or is in violation of the
+       principles herein mentioned or if there be a substantive suspicion in this regard, NITK Surathkal will inform
+       the Chief Vigilance Officer and in addition, can also initiate disciplinary actions as per its internal laid down
+       policies and procedures.
+
+Article 2: Commitment of the Bidder(s)/ Contractor(s)
+
+1)     It is required that each Bidder/Contractor (including their respective officers, employees and agents) adheres
+       to the highest ethical standers, and report to the Government / Department all suspected acts of fraud or
+       corruption or Coercion or Collusion of which it has knowledge or becomes aware, during the tendering
+       process and through the negotiation or award of a contract.
+
+2)     The Bidder(s)/Contractor(s) commit himself to take measures necessary to prevent corruption. He commits
+       himself to observe the following principles during his participation in the Tender process and during the
+       Contact execution:
+       a.      The Bidder(s)/Contractor(s) will not, directly or through any other person or firm, offer, promise or
+               give to any of the Principal/Owner’s employees involved in the Tender process or execution of the
+               Contractor to any third person any material or other benefit which he/she is not legally entitled to, in
+               order to obtain in exchange any advantage of any kind whatsoever during the Tender process or
+               during the execution of the Contractor.
+
+                                                                                                        Page 25 of 41
+
+Seal and Signature of the bidder                                     Registrar, for NITKSurathkal
+       b.      The Bidder(s)/Contractor(s) will not enter with other Bidder(s)intoan undisclosed agreement or
+               understanding, whether formal or informal. This applies in particular to prices, specifications,
+               certifications, subsidiary contracts, submission or non-submission of bids or any other actions to
+               restrict competitiveness or to cartelize in the bidding process.
+
+        c.      The Bidder(s)/Contractor(s) will not commit any offense under the relevant IPC/PC Act. Further, the
+                Bidder(s)/Contractor(s) will not use improperly, (for the purpose of competition or personal gain), or
+                pass on to others, any information or documents provided by the Principal/Owner as
+
+        d.      part of the business relationship, regarding plans, technical proposals and business details, including
+                information contained or transmitted electronically.
+
+        e.      The Bidder(s)/Contractor(s) of foreign origin shall disclose the names and addresses of
+                agents/representatives in India if any. Similarly, Bidder(s)/Contractor(s) of Indian Nationality shall
+                disclose names and addresses of foreign agents/representatives if any. Either the Indian agent on
+                behalf of the foreign principals or the foreign principal directly could bid in a tender but not both.
+                Further, in cases where an agent participates in a tender on behalf of one manufacturer, he shall not
+                be allowed to quote on behalf of another manufacturer along with the first manufacturer in a
+                subsequent/parallel tender for the same item.
+
+        f.      The Bidder(s)/Contractor(s) will when presenting his bid, disclose any and all payments he has
+                made, is committed to or intends to make to agents, brokers, or any other intermediaries in
+                connection with the award of the Contract.
+
+iii.    The Bidder(s)/Contractor(s) will not instigate third persons to commit offenses outlined above or be an
+        accessory to such offenses.
+
+iv.     The Bidder(s)/Contractor(s) will not, directly or through any other person or firm indulge in fraudulent practice
+        means a willful misrepresentation or omission of facts or submission of fake/forged documents in
+        order to induce a public official to act in reliance thereof, with the purpose of obtaining unjust
+        advantage by or causing damage to a justified interest of others and/or to influence the procurement
+        process to the detriment of the Government interests.
+
+v.      The Bidder(s)/Contractor(s) will not, directly or through any other person or firm use Coercive practices
+        (means the act of obtaining something, compelling action or influencing a decision through intimidation, there
+        or the use of force directly or indirectly, where potential or actual injury may befall upon a person, his/her
+        reputation or property to influence their participation in the tendering process).
+
+Seal and Signature of the bidder                                     Registrar, for NITK Surathkal
+
+                                                                                                         Page 26 of 41
+
+Article 3: Consequences of Breach
+         Without prejudice to any rights that may be available toNITK Surathkal under law or the Contract or its
+established policies and laid down procedures, the Principal/Owner shall have the following rights in case of breach of
+this Integrity Pact by the Bidder(s)/Contractor(s) and the Bidders/Contractor accepts and undertakes to respect and
+uphold the Principal/Owner’s absolute right:
+
+        1)      If the Bidder(s)/Contractor(s), either before awarded or during the execution of Contract has
+                committed a transgression through a violation of Article 2 above or in any other form, such as to put
+                his reliability or credibility in question, the Principal/Owner after giving a 14-day notice to the
+                contractor shall have powers to disqualify the Bidder(s)/Contractor(s) from the Tender process or
+                terminate/determinate the Contract - if already executed or exclude the Bidders/Contractor from
+                future contract award processes. The imposition and duration of the exclusion will be determined by
+                the severity of transgression and determined by the Principal/Owner. Such exclusion may be
+                forever or for a limited period as decided by NITK Surathkal.
+
+        2)      Forfeiture of EMD/Performance Guarantee/Security Deposit: If NITK Surathkal has disqualified
+                the Bidder(s) from the tender process before the award of the Contract or terminate/determinate the
+                Contractor has accrued the right to terminate/determinate the Contract according to Article 3(1), the
+                Principal/Owner apart from exercising any legal rights that may have accrued to NITK Surathkal, may
+                in its considered opinion forfeit the entire amount of Earnest Money Deposit, Performance Security of
+                the Bidders/Contractor.
+
+        3)      Criminal Liability: If NITK Surathkal obtains knowledge of the conduct of a Bidder or Contractor, or
+                of an employee or a representative or an associate of a Bidder or Contractor which constitutes
+                corruption within the meaning of Indian Penal code (IPC)/Prevention of Corruption Act, or if the
+                Principal/Owner has substantive suspicion in this regard, NITK Surathkal will inform the same to law
+                enforcing agencies for further investigation.
+
+Article 4: Previous Transgression
+    1) The Bidder declares that no previous transgressions occurred in the last 5 years with any other Company in
+        any country conforming to the anti-corruption approach or with Central Government or State Government or
+        any other Central/State Public Enterprises in India that could justify his exclusion from the Tender process.
+
+    2) If the Bidder makes an incorrect statement on this subject, he can be disqualified from the Tender process or
+       action can be taken for banning of business dealings/ holiday listing of the Bidder/Contractor as deemed fit by
+       the Principal/Owner.
+
+    3) If the Bidder/Contractor can prove that he has resorted/recouped the damage caused by him and has
+       installed a suitable corruption prevention system, the Principal/Owner may, at its discretion, revoke the
+       exclusion prematurely.
+
+                                                                                                       Page 27 of 41
+
+Seal and Signature of the bidder                               Registrar, for NITK Surathkal
+Article: 5 Equal Treatment of all Bidder/Contractors/Subcontractors
+
+    1) The Bidder(s)/Contractor(s) undertake(s) to demand from all subcontractors a commitment in conformity with
+       this Integrity Pact. The Bidders/Contractor shall be responsible for any violation(s) of the principles laid down
+       in this agreement/Pact by any of its Sub-contractors/sub-vendors.
+
+    2) The Principal/Owner will enter into pacts on identical terms as this one with all Bidders and Contractors.
+
+    3) The Principal/Owner will disqualify Bidders, who do not submit, the duly signed pact between the
+       Principal/Owner and the bidder, along with the Tender, or violate its provisions at any stage of the Tender
+       process, from the Tender process.
+
+Article 6: Duration of the Pact
+
+         This Pact begins when both the parties have legally signed it. It expires for the Contractor/Vendor 12months
+after the completion of work under the contractor or till the continuation of defect liability period, whichever is more
+and for all other bidders, till the Contract has been awarded.
+
+        If any claim is made/lodged during the time, the same shall be binding and continue to be valid despite the
+lapse of these pacts as specified above, under it is discharged/determined by the Competent Authority of NITK,
+Surathkal.
+
+Article 7: Other Provisions
+    1) This Pact is subject to Indian Law, place of performance and jurisdiction is Mangaluru, the Headquarters of
+        NITK Surathkal, who has floated the Tender.
+
+    2) Changes and supplements need to be made in writing. Side agreements have not been made.
+
+    3) If the Contractor is a partnership or a consortium, this Pact must be signed by all the partners or by one or
+       more partners holding power of attorney signed by all partners and consortium members. In the case of a
+       Company, the Pact must be signed by a representative duly authorized by board resolution.
+
+    4) Should one or several provisions of this Pact turn out to be invalid; the remainder of this Pact remains valid.
+       In this case, the parties will strive to come to an agreement with their original intentions.
+
+    5) It is agreed on term and condition that any dispute or difference arising between the parties with regard to the
+       terms of this Integrity Agreement / Pact, any action was taken by the Owner/Principal in accordance with this
+       Integrity Agreement/Pact or interpretation thereof shall not be subject to arbitration.
+
+    Seal and Signature of the bidder                                     Registrar, for NITK Surathkal
+                                                                                                         Page 28 of 41
+
+Article 8: LEGAL AND PRIOR RIGHTS
+
+All rights and remedies of the parties hereto shall be in addition to all the other legal rights and remedies belonging to
+such parties under the Contract or law and the same shall be deemed to be cumulative and not alternative to such
+legal rights and remedies aforesaid. For the sake of brevity, both the Parties agree that this Integrity Pact will have
+precedence over the Tender/Contract documents with regard to any of the provisions covered under this Integrity
+Pact.
+
+IN WITNESS WHEREOF the parties have signed and executed this Integrity Pact at the place and date first above
+mentioned in the presence of the following witnesses:
+
+………………………………………………………..                                ……..……..……………………………………………..
+(For and on behalf of NITK Surathkal)                           (For and on behalf of bidder/ contractor)
+WITNESSES:
+
+        1.         …………………………………….
+                 (Signature, name, and address)
+
+        2.       …………………………………….
+                 (Signature, name, and address)
+
+Place: Surathkal.                                                                             Dated:
+
+                                                                                                          Page 29 of 41
+
+                                                                                             Annexure –‘E’
+Formatfor Bank Account details of the bidder
+
+      Name of the account holder (the bidder)
+
+      Complete address
+
+      Contact number
+
+      Email address
+
+     Bank Account details:
+
+      Bank name
+
+      Branch name
+
+      MICR number
+
+      Account type
+
+      Account Number
+
+      Please re-type the Account number again
+
+      IFSC code of the Bank
+
+I hereby declare that the particulars given above are correct and complete. If the transaction is delayed or not effected
+at all for reasons of incomplete or incorrect information, I would not hold the Institute responsible for this.
+I have read the option invitation letter and agree to discharge the responsibility expected of me as a participant under
+the scheme.
+
+Seal and signature of the bidder.
+Certification from the banker:
+Certified that the particulars furnished above are correct as per our records.
+
+Seal and signature of the authorized officer of the bank.
+
+                                                                                                         Page 30 of 41
+
+                                                                                           ANNEXURE –‘F’
+
+FORMAT FOR PERFORMANCE GUARANTEE BOND
+(To be typed on Non-judicial stamp paper of the value of Indian Rupees of Five Hundred)
+To,
+Director,
+National Institute of Technology Karnataka,
+Srinivasnagar P.O., Surathkal
+Mangaluru – 575025
+
+Whereas…………………………………………………… (name and address of the contractor) (hereinafter called “the
+contractor”) has undertaken, in pursuance of contract no ……….. date……………. to supply ………………
+(description of goods and Works/ Services) (hereinafter called “the contract”).
+
+And Whereas you have stipulated it in the said contract that the contractor shall furnish you with a bank guarantee by
+a Commercial bank for the sum specified therein as security for compliance with its obligations as per the contract;
+
+And Whereas we have agreed to give the contractor such a bank guarantee.
+
+Now Therefore we hereby affirm that we are guarantors and responsible to you, on behalf of the contractor, up to a
+total of …………………………………………………….(amount of the guarantee in words and figures), and we
+undertake to pay you, upon your first written demand declaring the contractor to be in default under the contract and
+without cavil or argument, any sum or sums within the limits of (amount of guarantee) as aforesaid, without your
+needing to prove or to show grounds or reasons for your demand or the sum specified therein.
+
+We hereby waive the necessity of your demanding the sail debt from the contractor before presenting us with
+demand.
+
+We further agree that no change or addition to or other modification of the terms of the contract to be performed
+thereunder or of any of the contract documents which may be made between you and the contractor shall in any way
+release us from any liability under this guarantee, and we hereby waive notice of any such change, addition, or
+modification.
+
+This guarantee shall be valid until the ………….day of …….20……
+
+Our………………………………….branch at………………*(Name & Address of the ………….…………..*(branch) is
+liable to pay the guaranteed amount depending on the filing of a claim and any part thereof under this Bank
+Guarantee only and only if you serve upon us at our ………………* branch a written claim or demand and received by
+us at our …………………..* branch on or before Dt………….. otherwise, the bank shall be discharged of all liabilities
+under this guarantee after that.
+
+                                         (Signature of the authorized officer of the Bank)
+                                                ………………………………………….
+                                                ………………………………………….
+                                                  Name and designation of the officer
+                                                …………………………………………
+                                  Seal, name & address of the Bank and address of Branch
+
+                                                                                                      Page 31 of 41
+
+*Preferably at the headquarters of the authority competent to sanction the expenditure for the procurement of goods
+or at the concerned district headquarters or the state headquarters.
+                                                                                                  Annexure-‘G’
+
+                           (Compliance to be submitted in the bidder’s letterhead)
+                                           (as applicable)
+
+ Sub: Compliance to Government of India order OM No.6/18/2019-PPD dated 23.07.2020 & 24.7.2020
+ regarding restrictions under Rule 144 (XI) of the General Financial Rules (GFRs), 2017
+
+  Item Name:
+
+  Enquiry No.:
+
+ We M/s.                                  (name of the bidder company) have read the clauses pertaining to the
+ Department of Expenditure’s (DoE) Public Procurement Division Order (Public procurement no 1,2 & 3 vide ref.
+ F.No.6/18/2019-PPD dated 23.07.2020&24.7.2020) regarding restrictions on procurement from a bidder of a
+ country that shares a land border with India.
+
+ We hereby certify that we are not from such a country and eligible to be considered for this tender.
+
+ (Note: Non-compliance of abovesaid GoI Order and its subsequent amendment,(if any),by any bidder(s) shall lead
+ to commercial rejection of their bids by NITK)
+
+ For and behalf of            (Name of the bidder)
+
+ (Signature, date & seal of an authorized representative of the bidder)
+
+                                                                                                        Page 32 of 41
+
+                                                                                                    Annexure-‘H’
+
+                         (Compliance to be submitted in the bidder’s letterhead)
+                                             (as applicable)
+
+ Sub: Compliance to Government of India order OM No.6/18/2019-PPD dated 23.07.2020 & 24.7.2020
+ regarding restrictions under Rule 144 (XI) of the General Financial Rules (GFRs), 2017
+
+  Item Name:
+
+  Enquiry No.:
+
+ WeM/s.                                 (name of the bidder company) have read the clauses pertaining to the
+ Department of Expenditure’s (DoE) Public Procurement Division Order (Public procurement no 1,2 & 3 vide ref.
+ F.No.6/18/2019-PPD dated 23.07.2020 & 24.7.2020) regarding restrictions on procurement from a bidder of a
+ country which shares a land border with India.
+
+ We are from such a country which shares a land border with India & have been registered with the Competent
+ Authority as specified in the above-said order. We hereby certify that we fulfill all requirements in this regard and
+ are eligible to be considered.
+
+Evidence of valid registration by the Competent Authority is attached.
+
+ (Note: Non-compliance of above said GoI Order and its subsequent amendment, (if any), by any bidder(s) shall
+ lead to commercial rejection of their bids by NITK)
+
+ For and behalf of             (Name of the bidder)
+
+ (Signature, date & seal of an authorized representative of the bidder)
+
+                                                                                                        Page 33 of 41
+
+                                                                                               Annexure-‘I’
+
+                              Self-Certification on the letterhead of the company
+
+In line with Government Public Procurement Order No. P-45021/2/2017-BE-II dt. 15.06.2017, P-45021/2/2017-PP
+(BE-II) dated 28.05.2018, P-45021/2/2017-PP (BE-II) dated 29.05.2019 and
+P-45021/2/2017-PP (BE-II) dated 16.09.2020, we hereby certify that
+
+(Supplier name) are local supplier meeting requirement of minimum local content            % defined in as above
+orders for the material against Enquiry / Tender No
+
+Details of the location at which local value addition will be made are as follows:
+
+We also understand false declarations will be in breach of the Code of Integrity under Rule 175(1)(i)(h) of the
+General Financial Rules for which a bidder or its successors can be debarred for up to two years as per Rule 151
+(iii) of the General Financial Rules along with such other actions as may be permitted under law.
+
+Date:                                                  Signature:
+Place:                                                 Name and Designation:
+                                                       Mobile no:
+                                                       Office Telephone No: Email ID:
+                                                       Office Seal:
+
+                                                                                                  Page 34 of 41
+
+                                                                                       Annexure-‘J’
+                      FORMAT FOR EARNEST MONEY DEPOSIT / BID BOND
+             (To be typed on Non-judicial stamp paper of value Indian Rupees Five Hundred)
+(TO BE ESTABLISHED THROUGH ANY OF THE NATIONAL BANKS (WHETHER SITUATED AT MANGALURU OR
+OUTSTATION) WITH A CLAUSE TO ENFORCE THE SAME ON THEIR LOCAL BRANCH AT MANGALURU OR
+ANY SCHEDULED BANK (OTHER THAN NATIONALISED BANK) SITUATED AT MANGALURU. BONDS ISSUED
+BY COOPERATIVE BANKS ARE NOT ACCEPTED)
+
+                                                        LETTER OF GUARANTEE
+To
+Director,
+National Institute of Technology Karnataka,
+Srinivasnagar P.O., Surathkal
+Mangaluru – 575025
+
+IN ACCORDANCE WITH YOUR TENDER for the supply of ….............................., M/s.............................. (hereinafter
+called the “Bidder”) having its Registered Office at ......................................., wish to participate in the said bid for the
+supply....................................................................................................................as an irrevocable Bank Guarantee
+against Earnest Money Deposit for an amount of Rs. …................... (Rupees...............................) valid up to (180
+days from the date of issue of Bank Guarantee), is required to be submitted by the bidder as a condition precedent
+for participating in the said bid, which amount is liable to be forfeited by the Purchaser on (1) the withdrawal or
+revision of the offer by the bidder within the validity period, (2) Non acceptance of the Letter of Intent/Purchase order
+by the Bidder when issued within the validity period, (3) failure to execute the contract as per contractual terms and
+condition within the contractual delivery period and (4) on the happening of any contingencies mentioned in the bid
+documents.
+
+During the validity of this Bank Guarantee:
+We, ….......................(Bank name) having the registered office at....................................guarantee and undertake to
+pay immediately on first demand by NITK Surathkal, an amount of Rs........................... (Rupees.
+.........................................................................................................................................)without any reservation,
+protest, demur and recourse. Any such demand made by theNITK Surathkal shall be conclusive and recourse. Any
+such demand made by the purchaser shall be binding on the Bank irrespective of any dispute or difference raised by
+the Bidder.
+ The Guarantee shall be irrevocable and shall remain valid up to........................(180 days from the date of issue of
+Bank Guarantee) If any further extension is required, the same shall be extended to such required period on receiving
+instruction from the Bidder, on whose behalf the is Guarantee is issued.
+
+Notwithstanding anything contained herein:
+⁎ Our liability under this Bank Guarantee shall not exceed Rs.................... (Rupees....................).
+⁎ This Bank Guarantee shall be valid up to....................................................................(date).
+⁎ We are liable to pay the guaranteed amount or any part thereof under this Bank Guarantee Only and only if you
+serve upon us a written claim on or before ....................(date).
+
+This Bank further agrees that the claims if any, against this Bank Guarantee shall be enforceable at our branch office
+at ........................................situated at ........................................(Address of local branch).
+
+Yours truly,
+
+                                                                                                                                             Page 35 of 41
+
+Signature and seal of the guarantor: Name of Bank:
+Address:
+Date:
+
+Instruction to Bank: Bank should note that on expiry of Bond Period, the Original Bond will not be returned to the
+Bank. The bank is requested to take appropriate necessary action on or after the expiry of the bond period
+
+                                                                                                   Page 36 of 41
+
+                                                                                              Annexure-‘K’
+                                                 Checklist for BIDDERs
+BIDDERS are to indicate whether the following documents are uploaded by striking out the non-relevant option and
+the relevant technical bid documents should be in order.
+     Sl.                                                                                        Document
+          Documents                                      Content
+    No.                                                                                          Attached
+                        A signed copy of the tender document should be                        (Yes /No) Pg.
+     1
+                        uploaded                                                               No
+
+                      Self-Attested copy of GST & PAN Number                                  (Yes /No) Pg.
+    2                                                                                         No.
+                      License certificate for manufacture /supply of the item &Factory license. (Yes /No) Pg.
+    3                 Registration with EPF and ESI                                             No.
+                      Undertaking that the successful BIDDER agrees to give a 3% (Yes /No) Pg.
+    4                 Performance Security.                                      No.
+
+    5                 Catalogue of the Product with detailed product specifications.          (Yes /No) Pg.
+                                                                                              No.
+
+    6                 Copy of the Balance Sheet                                               (Yes /No) Pg.
+                                                                                              No.
+                      List of Owner/partners of the firm and their contact numbers (Bidder (Yes /No) Pg.
+    7                 Information)                                                         No.
+
+                      The contract form is given in section 5                                 (Yes /No) Pg.
+    8                                                                                         No.
+          Technical Format of compliance statement of specification as per Annexure-‘A’       (Yes /No) Pg.
+    9        Bid                                                                              No.
+
+                      Previous Supply Order as per Annexure-‘B’                               (Yes /No) Pg.
+    10                                                                                        No.
+                      Declaration of abandoned or suspended any awarded service & Blacklist   (Yes /No) Pg.
+    11                Certificate. Annexure ‘C’                                               No.
+
+                      Integrity Pact. Annexure ‘D’                                            (Yes /No) Pg.
+    12                                                                                        No.
+
+    13                Bank details of the bidder. Annexure ‘E’                                (Yes /No) Pg.
+                                                                                              No.
+                      EMD FORMAT Annexure ‘J’                                                 (Yes /No) Pg.
+    14
+                                                                                              No.
+
+    15                Document as per specification (if any)                                  (Yes /No) Pg.
+                                                                                              No.
+
+   16                 Annexure –‘G’                                                           (Yes /No) Pg.
+                                                                                              No.
+
+   17                 Annexure –‘H’                                                           (Yes /No) Pg.
+                                                                                              No.
+                                                                                                 Page 37 of 41
+
+18                Annexure –‘I’                 (Yes /No) Pg.
+                                                No.
+     Financial-
+ 1                Price bid                     ( Yes /No )
+     Bid
+
+                                  Seal and Signature of the bidder
+
+                                                  Page 38 of 41
+
+                                                                                 Annexure-‘L’
+                        Detailed Technical Specifications
+
+ Technical Specifications for Desktop Computer Systems                   Quantity- 35
+  Description                                Technical Specifications
+     Quantity                                              35
+                        To be specified by supplier (Only a Business/Enterprise series of
+ Make & Model           TOWER desktop to be quoted) The brand quoted and the vendor
+                         should not be black listed in any of Govt., Semi Govt. or similar
+                      entities. (Self attested declaration should be submitted with respect to
+                                                         same)
+ ISO Certification          Manufacturing facility/brand should be ISO 9001:2015, ISO
+                                   14001:2015 & ISO/IEC 27001: 2013 certified.
+   Form Factor                         Tower Model 13 Litres or higher capacity
+                        Intel® Core™ i7-14700 with Intel UHD Graphics (1.5 GHz E-core
+                       base frequency, 2.1 GHz P-core base frequency, up to 4.2 GHz E-core
+ Processor/CPU          Max Turbo frequency, up to 5.3 GHz P-core Max Turbo frequency,
+                                                        33 MB L3
+                                     cache, 8 P-cores and 12 E-cores, 28 threads),
+     Chipset              Intel® Q670 Chipset or better OEM Motherboard with TPM 2.0
+     Memory                32GB(2x16GB) , DDR5, 4800 Transfer rates up to 4400 MT/s or
+                            higher, Expandable upto 128GB with 4 DIMM Slots or higher
+      SSD                          M.2 2280 1TB PCIe NVMe Solid State or higher
+  Graphics Card                            NVIDIA RTX A400 4GB or Higher
+     Audio                  Realtek ALC3252 codec, universal audio jack with CTIA and OMTP
+                                                    headset support
+                                     1 slim ODD; 1 removable M.2 SSD bay; Two 3.5
+   Drive Bays
+                                                          Front:
+                                           1 headphone/microphone combo;
+      Ports                                    4 SuperSpeed USB Type-A;
+                                              1 SuperSpeed USB Type-C®;
+                                                           Rear:
+                                                      3 USB Type-A
+                                                    3 USB 2.0 Type-A
+                                                       1 HDMI 1.4b
+                                                          1 RJ-45
+                                                 1 audio line-in/line-out
+                                                   2 DisplayPort™ 1.4a
+Keyboard & Mouse          USB Wired Multi Media Keyboard and USB Optical scroll Mouse
+                                         (should be same make as PC).
+                         1 M.2 2230; 2 PCIe 3 x1; 1 PCIe 3 x16 (wired as x4); 2 M.2 2280; 1 PCIe 4
+       Slots                x16 (1 M.2 2230 slot for WLAN and 2 M.2 2280 slots for storage)
+
+                                                                                    Page 39 of 41
+
+                                  260W or higher SMPS Surge protected with minimum 90%
+      Power Supply
+                              efficient PSU voltage autosensing (Mention SMPS power wattage).
+                               23.8" FHD Monitor with Minimum resolution of 1920x1080, IPS
+                                 with LED backlight, with DisplayPort, VGA, HDMI, TCO 8.0
+        Monitor
+                                    Certified (Same OEM as desktop and Model should be
+                                                         mentioned).
+                                Genuine Windows 11 Professional 64bit factory preloaded with
+    Operating System
+                                                      single key recovery
+                                    Intel® Wi-Fi 6E AX211 (2x2) and Bluetooth® 5.3 wireless card
+   Wi-Fi & Bluetooth
+       Ethernet                    10/100/1000 Mbps on board integrated Network Port.
+  Operating System
+                                               Windows 11 Professional & Linux.
+      Certification
+  Other Regulatory                       ISO 9001, 14001, 20001, 27001 for OEM.
+   Certificates and
+Environmental Standards       BIS (Quoted Model number BIS Certificate should contain Indian Factory
+                                                    Address), ROHS, CE.
+                               5-Years Comprehensive Onsite Warranty including Windows 11
+                                Professional Operating System, Monitor, Keyboard and Mouse
+                                                   should be from the OEM.
+                             In case of HARDWARE breakdown, service calls must be attended
+        Warranty                          by OEM engineer directly within 24 hours.
+                                 In case of downtime more than 72hours, a standby must be
+                                  provided post installation, 5‑year product warranty for all
+                             component including Windows 11 Professional Operating System,
+                             Monitor, Keyboard & Mouse should reflect in the support website
+                                                         of the OEM.
+                              Supplier should provide at least one resident service engineer in
+                                   NITK Campus for attending service calls immediately.
+                           Supplier has to send the Technician for complete installation on-site (at
+      Installation
+                                                     NITK, Surathkal).
+
+                           Brand/OEM must have an online system hardware diagnostic facility.
+Diagnostics and software                   Must have the facility to download
+        updates            And update the preinstalled software, device drivers and firmware on
+                                                       its websites.
+
+                                                                                        Page 40 of 41
+
+**Disclaimer** Bidders are advised to exercise caution and not respond to any unknown calls, emails, or embedded links
+requesting payment for participating in the tender or for any other purpose. Please note that NITKSurathkal never asks for
+any tender fee for participation in tenders or bids.
+
+                                                                               Signature Not Verified
+                                                                               Digitally signed by RAKESH KUMAR
+                                                                                                         IST 41 of 41
+                                                                               Date: 2025.03.06 10:13:03Page
+                                                                               Location: eProcure-EPROC

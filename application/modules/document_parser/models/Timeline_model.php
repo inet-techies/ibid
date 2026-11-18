@@ -23,7 +23,7 @@ class Timeline_model extends CI_Model {
         // 1. If cached TimelineJson has milestones, check if valid; otherwise hydrate from DB
         $existingTimeline = !empty($fs['TimelineJson']) ? json_decode($fs['TimelineJson'], true) : [];
         $corrigenda = $existingTimeline['corrigenda'] ?? [];
-        $reminders  = $existingTimeline['reminders'] ?? [];
+        $reminders  = $this->getReminders($tfs_id);
 
         // 2. Fetch corresponding BidCreationDetails if Bcid is present
         $bid = null;
@@ -267,18 +267,81 @@ class Timeline_model extends CI_Model {
     }
 
     /**
+     * Check if a table exists in a case-insensitive manner (robust for MySQL on Windows & Linux)
+     */
+    public function tableExists($table) {
+        $tables = array_map('strtolower', $this->db->list_tables());
+        return in_array(strtolower($table), $tables);
+    }
+
+    /**
+     * Helper to read TimelineJson directly without infinite recursion
+     */
+    public function getTimelineFromBlob($tfs_id) {
+        $row = $this->db->select('TimelineJson')->where('Tfsid', (int)$tfs_id)->get('TenderFactSheet')->row_array();
+        return !empty($row['TimelineJson']) ? json_decode($row['TimelineJson'], true) : [];
+    }
+
+    /**
      * Get Corrigenda records directly from TimelineJson
      */
     public function getCorrigenda($tfs_id) {
-        $timeline = $this->getTimeline($tfs_id);
+        $timeline = $this->getTimelineFromBlob($tfs_id);
         return $timeline['corrigenda'] ?? [];
     }
 
     /**
-     * Get reminders directly from TimelineJson
+     * Get reminders directly from exact table TenderTimelineReminders (with fallback to TimelineJson)
      */
     public function getReminders($tfs_id, $user_id = null) {
-        $timeline = $this->getTimeline($tfs_id);
+        $tfs_id = (int)$tfs_id;
+        $dbReminders = [];
+
+        if ($this->tableExists('TenderTimelineReminders')) {
+            $this->db->where('Tfsid', $tfs_id)
+                     ->where('DeliveryStatus !=', 'Cancelled')
+                     ->order_by('ScheduledAt', 'ASC');
+
+            if ($user_id) {
+                $this->db->where('UserId', (int)$user_id);
+            }
+
+            $rows = $this->db->get('TenderTimelineReminders')->result_array();
+            foreach ($rows as $row) {
+                $dbReminders[] = [
+                    'id'              => (int)$row['Ttrid'],
+                    'Ttrid'           => (int)$row['Ttrid'],
+                    'tfs_id'          => (int)$row['Tfsid'],
+                    'Tfsid'           => (int)$row['Tfsid'],
+                    'bcid'            => !empty($row['Bcid']) ? (int)$row['Bcid'] : null,
+                    'Bcid'            => !empty($row['Bcid']) ? (int)$row['Bcid'] : null,
+                    'user_id'         => (int)$row['UserId'],
+                    'UserId'          => (int)$row['UserId'],
+                    'milestone_type'  => $row['MilestoneType'],
+                    'MilestoneType'   => $row['MilestoneType'],
+                    'reminder_type'   => $row['ReminderType'],
+                    'ReminderType'    => $row['ReminderType'],
+                    'scheduled_at'    => $row['ScheduledAt'],
+                    'ScheduledAt'     => $row['ScheduledAt'],
+                    'recipient_email' => $row['RecipientEmail'],
+                    'RecipientEmail'  => $row['RecipientEmail'],
+                    'notes'           => $row['Notes'],
+                    'Notes'           => $row['Notes'],
+                    'status'          => strtolower($row['DeliveryStatus']),
+                    'delivery_status' => $row['DeliveryStatus'],
+                    'DeliveryStatus'  => $row['DeliveryStatus'],
+                    'created_at'      => $row['CreationTs'],
+                    'CreationTs'      => $row['CreationTs']
+                ];
+            }
+        }
+
+        if (!empty($dbReminders)) {
+            return $dbReminders;
+        }
+
+        // Fallback to TimelineJson if table has no records for this tender
+        $timeline = $this->getTimelineFromBlob($tfs_id);
         $reminders = $timeline['reminders'] ?? [];
         if ($user_id) {
             $filtered = [];
@@ -293,42 +356,87 @@ class Timeline_model extends CI_Model {
     }
 
     /**
-     * Create or update a reminder inside TimelineJson
+     * Create or update a reminder inside TenderTimelineReminders and sync to TimelineJson
      */
     public function saveReminder($data) {
-        $tfs_id = (int)$data['tfs_id'];
-        $timeline = $this->getTimeline($tfs_id);
-        if (!$timeline) return false;
+        $tfs_id = (int)($data['tfs_id'] ?? $data['Tfsid'] ?? 0);
+        if ($tfs_id <= 0) return false;
 
-        $reminders = $timeline['reminders'] ?? [];
         $now = date('Y-m-d H:i:s');
+        $userId = (int)($data['user_id'] ?? $data['UserId'] ?? 1);
+        $milestoneType = trim((string)($data['milestone_type'] ?? $data['MilestoneType'] ?? ''));
+        $reminderType = trim((string)($data['reminder_type'] ?? $data['ReminderType'] ?? '3_days'));
+        $scheduledAt = !empty($data['scheduled_at']) ? $data['scheduled_at'] : (!empty($data['ScheduledAt']) ? $data['ScheduledAt'] : null);
+        $recipientEmail = trim((string)($data['recipient_email'] ?? $data['RecipientEmail'] ?? ''));
+        $notes = trim((string)($data['notes'] ?? $data['Notes'] ?? ''));
+        $bcid = !empty($data['bcid']) ? (int)$data['bcid'] : (!empty($data['Bcid']) ? (int)$data['Bcid'] : null);
 
-        $remId = time() . '_' . rand(100, 999);
+        if (!$bcid) {
+            $fsRow = $this->db->select('Bcid')->where('Tfsid', $tfs_id)->get('TenderFactSheet')->row_array();
+            if (!empty($fsRow['Bcid'])) {
+                $bcid = (int)$fsRow['Bcid'];
+            }
+        }
+
+        $remId = null;
+
+        if ($this->tableExists('TenderTimelineReminders')) {
+            $existing = $this->db->where('Tfsid', $tfs_id)
+                ->where('UserId', $userId)
+                ->where('MilestoneType', $milestoneType)
+                ->where('DeliveryStatus', 'Pending')
+                ->get('TenderTimelineReminders')->row_array();
+
+            $dbData = [
+                'Tfsid'          => $tfs_id,
+                'Bcid'           => $bcid,
+                'UserId'         => $userId,
+                'MilestoneType'  => $milestoneType,
+                'ReminderType'   => $reminderType,
+                'ScheduledAt'    => $scheduledAt,
+                'RecipientEmail' => $recipientEmail,
+                'Notes'          => $notes,
+                'DeliveryStatus' => 'Pending'
+            ];
+
+            if ($existing) {
+                $remId = (int)$existing['Ttrid'];
+                $this->db->where('Ttrid', $remId)->update('TenderTimelineReminders', $dbData);
+            } else {
+                $dbData['CreationTs'] = $now;
+                $this->db->insert('TenderTimelineReminders', $dbData);
+                $remId = (int)$this->db->insert_id();
+            }
+        }
+
+        // Dual sync: update TimelineJson on TenderFactSheet
+        $timeline = $this->getTimelineFromBlob($tfs_id) ?: [];
+        $reminders = $timeline['reminders'] ?? [];
         $record = [
-            'id'              => $remId,
-            'milestone_type'  => $data['milestone_type'] ?? '',
-            'user_id'         => (int)($data['user_id'] ?? 1),
-            'reminder_type'   => $data['reminder_type'] ?? '3_days',
-            'scheduled_at'    => $data['scheduled_at'] ?? null,
-            'recipient_email' => $data['recipient_email'] ?? '',
-            'notes'           => $data['notes'] ?? '',
+            'id'              => $remId ?: (time() . '_' . rand(100, 999)),
+            'Ttrid'           => $remId,
+            'milestone_type'  => $milestoneType,
+            'user_id'         => $userId,
+            'reminder_type'   => $reminderType,
+            'scheduled_at'    => $scheduledAt,
+            'recipient_email' => $recipientEmail,
+            'notes'           => $notes,
             'status'          => 'scheduled',
+            'delivery_status' => 'Pending',
             'created_at'      => $now
         ];
 
-        // Replace if identical reminder exists for this user and milestone
-        $updated = false;
+        $synced = false;
         foreach ($reminders as &$r) {
-            if ($r['milestone_type'] === $record['milestone_type'] && $r['user_id'] === $record['user_id'] && $r['status'] === 'scheduled') {
+            if (($r['milestone_type'] ?? '') === $milestoneType && (int)($r['user_id'] ?? 0) === $userId && ($r['status'] ?? '') === 'scheduled') {
                 $r = array_merge($r, $record);
-                $updated = true;
-                $remId = $r['id'];
+                $synced = true;
                 break;
             }
         }
         unset($r);
 
-        if (!$updated) {
+        if (!$synced) {
             $reminders[] = $record;
         }
 
@@ -339,37 +447,130 @@ class Timeline_model extends CI_Model {
     }
 
     /**
-     * Cancel a reminder inside TimelineJson
+     * Cancel an existing reminder in TenderTimelineReminders and TimelineJson
+     * Accepts either ($ttrid, $user_id) or ($tfs_id, $reminder_id, $user_id)
      */
-    public function cancelReminder($tfs_id, $reminder_id, $user_id = null) {
-        $timeline = $this->getTimeline($tfs_id);
-        if (!$timeline || empty($timeline['reminders'])) return false;
+    public function cancelReminder($p1, $p2 = null, $p3 = null) {
+        $now = date('Y-m-d H:i:s');
+        $tfs_id = null;
+        $reminder_id = null;
+        $user_id = null;
 
-        foreach ($timeline['reminders'] as &$r) {
-            if ($r['id'] == $reminder_id) {
-                if (!$user_id || $r['user_id'] == $user_id) {
-                    $r['status'] = 'cancelled';
-                    $r['cancelled_at'] = date('Y-m-d H:i:s');
+        if ($p3 !== null) {
+            // ($tfs_id, $reminder_id, $user_id)
+            $tfs_id = (int)$p1;
+            $reminder_id = $p2;
+            $user_id = $p3 ? (int)$p3 : null;
+        } elseif (is_numeric($p1)) {
+            if ($this->tableExists('TenderTimelineReminders')) {
+                $remRow = $this->db->get_where('TenderTimelineReminders', ['Ttrid' => (int)$p1])->row_array();
+                if ($remRow) {
+                    $reminder_id = (int)$p1;
+                    $user_id = $p2 ? (int)$p2 : null;
+                    $tfs_id = (int)$remRow['Tfsid'];
+                } else {
+                    $tfs_id = (int)$p1;
+                    $reminder_id = $p2;
+                    $user_id = null;
                 }
+            } else {
+                $tfs_id = (int)$p1;
+                $reminder_id = $p2;
+                $user_id = null;
+            }
+        } else {
+            $reminder_id = $p1;
+            $user_id = $p2 ? (int)$p2 : null;
+        }
+
+        $updated = false;
+
+        if ($this->tableExists('TenderTimelineReminders') && is_numeric($reminder_id)) {
+            $this->db->where('Ttrid', (int)$reminder_id);
+            if ($user_id) {
+                $this->db->where('UserId', (int)$user_id);
+            }
+            $this->db->update('TenderTimelineReminders', [
+                'DeliveryStatus' => 'Cancelled',
+                'CancelledAt'    => $now
+            ]);
+            if ($this->db->affected_rows() > 0) {
+                $updated = true;
             }
         }
-        unset($r);
 
-        return $this->saveTimelineJson($tfs_id, $timeline);
+        // Sync cancellation in TimelineJson
+        if ($tfs_id) {
+            $timeline = $this->getTimelineFromBlob($tfs_id);
+            if (!empty($timeline['reminders'])) {
+                foreach ($timeline['reminders'] as &$r) {
+                    if (($r['id'] == $reminder_id) || (($r['Ttrid'] ?? null) == $reminder_id)) {
+                        if (!$user_id || ((int)($r['user_id'] ?? 0) === (int)$user_id)) {
+                            $r['status'] = 'cancelled';
+                            $r['delivery_status'] = 'Cancelled';
+                            $r['cancelled_at'] = $now;
+                            $updated = true;
+                        }
+                    }
+                }
+                unset($r);
+                $this->saveTimelineJson($tfs_id, $timeline);
+            }
+        }
+
+        return $updated;
     }
 
     /**
-     * Fetch pending reminders due for dispatch across all TenderFactSheet records (for cron runner)
+     * Fetch pending reminders due for dispatch across all records from TenderTimelineReminders (for cron runner)
      */
     public function getPendingRemindersDue() {
         $now = date('Y-m-d H:i:s');
+        $due = [];
+
+        if ($this->tableExists('TenderTimelineReminders')) {
+            $rows = $this->db->select('r.Ttrid, r.Tfsid, r.Bcid, r.UserId, r.MilestoneType, r.ReminderType, r.ScheduledAt, r.RecipientEmail, r.Notes, r.DeliveryStatus, fs.TenderRefNo, fs.Department, fs.TenderTitle')
+                ->from('TenderTimelineReminders r')
+                ->join('TenderFactSheet fs', 'fs.Tfsid = r.Tfsid', 'left')
+                ->where('r.DeliveryStatus', 'Pending')
+                ->where('r.ScheduledAt <=', $now)
+                ->get()->result_array();
+
+            foreach ($rows as $row) {
+                $due[] = [
+                    'id'              => (int)$row['Ttrid'],
+                    'Ttrid'           => (int)$row['Ttrid'],
+                    'tfs_id'          => (int)$row['Tfsid'],
+                    'Tfsid'           => (int)$row['Tfsid'],
+                    'bcid'            => !empty($row['Bcid']) ? (int)$row['Bcid'] : null,
+                    'Bcid'            => !empty($row['Bcid']) ? (int)$row['Bcid'] : null,
+                    'user_id'         => (int)$row['UserId'],
+                    'UserId'          => (int)$row['UserId'],
+                    'milestone_type'  => $row['MilestoneType'],
+                    'MilestoneType'   => $row['MilestoneType'],
+                    'reminder_type'   => $row['ReminderType'],
+                    'ReminderType'    => $row['ReminderType'],
+                    'scheduled_at'    => $row['ScheduledAt'],
+                    'ScheduledAt'     => $row['ScheduledAt'],
+                    'recipient_email' => $row['RecipientEmail'],
+                    'RecipientEmail'  => $row['RecipientEmail'],
+                    'notes'           => $row['Notes'],
+                    'Notes'           => $row['Notes'],
+                    'TenderNo'        => $row['TenderRefNo'],
+                    'Department'      => $row['Department'],
+                    'TenderTitle'     => $row['TenderTitle']
+                ];
+            }
+            return $due;
+        }
+
+        // Fallback to scanning TimelineJson if table is not available
         $rows = $this->db->select('Tfsid, TenderRefNo, Department, TenderTitle, TimelineJson')
             ->from('TenderFactSheet')
             ->where('TimelineJson IS NOT NULL')
             ->where('TimelineJson !=', '')
             ->get()->result_array();
 
-        $due = [];
         foreach ($rows as $row) {
             $data = json_decode($row['TimelineJson'], true);
             if (empty($data['reminders'])) continue;
@@ -377,7 +578,7 @@ class Timeline_model extends CI_Model {
             foreach ($data['reminders'] as $r) {
                 if (($r['status'] ?? '') === 'scheduled' && !empty($r['scheduled_at']) && $r['scheduled_at'] <= $now) {
                     $r['tfs_id'] = $row['Tfsid'];
-                    $r['TenderRefNo'] = $row['TenderRefNo'];
+                    $r['TenderNo'] = $row['TenderRefNo'];
                     $r['Department'] = $row['Department'];
                     $r['TenderTitle'] = $row['TenderTitle'];
                     $due[] = $r;

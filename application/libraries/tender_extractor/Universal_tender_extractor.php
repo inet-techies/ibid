@@ -27,7 +27,7 @@ class Universal_tender_extractor
      * @param array $pageMap Optional page map [pageNo => pageText]
      * @return array Standardized payload containing 'fields', 'diagnostics', and 'ai_summary'
      */
-    public static function extract($rawText, $origName = '', $ext = '', array $pageMap = [])
+    public static function extract($rawText, $origName = '', $ext = '', array $pageMap = [], array $emails = [], array $phones = [])
     {
         $startTime = microtime(true);
 
@@ -200,6 +200,22 @@ class Universal_tender_extractor
         require_once __DIR__ . '/Keyword_extractor.php';
         $kwRes = Keyword_extractor::extract($normText, $resolvedFields['tender_title']['value'] ?? '', !empty($pageMap) ? $pageMap : $normPageMap);
         $resolvedFields['keywords_summary'] = $kwRes;
+
+        // 6b. Customer Information: State, Customer Name, Address, Phone
+        require_once __DIR__ . '/Customer_info_extractor.php';
+        $custInfo = Customer_info_extractor::extract(
+            $normText,
+            $resolvedFields['tender_title']['value'] ?? '',
+            !empty($pageMap) ? $pageMap : $normPageMap,
+            $resolvedFields,
+            $emails,
+            $phones,
+            $origName
+        );
+        $resolvedFields['customer_state']   = $custInfo['customer_state'];
+        $resolvedFields['customer_name']    = $custInfo['customer_name'];
+        $resolvedFields['customer_address'] = $custInfo['customer_address'];
+        $resolvedFields['customer_phone']   = $custInfo['customer_phone'];
 
         // 7. Diagnostics & Date Audit Report
         $endTime = microtime(true);
@@ -407,9 +423,13 @@ class Universal_tender_extractor
                             $candVal = isset($m[1]) ? trim($m[1]) : '';
                             if ($candVal === '') continue;
 
-                            $offset = strpos($pageText, $m[0]);
+                            $offset = mb_strpos($pageText, $m[0], 0, 'UTF-8');
+                            if ($offset === false) {
+                                $offset = strpos($pageText, $m[0]);
+                            }
                             $start = max(0, $offset - 20);
-                            $evidence = substr($pageText, $start, strlen($m[0]) + 60);
+                            $evidence = mb_substr($pageText, $start, mb_strlen($m[0], 'UTF-8') + 60, 'UTF-8');
+                            $evidence = mb_convert_encoding($evidence, 'UTF-8', 'UTF-8');
 
                             self::addProcessedCandidate($field, $candVal, 'label_based', 90, $pNo, $evidence, $allCandidates);
                         }
@@ -436,14 +456,31 @@ class Universal_tender_extractor
         }
 
         // Layout extraction for Tender Reference No
-        if (preg_match('/\b(NIT\s*No\.?|RFP\s*(?:Enquiry\s*)?No\.?|Tender\s*(?:Notice\s*)?No\.?|Bid\s*No\.?)\s*[:\t\- ]*([A-Za-z0-9][A-Za-z0-9\/_\-:\.]{3,70})/i', $earlyPagesText, $m)) {
+        if (preg_match('/\b(NIT\s*No\.?|RFP\s*(?:Enquiry\s*)?No\.?|Tender\s*(?:Notice|Notification)?\s*No\.?|Tender\s+Reference\s*No\.?|Bid\s*No\.?)\s*[:\t\- ]*([A-Za-z0-9][A-Za-z0-9\/_\-:\.]{3,70})/i', $earlyPagesText, $m)) {
+            $candRef = trim($m[2]);
+            $candRef = preg_replace('/\s+Date:.*$/i', '', $candRef);
+            if (!preg_match('/^\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{2,4}$/', $candRef)) {
+                $allCandidates['tender_reference'][] = [
+                    'value'      => $candRef,
+                    'raw_value'  => $candRef,
+                    'confidence' => 94,
+                    'method'     => 'layout_aware',
+                    'page'       => 1,
+                    'evidence'   => trim($m[0])
+                ];
+            }
+        }
+
+        // Two-column or wrapped table Reference No (e.g. "Tender \n ZO: NDZ:SEC-17:2026-27-01 \n Reference No.")
+        if (preg_match('/Tender\s*[\r\n]+\s*([A-Z0-9]{2,10}(?:\s*:\s*[A-Za-z0-9\-_]+){2,5})\s*[\r\n]+\s*Reference\s+No\.?/iu', $earlyPagesText, $tm)) {
+            $candRef = trim(preg_replace('/\s+/', ' ', $tm[1]));
             $allCandidates['tender_reference'][] = [
-                'value'      => trim($m[2]),
-                'raw_value'  => trim($m[2]),
-                'confidence' => 94,
-                'method'     => 'layout_aware',
+                'value'      => $candRef,
+                'raw_value'  => $candRef,
+                'confidence' => 97,
+                'method'     => 'layout_aware_grid',
                 'page'       => 1,
-                'evidence'   => trim($m[0])
+                'evidence'   => trim($tm[0])
             ];
         }
 
@@ -491,9 +528,9 @@ class Universal_tender_extractor
     {
         foreach ($pageMap as $pNo => $pageText) {
             // EMD context match: "bidders must submit EMD of Rs. X"
-            if (preg_match('/(?:EMD|Earnest\s+Money(?:\s+Deposit)?)\s+(?:of\s+)?(?:Rs\.?|INR|₹)?\s*([0-9,]+(?:\.\d{1,2})?(?:\s*(?:Lakhs?|Lacs?|Crores?|Cr))?)/i', $pageText, $em)) {
+            if (preg_match('/(?:EMD|Earnest\s+Money(?:\s+Deposit)?)\s+(?:of\s+)?(?:Rs\.?|INR|₹)\s*([0-9,]+(?:\.\d{1,2})?(?:\s*(?:Lakhs?|Lacs?|Crores?|Cr))?)/i', $pageText, $em)) {
                 $amtRes = Amount_extractor::parse($em[1]);
-                if ($amtRes['numeric'] !== null) {
+                if ($amtRes['numeric'] !== null && ($amtRes['numeric'] === 0 || $amtRes['numeric'] >= 500)) {
                     $allCandidates['emd_value'][] = [
                         'value'      => (string)$amtRes['numeric'],
                         'raw_value'  => $amtRes['formatted'],
@@ -779,6 +816,11 @@ class Universal_tender_extractor
             'location'                      => $resolvedFields['work_location']['value'] ?? '',
             'contract_period'               => $resolvedFields['contract_period']['value'] ?? '',
             'keywords'                      => $resolvedFields['keywords_summary']['value'] ?? '',
+            'state'                         => $resolvedFields['customer_state']['value'] ?? '',
+            'customer_state'                => $resolvedFields['customer_state']['value'] ?? '',
+            'customer_name'                 => $resolvedFields['customer_name']['value'] ?? '',
+            'customer_address'              => $resolvedFields['customer_address']['value'] ?? '',
+            'customer_phone'                => $resolvedFields['customer_phone']['value'] ?? '',
             'title'                         => !empty($resolvedFields['tender_title']['value']) ? $resolvedFields['tender_title']['value'] : $origName,
             'first_line'                    => '',
             'bid_title'                     => $resolvedFields['tender_title']['value'] ?? ''

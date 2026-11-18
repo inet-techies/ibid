@@ -74,10 +74,15 @@ class Bid extends MX_Controller
 		$Buquery = $this->bid_model->getLoginUser($username, $yourpassword);
 
 		if (!empty($Buquery)) {
-			// Clear any previous authenticated session until OTP is verified
+			$userRow = $Buquery[0];
+
+			/*
+			// =========================================================================
+			// [TEMPORARILY COMMENTED: 2-Step OTP Verification for Login]
+			// Uncomment this block once SMTP / mail delivery is configured.
+			// =========================================================================
 			$this->session->unset_userdata('logged_in');
 
-			$userRow = $Buquery[0];
 			$otpResult = $this->_issueAndSendOtp($userRow, 'login');
 
 			$this->session->set_userdata('pending_otp_login', [
@@ -96,6 +101,33 @@ class Bid extends MX_Controller
 			}
 
 			redirect($this->config->item('base_url').'bid/verifyLoginOtp');
+			return;
+			// =========================================================================
+			*/
+
+			// Direct Login (Bypassing OTP challenge)
+			$sess_array = array(
+				'Bid'    => $userRow['Buid'],
+				'BName'  => $userRow['Name'],
+				'BEmail' => $userRow['Email'],
+				'RoleId' => $userRow['Brid']
+			);
+			$this->session->set_userdata('logged_in', $sess_array);
+
+			$ip_address = $this->input->ip_address();
+			$login_time = date("Y-m-d H:i:s");
+			$logData = array(
+				'Logdescription' => "User " . $userRow['Buid'] . " Logged in Successfully on " . date("Y M d H i s"),
+				'Buid'           => $userRow['Buid'],
+				'UserRole'       => $userRow['Brid'],
+				'Ipaddress'      => $ip_address,
+				'LogInTime'      => $login_time,
+				'LogOutTime'     => '',
+				'Status'         => '1'
+			);
+			$this->bid_model->insertLoginLog($logData);
+
+			redirect($this->config->item('base_url').'bid/dashboard');
 			return;
 		} else {
 			$this->session->set_flashdata('err', 'Invalid Login Credentials..!');
@@ -936,14 +968,6 @@ public function AddBidData(){
 			$openingDate = trim($inputs['OpeningDate'] ?? '');
 			if (empty($openingDate) || !strtotime($openingDate)) {
 				$validationErrors[] = 'Valid Bid Opening Date is required.';
-			}
-
-			if (!empty($publishedDate) && !empty($submissionDate) && strtotime($submissionDate) < strtotime($publishedDate)) {
-				$validationErrors[] = 'Submission End Date cannot be earlier than Published Date.';
-			}
-
-			if (!empty($submissionDate) && !empty($openingDate) && strtotime($openingDate) < strtotime($submissionDate)) {
-				$validationErrors[] = 'Opening Date cannot be earlier than Submission End Date.';
 			}
 
 			$bidSummary = trim($inputs['bidSummaryInput'] ?? '');
@@ -2744,27 +2768,54 @@ public  function logout()
     public function processTimelineRemindersCron()
     {
         $this->load->model('document_parser/Timeline_model');
+        $this->load->model('bid/Bid_model');
         $due = $this->Timeline_model->getPendingRemindersDue();
         $sentCount = 0;
         $now = date('Y-m-d H:i:s');
 
         foreach ($due as $rem) {
+            $remId = (int)($rem['Ttrid'] ?? $rem['id']);
+            $emailSent = false;
+            $subject = 'Tender Milestone Reminder: ' . ucfirst(str_replace('_', ' ', $rem['milestone_type'])) . ' for ' . ($rem['TenderNo'] ?: 'Tender #' . $rem['tfs_id']);
+
             // Send email if recipient email exists
             if (!empty($rem['recipient_email'])) {
                 @$this->email->clear();
                 @$this->email->from('noreply@ibid-system.local', 'iBid Tender Timeline Intelligence');
                 @$this->email->to($rem['recipient_email']);
-                @$this->email->subject('Tender Milestone Reminder: ' . ucfirst(str_replace('_', ' ', $rem['milestone_type'])) . ' for ' . ($rem['TenderNo'] ?: 'Tender #' . $rem['tfs_id']));
+                @$this->email->subject($subject);
                 @$this->email->message("This is a reminder for {$rem['milestone_type']}.\nScheduled at: {$rem['scheduled_at']}\nNotes: {$rem['notes']}");
-                @$this->email->send();
+                $emailSent = (bool)@$this->email->send();
             }
 
-            $this->db->where('id', $rem['id'])->update('tender_timeline_reminders', [
-                'delivery_status' => 'sent',
-                'delivered_at'    => $now,
-                'updated_at'      => $now
-            ]);
-            $sentCount++;
+            $deliveryStatus = $emailSent ? 'Sent' : (!empty($rem['recipient_email']) ? 'Failed' : 'Sent');
+
+            // Update exact table TenderTimelineReminders
+            if ($this->Bid_model->tableExists('TenderTimelineReminders')) {
+                $this->db->where('Ttrid', $remId)->update('TenderTimelineReminders', [
+                    'DeliveryStatus' => $deliveryStatus,
+                    'DeliveredAt'    => $now
+                ]);
+            }
+
+            // Record notification dispatch into exact table BidNotificationLog
+            if (!empty($rem['bcid']) && $this->Bid_model->tableExists('BidNotificationLog')) {
+                $this->bid_model->insertNotificationLog([
+                    'Bcid'             => (int)$rem['bcid'],
+                    'NotificationType' => 'TIMELINE_REMINDER',
+                    'RecipientEmail'   => $rem['recipient_email'] ?? '',
+                    'Subject'          => $subject,
+                    'Status'           => ($deliveryStatus === 'Sent') ? 'SENT' : 'FAILED',
+                    'SentAt'           => ($deliveryStatus === 'Sent') ? $now : null,
+                    'CurrentStatusId'  => 0,
+                    'OpeningDate'      => null,
+                    'ErrorMessage'     => ($deliveryStatus === 'Failed') ? 'Email transport delivery failed' : null
+                ]);
+            }
+
+            if ($deliveryStatus === 'Sent') {
+                $sentCount++;
+            }
         }
 
         return $this->output->set_content_type('application/json')

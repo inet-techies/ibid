@@ -338,13 +338,22 @@ $secAssessments = !empty($fs['OpportunityAssessment']) ? parseSectionKV($fs['Opp
 $prebidNotes = isset($secAssessments['Pre-Bid Queries']) ? $secAssessments['Pre-Bid Queries'] : (!empty($fs['PrebidQueryNotes']) ? $fs['PrebidQueryNotes'] : '');
 $attentionAreas = [];
 foreach ($secAssessments as $k => $v) {
-    if (strpos($k, 'Key Attention Area') !== false || strpos($k, 'Assessment') !== false || stripos($k, 'Remarks') !== false) {
+    if (stripos($k, 'Remarks') !== false) {
+        continue;
+    }
+    if (strpos($k, 'Key Attention Area') !== false || strpos($k, 'Key Assessment Area') !== false || strpos($k, 'Assessment') !== false || strpos($k, 'Opportunity') !== false) {
         $attentionAreas[] = $v;
     }
 }
 if (empty($attentionAreas) && !empty($fs['OpportunityAssessmentJson'])) {
     $arr = json_decode($fs['OpportunityAssessmentJson'], true);
-    if (is_array($arr)) $attentionAreas = $arr;
+    if (is_array($arr)) {
+        foreach ($arr as $item) {
+            if (is_string($item) && stripos($item, 'Remarks:') === false) {
+                $attentionAreas[] = $item;
+            }
+        }
+    }
 }
 ?>
 

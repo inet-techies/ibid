@@ -652,8 +652,10 @@ class Factsheet_model extends CI_Model
         $risks = !empty($fs['RiskPoints']) ? self::deserializeList($fs['RiskPoints']) : [];
 
         // ── Section 12: OpportunityAssessment ──
+        // Note: Remarks from the Create Bids workflow are internal bid remarks and must NEVER be placed in Opportunity Assessment
         $opp = !empty($fs['OpportunityAssessment']) ? self::deserializeKeyValue($fs['OpportunityAssessment']) : [];
-        if ($remarks !== '') $opp['Remarks'] = $remarks;
+        if (isset($opp['Remarks'])) unset($opp['Remarks']);
+        if (isset($opp['remarks'])) unset($opp['remarks']);
         if ($portal !== '')  $opp['Tender Portal'] = $portal;
 
         // 3. Assemble payload for database

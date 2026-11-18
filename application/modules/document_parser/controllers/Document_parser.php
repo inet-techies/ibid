@@ -390,8 +390,53 @@ class Document_parser extends MX_Controller
         while (ob_get_level() > 0) {
             ob_end_clean();
         }
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode($payload);
+        if (!headers_sent()) {
+            header('Content-Type: application/json; charset=utf-8');
+            header('Cache-Control: no-cache, no-store, must-revalidate');
+            header('Pragma: no-cache');
+            header('Expires: 0');
+        }
+
+        $payload = $this->_cleanUtf8Recursive($payload);
+
+        $flags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
+        if (defined('JSON_INVALID_UTF8_SUBSTITUTE')) {
+            $flags |= JSON_INVALID_UTF8_SUBSTITUTE;
+        }
+
+        $json = json_encode($payload, $flags);
+        if ($json === false) {
+            $json = json_encode($this->_utf8ize($payload), JSON_UNESCAPED_SLASHES);
+        }
+
+        echo $json;
         exit;
+    }
+
+    private function _cleanUtf8Recursive($data)
+    {
+        if (is_string($data)) {
+            return mb_convert_encoding($data, 'UTF-8', 'UTF-8');
+        }
+        if (is_array($data)) {
+            foreach ($data as $k => $v) {
+                $cleanKey = is_string($k) ? mb_convert_encoding($k, 'UTF-8', 'UTF-8') : $k;
+                $data[$cleanKey] = $this->_cleanUtf8Recursive($v);
+            }
+        }
+        return $data;
+    }
+
+    private function _utf8ize($data)
+    {
+        if (is_string($data)) {
+            return utf8_encode($data);
+        }
+        if (is_array($data)) {
+            foreach ($data as $k => $v) {
+                $data[$k] = $this->_utf8ize($v);
+            }
+        }
+        return $data;
     }
 }

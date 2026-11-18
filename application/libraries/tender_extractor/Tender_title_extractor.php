@@ -151,12 +151,31 @@ class Tender_title_extractor
         $totalLines = count($lines);
 
         // --- STRATEGY A: Explicit Labels ---
-        // "Name of Work:", "Name of the Item:", "Brief description of material:", "Tender Title:", "Subject:"
-        $labelPattern = '/^(?:(?:\d+\.|\(?\d+\)?|sl\.?\s*(?:no\.?)?\s*\d+)?\s*(?:name\s+of\s+(?:the\s+)?(?:work|item|equipment|material|project|job)|tender\s+title|title\s+of\s+(?:the\s+)?(?:work|tender)|brief\s+description\s+of\s+(?:the\s+)?(?:material|work|goods)|description\s+of\s+(?:the\s+)?(?:work|goods|material)|subject|sub\s*:|scope\s+of\s+(?:work|procurement)))\s*(?:[-:.\x{2013}\x{2014}]+\s*|\s{2,})\s*(.+)$/iu';
+        // "Name of Work:", "Name of the Item:", "Name of Goods:", "Brief description of material:", "Tender Title:", "Subject:"
+        $labelPattern = '/^(?:(?:\d+\.|\(?\d+\)?|sl\.?\s*(?:no\.?)?\s*\d+)?\s*(?:name\s+of\s+(?:the\s+)?(?:work|item|goods|equipment|material|project|job)|item\(s\)\s+name(?:\s+to\s+be\s+procured)?|tender\s+title|title\s+of\s+(?:the\s+)?(?:work|tender)|brief\s+description\s+of\s+(?:the\s+)?(?:material|work|goods)|description\s+of\s+(?:the\s+)?(?:work|goods|material)|subject|sub\s*:|scope\s+of\s+(?:work|procurement)))\s*(?:[-:.\x{2013}\x{2014}]+\s*|\s{2,})\s*(.+)$/iu';
 
         for ($i = 0; $i < $totalLines; $i++) {
             $line = trim($lines[$i]);
             if ($line === '') continue;
+
+            // Wrapped layout: "High End Desktop \n Name of Goods"
+            if (preg_match('/^(?:name\s+of\s+(?:the\s+)?(?:work|item|goods|equipment|material)|item\(s\)\s+name(?:\s+to\s+be\s+procured)?)\s*$/iu', $line)) {
+                if ($i > 0) {
+                    $prevL = trim($lines[$i - 1]);
+                    if ($prevL !== '' && strlen($prevL) >= 4 && !preg_match('/^(?:Tender|Date|No\.|\d+$|Section|\[PAGE)/i', $prevL)) {
+                        $candVal = self::cleanCandidate($prevL);
+                        if (self::isValidCandidate($candVal)) {
+                            $candidates[] = [
+                                'value'      => $candVal,
+                                'source'     => 'explicit_label_preceding',
+                                'raw_label'  => $line,
+                                'base_score' => 94,
+                                'line_idx'   => $i - 1
+                            ];
+                        }
+                    }
+                }
+            }
 
             if (preg_match($labelPattern, $line, $m)) {
                 $candVal = trim($m[1]);

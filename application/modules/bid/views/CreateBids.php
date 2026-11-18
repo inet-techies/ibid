@@ -666,6 +666,129 @@
     }
   }
 
+  // ── Helper: Cleanly reset all parser auto-filled fields, badges, and attachment state ──
+  function clearAutoFilledFields(isFullReset) {
+    var autoFillIds = [
+      'bidTitleInput',
+      'bidTenderIDInput',
+      'bidEmdInput',
+      'startDate',
+      'tenderPublicationTime',
+      'documentSaleStartDate',
+      'documentSaleStartTime',
+      'documentSaleEndDate',
+      'documentSaleEndTime',
+      'prebidQueryStartDate',
+      'prebidQueryStartTime',
+      'prebidQueryEndDate',
+      'prebidQueryEndTime',
+      'prebidMeetingDate',
+      'prebidMeetingTime',
+      'prebidResponseDate',
+      'prebidResponseTime',
+      'bidSubmissionStartDate',
+      'bidSubmissionStartTime',
+      'dueDate',
+      'bidSubmissionEndTime',
+      'pqBidOpeningDate',
+      'pqBidOpeningTime',
+      'dateofBirth',
+      'technicalBidOpeningTime',
+      'financialBidOpeningDate',
+      'financialBidOpeningTime',
+      'bidSummaryInput',
+      'bidTenderPortalInput',
+      'bidStateInput',
+      'bidCustomerNameInput',
+      'bidCustomerPhoneInput',
+      'bidCustomerAddressInput'
+    ];
+
+    autoFillIds.forEach(function(id) {
+      // STRICT SAFETY: Never clear Department or Estimated Tender Value via parser reset
+      if (id === 'bidDepartmentInput' || id === 'bidEstimatedInput') return;
+
+      var el = document.getElementById(id);
+      if (!el) return;
+
+      if (el.tagName === 'SELECT') {
+        el.selectedIndex = 0;
+        el.value = '';
+      } else {
+        el.value = '';
+      }
+      el.dispatchEvent(new Event('input', {bubbles: true}));
+      el.dispatchEvent(new Event('change', {bubbles: true}));
+    });
+
+    // Clear EMD amount in words
+    var emdWords = document.getElementById('emdInWords');
+    if (emdWords) emdWords.innerHTML = '';
+
+    // Clear hidden attachment and factsheet tracking fields
+    var hiddenFields = ['attachedDocumentPath', 'attachedDocumentName', 'factSheetId', 'factSheetUrl'];
+    hiddenFields.forEach(function(id) {
+      var hEl = document.getElementById(id);
+      if (hEl) hEl.value = '';
+    });
+
+    // Clear NAS Path if it was pointing to an uploaded tender document
+    var nasEl = document.getElementById('bidNASIDInput');
+    if (nasEl && (nasEl.value.indexOf('uploads/tender_documents/') !== -1 || nasEl.value.indexOf('uploads/tender/') !== -1)) {
+      nasEl.value = '';
+    }
+
+    // Hide and reset attachment badges & factsheet links
+    var attachBadge = document.getElementById('attachedDocumentBadge');
+    if (attachBadge) attachBadge.style.display = 'none';
+
+    var nameEl = document.getElementById('attachedDocName');
+    if (nameEl) nameEl.textContent = '';
+
+    var sizeEl = document.getElementById('attachedDocSize');
+    if (sizeEl) sizeEl.textContent = '';
+
+    var classBadge = document.getElementById('attachedDocClassification');
+    if (classBadge) {
+      classBadge.style.display = 'none';
+      classBadge.textContent = '';
+    }
+
+    var txtPathEl = document.getElementById('attachedDocTxtPath');
+    if (txtPathEl) {
+      txtPathEl.style.display = 'none';
+      txtPathEl.textContent = '';
+    }
+
+    var fsLink = document.getElementById('attachedDocFactSheetLink');
+    if (fsLink) {
+      fsLink.style.display = 'none';
+      fsLink.href = 'javascript:void(0);';
+    }
+
+    var fsBtn = document.getElementById('btnViewFactSheet');
+    if (fsBtn) {
+      fsBtn.style.setProperty('display', 'none', 'important');
+    }
+
+    // Remove all verification confidence badges from the DOM
+    document.querySelectorAll('[id$="_confBadge"]').forEach(function(badge) {
+      badge.remove();
+    });
+
+    // Clear validation error highlights and feedback
+    document.querySelectorAll('.is-invalid').forEach(function(el) {
+      el.classList.remove('is-invalid');
+    });
+    document.querySelectorAll('.has-validation-error').forEach(function(el) {
+      el.classList.remove('has-validation-error');
+    });
+    document.querySelectorAll('.field-error-feedback').forEach(function(el) {
+      el.style.display = 'none';
+      el.textContent = '';
+    });
+  }
+
   function setVerifiedField(id, val, confidence, isDate, fieldLabel, timeVal) {
     // CRITICAL EXCLUSIONS: Department and Estimated Tender Value must NEVER be auto-populated
     if (id === 'bidDepartmentInput' || id === 'bidEstimatedInput') {
@@ -674,11 +797,6 @@
 
     var el = document.getElementById(id);
     if (!el) return false;
-
-    // For Bid Title or Summary Keywords: do NOT overwrite if the user has already entered them manually
-    if ((id === 'bidTitleInput' || id === 'bidSummaryInput') && el.value && el.value.trim() !== '') {
-      return false;
-    }
 
     // Remove any existing badge
     var existingBadge = document.getElementById(id + '_confBadge');
@@ -705,12 +823,32 @@
     }
 
     var finalVal = isDate ? formatToIsoDateTime(val, timeVal) : val;
-    el.value = finalVal;
+
+    if (el.tagName === 'SELECT') {
+      var foundOption = false;
+      for (var optIdx = 0; optIdx < el.options.length; optIdx++) {
+        var optVal = el.options[optIdx].value.toLowerCase();
+        var optTxt = el.options[optIdx].text.toLowerCase();
+        var targetVal = (finalVal || '').toLowerCase();
+        if (optVal === targetVal || optTxt === targetVal || (targetVal && optTxt.indexOf(targetVal) !== -1)) {
+          el.selectedIndex = optIdx;
+          finalVal = el.options[optIdx].value;
+          foundOption = true;
+          break;
+        }
+      }
+      if (!foundOption) {
+        el.value = finalVal;
+      }
+    } else {
+      el.value = finalVal;
+    }
+
     el.dispatchEvent(new Event('input', {bubbles: true}));
     el.dispatchEvent(new Event('change', {bubbles: true}));
 
     // Verify value was accepted
-    if (el.value !== finalVal && el.value === '') {
+    if (el.value !== finalVal && el.value === '' && el.tagName !== 'SELECT') {
       return false;
     }
 
@@ -791,6 +929,7 @@
   }
 
   function showIrrelevantDocError(msg) {
+    clearAutoFilledFields();
     var irrAlert = document.getElementById('docParseIrrelevantAlert');
     var successAlert = document.getElementById('docParseSuccessAlert');
     var errAlert = document.getElementById('docParseErrorAlert');
@@ -822,6 +961,9 @@
 
 
   function autoFillForm(resp) {
+    // Cleanly wipe any prior auto-filled document state before filling new document data
+    clearAutoFilledFields();
+
     var fields = resp.fields || {};
     var ai     = resp.ai_summary || {};
     var filled = [];
@@ -1050,6 +1192,42 @@
       filled.push('Portal URL');
     }
 
+    // ── Customer State ──
+    var stateData = fields.customer_state || {};
+    var stateVal  = stateData.value || ai.state || ai.customer_state || '';
+    var stateConf = stateData.confidence !== undefined ? stateData.confidence : (stateVal ? 95 : 0);
+    if (stateVal && setVerifiedField('bidStateInput', stateVal, stateConf, false, 'State')) {
+      filled.push('State');
+      removeErr(document.getElementById('bidStateInput'));
+    }
+
+    // ── Customer Name ──
+    var custData = fields.customer_name || fields.issuing_authority || {};
+    var custVal  = custData.value || ai.customer_name || ai.issuing_authority || '';
+    var custConf = custData.confidence !== undefined ? custData.confidence : (custVal ? 90 : 0);
+    if (custVal && setVerifiedField('bidCustomerNameInput', custVal, custConf, false, 'Customer Name')) {
+      filled.push('Customer Name');
+      removeErr(document.getElementById('bidCustomerNameInput'));
+    }
+
+    // ── Customer Phone ──
+    var phoneData = fields.customer_phone || {};
+    var phoneVal  = phoneData.value || ai.customer_phone || (resp.phones && resp.phones.length ? resp.phones[0] : '');
+    var phoneConf = phoneData.confidence !== undefined ? phoneData.confidence : (phoneVal ? 90 : 0);
+    if (phoneVal && setVerifiedField('bidCustomerPhoneInput', phoneVal, phoneConf, false, 'Customer Phone')) {
+      filled.push('Customer Phone');
+      removeErr(document.getElementById('bidCustomerPhoneInput'));
+    }
+
+    // ── Customer Address ──
+    var addrData = fields.customer_address || fields.work_location || {};
+    var addrVal  = addrData.value || ai.customer_address || ai.location || '';
+    var addrConf = addrData.confidence !== undefined ? addrData.confidence : (addrVal ? 90 : 0);
+    if (addrVal && setVerifiedField('bidCustomerAddressInput', addrVal, addrConf, false, 'Customer Address')) {
+      filled.push('Customer Address');
+      removeErr(document.getElementById('bidCustomerAddressInput'));
+    }
+
     return filled;
   }
 
@@ -1062,6 +1240,9 @@
       showError('Unsupported file type (.' + ext + '). Please upload PDF, DOCX, DOC, RTF or TXT.');
       return;
     }
+
+    // Immediately reset form fields, badges, and state when new upload starts
+    clearAutoFilledFields();
 
     // Show spinner, hide old alerts
     document.getElementById('docParseSuccessAlert').style.display = 'none';
@@ -1422,8 +1603,6 @@
         var valSub = elSub.value ? elSub.value.trim() : '';
         if (valSub === '') {
           addErr(elSub, 'Please select the Bid Submission End Date.');
-        } else if (elPub && elPub.value && new Date(valSub) < new Date(elPub.value)) {
-          addErr(elSub, 'Submission Date cannot be earlier than Published Date.');
         } else {
           removeErr(elSub);
         }
@@ -1435,8 +1614,6 @@
         var valOpen = elOpen.value ? elOpen.value.trim() : '';
         if (valOpen === '') {
           addErr(elOpen, 'Please select the Bid Opening Date.');
-        } else if (elSub && elSub.value && new Date(valOpen) < new Date(elSub.value)) {
-          addErr(elOpen, 'Opening Date cannot be earlier than Submission Date.');
         } else {
           removeErr(elOpen);
         }
@@ -1808,32 +1985,7 @@
     var clearBtn = document.getElementById('btnClearBidForm');
     if (clearBtn) {
       clearBtn.addEventListener('click', function() {
-        setField('attachedDocumentPath', '');
-        setField('attachedDocumentName', '');
-        setField('factSheetId', '');
-        setField('factSheetUrl', '');
-        var classBadge = document.getElementById('attachedDocClassification');
-        if (classBadge) classBadge.style.display = 'none';
-        var txtPathEl = document.getElementById('attachedDocTxtPath');
-        if (txtPathEl) txtPathEl.style.display = 'none';
-        var fsLink = document.getElementById('attachedDocFactSheetLink');
-        if (fsLink) {
-          fsLink.style.display = 'none';
-          fsLink.href = 'javascript:void(0);';
-        }
-        var attachBadge = document.getElementById('attachedDocumentBadge');
-        if (attachBadge) attachBadge.style.display = 'none';
-
-        // Clear all validation errors and summary alert
-        document.querySelectorAll('.is-invalid').forEach(function(el) {
-          el.classList.remove('is-invalid');
-        });
-        document.querySelectorAll('.has-validation-error').forEach(function(el) {
-          el.classList.remove('has-validation-error');
-        });
-        document.querySelectorAll('.field-error-feedback').forEach(function(el) {
-          el.style.display = 'none';
-        });
+        clearAutoFilledFields(true);
         var typeEl = document.getElementById('bidTypeInput');
         if (typeEl && typeEl.nextElementSibling && typeEl.nextElementSibling.classList.contains('select2-container')) {
           typeEl.nextElementSibling.style.border = '';

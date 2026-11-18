@@ -1,0 +1,2691 @@
+TENDER DOCUMENT
+
+                               INTERIOR & ELECTRICAL WORKS
+
+                                                 FOR
+
+                     ANNEXE BUILDING AT 10TH FLOOR (PHASE - II) FOR
+                     THE STATE TRADING CORPORATION OF INDIA LTD.
+
+                                                 AT
+
+                               STC BUILDING, 1, TOLSTOY MARG,
+                                     NEW DELHI – 110001.
+
+ISSUED TO –
+
+ARCHITECT
+
+MUNISH VERMA & ASSOCIATES
+B-21, SHAKTI NAGAR EXTENTION
+NEW DELHI - 110052.
+PHONE : 27309102, 27309194, 27303091, 32603188
+FAX : 011-42273603
+E MAIL : mvasso@gmail.com
+
+To
+
+________________________
+________________________
+________________________
+
+                                          NOTICE INVITING TENDER
+
+Sub.: Renovation of remaining portion of 10th floor of its Annexe Building at Jawahar Vyapar Bhawan.
+      New Delhi.
+==================================================================================
+
+Dear Sirs,
+
+I, HARI SINGH, Chief Engineer of STATE TRADING CORPORATION OF INDIA LTD. having Regd.
+Office at JAWAHAR VYAPAR BHAWAN, 1, TOLSTOY MARG, NEW DLEHI – 110001, hereby invite you
+to tender for the above work
+
+     1.   The tender copies can be had from Office of the Chief Engineer, State trading Corporation of India
+          Ltd., Jawahar Vyapar Bhawan, Tolstoy Marg, New Delhi – 110 001, during working hours from
+          18.05.2009… to …04.06.2009… on all working days between 10 A. M. and 4.00 P. M. on payment of a
+          non-refundable cost of Tender documents of Rs. 1,000/- (Rupees One Thousand only) in the form of
+          Demand Draft/Banker’s Cheque in favour of STATE TRADING CORPORATION OF INDIA LTD.
+          PAYABLE AT NEW DELHI. The tender can also be downloaded from our website (www.stc.gov.in or
+          www.tenders.gov.in). However a banker’s cheque/demand draft for Rs. 1,000/- being the cost of tender
+          must accompany such bids beside the EMD amount of Rs.50,000/-..
+
+     2.   The tender duly filled in, signed & sealed and super scribed “Renovation of remaining portion of 10th Floor
+          of its Annexe Building at Jawahar Vyapar Bhawan, New Delhi”. and addressed to THE STATE
+          TRADING CORPORATION OF INDIA LTD., dropped in the Tender Box kept on the Reception of
+          JAWAHAR VYAPAR BHAWAN, TOLSTOY MARG, NEW DELHI – 110 001, not later than 3 pm on
+          05.06.2009 under any circumstances, and the tenders will be opened on same day at 3.30 pm on 10th floor
+          (Mini Board Room), Jawahar Vyapar Bhawan, New Delhi, in presence of contractors or their authorized
+          representatives if they wish to be present.
+
+     3.   Any other mode of sending the tender through courier or by post shall not be accepted.
+
+                                                                                                        - Sd -
+                                                                                                (HARI SINGH)
+                                                                                           CHIEF ENGINEER
+                                                    For and on behalf of State Trading Corporation of India Ltd.
+
+                                                          1
+
+                                              CONTENTS
+
+Sl. No.                                    Description           Page No.
+   1.     Letter Submitting Tender                                   3
+   2.     Special Instructions                                      4
+   3.     Article of Agreement                                     5-6
+   4.     Special condition                                        7-19
+   5.     Condition of Contract                                   11-21
+   6.     Schedule of materials to be issued to the Contractor      22
+   7.     Appendix Hereinbefore Referred to                         23
+   8.     Specifications
+          i)       Civil Work                                     24-24
+          ii)      Interior & allied works                        26-30
+          iii)     Electrical works                               31-40
+
+  9.      Notes                                                    41
+ 10.      List of approved makes                                  42-44
+ 11.      Bill of Quantities                                      45-56
+ 12.      Summary & abstract                                       57
+
+                                                    2
+
+                                       LETTER SUBMITTING TENDER
+
+The Chief Engineer (Civil),
+The State Trading Corporation of India Ltd.,
+20th Floor Jawahar Vyapar Bhawan,
+1, Tolstoy Marg, New Delhi – 110001
+
+Dear Sir/Sirs,
+   This has reference to the tender invited by you for the Interior & Electrical Works of your Annexe Building at
+10th floor (Phase – II) of STC Building at State Trading Corporation of India Ltd., Jawahar Vyapar Bhawan, 1,
+Tolstoy Marg, New Delhi – 110001.
+
+I/We do hereby offer to execute the works under “contract” at the representative rates mentioned in the Bill of
+Quantities. I/We have examined the Tentative Drawings, seen the site and read the articles of agreement, conditions
+of contract, specifications and special clauses - forming part of the bill of quantities. I/We agree to finish and
+complete the whole of the works as agreed to as per terms and conditions within 60 DAYS from 3rd day of getting
+order to start work.
+
+I/We have deposited as Earnest Money Rs. 50,000/- (rupees fifty thousand only) in the form of a Bank Draft in
+favour of The State Trading Corporation of India Ltd., and payable at Delhi which amount is not to bear any
+interest. I/We do hereby agree that this sum shall be forfeited by the Employer in the event our tender is accepted
+and I/We fail to execute the contract, as per terms and conditions agreed, when called upon to do so.
+
+I/We understand that you are not bound to accept the lowest or any tender that you receive.
+
+Name of Partners of the firm                                                Yours faithfully
+
+Name of our Bankers
+
+                                                         3
+
+                                            SPECIAL INSTRUCTIONS
+
+The tenderer is advised to furnish the following information / document with their tender.
+
+    1.   A true copy of the letter for his registration with government department / public sector under taking.
+
+    2.   A true copy of his latest income tax clearance certificate.
+
+    3.   List of works carried out by the tenderer during last three years.
+
+    4.   List of tools and plants owned by the tenderer.
+
+    5.   This tender document contain 55 pages in addition to first 3 pages.
+
+                                                           4
+
+                                                       ARTICLES OF AGREEMENT
+
+This agreement made at Delhi, this .......... day of 2007 BETWEEN The State Trading Corporation of India Ltd.
+(hereinafter called as STC), having their registered office at Jawahar Vyapar Bhawan, 1, Tolstoy Marg, New
+Delhi – 110001 hereinafter referred to as the Employer which expression shall include their Heirs, Executors,
+Administrators &                       Assigns) of               the    one     part    and    Sh....................................................of M/s
+........................................................... (hereinafter referred to as the contractor which expression shall include their
+Heirs, Executors , Administrators and Assigns) of the other part.
+
+WHERE AS the Employer is desirous of renovating Annexe Building at 10th floor (Phase – II) of STC Building
+and have got the drawings and specifications describing the works to be done through their Architects M/s MUNISH
+VERMA & ASSOCIATES, B - 21 Shakti Nagar Extention, Delhi - 52 ( Hereinafter referred to as the Architects)
+and where as the said drawings and the specifications and the Priced Bill of quantities have been signed by or on
+behalf of the parties here to, and where as the contractor has agreed to execute upon and subject to the conditions
+set forth herein (here in after referred to as “the said conditions”) the work shown upon the said drawings and
+described in the said specifications and the said priced bill of quantities.
+
+NOW IT IS HEREBY AGREED AS FOLLOWS :-
+
+1. In consideration of the payment to be made to the Contractor as hereinafter provided he shall upon and subject to
+the said conditions execute and complete the works shown upon the said Drawings and such further detailed
+drawings as will be furnished to them by the said Architects and described in the specifications and detailed
+specifications and the said priced Bill of Quantities.
+
+2. The Employer shall pay the Contractor such sums as shall become payable hereunder at the times and in the
+manner specified.
+
+3. The term the “Architects” in the said Conditions shall mean the said messrs MUNISH VERMA &
+ASSOCIATES, B-21, Shakti Nagar Extension, Delhi - 52.
+
+4. The Agreement, documents and the drawings to be supplied later, mentioned above, shall form the basis of this
+contract and the decision of the said Architects in reference to all matters of dispute as to the material workmanship
+or account and as to the intended interpretation of the clauses of this agreement or any other document attached here
+to shall be final and binding on both parties and may be made a Rule of Court.
+
+5. The said Contract comprises the building above mentioned and all subsidiary works connected therewith in the
+same site as may be ordered to be done from time to time by the said Architects even though such works may not be
+shown on the drawings or described in the said Specifications or the Priced Bill of Quantities.
+
+6. The Employer through the Architects reserves to himself the right of altering the drawings and nature of the work
+and of adding to or omitting any items of work or of having portions of the same carried out departmentally or
+otherwise and the such alterations or variations shall be carried out without prejudice to this contract.
+
+7. No mobilisation advance shall be paid to the Contractor by Employer on signing the contract.
+
+8. The said conditions shall be read and construed forming part of this Agreement and the parties hereto will be
+respectively abide by and submit themselves to the conditions and stipulations and perform the agreement on their
+parts respectively in such conditions contained.
+
+9. No labour/ material escalation shall be paid to the contractor.
+
+                                                                            5
+
+10. The several parts of this Contract have been read to us and fully understood by us. As witness our hands this
+......... day of ......................... .
+
+-----------------------------------------
+Signed by the said
+
+-----------------------------------------
+In the presence of
+
+-----------------------------------------
+Signed by the said
+
+-----------------------------------------
+In the presence of
+
+                                                       6
+
+                                                   SPECIAL CONDITIONS
+
+      The sealed tender shall be addressed to The Chief Engg. (civil), State Trading Corporation of India Ltd., 20th
+      Floor, Jawahar Vyapar Bhawan, 1, Tolstoy Marg, New Delhi – 110001 superscribed on this cover, with the
+      name of work and due date and time of opening. The sealed cover shall contain the following documents.
+
+  1. a         Tender document (original) as provided duly filled in and signed by the tenderer and drawings provided (if
+               any).
+
+  1. b.     All other documents including covering letters etc. that the tenderer is required to furnish, Earnest money
+   deposit etc.
+
+2. Tender must be submitted without making any additional alternations as per details given in other clauses.
+
+3. Addenda / Corrigenda to this tender documents, if issued, must be signed, submitted along with the tender
+documents in schedule of rates of tender document and should price the work based on the revised quantities where
+amendments        of quantities are issued in addenda.
+
+4.Tenderer are advised to submit their bids based strictly on the terms and conditions as specified and contained in the
+   tender documents and not to stipulated any deviations.
+
+      5.   Corrections and Erasures: All corrections(s) and alternation(s) in the entries of tender paper shall be signed
+           in full by the TENDERER with date. No erasure or over writing is permissible.
+
+      6.    Tender shall remain valid for a period of 90 days (from the date of opening the tender). The Employer may
+           extend the said period.
+
+      7 a. The Employer does not bind themselves to accept the lowest or any tender and reserves to itself the right to
+           accept or reject any or all the tenders, in whole or in part without assigning any reasons for doing so.
+
+      7 b. S.T.C. reserves its right to purchase Chairs, door closers & handles etc. directly from the manufacturer /
+           agency and it will be the responsibility of the Contractor to install the same.
+
+  8 a.     Each of the tender documents is required to be signed by the person or persons submitting the Tender in token
+           of his/ their having acquainted himself / themselves with the Conditions of Contract, General Specifications,
+           Special Conditions, etc., as laid down. Any Tender with any of the documents not so signed will be rejected.
+
+  8 b.     The Tender submitted on behalf of a firm shall be signed by all the partners of the firm or by the partner who
+           has the necessary authority on behalf of the firm to enter into the proposed contract, otherwise the Tender is
+           liable to be rejected.
+
+  9 a.     The tender form must be filled in English and all entries must be made by hand and written in ink. If any of the
+           documents is missing, or unsigned, the tender will be considered invalid.
+
+  9 b.     The Tenderer shall also submit along with his tender, a list mentioning the names of manufacturers of
+           specialised items like steel windows, patented water proofing, flush doors, floor tiles, false ceilings etc. which
+           he proposes to use in the work if his tender is accepted.
+
+10.      All erasures and alterations made while filling the tender must be attested by initials of the tenderer. Overwriting
+         of figures is not permitted, failure to comply with either of these conditions will render the tender void. No
+       request of any change in rates or conditions after the opening of the tender will be entertained.
+
+11.       Intending tenderers shall pay as Earnest money as given in appendix hereinbefore referred to. A tender which
+       is not accompanied by earnest money will not be considered. The earnest money will be returned to the tenderer if
+          his tender is not accepted but without any interest.
+
+                                                                7
+
+12.      The earnest money deposit paid by the successful tenderer, when he submitted his Tender, shall be held by the
+         Employer as part of retention money for the execution and due fulfillment of the contract. No interest shall be
+         paid on the said deposit.
+
+13.       Within three days of the receipt of intimation from the Employer of the acceptance for his Tender, the
+          successful Tenderer shall be bound to implement the contract by signing an agreement in accordance with the
+          draft agreement and the Schedule of Conditions, but the written acceptance by the Employer of a Tender will
+          constitute a binding agreement between the Employer and the person so tendering whether such formal contract
+       is or is not subsequently entered into.
+
+14.      All compensation or other sums of money payable by the contractor to the Employer under the terms of this
+         contract may be deducted from his earnest money and the security deposit, if the amount so permits, and
+         contractor shall unless such deposit has become otherwise payable, with in ten days after such deduction make
+         good in cash the amount so deducted.
+
+15.      The Contractor shall not assign the contract fully or partially. He shall not sublet any portion of the contract
+         except with the written consent of the Employer, failing which the Employer may summarily terminate the
+         contract, whereupon the security deposit shall stand forfeited and at absolute disposal of the Employer and the
+         Employer will not be liable to pay any damages / compensation.
+
+16. The Contractor shall carry out all the Interior / Electrical / Fabrication work and other works strictly in accordance
+    with drawings, details and instructions of the Architects / Engineer – In – Charge (hereinafter called as E.I.C.). If in
+    the opinion of the Architects, changes have to be made, in the work already carried out, then it is to be carried out
+    without any extra charge. The Employer’s decisions in such cases shall be final.
+
+17. A Schedule / Bill of probable quantities in respect of such work and specifications accompany these special
+    Conditions. The Bill of probable quantities is liable to alterations by omission, or additions at the discretion of the
+    Employer. Each Tender should contain not only the rates but also the value of each item of work entered in a
+    separate column and all the items should be totaled up in order to show the aggregate value of the entire Tender.
+    All corrections in the Tender rates shall be duly attested by the dated initials of the Tenderer. Corrections which are
+    not attested may entail the rejection of the Tender. Rates should be quoted both in figures and words in columns
+    specified.
+
+18. The Tenderer must obtain for himself on his own responsibility and at his own expense all the information which
+    may be necessary for the purpose of filling a Tender and for entering into a contract and must examine the
+    drawings and must consider and inspect the site of the work and acquaint himself with all local conditions, means
+    of access to the work, nature of the work and all matters appertaining thereto.
+
+19. The rates quoted in the Tender shall include all charges for double scaffoldings, centering, water and meter
+    charges, electric charges, temporary plumbing, hire for any tools and plants, Insurance, marking out and clearing of
+    site, watering/curing of concrete and various other materials as mentioned in the specifications all complete. The
+    rates quoted shall be deemed to be for the finished work to be measured at site. Tenderer must include in their rates
+    sales Tax, Excise Duty, Octroi, Work Tax, VAT, Service Tax, fluctuations in the market rates and any other tax
+    and duty, or other levy levied by the Central Government or State Government or Local Authority, If applicable.
+    The Tenderer shall also be liable to pay any taxes and levies etc. levied by Central Government / State Government
+    / Local Authorities etc., even if implemented, increased or levied after the award of this Contract. No claim in
+    respect of Sales - Tax, Excise Duty, Octroi, work tax, VAT, Service Tax or other taxes, Duties or levies shall be
+    entertained by the Employer under any circumstance.
+
+      Contractor is to fully indemnify STC of India Ltd. against any type of loss/accident caused due to the negligence of
+      contractor and he should take all precautions for smooth execution of the work. In this regard, the contractor shall
+      take Insurance Covers for Third Party and for Workmen Compensation in the joint names of STC and the contractor.
+      The charges for insurance covers to be valid up to the completion if the work shall be bome by the contractor.
+
+                                                               8
+
+   The contractor will be fully responsible for any injury or accident to any person(s) employed by him, and for any
+   damage to any structure or any part of the property, which may arise due to operation/negligence of the contractor
+   its workers while executing the work.
+
+   The contractor upon award of the work shall comply with all the required statutory provision e.g. payment of Wages
+   Act, Apprentice Act, workmen’s Compensation Act, Contract Labour (Regulation & Abolition)Act. Industrial
+   disputes Act, Maternity Benefit Act, etc. and the rates made there under from time to time.
+
+   If any claim, on account of non-compliance of the above laws by the contractor arises against the STC, the tenderer
+   shall indemnify the STC. The Engineer-In-Charge shall have the STC, the tenderer shall indemnify the STC. The
+   Engineer-In charge shall have the right to deduct from the money due to the contractor any sum required or
+   estimated to be required for making good the loss suffered by a worker or workers.
+
+20. The Employer shall deduct the required amount towards T.D.S. and any other tax as per the prevalent rules from
+      all the payments made to the Contractor.
+
+21. The calculations made by the tenderer should be based upon probable quantities of the several items of work which
+    are furnished for the tenderer’s convenience in the Bill of probable quantities but it must be clearly understood that
+    the contract is not a lump sum contract, that neither the probable quantities nor the value of the individual items nor
+    the aggregate value of the entire tender will form part of the contract and that the Employer does not in any way
+    assure the tenderer or guarantee that the said probable quantities are correct or that the work would correspond
+    thereto.
+
+22. Time shall be considered as the essence of the Contract. The entire construction must be completed in time period
+    given in the appendix hereinbefore referred to including civil works, electrical installation, sanitary, water
+    supply, interior works and drainage arrangements from the date of allotment of work. The attention of the Tenderer
+    is drawn to Clause 21 of the Condition of Contract to damages for non completion as per time frame stipulated
+    above. The Tenderer shall before commencing work prepare a detailed work program which shall be approved by
+    the Employer.
+
+23. The Tenderer shall submit with his Tender a list of similar works he has executed giving details as to their
+    magnitude and cost which shall not be less then Rs. 15 .00 lakhs (in single order in the past 3 years) and the time
+    within which he works completed alongwith certificate of satisfactory completion from the institute of
+    repute/department in this regard.
+
+24. The tenderer shall fill all the items in the Bill of Quantities.
+
+25. The contractor shall not be entitled to any compensation for any loss suffered by him on account of delays in
+    commencing or executing the work whatever the cause of delays may be, including delays arising out of
+    modification to the work entrusted to him or any sub contracts connected therewith or delays in awarding contracts
+    for other trades of the project or in commencement or completion of such works or in procuring Government
+    Controlled or other building materials or obtaining water and power connection for construction purposes or for
+    any other reason whatsoever and the Employer shall not be liable, under any circumstance, for any claim in respect
+    thereof. The Employer does not accept liability for any sum besides the Tender amount subject only to such
+    variations as may be provided for herein.
+
+26. The successful Tenderer is bound to carry out any other items of work necessary for the completion of job even
+    though such items are not included in the quantities. Schedule of instructions in respect of such additional items,
+    their quantities and rates shall be issued in writing by the Employer.
+
+27. If the Headquarters of successful Tenderer are elsewhere than in Delhi, he shall have a duly authorised Agent in
+    Delhi from the commencement of the work until the building is occupied by the Employer. Such agent shall be
+    authorised to act on behalf of the successful Tenderer to accept service of notice of contract and to agree to extras,
+    omissions and varied items of works and rates for the same. Such Agent shall maintain on his staff a qualified
+    engineer approved by the Employer and such office personnel as may be required for the efficient executions of
+    works. Any notice under the contract shall be deemed to have been served on the successful tenderer if served upon
+
+                                                                 9
+
+    such agent or sent by registered letter to his address. Such agent shall not be changed and shall not leave during the
+    duration of the contract, unless the written consent of the Employer have been previously obtained. If the Employer
+    shall order the Contractor to carry out any rectification under the terms of the contract after the building is
+    completed, the successful tenderer shall have the same or another duly authorised agent while such rectifications
+    are being carried out.
+
+28. The successful tenderer shall co-operate and coordinate with the other contractors for different jobs related to the
+    project, to be appointed by the Employer, so that the work shall proceed smoothly with least possible delay and to
+    the satisfaction of the Employer.
+
+29. The construction and maintenance of stores and security shall be the responsibility of the Contractor.
+
+30. The security deposit of the successful Tenderer will be forfeited if he fails to comply with any of the conditions of
+    the Contract.
+
+31. The expression ‘Contractors’ shall include its legal heirs / administrators, executors, successors and permitted
+    assigns.
+
+32. It shall be the responsibility of the contractor to submit samples to obtain prior approval of the Employer in respect
+    of all materials, fittings & fixtures & any other items as decided by the Employer. One such approved sample of all
+    items shall be kept with the Employer and at site for future reference.
+
+33. The Contractor must submit the running bills in duplicate with complete nomenclature of the particular items
+    executed as per Bill of Quantities.
+
+34. The contractors shall be a solely and entirely responsible for obtaining all the approvals from local authorities &
+    statutory bodies such as NDMC & CFO etc. or any other municipal or other authorities concerned. The contractor
+    shall pay necessary fees and observe all necessary formalities required in this connection All expenses in this
+    regard shall be solely borne by the contractor who shall be responsible for all consequences directly or indirectly
+    arising out of any delay in taking action by contractor or their failure in any respect whatsoever in this regard. It is
+    to be clearly understood that the STC shall not entertain any claim whatsoever or any liability arising from this
+    obligation of contractor. In case of failure of the contractor in regard to this obligation the STC on the advice of the
+    architect shall be at liberty to take action against the contractor as deemed fit and proper.
+
+   ___________________                                                                          _____________________
+        EMPLOYER                                                                                   CONTRACTOR
+
+                                                              10
+
+                                                    CONDITIONS OF CONTRACT
+
+1. Interpretations
+  In construing these Conditions, the Specifications, the Bill of Quantities, Tender and Agreement, the following
+words shall have the meanings herein assigned to them except where the subject or context otherwise requires :-
+
+“Employer” shall mean The State Trading Corporation of India Ltd.
+
+“Contractor” shall mean.................................................................................................. and his (their) heirs, legal
+representatives, assigns and successors ,
+
+“Site” shall mean the site of the contract works for Annexe building at 10th floor (Phase – II) of State Trading
+Corporation of India Ltd., Jawahar Vyapar Bhawan, 1, Tolstoy Marg, New Delhi – 110001 including any
+buildings and erections thereon and any other land adjoining there to (inclusively as aforesaid allotted by the
+Employer for the construction).
+
+“This contract” shall mean the Articles of Agreement, these Conditions, the Priced Bill of Quantities, the
+Specifications, the Appendix, the Annexures, and additional instructions issued till the receipt of the Tender and
+subsequent correspondence if any till the date of acceptance of Tender and the letter of acceptance of contract .
+
+“Works” shall mean the Interior / electrical works / construction of Employer’s building at the above said site
+according to the specifications, bill of quantities and other documents attached herein and elsewhere in the tender
+document.
+
+“Act of Insolvency” shall mean any act of Insolvency as defined by the Presidency Towns Insolvency Act, or the
+Provincial Act or any amending Statute.
+
+“Notice in writing” or written notice shall mean a notice in written, typed or printed characters sent (unless delivered
+personally or otherwise proved to have been received) by registered post to the last known private or business
+address or registered office of the addressee and shall be deemed to have been received when in the ordinary course
+of post it would have been delivered.
+
+“Virtual Completion” shall mean that building is in the opinion of Architects fit for occupation.
+
+“Words imputing persons include firms and corporations. Words inputting the singular only also include the plural
+and vice versa where the context so requires.
+
+2.   Scope of Contract
+        The Contractor shall carry out and complete the works in every respect in accordance with this Contract and
+in accordance with the directions and to the satisfaction of the Employer. The Architects may in their absolute
+discretion from time to time issue further drawings and/or written instructions details, direction and explanations
+which are hereafter collectively referred to as “The Employer Instructions” in regard to :-
+
+(a) The variation or modification of the design, quality or quantity of works or the additions or omission or
+substitution of any work.
+
+(b) Any discrepancy in the drawings or between the Bill of Quantities and/or Drawing and/or specifications.
+
+(c) The removal from the site of any materials brought thereon by the Contractor and the substitution of other
+materials therefore.
+
+(d) The removal and /or re-execution of any works executed by the Contractor.
+
+(e) The dismissal from the works of any persons thereupon.
+
+(f) The opening up for inspection of any work covered up.
+
+                                                                         11
+
+(g) The amending and making good of any defects under Clause (28).
+
+(h)Any other direction in regard to execution of the said work.
+
+The Contractor shall forthwith comply with and duly execute any work comprised in such Architects Instructions
+provided always that verbal instructions, directions and explanations given to the Contractor or his Foreman upon
+the works by the Employer shall if involving a variation be confirmed in writing by the Contractor within seven days
+and not dissented from in writing within a further period of seven days by the Employer such shall be deemed to be
+Employer Instructions with in the scope of contract . Rates of items not mentioned in the Priced Bill of Quantities
+shall be fixed by the Employer.
+
+3.  Drawings and Bill of Quantities
+        One complete set of the Drawings and Specifications and Bill of Quantities shall be furnished by the
+Architects to the Contractors and the Architects shall furnish, within such time as they may consider reasonable, one
+copy of any additional drawing which in their opinion may be necessary for the execution of any part of the work.
+Such copies shall be kept on the works and the Architects and their representatives shall at all reasonable times have
+access to the same and they shall be returned to the Architects by the contractor before the issue of the certificate for
+the balance of his account under the Contract. This contract and the signed Specification and Schedule/Bill of
+Quantities shall remain in the custody of the Architects, and shall be produced by them at their office as and when
+required by the Employer or by the Contractor.
+
+4. Contractor to Provide everything necessary
+     The contractor shall provide everything necessary for the proper Execution of the work according to the intent
+and meaning of the Drawings. Priced Bill of Quantities and Specifications taken together whether the same may not
+be particularly shown or described therein provided that the same can reasonably be inferred therefrom and if the
+Contractor finds any discrepancy therein he shall immediately and in writing refer the same to the Architects whose
+decision shall be final and binding on the parties. Figured dimensions shall be followed in preference to scale.
+
+The Contractor shall provide himself for ground and/or municipal water for the carrying out of the work at his own
+cost. The contractor shall make his own arrangements for the supply of water by way of boring /municipal water.
+The Employer shall on no account be responsible for the expense incurred by the Contractor for water obtained from
+elsewhere and in this case the same shall be got tested and used only after specific written permission from the
+Employer. Recovery of water, if supplied, will be made from the running bills @ ½% of gross amount of work
+done.
+
+The Employer will provide electricity at one point on chargeable basis. The Contractor shall have to make his own
+arrangement to maintain, at his own expense, an efficient service of electric light and power and shall pay for the
+electricity consumed. Recovery of electricity supplied will be made from the running bills @ ½% of gross
+amount of work done.
+
+The Contractor shall supply, fix and maintain at his cost, during the execution of any works all the necessary
+centering, scaffolding, staging, planking, timbering, strutting, shoring, pumping, fencing, hoarding, watching, and
+lighting by night as well as by day, required not only for the proper execution and protection of the said work, but
+also for the protection of the public and the safety of any adjacent roads, streets, cellars, vaults, pavements, walls,
+houses, building and all other erections, matters or things; and the contractor shall take down and remove any or all
+such centering, scaffolding, staging, planking, timbering, strutting, shoring etc. as occasion shall require or when
+ordered so to do, and shall fully reinstate and make good all matters and things disturbed during the execution of the
+works to the satisfaction of the Architects.
+
+5. Authorities Notices and patents
+         The Contractor shall arrange to give all notice required by the said Acts, Regulations or Byelaws to be
+given to any Authority, and to pay to such Authority, or to any Public Officer all fees that may be properly
+chargeable in respect of the works, and lodge the receipt with the Employer.
+
+                                                           12
+
+             The Contractor shall indemnify the Employer against all claims in respect of patent, rights, and shall
+defend all actions arising from such claims unless he has informed the Employer / Architects before any such
+infringement and received their permission to proceed and shall himself pay all royalties, licence fees, damages,
+costs and charge of all and every sort that may be legally incurred in respect thereof.
+
+6.   Setting out works
+       The Contractor shall set out the works and shall be responsible for the true and perfect setting out of the same
+and for the correctness of the positions, levels, dimension and alignment of all parts thereof. If at any time any error
+shall appear during the progress of any part of the work the contractor shall at his own expense rectify such error,
+called upon to the satisfaction of the Architects.
+
+7.  Contractor Immediately to remove all offensive matter
+        All soil, filth or other matter of an offensive nature, taken out of any trench, sewer, drains, cesspool or other
+place shall not be deposited on the surface, but shall be at once carted away by the Contractor to some pit or place
+provided by him at his own cost.
+
+8.   Material and Workmanship to Conform to Description
+     All materials and workmanship so far as procurable be of the respective kinds described in the Priced Schedule
+of quantities and/or Specifications and in accordance with the Architects instructions and the Contractor shall upon
+the request of the Architects furnish them with all invoices, accounts receipts, and other vouchers to prove that the
+materials comply therewith. The Contractor shall at his own cost arrange for and /or carry out any test of materials
+which the Architects/ Employer may require.
+
+9.   Access
+       The Architects, their representative and the Employer shall at all reasonable times have free access to the
+work and or to the workshops, factories, or other places where materials are being prepared or constructed for the
+contract and also to any places where the materials are lying or from which they are being obtained and the
+Contractor shall give every facility to Architects/ Employer and their representative necessary for inspections and
+examinations and test of the materials and workmanship. Except the representative of Public Authorities, no person
+shall be allowed on the work anytime without the written permission of the Employer.
+
+        If any work is to be done at the place other than the site of the works the Contractor shall obtain the written
+permission of the Employer for doing so.
+
+10. Supervision and Foreman
+       The Contractor shall give all necessary personal superintendence during the execution of the work and as
+long thereafter as the Architects may consider necessary until the expiration of the “Defect Liability Period” stated
+in the appendix hereinbefore referred to. The contractor shall also during the whole time the works are in progress
+employ a competent foreman approved by the Employer who shall be constantly in attendance at the building while
+the men are at work. Any directions, examinations, instructions or notices given by the Architects/ Employer to such
+Foreman shall be deemed to be given to the Contractor.
+
+11. Clerk of Works
+     The terms “Clerk of works” shall mean the person approved by the Architects and appointed and paid by the
+Employer acting under the orders of the Architects to superintend the work in the absence of the Architects. The
+Contractors shall afford the Clerk of Works every facility and assistance for examining the work and materials and
+for checking and measuring time and materials. The contractor shall provide office accommodation to Clerk of
+Works. Neither the Clerk of Works nor any representative of the Architects shall have power to revoke, alter,
+enlarge or relax any requirements of the Contractor to sanction any day-work additions, alterations deviations or
+omissions or any extra works whatever, except in so far as such authority may be specially conferred by a written
+order of Architects / E.I.C.
+
+ The Clerks of Works, or any representative of Architects, shall have power to give notice to the Contractor or to his
+Foremen, of non- approval of any work materials and such work shall be suspended or the use of such materials
+shall be discontinued until the decision of the Architects/ Employer, is obtained. The work will from time be
+examined by the Architects/ Employer, the Clerk of works or the Architects representative, but such examinations
+
+                                                           13
+
+shall not in any way exonerate the Contractor from the obligations to remedy and defects which may be found to
+exist at any stage of the work or after the same is completed, Subject to the limitations of the clause the Contractor
+shall take instructions only from the Architects/ Employer.
+
+12. Dismissal of workmen
+        The Contractor shall on the request of the Architects, immediately dismiss from the works any person
+employed thereon who may, in the opinion of the Architects, be unsuitable or incompetent or who may misconduct
+himself, any such person shall not be again employed or allowed on the works without the permission of Architects/
+Employer.
+
+13. Date of Commencement and Completion
+      The contractor shall be allowed admittance to the site on the “Date of Commencement” stated in the Appendix
+hereinbefore referred to, and he shall thereupon and forthwith begin the works and shall regularly proceed with
+and complete the same on or before the “Date of Completion” stated in the Appendix subject, nevertheless to
+provisions for extension of time hereinafter contained. The time being the essence of Contract, the Contractor will
+adhere to time and progress chart and will give proportionate time i.e. 1/4th of work in 1/4th of the time, 1/2 of the
+work in 1/2 of the time and 3/4th of the work in 3/4th of the time. In case of failure on the part of contractor to give
+proportionate progress in proportionate time then the Employer through the Architects may recover by way of
+liquidated damages the amount calculated at ½% of the Contract price per week of delay subject to a maximum of
+10% of the Contract Price.
+
+14. Assignment
+        The whole of the works included in the Contract shall be executed by the Contractor and the Contractor shall
+not, directly or indirectly transfer, assign or underlet the contract or any part, share or interest therein nor shall he
+take a new partner without the written consent of the Architects/ Employer, and no subletting shall relieve the
+Contractor from the full and Entire responsibility of the Contract or from active superintendence of the work during
+its progress.
+
+15. Bill of Quantities
+      The Bill of Quantities unless otherwise stated shall be deemed to have been prepared in accordance with the
+method of measurement mentioned in the Specifications, and shall be considered to be approximate and no liability
+shall attach to the Employer for any error that may be discovered therein.
+
+16. Sub-Contractors
+         All Specialists, Merchants, Tradesmen and others executing any work or supplying and fixing any goods or
+for which provisional sums are included in the Bill of Quantities and Specifications who may be nominated or
+selected by the Architects are hereby declared to be Sub-Contractors and are herein referred to as nominated Sub-
+Contractors.
+
+        No nominated Sub-contractor shall be employed on or in connection with the works against whom the
+Contractor shall make reasonable objection or ( save where the Architects and the Contractor shall otherwise agree )
+who will not enter into a Contract providing :-
+
+(a) That the nominated sub-contractor shall indemnify the Contractor against the same obligations in respect of the
+sub-contractor as the Contractor is under in respect of this Contract.
+
+(b) That the nominated Sub-Contractor shall indemnify the Contractor against claims in respect of any negligence
+by the Sub-Contractor or his servants or agents or any misuse by him or them of any scaffolding or other plant and
+property of the Contractor or under any workmen’s Compensation Act in force.
+
+17. Variations
+     The Contractor may when authorised , and shall when directed, in writing by the Architects/ Employer add to ,
+omit from, or vary the words shown upon the Drawings or described in Specification or included in the Bill of
+Quantities, but the Contractor shall make no additions, omission or variations without such authorisation or
+direction. A verbal authority or direction by the Architects/ Employer shall if confirmed by the Contractor in writing
+
+                                                           14
+
+within seven days and not repudiated by the Architects/ Employer with in next 15 days be deemed to have been
+given in writing.
+     No claim for any extra shall be allowed unless it shall have been executed under the provisions of the Clause or
+by the Architects/ Employer herein mentioned. Any such extra is herein referred to as an authorised extra. No
+variations, i.e. additions, omissions or substitutions, shall vitiate the Contract.
+    The rates of items not included in the Schedule of Quantities shall be settled by the Employer.
+
+18. Damage to persons and property Insurance in respect of
+
+           The Contractor shall be responsible for all injury to persons, animals or things and for all damage to the
+structural and/or decorative part of property which may arise from the operations or neglect of himself or of any
+Sub-Contractor or of any of his or Sub-Contractor’s employees whether such injury or damage arise from
+carelessness, accident, or any other cause whether in any way connected with the carrying out of this Contract. This
+clause shall be held to include, inter alia, any damage to buildings, whether immediately adjacent or otherwise, and
+any damage to roads, streets, footpaths, bridges or ways as well as all damage caused to the buildings, and the works
+forming the subject of this Contract by Frost, rain or other inclemency of the weather. The Contractor shall
+indemnify the Employer and hold him harmless in respect of all and any expense arising from any such injury or
+damage to persons or property as aforesaid and also in respect of any claim made in respect of injury or damage
+under any Acts of Government or otherwise and also in respect of any award of compensation or damage
+consequent upon such claim (Format of Indemnity bond is enclosed in annexure - I).
+
+ The Contractor shall reinstate all damage of every sort mentioned in the clause, so as to deliver up the whole of the
+Contract works complete and perfect in every respect and so as to make good or otherwise satisfy all claims to the
+property of third parties.
+
+     The Contractor shall indemnify the Employer against all claims which may be made against the Employer by an
+member of the public .central govt. , state govt., any other authority, or other third party in respect of the works or in
+consequence thereof and shall at his own expense arrange to effect and maintain, until the Virtual Completion of the
+Contract with an approved Office of policy of insurance in the joint names of the Employer and the contractor
+against such risk and deposit such policy or policies with the Employer/Architects from time to time during the
+currency of the Contract. The contractor shall comply with all rules , regulations and laws including but not limited
+to industrial law , and also indemnify the Employer against the claims which may be made upon the Employer
+whether under the workmen’s Compensation Act or any industrial or other Statute in force-during the currency of
+this Contract or at common Law in respect of any Employee of the Contractor or any Sub-Contractor and shall at his
+own expense effect and maintain, until the virtual Completion of the Contract, with an approved office a policy of
+Insurance in the joint name of the Employer and the Contractor against such risk and deposit such Policies or Policy
+with the Architects from time to time during currency of this Contract. The Contractor shall be responsible for
+anything which may be excluded from the Insurance Policies above referred to and also for all other damages to any
+property arising out of and incidental to what is stated here-in-before
+
+He shall also indemnify the Employer in respect of any costs, charges or expenses arising out of any claim or
+proceedings and also in respect of any award of compensation or damage arising there from , due to direct or
+indirect negligence of contractor or subcontractor, by any person, central government, state government or any other
+authority.
+
+The Employer with the consent of the Architects shall be at liberty and is hereby empowered to deduct the amount
+of any damages, compensation costs, charges and expenses arising or occurring from or in respect of any such claim
+or damaged from any sums or sums due or to become due to the Contractor.
+
+19. Insurance
+        Unless otherwise instructed by the Employer the Contractors shall on signing the Contract insure the
+works and keep them insured until the Virtual Completion of the Contract against loss or damage by fire and
+earthquake in an Office to be approved by the Architects/ Employer, in joint names of the Employer and Contractor
+for such amount and the Architects, fees and for any further sum if called upon to do so by the Architects/ Employer
+the premium of such further sum being allowed to the Contractor as an authorised extra. Such policy shall cover the
+property of the Employer only and the Architects fees and in connection with his services generally in the
+
+                                                           15
+
+reinstatement, and shall not cover any property of the Contractor or any Sub-contractor or Employee. The date of
+signing Contractor shall deposit the policy and receipts for premium with the Architects within 15 days from
+the Contract unless otherwise instructed by the Architects. In default of the contractor insurings as provided above
+the Employer or the Architects on his behalf may deduct the premium paid from any moneys due, or which may
+become due to the Contractor. The Contractor shall , as soon as the claim under the Policy is settled , work
+reinstated by the Insurance Office should they elect to do so , proceed with all due diligence with the completion of
+the work in the same manner as though the fire had not occurred and in all respects under the same Conditions of
+Contract. The Contractor, in case of rebuilding or reinstatement after fire, shall be entitled to such extension of time
+for completion as the Architects may deem fit.
+
+20. Delay and Extension of Time
+          If in the opinion of the Employer the work be delayed (a) by force majeure or (b) by reason of any
+exceptionally inclement weather or (c) by reason of proceeding taken or threatened by or disputes with adjoining or
+neighbouring Employer or public authorities or (d) by delays of other Contractor or tradesmen engaged by the
+Employer or the Architects and the works not referred to in the Bill of Quantities and/or specification or (e) by
+reasons of Architect’s instruction as per Clause No. 2 or (f) by reason of civil commotion , local combination of
+workmen or strike or lock-out affecting any of the building trades or (g) in consequence of the contractor not having
+received in due time necessary instructions from the Architects for which he shall have specially applied in writing ,
+or (h) from other cause which the Architects may certify as beyond the control of the Contractor or (I) by reason of
+non payment of interim certificates at specified time , the Employer shall make a fair and reasonable extension of
+time for completion of the contract works. In case of strike or lock out the contractor shall as soon as may be given
+written notice thereof to the Employer, but the Contractor shall nevertheless constantly use his endeavours to
+prevent delay and shall do all that may reasonably be required to the satisfaction of Architects/ Employer to proceed
+with the work.
+
+21. Damage for non-completion
+          If the Contractor fails to complete the works by the date of Completion stated in the Appendix
+hereinbefore referred to or with in the extended time under Clause 20 hereof and the Employer certify in writing
+that in their opinion the same ought reasonably so have been completed, the Contractor shall pay the Employer the
+sum named in the Appendix hereinbefore referred to as “Liquidated Damages” for the period during which the
+said works shall so remain incomplete and the Employer may deduct such damages from any moneys due to the
+Contractor.
+
+22. Failure by Contractor to comply with Architects Instructions.
+        If contractor after receipt of written notice from the Employer requiring compliance, with such further
+drawings and/or Architects instructions fails within seven days to comply with the same , the Employer may with
+the consent of the Architects employ and pay other persons to execute any such work whatsoever as may be
+necessary to give effect thereto and all costs incurred in connection therewith shall be recoverable from the
+Contractor by the Employer on a certificate by the Architects as a debt or may be deducted by him from any moneys
+due to the Contractor.
+
+23. Measurements of Works
+          The Architects may from time to time intimate to the Employer and the Contractor that they require the
+works to be measured and the Employer and the Contractor shall attend or send a qualified agent to assist the
+Architects or the Architects representative in taking such measurements and calculation and to furnish all particulars
+or to give all assistance required by either of them.
+
+Should the Employer and/or Contractors not attend or neglect or omit to send such Agent then the measurements
+taken by the Architects or approved by them shall be taken to be correct measurements of the work.
+
+The Employer and the Contractor or their Agents may at the time of measurements take such notes of measurements
+as they may require.
+
+The final measurements and valuation in respect of the Contract shall be completed within the period of Final
+Measurements stated in the Appendix hereinbefore referred to.
+
+                                                          16
+
+24. Certificate and Payment
+        The Contractor shall be paid by the Employer from time to time by installments under interim certificates to
+be issued by the Architects to the contractor on account of the works executed when in the opinion of the Architects
+work to the approximate value named in the Appendix hereinbefore referred to as value of works for interim
+Certificate” (or less at the reasonable discretion of the Architects) has been executed in accordance with this
+Contract , subject, however, to a retention of the percentage of such value named in Appendix hereinbefore
+referred to hereto as “Retention percentage for Interim Certificates” . The Architects may in their discretion include
+in the interim Certificate such amount as they may consider proper on account of material delivered upon the site by
+the contractor for use in the works. And when the works have been virtually completed and the Architects shall have
+certify in writing that they have been so complete the Contractor shall be paid by the Employer in accordance with
+the Certificate to be issued by the Architects the sum of the money named in the Appendix hereinbefore referred
+to as “Installment after virtual Completion” and the Contractor shall be entitled to the payment of the final balance
+in accordance with the final Certificate to be issued in writing by the Architects at the expiration of the period
+referred to as “Defects Liability Period” in the Appendix hereinbefore referred to from the date of Virtual
+Completion or soon after the expiration of such period as the works shall have been finally completed and all defects
+made good according to the true intent and meaning hereof which ever shall last happen. Provided always that the
+issue by the Architects of any certificate during the Progress of the works at or after their completion shall not
+relieve the Contractor from his liability under Clause 2 and 28 in case of fraud, dishonesty or fraudulent
+concealment relating to the works or materials or to any matter dealt within the Certificate and in case of all defects
+and insufficiencies in the works or materials which a reasonable examination would not have disclosed. No
+certificate of the Architects shall of itself be conclusive evidence that any works or materials to which it relates are
+in accordance with the contract. The certificate so issued shall be for limited purpose of releasing the payment only.
+
+The Employer shall have power to withhold any Certificate, if the work or any parts thereof are not being carried out
+to their satisfaction. The Employer are empowered to adjust the amount payable against the future work completed
+if deficiency is found in any of the previous work carried out against which payment has already been released.
+
+Payments upon the Architects Certificate shall be made within the period named in the Appendix hereinbefore
+referred to “Period of honouring Certificate” after such certificate have been delivered to the Employer.
+
+25. Unfixed materials when taken into account to be the property of the Employer
+             When in any certificate of which the Contractor has received payment the Architects have included the
+value of unfixed materials intended for and/or placed on or adjacent to the works such materials shall become the
+property of the Employer for any loss or damage to which the Contractor shall be responsible and they shall not be
+removed from the site except for use upon the works without the written authority of the Employer. The value of
+such unfixed material shall be 75% of Actual cost.
+
+26. Delayed Payment
+        Amount payable by the Employer to the Contractor in pursuance of any Certificate given by the Architects
+here under shall, If not paid within the “Period for honouring Certificate” named in the Appendix hereinbefore
+referred to, carry interest at the rate named in the Appendix hereinbefore referred to as the “Rate of interest for
+delayed payment” from the date upon which the sum ought to have been paid by the Employer until payment.
+
+27. Certificate of Virtual Completion
+         The works shall not be considered as completed until the Employer have certified in writing that they have
+been virtually completed and the Defects Liability Period shall commence from the date of such certificate.
+
+28. Defects after Completion
+        The defects, shrinkage, settlements or other faults which may appear within “the Defect Liability Period”
+stated in the Appendix hereinbefore referred to or if not stated then within twelve months after the Virtual
+Completion of the works, arising in the opinion of the Employer from material or workmanship not in accordance
+with the contract, shall upon the direction in writing of the Architects and within such reasonable time as shall be
+specified therein, be amended and made good by the Contractor, at his own cost : unless the Employer shall decide
+that he ought to be paid for such amending and making good ; and in case of default the Employer may employ and
+pay other persons to amend and make good such defects, shrinkage settlements or other faults and all damage, loss
+and expenses consequent thereon or incidental thereto shall be made good and borne by the Contractor and such
+
+                                                          17
+
+damage, loss and expenses shall be recoverable from him by the Employer or may be deducted by the Employer
+upon the Architects certificate in writing from any moneys due or that may become due to the Contractor or the
+Employer may in lieu of such amending and making good by the Contractor deduct from any money due to the
+Contractor a sum to be determined under Clause No. 24 being insufficient, recover the balance from Contractor ,
+together with any expenses the Employer may have incurred in connection therewith. Should any defective work
+have been done or material supplied by any subcontractor employed on the works who has been nominated or
+approved by Architects as provided in clause No.16 the Contractor shall be liable to make good in the same manner
+as if such work or material had been done or supplied by the Contractor and be subject to the provision of this clause
+and clause No.2 hereof. The contractor shall remain liable under the provisions of this clause not withstanding the
+signing by the Architects of any certificate or the passing of accounts.
+
+29. Architects may delay the Progress
+        The Architects may delay the progress of the works in case of rains or otherwise, without vitiating, the
+Contract, and subject to the approval of the Employer may grant such extension of time for the Completion of
+Contract as they think proper and sufficient in consequence of such delay and the Contractor shall not make any
+claim for compensation or damages in relation thereto.
+
+30. Provisional sums Application of
+          All works for which provisional sums of money are provided may be selected or ordered from any
+manufacturers or firms at the discretion of the Employer and Employer reserves to himself the right of paying direct
+for any such work. The Contractor shall not be entitled to any profits for provisional item.
+
+31. Other persons engaged by Employer
+            The Employer with the consent of the Architects reserves the right to execute any work not included in the
+contract which he may desire to have carried out by other persons, and the Contractor shall allow all reasonable
+facilities and the use of his scaffolding and plant for the execution of such work but is not required to provide any
+special plant or material for the execution of such work except by special arrangement with the Employer. Such
+work, shall be carried out in such manner as not to impede the progress of the work included in the Contract and the
+Contractor shall not be responsible for any damage or delay which may happen to or occasioned by such work.
+
+32. Suspension
+       If the Contractor except on account of any legal restraint upon the Employer preventing the continuance of
+work suspends the works or in the opinion of the Architects neglect or fail to proceed with due diligence in the
+performance of his part of the Contract or if he makes default more than one in respect of Clause No.2 the Employer
+through the Architects shall have the power to give notice in writing to the Contractor requiring that the work be
+proceeded within reasonable manner and with reasonable dispatch , such notice shall purport to be a notice under
+this clause. After such notice shall have been given the Contractor shall not be at liberty to remove from the site of
+the work or from any ground contiguous thereto any plant or materials belonging to him which will have been
+placed thereon for the purpose of the works and the Employer shall have a lien upon all such plant and materials to
+subsist from the date of such notice being given until the notice shall have been complied with. If the contractor
+shall fail for seven days after such notice have been given to proceed with the works as therein prescribed the
+Employer may proceed as provided in clause No.33.
+
+33. Termination of Contract by Employer
+             If the Contractor (being an individual or a firm) commit any “Act of insolvency” or be adjudged an
+insolvent, make an assignment or composition for the benefit of the greater part in number or amount of his
+creditors, or enter into a deed of Assignment with his creditors or, ( being an incorporated company ) have an order
+made against him or pass an effective Resolution or winding up either compulsorily or subject to the supervision of
+the court or voluntary , or if the official assignee of the contractor repudiate the contract or if the official assignee or
+the liquidator in any such winding up be unable within seven days after notice to him requiring him to do so , to
+show to the reasonable satisfaction of the Architects that he is able to carry out and fulfill the Contract and if
+required by the Architects to give security there for or if the Contractor , (whether an individual , firm or
+incorporated Company) shall suffer execution to be issued , or if the Contractor suffer any payment Contractor
+assign or sublet the Contract without the consent in writing of the Architects/ Employer first obtained , or if the
+Contractor shall charge or encumber this Contract or any payments due or which may become due to the Contractor
+there under, or if the Architects certify in writing to the Employer that in their opinion the Contractor :
+
+                                                            18
+
+(1) has abandoned the Contract or,
+
+(2) has failed to commence the work, or has without any lawful excuse under these conditions suspended the
+progress of the work for fourteen days after receiving from the Employer written notice to proceed, or
+
+(3) has failed to proceed with the works with such due diligence and failed to make such due progress as would
+enable the works to be completed within the time agreed upon , or
+
+(4) has failed to remove materials from the site or to pull down and replace works within seven days after receiving
+written notice from the Employer that the said materials or work were condemned and rejected by the Employer
+under these conditions , or
+
+(5) has neglected or failed persistently to observe and perform all or any of the acts , matter or things by this
+Contract to be observed and performed by the Contractor for seven days after written notice has been given to
+Contractor requiring the Contractor to observe or perform the same , or
+
+(6) has to the detriment of good workmanship or in defiance of the Employer Instructions to the contrary sublet any
+part of the Contract.
+
+Then and in any of the said causes the Employer after having discussion with Architects not withstanding any
+previous waiver, after giving seven days notice in writing to the Contractor , determine the Contract, but without
+thereby affecting the power of Architects or the obligations and liabilities of the Contractor, the whole of which shall
+continue to be in force as fully as if the Contract had not been so determined and as if the works subsequently
+executed has been executed by or on behalf of the Contractor .And Further , the Employer with the consent of the
+Architects by his agents or servant may enter upon and take possession of the works and all plants , tools,
+scaffolding sheds , machinery steam and other power , utensils and materials , lying upon premises or the adjoining
+lands or roads , and use the same as his own property or may employ the same by means of his own servants and
+workmen in carrying on and completing the works by employing any other contractors or other person or persons to
+complete the works ,and the Contractor shall not in any way interrupt or do any act , matter or thing to prevent or
+hinder such other Contractor or other persons or persons employed for completing and finishing or using materials
+and plant for the work . When the work is completed , or as soon thereafter as convenient the Employer shall give a
+notice in writing to the Contractor to remove his surplus materials and plant and should the Contractor fail to do so
+with in a period of 14 days after receipt thereof by him, the Employer may sell the same by public auction and shall
+give credit to the Contractor for the amount so realised The Architects shall thereafter ascertain and certify in
+writing under their hand what (if anything) shall be due or payable to by the Employer, for the value of the said plant
+and materials so taken possession of by the Employer, and the expense or losses which the Employer shall have
+been put to in getting the works to be so completed and the amount, if any owing to the Contractor and the amount
+which shall be so certified shall, there upon , be paid by the Employer to the Contractor or by the Contractor to the
+Employer, as the case may be , and certificate of the Architects shall be final and conclusive between the parties.
+
+34. Termination of contract by Contractors
+            If the Employer , commit any “Act of insolvency” or if the Employer being an ( individual or Firm ) shall
+be adjudged insolvent or shall make an assignment or composition for the benefit of the greater part in number or
+amount of his creditors, or (being an incorporated company) shall have an order made against him or pass an
+effective Resolution for winding up either compulsorily or subject to the supervision of the court or voluntarily or if
+the official Assignee of the Employer shall repudiate the Contract, or if the official Assignee of the Liquidator in any
+such winding up shall be unable with in fourteen days after notice to him requiring him so to do, to show to the
+reasonable satisfaction of the contractors that he is able to carry out and fulfill the contract and to make all payments
+due and to become due there under and , if required by the Contractor to give security for the same or if the works be
+stopped for three months under the order of the Employer or by any injunction or other order of any Court of Law,
+then and in any of the said cases the Contractor shall be at liberty to determine the Contract by notice in writing to
+the Employer through the Architects and he shall be entitled to recover from the Employer payment for all works
+executed duly certified by the Architect .
+In arriving at the amount of such payment the net rates contained in the Contractors original Tender shall be
+followed, or where the same may not apply valuation shall be made in accordance with Clause 17 hereof .
+
+                                                           19
+
+35. Disputes to be finally determined by Architects
+     The decision, opinion, direction, certificate or valuation with respect to all or any of the matters under clause
+2,4, 8, 14, 20, (a,b,c,d,e,f, & h) 28, 32, and 33 hereof (which matters are herein referred to as excepted matters) shall
+be final and conclusive and binding on the parties hereto and shall be without Appeal. Any other decision,
+opinion, direction, certificate or valuation of the Architects or any refusals of the Architects to give any of the
+same shall be subject to the right of Arbitration and review in the same way in all respects (including the
+provision as to opening the Reference) as if it were a decision of the Architects under Clause No. 37.
+
+36. Deposit
+     The amount deposited by the Contractor along with his Tender shall be retained with the Employer and it shall
+be returned to the Contractor on the Virtual Completion of the works after duly certified by the Architects or In case
+of default in any of the foregoing conditions the deposit amount shall be forfeited to the Employer.
+
+37. Settlement of Dispute, Arbitration
+         All disputes and differences of any kind what ever arising out of or in connection with the Contract or the
+carrying out of works (whether during the progress of the works or after their completion and whether before or after
+the determination abandonment or breach of the Contract) shall be referred to and settled by the Architects who
+shall state their decision in writing subject to the Employer consent. Such decision may be in the form of a
+final certificate or otherwise. The decision of the Architects with respect to any of the excepted matters shall
+be final and without Appeal as stated in clause No. 35. But if either the Employer or the Contractor be dissatisfied
+with the decision of the Architects or any matter question or the dispute of any kind (except any of the excepted
+matters) or as to with holding by the Architects of any certificate to which the Contractor may claim to be entitled,
+then and in any such case either party (the Employer or the Contractors) may within 30 days after receiving notice
+to such decision give a written notice to the other party requiring that such matters in dispute be arbitrated
+upon. Such written notice shall specify the matters which are in dispute and such dispute of difference of which such
+written notice has been given and no other shall be and is hereby referred to the arbitration and final decision of a
+single Arbitrator being Fellow of the Indian Institute of Architects to be agreed upon and appointed by both parties
+or in case of disagreement as to the appointment of a single arbitrator, to the arbitration of two Arbitrators being
+both fellows of the Indian Institute of Architects one to be appointed by each party, which Arbitrators shall before
+taking upon themselves the burden of reference appoint an Umpire.
+
+      The Arbitrator, the Arbitrators or the Umpire shall have power to open up, review and revise any certificate,
+opinion , requisition or notice, save regard to the excepted matters referred to in Clause No. 35 and to determine all
+matters in dispute which shall be submitted to him or them and of which notice shall have been given as aforesaid .
+
+Upon every or any such reference the cost of and incidental to the Reference and Award respectively shall be in the
+direction of the Arbitrator or ‘Arbitrators’ or the Umpire who may determine the amount thereof, or direct the same
+to do taxed as between Attorney and Employer or as between party and shall direct by whom and to whom and in
+what manner the same shall be borne and paid . The submission shall be deemed to be a submission to Arbitration
+within the meaning of the Indian Arbitration Act 1940 or any statutory modification thereof. The award of the
+Arbitrator or Arbitrators or the Umpire shall be final and binding on the parties. Such Reference except as to the
+withholding by the Architects of any Certificates under Clause 32 to which the Contractor claims to be entitled shall
+not be opened or entered upon until after the completion or alleged completion of the works or until after the
+practical cessation of the works arising from any cause unless with written consent of Employer and the Contractor.
+Provided always that the Employer shall not withhold the payment of the Interim Certificate nor the Contractor
+except with the consent in writing of the Architects in any way delay the carrying out of the works by reason of any
+such matter , question or dispute referred to Arbitration but shall proceed with the work with all due diligence and
+shall until the decision of the Arbitrator or Arbitrators or the Umpire be given abide by the decision of the Architects
+and no award of the Arbitrator or arbitrators or the Umpire shall relieve the Contractor of the obligation to adhere
+strictly to the Architects Instructions with regard to the Actual carrying out of the work . The Employer and the
+Contractor hereby also agree that Arbitration under this clause shall be condition precedent to any right or Action
+under the Contract.
+
+38. Labour Escalation
+
+                                                           20
+
+  No labour escalation will be paid to the Contractor under any circumstances.
+
+  39. Material Escalation
+
+  No material escalation will be paid to the Contractor under any circumstances.
+
+40. Secured advance:
+
+     Secured advance shall be paid for the non-perishable materials subject to maximum of 75% of the invoice cost.
+
+                                                          21
+
+                  SCHEDULE OF MATERIALS TO BE ISSUED TO THE CONTRACTOR
+
+No material will be supplied by the Employer and all the materials will have to be procured by the Contractor.
+
+                                                         22
+
+                                      APPENDIX HEREINBEFORE REFERRED TO
+
+Clause No.                   Description                                          Detail
+    11           Earnest money                          Rs. 50,000/- (rupees fifty thousand only) as bank draft
+                                                        in favour of The State Trading Corporation of India
+                                                        Ltd.
+  24 & 28        Defects Liability Period               One year
+     13          Date of commencement                   With in 3 days from the date of order to start the work
+                                                        /or date of handing over possession of site.
+     13          Date of Completion                     2 (two) Calendar months from the date of
+                                                        commencement
+     23          Period of final measurement            15 days from the date of completion
+     36          Retention money / security deposit     10% of contract value (including Earnest Money)
+     24          Installment after virtual completion   50% security deposit to be released after virtual
+                                                        completion and balance 50% to be released after
+                                                        defects liability period.
+                 Estimated cost                         Rs. 23.50 lacs (approx)
+                 Liquidated damages                     ¼% of the Contract price per week of delay subject to
+                                                        a maximum of 10% of the Contract Price.
+
+---------------------------------------                                 ---------------------------------------
+          EMPLOYER                                                               CONTRACTOR
+
+                                                        23
+
+                                                 SPECIFICATIONS
+                                                 FOR CIVIL WORK
+
+1.     General
+(a) These specifications are intended for general description of quality and workmanship of material and finished
+work. They are not intended to cover minute details. The work shall be executed in accordance with best modern
+practices. The Architects decision shall be final and binding on any issue arising out from any discrepancies.
+
+(b) The quantities furnished are approximate and may vary. The contractor quoted rates shall remain firm within the
+variation limits.
+
+(c) Rates quoted shall include labour , materials, tools, plants, appliances, transport, equipment, taxes, duties , octroi,
+levies, contractors supervision, overheads and profit and all that are necessary for the satisfactory completion of the
+job other than services and materials supplied by the Employer.
+
+(d) In case where the specifications given below are found wanting the latest I.S. specifications shall hold good.
+
+Wherever reference has been made to Indian standard or any other specifications the same shall mean to refer to the
+latest specifications irrespective of any particular edition of such specifications being mentioned in the specifications
+below or Schedule of quantities.
+
+The workmanship shall be the best of its kind and shall conform to these specifications are given. In case nothing is
+specified in these specifications the Indian Standard specifications in every respect and where I.S.I is also silent
+latest trade practices shall prevail subject to the approval of the Architects. All materials or workmanship which in
+the opinion of the Architects is defective or unsuitable shall be removed immediately from the site and shall be
+substituted with proper material and / or workmanship forthwith.
+
+2.     WOOD WORK AND JOINERY
+(1)    Timber
+(a)      Unless otherwise specified, all timber for frames of doors, windows, ventilators, etc. shall be best quality
+sound, well seasoned Sycamore wood / Ghana Teak wood or timber as specified in Bill Of Quantities, shall be
+free from knots , shakes, fissures, flaws, sun cracks and other defects. The planed surface shall be smooth and free
+from blemishes and discolourations.
+
+(b) All timber for carpentary and joinery in touch with masonary or concrete shall be coal tarred or creosoted
+before fixing. All rough frame work in partitions suspended ceilings and veneering to walls etc., shall be treated with
+approved wood preservatives as per manufacturer’s instructions and specifications. The rates quoted shall provide
+for such treatments.
+
+(c)    Timber member shall be fabricated out of kiln seasoned timber.
+
+(d) Carpentary Work :
+The timber shall be properly, planed and wrought in a workman like manner. Joints shall be true and fit properly,
+assembled accurately and clamped together so as be square, flat and close jointed. The combed joints shall have two
+tongues on each member to be jointed and shall be glued and pinned together with wooden pegs. Pegs shall engage
+all tongues and no tongue shall be less than 6 mm. thick.
+          In mortice and tenon joints all tenons shall not be less than 12mm thick and shall be the full width of the
+member. Tenons shall be glued into the mortices. Through tenons shall in addition be pinned with wood dowels of
+not less than 6 mm dia. or with non-ferrous metal dowels of not less than 6 mm dia. Alternatively through tenons
+may be wedged if the mortices are tapered.
+
+2) Holdfasts : Three holdfasts shall be fixed to each post of the door frame and two to each post of the window
+frame. The M.S. holdfasts shall be of the size 30 cmsx40mmx5mm & shall be fixed to the frames by means of
+screws and/or bolts & nuts but not nails . The other end of the holdfast shall be fixed into jambs with cement
+concrete 1:2:4 block dimensions or as direction. Horns in frames shall be cut and shall not be used as of hold fasts.
+
+                                                            24
+
+Whenever asked for, rawl plugs or bolts as directed shall be used for rough grounds framing hangers etc.
+
+(3)    Workmanships
+(a)       The workmanship shall be first class and to the approval of the Architects. Scantling and boarding shall be
+accurately sawn and shall be of required width and thickness. All carpenter’s work shall be wrought except where
+otherwise described. The workman ship and joinery shall be accurately set out in strict accordance with the drawings
+and shall be framed together and securely fixed in approved manner and with properly made joints. All work is to be
+properly tenoned, shouldered, wedged, pinned, etc and properly glued with approved quality glue to the satisfaction
+of the Architects.
+
+(b) Screws: All screws to be used in wood work and joinery shall be of brass or as specified or as directed by the
+Architects.
+(c)    Tolerances: 1.5mm will be allowed for each wrought face of the sizes specified except where described as
+“finished” in which case they shall hold to be the full dimensions.
+
+(d) Protection: All wood work and joinery edges of timber frames etc. shall be protected from being damaged
+during construction by providing rough timber casings securely fixed and other adequate protective measures.
+
+(e)   Antitermite treatment shall be done suitably as directed by the Architects.
+
+(f)   Doors / windows frames shall have cut rebates. Planted rebates shall not be permitted.
+
+(g)     Where door frames are fixed flush with plaster to wall, teak wood cover mould 40x12mm as per drawing
+shall be provided all round where the plaster is flush with the frame, painted or finished as in doors and rates quoted
+shall include for the same.
+
+                                                          25
+
+SPECIFICATIONS
+                                         INTERIOR & ALLIED WORKS
+1.       GENERAL
+
+         The work under this tender shall be executed strictly in accordance with constructional and material
+         requirements defined under these specifications. The contractor shall carefully acquaint himself with these
+         specifications to determine his contractual obligations for work. The conditions of these specifications will
+         be binding on the contractor and no deviation shall be permissible unless specifically approved by the
+         Project Manager / Architect in writing.
+
+1.1      DRAWINGS / DIMENSIONS
+
+         Figured Dimensions on drawings shall supersede measurements by scale and drawings to a large scale take
+         precedence over those to a smaller scale. Special dimensions or directions in the specifications shall be
+         checked on site. The dimensions where stated do not allow for wastage, laps, joins etc. he levels,
+         measurements and other information concerning the existing site as shown on the drawings are believed to
+         be correct, but the contractor shall be entertained hereafter on account of any errors or omissions in the
+         levels or the description of the ground turning out to be different from what was excepted or shown on the
+         drawings.
+
+1.2      CO-ORDINATION OF DRAWING
+
+         Before commencement of work, the contractor shall so-relate all relevant Structural, Architectural and
+         services drawings and satisfy himself that the information available there form is complete and
+         unambiguous.
+
+         The contractor shall be responsible for any error / difficulty in execution / damage incurred owing to any
+         discrepancy in the drawings which has been overlooked by him and has not been brought to the notice of
+         the Project Manager / Architect before execution.
+
+1.3      B.I.S. CODES OF PRACTICE
+
+         Wherever any reference is made in the specifications to any Bureau of Indian Standard (B.I.S.) or Indian
+         Standard (I.S.) Code of practice, it shall be understood to indicate the latest version of the code of practice
+         in usage at the time of construction.
+
+2.       ALUMINUM DOORS, WINDOWS AND GLAZINGS
+
+      2.1 SHOP DRAWING
+
+         Contractor shall submit to the Architect for hid approval shop drawings within 10 days of confirming
+         opening sizes the drawing should be to full scale as possible showing all items of work including: -
+
+         a.       Metal thickness.
+         b.       Arrangement of components.
+         c.       Jointing.
+         d.       Details of the site connections.
+         e.       Fastenings.
+         f.       Flashings.
+         g.       Metal finishes.
+         h.       Glazing.
+         i.       Weather-stripping.
+         j.       Sub framing.
+         k.       Hardware (including preparation)
+         l.       Sealants.
+         m.       Other pertinent information.
+
+                                                          26
+
+2.2     INSPECTION: All material brought to site by the contractor for use in work shall be subject to inspection
+        and approval by the Architect and shall be required to get necessary tests carried out on material and work
+        from approval laboratory/test house the cost of which shall be borne by the contractor.
+
+2.3     ALUMINIUM SECTIONS: Aluminium sections used for work shall be as per Architect approved drawing
+        and suitable for use to meet architectural design technical, structural, functional and visual considerations.
+        The aluminium extruded section shall conform to IS designation HE9 WP/ HV9 WP alloy with chemical
+        composition and technical properties as per IS 733 and IS 1285.
+
+2.4     SAMPLES: Sample of typical curtain wall shall be made and got approved before mass fabrication.
+
+2.5     FABRICATION: All frames shall be square and flat and the frames being fabricated to a true right angle
+        and shall conform to IS 1948. These shall be fabricated as per approved shop drawing. Both fixed and
+        openable frames shall be fabricated out of a section which has been machine cut to length and mechanically
+        jointed with hardened nickel zinc plated steel screws and jointing accessories such as cleat fixture, machine
+        bolt made of such, material as not to cause bimetallic action. For matching with coloured anodized
+        aluminium section all visible screws shall be coloured black by chemical process. Threads of machine
+        screws used shall with stand 150-kg/ sqm wind pressure with out deformation. Required sash bars as per
+        approved drawing shall have water right EPDM gasket so that water does not penetrate through water
+        penetrates exterior gasket and are property welded / braced / screwed to the main members.
+
+2.6 PRECAUTIONS: Contractor shall ensure that aluminum curtain walls are not deformed /damaged during
+    subsequent construction .All fitting hinges and frame works etc. shall be protected with alkathene sheets so that
+    these may not be damaged during execution of work.
+
+2.7     FITTINGS
+        Hinges, locks, handles, stay tower bolts rubber buffers door closer and other fittings shall be provided as
+        called for in the schedule of hardware/drawings.
+
+2.8     FIXING
+
+        The contractor shall fix aluminium doors frames wherever possible shall be fixed in placed before erecting
+        partition. Where this is not possible prepared openings shall be left for holdfasts. Breaking of partition or
+        walls for inserting holdfasts will not be permitted. Where the frames are to be fixed to column /wall faces
+        they shall be fixed with rawl bolts / expansion bolts of approved make in approved manner. Special
+        concrete blocks with cement concrete 1:2:4 (1cement: 2coarse: 4stone aggregate 10mm nominal size) with
+        3mm thick M.S. plate 100x100mm shall be cast set at suitable places into the jambs of opening. Door and
+        window frames shall be welded to the blocks with spaces in approved manner.
+
+        The contractor shall be responsible for assembling composites bedding and pointing with mastic inside and
+        outside at the mullion and transoms. Fixing lugs to the frames placing the doors /windows in their
+        respective opening and bedding with mastic. The contractor shall be responsible for all builders work
+        including all cutting out and making good forming fixing holes for inserting loose lugs bolts and clips and
+        for stacking of window doors adjacent to the opening for necessary hoisting. The contractor shall be
+        responsible for the doors and windows being set straight. Plump and level and for their satisfactory
+        operation after operation after the fixing is complete.
+
+2.9     MANUFACTURER’S ATTENDANCE
+
+        The manufacturer immediately prior to the commencement of glazing shall adjust and set all windows and
+        doors and accept responsibility for the satisfactory working of the opening frames. The contractor shall
+        give three days clear notice to the manufacturer that glazing will commence.
+
+2.11    MASTIC CEMENT
+
+                                                         27
+
+           The gaps between frames and support and also any gaps in the door and window section shall be raked out
+           as directed and filled with mastic cement of approved colour and make to ensure complete water tightness.
+           The mastic cement shall be of such colour and composition that it would not stain the masonry / concrete
+           work shall receive paint without bleeding will not sag or run and shall not set hard or dry out under any
+           condition of weather. The sample of plastic cement to be used for this purpose shall be got approved from
+           Architect before its actual use.
+
+      4.   CARPENTRY AND JOINERY
+
+               4.1 EXTENT AND INTENT
+           It is the intent of this specification to include all carpentry and joinery work in connection with doors
+           windows glazing partitions ceiling paneling cabinets and other items of wood work called for in the
+           drawing.
+
+3.2        GENERAL
+
+           The carpentry and joinery work shall include the furnishing of all first materials equipments incidentals and
+           appliances required to complete the work including the provision and installation of fastening devices and
+           hardware in accordance with the drawings and the attached hardware schedule.
+
+3.3        TIMBER
+
+           Sycamore wood / Figured Sycamore wood / any other wood where called for shall be of selected best
+           quality first class wood. All timber shall be uniform in texture free from large loose dead or cluster knots
+           wanes rot decay discoloration soft or spongy spots hollow pockets sap wood pith or center heart and all the
+           defects and blemishes.
+
+3.4        SAMPLES AND SHOP DRAWINGS
+
+           The contractor shall before proceeding with the work submit to the Architect for his approval complete
+           samples of the various materials including hardware and fastening devices and shop drawing and large
+           scale details covering all joinery work.
+
+3.5        ROUGH CARPENTRY
+
+           Materials unless otherwise called for all framing and other concealed wood members shall be of first class
+           teakwood and shall be seasoned to a moisture content of not less than 10% or more than 15%. Wood of
+           greater moisture.
+
+3.6        WORKMANSHIP
+
+           All carpenter’s work shall be done by skilled workmen using proper tools .All joints shall as possible be
+           mortise and tenoned and glued with best quality approved waterproof glue. Where mortise tenon joints are
+           not possible .the joints shall be securely nailed with the longest nails that may be used without splitting the
+           wood. Wherever it is necessary or an adequate joints cannot be formed by nailing the members shall be
+           lapped or jointed by GI straps or extra wood blocks .All joints shall be done with neatness and as approved
+           and directed by the Architect.
+
+3.7        BLOCK BOARD AND PLY
+
+           Block board and ply for partition cupboards and all other cabinet work shall be solid core phenol
+           formaldehyde resin bounded of approved make as called for.
+           Unless otherwise shown all blackboards and ply shall be commercial ply veneered on both faces. Samples
+           of flush doors ply blackboards etc. shall be submitted to the Architect for his approval and all shutters
+
+                                                            28
+
+            boards etc. to be used in the work shall conform to the approval and all shutters boards etc, to be used in the
+            work shall to the approved sample in all respects.
+
+3.8         PARTITION AND CABINET WORK
+
+            General: Partitions cabinets etc, shall be fabricated and assembled in the workshop as far as practicable
+            and then brought instead the building ready to set in place .The various members shall be worked in the
+            best manner know to the trade mortised and tenoned doweled blocked and glued together so as to avoid the
+            use of nails s for as possible .The details shall be closely followed moulding clearly cut and miters
+            accurately made. Free edge of shutters shelves partitions sides etc. shall be provided with first class
+            teakwood edging glued and nailed in approved manner. Shelves where shown fixed shall be supported on
+            aluminum or other cleats or in other manner as approved by the Architect. Adjustable shelves shall have
+            brass sockets and pins as detailed on drawing.
+
+            Drawer bottoms shall be of 6mm commercial ply unless otherwise show. Drawer front sides and back shall
+            be of first class teakwood .The drawers shall slide on wooden bearers as shown on drawing.
+
+            Timber skirtings where called for shall be of first class teakwood cut to required sizes. Planed smooth on
+            visible faces and fixed in position in approved manner. Cutout opening etc. shall be provided in the
+            counters and ranges. Pipes etc. as shown on drawing and as required at site.
+
+3.9         HARDWARE FITTINGS
+
+            Hinges, handles, knobs, locks, ball catchers, adjustable shelf fitting (Brass lacquered or polished) and other
+            hardware fittings for doors and cabinetwork shall be of the best quality and specified make as approved by
+            the Architect. The number, size etc, shall be as per the hardware schedule and as shown on drawings.
+
+3.10        PRESERVATIVE TREATMENT
+
+            All woodwork in contact with masonry shall be painted with approved asphalt or antitermite & fire
+            retardant coating (viper or equivalent) before placing. Care shall be taken to keep exposed surfaces clear
+            from tar etc. felt shall be used to isolated wood from masonry wherever practicable .All concealed wood
+            etc. shall be treated fully and liberally with so lignum before placing in position.
+
+3.11        PAINTING AND POLISHING
+
+            All exposed wooden faces of partitions, Glazing, Doors, Cabinetwork etc. shall be Duco painted /melamine
+            polished as per specs to approved finish. Door shutters internal faces of cupboards and cabinets etc shall be
+            enamel painted/oiled to approved finish. Drawer bottom sides of drawers etc. oiling etc. shall be carried out
+            as specified under “Painting”.
+
+3.12        PROTECTION OF WORK
+
+            The contractor shall be responsible for the temporary doors and closing in opening necessary for the
+            protection of the work during progress .He shall be also provide and maintain any other temporary covering
+            required for the protection of finished wood work left unprotected.
+
+       5.   GLAZING COMPOUND
+
+            Glazing putty for setting glass shall be of approved quality (Shalimar or approved equivalent) suitable for
+            use of metal windows and confirming to IS 420-1953. Setting blocks shall be of NEOPRENE of approved
+            quality and make.
+
+5      HARDWARE
+
+       1.       EXTENT AND INTENT
+
+                                                             29
+
+     The intention of the contractor is that the building as shown shall be completely equipped with required
+     hardware .Any required item not noted or listed shall be finished in a grade equal to and in harmony with
+     similar item listed.
+     The contractor shall furnish all labour materials tools appliances and incidental required to complete the
+     hardware work specified herein or listed in the schedule of hardware or as may be required by the actual
+     conditions at the building including the necessary screws special screws bolts expansion bolts and other
+     devices necessary which shall be of sufficient size to securely and permanently fix the hardware in place.
+     No steel or iron screws shall be used. Special screws shall match material and finish of article being
+     fastened.
+
+2.   GENERAL
+
+     All hardware shall be of the best quality of its type and strictly in conformity with the materials and
+     finished described in schedule of hardware .If called upon to do so the contractor shall arrange to get
+     hardware specially manufacture to the design requirements and standard laid down by the Architect.
+
+3.   SAMPLES
+
+     Samples of each different item of hardware including screws or any particular item of perfect hardware
+     shall be submitted to the Architect for approval.
+
+4.   QUALITY
+
+     All hardware shall be of perfect fit uniform in finish and free imperfection that affect serviceability or mar
+     the appearance.
+
+5.   INSTALLATION
+
+     All hardware shall be installed by skilled workmen equipped with proper and adequate tools .The hardware
+     shall be installed true plump and square in accordance with the manufacturer’s instructions
+
+6.   PROTECTION
+
+     Hardware shall not installed earlier than necessary and it shall be the responsibility of the contractor to
+     protect all hardware removing some when necessary for protection and deliver all in good working order
+     and unblemished. Any defective or marred items shall be made good to the satisfaction of the Architect
+     without additional cost to the Employer.
+
+7.   GUARANTEE
+
+     The contractor shall be responsible for the proper working of all hardware for a period of one year from the
+     data of completion and acceptance of the building.
+
+                                                      30
+
+                                                Specifications
+                                           FOR ELECTRICAL WORK
+
+1. The installation shall generally be carried out in conformity to the Indian Standard Specifications and Code of
+Practice for electrical works, but where the specifications attached to the tender differ from these specifications,
+these specifications shall be followed.
+
+2. In case where the I.S. Specifications and these Specifications are found wanting, the work shall be carried out as
+per relevant latest Code of Practice recommended by B.S.S.
+
+3. In addition, the installation shall comply in all respects with the requirements of Indian Electricity Act, 1910,
+amended upto date and Indian Electricity Rules, 1956, thereunder and the special requirements, if any, of the state
+Electricity Board / New Delhi Municipal Committee.
+
+4. Except where joint box system has been expressly mentioned in the schedule of work, wiring shall be done in
+“looping system” and Phase or live conductor shall be looped at switch box and neutral conductor can be looped
+from light, fan, or socket outlets. In non - residential buildings, neutral conductor & earth continuity wire shall be
+brought to each switch board situated in rooms and halls and these shall be terminated inside the switch boards with
+suitable connectors and such switch boards shall be of adequate size to accommodate 1No.5 Amps socket outlet and
+control switch in future.
+
+Where joint box system has been expressly mentioned in specifications for wiring ,these all joints in conductors
+shall be made by approved mechanical connector laid in approved Junction Boxes.
+
+5. The successful tender shall give all notices required by the said Act etc. He shall also undertake to provide test
+certificates.
+
+6. All materials and fittings, appliances etc. used in the Eletrical Installation shall conform to the latest Indian
+Standard Specifications, wherever these exist. In the absence of I.S. Specifications, revelant B.S. Standard shall be
+applicable.
+
+7. All cables and flexible cords shall be accompanied by the makers test certificates stating the class and giving the
+result of the insulation test.
+
+8. In case of materials, for which standard specifications do not exist, the materials shall be got approved by the
+Engineer of the Society/Architects.
+
+9. No wiring shall be laid under the floors unless it is absolutely inescapable. In case this is unavoidable, it should
+pass through class ‘B’ water - tight galvanised iron pipes & not through ordinary conduit. No extra payment shall be
+made on this account.
+
+10. (a) Point wiring shall consist of branch wiring for final sub - distribution board together with the controlling
+switch (or push ) as far as and including the ceiling rose or any other approved terminations or socket outlet. In case
+of more than one light being controlled by a
+switch, the wiring upto the ceiling rose of the first light first light including the switch shall be considered as a
+primary point. Loop wiring from light to light shall be considered as a secondary point and distinguishing rates shall
+be quoted. In case of light controlled from 2 points, the point wiring should include among others, the two way
+switches.
+
+(b) A 3 pin socket outlet point and fan point shall include the earth continuity bare copper conductor of No. 14 SWG
+from earth pin to the terminal or bus at the final distributing centre.
+
+11. Workmanship:
+
+                                                          31
+
+Good workmanship and neat appearance are the pre - requisites for compliance with various sections of these
+specifications.
+
+The work shall be carried out under direct supervision of a person holding certificate of competency issued by the
+relevant State/ Central Govt. and in accordance with the latest Statutory Rules & Regulations in force. The relevant
+I.S. Code practices are to be followed and labour force engaged shall also be holding certificates of competency as
+applicable.
+
+Tenderer shall mention the name of supervisor on the Completion Drawings for ready reference at later date.
+
+12(a) In estimating the current to be carried out by any conductor, incandescent lamps, shall be rated at 100 watts,
+the ceiling fans shall be rated at 80watts, table fans and ordinary socket points at 60watts fluorescent lamps of 4 ft. at
+50 watts and 2ft. at 25 watts and power socket outlets at 1000 watts, unless the actual values are specified.
+
+(b) Lights, fans, bells/buzzers, and socket outlets may be worked on a common circuit. Such sub - circuits shall not
+have more than a total of 8 points of lights, fans & socket outlets. The load of such circuits shall be restricted to 800
+watts. The number of socket outlets shall not be more than 2 per circuit.
+
+As regards power sub - circuits, the outlets shall be provided according to the load design for these circuits but in no
+case shall these be more than 2 outlets of each circuit, and independent conduit shall be laid for this system of load.
+
+13. Drawings:
+
+(a) The Contractor shall prepare fabrication & detailed working drawing on the basis of electrical drawings supplied
+by Architects and obtain the approval of the Architects. All work shall be carried out only on approval of these
+drawings. However, approval of the drawings does not relieve the contractor of his responsibilities to meet with the
+intent of the specifications.
+
+(b) The Contractor shall also submit complete layout drawings to the Architects on completion of the work. The
+rate quoted by the contractor shall be inclusive of this work.
+These drawings must give the following information :
+
+(i) Runs of conduit, diameters of conduits, number of wires contained in conduit and size of wires for point wiring :
+
+(ii) Location of all distribution boards, main switches and junction and pull boxes and fuses.
+
+(iii) Complete schematic diagram of the installation;
+
+(iv) Location of earthing station;
+
+(v) Telephone outlets and its sizes of conduits etc.
+
+The virtual completion certificate will not be issued.
+
+14. Position of lighting points, Distribution Boards and Switchgears:
+
+(a) Light, fan and 5Amps socket outlet switch board shall be installed so that the bottom of switch board is
+1.25Meters (4’) above the floor unless the front of switch board is completely enclosed by a hinged door or the
+switch board is situated at a position to which only authorised persons have an access.
+
+(b) Switch boards shall not be erected above gas stoves or sinks or within 2.5 meters (8ft.) of any washing unit in
+washing rooms or laundries.
+
+                                                           32
+
+(c) Switch boards for socket outlets for domestic power shall be installed so that the bottom of switch board is at a
+height of 230mm (9”) from the floor level. However, such switch boards in kitchen shall also be at a height of 1.25
+meters (4’) from floor. Switch boards of heating appliances shall be at a close position to the appliance itself.
+
+(d) The recommended positions of the lighting points, control switches, distribution boards & switchgears as shown
+on the layout drawings, will be adhered to as far as practicable.
+
+(e) Should there be any discrepancy or incomplete description ambiguity or omission in the drawings and other
+documents, whether original and supplementary forming the contract, the Tenderer shall, immediately on
+discovering the same, draw attention of the Architects.
+
+(f) Before commencement of work, the exact final position of all points, switch boxes and the distribution board
+shall be ascertained by the Tenderer from the Architects’ representative.
+
+15. Samples:
+
+The Contractor shall submit 2 sets of samples of accessories and apparatus, he proposes to use in the installation, to
+the Architects for approval. Drawings or samples, as required, shall be submitted by the Contractor and this
+specification shall not be departed from without the written instructions from the Architects. The verbal approval
+given by the Architects of any drawings or samples submitted by the contractors shall in no way exonerate the
+contractors from their liability to carry out the work in accordance with the terms of the contract.
+
+16. Conduits : A ( M.S Conduits )
+
+(a) All metallic conduits, if specified in detailed specifications & scope for L.S. work, shall be heavy gauge
+resistance welded and screwed electrical thread, manufactured in accordance with BSS : 31 or latest I.S.S.
+
+(b) No smaller size than 25 mm diameters shall be employed unless otherwise specified and conduits and conduit
+accessories shall be enamelled or galvanised as specified for the various positions.
+
+(c) All conduits shall be of ample size to give easy “draw in” and “out” of all the cables in the conduits and the
+number of conductors shall not exceed that laid down as per appendix (I).
+
+(d) Care shall be taken to ensure that all conduits are adequately protected while stored on site prior to erection and
+no damaged conduit shall be used.
+
+(e) All ends of conduits shall be reamed and filed to remove rough edges and inside surfaces of conduits shall be
+smooth and free from burrs and all other defects.
+
+(f) Conduits showing traces of rust shall be wire brushed and painted with an approved mettallic paint.
+
+( B ) P.V.C Conduits:
+2 mm thick PVC conduits conforming to relevant I.S codes shall be used as specified in detailed scope of work later.
+
+17. Preparation of Conduit: [ For M.S. Conduits only ( if specified ) ]
+
+(a) The inside surface and ends of conduits and fittings used in connection therewith, shall be smooth, cut square
+and free from burrs and all other defects. Reamers shall be used on the ends of all conduits after screw threads have
+been cut and all grease, enamel, etc. removed.
+
+(b) All threads shall be clean and free from rust. Powdered soap stone, ealc or prepared compounds shall be used as
+lubricants to facilitate pulling - in of conductors; oil and grease will not be used.
+
+(c) Tallow or other approved lubricant shall be used, where threads are cut.
+
+18. Erection of Conduit: [For M.S. Conduits only (if specified)]
+
+                                                          33
+
+(a) The conduit shall be properly and tightly screwed between the various lengths and to the boxes to which it runs
+and terminates so that the wiring is continuously and effectively projected throughout its entire length. No part of the
+conduit shall be under mechanical stress & the whole conduit system shall be electrically and mechanically
+continuous throughout.
+
+(b) Corners shall be turned by means of easy bends or sets made cold without altering the section or opening the
+seam. The radius of every conduit bend shall be such as to allow compliance with Regulation B-32 of the IEE
+Regulations for bends in cables, and, in addition, the inner radius of the bend shall not be less than 2.5 times the
+outside diameter of the conduit.
+
+(c) Where conduits are connected by means of a socket, the ends of the conduits shall but together in the centre of
+the socket, and except in the case of running joint, no exposed threads shall be visible after erection.
+
+(d) Where running joints are used, they shall be thoroughly coated immediately after erection with zinc chromate
+primer and then painted. Where the finish of the conduit is damaged in erection, it shall be immediately made good
+with an approved metallic paint. All vice marks shall be removed and the conduit well protected, where the
+galvanising has cracked or flaked.
+
+(e) Where conduits terminate at a drilled hole entry, connection shall be made by means of a coupler & brass male
+hexagon bush. A serrated or compression washer shall be fitted between the bush and box to ensure good continuity.
+
+19. Completion Prior to Wiring:
+
+(a) All conduit installations must be completed and erected in their entirely before they are wired and must be
+fully rewireable from outlets to distribution boards or trunking systems etc., to which they connect.
+
+(b) No wiring of any part of the installation shall commence until instructions are received to do so by the Engineer
+at such times as he is satisfied that the wiring will not be damaged due to building operations.
+
+20. Method of Installing Concealed Conduits:
+
+(a) For concealed work, the whole of the conduit shall be installed in such a manner that rewiring can be carried
+out from the fitting boxes and switch boxes only.
+
+(b) Draw-in boxes will only be permitted in special instances approved by and at the discretion of the Engineer.
+(c) All general conduit installation requirements, set out above, shall apply to concealed work.
+
+21. Fixing Conduits and Accessories:
+
+(a) Where concealed conduits are to be covered in walls, floors etc., they shall be fixed by approved methods
+fixing pipe hooks spaced not more than 0.914 meter (8ft.) apart and shall be firm against the structure along their
+length without springing
+(b) Switch boxes and socket boxes, etc., shall be securely fixed by means of counter sunk steel screws and rawl
+plugs. They shall be firmly grouted in position prior to plastering or screeding.
+
+(c) Any light point or socket outlet boxes associated with conduits buried in concrete shall not normally be fixed, but
+shall be held rigidly in position in an approved manner by the conduits and grouted in.
+
+(d) The Electrical Contractor shall provide attendance during the pouring of concrete to ensure that the conduits
+and accessories are not displaced.
+
+(e) Where conduits are concealed in wall chases, they shall be recessed in such a manner that they will be finally
+covered by the full thickness of plaster and/or rendering to a minimum depth of 12.5mm. (1/2”)
+
+22. Conduits in False Ceiling:
+
+                                                          34
+
+In false ceiling, the conduits shall be fixed by conduit saddles to the soffit of the structural ceiling slab, or shall be
+supported by means of mild steel straps securely fixed to both conduit and structural ceiling, or by other approved
+means to the approval of the Engineer. The conduits shall be supported by means of separate fixing securely fixed to
+the box and the structural ceiling, or by other approved means, so that the box is held rigid.
+
+23. Inspection Boxes etc.:
+
+(a) Small circular B.S. boxes shall be used for inspection and point boxes on conduits, upto and including 25mm.
+diameter. Where inspection boxes are necessary for conduits larger than 5mm.diameter, the through pattern type
+shall be used, unless otherwise directed by the Engineer.
+
+(b) Wherever several conduits are run together, adequately sized adaptable boxes, common to all runs shall be used,
+meeting with the approval of the Engineer, to avoid inserting inspection boxes in the individual runs. Where it is
+necessary to segregate wiring, metal fillets shall be securely fixed within the box.
+
+24. Fixing of Boxes:
+
+(a) All boxes except, those for external works, shall be securely fixed by means of counter sunk screws, minimum
+size 11/2” x No.8 using approved type rawl plugs.
+
+(b) At least one screw shall be used for fixing standard circular conduit boxes and two screws for large conduit
+boxes and adaptable boxes upto 150mm. x 100mm. size. A minimum of four fixing screws shall be used for larger
+boxes.
+
+(c) In all cases, the fixing holes shall be suitable for counter sunk screws, so that the screw heads do not project into
+the boxes and all screw driver burrs shall be removed before cables are drawn in.
+
+(d) For external work and other particularly damp situations, galvanised cast iron, weather proof boxes with external
+fixing plugs shall be used.
+
+(e) In addition to the external fixings, the boxes shall be supported by saddles spaced not more than 150mm. on each
+side of the box. Fixing holes shall not be drilled in the box.
+
+25. Conduit Boxes:
+
+Where the change from solid conduit to flexible conduit occurs, a standard conduit box shall be inserted between the
+2 types of conduit. The flexible conduit adapter shall be screwed into the spouted entry of conduit box and the use of
+dome covers will not be permitted.
+
+26. Switches:
+
+(a) S.P. Tumbler/Piano/Modular switches will be of flush type, mounted on metal switch plate/bridge inside the
+above box. Groups of switches shall be mounted in the same box with multiple type switch plate.
+
+27. Wires & Cables:
+
+All wires shall be PVC insulated copper conductor unless otherwise specified.
+
+28. Fittings:
+
+Unless otherwise specified, light fittings shall be generally fixed, as directed by the Site Engineer:
+
+(a) Wall fittings such as brackets batten holders etc. shall be at 6’-6” height unless otherwise specified or directed.
+
+                                                           35
+
+(b) All ceiling fittings shall be flush with ceiling and installed with/without teakwood round base of approved
+design, as directed.
+
+(c) Bulk head fittings shall be flush with ceiling /wall, as required. Bulk head fittings on walls shall be at a height
+as specified.
+
+(d) Pendants fittings shall be suspended to a height of 8’-0” from floor level.
+
+(e) All fitting shall have their leading in VIR/PVC wires of size not less than 1.5sq.mm cable or otherwise as
+directed by the Engineer-in-charge. Pendant shall be suspended with T.R.S. Twin core flexible cable (black) or size
+not less than 14/.0076”.
+
+(f) Screwed holders shall be used in brackets & pendants. Batten light fittings shall have brass holders on T.W.
+round block in case of surface wiring and bakelite batten holder in case of recessed system of wiring.
+
+(g) Ceiling Rose: For recessed system of wiring, this shall be of porcelain make and flush type. For surface type of
+wiring, this shall be of bakelite.
+
+29. Testing of Installation:
+
+(a) Insulation Resistance:
+
+(i) The insulation resistance shall be measured by applying between earth & the whole system of conductors or any
+section thereof with all fuses in place and all switches closed, and except in earthed concentric wiring and all lamps
+in position or both poles of the installation otherwise electrically connected together, a direct current pressure of not
+less than twice the working pressure provided that it need not exceed 500volts for medium voltage circuits. Where
+the supply is derived from the 3 wire (A.C. or D.C.) or a poly phase system, the neutral pole of which is connected
+to earth either direct or through added resistance, the working pressure shall be deemed to be that which is
+maintained between the outer or phase conductor and the neutral.
+
+ (ii) The insulation resistance measured as above shall be not less than 50 divided by the number of points on the
+circuit provided that the whole installation shall not be required to have an insulation resistance greater than one
+mega-ohm.
+
+(iii) Control rheostats, heating and power appliances & electric signs may, if required, be disconnected from the
+circuit during the test, but in that event the insulation resistance between the case or frame work, and all live parts of
+each rheostat, appliance and sign, shall be not less than that specified in the relevant Indian Standard Specification
+or where there is no such specification shall be not less than half a mega-ohm.
+
+(iv) The insulation resistance shall also measured between all conductors connected to one pole or phase conductor
+of the supply and all the conductors connected to the middle wire or the neutral or to the other pole or phase
+conductors of the supply and its value shall be not less than the specified in sub-clause (ii).
+
+(v) On completion of an electric installation (or an extension to an installation ) a certificate shall be furnished by
+the contractor countersigned by the certified supervisor under whose direct supervision, the installation was carried
+out. This certificate shall be in the prescribed from as required by the local Electric Supply Authorities.
+
+(b) Testing of Earth Continuity Path: The earth continuity conductor including metal conduits and metallic
+envelopes of cables in all cases shall be tested for electric continuity and the electrical resistance of the same along
+with the earthing lead but excluding any added resistance or earth leakage circuit breaker measured from the
+connection with the earth electrode to any point in the earth continuity conductor in the completed installation, shall
+not exceed one ohm.
+
+(c) Testing of Polarity on non-linked single pole switches:
+
+                                                           36
+
+(i) In a 2 wire installation a test shall be made to verily that all non-linked single pole switches have been fitted in
+the same conductor throughout & such conductor shall be labelled or marked for connection to an outer or phase
+conductor or to the non-earthed conductor of the supply.
+
+(ii) In a three wire or a four wire installation, a test shall be made to verify that every non-linked single pole switch
+is fitted in a conductor which is labelled and marked for connection to one of the outer or phase conductor of the
+supply.
+
+30. The Contractor shall be responsible for providing the necessary instruments and subsidiary earths for carrying
+out the tests. The earth continuity tests shall not comply with the I.S. Specifications as may be applicable. Should the
+above tests not comply with the limits laid down, the Tenderer shall rectify the faults until the required results are
+obtained.
+
+31. Telephone System:
+
+Wiring for telephone shall be of copper with PVC cable of size as specified. Layout shall be as per drawings..
+
+32. Miniature Circuit Breakers:
+
+The breakers shall have quick break trip free mechanism with thermal overload and magnetic short circuiting
+tripping characteristic. The mechanism shall be such that the circuit can not be held closed against fault. The thermal
+element shall revent reclosing of a circuit when a fault or overload persist. The contacts shall be of Silver Tungsten
+or other suitable material to give long contact life. Multiple units shall have an inter-tripping mechanism ensuring
+complete isolation in the event of an overload or fault on any one phase. The connectors shall be suitably shrouded.
+It shall be of 9 KA capacity. Use motor duty MCB for air-conditioning outlets and other motor duty outlets (C
+series)
+
+                                                           37
+
+                        SPECIFIC CONDITIONS OF CONTRACT (Electrical Work)
+GENERAL
+
+1.01   The contractor shall have to submit test report forms for receiving electrical connection from DVB
+       promptly, if so required by the Employer.
+1.02   The work as indicated in the scope of work attached herewith including any
+       modification/addition/alteration ordered subsequently, shall be carried out as per the standard/specifications
+       indicated below:-
+       i)         Relevant ISS as modified upto date. Where IS codes do not exist, the British Standards shall be
+                  followed.
+       ii)        Indian Electricity Rules 1956 as amended up to date.
+       iii)       CPWD Specifications for Electrical Works (Part – I) Internal, (Part –II) External 1995 and (Part –
+                  IV) 1982, with correction slips up to the date of Tendering.
+       iv)        LIST OF INDIAN STANDARDS
+
+                     L.T. Switchgear Boards / Panels and other Components
+
+  a.   Factory built Assemblies of switchgear up to 100 V          :     I.S. : 8623 – 1980
+
+  b.   Heavy duty air break switches and composite units
+       of switches and fuses                                       :     I.S. : 4064 – 1967
+
+  c.   Push buttons                                                :     I.S. : 6875 (part 2) 1973
+
+  d.   Contractors                                                 :     I.S. : 2999-1975
+
+  e.   Air break isolators for voltage not exceeding 1000 V        :     I.S. : 2607 – 1967
+
+  f.   High rupturing fuses                                        :     I.S. : 9224
+
+  g.   Direct acting electrical indicating instruments             :     I.S. 1248 – 1968
+
+  h.   Current    transformers,        general   requirement,
+       measuring and protective                                    :     I.S. 2705 (Part I to IV)
+
+  i.   Power socket outlets                                        :     I.S. : 4615
+
+       L.T. Cables
+
+  a.   PVC insulated, heavy duty cables                            :     I.S. 1554 – 1976 (Part – II)
+
+  b.   Installation & maintenance of cables                        :     I.S. 1255 – 1967
+
+       Earthing
+
+  a.   Code of practice for earthing                               :     I.S. : 3043
+
+       Protective Relays
+
+  a.   Thermal relays                                              :     I. S. : 3842 (Part IV)
+
+                                                         38
+
+   b.    Power relays                                                :     I. S. : 3842 (Part V)
+
+               SAFET CODE OF PRACTICE (INSTALLATION)
+
+   a.    Guide for safety procedures and practice in electrical
+         works                                                       :     I.S. : 5216 – 1969
+
+   b.    Guide on effects of current passing through human
+         body                                                        :     I.S. : 8337 – 1977
+
+   c.    Warning symbols for Dangerous voltage                       :     I.S. : 2147 – 1962
+
+   d.    Degree of protection provide by enclosures for low
+         voltage switchgear and controller                           :     I.S. : 2551 – 1963
+
+   e.    Danger notice plates                                        :     I.S. : 8923 - 1987
+
+1.03     A table indicating makes acceptable in respect of some important materials is attached. The contractor can
+         use only the makes specified in the table against a particular item subject to conformity with specifications.
+         For material not covered in above-mentioned table any ISI marked product may be used and if same is not
+         available, then it shall conform to relevant IS/BS and will be used with prior approval of Employer.
+1.04     All the materials to be used has to be inspected and approved by the Employer before installation at site.
+1.05     The following works shall be deemed to be included within the scope of the work to be executed by the
+         contractor:-
+         i)       All minor building work such as cutting holes and chases in walls/ceiling and making good the
+                  same with cement mortar 1:4 (1 cement: 4 coarse sand)
+         ii)      Provision of supports and clamps for fixing arrangement including nuts, bolts, cable glands, lugs,
+                  terminal blocks etc as a part of the particular item unless given separately in the schedule of
+                  quantities.
+1.06     QUALITY OF MATERIAL AND WORKMANSHIP
+All the parts of the equipment shall be of such a design, size and material so as to function satisfactorily under all
+rated conditions of operation. All components of the equipment shall have adequate factor of safety. The work of
+fabrication and assembly shall conform to sound engineering practice and on the basis of “Fail Safe Design”. The
+mechanical parts subject to wear and tear shall be easily replaceable type.
+         The construction of the equipment shall be of such design so as to facilitate easy operation; inspection,
+         maintenance and repairs. All connections and contacts shall be designed to minimise risk of accidental
+         short circuit by animals, birds, vermin etc. all identical items and their components/parts should be
+         completely interchangeable including spare parts.
+
+1.07     INSPECTION BEFORE DISPATCH
+         All routine tests prescribed in relevant standards (IS/BS) shall be conducted before dispatch of equipment.
+         No equipment shall be dispatched from the manufacturer’s premises without such test being conducted and
+         test result recorded. These test certificates shall be given along with the supply of equipment.
+         The authorised representative of the Employer shall, inspect and witness the pre-delivery tests at
+         manufacturer’s work. For this purpose, the contractor shall give 15 days advance information to the
+         Employer for inspection. The Employer reserves the right to have inspection done through a third party.
+
+1.08     TESTING AND INSTALLATION
+
+         a)       The entire system shall be tested to the satisfaction of the Employer or its authorised
+
+                                                          39
+
+                representative.
+
+       b)       Tests shall be performed in the presence of the Employer. The contractor shall provide labour,
+                equipment and materials required for performance of the tests.
+
+1.09   The contractor shall have to furnish two sets of manufacture’s operation and maintenance manuals
+       including maintenance schedule of all major equipments including relevant data sheets, catalogues the
+       spare parts manual and wiring diagrams etc. as applicable.
+
+1.10   The contractor shall furnish four sets of completion plan while handing over the installation.
+
+1.11   The contractor shall arrange fitness/clearance certificate from the office of Electrical Inspector, Delhi
+       Administration for the electrical installation. However the fee for such certificates to be paid to Delhi
+       Admn. Shall be born by the Employer.
+
+2.     COMMERCIAL CONDITIONS
+2.1          TERMS OF PAYMENT (for point wiring)
+       a. 25% (Twenty five- percent) On laying of conduit.
+       b. 25% (Twenty five- percent) On drawing of wires.
+       c. 25% (Twenty five- percent) On fixing of switches etc.
+       d. 15% (Fifteen- percent) On testing and commissioning.
+
+2.2             APPROVALS
+       The successful contractor shall be responsible to get approval of the scheme prior to start of job from DVB
+       as well as to get the work inspected and approved by Electrical Inspector of the complete scheme including
+       incurring expenses for the approvals.
+
+                                                        40
+
+                                                        NOTES
+
+GENERAL
+
+1.       The rates quoted for all items in this schedule shall be applicable to the work pertaining to that item in all
+         floors and at any heights including double heights whether specifically mentioned or not for any building in
+         the complex. The contractor must see and sign the tentative drawings before filling the rates.
+
+2.       The rates quoted shall include for extending minor assistance to other contractors / agencies engaged by the
+         Employer in connection with other trades of the work or may be of similar nature in the project and for
+         proper co-ordination of various items to accommodate the works of other such agencies and making good
+         the holes in R.C.C works, brick work and other works made by other agencies before filling up water
+         proofing/other items of work. The successful tender shall extend such facilities like supply of water,
+         electricity, etc. for other agencies on chargeable basis.
+
+3.       It is sole discretion of Employer to delete any item of work during execution of work. The quantities
+         mentioned in the BOQ are tentative and may vary on either side up to any limit.
+
+WOOD WORK:
+
+(a) All fittings to be obtained from reputed manufactures samples of all hardware fittings shall be got approved by
+    the Architects before placing order.
+
+(b) All door and windows shall be as per detailed drawings prepared by the Architects and as directed.
+
+(c) The rate shall include providing & fixing rawl plugs for fixing of chaukhats wherever required & painting of all
+    joinery woodwork with three or more coats of approved brand and first quality synthetic enamel paint over a
+    coat of approved wood primer. If required, additional coat of paint shall be given to obtain uniform and good
+    finish at no extra cost. If directed, putty shall be applied all over the surface to ensure smooth and neat finish at
+    no extra cost.
+
+                                                           41
+
+                LIST OF APPROVED MANUFACTURERS FOR DIFFERENT MATERIALS
+                     TO BE USED IN THIS PROJECT FOR ELECTRICAL WORKS
+
+                                           (All materials shall be ISI mark)
+
+Sl.No.                  Details of Materials                                      Manufacturers Name
+
+1.       M.S. Conduits and accessories                         BEC / AKG / NIC
+2.       P.V.C. conduits and accessories                       BEC(Grey) / AKG / KALINGA
+3.       P.V.C. insulated copper conductor wires 1100          Finolex / Skyline / Proflex / Polycab
+         volts grade (All wires shall be multi-stranded)
+4.       M V Switchgear                                        L & T / GE Power Control / Schnieder
+5.       Miniature circuit breakers                            Legrand / Clipsal / Schnieder
+6.       Switches, plugs, telephone outlets & wiring M.K. (Modular Clip ON Type) / Legrand / CLIPSAL
+         accessories
+7.       G.I. Pipe                                   Jindal (Hisar)
+8.       Telephone wires                             Delton / Finolex
+8.       Cat6e cable                                 Skytone / Legrand / Finolex
+9.       PVC insulated Aluminium conductor armoured Cable Corporation of India/Fort Gloster/INCAB
+         cables of 1100 V/ 11000 V grade
+10.      Cable Glands                                Chromium plated Brass heavy duty glands,
+                                                     weatherproof with rubber washers and gaskets of
+                                                     Comet make
+11.      Cable Lugs                                  Dowells crimping type
+12.      CFL light fixtures                                    Philips / Pierlite / Bajaj
+13.      Fluorescent light fixtures                            Philips / Pierlite / Bajaj
+14.      Indicating Lamps                                      Vaishno, Kaycee, L & T
+15.      Terminal Blocks                                       Elmex
+16.      Compact Fluorescent Lamps                             Osram / Philips / Crompton / Bajaj
+17.      Energy meter                                          Jaipur / Havells
+18.      Scraped earth metal clad socket and top               Crompton / BCH / MDS
+19.      Earth Leakage Circuit Breaker                         L & T-Hager / MDS / Clipsal
+20.      Telephone Tag Block                                   Krone
+21.      Fire Detectors                                        System sensor/Apollo
+22.      Co-axial cables                                       Delton / Finolex
+23.      Panels                                                Paragon / Tricolite / Anand Power
+
+Note:
+1. The Contractor shall produce samples before procurement of the material for approval of the Employer for all
+materials required for work. The material of the makes out of the above as approved by the Employer shall be used
+on the work. The decision of the Employer from the above makes shall be final.
+
+2. In respect of the material for which approved makes are not specified as above, the same shall be decided by the
+Employer and shall be as per the sample got approved from Employer before the procurement.
+
+3. The Contractor shall submit samples of all materials one months from the date of start of work for approval from
+the Employer.
+
+                                                          42
+
+   LIST OF APPROVED MANUFACTURERS FOR DIFFERENT MATERIALS TO BE USED IN THIS
+                     PROJECT FOR CIVIL / INTERIOR / PLUMBING WORKS
+
+            Details of Materials                     Manufacturers Name
+
+Distemper/Paints
+Plastic Emulsion                         Berger/Asian /ICI
+Synthetic Enamel                              --do--
+Oil Bound Distemper                          ---do--
+
+Textured paint                           Heritage (Bakelite Hylam Ltd) / Spectrum
+
+Wood Work
+Ply board/ Plywood                       Green / Duro/Mayur
+Laminate                                 Greenlam / Duro Mica
+Veneer Ply                               Duro / Mayur / Green
+Flush Door                               Duro Doors
+Locks                                    Godrej
+Anodised Aluminium fittings for door &   Argent / Classic Raja (heavy duty)
+windows
+Door closer                              Hardwyn / Door King / Godrej
+Floor springs                            Sandhu / Prabhat / Door King
+
+Gypsum Board                             India Gypsum
+
+Aluminium glazing / Structural glazing   Alkarma / Ashu Décore India (P) Ltd. / AGV
+                                         Aluminium (P) Ltd.
+
+Vertical / Venetian Blinds               Mac Décor / Vista Levealor
+
+Glass                                    Modi Float Glass / St. Gobain Float glass
+
+Looking glass / mirror                   Modi float / Atul
+
+Polysulphide Sealant                     Ordinary PIDISEAL by M/s PIDILITE
+                                         INDUSTRIES LTD. Bombay or TUFFESEAL
+                                         by M/s Hindustan Brothers 225 Rue Francuis
+                                         Martin, Pondicherry –605001.
+
+Waterproofing Compound                   CICO No.1 SUPAPLAST
+
+M.S. Pipes Heavy class                   Jindal / Surya Prakash
+
+G.I. Pipe Fittings                       Unik / Zoloto / "R" Brand
+
+Polymeric Tape 4 mm thk                  Makpolykote / Pypkote
+
+Butterfly Valve                          C&R / Advance
+
+Dual Plate check valve                   C&R / Advance
+
+                                                43
+
+Ball Valve                                      Arco(Italy) / Bugatti
+
+Enamel Painting of Pipes                        J & N / Asian / Nerolac / Berger
+
+Welding Rods                                    Victor / Maruti
+
+Manual Call Box                                 Agni (Suraksha) / Agni
+
+Hooter with Line Matching Transformer           Agni (Suraksha) / Agni
+
+Fire Alarm Panel & P. A. Panel                  Agni (Suraksha) / Agni
+
+Amplifier                                       Ahuja / Mega / Philips
+
+Note:
+
+1. The Contractor shall produce samples before procurement of the material for approval of the Employer for all
+materials required for work. The material of the makes out of the above as approved by the Employer shall be used
+on the work. The decision of the Employer from the above makes shall be final.
+
+2. In respect of the material for which approved makes are not specified as above, the same shall be decided by the
+Employer and shall be as per the sample got approved from Employer before the procurement.
+
+3. The Contractor shall submit samples of all materials one month from the date of start of work for approval from
+the Employer.
+
+                                                        44
+
+                            SECTION - A (CIVIL / INTERIORS / LOOSE FURNITURE)
+
+S.NO.   DECSRIPTION                                                                 QTY.    UNIT     RATE       AMOUNT
+
+        Note:                                                                                                               :
+        1. All the exposed wooden / ply surface shall be polished with Melamine MAT finish with P.U. coating and
+        nothing extra will be paid for the same. The sample of melamine MAT polish with P.U. Coating should be got
+        approved                 by                  the                  E.I.C.                /                Architects.
+        2. Only sycamore wood & European Sycamore ply veneer etc. shall be used. All the exposed surfaces shall be
+        either with European Sycamore Ply veneer or Sycamore wood unless specified otherwise.
+        3.           Only              Seasoned             wood              is           to            be            used.
+        4. All the samples of brass fittings, Hinges, sliding fittings & other hardware items should be approved by the
+        E.I.C.                   /                     Architects                    before                     installation.
+        5.       The      rates        quoted       should         be      for      all       heights       and       levels.
+        6.     All    the    wooden        members       should      be     treated     with     anti-termite     treatment.
+        7. Provision for carrying electrical conduits & fixing of M.S. boxes to be made in the panelling / partitions /
+        table & running counters as per the detailed drawings and instruction of E.I.C. / Architects.
+        8. The fire suppression works & Air-Conditioning works should be got done through the agencies already
+        working in STC.
+
+  1
+        Dismantling of existing carpentary works, partitions, false ceiling, wall
+        panelling, electrical wires, conduits & fixtures and fittings, etc. all
+        complete as per site requirements and stacking the usable materials
+        within building premises complete at site as directed by the Engineer-
+        In-Charge.                                                                   1       Job
+
+  2
+        Removing and dumping of malba from the site to dumping ground/
+        outside the site premises as per the instructions of the Engineer - In -
+        Charge .                                                                     1       Job
+
+                                                              45
+
+3
+
+    OPTA           A        False         Ceiling         (white         tiles)
+
+    Providing and fixing OPTA A false ceiling. Ceiling Tiles shall be
+    Ecophon Advantage square edge glass-wool based acoustic ceiling in
+    size 600 x 600 x 12mm having noise reduction co-efficient (NRC) of
+    0.85- 0.85(Average) Measurement of sound absorption coefficient in a
+    reverberation room according to SS-EN 025259, light reflectance 83%
+    and humidity resistance of 95% at 30*C. The weight of the system
+    with the tile should be approx. 2.2 kg/m2 and the tiles should have
+    class A absorption according to EN ISO 11654 (SS 025260). Fire
+    classifications for the tiles should be according to latest European
+    norms of Euroclass A2-s1, d0. Advantage A tiles to be laid on 24 mm
+    Grid system comprising of main runner of size 3600 mm, cross tee of
+    1200 mm and 600 mm of and wall angle of 3000 mm.
+
+    The rate quoted should include for work done at all heights including
+    scaffolding, labour, cartage & transportation etc., all accessories
+    required for proper fixing of false ceiling as per sound Engineering
+    Practices, all taxes, levies etc. complete in all respects up to the entire
+    satisfaction of the E.I.C. / Architects. The work should be carried out
+    by the authorised installer of the Company. Nothing extra shall be
+    payable for making provisions for fixing of light fixtures and A.C.
+    grills & diffusers etc.                                                       175    Sqm.
+
+4
+    Providing well seasoned Sycamore wood work in frames of doors &
+    windows etc. fixed in position including painting the portion in contact
+    with masonary / R.C.C. / wooden partition with 2 or more coats of
+    Antitermite treatment and fixing the frames with suitable dash
+    fasteners or as per the directions of the E.I.C. / Architects and
+    melamine MAT polish with P.U. Coating to give an even shade
+    including a coat of wood filler as per directions of site incharge &
+    Architect.                                                                    0.65   Cum
+
+                                                            46
+
+5
+
+    Providing and fixing 75 mm thick full height partitions as per layout
+    given in detailed drawing No. A/STC/ANNEXE/PH-II/101 with
+    internal hard wood frame work 55mm x 55mm thick @ 600mm c/c
+    both sides (maximum spacing) with 230 mm x 12.5 mm Sycamore
+    wooden skirting / band on top & bottom on both sides. The partitions
+    should be fixed with R.C.C. floor & beams with dash fasteners of
+    appropriate size to attain maximum stiffness. The partition has 4 mm
+    thick European sycamore veneer over 6 mm thick commercial
+    plywood on both sides of the hard wood frame to make thickness of
+    partition as 75 mm thick. The rate quoted should include for providing
+    and fixing 25 mm thick glass wool of 32 kg/M3 density with 28%
+    perforation of total area placed in cloth bags to fill the gaps in the hard
+    wood frame. The work should be carried out as per detailed drawing
+    No. A/STC/ANNEXE/PH-II/101.
+
+    All the exposed surfaces should be Sycamore wood or 4 mm thick
+    European Sycamore veneer ply. All wooden members should be
+    treated with anti termite treatment. All the exposed wooden / ply
+    surface shall be polished with Melamine MAT finish with P.U.
+    coating. All other surfaces will be enamel painted complete as per
+    instructions at site. The rates are given for complete partition work and
+    nothing extra will be given. Minor modifications may be suggested by
+    the architects / E.I.C. as per site requirements and nothing extra will be
+    paid for the same.                                                            127   Sqm.
+
+6
+
+    Providing and fixing 75 mm thick low height partition (up to 1500 mm
+    height) as per layout given in detailed drawing No.
+    A/STC/ANNEXE/PH-II/101 with internal hard wood frame work
+    55mm x 55mm thick @ 600mm c/c both sides with 230 mm x 12.5
+    mm Sycamore wooden skirting / band on top & bottom on both sides.
+    The partitions should be fixed with R.C.C. floor & beams with dash
+    fasteners of appropriate size to attain maximum stiffness. The partition
+    has 4 mm thick European Sycamore veneer over 6 mm thick
+    commercial plywood on both sides to make thickness of partition as 75
+    mm thick. The rate quoted should include for providing and fixing 25
+    mm thick glass wool of 32 kg/M3 density with 28% perforation of total
+    area placed in cloth bags to fill the gaps in the hard wood frame. The
+    work should be carried out as per detailed drawing No.
+    A/STC/ANNEXE/PH-II/101.
+
+                                                            47
+
+    All the exposed surfaces should be Sycamore wood or 4 mm thick
+    European Sycamore veneer ply. All wooden members should be
+    treated with anti termite treatment. All the exposed wooden / ply
+    surface shall be polished with Melamine MAT finish with P.U.
+    coating. All other surfaces will be enamel painted complete as per
+    instructions at site. The rates are given for complete partition work and
+    nothing extra will be given. Minor modifications may be suggested by
+    the architects / E.I.C. as per site requirements and nothing extra will be
+    paid for the same.                                                           25   Sqm.
+
+7
+
+    Providing and fixing 50 mm thick low height partition (up to 1500 mm
+    height) as per layout given in detailed drawing No.
+    A/STC/ANNEXE/PH-II/101 with internal hard wood frame work
+    30mm x 30mm thick @ 600mm c/c both sides with 230 mm x 12.5
+    mm Sycamore wooden skirting / band on top & bottom on both sides.
+    The partitions should be fixed with R.C.C. floor & beams with dash
+    fasteners of appropriate size to attain maximum stiffness. The partition
+    has 4 mm thick European Sycamore veneer over 6 mm thick
+    commercial plywood on both sides to make thickness of partition as 55
+    mm thick. The work should be carried out as per detailed drawing No.
+    A/STC/ANNEXE/PH-II/101.
+
+    All the exposed surfaces should be Sycamore wood or 4 mm thick
+    European Sycamore veneer ply. All wooden members should be
+    treated with anti termite treatment. All the exposed wooden / ply
+    surface shall be polished with Melamine MAT finish with P.U.
+    coating. All other surfaces will be enamel painted complete as per
+    instructions at site. The rates are given for complete partition work and
+    nothing extra will be given. Minor modifications may be suggested by
+    the architects / E.I.C. as per site requirements and nothing extra will be
+    paid for the same.                                                           22   Sqm.
+
+                                                           48
+
+8a
+
+     Providing and fixing 50 mm thick doors made of internal hard wood
+     frame work of 75 mm x 30 mm thick, 5 Nos. of frames equally placed
+     on both sides. The outer moulding of Sycamore wood all around the
+     hard wood frame should be out of 50 mm x 40 mm thick for stiffness.
+     The rate quoted should include for providing and fixing 30 mm thick
+     glass wool of 32 kg/M3 density with 28% perforation of total area
+     placed in cloth bags to fill the gaps in the hard wood frame. The top
+     surface of hard wood framework shall be finished with 6 mm thick
+     commercial ply & 4 mm thick European Sycamore veneer ply on both
+     sides to make total thickness of the door as 50 mm. The door is
+     provided with S.S. plate of size 380 mm x 250 mm on both sides. The
+     rate quoted should include for providing and fixing 4 Nos. of 5" long
+     heavy duty brass hinges. The rate quoted should also include for
+     providing and fixing all necessary brass hardware except lock & door
+     closers (locks and door closers will be paid separately).
+
+     The locks and door closers can also be supplied by the S.T.C. & it will
+     be the responsibility of the Contractor to install the same and nothing
+     extra will be paid for the same. All the exposed surfaces should be
+     Sycamore wood or 4 mm thick European Sycamore veneer ply. All
+     wooden members should be treated with anti termite treatment. All the
+     exposed wooden / ply surface shall be polished with Melamine MAT
+     finish with P.U. coating. The rates are given for complete work and
+     nothing extra will be given. Minor modifications may be suggested by
+     the architects / E.I.C. as per site requirements and nothing extra will be
+     paid for the same.                                                           20   Sqm.
+
+8b   Same as above but for fixing the door with sliding arrangements
+     including all fittings etc. complete in all respects up the entire
+     satisfaction of the Engineer-in-Charge.                                      3    Sqm.
+
+9    Providing concealed door closers as per the sample approved by the
+     E.I.C.                                                                       8    Each
+
+10   Providing 6 lever brass locks & handles (duly polished & lacquered) of
+     Godrej make on flush door shutters.                                          8    Each
+
+11
+     Providing and painting with plastic paint on new or old work (on walls
+     and ceilings), 2 or more coats to give an even shade including primer
+     coat complete as per directions of the Engineer-In-Charge. The rate
+     quoted should include for scrapping the existing paint, if required.         0    Sqm.
+
+                                                            49
+
+12
+
+     Providing and fixing panelling on walls as per layout given in detailed
+     drawing No. A/STC/ANNEXE/PH-II/101 with internal hard wood
+     frame work 75 mm x 30mm @ 600mm c/c both sides with 230 mm x
+     12.5 mm Sycamore wooden skirting / band on top & bottom on both
+     sides. All the hard wood frame should be properly fixed to the wall
+     with dash fasteners in proper alighnment & levels up to the entire
+     satisfaction of the E.I.C. / architects. 6 mm thick commercial ply & 4
+     mm thick European sycamore veneer with 4 mm grooves as per design
+     shall be provided on top of the hard wood frame.
+
+     The work should be carried out as per detailed drawing No.
+     A/STC/ANNEXE/PH-II/101. All the exposed surfaces should be
+     Sycamore wood or 4 mm thick European Sycamore veneer ply. All
+     wooden members should be treated with anti termite treatment. All the
+     exposed wooden / ply surface shall be polished with Melamine MAT
+     finish with P.U. coating. The rates are given for complete panelling
+     work and nothing extra will be given. Minor modifications may be
+     suggested by the architects / E.I.C. as per site requirements and nothing
+     extra will be paid for the same.                                            80    Sqm.
+
+13
+
+     Providing and fixing panelling on existing openable windows with
+     hardwood frame & 4 mm thick Sycamore veneer on top. All the
+     exposed surfaces should be Sycamore wood or 4 mm thick European
+     Sycamore veneer ply. All wooden members should be treated with anti
+     termite treatment. All the exposed wooden / ply surface shall be
+     polished with Melamine MAT finish with P.U. coating. The rates are
+     given for complete panelling work and nothing extra will be given.
+     Minor modifications may be suggested by the architects / E.I.C. as per
+     site requirements and nothing extra will be paid for the same.              18    Sqm.
+
+14
+
+     Providing and fixing 2 mm thick homogeneous floor covering
+     MIPOLAM TROPLAN 100 of GERFLOR (FRANCE) make. Roll
+     width of 2.0 Meter x 20 Meter with directional design colour dyed as a
+     raw mixture to ensure even colour throughout the thickness. The
+     flooring should be treated with Polyurethane treatment (PUR) which
+     facilitates ease of maintenance & eliminates the use of acrylic
+     emulsion after installation. The flooring should be anti-static & anti
+     fungal. The flooring must incorporate antibacterial & fungicidal
+     treatment for hygiene. The rate quoted should include for a good grade
+     of acrylic based adhesive to be used for installation. The flooring
+     should comply to K-5 wear rating with an electrical resistance of 108
+     (EN108) category. The flooring should be suitable for heavy traffic
+     areas. All joints must be hot seam welded. The work should be carried
+     out by the procedure specified by the maufacturer and the work should
+     be got done through authorised dealers / applicators of the company or
+     by the company directly.                                                    175   Sqm.
+
+                                                           50
+
+15   Providing and fixing vertical blinds of MAC (Black out range) or
+     approved equivalent make, colour, size and shape in existing window
+     openings. The sample can also be seen in the training center at 4th
+     floor or board room at 10th floor.                                        64   Sqm.
+
+16
+
+     Providing & making 1600 mm long, 750 mm wide, 750 mm high
+     office / computer table with drawer units made of 19 mm thick
+     commercial Board top, side supports, apron and front fascia in varying
+     lengths and 750 mm height. Table Top will be supported on vertical
+     supports of 75 mm x75 mm Sycamore wooden legs with top supports
+     50 mm x 50 mm Sycamore wood and with 19 mm thick Commercial
+     board top with 4 mm thick European Sycamore on top of the board
+     with Sycamore wood moulding 53 x 23 mm all round. Table Top will
+     be provided with 75 mm deep key board tray on sliding channels.
+     Drawer Unit will have drawers with central locking arrangement,
+     running on sliding channels. Drawers will be made of 19 mm thick
+     commercial board sides, back & base and 19 mm thick commercial
+     board at front finished with 4 mm thick European Sycamore veneer.
+     Table top will be finished with 4 mm thick European sycamore veneer
+     and supports inside, front fascia with 4 mm thick European Sycamore
+     Ply veneer. All other surfaces will be enamel painted complete as per
+     instructions at site.
+
+      The brass hinges, fixtures, handles and locking arrangemens will be
+     fixed as per the instruction of the Architect. Units top, front, all
+     exposed /open shelves will be finished with 4 mm thick Euiropean
+     Sycamore veneer and sides will be finished with 4 mm thick European
+     Sycamore veneer. Sycamore wood half round moulding of 53 mm x 23
+     mm shall be fixed as per the drawing in front . All other surfaces will
+     be enamel painted of approved colour & shade complete as per detail
+     drawings / Architects instructions at site. The work should be carried
+     out as per detailed drawing No. A/STC/ANNEXE/PH-II/101. All the
+     exposed surfaces should be Sycamore wood or 4 mm thick European
+     Sycamore veneer ply. All wooden members should be treated with anti
+     termite treatment. All the exposed wooden / ply surface shall be
+     polished with Melamine MAT finish with P.U. coating. The rates are
+     given for complete work and nothing extra will be given. Minor
+     modifications may be suggested by the architects / E.I.C. as per site
+     requirements and nothing extra will be paid for the same.                 8    Each
+
+                                                          51
+
+17
+
+     Providing & making Side Units 900 mm x 444 mm deep made of 19
+     mm thick commercial Board top, sides, bottom, drawers & shutters of
+     size as shown in the drawings finished with 4 mm thick European
+     sycamore Ply veneer at top, front & sides. Side Unit will have 2 nos. of
+     drawers at top, running on sliding channels and openable shutters in
+     lower area with brass hardwares, locking arrangements etc. complete.
+     Drawers will be made of 19mm thick commercial board sides, front &
+     back with 19 mm thick board with 50 mm x 50 mm Sycamore wood
+     frame as shown. Also 19 mm thick commercial board will be fixed on
+     back side of unit. All internal surfaces will be finished with enamel
+     paint of approved colour & shade complete in all respect as per
+     detailed drawing No. A/STC/ANNEXE/PH-II/101 / Architects
+     instructions at site.                                                       8    Each
+
+18
+
+     Providing, fabricating & fixing running computer counters 750 mm
+     wide and 750 mm height and in varying lengths as per detail drawing
+     Nos. A/STC/ANNEXE/PH-II/101 made of 19 mm thick commercial
+     board top, side supports, apron and front fascia in varying lengths as
+     per plan. Table Top will be supported on vertical supports with 53
+     mm x 23mm Sycamore wood moulding as per detailed drawing.
+     Apron will be provided and one side European Sycamore ply veneer
+     will be fixed on front side. The counter is fixed to low height partition
+     with full height commercial board stiffeners, 2 Nos. in each unit of
+     length 3216 mm long or of any length. Table Top will be provided
+     with 80 mm deep key board tray on sliding channels. Drawer Units
+     will have 1 nos. of drawers with central locking arrangement, running
+     on sliding channels as per the drawing. Table top will be finished with
+     4 mm thick European Sycamore ply veneer and supports inside, front
+     fascia with 4 mm thick European Sycamore veneer. All other surfaces
+     will be enamel painted complete as per instructions at site.                26   Meter
+
+19
+
+     Providing making & fixing 400 mm deep Over Head Storage Units in
+     varying lengths (max. 2400 mm) and heights made of 19 mm thick
+     commercial board top, bottom, sides, shelves & shutters and 19 mm
+     thick back commercial board. Vertical division will be made of 19 mm
+     thick commercial board @ 320 mm c/c to make 6 equal divisions
+     with19 mm x 4mm thick lipping all around. On the outer surface,
+     Sycamore wood moulding will be provided as per design. Shutter will
+     be provided with brass hardwares and locking arrangement. Shelves
+     will be provided @ 471 mm c/c to make 2 equal divisions. Units front
+     & sides will be finished with 4 mm thick European Sycamore veneer.
+     All other surfaces will be enamel painted of approved colour & shade
+     complete as per detail drawings No. A/STC/ANNEXE/PH-II/101 and
+     as per E.I.C. / Architect's instructions at site.
+
+                                                           52
+
+     All the exposed surfaces should be Sycamore wood or 4 mm thick
+     European Sycamore veneer ply. All wooden members should be
+     treated with anti termite treatment. All the exposed wooden / ply
+     surface shall be polished with Melamine MAT finish with P.U.
+     coating. The rates are given for complete work and nothing extra will
+     be given. Minor modifications may be suggested by the architects /
+     E.I.C. as per site requirements and nothing extra will be paid for the
+     same.                                                                      18   Sqm.
+
+20
+
+     Providing and fixing soft display board with 12 mm thick soft board &
+     Sycamore wood moulding and fabric etc. complete in all respects up to
+     the entire satisfaction of the E.I.C. / architects. All the exposed
+     surfaces should be Sycamore wood. All wooden members should be
+     treated with anti termite treatment. All the exposed wooden / ply
+     surface shall be polished with Melamine MAT finish with P.U.
+     coating. The rates are given for complete work and nothing extra will
+     be given. Minor modifications may be suggested by the architects /
+     E.I.C. as per site requirements and nothing extra will be paid for the
+     same.                                                                      12   Sqm.
+
+21
+
+     Providing and fixing wooden pelmets made out of 19mm thick
+     commercial board as per the existing pattern finished wit 4mm thick
+     European sycamore veneer complete in all respects up to the entire
+     satisfaction of the E.I.C. / architects. All the exposed surfaces should
+     be Sycamore wood. All wooden members should be treated with anti
+     termite treatment. All the exposed wooden / ply surface shall be
+     polished with Melamine MAT finish with P.U. coating. The rates are
+     given for complete work and nothing extra will be given. Minor
+     modifications may be suggested by the architects / E.I.C. as per site
+     requirements and nothing extra will be paid for the same.                  20   Meter
+
+22   Providing and placing in position high back executive chairs of Godrej
+     make.                                                                      8    Each
+
+23   Providing and placing in position medium back visitors chairs of
+     Godrej make.                                                               16   Each
+
+24   Providing and placing in position medium back chairs of Godrej make
+     (for office use).                                                          10   Each
+
+     TOTAL OF S.H. C/O TO ABSTRACT
+
+                                                          53
+
+                                           SECTION - B ELECTRICAL WORKS
+
+Sl. No.                                 Description                                   Qty           Rate     Amount
+                                                                                            Unit    ( Rs.)   (Rs.)
+
+          POINT WIRING (all switches and accessories are Modular type of
+          MK make)
+
+  1       Wiring for the following light points with 1.5 sq.mm PVC insulated
+          copper        conductor wires in concealed         MS conduits in
+          F.ceiling/walls/ceiling  as directed including providing 6 amps flush
+          type switches, 5 sided GI Boxes for housing switches and earthing
+          complete as required.
+  a.      One point controlled by one 6 amps Switch.                                  48    Each
+  b       Two points controlled by one 6 amps Switch.                                 15    Each
+
+  2       Wiring for 6 amps light plug outlets with 1.5 sq.mm PVC insulated
+          copper conductor wires in MS Conduits in ceiling/walls/floor as
+          directed including providing 6 amps flush type 5 pin socket and 6 amps
+          switch with cover plate, 5 sided GI boxes for housing switches, sockets
+          and earthing complete as required
+                                                                                      55    Each
+
+  3       Wiring for 16 amps power outlet points with 4 sq.mm PVC insulated
+          copper conductor wires in concealed MS conduits in F.ceiling/walls/
+          Ceiling/ floor ducts as directed including providing 16 amps flush type
+          6 pin switches and socket with cover plate 5 sided GI outlet boxes for
+          switches and socket and earthing the third pin with 4 sq.mm PVC
+          insulated copper conductor wires complete as required (Only one
+          outlet shall be connected on each circuit)
+
+                                                                                      20    Each
+
+  4       Wiring for the following Call Bell points with 1.5 Sq.mm PVC
+          insulated copper      conductor wires in concealed MS conduits in
+          F.ceiling / walls / ceiling    as directed including providing 6 amps
+          flush type Bell Push, 5 sided GI Boxes for housing switches and
+          earthing complete as required.
+                                                                                       4    Each
+
+  5
+          Providing and fixing in position the following PVC conduits including
+          all accessories concealed in false ceiling/wall/floor/ceiling as required
+          including M.S. junction or pull boxes with 3mm thick perspex sheet
+          cover plate complete with 1.6 mm dia G.I. pull wires. (for Telephone
+          & Computer system)
+          25 mm dia conduit                                                           400   Meter
+
+  6       Providing and fixing in position suitable 1.6 mm thick G.I. outlet box
+          along with 1 No. RJ - 11 Telephone Jack and cover plate with all
+          fixing accessories as required.                                             23    Each
+
+                                                                54
+
+7    Providing and fixing in position suitable 1.6 mm thick G.I. outlet box
+     along with 1 No. RJ - 45 computer outlets and cover plate with all
+     fixing accessories as required.                                             23    Each
+
+8
+     Providing and fixing in position 2mm thick M.S. Telephone junction
+     box of size suitable for fixing of following Krone Tag Block with key
+     lock arrangement. Also provide clamps for fixing tag blocks.
+     30 pair Telephone Tag Block Box                                              1    Each
+
+9    Providing and fixing in existing Metal Box Krone Tag Block of
+     following pairs consisting of necessary Back Mount Frame,
+     disconnection modules and grommets complete as required.
+     30 pair Telephone Tag Block                                                  1    Each
+
+10   Supply, drawing and making connections with Telephone single cord
+     outlet and Telephone Junction Box with the following unarmoured
+     PVC insulated Telephone wires in existing conduits from the telephone
+     outlet points to the Telephone junction box.
+
+     (3 x 0.51 mm) unarmoured PVC insulated ATC cable                            800   Meter
+
+11   Supply, drawing and making connections with Telephone Main
+     Junction box and Telephone Junction Box with the following
+     armoured PVC insulated Telephone wires in False Ceiling / concrete
+     slab / wall from the junction box to the Main Telephone junction box
+     including supports from the roof complete with all accessories.
+
+a.   30 x (2 x 0.61 mm) armoured PVC insulated ATC cable                         30    Meter
+
+12   Supply, drawing and making connections with computer points RJ-45
+     using Cat-6e cable.                                                         750   Meter
+
+     DB, SUB-MAIN WIRING & EARTHING
+
+13   Providing and fixing in position the following MS conduits including
+     all accessories concealed in false ceiling/wall/floor/ceiling as directed
+     complete with GI pull wires. (for sub-main wiring)
+
+     32 mm dia MS conduit                                                        60    Meter
+
+14   Supply, drawing, making connections at both ends using copper lugs
+     and crimping the following sizes of PVC insulated stranded copper
+     conductor wires in existing conduits complete as required.
+
+     4 x 16 + 2 x 4 sq. mm copper wires                                          60    Meter
+
+                                                           55
+
+15   Supply and installation of sheet metal enclosed double door 12 way
+     TPN DB, consisting of 36 Nos. 6/20 AMP SP MCB's and controlled
+     by one number 30 MA sensitivty 63 AMPS four pole ELCB backed up
+     with 63 Amps. TPN MCB.                                                     1    Each
+
+      LIGHTING FIXTURES AND FANS (all lighting fixtures shall be
+     inclusive of lamps)
+
+16   Supply, Receiving, storing, handling, assembling, fixing in position,
+     testing and commissioning of CFL Light Fixturewith lamp in false
+     ceiling complete with all fixing accessories as required.
+
+a.   Philips Cat. No. FBH 145/118 HF                                           18    Each
+b.   Philips Cat. No. FBS 450/236 D6 PW HF                                     38    Each
+
+17   Supply, Receiving, storing, handling, assembling, installing in
+     position, effecting proper connections, testing and commissioning of
+     call bell buzzer / bell indicators including wooden base and fixing
+     clamps as required.
+                                                                                4    Each
+
+     FIRE DETECTION AND ALARM SYSTEM
+
+18
+     Providing and fixing in position the following MS conduits including
+     all accessories concealed in False ceiling/walls/partitions as required
+     including 5 sided 1.5mm thick M.S. junction boxes and 3mm thick
+     perspex sheet cover plate complete with G.I. pull wires.
+     1.6mm wall thickness 25mm dia                                             425   Meter
+
+19   Providing and fixing in position 1.6mm thick M.S. outlet boxes for
+     housing for remote indicators including providing remote indicator & 3
+     mm thick hylam sheet cover as required                                    22    Each
+
+20   Supply and drawing of the following PVC insulated copper conductor
+     wires in existing conduits .
+a.   1 x 1.5 sq. mm PVC insulated FRLS copper conductor wires                  500   Meter
+
+21   Supply, installation,connecting, testing and commissioning of Smoke
+     Detectors (Ionisation) type as required complete. (Appolo make series
+     60)                                                                       12    Each
+
+22
+     Supply, installation,connecting, testing and commissioning of Smoke
+     Detectors (Optical) type as required complete. (Appolo make series 60)    12    Each
+
+23
+     Supply, installation, connecting, testing and commissioning of Heat
+     Detectors as required complete. (Rate of rise cum fixed type)             24    Each
+
+                                                          56
+
+         (Appolo make series 60 )
+
+ 24      Supply, installation, connecting, testing and commissioning of
+         Electronic Hooters (30 M range) in suitable size of M.S. box.as
+         required complete.                                                         1    Each
+
+ 25      Supply, installation, connecting, testing and commissioning of Manual
+         Call Pushes with Hammer etc.in suitable size of M.S. box as required
+         complete.                                                                  2    Each
+
+ 26
+         Supply, installation, connecting, testing and commissioning of 305mm
+         heavy duty Exhaust fan including making holes and providing louvers
+         etc. complete as required. Crompton/bajaj/almonard make                    1    Each
+         TOTAL OF S.H. C/O TO ABSTRACT
+
+                      SECTION - C (FIRE SUPPRESSION & AIR-CONDITIOINING WORKS)
+
+S. No.                                 Description                                 Qty   Unit    Rate   Amount
+
+  1      Supply, erection and commissioning of MS heavy class pipe complete
+         with bends, tees, reducers, and flanges, etc as per IS 1239 Part-I and
+         Part-II welded construction with angle iron painted supports, hangers,
+         anchors etc including painting with one coat of red oxide and two coats
+         of P.O. Red enamel.
+  a      65mm diameter                                                             55    Meter
+  b      25mm diameter                                                             45    Meter
+
+  2      Dismantling of old pipes including removal from the site.
+  a      50mm diameter                                                             55    Meter
+  b      25mm diameter                                                             45    Meter
+
+  3      Providing, fixing, testing and commissioning of pendant type sprinkler
+         heads with quartzoid bulb and an operating temperature of 68 degree
+         celcius.                                                                  34    Each
+
+  4      S&E of sprinkler Rosset Plate for sprinklers below the false ceiling.
+                                                                                   17    Each
+
+  5      Making/modification of A/C duct as per False ceiling levels as per
+         existing patterns.                                                        18    Each
+
+  6      Providing and fixing supply and return grill for air-conditioning 12" x
+         16" size (as per approved design already installed in the office).
+                                                                                   32    Each
+         TOTAL OF S.H. C/O TO ABSTRACT
+
+                                                               57
+
+                                                 ABSTRACT
+
+1   Total of Interior works (Section - A)
+2   Total of Electrical Works (Section - B)
+3   Total of Fire Suppression & Air-Conditioning works (Section - C)
+
+    Total
+
+                                                       58

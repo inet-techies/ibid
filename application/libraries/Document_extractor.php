@@ -148,9 +148,9 @@ class Document_extractor
         $aiSummary     = $this->generateAiSummary($formattedText, $origName, $ext, $filePath);
 
         // ── Universal Tender Document Extraction Engine ──
-        $pageMap = $this->extractPageMap($filePath);
+        $pageMap = $this->extractPageMap($filePath, $rawResult['text']);
         require_once __DIR__ . '/tender_extractor/Universal_tender_extractor.php';
-        $universal = Universal_tender_extractor::extract($formattedText, $origName, $ext, $pageMap);
+        $universal = Universal_tender_extractor::extract($formattedText, $origName, $ext, $pageMap, $emails, $phones);
 
         // Universal engine is the authoritative source for all 12 milestones, tender reference, EMD, portal, and fees
         if (!empty($universal['ai_summary']) && is_array($universal['ai_summary'])) {
@@ -172,23 +172,20 @@ class Document_extractor
                 $aiSummary[$mK] = $universal['ai_summary'][$mK] ?? '';
             }
 
-            if (!empty($universal['fields']['tender_reference']['value'])) {
-                $aiSummary['ref_no']    = $universal['fields']['tender_reference']['value'];
-                $aiSummary['ref_code']  = $universal['fields']['tender_reference']['value'];
-                $aiSummary['tender_id'] = $universal['fields']['tender_reference']['value'];
-            }
-            if (!empty($universal['fields']['emd_value']['value'])) {
-                $aiSummary['emd_value'] = $universal['fields']['emd_value']['value'];
-                $aiSummary['emd_original'] = $universal['fields']['emd_value']['original_amount'] ?? '';
-                $aiSummary['emd_in_words'] = $universal['fields']['emd_value']['amount_in_words'] ?? '';
-                $aiSummary['emd_source'] = $universal['fields']['emd_value']['source'] ?? '';
-            }
-            if (!empty($universal['fields']['tender_fee']['value'])) {
-                $aiSummary['tender_fee'] = $universal['fields']['tender_fee']['value'];
-                $aiSummary['tender_fee_original'] = $universal['fields']['tender_fee']['original_amount'] ?? '';
-                $aiSummary['tender_fee_in_words'] = $universal['fields']['tender_fee']['amount_in_words'] ?? '';
-                $aiSummary['tender_fee_source'] = $universal['fields']['tender_fee']['source'] ?? '';
-            }
+            // Universal engine is strictly authoritative: never allow outdated or unvalidated legacy fallbacks
+            $aiSummary['ref_no']    = $universal['fields']['tender_reference']['value'] ?? '';
+            $aiSummary['ref_code']  = $universal['fields']['tender_reference']['value'] ?? '';
+            $aiSummary['tender_id'] = $universal['fields']['tender_reference']['value'] ?? '';
+
+            $aiSummary['emd_value']    = $universal['fields']['emd_value']['value'] ?? '';
+            $aiSummary['emd_original'] = $universal['fields']['emd_value']['original_amount'] ?? '';
+            $aiSummary['emd_in_words'] = $universal['fields']['emd_value']['amount_in_words'] ?? '';
+            $aiSummary['emd_source']   = $universal['fields']['emd_value']['source'] ?? '';
+
+            $aiSummary['tender_fee']          = $universal['fields']['tender_fee']['value'] ?? '';
+            $aiSummary['tender_fee_original'] = $universal['fields']['tender_fee']['original_amount'] ?? '';
+            $aiSummary['tender_fee_in_words'] = $universal['fields']['tender_fee']['amount_in_words'] ?? '';
+            $aiSummary['tender_fee_source']   = $universal['fields']['tender_fee']['source'] ?? '';
             if (!empty($universal['fields']['tender_portal']['value'])) {
                 $aiSummary['portal'] = $universal['fields']['tender_portal']['value'];
             }
@@ -196,6 +193,19 @@ class Document_extractor
                 $aiSummary['keywords'] = $universal['fields']['keywords_summary']['value'];
                 $aiSummary['keywords_summary'] = $universal['fields']['keywords_summary']['value'];
                 $aiSummary['keywords_list'] = $universal['fields']['keywords_summary']['list'] ?? [];
+            }
+            if (!empty($universal['fields']['customer_state']['value'])) {
+                $aiSummary['state'] = $universal['fields']['customer_state']['value'];
+                $aiSummary['customer_state'] = $universal['fields']['customer_state']['value'];
+            }
+            if (!empty($universal['fields']['customer_name']['value'])) {
+                $aiSummary['customer_name'] = $universal['fields']['customer_name']['value'];
+            }
+            if (!empty($universal['fields']['customer_address']['value'])) {
+                $aiSummary['customer_address'] = $universal['fields']['customer_address']['value'];
+            }
+            if (!empty($universal['fields']['customer_phone']['value'])) {
+                $aiSummary['customer_phone'] = $universal['fields']['customer_phone']['value'];
             }
         }
 
@@ -234,7 +244,7 @@ class Document_extractor
             $classificationStatus = 'irrelevant';
         }
 
-        return [
+        return $this->cleanUtf8Recursive([
             'status'                => $relevance['is_relevant'] ? 'success' : 'error',
             'success'               => $relevance['is_relevant'],
             'is_relevant'           => $relevance['is_relevant'],
@@ -268,7 +278,27 @@ class Document_extractor
             'diagnostics'           => $universal['diagnostics'],
             'corrigendum'           => isset($universal['corrigendum']) ? $universal['corrigendum'] : null,
             'message'               => $relevance['is_relevant'] ? '' : $relevance['reason']
-        ];
+        ]);
+    }
+
+    /**
+     * Recursively ensure all string values and keys in an array are valid UTF-8
+     *
+     * @param mixed $data
+     * @return mixed
+     */
+    public function cleanUtf8Recursive($data)
+    {
+        if (is_string($data)) {
+            return mb_convert_encoding($data, 'UTF-8', 'UTF-8');
+        }
+        if (is_array($data)) {
+            foreach ($data as $k => $v) {
+                $cleanKey = is_string($k) ? mb_convert_encoding($k, 'UTF-8', 'UTF-8') : $k;
+                $data[$cleanKey] = $this->cleanUtf8Recursive($v);
+            }
+        }
+        return $data;
     }
 
     /**
@@ -420,13 +450,32 @@ class Document_extractor
             }
 
         } elseif ($ext === 'docx') {
-            $extractedText = $this->extractDocx($filePath);
+            // Check if file is truly a ZIP archive (PK\x03\x04) or a binary DOC renamed as DOCX
+            $magic = @file_get_contents($filePath, false, null, 0, 4);
+            if ($magic === "\xD0\xCF\x11\xE0") {
+                $extractedText = $this->extractDoc($filePath);
+            } else {
+                $extractedText = $this->extractDocx($filePath);
+                if (empty(trim($extractedText))) {
+                    $extractedText = $this->extractDoc($filePath);
+                }
+            }
             if (!empty(trim($extractedText))) {
                 $methodUsed = 'Processed';
             }
 
         } elseif ($ext === 'doc') {
-            $extractedText = $this->extractDoc($filePath);
+            // Check if file is actually an OpenXML DOCX (PK\x03\x04) saved with .doc extension
+            $magic = @file_get_contents($filePath, false, null, 0, 4);
+            if ($magic === "PK\x03\x04") {
+                $extractedText = $this->extractDocx($filePath);
+            }
+            if (empty(trim($extractedText))) {
+                $extractedText = $this->extractDoc($filePath);
+            }
+            if (empty(trim($extractedText))) {
+                $extractedText = $this->extractDocx($filePath);
+            }
             if (!empty(trim($extractedText))) {
                 $methodUsed = 'Processed';
             }
@@ -2060,6 +2109,9 @@ class Document_extractor
         $xml = preg_replace('/<\/w:tc>/i', " | ", $xml);
         $xml = preg_replace('/<\/w:tr>/i', "\n", $xml);
         $xml = preg_replace('/<\/w:p>/i', "\n", $xml);
+        // Preserve Word page breaks as form feed characters (\x0C)
+        $xml = preg_replace('/<w:br[^>]*w:type=["\']page["\'][^>]*\/?>/i', "\x0c", $xml);
+        $xml = preg_replace('/<w:lastRenderedPageBreak\s*\/?>/i', "\x0c", $xml);
         $xml = preg_replace('/<w:br[^>]*\/?>/i', "\n", $xml);
         $xml = preg_replace('/<w:softHyphen\s*\/>/i', '', $xml);
         $xml = preg_replace('/<w:noBreakHyphen\s*\/>/i', '-', $xml);
@@ -3958,7 +4010,7 @@ class Document_extractor
      * @param string $filePath Absolute path to document
      * @return array [ 1 => string, 2 => string, ... ]
      */
-    public function extractPageMap($filePath)
+    public function extractPageMap($filePath, $rawText = null)
     {
         if (empty($filePath) || !file_exists($filePath)) {
             return [];
@@ -3977,7 +4029,8 @@ class Document_extractor
                 '/usr/local/bin/pdftotext'
             ];
 
-            $whichPdf = @trim(@shell_exec('which pdftotext 2>/dev/null'));
+            $isWin = (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN');
+            $whichPdf = !$isWin ? @trim(@shell_exec('which pdftotext 2>/dev/null')) : '';
             if (!empty($whichPdf) && file_exists($whichPdf)) {
                 array_unshift($popplerPaths, $whichPdf);
             }
@@ -4021,8 +4074,7 @@ class Document_extractor
                 } catch (\Throwable $e) {}
             }
         } else {
-            $raw = $this->extractRawText($filePath, $ext);
-            $text = isset($raw['text']) ? $raw['text'] : '';
+            $text = ($rawText !== null) ? $rawText : (isset($this->extractRawText($filePath, $ext)['text']) ? $this->extractRawText($filePath, $ext)['text'] : '');
             if (!empty($text)) {
                 $pages = preg_split('/\x0c|\f/', $text);
                 foreach ($pages as $i => $p) {

@@ -259,10 +259,10 @@ class Keyword_extractor
         }
 
         // Split title into noun segments by delimiters
-        $segments = preg_split('/(?:\s+(?:for|of|in|at|by|under|with)\s+|\s*[,;\/]\s*)/iu', $title);
+        $segments = preg_split('/(?:\s+(?:for|of|in|at|by|under|with)\s+|\s*[,;\/]\s*|\s*[\–\—\-]+\s*)/iu', $title);
         foreach ($segments as $seg) {
-            $seg = trim($seg, " \t\n\r,.-;:()");
-            if (strlen($seg) < 4 || strlen($seg) > 55) continue;
+            $seg = trim($seg, " \t\n\r,.-;:()–—\"'");
+            if (mb_strlen($seg, 'UTF-8') < 4 || mb_strlen($seg, 'UTF-8') > 55) continue;
             if (self::isAllStopwords($seg)) continue;
 
             // Normalize segment into clean title case
@@ -536,7 +536,7 @@ class Keyword_extractor
      */
     protected static function toTitleCase($str)
     {
-        $str = preg_replace('/\s+/', ' ', trim($str, " \t\n\r,.-;:()\"'"));
+        $str = preg_replace('/\s+/u', ' ', trim($str, " \t\n\r,.-;:()–—\"'"));
         $lowerWords = ['and', 'or', 'of', 'for', 'in', 'at', 'on', 'by', 'to', 'the', 'a', 'an'];
         $acronyms = ['CCTV', 'NVR', 'DVR', 'VMS', 'ANPR', 'PTZ', 'IP', 'AI', 'AMC', 'O&M', 'GIS', 'GPS', 'RFID', 'OCR', 'HVAC', 'ICCC', 'BUHS'];
 
@@ -546,18 +546,28 @@ class Keyword_extractor
 
         for ($i = 0; $i < $count; $i++) {
             $w = trim($words[$i]);
-            $upper = strtoupper($w);
+            if ($w === '') continue;
+
+            // Strip leading/trailing punctuation from word
+            $cleanWord = trim($w, ",.-;:()–—\"'");
+            if ($cleanWord === '') continue;
+            $upper = strtoupper($cleanWord);
 
             if (in_array($upper, $acronyms)) {
                 $capitalized[] = $upper;
-            } elseif ($i > 0 && $i < $count - 1 && in_array(strtolower($w), $lowerWords)) {
-                $capitalized[] = strtolower($w);
+            } elseif ($i > 0 && $i < $count - 1 && in_array(strtolower($cleanWord), $lowerWords)) {
+                $capitalized[] = strtolower($cleanWord);
+            } elseif (preg_match('/^[a-zA-Z]/', $cleanWord)) {
+                // Safe title case only when word begins with ASCII letter
+                $capitalized[] = ucfirst(strtolower($cleanWord));
             } else {
-                $capitalized[] = ucfirst(strtolower($w));
+                // Multibyte or numeric or symbolic token: preserve without corrupting bytes
+                $capitalized[] = $cleanWord;
             }
         }
 
-        return implode(' ', $capitalized);
+        $result = implode(' ', $capitalized);
+        return mb_convert_encoding($result, 'UTF-8', 'UTF-8');
     }
 }
 

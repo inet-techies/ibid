@@ -306,11 +306,17 @@ class Candidate_ranker
             if ($field === 'emd_value' && $num > 0 && $num < 500) {
                 return ['valid' => false, 'cleaned_value' => null, 'bonus' => 0];
             }
+            if ($field === 'emd_value' && preg_match('/\b(?:stamp\s+paper|non-judicial)\b/i', ($cand['evidence'] ?? '') . ' ' . ($cand['raw_value'] ?? ''))) {
+                return ['valid' => false, 'cleaned_value' => null, 'bonus' => 0];
+            }
             $bonus = 5;
             if (isset($cand['method'])) {
                 if ($cand['method'] === 'section_heading') $bonus += 15;
                 elseif ($cand['method'] === 'table_column_grid') $bonus += 12;
-                elseif ($cand['method'] === 'table_row') $bonus += 10;
+                elseif ($cand['method'] === 'table_row' || $cand['method'] === 'table_row_wrapped') $bonus += 12;
+            }
+            if (!empty($cand['page']) && $cand['page'] <= 3) {
+                $bonus += 5; // Notice Inviting Tender summary page priority
             }
             if (!empty($cand['amount_in_words'])) {
                 $bonus += 10;
@@ -327,6 +333,10 @@ class Candidate_ranker
                 return ['valid' => false, 'cleaned_value' => null, 'bonus' => 0];
             }
             if (preg_match('/^\d{6,10}$/', $val)) {
+                return ['valid' => false, 'cleaned_value' => null, 'bonus' => 0];
+            }
+            // Disallow pure dates being treated as tender reference numbers
+            if (preg_match('/^\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{2,4}$/', $val)) {
                 return ['valid' => false, 'cleaned_value' => null, 'bonus' => 0];
             }
             if (!preg_match('/[0-9\/_\-]/', $val)) {

@@ -850,6 +850,18 @@ public function getBidStatusInfo($bcid)
     }
 
     /**
+     * Check if a table exists in a case-insensitive manner (robust for MySQL on Windows & Linux)
+     *
+     * @param string $table
+     * @return bool
+     */
+    public function tableExists($table)
+    {
+        $tables = array_map('strtolower', $this->db->list_tables());
+        return in_array(strtolower($table), $tables);
+    }
+
+    /**
      * Insert a record into BidNotificationLog
      *
      * @param array $logData
@@ -857,7 +869,7 @@ public function getBidStatusInfo($bcid)
      */
     public function insertNotificationLog($logData)
     {
-        if (!$this->db->table_exists('BidNotificationLog')) {
+        if (!$this->tableExists('BidNotificationLog')) {
             log_message('error', 'BidNotificationLog table is unavailable; notification log was not recorded.');
             return false;
         }

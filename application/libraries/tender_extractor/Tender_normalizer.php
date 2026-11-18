@@ -70,7 +70,8 @@ class Tender_normalizer
 
         // 5. Clean common OCR misreads in numeric blocks
         // e.g. "Rs. l5,000" -> "Rs. 15,000" or "O5-08-2026" -> "05-08-2026"
-        $normalized = preg_replace_callback('/(?:Rs\.?|INR|₹)\s*([0-9lIO,.\s]+)/iu', function($m) {
+        // Must enforce word boundaries / negative lookbehinds so words like "person" or "first" are never mutilated into "peRs. 0n"
+        $normalized = preg_replace_callback('/(?<![a-zA-Z])(?:Rs\.?|INR|₹)\s*([0-9lIO](?:[0-9lIO,.\s]*[0-9lIO])?)(?![a-zA-Z])/iu', function($m) {
             $cleaned = str_replace(['l', 'I'], '1', $m[1]);
             $cleaned = str_replace(['O', 'o'], '0', $cleaned);
             return 'Rs. ' . $cleaned;
