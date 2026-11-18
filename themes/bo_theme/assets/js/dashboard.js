@@ -29,7 +29,11 @@
         state:      'ALL',
         fy:         'ALL',
         startDate:  null,
-        endDate:    null
+        endDate:    null,
+        department: 'ALL',
+        status:     'ALL',
+        category:   'ALL',
+        bidType:    'ALL'
     };
 
     var activeFilteredBids = [];
@@ -157,6 +161,15 @@
             return true;
         }
         return false;
+    }
+
+    function isCancelled(b) {
+        var s = (b.StatusName || '').toLowerCase().trim();
+        var d = (b.DisplayName || '').toLowerCase().trim();
+        var sid = parseInt(b.BidStatus, 10);
+        if (sid === 11 || sid === 15) return true;
+        var all = s + ' ' + d;
+        return all.indexOf('cancel') >= 0 || all.indexOf('drop') >= 0 || all.indexOf('reject') >= 0;
     }
 
     function statusBadgeClass(sn) {
@@ -287,7 +300,29 @@
     }
 
     /* ==============================================================
-       4. APPLY FILTERS (State, Date Range, Department, FY)
+       3.1 BUILD CATEGORY DROPDOWN
+       ============================================================== */
+    function buildCategoryOptions() {
+        var sel = document.getElementById('filter-category');
+        if (!sel) return;
+        sel.innerHTML = '<option value="ALL">All Categories</option>';
+        var catSet = {};
+        allBids.forEach(function(b) {
+            var c = resolveCategory(b);
+            if (c) catSet[c] = true;
+        });
+        Object.keys(catSet).sort().forEach(function(cat) {
+            var o = document.createElement('option');
+            o.value = cat;
+            o.textContent = cat;
+            sel.appendChild(o);
+        });
+        sel.value = 'ALL';
+        FS.category = 'ALL';
+    }
+
+    /* ==============================================================
+       4. APPLY FILTERS (State, Date Range, Department, FY, Status, Category, Bid Type)
        ============================================================== */
     function applyFilters() {
         activeFilteredBids = allBids.filter(function(b) {
@@ -299,6 +334,30 @@
 
             /* FY Filter */
             if (FS.fy && FS.fy !== 'ALL' && getBidFY(b) !== FS.fy) return false;
+
+            /* Department Filter */
+            if (FS.department && FS.department !== 'ALL') {
+                var dept = (b.BidDepartment || '').trim().toLowerCase();
+                if (dept !== FS.department.toLowerCase()) return false;
+            }
+
+            /* Status Filter */
+            if (FS.status && FS.status !== 'ALL') {
+                var stName = (b.DisplayName || b.StatusName || '').trim().toLowerCase();
+                if (stName !== FS.status.toLowerCase()) return false;
+            }
+
+            /* Category Filter */
+            if (FS.category && FS.category !== 'ALL') {
+                var cat = resolveCategory(b).toLowerCase();
+                if (cat !== FS.category.toLowerCase()) return false;
+            }
+
+            /* Bid Type Filter */
+            if (FS.bidType && FS.bidType !== 'ALL') {
+                var bt = (b.BidType || '').trim().toLowerCase();
+                if (bt !== FS.bidType.toLowerCase()) return false;
+            }
 
             /* Date Range Filter */
             if (FS.startDate || FS.endDate) {
@@ -312,14 +371,16 @@
             return true;
         });
 
-        // Update active filter badge on filter button
-        var activeCount = 0;
-        if (FS.state && FS.state !== 'ALL') activeCount++;
-        if (FS.fy && FS.fy !== 'ALL') activeCount++;
-        if (FS.startDate || FS.endDate) activeCount++;
+        // Update active filter badge on Additional Filters button
+        var activeExtraCount = 0;
+        if (FS.department && FS.department !== 'ALL') activeExtraCount++;
+        if (FS.status && FS.status !== 'ALL') activeExtraCount++;
+        if (FS.category && FS.category !== 'ALL') activeExtraCount++;
+        if (FS.bidType && FS.bidType !== 'ALL') activeExtraCount++;
+
         var $badge = $('#dashboard-filter-count');
-        if (activeCount > 0) {
-            $badge.text(activeCount).removeClass('d-none');
+        if (activeExtraCount > 0) {
+            $badge.text(activeExtraCount).removeClass('d-none');
         } else {
             $badge.addClass('d-none');
         }
@@ -348,10 +409,13 @@
         var total = bids.length;
         var participated = 0, won = 0, totalValue = 0, participatedValue = 0, wonValue = 0;
         var statusMap = {}, catMap = {}, stateMap = {};
-        var mTotal = new Array(12).fill(0);
-        var mPart  = new Array(12).fill(0);
-        var mWon   = new Array(12).fill(0);
-        var mVal   = new Array(12).fill(0);
+        var mTotal     = new Array(12).fill(0);
+        var mPart      = new Array(12).fill(0);
+        var mWon       = new Array(12).fill(0);
+        var mVal       = new Array(12).fill(0);
+        var mPartVal   = new Array(12).fill(0);
+        var mWonVal    = new Array(12).fill(0);
+        var mCancelVal = new Array(12).fill(0);
 
         bids.forEach(function(b) {
             var sn  = (b.DisplayName || b.StatusName || 'Created').trim();
@@ -361,8 +425,9 @@
             var st  = (b.State    || 'Unknown').trim();
 
             totalValue += val;
-            var part = isParticipated(b);
-            var win  = isWon(b);
+            var part   = isParticipated(b);
+            var win    = isWon(b);
+            var cancel = isCancelled(b);
             if (part) { participated++; participatedValue += val; }
             if (win)  { won++; wonValue += val; }
 
@@ -388,9 +453,19 @@
                 var d = new Date(ds);
                 if (!isNaN(d)) {
                     var m = d.getMonth();
-                    mTotal[m]++; mVal[m] += val;
-                    if (part) mPart[m]++;
-                    if (win)  mWon[m]++;
+                    mTotal[m]++;
+                    mVal[m] += val;
+                    if (part) {
+                        mPart[m]++;
+                        mPartVal[m] += val;
+                    }
+                    if (win) {
+                        mWon[m]++;
+                        mWonVal[m] += val;
+                    }
+                    if (cancel) {
+                        mCancelVal[m] += val;
+                    }
                 }
             }
         });
@@ -403,7 +478,8 @@
             wonValue: wonValue,
             winRate: wr,
             statusMap: statusMap, catMap: catMap, stateMap: stateMap,
-            mTotal: mTotal, mPart: mPart, mWon: mWon, mVal: mVal
+            mTotal: mTotal, mPart: mPart, mWon: mWon, mVal: mVal,
+            mPartVal: mPartVal, mWonVal: mWonVal, mCancelVal: mCancelVal
         };
     }
 
@@ -553,12 +629,11 @@
         var html = '';
         stages.forEach(function(st) {
             html +=
-                '<div class="pf-stage" data-funnel-key="' + st.key + '" title="' + escH(st.name) + ': ' + st.count + ' (' + st.pct + ')">' +
+                '<div class="pf-stage" data-funnel-key="' + st.key + '" title="' + escH(st.name) + ': ' + st.count + '">' +
                     '<span class="pf-label">' + escH(st.name) + '</span>' +
                     '<div class="pf-bar-cell">' +
                         '<div class="pf-bar ' + st.cls + '">' + st.count + '</div>' +
                     '</div>' +
-                    '<span class="pf-pct">' + st.pct + '</span>' +
                 '</div>';
         });
         el.innerHTML = html;
@@ -595,12 +670,13 @@
     }
 
     /* ==============================================================
-       11. ROW 3 LEFT — BIDS BY CATEGORY (Dynamic with Side Category Names)
+       11. ROW 3 LEFT — BIDS BY CATEGORY (Pie Chart)
        ============================================================== */
     function updateCategoryChart(c) {
         var el = document.getElementById('chart-category');
         if (!el) return;
         destroyChart('chart-category');
+        el.innerHTML = '';
 
         var catCounts = {};
         activeFilteredBids.forEach(function(b) {
@@ -619,25 +695,62 @@
             return;
         }
 
-        var maxCount = entries[0].count || 1;
-        var BLUE_SCALE = ['#1565C0', '#1976D2', '#1E88E5', '#2196F3', '#42A5F5', '#64B5F6', '#90CAF9'];
+        var series = entries.map(function(e) { return e.count; });
+        var labels = entries.map(function(e) { return e.name; });
 
-        el.innerHTML = '';
-        var list = document.createElement('div');
-        list.className = 'cat-ranked-list';
-
-        entries.forEach(function(e, i) {
-            var pct = Math.max(12, Math.round((e.count / maxCount) * 100));
-            var color = BLUE_SCALE[i % BLUE_SCALE.length];
-            var div = document.createElement('div');
-            div.className = 'crl-item';
-            div.innerHTML =
-                '<span class="crl-name" title="' + escH(e.name) + '">' + escH(e.name) + '</span>' +
-                '<div class="crl-bar-wrap"><div class="crl-bar-fill" style="width:' + pct + '%; background:' + color + '"></div></div>' +
-                '<span class="crl-count">' + e.count + '</span>';
-            list.appendChild(div);
+        charts['chart-category'] = new ApexCharts(el, {
+            chart: {
+                type: 'pie',
+                height: 255,
+                toolbar: { show: false },
+                animations: { enabled: true, easing: 'easeinout', speed: 600 },
+                events: {
+                    dataPointSelection: function(event, chartContext, config) {
+                        var catName = labels[config.dataPointIndex];
+                        if (catName && typeof openCategoryDD === 'function') {
+                            openCategoryDD(catName);
+                        }
+                    }
+                }
+            },
+            series: series,
+            labels: labels,
+            colors: ['#2563EB', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899', '#06B6D4', '#64748B', '#F97316'],
+            stroke: {
+                width: 2,
+                colors: ['#ffffff']
+            },
+            dataLabels: {
+                enabled: true,
+                formatter: function(val, opts) {
+                    return opts.w.config.series[opts.seriesIndex];
+                },
+                style: {
+                    fontSize: '11px',
+                    fontWeight: 600,
+                    colors: ['#ffffff']
+                },
+                dropShadow: { enabled: false }
+            },
+            legend: {
+                position: 'bottom',
+                horizontalAlign: 'center',
+                fontSize: '11px',
+                fontWeight: 500,
+                labels: { colors: '#475569' },
+                itemMargin: { horizontal: 8, vertical: 4 },
+                markers: { radius: 12, width: 8, height: 8 }
+            },
+            tooltip: {
+                theme: 'light',
+                y: {
+                    formatter: function(val) {
+                        return val + ' bid' + (val !== 1 ? 's' : '');
+                    }
+                }
+            }
         });
-        el.appendChild(list);
+        charts['chart-category'].render();
     }
 
     /* ==============================================================
@@ -723,53 +836,87 @@
     }
 
     /* ==============================================================
-       13. ROW 2 RIGHT — BID VALUE ANALYSIS (Area Chart)
+       13. ROW 2 RIGHT — BID VALUE ANALYSIS (Participated: Blue, Won: Green, Cancelled: Red)
        ============================================================== */
     function updateBidValueChart(c) {
         var el = document.getElementById('chart-bid-value');
         if (!el) return;
         destroyChart('chart-bid-value');
 
-        var valCr = c.mVal.map(function(v){ return parseFloat(crore(v)); });
+        var partCr   = c.mPartVal.map(function(v){ return parseFloat(crore(v)); });
+        var wonCr    = c.mWonVal.map(function(v){ return parseFloat(crore(v)); });
+        var cancelCr = c.mCancelVal.map(function(v){ return parseFloat(crore(v)); });
 
         charts['chart-bid-value'] = new ApexCharts(el, {
             chart: {
-                type:'area', height:210, toolbar:{ show:false },
-                animations:{ enabled:true, easing:'easeinout', speed:600 }
+                type: 'area',
+                height: 215,
+                toolbar: { show: false },
+                animations: { enabled: true, easing: 'easeinout', speed: 600 }
             },
-            series: [{ name:'Bid Value (Cr)', data:valCr }],
+            series: [
+                { name: 'Participated', data: partCr },
+                { name: 'Won', data: wonCr },
+                { name: 'Cancelled', data: cancelCr }
+            ],
+            colors: ['#2563EB', '#10B981', '#EF4444'], // Participated (Blue), Won (Green), Cancelled (Red)
+            stroke: {
+                curve: 'smooth',
+                width: 2.5
+            },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0.35,
+                    opacityTo: 0.05,
+                    stops: [0, 90, 100]
+                }
+            },
+            markers: {
+                size: 3.5,
+                strokeWidth: 2,
+                strokeColors: '#fff',
+                hover: { size: 6 }
+            },
             xaxis: {
                 categories: MONTHS,
-                labels:{ style:{ fontSize:'9.5px', colors:'#94A3B8' } },
-                axisBorder:{ show:false }, axisTicks:{ show:false }
+                labels: { style: { fontSize: '9.5px', colors: '#94A3B8', fontWeight: 500 } },
+                axisBorder: { show: false },
+                axisTicks: { show: false }
             },
             yaxis: {
-                labels:{
-                    style:{ fontSize:'9.5px', colors:'#94A3B8' },
-                    formatter:function(v){ var n = parseFloat(v); if(isNaN(n)) return '₹'+v; return '₹' + (Number.isInteger(n) ? n : n.toFixed(1)); }
+                labels: {
+                    style: { fontSize: '9.5px', colors: '#94A3B8' },
+                    formatter: function(v) {
+                        var n = parseFloat(v);
+                        if (isNaN(n)) return '₹' + v;
+                        return '₹' + (Number.isInteger(n) ? n : n.toFixed(1));
+                    }
                 }
             },
-            stroke:      { curve:'smooth', width:2, colors:['#1565C0'] },
-            fill: {
-                type:'gradient',
-                gradient:{
-                    shadeIntensity:1, opacityFrom:0.4, opacityTo:0.02,
-                    colorStops:[
-                        { offset:0,   color:'#1565C0', opacity:0.4 },
-                        { offset:100, color:'#1565C0', opacity:0.02 }
-                    ]
-                }
-            },
-            colors:      ['#1565C0'],
-            markers:     { size:4, colors:['#1565C0'], strokeColors:'#fff', strokeWidth:2 },
             dataLabels: {
-                enabled:true,
-                formatter:function(v){ return v > 0 ? '₹'+v : ''; },
-                style:{ fontSize:'9px', colors:['#1565C0'] },
-                background:{ enabled:false }
+                enabled: false
             },
-            grid:        { borderColor:'#EEF2FB', strokeDashArray:3 },
-            tooltip:     { y:{ formatter:function(v){ return '₹ '+v+' Cr'; } } }
+            legend: {
+                show: false
+            },
+            grid: {
+                borderColor: '#EEF2FB',
+                strokeDashArray: 3,
+                yaxis: { lines: { show: true } },
+                xaxis: { lines: { show: false } }
+            },
+            tooltip: {
+                shared: true,
+                intersect: false,
+                theme: 'light',
+                y: {
+                    formatter: function(v) {
+                        return '₹ ' + (v !== undefined ? v : 0) + ' Cr';
+                    }
+                }
+            }
         });
         charts['chart-bid-value'].render();
     }
@@ -1100,6 +1247,10 @@
             hReset.addEventListener('click', function() {
                 FS.state = 'ALL';
                 FS.fy = 'ALL';
+                FS.department = 'ALL';
+                FS.status = 'ALL';
+                FS.category = 'ALL';
+                FS.bidType = 'ALL';
                 FS.startDate = null;
                 FS.endDate = null;
 
@@ -1109,12 +1260,104 @@
                 var fyEl = document.getElementById('filter-fy');
                 if (fyEl) fyEl.value = 'ALL';
 
+                var deptEl = document.getElementById('filter-department');
+                if (deptEl) deptEl.value = 'ALL';
+
+                var statusEl = document.getElementById('filter-status');
+                if (statusEl) statusEl.value = 'ALL';
+
+                var catEl = document.getElementById('filter-category');
+                if (catEl) catEl.value = 'ALL';
+
+                var typeEl = document.getElementById('filter-type');
+                if (typeEl) typeEl.value = 'ALL';
+
                 var drInput = document.getElementById('filter-daterange');
                 if (drInput) drInput.value = '';
 
                 applyFilters();
             });
         }
+
+        /* Additional Filter Dropdowns */
+        var deptEl = document.getElementById('filter-department');
+        if (deptEl) {
+            deptEl.addEventListener('change', function() {
+                FS.department = this.value;
+                applyFilters();
+            });
+        }
+
+        var statusEl = document.getElementById('filter-status');
+        if (statusEl) {
+            statusEl.addEventListener('change', function() {
+                FS.status = this.value;
+                applyFilters();
+            });
+        }
+
+        var catEl = document.getElementById('filter-category');
+        if (catEl) {
+            catEl.addEventListener('change', function() {
+                FS.category = this.value;
+                applyFilters();
+            });
+        }
+
+        var typeEl = document.getElementById('filter-type');
+        if (typeEl) {
+            typeEl.addEventListener('change', function() {
+                FS.bidType = this.value;
+                applyFilters();
+            });
+        }
+
+        /* Additional Filters Toggle Button & Floating Popover */
+        $(document).on('click', '#btn-toggle-extra-filters', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var $panel = $('#dashboard-additional-filters');
+            var $btn = $(this);
+            var $chevron = $('#extra-filter-chevron');
+
+            if ($panel.is(':visible')) {
+                $panel.fadeOut(150);
+                $btn.removeClass('active');
+                $chevron.css('transform', 'rotate(0deg)');
+            } else {
+                $panel.fadeIn(150);
+                $btn.addClass('active');
+                $chevron.css('transform', 'rotate(180deg)');
+            }
+        });
+
+        /* Prevent clicks inside additional filter dropdown from closing it */
+        $(document).on('click', '#dashboard-additional-filters', function(e) {
+            e.stopPropagation();
+        });
+
+        /* Click anywhere outside additional filter dropdown to close */
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('#extra-filter-item-wrap').length) {
+                $('#dashboard-additional-filters').fadeOut(150);
+                $('#btn-toggle-extra-filters').removeClass('active');
+                $('#extra-filter-chevron').css('transform', 'rotate(0deg)');
+            }
+        });
+
+        /* Reset Additional Filters Only */
+        $(document).on('click', '#btn-reset-extra-filters', function(e) {
+            e.preventDefault();
+            FS.department = 'ALL';
+            FS.status = 'ALL';
+            FS.category = 'ALL';
+            FS.bidType = 'ALL';
+            var d = document.getElementById('filter-department'); if (d) d.value = 'ALL';
+            var s = document.getElementById('filter-status');     if (s) s.value = 'ALL';
+            var c = document.getElementById('filter-category');   if (c) c.value = 'ALL';
+            var t = document.getElementById('filter-type');       if (t) t.value = 'ALL';
+            applyFilters();
+        });
 
         /* View All States */
         var vasBtn = document.getElementById('btn-view-all-states');
@@ -1199,6 +1442,9 @@
         }
         buildStateOptions();
         buildFYOptions();
+        buildDepartmentOptions();
+        buildStatusOptions();
+        buildCategoryOptions();
         bindEvents();
         applyFilters();
     }

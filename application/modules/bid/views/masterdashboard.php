@@ -76,8 +76,62 @@ window.DASH_DATA = {
                 <option value="ALL">All Years</option>
             </select>
         </div>
+        <!-- Additional Filters Toggle and Floating Dropdown in the exact SAME container -->
+        <div class="header-filter-item position-relative" id="extra-filter-item-wrap">
+            <button type="button" class="btn btn-sm btn-filter-toggle" id="btn-toggle-extra-filters" title="Additional Filters">
+                <i class="feather-sliders text-primary"></i>
+                <span>Additional Filters</span>
+                <span class="badge bg-primary text-white ms-1 d-none" id="dashboard-filter-count">0</span>
+                <i class="feather-chevron-down ms-1" id="extra-filter-chevron" style="transition: transform 0.2s ease;"></i>
+            </button>
+            <div id="dashboard-additional-filters" class="dropdown-menu-custom shadow-lg p-3" style="display: none; position: absolute; right: 0; top: calc(100% + 6px); width: 330px; z-index: 1060; border-radius: 10px; border: 1px solid #E2E8F0; background: #ffffff;">
+                <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="d-inline-flex align-items-center justify-content-center bg-primary-subtle text-primary rounded" style="width: 24px; height: 24px;">
+                            <i class="feather-sliders fs-12"></i>
+                        </span>
+                        <span class="fw-bold text-dark" style="font-size: 13px;">Additional Filters</span>
+                    </div>
+                    <button type="button" class="btn btn-link btn-sm text-muted p-0 text-decoration-none" id="btn-reset-extra-filters" style="font-size: 11.5px; font-weight: 500;">
+                        <i class="feather-rotate-ccw me-1 text-primary"></i>Reset
+                    </button>
+                </div>
+                <div class="d-flex flex-column gap-2">
+                    <!-- 1. Department -->
+                    <div>
+                        <label class="form-label text-muted fw-semibold mb-1" style="font-size: 11px;">Department / Organization</label>
+                        <select id="filter-department" class="form-select form-select-sm" style="font-size: 12px; height: 34px;">
+                            <option value="ALL">All Departments</option>
+                        </select>
+                    </div>
+                    <!-- 2. Status -->
+                    <div>
+                        <label class="form-label text-muted fw-semibold mb-1" style="font-size: 11px;">Bid Status</label>
+                        <select id="filter-status" class="form-select form-select-sm" style="font-size: 12px; height: 34px;">
+                            <option value="ALL">All Statuses</option>
+                        </select>
+                    </div>
+                    <!-- 3. Category -->
+                    <div>
+                        <label class="form-label text-muted fw-semibold mb-1" style="font-size: 11px;">Category</label>
+                        <select id="filter-category" class="form-select form-select-sm" style="font-size: 12px; height: 34px;">
+                            <option value="ALL">All Categories</option>
+                        </select>
+                    </div>
+                    <!-- 4. Bid Type -->
+                    <div>
+                        <label class="form-label text-muted fw-semibold mb-1" style="font-size: 11px;">Bid Type</label>
+                        <select id="filter-type" class="form-select form-select-sm" style="font-size: 12px; height: 34px;">
+                            <option value="ALL">All Bid Types</option>
+                            <option value="OEM">OEM</option>
+                            <option value="Service">Service</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="header-filter-item">
-            <button type="button" class="btn btn-sm btn-icon btn-light-brand border" id="btn-reset-filters" title="Reset Filters" style="width: 34px; height: 34px; padding: 0; display: inline-flex; align-items: center; justify-content: center;">
+            <button type="button" class="btn btn-sm btn-icon btn-light-brand border" id="btn-reset-filters" title="Reset All Filters">
                 <i class="feather-rotate-ccw"></i>
             </button>
         </div>
@@ -190,8 +244,20 @@ window.DASH_DATA = {
 
     <!-- Right: Bid Value Analysis -->
     <div class="bid-chart-card bid-value-card">
-        <div class="bcc-header">
+        <div class="bcc-header d-flex align-items-center justify-content-between">
             <span class="bcc-title">Bid Value Analysis</span>
+            <div class="d-flex align-items-center gap-2">
+                <span class="d-inline-flex align-items-center gap-1" style="font-size: 11px; color: #2563EB; font-weight: 600;">
+                    <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2563EB;"></span> Participated
+                </span>
+                <span class="d-inline-flex align-items-center gap-1" style="font-size: 11px; color: #16A34A; font-weight: 600;">
+                    <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#10B981;"></span> Won
+                </span>
+                <span class="d-inline-flex align-items-center gap-1" style="font-size: 11px; color: #DC2626; font-weight: 600;">
+                    <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#EF4444;"></span> Cancelled
+                </span>
+                <span class="badge bg-light text-muted border ms-1" style="font-size: 9.5px; font-weight: 600;">(₹ Cr)</span>
+            </div>
         </div>
         <div id="chart-bid-value"></div>
     </div>
@@ -263,15 +329,7 @@ window.DASH_DATA = {
 </svg>
             </div>
 
-            <!-- 2. Legend in the Middle (Stacked vertically) -->
-            <div class="scb-legend-wrap">
-                <div class="sml-item"><span class="sml-dot" style="background:#0D47A1"></span>High (≥ 10)</div>
-                <div class="sml-item"><span class="sml-dot" style="background:#1976D2"></span>Medium (5 - 9)</div>
-                <div class="sml-item"><span class="sml-dot" style="background:#90CAF9"></span>Low (1 - 4)</div>
-                <div class="sml-item"><span class="sml-dot" style="background:#CFD8DC"></span>No Bids</div>
-            </div>
-
-            <!-- 3. Ranked State List on the Right -->
+            <!-- 2. Ranked State List on the Right -->
             <div class="scb-list-wrap">
                 <div class="state-ranked-list" id="state-ranked-list"></div>
                 <div class="scb-footer">
