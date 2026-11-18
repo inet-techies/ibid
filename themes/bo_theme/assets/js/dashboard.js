@@ -670,13 +670,12 @@
     }
 
     /* ==============================================================
-       11. ROW 3 LEFT — BIDS BY CATEGORY (Pie Chart)
+       11. ROW 3 LEFT — BIDS BY CATEGORY (Dynamic with Side Category Names)
        ============================================================== */
     function updateCategoryChart(c) {
         var el = document.getElementById('chart-category');
         if (!el) return;
         destroyChart('chart-category');
-        el.innerHTML = '';
 
         var catCounts = {};
         activeFilteredBids.forEach(function(b) {
@@ -695,62 +694,32 @@
             return;
         }
 
-        var series = entries.map(function(e) { return e.count; });
-        var labels = entries.map(function(e) { return e.name; });
+        var maxCount = entries[0].count || 1;
+        var BLUE_SCALE = ['#1565C0', '#1976D2', '#1E88E5', '#2196F3', '#42A5F5', '#64B5F6', '#90CAF9'];
 
-        charts['chart-category'] = new ApexCharts(el, {
-            chart: {
-                type: 'pie',
-                height: 255,
-                toolbar: { show: false },
-                animations: { enabled: true, easing: 'easeinout', speed: 600 },
-                events: {
-                    dataPointSelection: function(event, chartContext, config) {
-                        var catName = labels[config.dataPointIndex];
-                        if (catName && typeof openCategoryDD === 'function') {
-                            openCategoryDD(catName);
-                        }
-                    }
+        el.innerHTML = '';
+        var list = document.createElement('div');
+        list.className = 'cat-ranked-list';
+
+        entries.forEach(function(e, i) {
+            var pct = Math.max(12, Math.round((e.count / maxCount) * 100));
+            var color = BLUE_SCALE[i % BLUE_SCALE.length];
+            var div = document.createElement('div');
+            div.className = 'crl-item';
+            div.style.cursor = 'pointer';
+            div.title = 'Click to view ' + escH(e.name) + ' bids';
+            div.innerHTML =
+                '<span class="crl-name" title="' + escH(e.name) + '">' + escH(e.name) + '</span>' +
+                '<div class="crl-bar-wrap"><div class="crl-bar-fill" style="width:' + pct + '%; background:' + color + '"></div></div>' +
+                '<span class="crl-count">' + e.count + '</span>';
+            div.addEventListener('click', function() {
+                if (typeof openCategoryDD === 'function') {
+                    openCategoryDD(e.name);
                 }
-            },
-            series: series,
-            labels: labels,
-            colors: ['#2563EB', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899', '#06B6D4', '#64748B', '#F97316'],
-            stroke: {
-                width: 2,
-                colors: ['#ffffff']
-            },
-            dataLabels: {
-                enabled: true,
-                formatter: function(val, opts) {
-                    return opts.w.config.series[opts.seriesIndex];
-                },
-                style: {
-                    fontSize: '11px',
-                    fontWeight: 600,
-                    colors: ['#ffffff']
-                },
-                dropShadow: { enabled: false }
-            },
-            legend: {
-                position: 'bottom',
-                horizontalAlign: 'center',
-                fontSize: '11px',
-                fontWeight: 500,
-                labels: { colors: '#475569' },
-                itemMargin: { horizontal: 8, vertical: 4 },
-                markers: { radius: 12, width: 8, height: 8 }
-            },
-            tooltip: {
-                theme: 'light',
-                y: {
-                    formatter: function(val) {
-                        return val + ' bid' + (val !== 1 ? 's' : '');
-                    }
-                }
-            }
+            });
+            list.appendChild(div);
         });
-        charts['chart-category'].render();
+        el.appendChild(list);
     }
 
     /* ==============================================================
